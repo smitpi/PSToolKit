@@ -37,24 +37,28 @@ Created [20/02/2022_22:02] Initial Script Creating
 <# 
 
 .DESCRIPTION 
- Opens the Computer Managment of the system or remote system 
+ Opens the Computer Management of the system or remote system 
 
 #> 
 
 
 <#
 .SYNOPSIS
-Opens the Computer Managment of the system or remote system
+Opens the Computer Management of the system or remote system
 
 .DESCRIPTION
-Opens the Computer Managment of the system or remote system
+Opens the Computer Management of the system or remote system
+
+
+.PARAMETER ComputerName
+Computer to Manage
 
 .EXAMPLE
-Show-ComputerManagment
+Show-ComputerManagement -ComputerName neptune
 
 #>
-Function Show-ComputerManagment {
-	[Cmdletbinding(HelpURI = "https://smitpi.github.io/PSToolKit/Show-ComputerManagment")]
+Function Show-ComputerManagement {
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Show-ComputerManagement')]
                 PARAM(
         			[ValidateScript({if (Test-Connection -ComputerName $_ -Count 2 -Quiet) {$true}
                             		else {throw "Unable to connect to $($_)"} })]

@@ -73,12 +73,12 @@ Function Update-PSToolKit {
 		Remove-Item (Join-Path $psfolder.FullName '\Modules\PSToolKit') -Recurse -Force
 	}
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] download from github"
-	Invoke-WebRequest -Uri https://codeload.github.com/smitpi/PSToolKit/zip/refs/heads/main -OutFile C:\Temp\private.zip
+	Invoke-WebRequest -Uri https://codeload.github.com/smitpi/PSToolKit/zip/refs/heads/master -OutFile C:\Temp\private.zip
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] expand into module folder"
 	Expand-Archive C:\Temp\private.zip C:\Temp
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] rename folder"
 	$newfolder = New-Item -Path	(Join-Path $psfolder.FullName '\Modules') -Name PSToolKit -ItemType Directory -Force
-	Copy-Item -Path C:\Temp\PSToolKit-main\Output\* -Destination $newfolder.FullName -Recurse
+	Copy-Item -Path C:\Temp\PSToolKit-master\Output\* -Destination $newfolder.FullName -Recurse
 	Remove-Item C:\Temp\private.zip
-	Remove-Item C:\Temp\PSToolKit-main -Recurse
+	Remove-Item C:\Temp\PSToolKit-master -Recurse
 } #end Function

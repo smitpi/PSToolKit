@@ -5,31 +5,31 @@ online version:
 schema: 2.0.0
 ---
 
-# Show-ComputerManagment
+# Show-ComputerManagement
 
 ## SYNOPSIS
-Opens the Computer Managment of the system or remote system
+Opens the Computer Management of the system or remote system
 
 ## SYNTAX
 
 ```
-Show-ComputerManagment [[-ComputerName] <String[]>] [<CommonParameters>]
+Show-ComputerManagement [[-ComputerName] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Opens the Computer Managment of the system or remote system
+Opens the Computer Management of the system or remote system
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Show-ComputerManagment
+Show-ComputerManagement -ComputerName neptune
 ```
 
 ## PARAMETERS
 
 ### -ComputerName
-{{ Fill ComputerName Description }}
+Computer to Manage
 
 ```yaml
 Type: String[]

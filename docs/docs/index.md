@@ -87,7 +87,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Set-SharedPSProfile](https://smitpi.github.io/PSToolKit/#Set-SharedPSProfile) -- Redirects PowerShell profile to network share.
 - [Set-StaticIP](https://smitpi.github.io/PSToolKit/#Set-StaticIP) -- Set static IP on device
 - [Set-TempFolder](https://smitpi.github.io/PSToolKit/#Set-TempFolder) -- Set all the temp environmental variables to c:\temp
-- [Show-ComputerManagment](https://smitpi.github.io/PSToolKit/#Show-ComputerManagment) -- Opens the Computer Managment of the system or remote system
+- [Show-ComputerManagement](https://smitpi.github.io/PSToolKit/#Show-ComputerManagement) -- Opens the Computer Management of the system or remote system
 - [Show-PSToolKit](https://smitpi.github.io/PSToolKit/#Show-PSToolKit) -- Show details of the commands in this module
 - [Start-PSModuleMaintenance](https://smitpi.github.io/PSToolKit/#Start-PSModuleMaintenance) -- Goes through all the installed modules, and allow you to upgrade(If available), or remove old and duplicate versions.
 - [Start-PSProfile](https://smitpi.github.io/PSToolKit/#Start-PSProfile) -- The PS Profile I use on client sites

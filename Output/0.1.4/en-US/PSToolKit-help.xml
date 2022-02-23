@@ -6345,23 +6345,23 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Show-ComputerManagment</command:name>
+      <command:name>Show-ComputerManagement</command:name>
       <command:verb>Show</command:verb>
-      <command:noun>ComputerManagment</command:noun>
+      <command:noun>ComputerManagement</command:noun>
       <maml:description>
-        <maml:para>Opens the Computer Managment of the system or remote system</maml:para>
+        <maml:para>Opens the Computer Management of the system or remote system</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Opens the Computer Managment of the system or remote system</maml:para>
+      <maml:para>Opens the Computer Management of the system or remote system</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Show-ComputerManagment</maml:name>
+        <maml:name>Show-ComputerManagement</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>ComputerName</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ComputerName Description }}</maml:para>
+            <maml:para>Computer to Manage</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -6376,7 +6376,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>ComputerName</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ComputerName Description }}</maml:para>
+          <maml:para>Computer to Manage</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -6396,7 +6396,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Show-ComputerManagment</dev:code>
+        <dev:code>Show-ComputerManagement -ComputerName neptune</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
