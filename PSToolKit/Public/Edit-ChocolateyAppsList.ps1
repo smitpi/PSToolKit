@@ -93,7 +93,7 @@ Function Edit-ChocolateyAppsList {
 		[Parameter(ParameterSetName = 'Add')]
 		[string]$ChocoID,
 		[Parameter(ParameterSetName = 'Add')]
-		[string]$ChocoSource
+		[string]$ChocoSource = 'chocolatey'
 	)
 
 	$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')

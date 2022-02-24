@@ -24,6 +24,7 @@ Get-Help about_PSToolKit
 Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit)
  
 ## Functions
+- [Get-BinRoot](https://smitpi.github.io/PSToolKit/#Get-BinRoot) -- Get-ToolsLocation
 - [Add-ChocolateyPrivateRepo](https://smitpi.github.io/PSToolKit/#Add-ChocolateyPrivateRepo) -- Add a private repository to Chocolatey.
 - [Backup-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#Backup-ElevatedShortcut) -- Exports the RunAss shortcuts, to a zip file
 - [Backup-PowerShellProfile](https://smitpi.github.io/PSToolKit/#Backup-PowerShellProfile) -- Creates a zip file from the ps profile directories
@@ -55,6 +56,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Get-RemoteUptime](https://smitpi.github.io/PSToolKit/#Get-RemoteUptime) -- Check the uptime of a list of servers
 - [Get-SoftwareAudit](https://smitpi.github.io/PSToolKit/#Get-SoftwareAudit) -- Connects to a remote hosts and collect installed software details
 - [Get-SystemInfo](https://smitpi.github.io/PSToolKit/#Get-SystemInfo) -- Get system details of a remote device
+- [Get-SystemUptime](https://smitpi.github.io/PSToolKit/#Get-SystemUptime) -- 
 - [Get-WinEventLogExtract](https://smitpi.github.io/PSToolKit/#Get-WinEventLogExtract) -- Extract Event logs of a server list, and create html / excel report
 - [Import-CitrixSiteConfigFile](https://smitpi.github.io/PSToolKit/#Import-CitrixSiteConfigFile) -- Import the CItrix config file, and created a variable with the details
 - [Import-XamlConfigFile](https://smitpi.github.io/PSToolKit/#Import-XamlConfigFile) -- Import the wpf xaml file and create variables from objects
@@ -88,10 +90,12 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Set-StaticIP](https://smitpi.github.io/PSToolKit/#Set-StaticIP) -- Set static IP on device
 - [Set-TempFolder](https://smitpi.github.io/PSToolKit/#Set-TempFolder) -- Set all the temp environmental variables to c:\temp
 - [Show-ComputerManagement](https://smitpi.github.io/PSToolKit/#Show-ComputerManagement) -- Opens the Computer Management of the system or remote system
+- [Show-ComputerManagment](https://smitpi.github.io/PSToolKit/#Show-ComputerManagment) -- Opens the Computer Managment of the system or remote system
 - [Show-PSToolKit](https://smitpi.github.io/PSToolKit/#Show-PSToolKit) -- Show details of the commands in this module
 - [Start-PSModuleMaintenance](https://smitpi.github.io/PSToolKit/#Start-PSModuleMaintenance) -- Goes through all the installed modules, and allow you to upgrade(If available), or remove old and duplicate versions.
 - [Start-PSProfile](https://smitpi.github.io/PSToolKit/#Start-PSProfile) -- The PS Profile I use on client sites
 - [Start-PSRoboCopy](https://smitpi.github.io/PSToolKit/#Start-PSRoboCopy) -- My wrapper for default robocopy switches
+- [Start-PSToolkitSystemInitialize](https://smitpi.github.io/PSToolKit/#Start-PSToolkitSystemInitialize) -- Commands for a new system
 - [Sync-PSFolders](https://smitpi.github.io/PSToolKit/#Sync-PSFolders) -- Compare two directories and copy the differences
 - [Test-CitrixCloudConnector](https://smitpi.github.io/PSToolKit/#Test-CitrixCloudConnector) -- Perform basic connection tests to CItrix cloud.
 - [Test-CitrixVDAPorts](https://smitpi.github.io/PSToolKit/#Test-CitrixVDAPorts) -- Test connection between ddc and vda
