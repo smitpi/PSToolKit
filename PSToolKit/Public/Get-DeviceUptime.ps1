@@ -3,7 +3,7 @@
 
 .VERSION 0.1.0
 
-.GUID ed39e15a-67d3-4ecb-b140-50909f71d915
+.GUID 50595f56-95a0-4491-883a-e3022264c340
 
 .AUTHOR Pierre Smit
 
@@ -26,20 +26,34 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [23/02/2022_23:01] Initial Script Creating
+Created [24/02/2022_05:49] Initial Script Creating
 
 .PRIVATEDATA
 
 #>
 
+
 <# 
 
 .DESCRIPTION 
-Calculates the uptime of a system 
-#>
+ Calculates the uptime of a system 
 
-Function Get-SystemUptime {
-	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Get-SystemUptime')]
+#> 
+
+
+<#
+.SYNOPSIS
+Calculates the uptime of a system
+
+.DESCRIPTION
+Calculates the uptime of a system
+
+.EXAMPLE
+Get-DeviceUptime
+
+#>
+Function Get-DeviceUptime {
+	[Cmdletbinding(DefaultParameterSetName='Set1', HelpURI = "https://smitpi.github.io/PSToolKit/Get-DeviceUptime")]
 	                PARAM(
 		            [Parameter(Mandatory = $false)]
 					[Parameter(ParameterSetName = 'Set1')]
@@ -71,4 +85,6 @@ try {
 })
 }
 return $ReturnObj
+
+
 } #end Function

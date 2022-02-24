@@ -29,6 +29,7 @@ Functions in this module:
 	 Get-CitrixClientVersions -- Report on the CItrix workspace versions the users are using.
 	 Get-CommandFiltered -- Finds commands on the system and sort it according to module
 	 Get-CommandHelp -- Show the help file of a command in  a new window
+	 Get-DeviceUptime -- Calculates the uptime of a system
 	 Get-FolderSize -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option
 	 Get-FQDN -- Get FQDN for a device, and checks if it is online
 	 Get-FullADUserDetail -- Extract handy info of an AD user
@@ -40,7 +41,6 @@ Functions in this module:
 	 Get-RemoteUptime -- Check the uptime of a list of servers
 	 Get-SoftwareAudit -- Connects to a remote hosts and collect installed software details
 	 Get-SystemInfo -- Get system details of a remote device
-	 Get-SystemUptime -- 
 	 Get-WinEventLogExtract -- Extract Event logs of a server list, and create html / excel report
 	 Import-CitrixSiteConfigFile -- Import the CItrix config file, and created a variable with the details
 	 Import-XamlConfigFile -- Import the wpf xaml file and create variables from objects
