@@ -123,10 +123,13 @@ Function Set-PSToolKitSystemSettings {
     }
 
     if ($ExecutionPolicy) {
+        try {
         Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope Process
         Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope CurrentUser
         Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope LocalMachine
         Write-Color '[Set]', 'ExecutionPolicy: ', 'Complete' -Color Yellow, Cyan, Green
+        } catch { Write-Warning "[Set]ExecutionPolicy: Failed:`n $($_.Exception.Message)" }
+
     }
 
     if ($PSGallery) {
@@ -145,13 +148,7 @@ Function Set-PSToolKitSystemSettings {
                     Install-Module -Name $base -Force -AllowClobber -Scope AllUsers
                     Import-Module $base -Force
                     $PSGet = Get-Module $base | Update-Module -Force -PassThru
-
                     Import-Module $base -Force
-                    #Get-Module $base | Where-Object {$_.version -notlike $PSGet.version}| ForEach-Object {Uninstall-Module -Name $_.Name -MinimumVersion $_.Version -Force -Verbose}
-
-                    #(get-item (Get-Module $base | Where-Object {$_.version -notlike $PSGet.version}).Path).Directory.FullName | Remove-Item -Recurse -Verbose -Force
-                    #Import-Module $base -Force
-                    Get-Module $base
                 }
 
                 Write-Color '[Set]', 'PSGallery: ', 'Complete' -Color Yellow, Cyan, Green
@@ -176,13 +173,7 @@ Function Set-PSToolKitSystemSettings {
                 Install-Module -Name $base -Force -AllowClobber -Scope AllUsers
                 Import-Module $base -Force
                 $PSGet = Get-Module $base | Update-Module -Force -PassThru
-
                 Import-Module $base -Force
-                #Get-Module $base | Where-Object {$_.version -notlike $PSGet.version}| ForEach-Object {Uninstall-Module -Name $_.Name -MinimumVersion $_.Version -Force -Verbose}
-
-                #(get-item (Get-Module $base | Where-Object {$_.version -notlike $PSGet.version}).Path).Directory.FullName | Remove-Item -Recurse -Verbose -Force
-                #Import-Module $base -Force
-                Get-Module $base
             }
 
             Write-Color '[Set]', 'PSGallery: ', 'Complete' -Color Yellow, Cyan, Green
@@ -359,7 +350,7 @@ Function Set-PSToolKitSystemSettings {
                 choco upgrade vmware-tools -y --limit-output
             }
         }
-        catch { Write-Warning "[Installing]VMWareTools: Failed:`n $($_.Exception.Message)" }
+        catch { Write-Warning "[Installing] VMWare Tools: Failed:`n $($_.Exception.Message)" }
 
     }
 
@@ -367,15 +358,20 @@ Function Set-PSToolKitSystemSettings {
         try {
             $ScriptFromGitHub = Invoke-WebRequest https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 -UseBasicParsing
             Invoke-Expression $($ScriptFromGitHub.Content) -Verbose
-            Write-Color '[Installing] ', 'AnsibleRemote: ', 'Complete' -Color Yellow, Cyan, Green
+            Write-Color '[Installing] ', 'Ansible Remote: ', 'Complete' -Color Yellow, Cyan, Green
         }
-        catch { Write-Warning "[Installing]AnsibleRemote: Failed:`n $($_.Exception.Message)" }
+        catch { Write-Warning "[Installing]Ansible Remote: Failed:`n $($_.Exception.Message)" }
 
     } #end
 
     if ($EnableNFSClient) {
         try {
-            Enable-WindowsOptionalFeature -Online -FeatureName 'ServicesForNFS-ClientOnly' -All
+            $checkver = Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object caption
+            if ($checkver -like '*server*') {
+                Enable-WindowsOptionalFeature -Online -FeatureName 'ServicesForNFS-ServerAndClient' -All
+            } else {
+                Enable-WindowsOptionalFeature -Online -FeatureName 'ServicesForNFS-ClientOnly' -All
+            }
             Enable-WindowsOptionalFeature -Online -FeatureName 'ClientForNFS-Infrastructure' -All
             Enable-WindowsOptionalFeature -Online -FeatureName 'NFS-Administration' -All
             nfsadmin client stop
@@ -384,10 +380,10 @@ Function Set-PSToolKitSystemSettings {
             nfsadmin client start
             nfsadmin client localhost config fileaccess=755 SecFlavors=+sys -krb5 -krb5i
             Write-Color 'Useage:', 'mount -o anon <server>:/<path> <drive letter>' -Color Cyan, DarkCyan
-            Write-Color '[Installing] ', 'ChocolateyClient: ', 'Complete' -Color Yellow, Cyan, Green
+            Write-Color '[Installing] ', 'NFS Client: ', 'Complete' -Color Yellow, Cyan, Green
 
         }
-        catch { Write-Warning "[Installing]VMWareTools: Failed:`n $($_.Exception.Message)" }
+        catch { Write-Warning "[Installing] NFS Client: Failed:`n $($_.Exception.Message)" }
 
     
     } #end

@@ -109,6 +109,7 @@ Function Start-PSToolkitSystemInitialize {
 		Set-PSToolKitSystemSettings -RunAll
 		Set-PSToolKitConfigFiles -Source Module
 		Install-PSModules -BaseModules
+		Install-ChocolateyClient
 		Install-ChocolateyApps -BaseApps
 	}
 } #end Function
