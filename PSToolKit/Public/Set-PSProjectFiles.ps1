@@ -126,7 +126,6 @@ Function Set-PSProjectFiles {
 	$ModfuleIndex = [IO.Path]::Combine($ModuleBase, 'docs', 'docs', 'index.md')
 	[System.Collections.ArrayList]$Issues = @()
 	[System.Collections.ArrayList]$ScriptAnalyzerIssues = @()
-	$rootModule = ([IO.Path]::Combine($ModuleOutput.fullname, "$($module.Name).psm1"))
 	#endregion
 
 	function exthelp {
@@ -313,11 +312,13 @@ Function Set-PSProjectFiles {
 		#region copy files
 		Write-Color '[Starting]', 'Creating new module files' -Color Yellow, DarkCyan
 
-		
-		Copy-Item -Path $ModuleManifestFile.FullName -Destination $ModuleOutput.fullname -Recurse
+		$ModuleOutput = Get-Item $ModuleOutput
+		$rootModule = ([IO.Path]::Combine($ModuleOutput.fullname, "$($module.Name).psm1"))
+
+		Copy-Item -Path $ModuleManifestFile.FullName -Destination $ModuleOutput.fullname -Force
 		$PrivateFiles = Get-ChildItem -Path $ModulePrivateFunctions.FullName -Exclude *.ps1
 		if ($null -notlike $PrivateFiles) {
-			Copy-Item -Path $ModulePrivateFunctions.FullName -Destination $ModuleOutput.fullname -Recurse -Exclude *.ps1
+			Copy-Item -Path $ModulePrivateFunctions.FullName -Destination $ModuleOutput.fullname -Recurse -Exclude *.ps1 -Force
 		}
     
 		$public = @(Get-ChildItem -Path "$($ModulePublicFunctions.FullName)\*.ps1" -Recurse -ErrorAction Stop)
