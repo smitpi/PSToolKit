@@ -56,7 +56,8 @@ Start-PSToolkitSystemInitialize
 Function Start-PSToolkitSystemInitialize {
 	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Start-PSToolkitSystemInitialize')]
 	PARAM(
-		[switch]$LabSetup = $false
+		[switch]$LabSetup = $false,
+		[switch]$InstallMyModules = $false
 	)
 
 	$wc = New-Object System.Net.WebClient
@@ -81,7 +82,7 @@ Function Start-PSToolkitSystemInitialize {
 	$null = Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 
 	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'Needed Powershell modules' -ForegroundColor Yellow
-	Install-Module ImportExcel, PSWriteHTML, PSWriteColor, PSScriptTools, PoshRegistry, Microsoft.PowerShell.Archive -Scope CurrentUser
+	Install-Module ImportExcel, PSWriteHTML, PSWriteColor, PSScriptTools, PoshRegistry, Microsoft.PowerShell.Archive -Scope AllUsers
 
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Checking] Temp folder"
 	if ((Test-Path C:\Temp) -eq $false ) { New-Item -ItemType Directory -Path C:\Temp -Force }
@@ -112,5 +113,9 @@ Function Start-PSToolkitSystemInitialize {
 		Install-PSModules -BaseModules
 		Install-ChocolateyClient
 		Install-ChocolateyApps -BaseApps
+	}
+	if ($InstallMyModules) {
+		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'Installing Other Modules' -ForegroundColor Yellow
+		Install-Module CTXCloudApi, PSConfigFile, PSLauncher -Scope AllUsers -Force -SkipPublisherCheck -AllowClobber
 	}
 } #end Function
