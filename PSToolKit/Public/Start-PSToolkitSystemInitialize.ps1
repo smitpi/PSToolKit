@@ -71,6 +71,18 @@ Function Start-PSToolkitSystemInitialize {
 	}
 	else { $psfolder = Get-Item (Get-Item $profile).DirectoryName }
 
+	Write-Host '[Setting]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'Powershell Script Execution' -ForegroundColor Yellow
+	Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope Process
+	Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope CurrentUser
+
+	Write-Host '[Setting]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'Powershell Gallery' -ForegroundColor Yellow
+	$null = Install-PackageProvider Nuget -Force
+	$null = Register-PSRepository -Default -ErrorAction SilentlyContinue
+	$null = Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+
+	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'Needed Powershell modules' -ForegroundColor Yellow
+	Install-Module ImportExcel, PSWriteHTML, PSWriteColor, PSScriptTools, PoshRegistry, Microsoft.PowerShell.Archive -Scope CurrentUser
+
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Checking] Temp folder"
 	if ((Test-Path C:\Temp) -eq $false ) { New-Item -ItemType Directory -Path C:\Temp -Force }
 	if ((Test-Path C:\Temp\private.zip) -eq $true ) { Remove-Item C:\Temp\private.zip -Force }
@@ -91,17 +103,6 @@ Function Start-PSToolkitSystemInitialize {
 	Remove-Item C:\Temp\private.zip
 	Remove-Item C:\Temp\PSToolKit-master -Recurse
 
-	Write-Host '[Setting]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'Powershell Script Execution' -ForegroundColor Yellow
-	Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope Process
-	Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope CurrentUser
-
-	Write-Host '[Setting]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'Powershell Gallery' -ForegroundColor Yellow
-	$null = Install-PackageProvider Nuget -Force
-	$null = Register-PSRepository -Default -ErrorAction SilentlyContinue
-	$null = Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-
-	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'Needed Powershell modules' -ForegroundColor Yellow
-	Install-Module ImportExcel, PSWriteHTML, PSWriteColor, PSScriptTools, PoshRegistry -Scope CurrentUser
 	Import-Module PSToolKit -Force
 	New-PSProfile
 	Start-PSProfile
