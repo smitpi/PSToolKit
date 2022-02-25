@@ -326,6 +326,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://smitpi.github.io/PSToolKit/Set-WindowsAutoLogin/</loc>
+         <lastmod>2022-02-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://smitpi.github.io/PSToolKit/Show-ComputerManagement/</loc>
          <lastmod>2022-02-25</lastmod>
          <changefreq>daily</changefreq>

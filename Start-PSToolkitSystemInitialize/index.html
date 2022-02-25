@@ -1206,6 +1206,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../Set-WindowsAutoLogin/" class="md-nav__link">
+        Set-WindowsAutoLogin
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Show-ComputerManagement/" class="md-nav__link">
         Show-ComputerManagement
       </a>
@@ -1753,19 +1768,19 @@
 
 <h1 id="start-pstoolkitsysteminitialize">Start-PSToolkitSystemInitialize</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Commands for a new system</p>
+<p>Initialize a blank machine.</p>
 <h2 id="syntax">SYNTAX</h2>
 <div class="highlight"><pre><span></span><code>Start-PSToolkitSystemInitialize [-LabSetup] [-InstallMyModules] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
-<p>Commands for a new system</p>
+<p>Initialize a blank machine with PSToolKit tools and dependencies.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Start-PSToolkitSystemInitialize
+<div class="highlight"><pre><span></span><code>Start-PSToolkitSystemInitialize -InstallMyModules
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-labsetup">-LabSetup</h3>
-<p>Commands for my lab</p>
+<p>Commands only for my HomeLab</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
@@ -1777,7 +1792,7 @@
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
 <h3 id="-installmymodules">-InstallMyModules</h3>
-<p>{{ Fill InstallMyModules Description }}</p>
+<p>Install my other published modules.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
