@@ -224,7 +224,7 @@ Function Start-PSProfile {
 		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
 		Write-Host (' {0,23} ' -f 'Module Paths Details') -ForegroundColor DarkCyan
 		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
-		Write-Host "$(($ModuleDetails | Sort-Object -Property modules -Descending | Out-String))" -ForegroundColor DarkBlue	
+		Write-Host "$(($ModuleDetails | Sort-Object -Property modules -Descending | Out-String))" -ForegroundColor Magenta	
 	} 
 
 	if ($AddFun) {
