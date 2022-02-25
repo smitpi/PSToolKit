@@ -12,7 +12,7 @@
 RootModule = 'PSToolKit.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.7'
+ModuleVersion = '0.1.9'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -79,7 +79,7 @@ FunctionsToExport = 'Add-ChocolateyPrivateRepo', 'Backup-ElevatedShortcut',
                'Enable-RemoteHostPSRemoting', 'Export-CitrixPolicySettings', 
                'Export-ESXTemplates', 'Export-PSGallery', 'Find-ChocolateyApps', 
                'Find-OnlineModule', 'Find-OnlineScript', 'Find-PSScripts', 
-               'Format-AllObjectsInAListView', 'Get-AllUsersInGroup', 
+               'Format-AllObjectsInAListView', 'Get-AllUsersInGroup', 'Get-BinRoot', 
                'Get-CitrixClientVersions', 'Get-CommandFiltered', 'Get-CommandHelp', 
                'Get-DeviceUptime', 'Get-FolderSize', 'Get-FQDN', 
                'Get-FullADUserDetail', 'Get-ModuleCommandHelp', 
@@ -98,10 +98,10 @@ FunctionsToExport = 'Add-ChocolateyPrivateRepo', 'Backup-ElevatedShortcut',
                'Remove-UserProfile', 'Restore-ElevatedShortcut', 'Search-Scripts', 
                'Set-PSProjectFiles', 'Set-PSToolKitConfigFiles', 
                'Set-PSToolKitSystemSettings', 'Set-SharedPSProfile', 'Set-StaticIP', 
-               'Set-TempFolder', 'Show-ComputerManagement', 'Show-PSToolKit', 
-               'Start-PSModuleMaintenance', 'Start-PSProfile', 'Start-PSRoboCopy', 
-               'Start-PSToolkitSystemInitialize', 'Sync-PSFolders', 
-               'Test-CitrixCloudConnector', 'Test-CitrixVDAPorts', 
+               'Set-TempFolder', 'Set-WindowsAutoLogin', 'Show-ComputerManagement', 
+               'Show-PSToolKit', 'Start-PSModuleMaintenance', 'Start-PSProfile', 
+               'Start-PSRoboCopy', 'Start-PSToolkitSystemInitialize', 
+               'Sync-PSFolders', 'Test-CitrixCloudConnector', 'Test-CitrixVDAPorts', 
                'Test-PendingReboot', 'Test-PSRemote', 'Update-ListOfDDCs', 
                'Update-LocalHelp', 'Update-PSModuleInfo', 'Update-PSScriptInfo', 
                'Update-PSToolKit', 'Update-PSToolKitGistConfigFiles', 

@@ -40,10 +40,6 @@
     "Source": "chocolatey"
   },
   {
-    "Name": "dashlane",
-    "Source": "chocolatey"
-  },
-  {
     "Name": "dotnet-6.0-runtime",
     "Source": "chocolatey"
   },
@@ -53,6 +49,10 @@
   },
   {
     "Name": "easyconnect",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "fing",
     "Source": "chocolatey"
   },
   {
