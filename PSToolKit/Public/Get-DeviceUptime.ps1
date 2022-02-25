@@ -48,8 +48,11 @@ Calculates the uptime of a system
 .DESCRIPTION
 Calculates the uptime of a system
 
+.PARAMETER ComputerName
+Computer to query.
+
 .EXAMPLE
-Get-DeviceUptime
+Get-DeviceUptime -ComputerName Neptune
 
 #>
 Function Get-DeviceUptime {

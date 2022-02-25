@@ -42,16 +42,20 @@ Created [24/02/2022_05:32] Initial Script Creating
 
 <#
 .SYNOPSIS
-Commands for a new system
+Initialize a blank machine.
 
 .DESCRIPTION
-Commands for a new system
+Initialize a blank machine with PSToolKit tools and dependencies.
 
 .PARAMETER LabSetup
-Commands for my lab
+Commands only for my HomeLab
+
+.PARAMETER InstallMyModules
+Install my other published modules.
 
 .EXAMPLE
-Start-PSToolkitSystemInitialize
+Start-PSToolkitSystemInitialize -InstallMyModules
+
 #>
 Function Start-PSToolkitSystemInitialize {
 	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Start-PSToolkitSystemInitialize')]
@@ -116,6 +120,6 @@ Function Start-PSToolkitSystemInitialize {
 	}
 	if ($InstallMyModules) {
 		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'Installing Other Modules' -ForegroundColor Yellow
-		Install-Module CTXCloudApi, PSConfigFile, PSLauncher -Scope AllUsers -Force -SkipPublisherCheck -AllowClobber
+		Install-Module CTXCloudApi, PSConfigFile, PSLauncher, XDHealthCheck -Scope AllUsers -Force -SkipPublisherCheck -AllowClobber
 	}
 } #end Function

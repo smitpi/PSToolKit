@@ -39,19 +39,24 @@ Created [26/10/2021_22:32] Initial Script Creating
 
 #>
 
-
 <#
 .SYNOPSIS
-The PS Profile I use on client sites
+My PS Profile for all sessions.
 
 .DESCRIPTION
-The PS Profile I use on client sites
+My PS Profile for all sessions.
 
 .PARAMETER ClearHost
-Clear the screen before it loads
+Clear the screen before loading.
+
+.PARAMETER AddFun
+Add fun details in the output.
 
 .PARAMETER ShowModuleList
-Show the module list and count of modules.
+Summary of installed modules.
+
+.PARAMETER ShortenPrompt
+Shorten the command prompt for more coding space.
 
 .EXAMPLE
 Start-PSProfile -ClearHost
@@ -61,9 +66,11 @@ Function Start-PSProfile {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Start-PSProfile')]
 	PARAM(
 		[switch]$ClearHost = $false,
-		[switch]$ShowModuleList = $false
+		[switch]$AddFun = $false,
+		[switch]$ShowModuleList = $false,
+		[switch]$ShortenPrompt = $false
 	)
-
+	<##>
 	$ErrorActionPreference = 'Stop'
 
 	if ($ClearHost) { Clear-Host }
@@ -80,19 +87,23 @@ Function Start-PSProfile {
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 	## Some Session Information
-	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor Yellow -NoNewline
-	Write-Host (' {0,20} ' -f 'Session Info') -ForegroundColor DarkCyan
+	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
+	Write-Host (' {0,20} ' -f 'PowerShell Info') -ForegroundColor DarkCyan
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
     
-	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor Yellow -NoNewline
+	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
 	Write-Host (' {0,-35}: ' -f 'Computer Name') -ForegroundColor Cyan -NoNewline
 	Write-Host ('{0,-20}' -f "$($env:COMPUTERNAME) ($(([System.Net.Dns]::GetHostEntry(($($env:COMPUTERNAME)))).HostName))") -ForegroundColor Green
 
-	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor Yellow -NoNewline    
+	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline    
 	Write-Host (' {0,-35}: ' -f 'PowerShell Execution Policy') -ForegroundColor Cyan -NoNewline
 	Write-Host ('{0,-20}' -f "$(Get-ExecutionPolicy -Scope LocalMachine)") -ForegroundColor Green
 
-	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor Yellow -NoNewline
+	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline    
+	Write-Host (' {0,-35}: ' -f 'PowerShell Edition') -ForegroundColor Cyan -NoNewline
+	Write-Host ('{0,-20}' -f "$($PSVersionTable.PSEdition) (Ver: $($PSVersionTable.PSVersion.ToString()))") -ForegroundColor Green
+
+	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
 	Write-Host (' {0,-35}: ' -f 'PowerShell Profile Folder') -ForegroundColor Cyan -NoNewline
 	Write-Host ('{0,-20}' -f "$($psfolder)") -ForegroundColor Green
 
@@ -120,7 +131,7 @@ Function Start-PSProfile {
  catch { Write-Warning 'Unable to set location' }
 
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
-	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor Yellow -NoNewline
+	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
 	Write-Host (' {0,25} ' -f 'Loading Functions') -ForegroundColor DarkCyan
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
 
@@ -145,25 +156,61 @@ Function Start-PSProfile {
 		Write-Host ('{0,-21}' -f 'Complete') -ForegroundColor Green
 	}
  catch { Write-Warning 'Chocolatey: Could not be loaded' }
- 
- 	try {
+
+ try {
 		Add-PSSnapin citrix*
 		Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
 		Write-Host (' {0,-36}: ' -f 'Citrix SnapIns') -ForegroundColor Cyan -NoNewline
 		Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
 	}
  catch { Write-Warning 'Citrix SnapIns: Could not be loaded' }
+ if ($AddFun) {
+	 try {
+			$chuck = (Invoke-RestMethod -Uri https://api.chucknorris.io/jokes/random?category=dev).value
+			Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
+			Write-Host (' {0,-36}: ' -f 'Chuck Detail') -ForegroundColor Cyan -NoNewline
+			Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
+		}
+		catch { Write-Warning 'Chuck gave up...' }
+		try {
+			$Gandalfheader = @{}
+			$Gandalfheader.Add('Authorization', 'Bearer gyE1jxTY0t4TRM97ttkt')
+			$Gandalf = Invoke-RestMethod 'https://the-one-api.dev/v2/quote?character=5cd99d4bde30eff6ebccfea0' -Headers $Gandalfheader
+			$GandalfSaid = ($Gandalf).docs[$(Get-Random -Minimum 1 -Maximum $Gandalf.total)].dialog
+			Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
+			Write-Host (' {0,-36}: ' -f 'Gandalf Knowledge') -ForegroundColor Cyan -NoNewline
+			Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
+		}
+		catch { Write-Warning 'BellRock got Gandalf this time...' }
+
+		try {
+			$compquoteheader = @{}                                               
+			$compquoteheader.Add('X-Api-Key', 'JRUU5PI8OkiWrdOBA5HaCA==dID1JPo3CUnFoRJl')
+			$compquote = Invoke-RestMethod 'https://api.api-ninjas.com/v1/quotes?category=computers' -Headers $compquoteheader
+			$RandomFact = Invoke-RestMethod 'https://api.api-ninjas.com/v1/facts?limit=1' -Headers $compquoteheader
+			$weather = Invoke-RestMethod 'https://api.api-ninjas.com/v1/weather?city=Johannesburg' -Headers $compquoteheader
+			Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
+			Write-Host (' {0,-36}: ' -f 'Needed Facts') -ForegroundColor Cyan -NoNewline
+			Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
+		}
+		catch { Write-Warning 'Out of Faxs...' }
+	}
 
 	$ErrorActionPreference = 'Continue'
+
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
-	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor Yellow -NoNewline
-	Write-Host (' {0,-35}: ' -f 'Starting Session for') -ForegroundColor Cyan -NoNewline
+	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
+	Write-Host (' {0,23} ' -f 'Session Detail') -ForegroundColor DarkCyan
+	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
+
+	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
+	Write-Host (' {0,-35}: ' -f 'For User:') -ForegroundColor Cyan -NoNewline
 	Write-Host ('{0,-20}' -f "$($env:USERDOMAIN)\$($env:USERNAME) ($($env:USERNAME)@$($env:USERDNSDOMAIN))") -ForegroundColor Green
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
 	Write-Host ' '
 
 
-	if ($ShowModuleList) {
+ if ($ShowModuleList) {
 		[string[]]$Modpaths = ($env:PSModulePath).Split(';')
 		$AvailableModules = Get-Module -ListAvailable
 		[System.Collections.ArrayList]$ModuleDetails = @()
@@ -174,9 +221,63 @@ Function Start-PSProfile {
 				Modules  = ($AvailableModules | Where-Object { $_.path -match $Mpath.replace('\', '\\') } ).count
 			}
 		} 
-		Write-Host '----------------------------' -ForegroundColor DarkGray
-		Write-Host "`tList of Module Paths:" -ForegroundColor yellow
-		Write-Host '----------------------------' -ForegroundColor DarkGray
-		$ModuleDetails | Sort-Object -Property modules -Descending
+		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
+		Write-Host (' {0,23} ' -f 'Module Paths Details') -ForegroundColor DarkCyan
+		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
+		Write-Host "$(($ModuleDetails | Sort-Object -Property modules -Descending | Out-String))" -ForegroundColor DarkBlue	
 	} 
+
+	if ($AddFun) {
+		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
+		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
+		Write-Host (' {0,23} ' -f 'Giving Knowledge') -ForegroundColor DarkCyan
+		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
+		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
+		Write-Host (' {0,-35}: ' -f "Today will be $($weather.cloud_pct)% Cloudy, with a low of $($weather.min_temp)°C and a high of $($weather.max_temp)°C") -ForegroundColor Cyan
+		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
+		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
+		Write-Host (' {0,-35}: ' -f 'Chuck Noris in Dev:') -ForegroundColor Cyan -NoNewline
+		Write-Host (' {0,-20} ' -f "$($chuck)") -ForegroundColor DarkCyan
+		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
+		Write-Host (' {0,-35}: ' -f 'Gandalf the White:') -ForegroundColor Cyan -NoNewline
+		Write-Host (' {0,-20} ' -f "$($GandalfSaid)") -ForegroundColor DarkCyan
+		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
+		Write-Host (' {0,-35}: ' -f "$($compquote.AUTHOR) said") -ForegroundColor Cyan -NoNewline
+		Write-Host (' {0,-20} ' -f "$($compquote.quote)") -ForegroundColor DarkCyan
+		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
+		Write-Host (' {0,-35}: ' -f 'Did you know') -ForegroundColor Cyan -NoNewline
+		Write-Host (' {0,-20} ' -f "$($RandomFact.fact)") -ForegroundColor DarkCyan
+		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
+ }
+
+ if ($ShortenPrompt) {
+	 Function prompt {
+			$location = $executionContext.SessionState.Path.CurrentLocation.path
+			#what is the maximum length of the path before you begin truncating?
+			$len = 20
+
+			if ($location.length -gt $len) {
+
+				#split on the path delimiter which might be different on non-Windows platforms
+				$dsc = [system.io.path]::DirectorySeparatorChar
+				#escape the separator character to treat it as a literal
+				#filter out any blank entries which might happen if the path ends with the delimiter
+				$split = $location -split "\$($dsc)" | Where-Object { $_ -match '\S+' }
+				#reconstruct a shorted path
+				$here = "{0}$dsc{1}...$dsc{2}" -f $split[0], $split[1], $split[-1]
+
+			}
+			else {
+				#length is ok so use the current location
+				$here = $location
+			}
+
+			"PS $here$('>' * ($nestedPromptLevel + 1)) "
+			# .Link
+			# https://go.microsoft.com/fwlink/?LinkID=225750
+			# .ExternalHelp System.Management.Automation.dll-help.xml
+
+		}
+ }
+
 } #end Function
