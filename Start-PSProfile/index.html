@@ -546,6 +546,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../Get-DeviceUptime/" class="md-nav__link">
+        Get-DeviceUptime
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Get-FQDN/" class="md-nav__link">
         Get-FQDN
       </a>
@@ -1191,8 +1206,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../Show-ComputerManagment/" class="md-nav__link">
-        Show-ComputerManagment
+      <a href="../Show-ComputerManagement/" class="md-nav__link">
+        Show-ComputerManagement
       </a>
     </li>
   
@@ -1326,8 +1341,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-addfun" class="md-nav__link">
+    -AddFun
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-showmodulelist" class="md-nav__link">
     -ShowModuleList
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-shortenprompt" class="md-nav__link">
+    -ShortenPrompt
   </a>
   
 </li>
@@ -1390,6 +1419,21 @@
     <li class="md-nav__item">
       <a href="../Start-PSRoboCopy/" class="md-nav__link">
         Start-PSRoboCopy
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Start-PSToolkitSystemInitialize/" class="md-nav__link">
+        Start-PSToolkitSystemInitialize
       </a>
     </li>
   
@@ -1658,8 +1702,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-addfun" class="md-nav__link">
+    -AddFun
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-showmodulelist" class="md-nav__link">
     -ShowModuleList
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-shortenprompt" class="md-nav__link">
+    -ShortenPrompt
   </a>
   
 </li>
@@ -1723,19 +1781,31 @@
 
 <h1 id="start-psprofile">Start-PSProfile</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>The PS Profile I use on client sites</p>
+<p>My PS Profile for all sessions.</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Start-PSProfile [-ClearHost] [-ShowModuleList] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Start-PSProfile [-ClearHost] [-AddFun] [-ShowModuleList] [-ShortenPrompt] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
-<p>The PS Profile I use on client sites</p>
+<p>My PS Profile for all sessions.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
 <div class="highlight"><pre><span></span><code>Start-PSProfile -ClearHost
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-clearhost">-ClearHost</h3>
-<p>Clear the screen before it loads</p>
+<p>Clear the screen before loading.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-addfun">-AddFun</h3>
+<p>Add fun details in the output.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
@@ -1747,7 +1817,19 @@
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
 <h3 id="-showmodulelist">-ShowModuleList</h3>
-<p>Show the module list and count of modules.</p>
+<p>Summary of installed modules.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-shortenprompt">-ShortenPrompt</h3>
+<p>Shorten the command prompt for more coding space.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
