@@ -112,7 +112,7 @@ Function Set-PSProjectFiles {
  catch { Write-Error 'Unable to load module.'; exit }
 
 	Write-Color '[Starting]', 'Creating Folder Structure' -Color Yellow, DarkCyan
-	$ModuleBase = Get-Item (Get-Item $ModuleFunctionFile.PSParentPath).Parent
+	$ModuleBase = Get-Item ((Get-Item $ModuleFunctionFile.Directory).Parent).FullName
 	$ModuleOutput = [IO.Path]::Combine($ModuleBase, 'Output', $($ModuleManifest.Version.ToString()))
 	$Moduledocs = [IO.Path]::Combine($ModuleBase, 'docs', 'docs')
 	$ModuleExternalHelp = [IO.Path]::Combine($ModuleOutput, 'en-US')
