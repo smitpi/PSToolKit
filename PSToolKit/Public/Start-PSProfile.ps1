@@ -250,11 +250,11 @@ Function Start-PSProfile {
 		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
  }
 
- if ($ShortenPrompt) {
-	 Function prompt {
+if ($ShortenPrompt) {
+Function prompt {
 			$location = $executionContext.SessionState.Path.CurrentLocation.path
 			#what is the maximum length of the path before you begin truncating?
-			$len = 20
+			$len = 10
 
 			if ($location.length -gt $len) {
 
@@ -278,6 +278,8 @@ Function Start-PSProfile {
 			# .ExternalHelp System.Management.Automation.dll-help.xml
 
 		}
- }
+ 
+	prompt
+}
 
 } #end Function

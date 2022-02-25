@@ -26,7 +26,7 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [26/10/2021_22:32] Initial Script Creating
+Created [26/10/2021_22:32] Initialize Script Creating
 
 .PRIVATEDATA
 
@@ -47,7 +47,7 @@ Created [26/10/2021_22:32] Initial Script Creating
  Creates a new PowerShell script. With PowerShell Script Info
 
 .PARAMETER Path
-Where it will be created.
+Where the script will be created.
 
 .PARAMETER Verb
 Approved PowerShell verb
@@ -97,8 +97,7 @@ function New-PSScript {
 	try {
 		$module = Get-Item (Join-Path $checkpath.Parent -ChildPath "$((Get-Item $checkpath.Parent).BaseName).psm1") -ErrorAction Stop
 		$modulename = $module.BaseName
-	}
- catch { Write-Warning 'Could not detect module'; $modulename = Read-Host 'Module Name: ' }
+	} catch { Write-Warning 'Could not detect module'; $modulename = Read-Host 'Module Name: ' }
 
 
 	$functionText = @"
