@@ -93,14 +93,6 @@ if (`$psversiontable.psversion.major -ge 7) {
     `$ErrorView = 'ConciseView'
 }
 
-# For my homelab only
-if (Test-Path C:\Utils\PSModules) {
-Get-ChildItem C:\Utils\PSModules\*.psm1 -Recurse | ForEach-Object {
-    Write-Host '[Importing]: ' -NoNewline -ForegroundColor Cyan; Write-Host `$(`$_.FullName) -ForegroundColor Yellow
-    Import-Module -Global -FullyQualifiedName `$_.FullName -Force
-    }
-}
-
 `$PRModule = get-item `"$((Join-Path ((Get-Item $ModModules.ModuleBase).Parent).FullName "\*\$($ModModules.name).psm1"))`"
 Import-Module `$PRModule.FullName -Force
 Start-PSProfile
