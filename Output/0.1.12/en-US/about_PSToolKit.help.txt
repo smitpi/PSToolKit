@@ -67,7 +67,6 @@ Functions in this module:
 	 Restore-ElevatedShortcut -- Restore the RunAss shortcuts, from a zip file
 	 Search-Scripts -- Search for a string in a directory of ps1 scripts.
 	 Set-PSProjectFiles -- Creates and modify needed files for a PS project from existing module files.
-	 Set-PSToolKitConfigFiles -- Creates the config files for the modules and chocolatey scripts.
 	 Set-PSToolKitSystemSettings -- Set multiple settings on desktop or server
 	 Set-SharedPSProfile -- Redirects PowerShell profile to network share.
 	 Set-StaticIP -- Set static IP on device
@@ -89,7 +88,7 @@ Functions in this module:
 	 Update-PSModuleInfo -- Update PowerShell module manifest file
 	 Update-PSScriptInfo -- Update PowerShell ScriptFileInfo
 	 Update-PSToolKit -- Update local repository from GitHub
-	 Update-PSToolKitGistConfigFiles -- Update the config files hosted on GitHub
+	 Update-PSToolKitConfigFiles -- Manages the config files for the PSToolKit Module.
 	 Write-PSToolKitLog -- Create a log for scripts
  
 SEE ALSO

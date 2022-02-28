@@ -83,7 +83,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Restore-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#Restore-ElevatedShortcut) -- Restore the RunAss shortcuts, from a zip file
 - [Search-Scripts](https://smitpi.github.io/PSToolKit/#Search-Scripts) -- Search for a string in a directory of ps1 scripts.
 - [Set-PSProjectFiles](https://smitpi.github.io/PSToolKit/#Set-PSProjectFiles) -- Creates and modify needed files for a PS project from existing module files.
-- [Set-PSToolKitConfigFiles](https://smitpi.github.io/PSToolKit/#Set-PSToolKitConfigFiles) -- Creates the config files for the modules and chocolatey scripts.
 - [Set-PSToolKitSystemSettings](https://smitpi.github.io/PSToolKit/#Set-PSToolKitSystemSettings) -- Set multiple settings on desktop or server
 - [Set-SharedPSProfile](https://smitpi.github.io/PSToolKit/#Set-SharedPSProfile) -- Redirects PowerShell profile to network share.
 - [Set-StaticIP](https://smitpi.github.io/PSToolKit/#Set-StaticIP) -- Set static IP on device
@@ -105,5 +104,5 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Update-PSModuleInfo](https://smitpi.github.io/PSToolKit/#Update-PSModuleInfo) -- Update PowerShell module manifest file
 - [Update-PSScriptInfo](https://smitpi.github.io/PSToolKit/#Update-PSScriptInfo) -- Update PowerShell ScriptFileInfo
 - [Update-PSToolKit](https://smitpi.github.io/PSToolKit/#Update-PSToolKit) -- Update local repository from GitHub
-- [Update-PSToolKitGistConfigFiles](https://smitpi.github.io/PSToolKit/#Update-PSToolKitGistConfigFiles) -- Update the config files hosted on GitHub
+- [Update-PSToolKitConfigFiles](https://smitpi.github.io/PSToolKit/#Update-PSToolKitConfigFiles) -- Manages the config files for the PSToolKit Module.
 - [Write-PSToolKitLog](https://smitpi.github.io/PSToolKit/#Write-PSToolKitLog) -- Create a log for scripts

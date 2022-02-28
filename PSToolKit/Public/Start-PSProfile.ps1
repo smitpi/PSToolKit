@@ -90,16 +90,16 @@ Function Start-PSProfile {
 	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
 	Write-Host (' {0,20} ' -f 'PowerShell Info') -ForegroundColor DarkCyan
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
-    
+
 	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
 	Write-Host (' {0,-35}: ' -f 'Computer Name') -ForegroundColor Cyan -NoNewline
 	Write-Host ('{0,-20}' -f "$($env:COMPUTERNAME) ($(([System.Net.Dns]::GetHostEntry(($($env:COMPUTERNAME)))).HostName))") -ForegroundColor Green
 
-	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline    
+	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
 	Write-Host (' {0,-35}: ' -f 'PowerShell Execution Policy') -ForegroundColor Cyan -NoNewline
 	Write-Host ('{0,-20}' -f "$(Get-ExecutionPolicy -Scope LocalMachine)") -ForegroundColor Green
 
-	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline    
+	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
 	Write-Host (' {0,-35}: ' -f 'PowerShell Edition') -ForegroundColor Cyan -NoNewline
 	Write-Host ('{0,-20}' -f "$($PSVersionTable.PSEdition) (Ver: $($PSVersionTable.PSVersion.ToString()))") -ForegroundColor Green
 
@@ -184,7 +184,7 @@ Function Start-PSProfile {
 		catch { Write-Warning 'BellRock got Gandalf this time...' }
 
 		try {
-			$compquoteheader = @{}                                               
+			$compquoteheader = @{}
 			$compquoteheader.Add('X-Api-Key', 'JRUU5PI8OkiWrdOBA5HaCA==dID1JPo3CUnFoRJl')
 			$compquote = Invoke-RestMethod 'https://api.api-ninjas.com/v1/quotes?category=computers' -Headers $compquoteheader
 			$RandomFact = Invoke-RestMethod 'https://api.api-ninjas.com/v1/facts?limit=1' -Headers $compquoteheader
@@ -220,12 +220,12 @@ Function Start-PSProfile {
 				Location = $Mpath
 				Modules  = ($AvailableModules | Where-Object { $_.path -match $Mpath.replace('\', '\\') } ).count
 			}
-		} 
+		}
 		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
 		Write-Host (' {0,23} ' -f 'Module Paths Details') -ForegroundColor DarkCyan
 		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
-		Write-Host "$(($ModuleDetails | Sort-Object -Property modules -Descending | Out-String))" -ForegroundColor Magenta	
-	} 
+		Write-Host "$(($ModuleDetails | Sort-Object -Property modules -Descending | Out-String))" -ForegroundColor Magenta
+	}
 
 	if ($AddFun) {
 		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
@@ -278,7 +278,7 @@ Function prompt {
 			# .ExternalHelp System.Management.Automation.dll-help.xml
 
 		}
- 
+
 	prompt
 }
 

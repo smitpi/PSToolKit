@@ -32,7 +32,7 @@ New-PSScript -Path .\PSToolKit\Private\ -Verb get -Noun blah -Description 'blah'
 ## PARAMETERS
 
 ### -Path
-Where it will be created.
+Where the script will be created.
 
 ```yaml
 Type: DirectoryInfo
