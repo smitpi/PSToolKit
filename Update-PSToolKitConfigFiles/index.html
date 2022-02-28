@@ -12,14 +12,14 @@
         <meta name="author" content="Pierre Smit">
       
       
-        <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Update-PSToolKitGistConfigFiles/">
+        <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Update-PSToolKitConfigFiles/">
       
       <link rel="icon" href="https://mentorshipmovement.co.za/wp-content/uploads/2019/09/linkedin-profilepic-400x400.png">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.8">
     
     
       
-        <title>Update-PSToolKitGistConfigFiles - PSToolKit</title>
+        <title>Update-PSToolKitConfigFiles - PSToolKit</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#update-pstoolkitgistconfigfiles" class="md-skip">
+        <a href="#update-pstoolkitconfigfiles" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Update-PSToolKitGistConfigFiles
+              Update-PSToolKitConfigFiles
             
           </span>
         </div>
@@ -1131,21 +1131,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../Set-PSToolKitConfigFiles/" class="md-nav__link">
-        Set-PSToolKitConfigFiles
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../Set-PSToolKitSystemSettings/" class="md-nav__link">
         Set-PSToolKitSystemSettings
       </a>
@@ -1471,12 +1456,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Update-PSToolKitGistConfigFiles
+          Update-PSToolKitConfigFiles
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Update-PSToolKitGistConfigFiles
+        Update-PSToolKitConfigFiles
       </a>
       
         
@@ -1505,6 +1490,33 @@
   <a href="#syntax" class="md-nav__link">
     SYNTAX
   </a>
+  
+    <nav class="md-nav" aria-label="SYNTAX">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-default" class="md-nav__link">
+    local (Default)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#localgist" class="md-nav__link">
+    Localgist
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gistupdate" class="md-nav__link">
+    gistupdate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1544,8 +1556,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#-userid" class="md-nav__link">
-    -UserID
+  <a href="#-updatelocal" class="md-nav__link">
+    -UpdateLocal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-updategist" class="md-nav__link">
+    -UpdateGist
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-updatelocalfrommodule" class="md-nav__link">
+    -UpdateLocalFromModule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-updatelocalfromgist" class="md-nav__link">
+    -UpdateLocalFromGist
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-githubuserid" class="md-nav__link">
+    -GitHubUserID
   </a>
   
 </li>
@@ -1658,6 +1698,33 @@
     SYNTAX
   </a>
   
+    <nav class="md-nav" aria-label="SYNTAX">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-default" class="md-nav__link">
+    local (Default)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#localgist" class="md-nav__link">
+    Localgist
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gistupdate" class="md-nav__link">
+    gistupdate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1696,8 +1763,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#-userid" class="md-nav__link">
-    -UserID
+  <a href="#-updatelocal" class="md-nav__link">
+    -UpdateLocal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-updategist" class="md-nav__link">
+    -UpdateGist
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-updatelocalfrommodule" class="md-nav__link">
+    -UpdateLocalFromModule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-updatelocalfromgist" class="md-nav__link">
+    -UpdateLocalFromGist
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-githubuserid" class="md-nav__link">
+    -GitHubUserID
   </a>
   
 </li>
@@ -1761,44 +1856,100 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Update-PSToolKitGistConfigFiles.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Update-PSToolKitConfigFiles.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
-<h1 id="update-pstoolkitgistconfigfiles">Update-PSToolKitGistConfigFiles</h1>
+<h1 id="update-pstoolkitconfigfiles">Update-PSToolKitConfigFiles</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Update the config files hosted on GitHub</p>
+<p>Manages the config files for the PSToolKit Module.</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Update-PSToolKitGistConfigFiles [[-UserID] &lt;String&gt;] [[-GitHubToken] &lt;String&gt;] [&lt;CommonParameters&gt;]
+<h3 id="local-default">local (Default)</h3>
+<div class="highlight"><pre><span></span><code>Update-PSToolKitConfigFiles [-UpdateLocal] [-UpdateLocalFromModule] [&lt;CommonParameters&gt;]
+</code></pre></div>
+<h3 id="localgist">Localgist</h3>
+<div class="highlight"><pre><span></span><code>Update-PSToolKitConfigFiles [-UpdateLocal] [-UpdateLocalFromGist] [-GitHubUserID &lt;String&gt;]
+ [-GitHubToken &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre></div>
+<h3 id="gistupdate">gistupdate</h3>
+<div class="highlight"><pre><span></span><code>Update-PSToolKitConfigFiles [-UpdateGist] [-GitHubUserID &lt;String&gt;] [-GitHubToken &lt;String&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
-<p>Update the config files hosted on GitHub</p>
+<p>Manages the config files for the PSToolKit Module, By updating either the locally installed files, or the ones hosted on GitHub Gist.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Update-PSToolKitGistConfigFiles -UserID smitpi -GitHubToken xxxxxx
+<div class="highlight"><pre><span></span><code>Update-PSToolKitConfigFiles -UpdateLocal -UpdateLocalFromModule
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
-<h3 id="-userid">-UserID</h3>
-<p>GitHub userid hosting the gist.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<h3 id="-updatelocal">-UpdateLocal</h3>
+<p>Overwrites the local files in C:\Program Files\PSToolKit\Config\</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local, Localgist</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-updategist">-UpdateGist</h3>
+<p>Update the Gist from the local files.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gistupdate</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-updatelocalfrommodule">-UpdateLocalFromModule</h3>
+<p>Will be updated from the PSToolKit Modules files.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-updatelocalfromgist">-UpdateLocalFromGist</h3>
+<p>Will be updated from the hosted gist files..</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Localgist</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-githubuserid">-GitHubUserID</h3>
+<p>GitHub User with access to the gist.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Localgist, gistupdate</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
 <h3 id="-githubtoken">-GitHubToken</h3>
-<p>GitHub Token</p>
+<p>GitHub User's Token.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Localgist, gistupdate</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
@@ -1808,7 +1959,6 @@
 <h2 id="inputs">INPUTS</h2>
 <h2 id="outputs">OUTPUTS</h2>
 <h2 id="notes">NOTES</h2>
-<p>General notes</p>
 <h2 id="related-links">RELATED LINKS</h2>
 
               
