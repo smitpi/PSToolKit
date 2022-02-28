@@ -130,7 +130,7 @@ Function Edit-HostsFile {
 	}
 
 	if ($OpenInNotepad) { notepad.exe $HostFile.FullName }
-	if ($ShowCurrent) { 
+	if ($ShowCurrent) {
 		getcurrent
 		ListDetails $CurrentHostsFileFiltered
 	}

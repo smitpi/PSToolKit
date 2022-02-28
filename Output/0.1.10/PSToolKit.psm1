@@ -488,7 +488,7 @@ Function Edit-HostsFile {
 	}
 
 	if ($OpenInNotepad) { notepad.exe $HostFile.FullName }
-	if ($ShowCurrent) { 
+	if ($ShowCurrent) {
 		getcurrent
 		ListDetails $CurrentHostsFileFiltered
 	}
@@ -4208,7 +4208,7 @@ Export-ModuleMember -Function New-PSProfile
  Creates a new PowerShell script. With PowerShell Script Info
 
 .PARAMETER Path
-Where it will be created.
+Where the script will be created.
 
 .PARAMETER Verb
 Approved PowerShell verb
@@ -4258,8 +4258,7 @@ function New-PSScript {
 	try {
 		$module = Get-Item (Join-Path $checkpath.Parent -ChildPath "$((Get-Item $checkpath.Parent).BaseName).psm1") -ErrorAction Stop
 		$modulename = $module.BaseName
-	}
- catch { Write-Warning 'Could not detect module'; $modulename = Read-Host 'Module Name: ' }
+	} catch { Write-Warning 'Could not detect module'; $modulename = Read-Host 'Module Name: ' }
 
 
 	$functionText = @"
@@ -5131,7 +5130,7 @@ Function Set-PSProjectFiles {
  catch { Write-Error 'Unable to load module.'; exit }
 
 	Write-Color '[Starting]', 'Creating Folder Structure' -Color Yellow, DarkCyan
-	$ModuleBase = Get-Item (Get-Item $ModuleFunctionFile.PSParentPath).Parent
+	$ModuleBase = Get-Item ((Get-Item $ModuleFunctionFile.Directory).Parent).FullName
 	$ModuleOutput = [IO.Path]::Combine($ModuleBase, 'Output', $($ModuleManifest.Version.ToString()))
 	$Moduledocs = [IO.Path]::Combine($ModuleBase, 'docs', 'docs')
 	$ModuleExternalHelp = [IO.Path]::Combine($ModuleOutput, 'en-US')
@@ -5419,79 +5418,6 @@ Function Set-PSProjectFiles {
 } #end Function
  
 Export-ModuleMember -Function Set-PSProjectFiles
-#endregion
- 
-#region Set-PSToolKitConfigFiles.ps1
-############################################
-# source: Set-PSToolKitConfigFiles.ps1
-# Module: PSToolKit
-# version: 0.1.10
-# Author: Pierre Smit
-# Company: HTPCZA Tech
-#############################################
- 
-<#
-.SYNOPSIS
-Creates the config files for the modules and chocolatey scripts.
-
-.DESCRIPTION
-Creates the config files for the modules and chocolatey scripts.
-
-.PARAMETER Source
-Where to copy the config from.
-
-.PARAMETER UserID
-GitHub userid hosting the gist.
-
-.PARAMETER GitHubToken
-GitHub Token
-
-.EXAMPLE
-Set-PSToolKitConfigFiles -Source Module
-
-#>
-Function Set-PSToolKitConfigFiles {
-    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Set-PSToolKitConfigFiles')]
-
-    PARAM(
-        [ValidateSet('Gist', 'Module')]
-        [string]$Source = 'Module',
-        [Parameter(ParameterSetName = 'gist')]
-        [string]$UserID,
-        [Parameter(ParameterSetName = 'gist')]
-        [string]$GitHubToken
-    )
-    $ModulePath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
-    if (-not(Test-Path $ModulePath)) { $NewModulePath = New-Item $ModulePath -ItemType Directory -Force }
-    else { $NewModulePath = Get-Item $ModulePath }
-
-    if ($Source -like 'Module') {
-        $module = Get-Module PSToolKit
-        if (!$module) { $module = Get-Module PSToolKit -ListAvailable }
-        Get-ChildItem (Join-Path $module.ModuleBase -ChildPath \private) | Copy-Item -Destination $NewModulePath.FullName
-    }
-    else {
-        $headers = @{}
-        $auth = '{0}:{1}' -f $UserID, $GitHubToken
-        $bytes = [System.Text.Encoding]::ASCII.GetBytes($auth)
-        $base64 = [System.Convert]::ToBase64String($bytes)
-        $headers.Authorization = 'Basic {0}' -f $base64
-
-        $url = 'https://api.github.com/users/{0}/gists' -f $Userid
-
-        $gistfiles = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
-        $gistfiles = $gistfiles | Select-Object | Where-Object { $_.description -like 'PSToolKit-Config' }
-        $gistfileNames = $gistfiles.files | Get-Member | Where-Object { $_.memberType -eq 'NoteProperty' } | Select-Object Name
-        foreach ($gistfileName in $gistfileNames) {
-            $url = ($gistfiles.files."$($gistfileName.name)").raw_url
-            (Invoke-WebRequest -Uri $url -Headers $headers).content | Set-Content (Join-Path $NewModulePath.FullName -ChildPath $($gistfileName.name))
-            Write-Color '[Set]', $($gistfileName.name), ': Complete' -Color Yellow, Cyan, Green
-        }
-    }
-
-} #end Function
- 
-Export-ModuleMember -Function Set-PSToolKitConfigFiles
 #endregion
  
 #region Set-PSToolKitSystemSettings.ps1
@@ -6690,11 +6616,11 @@ Function Start-PSProfile {
 		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
  }
 
- if ($ShortenPrompt) {
-	 Function prompt {
+if ($ShortenPrompt) {
+Function prompt {
 			$location = $executionContext.SessionState.Path.CurrentLocation.path
 			#what is the maximum length of the path before you begin truncating?
-			$len = 20
+			$len = 10
 
 			if ($location.length -gt $len) {
 
@@ -6718,7 +6644,9 @@ Function Start-PSProfile {
 			# .ExternalHelp System.Management.Automation.dll-help.xml
 
 		}
- }
+ 
+	prompt
+}
 
 } #end Function
  
@@ -6926,6 +6854,7 @@ Function Start-PSToolkitSystemInitialize {
 	if ($LabSetup) {
 		Set-PSToolKitSystemSettings -RunAll
 		Set-PSToolKitConfigFiles -Source Module
+        Install-PS7
 		Install-PSModules -BaseModules
 		Install-ChocolateyClient
 		Install-ChocolateyApps -BaseApps
@@ -7926,9 +7855,9 @@ Function Update-PSToolKit {
 Export-ModuleMember -Function Update-PSToolKit
 #endregion
  
-#region Update-PSToolKitGistConfigFiles.ps1
+#region Update-PSToolKitConfigFiles.ps1
 ############################################
-# source: Update-PSToolKitGistConfigFiles.ps1
+# source: Update-PSToolKitConfigFiles.ps1
 # Module: PSToolKit
 # version: 0.1.10
 # Author: Pierre Smit
@@ -7937,70 +7866,140 @@ Export-ModuleMember -Function Update-PSToolKit
  
 <#
 .SYNOPSIS
- Update the config files hosted on GitHub
+Manages the config files for the PSToolKit Module.
 
 .DESCRIPTION
- Update the config files hosted on GitHub
+Manages the config files for the PSToolKit Module, By updating either the locally installed files, or the ones hosted on GitHub Gist.
 
-.PARAMETER UserID
-GitHub userid hosting the gist.
+.PARAMETER UpdateLocal
+Overwrites the local files in C:\Program Files\PSToolKit\Config\
+
+.PARAMETER UpdateLocalFromModule
+Will be updated from the PSToolKit Modules files.
+
+.PARAMETER UpdateLocalFromGist
+Will be updated from the hosted gist files..
+
+.PARAMETER UpdateGist
+Update the Gist from the local files.
+
+.PARAMETER GitHubUserID
+GitHub User with access to the gist.
 
 .PARAMETER GitHubToken
-GitHub Token
+GitHub User's Token.
 
 .EXAMPLE
-Update-PSToolKitGistConfigFiles -UserID smitpi -GitHubToken xxxxxx
+Update-PSToolKitConfigFiles -UpdateLocal -UpdateLocalFromModule
 
-.NOTES
-General notes
 #>
-Function Update-PSToolKitGistConfigFiles {
-	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Update-PSToolKitGistConfigFiles')]
+Function Update-PSToolKitConfigFiles {
+	[Cmdletbinding(DefaultParameterSetName = 'local', HelpURI = 'https://smitpi.github.io/PSToolKit/Update-PSToolKitConfigFiles')]
 	PARAM(
-		[string]$UserID,
+		[Parameter(ParameterSetName = 'local')]
+		[Parameter(ParameterSetName = 'Localgist')]
+		[ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+				else { Throw 'Must be running an elevated prompt run this function' } })]
+		[switch]$UpdateLocal,
+		[Parameter(ParameterSetName = 'gistupdate')]
+		[ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+				else { Throw 'Must be running an elevated prompt run this function' } })]
+		[switch]$UpdateGist,
+		[Parameter(ParameterSetName = 'local')]
+		[switch]$UpdateLocalFromModule,
+		[Parameter(ParameterSetName = 'Localgist')]
+		[switch]$UpdateLocalFromGist,					
+		[Parameter(ParameterSetName = 'gistupdate')]
+		[Parameter(ParameterSetName = 'Localgist')]
+		[string]$GitHubUserID,
+		[Parameter(ParameterSetName = 'gistupdate')]
+		[Parameter(ParameterSetName = 'Localgist')]
 		[string]$GitHubToken
 	)
-	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-	$headers = @{}
-	$auth = '{0}:{1}' -f $UserID, $GitHubToken
-	$bytes = [System.Text.Encoding]::ASCII.GetBytes($auth)
-	$base64 = [System.Convert]::ToBase64String($bytes)
-	$headers.Authorization = 'Basic {0}' -f $base64
+ $ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
+	if (-not(Test-Path $ConfigPath)) { $ModuleConfigPath = New-Item $ConfigPath -ItemType Directory -Force }
+	else { $ModuleConfigPath = Get-Item $ConfigPath }
+				
+	if ($UpdateLocal) {
+		if ($UpdateLocalFromModule) {
+			try {
+				$module = Get-Module PSToolKit
+				if (!$module) { $module = Get-Module PSToolKit -ListAvailable }
+				Get-ChildItem (Join-Path $module.ModuleBase -ChildPath \private) | ForEach-Object {
+					Copy-Item -Path $_.FullName -Destination $ModuleConfigPath.FullName -Force
+					Write-Color '[Update]', "$($_.name): ", 'Completed' -Color Yellow, Cyan, Green
+				}
+			} catch {throw "Unable to update from module source:`n $($_.Exception.Message)"}
+		}
+		if ($UpdateLocalFromGist) {
+			$headers = @{}
+			$auth = '{0}:{1}' -f $GitHubUserID, $GitHubToken
+			$bytes = [System.Text.Encoding]::ASCII.GetBytes($auth)
+			$base64 = [System.Convert]::ToBase64String($bytes)
+			$headers.Authorization = 'Basic {0}' -f $base64
 
-	$url = 'https://api.github.com/users/{0}/gists' -f $Userid
-	$AllGist = Invoke-RestMethod -Uri $url -Method Get -Headers $headers
-	$PRGist = $AllGist | Select-Object | Where-Object { $_.description -like 'PSToolKit-Config' }
+			$url = 'https://api.github.com/users/{0}/gists' -f $GitHubUserID
 
-	if ($null -like $PRGist) {
-		$Body = @{}
-		$files = @{}
-		$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
-		Get-ChildItem $ConfigPath | ForEach-Object { $Files[$_.Name] = @{content = ( Get-Content $_.FullName -Encoding UTF8 | Out-String ) } }
-		$Body.files = $Files
-		$Body.description = 'PSToolKit-Config'
-		$json = ConvertTo-Json -InputObject $Body
-		$json = [System.Text.Encoding]::UTF8.GetBytes($json)
-		$RawReq = Invoke-WebRequest -Headers $headers -Uri https://api.github.com/gists -Method Post -Body $json
-		ConvertFrom-Json -InputObject $RawReq
+			$gistfiles = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+			$gistfiles = $gistfiles | Select-Object | Where-Object { $_.description -like 'PSToolKit-Config' }
+			$gistfileNames = $gistfiles.files | Get-Member | Where-Object { $_.memberType -eq 'NoteProperty' } | Select-Object Name
+			foreach ($gistfileName in $gistfileNames) {
+				$url = ($gistfiles.files."$($gistfileName.name)").raw_url
+            (Invoke-WebRequest -Uri $url -Headers $headers).content | Set-Content (Join-Path $ModuleConfigPath.FullName -ChildPath $($gistfileName.name))
+				Write-Color '[Update]', $($gistfileName.name), ': Complete' -Color Yellow, Cyan, Green
+			}
+		}
 
 	}
-	else {
-		$Body = @{}
-		$files = @{}
-		$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
-		Get-ChildItem $ConfigPath | ForEach-Object { $Files[$_.Name] = @{content = ( Get-Content $_.FullName -Encoding UTF8 | Out-String ) } }
-		$Body.files = $Files
+	if ($UpdateGist) {
+		try {
+			$headers = @{}
+			$auth = '{0}:{1}' -f $GitHubUserID, $GitHubToken
+			$bytes = [System.Text.Encoding]::ASCII.GetBytes($auth)
+			$base64 = [System.Convert]::ToBase64String($bytes)
+			$headers.Authorization = 'Basic {0}' -f $base64
 
-		$Uri = 'https://api.github.com/gists/{0}' -f $PRGist.id
-		$json = ConvertTo-Json -InputObject $Body
-		$json = [System.Text.Encoding]::UTF8.GetBytes($json)
-		$RawReq = Invoke-WebRequest -Headers $headers -Uri $Uri -Method Patch -Body $json
-		ConvertFrom-Json -InputObject $RawReq
+			$url = 'https://api.github.com/users/{0}/gists' -f $GitHubUserID
+			$AllGist = Invoke-RestMethod -Uri $url -Method Get -Headers $headers -ErrorAction Stop
+			$PRGist = $AllGist | Select-Object | Where-Object { $_.description -like 'PSToolKit-Config' }
+		} catch {throw "Can't connect to gist:`n $($_.Exception.Message)"}
+
+		if ($null -like $PRGist) {
+			try { 	
+				$Body = @{}
+				$files = @{}
+				Get-ChildItem $ModuleConfigPath.FullName | ForEach-Object { $Files[$_.Name] = @{content = ( Get-Content $_.FullName -Encoding UTF8 | Out-String ) } } -ErrorAction Stop
+				$Body.files = $Files
+				$Body.description = 'PSToolKit-Config'
+				$json = ConvertTo-Json -InputObject $Body
+				$json = [System.Text.Encoding]::UTF8.GetBytes($json)
+				$null = Invoke-WebRequest -Headers $headers -Uri https://api.github.com/gists -Method Post -Body $json -ErrorAction Stop
+				Write-Color '[Initial]-[Upload]', 'PSToolKit Config to Gist:', ' Completed' -Color Yellow, Cyan, Green
+			} catch {throw "Can't connect to gist:`n $($_.Exception.Message)"}
+		} else {
+			try {
+				$Body = @{}
+				$files = @{}
+				Get-ChildItem $ModuleConfigPath.FullName | ForEach-Object { $Files[$_.Name] = @{content = ( Get-Content $_.FullName -Encoding UTF8 | Out-String ) } } -ErrorAction Stop
+				$Body.files = $Files
+				$Uri = 'https://api.github.com/gists/{0}' -f $PRGist.id
+				$json = ConvertTo-Json -InputObject $Body
+				$json = [System.Text.Encoding]::UTF8.GetBytes($json)
+				$null = Invoke-WebRequest -Headers $headers -Uri $Uri -Method Patch -Body $json -ErrorAction Stop
+				Write-Color '[Upload]', 'PSToolKit Config to Gist:', ' Completed' -Color Yellow, Cyan, Green
+			} catch {throw "Can't connect to gist:`n $($_.Exception.Message)"}
+
+		}
+
 	}
-} #end Function
+				
+
+} #end 
  
-Export-ModuleMember -Function Update-PSToolKitGistConfigFiles
+Export-ModuleMember -Function Update-PSToolKitConfigFiles
 #endregion
  
 #region Write-PSToolKitLog.ps1
