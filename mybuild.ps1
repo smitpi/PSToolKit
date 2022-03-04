@@ -8,8 +8,8 @@ PARAM(
 Get-Module PSToolKit | Remove-Module -Force
 Import-Module 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\Public\Set-PSProjectFiles.ps1' -Force
 try {
-	Copy-Item 'C:\Program Files\PSToolKit\Config\*' -Destination 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\Private' -Force -ErrorAction Stop -Verbose
-} catch {Write-Warning 'cant copy files'}
+	Copy-Item 'C:\Program Files\PSToolKit\Config\*' -Destination 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\Private' -Force -ErrorAction Stop
+} catch {throw "Cant copy config files"}
 
 
 if ($Update -like 'Build') {
@@ -20,7 +20,7 @@ if ($Update -like 'Build') {
 	} catch {Write-Warning 'cant delete files'}
 	Set-PSProjectFiles -ModulePSM1 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\PSToolKit.psm1' -VersionBump Build -mkdocs gh-deploy
 } else {
-	Set-PSProjectFiles -ModulePSM1 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\PSToolKit.psm1' -VersionBum CombineOnly
+	Set-PSProjectFiles -ModulePSM1 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\PSToolKit.psm1' -VersionBum CombineOnly -mkdocs serve
 }
 
 $newmod = ((Get-ChildItem -Path 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\Output\') | Sort-Object -Property Name -Descending)[0]
