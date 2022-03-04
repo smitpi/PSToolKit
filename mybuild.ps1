@@ -26,3 +26,8 @@ $newmod = ((Get-ChildItem -Path 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\
 Get-ChildItem -Directory 'C:\Program Files\WindowsPowerShell\Modules\PSToolKit' | Compress-Archive -DestinationPath 'C:\Program Files\WindowsPowerShell\Modules\PSToolKit\oldmodule.zip' -Update
 Get-ChildItem -Directory 'C:\Program Files\WindowsPowerShell\Modules\PSToolKit' | Remove-Item -Recurse -Force
 Copy-Item -Path $newmod.FullName -Destination 'C:\Program Files\WindowsPowerShell\Modules\PSToolKit\' -Force -Verbose -Recurse
+
+Set-Location "D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit"
+git add --all
+git commit --all -m "To Version:$((Get-ChildItem D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\Output).name.ToString())"
+git push
