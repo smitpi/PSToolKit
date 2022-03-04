@@ -24,7 +24,7 @@ Edit-PSModulesLists -List <String> [-RemoveModule] [<CommonParameters>]
 
 ### Add
 ```
-Edit-PSModulesLists -List <String> [-AddModule] [-ModuleName <String>] [<CommonParameters>]
+Edit-PSModulesLists -List <String> [-AddModule <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -86,21 +86,6 @@ Accept wildcard characters: False
 
 ### -AddModule
 Add to the list
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Add
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ModuleName
-What module to add.
 
 ```yaml
 Type: String

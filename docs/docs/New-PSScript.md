@@ -26,7 +26,7 @@ With PowerShell Script Info
 
 ### EXAMPLE 1
 ```
-New-PSScript -Path .\PSToolKit\Private\ -Verb get -Noun blah -Description 'blah' -tags ps
+New-PSScript -Path .\PSToolKit\Private\ -Verb get -Noun blah -Description 'blah' -tags PS
 ```
 
 ## PARAMETERS

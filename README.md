@@ -49,7 +49,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Get-FQDN](https://smitpi.github.io/PSToolKit/#Get-FQDN) -- Get FQDN for a device, and checks if it is online
 - [Get-FullADUserDetail](https://smitpi.github.io/PSToolKit/#Get-FullADUserDetail) -- Extract handy info of an AD user
 - [Get-ModuleCommandHelp](https://smitpi.github.io/PSToolKit/#Get-ModuleCommandHelp) -- Show help file of a command in a specified module
-- [Get-MyPSGalleryStats](https://smitpi.github.io/PSToolKit/#Get-MyPSGalleryStats) -- Show stats about my published modules
+- [Get-MyPSGalleryStats](https://smitpi.github.io/PSToolKit/#Get-MyPSGalleryStats) -- Show stats about my published modules.
 - [Get-NestedMember](https://smitpi.github.io/PSToolKit/#Get-NestedMember) -- Find all Nested members of a group
 - [Get-ProcessPerformance](https://smitpi.github.io/PSToolKit/#Get-ProcessPerformance) -- Gets the top 10 processes by CPU %
 - [Get-PropertiesToCSV](https://smitpi.github.io/PSToolKit/#Get-PropertiesToCSV) -- Get member data of an object. Use it to create other psobjects
