@@ -82,9 +82,7 @@ Function Edit-PSModulesLists {
 		[Parameter(ParameterSetName = 'Remove')]
 		[switch]$RemoveModule,
 		[Parameter(ParameterSetName = 'Add')]
-		[switch]$AddModule,
-		[Parameter(ParameterSetName = 'Add')]
-		[string]$ModuleName
+		[string]$AddModule
 	)
 
 	$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
@@ -116,14 +114,15 @@ Function Edit-PSModulesLists {
 		}
 		until ($select.toupper() -eq 'Q')
 
-		$SortMods =  $mods | Sort-Object -Property Name -Unique 
+		$SortMods =  $mods | Sort-Object -Property Name -Unique
         $SortMods | ConvertTo-Json -Depth 3 | Set-Content -Path $ModuleList -Force
 		[System.Collections.ArrayList]$mods = Get-Content $ModuleList | ConvertFrom-Json
 		ListStuff $mods.name
 
 	}
-	if ($AddModule) {
-		$findmods = Find-Module -Filter $ModuleName 
+	if (-not($RemoveModule) -and -not($ShowCurrent)) {
+		if ($null -like $AddModule) {throw "AddModule cant be an empty string"}
+		$findmods = Find-Module -Filter $AddModule
 		if ($findmods.Name.count -gt 1) {
 			ListStuff -arg $findmods.name
 			$select = Read-Host 'Make a selection: '
@@ -135,7 +134,7 @@ Function Edit-PSModulesLists {
 		}
 		else { Write-Error "Could not find $($ModuleName);quit" }
 
-		$SortMods =  $mods | Sort-Object -Property Name -Unique 
+		$SortMods =  $mods | Sort-Object -Property Name -Unique
         $SortMods | ConvertTo-Json -Depth 3 | Set-Content -Path $ModuleList -Force
 		[System.Collections.ArrayList]$mods = Get-Content $ModuleList | ConvertFrom-Json
 		ListStuff $mods.name
