@@ -24,6 +24,7 @@ Get-Help about_PSToolKit
 Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit)
  
 ## Functions
+- [Get-BinRoot](https://smitpi.github.io/PSToolKit/#Get-BinRoot) -- Get-ToolsLocation
 - [Add-ChocolateyPrivateRepo](https://smitpi.github.io/PSToolKit/#Add-ChocolateyPrivateRepo) -- Add a private repository to Chocolatey.
 - [Backup-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#Backup-ElevatedShortcut) -- Exports the RunAss shortcuts, to a zip file
 - [Backup-PowerShellProfile](https://smitpi.github.io/PSToolKit/#Backup-PowerShellProfile) -- Creates a zip file from the ps profile directories
@@ -82,7 +83,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Remove-UserProfile](https://smitpi.github.io/PSToolKit/#Remove-UserProfile) -- Connects to a server and renames a user profile folder, and delete the key from Profilelist in the registry
 - [Restore-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#Restore-ElevatedShortcut) -- Restore the RunAss shortcuts, from a zip file
 - [Search-Scripts](https://smitpi.github.io/PSToolKit/#Search-Scripts) -- Search for a string in a directory of ps1 scripts.
-- [Set-PSProjectFiles](https://smitpi.github.io/PSToolKit/#Set-PSProjectFiles) -- Creates and modify needed files for a PS project from existing module files.
 - [Set-PSToolKitSystemSettings](https://smitpi.github.io/PSToolKit/#Set-PSToolKitSystemSettings) -- Set multiple settings on desktop or server
 - [Set-SharedPSProfile](https://smitpi.github.io/PSToolKit/#Set-SharedPSProfile) -- Redirects PowerShell profile to network share.
 - [Set-StaticIP](https://smitpi.github.io/PSToolKit/#Set-StaticIP) -- Set static IP on device

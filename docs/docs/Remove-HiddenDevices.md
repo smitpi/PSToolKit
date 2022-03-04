@@ -25,58 +25,44 @@ Removes ghost devices from your system
 ### EXAMPLE 1
 ```
 Lists all devices
+. Remove-HiddenDevices -listDevicesOnly
 ```
-
-.
-Remove-HiddenDevices -listDevicesOnly
 
 ### EXAMPLE 2
 ```
 Save the list of devices as an object
+$Devices = . Remove-HiddenDevices -listDevicesOnly
 ```
-
-$Devices = .
-Remove-HiddenDevices -listDevicesOnly
 
 ### EXAMPLE 3
 ```
 Lists all 'ghost' devices
+. Remove-HiddenDevices -listGhostDevicesOnly
 ```
-
-.
-Remove-HiddenDevices -listGhostDevicesOnly
 
 ### EXAMPLE 4
 ```
 Save the list of 'ghost' devices as an object
+$ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly
 ```
-
-$ghostDevices = .
-Remove-HiddenDevices -listGhostDevicesOnly
 
 ### EXAMPLE 5
 ```
 Remove all ghost devices EXCEPT any devices that have "Intel" or "Citrix" in their friendly name
+. Remove-HiddenDevices -filterByFriendlyName @("Intel","Citrix")
 ```
-
-.
-Remove-HiddenDevices -filterByFriendlyName @("Intel","Citrix")
 
 ### EXAMPLE 6
 ```
 Remove all ghost devices EXCEPT any devices that are apart of the classes "LegacyDriver" or "Processor"
+. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor")
 ```
-
-.
-Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor")
 
 ### EXAMPLE 7
 ```
 Remove all ghost devices EXCEPT for devices with a friendly name of "Intel" or "Citrix" or with a class of "LegacyDriver" or "Processor"
+. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor") -filterByFriendlyName @("Intel","Citrix")
 ```
-
-.
-Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor") -filterByFriendlyName @("Intel","Citrix")
 
 ## PARAMETERS
 

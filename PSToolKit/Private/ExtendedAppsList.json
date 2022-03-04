@@ -84,6 +84,14 @@
     "Source": "chocolatey"
   },
   {
+    "Name": "mkdocs",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "mkdocs-material",
+    "Source": "chocolatey"
+  },
+  {
     "Name": "netfx-4.6.2",
     "Source": "chocolatey"
   },
@@ -132,6 +140,10 @@
     "Source": "chocolatey"
   },
   {
+    "Source": "chocolatey",
+    "Name": "salamander"
+  },
+  {
     "Name": "sumatrapdf",
     "Source": "chocolatey"
   },
@@ -164,4 +176,3 @@
     "Source": "chocolatey"
   }
 ]
-
