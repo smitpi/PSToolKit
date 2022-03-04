@@ -1,6 +1,9 @@
 function mybuild {
 	PARAM(
 		[Parameter(Mandatory = $true)]
+		[ValidateScript( { $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+				else { Throw 'Must be running an elevated prompt.' } })]
 		[ValidateSet('Combine', 'Build')]
 		[string]$Update
 	)
