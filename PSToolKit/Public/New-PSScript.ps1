@@ -127,7 +127,7 @@ Function $properverb-$propernoun {
                 	[ValidateScript( { if (Test-Path `$_) { `$true }
                                 else { New-Item -Path `$_ -ItemType Directory -Force | Out-Null; `$true }
                         })]
-                	[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp'
+                	[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp',
 					[ValidateScript({`$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
             						if (`$IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {`$True}
             						else {Throw "Must be running an elevated prompt to use ClearARPCache"}})]
@@ -139,8 +139,8 @@ Function $properverb-$propernoun {
 
 
 
-	if (`$Export -eq 'Excel') { `$data | Export-Excel -Path (`$ReportPath + "\$propernoun-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
-	if (`$Export -eq 'HTML') { `$data | Out-GridHtml -DisablePaging -Title "$propernoun" -HideFooter -SearchHighlight -FixedHeader }
+	if (`$Export -eq 'Excel') { `$data | Export-Excel -Path `$(Join-Path -Path `$ReportPath -ChildPath "\$propernoun-`$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx") -AutoSize -AutoFilter -Show }
+	if (`$Export -eq 'HTML') { `$data | Out-GridHtml -DisablePaging -Title "$propernoun" -HideFooter -SearchHighlight -FixedHeader -FilePath `$(Join-Path -Path `$ReportPath -ChildPath "\$propernoun-`$(Get-Date -Format yyyy.MM.dd-HH.mm).html") }
 	if (`$Export -eq 'Host') { `$data }
 
 
