@@ -24,6 +24,7 @@ Get-Help about_PSToolKit
 Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit)
  
 ## Functions
+- [Get-BinRoot](https://smitpi.github.io/PSToolKit/#Get-BinRoot) -- Get-ToolsLocation
 - [Add-ChocolateyPrivateRepo](https://smitpi.github.io/PSToolKit/#Add-ChocolateyPrivateRepo) -- Add a private repository to Chocolatey.
 - [Backup-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#Backup-ElevatedShortcut) -- Exports the RunAss shortcuts, to a zip file
 - [Backup-PowerShellProfile](https://smitpi.github.io/PSToolKit/#Backup-PowerShellProfile) -- Creates a zip file from the ps profile directories
@@ -49,7 +50,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Get-FullADUserDetail](https://smitpi.github.io/PSToolKit/#Get-FullADUserDetail) -- Extract handy info of an AD user
 - [Get-MyPSGalleryStats](https://smitpi.github.io/PSToolKit/#Get-MyPSGalleryStats) -- Show stats about my published modules.
 - [Get-ProcessPerformance](https://smitpi.github.io/PSToolKit/#Get-ProcessPerformance) -- Gets the top 10 processes by CPU %
-- [Get-PropertiesToCSV](https://smitpi.github.io/PSToolKit/#Get-PropertiesToCSV) -- Get member data of an object. Use it to create other psobjects
+- [Get-PropertiesToCSV](https://smitpi.github.io/PSToolKit/#Get-PropertiesToCSV) -- Get member data of an object. Use it to create other PSObjects.
 - [Get-SoftwareAudit](https://smitpi.github.io/PSToolKit/#Get-SoftwareAudit) -- Connects to a remote hosts and collect installed software details
 - [Get-SystemInfo](https://smitpi.github.io/PSToolKit/#Get-SystemInfo) -- Get system details of a remote device
 - [Get-WinEventLogExtract](https://smitpi.github.io/PSToolKit/#Get-WinEventLogExtract) -- Extract Event logs of a server list, and create html / excel report

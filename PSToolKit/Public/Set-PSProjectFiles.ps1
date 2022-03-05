@@ -95,8 +95,7 @@ Function Set-PSProjectFiles {
 				FunctionsToExport = (Get-Command -Module $module.Name | Select-Object name).name | Sort-Object
 			}
 			Update-ModuleManifest @manifestProperties
-		}
-		else {
+		} else {
 			$ModuleFunctionFile = Get-Item $ModulePSM1
 			$module = Import-Module $ModuleFunctionFile.FullName -Force -PassThru
 			if ((Get-Module $module.Name).count -gt 1) {
@@ -106,8 +105,7 @@ Function Set-PSProjectFiles {
 		}
 		$ModuleManifestFile = Get-Item ($ModuleFunctionFile.FullName.Replace('psm1', 'psd1'))
 		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object *
-	}
- catch { Write-Error 'Unable to load module.'; exit }
+	} catch { Write-Error 'Unable to load module.'; exit }
 
 	Write-Color '[Starting]', 'Creating Folder Structure' -Color Yellow, DarkCyan
 	$ModuleBase = Get-Item ((Get-Item $ModuleFunctionFile.Directory).Parent).FullName
@@ -288,9 +286,7 @@ Function Set-PSProjectFiles {
 		$ExcludeRules = @(
 			'PSMissingModuleManifestField',
 			'PSAvoidUsingWriteHost',
-			'PSUseShouldProcessForStateChangingFunctions',
 			'PSUseSingularNouns',
-			'PSAvoidTrailingWhitespace',
 			'PSReviewUnusedParameter'
 		)
 		Write-Color '[Starting]', 'PSScriptAnalyzer' -Color Yellow, DarkCyan
@@ -388,8 +384,7 @@ Function Set-PSProjectFiles {
 	if ($VersionBump -like 'CombineOnly') { 
 		combine
 		mkdocs
-	}
-	else {
+	} else {
 		exthelp
 		ScriptAnalyzer
 		combine

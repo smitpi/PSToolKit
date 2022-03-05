@@ -8,6 +8,7 @@ SHORT DESCRIPTION
  
 NOTES
 Functions in this module:
+	 Get-BinRoot -- Get-ToolsLocation
 	 Add-ChocolateyPrivateRepo -- Add a private repository to Chocolatey.
 	 Backup-ElevatedShortcut -- Exports the RunAss shortcuts, to a zip file
 	 Backup-PowerShellProfile -- Creates a zip file from the ps profile directories
@@ -33,7 +34,7 @@ Functions in this module:
 	 Get-FullADUserDetail -- Extract handy info of an AD user
 	 Get-MyPSGalleryStats -- Show stats about my published modules.
 	 Get-ProcessPerformance -- Gets the top 10 processes by CPU %
-	 Get-PropertiesToCSV -- Get member data of an object. Use it to create other psobjects
+	 Get-PropertiesToCSV -- Get member data of an object. Use it to create other PSObjects.
 	 Get-SoftwareAudit -- Connects to a remote hosts and collect installed software details
 	 Get-SystemInfo -- Get system details of a remote device
 	 Get-WinEventLogExtract -- Extract Event logs of a server list, and create html / excel report

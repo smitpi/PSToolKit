@@ -276,11 +276,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://smitpi.github.io/PSToolKit/Set-PSProjectFiles/</loc>
-         <lastmod>2022-03-05</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://smitpi.github.io/PSToolKit/Set-PSToolKitSystemSettings/</loc>
          <lastmod>2022-03-05</lastmod>
          <changefreq>daily</changefreq>

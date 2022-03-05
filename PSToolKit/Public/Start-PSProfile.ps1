@@ -52,6 +52,9 @@ Clear the screen before loading.
 .PARAMETER AddFun
 Add fun details in the output.
 
+.PARAMETER GalleryStats
+Stats about my published modules..
+
 .PARAMETER ShowModuleList
 Summary of installed modules.
 
@@ -67,6 +70,7 @@ Function Start-PSProfile {
 	PARAM(
 		[switch]$ClearHost = $false,
 		[switch]$AddFun = $false,
+		[switch]$GalleryStats = $false,
 		[switch]$ShowModuleList = $false,
 		[switch]$ShortenPrompt = $false
 	)
@@ -214,6 +218,13 @@ Function Start-PSProfile {
 		Write-Host (' {0,-35}: ' -f 'Chuck Noris in Dev:') -ForegroundColor Cyan -NoNewline
 		Write-Host (' {0,-20} ' -f "$($chuck)") -ForegroundColor Green
 		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
+ }
+
+ if ($GalleryStats) {
+		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
+		Write-Host (' {0,15} ' -f 'My PSGallery Stats') -ForegroundColor DarkRed
+		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
+		Write-Host "$((Get-MyPSGalleryStats -Display TableView) | Out-String)" -ForegroundColor Green
  }
 
 	if ($ShortenPrompt) {
