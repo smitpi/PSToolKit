@@ -72,10 +72,6 @@
     "Source": "chocolatey"
   },
   {
-    "Source": "chocolatey",
-    "Name": "internet-download-manager"
-  },
-  {
     "Name": "microsoft-edge",
     "Source": "chocolatey"
   },

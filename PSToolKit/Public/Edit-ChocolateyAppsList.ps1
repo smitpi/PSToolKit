@@ -26,20 +26,50 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [05/03/2022_06:36] Initital Script Creating
+Created [05/03/2022_06:36] Initial Script Creating
 
 .PRIVATEDATA
 
 #>
 
-<# 
+<#
 
-.DESCRIPTION 
- Add or remove apps from the json file used in Install-ChocolateyApps 
+.DESCRIPTION
+ Add or remove apps from the json file used in Install-ChocolateyApps
 
-#> 
+#>
+
+<#
+.SYNOPSIS
+Add or remove apps from the json file used in Install-ChocolateyApps
 
 
+.DESCRIPTION
+Add or remove apps from the json file used in Install-ChocolateyApps
+
+
+.PARAMETER ShowCurrent
+List current apps in the json file
+
+.PARAMETER AddApp
+add an app to the list.
+
+.PARAMETER ChocoID
+Name or ID of the app.
+
+.PARAMETER ChocoSource
+The source where the app is hosted
+
+.PARAMETER RemoveApp
+Remove app from the list
+
+.PARAMETER List
+Which list to use.
+
+.EXAMPLE
+Edit-ChocolateyAppsList -AddApp -ChocoID 7zip -ChocoSource chocolatey
+
+#>
 Function Edit-ChocolateyAppsList {
 	[Cmdletbinding(DefaultParameterSetName = 'Current', HelpURI = 'https://smitpi.github.io/PSToolKit/Edit-ChocolateyAppsList')]
 	PARAM(
@@ -70,8 +100,7 @@ Function Edit-ChocolateyAppsList {
 	$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
 	try {
 		$ConPath = Get-Item $ConfigPath
-	}
- catch { Write-Error 'Config path foes not exist'; exit }
+	} catch { Write-Error 'Config path foes not exist'; exit }
 
 	if ($List -like 'BaseApps') { $AppList = (Join-Path $ConPath.FullName -ChildPath BaseAppList.json) }
 	if ($List -like 'ExtendedApps') { $AppList = (Join-Path $ConPath.FullName -ChildPath ExtendedAppsList.json) }
