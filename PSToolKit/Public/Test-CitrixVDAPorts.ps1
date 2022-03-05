@@ -57,6 +57,7 @@ Test-CitrixVDAPorts -ServerList $list
 #>
 Function Test-CitrixVDAPorts {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Test-CitrixVDAPorts')]
+    [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true, Position = 0)]
         [System.Collections.ArrayList]$ServerList,

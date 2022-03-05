@@ -49,8 +49,8 @@ Show details of the commands in this module
 .PARAMETER ShowCommand
 Use the show-command command
 
-.PARAMETER html
-Create a website with the details
+.PARAMETER ExportToHTML
+Create a HTML page with the details
 
 .EXAMPLE
 Show-PSToolKit
@@ -60,7 +60,7 @@ Function Show-PSToolKit {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Show-PSToolKit')]
     PARAM(
         [switch]$ShowCommand = $false,
-        [switch]$html = $false
+        [switch]$ExportToHTML = $false
     )
 
     Write-Color 'Collecting Command Details' -Color DarkCyan
@@ -96,30 +96,30 @@ Function Show-PSToolKit {
             HelpUri             = $_.HelpUri
         }
     }
-   
+
     if ($ShowCommand) {
         $select = $commands | Select-Object Name, Description | Out-GridView -OutputMode Single
         Show-Command -Name $select.name
     }
 
     if (!$ShowCommand) {
-        $out = ConvertTo-ASCIIArt -Text 'PSToolKit' -Font big
+        $out = ConvertTo-ASCIIArt -Text 'PSToolKit' -Font roman
         $out += "`n"
-        $out += ConvertTo-ASCIIArt -Text $version -Font big
-        
-        Write-Host $out -ForegroundColor Yellow
-        
+        $out += ConvertTo-ASCIIArt -Text $version -Font basic
+        $out += ($(Add-Border -Text "Module Path: $($module.Path)" -Character '.') | Out-String)
+        Add-Border -TextBlock $out -Character % -InsertBlanks -Tab 2 -ANSIBorder "$([char]0x1b)[38;5;47m" -ANSIText "$([char]0x1b)[93m"
+
         foreach ($item in ($commands.verb | Sort-Object -Unique)) {
-            Write-Color 'Verb:', $item -Color Cyan, Red -StartTab 2
+            Write-Color 'Verb:', $item -Color Cyan, Red -StartTab 1 -LinesBefore 1
             $filtered = $commands | Where-Object { $_.Verb -like $item }
-            foreach ($fil in $filtered) {
-                Write-Color "$($fil.name) - ", $($fil.Description) -Color Gray, Yellow
+            foreach ($filter in $filtered) {
+                Write-Color "$($filter.name)", ' - ', $($filter.Description) -Color Gray, Red, Yellow
 
             }
         }
     }
 
-    if ($html) {
+    if ($ExportToHTML) {
         #region html settings
         $SectionSettings = @{
             HeaderTextSize        = '16'
@@ -128,21 +128,6 @@ Function Show-PSToolKit {
             HeaderTextColor       = '#ADEFD1'
             backgroundColor       = 'lightgrey'
             CanCollapse           = $true
-        }
-        $TableSettings = @{
-            SearchHighlight = $True
-            AutoSize        = $true
-            Style           = 'cell-border'
-            ScrollX         = $true
-            HideButtons     = $true
-            HideFooter      = $true
-            FixedHeader     = $true
-            TextWhenNoData  = 'No Data to display here'
-            DisableSearch   = $true
-            ScrollCollapse  = $true
-            #Buttons        =  @('searchBuilder','pdfHtml5','excelHtml5')
-            ScrollY         = $true
-            DisablePaging   = $true
         }
         $ImageLink = 'https://gist.githubusercontent.com/smitpi/ecdaae80dd79ad585e571b1ba16ce272/raw/6d0645968c7ba4553e7ab762c55270ebcc054f04/default-monochrome-black-1.png'
         #endregion
@@ -154,14 +139,11 @@ Function Show-PSToolKit {
             }
             foreach ($item in ($commands.verb | Sort-Object -Unique)) {
                 $filtered = $commands | Where-Object { $_.Verb -like $item }
-        
-    
                 New-HTMLSection -HeaderText "$($item)" @SectionSettings -Width 50% -AlignContent center -AlignItems center -Collapsed {
                     New-HTMLPanel -Content {
                         $filtered | ForEach-Object { New-HTMLContent -Invisible -Content {
                                 New-HTMLPanel -BackgroundColor GhostWhite -Content { New-HTMLText -Text "$($_.name)" -Color BlackRussian -FontSize 18 -Alignment right }
-                                #New-HTMLPanel -BackgroundColor GhostWhite -AlignContentText center -Content {New-HTMLText -Text "[More]($($_.HelpUri))" -Color BlackRussian -FontSize 14 -Alignment center }
-                                New-HTMLPanel -BackgroundColor GhostWhite -Content { New-HTMLText -Text "$($_.description) [More]($($_.HelpUri))" -Color FreeSpeechRed -FontSize 16 -Alignment left }      
+                                New-HTMLPanel -BackgroundColor GhostWhite -Content { New-HTMLText -Text "$($_.description) [More]($($_.HelpUri))" -Color FreeSpeechRed -FontSize 16 -Alignment left }
                             }
                         }
                     }

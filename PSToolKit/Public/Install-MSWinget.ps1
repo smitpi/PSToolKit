@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ms
+.TAGS MS
 
 .LICENSEURI
 
@@ -63,7 +63,7 @@ Function Install-MSWinget {
     if (([version]$checkver.Version).Major -gt 9 -and ([version]$checkver.Version).Build -gt 14393) {
 
         try {
-            $checkInstall = [bool](Invoke-Expression 'winget -v' -ErrorAction Stop)
+            $checkInstall = [bool](winget -ErrorAction Stop)
         }
         catch { $checkInstall = $false }
         if ($checkInstall) { Write-Color 'Winget: ', 'Already Installed' -Color Cyan, Yellow }
@@ -89,7 +89,7 @@ Function Install-MSWinget {
             #winget config path from: https://github.com/microsoft/winget-cli/blob/master/doc/Settings.md#file-location
             if (Test-Path "$env:LOCALAPPDATA\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json") {
                 $settingsPath = "$env:LOCALAPPDATA\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json";
-                $settingsJson = 
+                $settingsJson =
                 @'
     {
         // For documentation on these settings, see: https://aka.ms/winget-settings
@@ -102,7 +102,7 @@ Function Install-MSWinget {
             }
 
             try {
-                $checkInstall2 = [bool](Invoke-Expression 'winget -v' -ErrorAction Stop)
+                $checkInstall2 = [bool](winget -ErrorAction Stop)
             }
             catch { $checkInstall2 = $false }
             if ($checkInstall2) { Write-Color 'Winget: ', 'Installation Successful' -Color Cyan, green }

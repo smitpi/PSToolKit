@@ -64,6 +64,7 @@ Export-CitrixPolicySettings -FormatTable
 #>
 Function Export-CitrixPolicySettings {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Export-CitrixPolicySettings')]
+	[OutputType([System.Object[]])]
 	PARAM(
 		[switch]$FormatTable = $false,
 		[switch]$ExportToExcel = $false,

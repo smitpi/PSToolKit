@@ -35,17 +35,17 @@ Created [26/10/2021_22:32] Initial Script Creating
 <#
 
 .DESCRIPTION
-Get member data of an object. Use it to create other psobject
+Get member data of an object. Use it to create other PSObjects.
 
 #>
 
 
 <#
 .SYNOPSIS
-Get member data of an object. Use it to create other psobjects
+Get member data of an object. Use it to create other PSObjects.
 
 .DESCRIPTION
-Get member data of an object. Use it to create other psobjects
+Get member data of an object. Use it to create other PSObjects.
 
 .PARAMETER Data
 Parameter description
@@ -61,7 +61,8 @@ Function Get-PropertiesToCSV {
         [parameter( ValueFromPipeline = $True )]
         [object[]]$Data)
 
+    process {
     $data | Get-Member -MemberType NoteProperty | Sort-Object | ForEach-Object { $_.name } | Join-String -Separator ','
-
+    }
 } #end Function
 

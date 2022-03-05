@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -32,12 +32,12 @@ Created [12/01/2022_09:00] Initial Script Creating
 
 #>
 
-<# 
+<#
 
-.DESCRIPTION 
- This will download, install and setup a new Chocolatey Repo Server 
+.DESCRIPTION
+ This will download, install and setup a new Chocolatey Repo Server
 
-#> 
+#>
 
 <#
 .SYNOPSIS
@@ -106,7 +106,7 @@ Function Install-ChocolateyServer {
         Write-Warning 'Chocolatey not installed. Cannot install standard packages.'
         Exit 1
     }
-    # Install Chocolatey.Server prereqs
+    # Install Chocolatey.Server prerequisites
     choco install IIS-WebServer --source windowsfeatures
     choco install IIS-ASPNET45 --source windowsfeatures
 
@@ -118,13 +118,13 @@ Function Install-ChocolateyServer {
     Import-Module WebAdministration
     # Disable or remove the Default website
     Get-Website -Name 'Default Web Site' | Stop-Website
-    Set-ItemProperty 'IIS:\Sites\Default Web Site' serverAutoStart False    # disables website
+    Set-ItemProperty -Path 'IIS:\Sites\Default Web Site' -Name serverAutoStart -Value False    # disables website
 
     # Set up an app pool for Chocolatey.Server. Ensure 32-bit is enabled and the managed runtime version is v4.0 (or some version of 4). Ensure it is "Integrated" and not "Classic".
     New-WebAppPool -Name $appPoolName -Force
-    Set-ItemProperty IIS:\AppPools\$appPoolName enable32BitAppOnWin64 True       # Ensure 32-bit is enabled
-    Set-ItemProperty IIS:\AppPools\$appPoolName managedRuntimeVersion v4.0       # managed runtime version is v4.0
-    Set-ItemProperty IIS:\AppPools\$appPoolName managedPipelineMode Integrated   # Ensure it is "Integrated" and not "Classic"
+    Set-ItemProperty -Path IIS:\AppPools\$appPoolName -Name enable32BitAppOnWin64 -Value True       # Ensure 32-bit is enabled
+    Set-ItemProperty -Path IIS:\AppPools\$appPoolName -Name managedRuntimeVersion -Value v4.0       # managed runtime version is v4.0
+    Set-ItemProperty -Path IIS:\AppPools\$appPoolName -Name managedPipelineMode -Value Integrated   # Ensure it is "Integrated" and not "Classic"
     Restart-WebAppPool -Name $appPoolName   # likely not needed ... but just in case
 
     # Set up an IIS website pointed to the install location and set it to use the app pool.

@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -33,12 +33,12 @@ Created [28/01/2022_08:00] Initial Script Creating
 #>
 
 
-<# 
+<#
 
-.DESCRIPTION 
- Test ps remote to a device 
+.DESCRIPTION
+ Test ps remote to a device.
 
-#> 
+#>
 
 
 <#
@@ -71,7 +71,7 @@ Function Test-PSRemote {
 	if ($null -like $Credential) {
 		foreach ($comp in $ComputerName) {
 			try {
-				Invoke-Command -ComputerName $comp -ScriptBlock { Write-Output "PS Remote connection working on $($env:COMPUTERNAME)" }
+				Invoke-Command -ComputerName $comp -ScriptBlock { Write-Output "PS Remote connection working on $($using:env:COMPUTERNAME)" }
 			}
 			catch { Write-Warning "Unable to connect to $($comp) - Error: `n $($_.Exception.Message)" }
 		}
@@ -79,7 +79,7 @@ Function Test-PSRemote {
 	else {
 		foreach ($comp in $ComputerName) {
 			try {
-				Invoke-Command -ComputerName $comp -Credential $Credential -ScriptBlock { Write-Output "PS Remote connection working on $($env:COMPUTERNAME)" }
+				Invoke-Command -ComputerName $comp -Credential $Credential -ScriptBlock { Write-Output "PS Remote connection working on  $($using:env:COMPUTERNAME)" }
 			}
 			catch { Write-Warning "Unable to connect to $($comp) - Error: `n $($_.Exception.Message)" }
 		}

@@ -50,7 +50,7 @@ Update PowerShell module manifest file
 Path to .psd1 file
 
 .PARAMETER Author
-Who wrote the moduke
+Who wrote the module.
 
 .PARAMETER Description
 What it does
@@ -70,6 +70,7 @@ Update-PSModuleInfo -ModuleManifestPath .\PSLauncher.psd1 -ChangesMade 'Added bu
 #>
 Function Update-PSModuleInfo {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Update-PSModuleInfo')]
+	[OutputType([System.Collections.Hashtable])]
 	PARAM(
 		[Parameter(Mandatory = $true)]
 		[ValidateScript( { (Test-Path $_) -and ((Get-Item $_).Extension -eq '.psd1') })]

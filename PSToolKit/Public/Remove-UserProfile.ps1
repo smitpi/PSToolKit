@@ -59,23 +59,23 @@ Remove-UserProfile -TargetServer AD01 -UserName ps
 Function Remove-UserProfile {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Remove-UserProfile')]
     PARAM(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]$TargetServer,
         [Parameter(Mandatory = $true, Position = 1)]
         [ValidateNotNullOrEmpty()]
         [string]$UserName
     )
+    ## TODO Needs to be tested and confirm working.
     if ((Test-Connection -ComputerName $TargetServer -Count 2 -Quiet) -eq $true) {
         try {
             Invoke-Command -ComputerName $TargetServer -ScriptBlock {
-                param($using:using:UserName)
-                $UserProfile = Get-ChildItem C:\Users | Where-Object { $_.name -like $UserName }
+                $UserProfile = Get-ChildItem C:\Users | Where-Object { $_.name -like $using:UserName }
                 $UserProfileReg = Get-ChildItem 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion\ProfileList' | Where-Object { $_.GetValue('ProfileImagePath') -like $UserProfile.FullName }
                 $UserProfileGuid = Get-ChildItem 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion\ProfileGuid' | Where-Object { $_.pschildname -like $UserProfileReg.GetValue('Guid') }
-                $newuser = ('_OLD_' + $UserName.ToUpper())
+                $newuser = ('_OLD_' + $using:UserName)
                 $newfolder = 'C:\users\' + $newuser
-                if ((Test-Path -Path $newfolder) -eq $true) { $newuser = ('_OLD_' + (Get-Random -Maximum 20) + '_' + $UserName.ToUpper()) }
+                if ((Test-Path -Path $newfolder) -eq $true) { $newuser = ('_OLD_' + (Get-Random -Maximum 20) + '_' + $($using:UserName)) }
                 Rename-Item -Path $UserProfile.FullName -NewName $newuser
                 if ($UserProfileReg -eq $true) {
                     Set-Location 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion\ProfileList'

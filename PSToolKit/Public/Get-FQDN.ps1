@@ -57,13 +57,20 @@ get-FQDN -ComputerName Neptune
 #>
 Function Get-FQDN {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-FQDN')]
+	[OutputType([System.Object[]])]
 	PARAM(
 		[Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
-		[string]$ComputerName
+		[string[]]$ComputerName
 	)
-
-	[pscustomobject]@{
-		FQDN   = ([System.Net.Dns]::GetHostEntry(($($ComputerName)))).HostName
-		Online = Test-Connection -ComputerName $(([System.Net.Dns]::GetHostEntry(($($ComputerName)))).HostName) -Quiet -Count 2
+	process {
+		[System.Collections.ArrayList]$outobject = @()
+		$ComputerName | ForEach-Object {
+			[void]$outobject.add([pscustomobject]@{
+					Host   = $($_)
+					FQDN   = ([System.Net.Dns]::GetHostEntry(($($_)))).HostName
+					Online = Test-Connection -ComputerName $(([System.Net.Dns]::GetHostEntry(($($_)))).HostName) -Quiet -Count 2
+				})
+		}
 	}
+	end {return $outobject}
 } #end Function

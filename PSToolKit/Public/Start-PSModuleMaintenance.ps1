@@ -68,6 +68,7 @@ Start-PSModuleMaintenance -ListUpdateAvailable -PerformUpdate
 #>
 Function Start-PSModuleMaintenance {
 	[Cmdletbinding(DefaultParameterSetName = 'Update', HelpURI = 'https://smitpi.github.io/PSToolKit/Start-PSModuleMaintenance')]
+	[OutputType([System.Object[]])]
 	PARAM(
 		[Parameter(ParameterSetName = 'Update')]
 		[switch]$ListUpdateAvailable = $false,

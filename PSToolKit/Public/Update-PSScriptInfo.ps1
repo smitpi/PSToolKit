@@ -70,6 +70,7 @@ Update-PSScriptInfo -FullName .\PSToolKit\Public\Start-ClientPSProfile.ps1 -Chan
 #>
 Function Update-PSScriptInfo {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Update-PSScriptInfo')]
+	[OutputType([System.Collections.Hashtable])]
 	PARAM(
 		[Parameter(Mandatory = $true)]
 		[ValidateScript( { (Test-Path $_) -and ((Get-Item $_).Extension -eq '.ps1') })]

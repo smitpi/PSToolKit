@@ -57,7 +57,7 @@ Remove-FaultyProfileList -TargetServer AD01
 function Remove-FaultyProfileList {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Remove-FaultyProfileList')]
     PARAM(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]$TargetServer)
 
@@ -69,7 +69,7 @@ function Remove-FaultyProfileList {
 
                 foreach ($UserProfile in $UserProfileReg) {
                     if ((Test-Path -Path ($UserProfile.GetValue('ProfileImagePath'))) -eq $false) {
-                        Write-Host $UserProfile.GetValue('ProfileImagePath').split('\')[2] + ' -- Does not Exist' -ForegroundColor Red
+                        Write-Host "$($UserProfile.GetValue('ProfileImagePath').split('\')[2]) -- Does not Exist" -ForegroundColor Red
                         $AdminAnswer = Read-Host 'Delete from Registry (Y/N)'
                         if ($AdminAnswer.ToUpper() -eq 'Y') {
                             $UserProfileGuid = Get-ChildItem 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion\ProfileGuid' | Where-Object { $_.pschildname -like $UserProfile.GetValue('Guid') }
@@ -78,15 +78,15 @@ function Remove-FaultyProfileList {
                             Set-Location 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion\ProfileGuid'
                             Remove-Item $UserProfileGuid.PSChildName
                             Set-Location C:
-                            Write-Host $UserProfile.GetValue('ProfileImagePath').split('\')[2] + ' -- Deleted' -ForegroundColor DarkRed
+                            Write-Host "$($UserProfile.GetValue('ProfileImagePath').split('\')[2]) -- Deleted" -ForegroundColor DarkRed
                         }
                     }
                     else {
-                        Write-Host $UserProfile.GetValue('ProfileImagePath').split('\')[2] + ' -- Exists' -ForegroundColor Green
+                        Write-Host "$($UserProfile.GetValue('ProfileImagePath').split('\')[2]) -- Exists" -ForegroundColor Green
                     }
                 }
             }
-            Write-Host User Profile: $UserName removed from server $TargetServer -ForegroundColor DarkCyan
+            Write-Host "User Profile: $($UserName) removed from server $($TargetServer)" -ForegroundColor DarkCyan
 
         }
         Catch {
