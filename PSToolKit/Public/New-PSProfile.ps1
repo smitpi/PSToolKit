@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 0.1.0
+.VERSION 0.1.1
 
 .GUID 61cbb8e0-0468-4f53-9060-5d601fecb913
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS powershell
+.TAGS powershell ps
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -27,19 +27,21 @@
 
 .RELEASENOTES
 Created [05/02/2022_11:41] Initial Script Creating
+Updated [05/03/2022_06:35] added fun
 
 .PRIVATEDATA
 
-#>
+#> 
+
+#Requires -Module PSWriteColor
 
 <#
 
-.DESCRIPTION
- Creates new profile files in the documents folder
+.DESCRIPTION 
+Creates new profile files in the documents folder
 
 #>
 
-#Requires -Module PSWriteColor
 
 <#
 .SYNOPSIS

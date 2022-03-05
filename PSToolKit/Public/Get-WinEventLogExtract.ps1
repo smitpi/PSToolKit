@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 0.1.0
 
-.GUID 0a2c6466-01f5-4743-baf2-1cb8652860dd
+.GUID f5f67d9d-7a63-40c4-9e6c-de5b54e7f5b1
 
 .AUTHOR Pierre Smit
 
@@ -19,24 +19,25 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [26/10/2021_22:32] Initial Script Creating
+Created [05/03/2022_06:34] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
-<#
+<# 
 
-.DESCRIPTION
+.DESCRIPTION 
+ Extract Event logs of a server list, and create html / excel report 
 
-#>
+#> 
 
 <#
 .SYNOPSIS

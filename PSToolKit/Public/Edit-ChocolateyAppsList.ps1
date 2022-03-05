@@ -3,7 +3,7 @@
 
 .VERSION 0.1.0
 
-.GUID d3389a68-79da-49ae-b56b-0b6a4a6ba4cf
+.GUID 621b247a-ed41-411e-9ec6-a94b39444672
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS choco
+.TAGS ps
 
 .LICENSEURI
 
@@ -19,56 +19,27 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [16/01/2022_11:56] Initial Script Creating
+Created [05/03/2022_06:36] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
-<#
+<# 
 
-.DESCRIPTION
- Add or remove apps from the json file used in Install-ChocolateyApps
+.DESCRIPTION 
+ Add or remove apps from the json file used in Install-ChocolateyApps 
 
-#>
-<#
-.SYNOPSIS
-Add or remove apps from the json file used in Install-ChocolateyApps
+#> 
 
 
-.DESCRIPTION
-Add or remove apps from the json file used in Install-ChocolateyApps
-
-
-.PARAMETER ShowCurrent
-List current apps in the json file
-
-.PARAMETER AddApp
-add an app to the list.
-
-.PARAMETER ChocoID
-Name or ID of the app.
-
-.PARAMETER ChocoSource
-The source where the app is hosted
-
-.PARAMETER RemoveApp
-Remove app from the list
-
-.PARAMETER List
-Which list to use.
-
-.EXAMPLE
-Edit-ChocolateyAppsList -AddApp -ChocoID 7zip -ChocoSource chocolatey
-
-#>
 Function Edit-ChocolateyAppsList {
 	[Cmdletbinding(DefaultParameterSetName = 'Current', HelpURI = 'https://smitpi.github.io/PSToolKit/Edit-ChocolateyAppsList')]
 	PARAM(

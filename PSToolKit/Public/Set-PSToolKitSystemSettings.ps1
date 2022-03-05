@@ -63,6 +63,9 @@ Force the reinstall of ps gallery
 .PARAMETER IntranetZone
 Setup intranet zones for mapped drives.
 
+.PARAMETER IntranetZoneIPRange
+Setup intranet zones for mapped drives from ip addresses.
+
 .PARAMETER PSTrustedHosts
 Set trusted hosts to domain servers.
 
