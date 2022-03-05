@@ -199,25 +199,17 @@ Function Start-PSProfile {
 		}
 		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
 		Write-Host (' {0,25} ' -f 'Module Paths Details') -ForegroundColor DarkRed
-		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
-		Write-Host "$(($ModuleDetails | Sort-Object -Property modules -Descending | Out-String))" -ForegroundColor Green
-	}
-
-	if ($AddFun) {
-		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
-		Write-Host (' {0,15} ' -f 'Fun Stuff') -ForegroundColor DarkRed
-		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
-		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
-		Write-Host (' {0,-35}: ' -f 'Current weather') -ForegroundColor Cyan -NoNewline
-		Write-Host (' {0,-20} ' -f "$($weather.currentConditions.comment) | Temperature:$($weather.currentConditions.temp.c)°C | Wind:$($weather.currentConditions.wind.km)km/h |") -ForegroundColor Green
-		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
-		Write-Host (' {0,-35}: ' -f 'Chuck Noris in Dev:') -ForegroundColor Cyan -NoNewline
-		Write-Host (' {0,-20} ' -f "$($chuck)") -ForegroundColor Green
-		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
- }
-
-	if ($ShortenPrompt) {
-		Function prompt {
+		if ($AddFun) {
+			Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
+			Write-Host (' {0,15} ' -f 'Fun Stuff') -ForegroundColor DarkRed
+			Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
+			Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
+			Write-Host (' {0,-35}: ' -f 'Current weather') -ForegroundColor Cyan -NoNewline
+			Write-Host (' {0,-20} ' -f "$($weather.currentConditions.comment) | Temperature:$($weather.currentConditions.temp.c)°C | Wind:$($weather.currentConditions.wind.km)km/h |") -ForegroundColor Green
+			Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
+			Write-Host (' {0,-35}: ' -f 'Chuck Noris in Dev:') -ForegroundColor Cyan -NoNewline
+			Write-Host (' {0,-20} ' -f "$($chuck)") -ForegroundColor Green
+			Write-Host (' {0,-20} ' -f "$($weather.currentConditions.comment) | Temperature:$($weather.currentConditions.temp.c)°C | Wind:$($weather.currentConditions.wind.km)km/h |") -ForegroundColor Green
 			$location = $executionContext.SessionState.Path.CurrentLocation.path
 			#what is the maximum length of the path before you begin truncating?
 			$len = 10
@@ -238,6 +230,14 @@ Function Start-PSProfile {
 			}
 
 			"PS $here$('>' * ($nestedPromptLevel + 1)) "
+			# .Link
+			# https://go.microsoft.com/fwlink/?LinkID=225750
+			# .ExternalHelp System.Management.Automation.dll-help.xml
+
+		}
+	}
+
+} #end Function>' * ($nestedPromptLevel + 1)) "
 			# .Link
 			# https://go.microsoft.com/fwlink/?LinkID=225750
 			# .ExternalHelp System.Management.Automation.dll-help.xml

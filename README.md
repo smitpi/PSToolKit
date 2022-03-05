@@ -43,22 +43,26 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Get-AllUsersInGroup](https://smitpi.github.io/PSToolKit/#Get-AllUsersInGroup) -- Get details of all users in a group
 - [Get-CitrixClientVersions](https://smitpi.github.io/PSToolKit/#Get-CitrixClientVersions) -- Report on the CItrix workspace versions the users are using.
 - [Get-CommandFiltered](https://smitpi.github.io/PSToolKit/#Get-CommandFiltered) -- Finds commands on the system and sort it according to module
+- [Get-CommandHelp](https://smitpi.github.io/PSToolKit/#Get-CommandHelp) -- Show the help file of a command in  a new window
 - [Get-DeviceUptime](https://smitpi.github.io/PSToolKit/#Get-DeviceUptime) -- Calculates the uptime of a system
 - [Get-FolderSize](https://smitpi.github.io/PSToolKit/#Get-FolderSize) -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option
 - [Get-FQDN](https://smitpi.github.io/PSToolKit/#Get-FQDN) -- Get FQDN for a device, and checks if it is online
 - [Get-FullADUserDetail](https://smitpi.github.io/PSToolKit/#Get-FullADUserDetail) -- Extract handy info of an AD user
+- [Get-ModuleCommandHelp](https://smitpi.github.io/PSToolKit/#Get-ModuleCommandHelp) -- Show help file of a command in a specified module
 - [Get-MyPSGalleryStats](https://smitpi.github.io/PSToolKit/#Get-MyPSGalleryStats) -- Show stats about my published modules.
+- [Get-NestedMember](https://smitpi.github.io/PSToolKit/#Get-NestedMember) -- Find all Nested members of a group
 - [Get-ProcessPerformance](https://smitpi.github.io/PSToolKit/#Get-ProcessPerformance) -- Gets the top 10 processes by CPU %
 - [Get-PropertiesToCSV](https://smitpi.github.io/PSToolKit/#Get-PropertiesToCSV) -- Get member data of an object. Use it to create other psobjects
+- [Get-RemoteUptime](https://smitpi.github.io/PSToolKit/#Get-RemoteUptime) -- Check the uptime of a list of servers
 - [Get-SoftwareAudit](https://smitpi.github.io/PSToolKit/#Get-SoftwareAudit) -- Connects to a remote hosts and collect installed software details
 - [Get-SystemInfo](https://smitpi.github.io/PSToolKit/#Get-SystemInfo) -- Get system details of a remote device
 - [Get-WinEventLogExtract](https://smitpi.github.io/PSToolKit/#Get-WinEventLogExtract) -- Extract Event logs of a server list, and create html / excel report
-- [Import-CitrixSiteConfigFile](https://smitpi.github.io/PSToolKit/#Import-CitrixSiteConfigFile) -- Import the Citrix config file, and created a variable with the details
+- [Import-CitrixSiteConfigFile](https://smitpi.github.io/PSToolKit/#Import-CitrixSiteConfigFile) -- Import the CItrix config file, and created a variable with the details
 - [Import-XamlConfigFile](https://smitpi.github.io/PSToolKit/#Import-XamlConfigFile) -- Import the wpf xaml file and create variables from objects
-- [Install-ChocolateyApps](https://smitpi.github.io/PSToolKit/#Install-ChocolateyApps) -- Install chocolatey apps from a json list.
+- [Install-ChocolateyApps](https://smitpi.github.io/PSToolKit/#Install-ChocolateyApps) -- Install chocolatey apps from a json list
 - [Install-ChocolateyClient](https://smitpi.github.io/PSToolKit/#Install-ChocolateyClient) -- Downloads and installs the Chocolatey client.
 - [Install-ChocolateyServer](https://smitpi.github.io/PSToolKit/#Install-ChocolateyServer) -- This will download, install and setup a new Chocolatey Repo Server
-- [Install-CitrixCloudConnector](https://smitpi.github.io/PSToolKit/#Install-CitrixCloudConnector) -- Install Citrix cloud connector
+- [Install-CitrixCloudConnector](https://smitpi.github.io/PSToolKit/#Install-CitrixCloudConnector) -- Install CItrix cloud connector
 - [Install-MSWinget](https://smitpi.github.io/PSToolKit/#Install-MSWinget) -- Install the package manager winget
 - [Install-PS7](https://smitpi.github.io/PSToolKit/#Install-PS7) -- Install PS7 on the device
 - [Install-PSModules](https://smitpi.github.io/PSToolKit/#Install-PSModules) -- Install modules from .json file
@@ -66,7 +70,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Install-RSAT](https://smitpi.github.io/PSToolKit/#Install-RSAT) -- Install All Remote Support Tools
 - [Install-SSHServer](https://smitpi.github.io/PSToolKit/#Install-SSHServer) -- Install and setup OpenSSH on device.
 - [Install-WindowsTerminal](https://smitpi.github.io/PSToolKit/#Install-WindowsTerminal) -- Install Windows Terminal from GitHub on any OS
-- [New-CitrixSiteConfigFile](https://smitpi.github.io/PSToolKit/#New-CitrixSiteConfigFile) -- All a config file with Citrix server details. To be imported as variables.
+- [New-CitrixSiteConfigFile](https://smitpi.github.io/PSToolKit/#New-CitrixSiteConfigFile) -- All a config file with CItrix server details. To be imported as variables.
 - [New-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#New-ElevatedShortcut) -- Creates a shortcut to a script or exe that runs as admin, without UNC
 - [New-GodModeFolder](https://smitpi.github.io/PSToolKit/#New-GodModeFolder) -- Creates a God Mode Folder
 - [New-PSModule](https://smitpi.github.io/PSToolKit/#New-PSModule) -- Creates a new PowerShell module.
