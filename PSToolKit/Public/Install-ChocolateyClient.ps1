@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -32,12 +32,12 @@ Created [12/01/2022_08:40] Initial Script Creating
 
 #>
 
-<# 
+<#
 
-.DESCRIPTION 
- Downloads and installs the Chocolatey client. 
+.DESCRIPTION
+ Downloads and installs the Chocolatey client.
 
-#> 
+#>
 
 
 <#
@@ -60,19 +60,25 @@ Function Install-ChocolateyClient {
     New-Item -ItemType File -Path $Profile -Force
   }
 
+		$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+    if (-not($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))) { Throw 'Must be running an elevated prompt to use function' }
+
   [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-  if (!(Get-Command choco.exe -ErrorAction SilentlyContinue)) {
-    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-    Write-Color '[Installing] ', 'ChocolateyClient: ', 'Complete' -Color Cyan, Yellow, Green
+  if (-not(Get-Command choco.exe -ErrorAction SilentlyContinue)) {
+    Set-ExecutionPolicy Bypass -Scope Process -Force -ErrorAction SilentlyContinue
+    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+    $web = New-Object System.Net.WebClient
+    $web.DownloadFile('https://community.chocolatey.org/install.ps1', "$($env:TEMP)\choco-install.ps1")
+    & "$($env:TEMP)\choco-install.ps1"
+    Write-Color '[Installing] ', 'Chocolatey Client: ', 'Complete' -Color Cyan, Yellow, Green
   }
   else {
-    Write-Color '[Installing] ', 'ChocolateyClient: ', 'Aleady Installed' -Color Cyan, Yellow, Green
+    Write-Color '[Installing] ', 'Chocolatey Client: ', 'Aleady Installed' -Color Cyan, Yellow, Green
   }
 
-  choco config set --name="'useEnhancedExitCodes'" --value="'true'" 
-  choco config set --name="'allowGlobalConfirmation'" --value="'true'" 
-  choco config set --name="'removePackageInformationOnUninstall'" --value="'true'" 
+  choco config set --name="'useEnhancedExitCodes'" --value="'true'"
+  choco config set --name="'allowGlobalConfirmation'" --value="'true'"
+  choco config set --name="'removePackageInformationOnUninstall'" --value="'true'"
   Write-Color '[Installing] ', 'ChocolateyClient: ', 'Config set' -Color Cyan, Yellow, Green
 
 } #end Function

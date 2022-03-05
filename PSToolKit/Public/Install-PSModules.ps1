@@ -72,17 +72,36 @@ Install-PSModules BaseModules
 
 #>
 Function Install-PSModules {
-	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Install-PSModules')]
+	[Cmdletbinding(DefaultParameterSetName = 'base', HelpURI = 'https://smitpi.github.io/PSToolKit/Install-PSModules')]
 	PARAM(
+		[Parameter(ParameterSetName = 'base')]
 		[switch]$BaseModules = $false,
+		[Parameter(ParameterSetName = 'ext')]
 		[switch]$ExtendedModules = $false,
+		[Parameter(ParameterSetName = 'base')]
+		[Parameter(ParameterSetName = 'ext')]
+		[Parameter(ParameterSetName = 'other')]
+		[validateset("CurrentUser","AllUsers")]
+		[string]$Scope = "CurrentUser",
+		[Parameter(ParameterSetName = 'other')]
 		[switch]$OtherModules = $false,
+		[Parameter(ParameterSetName = 'other')]
 		[ValidateScript( { (Test-Path $_) -and ((Get-Item $_).Extension -eq '.json') })]
 		[string]$JsonPath,
+		[Parameter(ParameterSetName = 'base')]
+		[Parameter(ParameterSetName = 'ext')]
+		[Parameter(ParameterSetName = 'other')]
 		[switch]$ForceInstall = $false,
+		[Parameter(ParameterSetName = 'base')]
+		[Parameter(ParameterSetName = 'ext')]
+		[Parameter(ParameterSetName = 'other')]
 		[switch]$UpdateModules = $false,
+		[Parameter(ParameterSetName = 'base')]
+		[Parameter(ParameterSetName = 'ext')]
+		[Parameter(ParameterSetName = 'other')]
 		[switch]$RemoveAll = $false
 	)
+
 	$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
 	try {
 		$ConPath = Get-Item $ConfigPath
@@ -119,11 +138,11 @@ Function Install-PSModules {
 		if ($PSModule.Name -like '') {
 			Write-Host 'Installing Module:' -ForegroundColor Cyan -NoNewline
 			Write-Host $mod.Name -ForegroundColor Yellow
-			Install-Module -Name $mod.Name -Scope AllUsers -AllowClobber -Force
+			Install-Module -Name $mod.Name -Scope $Scope -AllowClobber -Force
 		}
 		else {
 			Write-Host 'Using Installed Module:' -ForegroundColor Cyan -NoNewline
-			Write-Host $PSModule.Name - $PSModule.Path -ForegroundColor Yellow
+			Write-Host "$PSModule.Name - $PSModule.Path" -ForegroundColor Yellow
 		}
 	}
 }

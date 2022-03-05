@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -32,12 +32,12 @@ Created [24/02/2022_05:32] Initial Script Creating
 
 #>
 
-<# 
+<#
 
-.DESCRIPTION 
- Commands for a new system 
+.DESCRIPTION
+ Commands for a new system
 
-#> 
+#>
 
 
 <#
@@ -65,7 +65,7 @@ Function Start-PSToolkitSystemInitialize {
 	)
 
 	$wc = New-Object System.Net.WebClient
-	$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials 
+	$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Checking] Profile"

@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ps
+.TAGS PS
 
 .LICENSEURI
 
@@ -65,7 +65,7 @@ What it does.
 Tags for searches.
 
 .EXAMPLE
-New-PSScript -Path .\PSToolKit\Private\ -Verb get -Noun blah -Description 'blah' -tags ps
+New-PSScript -Path .\PSToolKit\Private\ -Verb get -Noun blah -Description 'blah' -tags PS
 
 #>
 function New-PSScript {
@@ -113,7 +113,8 @@ $properverb-$propernoun
 
 #>
 Function $properverb-$propernoun {
-	[Cmdletbinding(DefaultParameterSetName='Set1', HelpURI = "https://smitpi.github.io/$modulename/$properverb-$propernoun")]
+		[Cmdletbinding(DefaultParameterSetName='Set1', HelpURI = "https://smitpi.github.io/$modulename/$properverb-$propernoun")]
+	    [OutputType([System.Object[]])]
                 PARAM(
 					[Parameter(Mandatory = `$true)]
 					[Parameter(ParameterSetName = 'Set1')]
@@ -121,9 +122,6 @@ Function $properverb-$propernoun {
 					[System.IO.FileInfo]`$InputObject = "c:\temp\tmp.csv",
 					[ValidateNotNullOrEmpty()]
 					[string]`$Username,
-					[Parameter(Mandatory = `$true)]
-					[switch]`$UpdateAll = `$false,
-					[Parameter(Mandatory = `$false)]
 					[ValidateSet('Excel', 'HTML')]
 					[string]`$Export = 'Host',
                 	[ValidateScript( { if (Test-Path `$_) { `$true }

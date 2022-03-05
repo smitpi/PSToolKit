@@ -41,38 +41,45 @@ Created [26/10/2021_22:32] Initial Script Creating
 
 <#
 .SYNOPSIS
-Show stats about my published modules
+Show stats about my published modules.
 
 .DESCRIPTION
-Show stats about my published modules
+Show stats about my published modules.
+
+.PARAMETER Display
+How to display the output.
 
 .EXAMPLE
-Get-MyPSGalleryStats
+Get-MyPSGalleryStats -Display TableView
 
 #>
 Function Get-MyPSGalleryStats {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-MyPSGalleryStats')]
+    [OutputType([System.Object[]])]
+    PARAM(
+        [ValidateSet('GridView', 'TableView')]
+        [string]$Display = 'Host'
+    )
 
-    PARAM()
-
-    $newObject = @()
+    [System.Collections.ArrayList]$newObject = @()
     $ResultModule = Find-Module CTXCloudApi, PSConfigFile, PSLauncher, XDHealthCheck -Repository PSGallery
     foreach ($mod in $ResultModule) {
-        $newObject += [PSCustomObject]@{
-            Name                 = $mod.Name
-            Version              = $mod.Version
-            tags                 = @($mod.tags) | Out-String
-            ItemType             = $mod.AdditionalMetadata.ItemType
-            published            = $mod.AdditionalMetadata.published
-            downloadCount        = $mod.AdditionalMetadata.downloadCount
-            versionDownloadCount = $mod.AdditionalMetadata.versionDownloadCount
-            Authors              = $mod.AdditionalMetadata.Authors
-            CompanyName          = $mod.AdditionalMetadata.CompanyName
-            ProjectUri           = $mod.ProjectUri.AbsoluteUri
-            summary              = $mod.AdditionalMetadata.summary
-        }
+        [void]$newObject.Add([PSCustomObject]@{
+                Sum = [PSCustomObject]@{
+                    Name            = $mod.Name
+                    Version         = $mod.Version
+                    Date            = [datetime]$mod.AdditionalMetadata.published
+                    TotalDownload   = $mod.AdditionalMetadata.downloadCount
+                    VersionDownload = $mod.AdditionalMetadata.versionDownloadCount
+                }
+                All = $mod
+            })
     }
-    $newObject | ConvertTo-WPFGrid
+    if ($Display -like 'GridView') {$newObject.Sum | ConvertTo-WPFGrid}
+    if ($Display -like 'TableView') {$newObject.Sum | Format-Table -AutoSize}
+    if ($Display -like 'Host') {$newObject}
+
+
 } #end Function
 
 

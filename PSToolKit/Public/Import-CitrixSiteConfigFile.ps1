@@ -35,16 +35,16 @@ Created [26/10/2021_22:32] Initial Script Creating
 <#
 
 .DESCRIPTION
- Import the CItrix config file, and created a variable with the details
+ Import the Citrix config file, and created a variable with the details
 
 #>
 
 <#
 .SYNOPSIS
- Import the CItrix config file, and created a variable with the details
+ Import the Citrix config file, and created a variable with the details
 
 .DESCRIPTION
- Import the CItrix config file, and created a variable with the details
+ Import the Citrix config file, and created a variable with the details
 
 .PARAMETER CitrixSiteConfigFilePath
 Path to config file
@@ -52,8 +52,6 @@ Path to config file
 .EXAMPLE
 Import-CitrixSiteConfigFile -CitrixSiteConfigFilePath c:\temp\CTXSiteConfig.json
 
-.NOTES
-General notes
 #>
 Function Import-CitrixSiteConfigFile {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Import-CitrixSiteConfigFile')]

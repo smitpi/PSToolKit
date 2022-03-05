@@ -50,12 +50,11 @@ Install All Remote Support Tools
 .EXAMPLE
 Install-RSAT
 
-.NOTES
-General notes
 #>
 Function Install-RSAT {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Install-RSAT')]
 	PARAM()
+
 	$checkver = Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object caption
 	if ($checkver -notlike '*server*') {
 		Write-Host 'Installing RSAT on device type:' -ForegroundColor Cyan -NoNewline

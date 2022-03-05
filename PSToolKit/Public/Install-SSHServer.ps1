@@ -46,19 +46,17 @@ Install and setup OpenSSH on device.
 .DESCRIPTION
 Install and setup OpenSSH on device.
 
-.PARAMETER AddPowershellSubsystem
+.PARAMETER AddPowerShellSubsystem
 Add the ps subsystem to the ssh config file.
 
 .EXAMPLE
  Install-SSHServer
 
-.NOTES
-General notes
 #>
 Function Install-SSHServer {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Install-SSHServer')]
 	PARAM(
-		[switch]$AddPowershellSubsystem = $false
+		[switch]$AddPowerShellSubsystem = $false
 	)
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 	if (!(Get-Command choco.exe -ErrorAction SilentlyContinue)) {
@@ -72,8 +70,7 @@ Function Install-SSHServer {
 		if (Test-Path 'C:\Program Files\OpenSSH-Win64') { Rename-Item -Path 'C:\Program Files\OpenSSH-Win64' -NewName OpenSSH-Win64-old -Force }
 		New-Item 'C:\Program Files\OpenSSH-Win64' -ItemType Directory -Force
 		Expand-Archive -Path $OutFile -OutputPath 'C:\Program Files\OpenSSH-Win64' -ShowProgress -FlattenPaths
-	}
- else {
+	} else {
 		Get-ChocoPackage -Name openssh -Exact | Install-ChocoPackage -Force
 	}
 	Import-Module 'C:\Program Files\OpenSSH-Win64\install-sshd.ps1'
@@ -87,7 +84,7 @@ Function Install-SSHServer {
 	'sshd', 'ssh-agent' | Get-Service | Stop-Service
 	'sshd', 'ssh-agent' | Get-Service | Start-Service -Verbose
 
-	if ($AddPowershellSubsystem) {
+	if ($AddPowerShellSubsystem) {
 		$PowerShellPath = (Get-Command -Name pwsh.exe).Path
 		$fso = New-Object -ComObject Scripting.FileSystemObject
 		$NewSSHConf += ' '

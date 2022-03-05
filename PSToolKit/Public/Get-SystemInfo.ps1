@@ -62,7 +62,7 @@ Get-SystemInfo -ComputerName Apollo
 #>
 Function Get-SystemInfo {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-SystemInfo')]
-
+    [OutputType([System.Object[]])]
     PARAM(
         [ValidateScript( { if (Test-Connection -ComputerName $_ -Count 2 -Quiet) { $true }
                 else { throw "Unable to connect to $($_)" } })]
@@ -193,7 +193,7 @@ Function Get-SystemInfo {
                 Bios          = $CompinfoBios | Where-Object { $_.name -in $biosfiltered }
                 Windows       = $CompinfoWin | Where-Object { $_.name -in $WinFiltered }
                 Software      = Get-SoftwareAudit -ComputerName $comp | Select-Object Displayname, DisplayVersion, Publisher, EstimatedSize
-                Enviroment    = Get-CimInstance -Namespace root/cimv2 -ClassName win32_environment -ComputerName $comp | Select-Object Name, UserName, VariableValue, SystemVariable, Description
+                Environment    = Get-CimInstance -Namespace root/cimv2 -ClassName win32_environment -ComputerName $comp | Select-Object Name, UserName, VariableValue, SystemVariable, Description
                 hotfix        = Get-CimInstance -ComputerName $comp -Namespace root/cimv2 -ClassName win32_quickfixengineering | Select-Object Caption, Description, HotFixID
                 EventViewer   = $AllEvents
                 Network       = $Network
@@ -218,7 +218,7 @@ Function Get-SystemInfo {
                 $SysInfo.Bios | Export-Excel -Path $ExcelPath -WorksheetName Bios -AutoSize -AutoFilter
                 $SysInfo.Windows | Export-Excel -Path $ExcelPath -WorksheetName Windows -AutoSize -AutoFilter
                 $SysInfo.Software | Export-Excel -Path $ExcelPath -WorksheetName Software -AutoSize -AutoFilter
-                $SysInfo.Enviroment | Export-Excel -Path $ExcelPath -WorksheetName ENV -AutoSize -AutoFilter
+                $SysInfo.Environment | Export-Excel -Path $ExcelPath -WorksheetName ENV -AutoSize -AutoFilter
                 $SysInfo.hotfix | Export-Excel -Path $ExcelPath -WorksheetName Hotfix -AutoSize -AutoFilter
                 $SysInfo.EventViewer | Export-Excel -Path $ExcelPath -WorksheetName Events -AutoSize -AutoFilter
                 $SysInfo.Network | Export-Excel -Path $ExcelPath -WorksheetName Network -AutoSize -AutoFilter
@@ -263,17 +263,17 @@ Function Get-SystemInfo {
             #region Build HTML
             $path = Get-Item $ReportPath
             $HTMLPath = Join-Path $Path.FullName -ChildPath "SystemInfo-$(Get-Date -Format yyyy.MM.dd-HH.mm).html"
-              
+
             New-HTML -TitleText 'SystemInfo' -FilePath $HTMLPath {
                 New-HTMLLogo -RightLogoString $ImageLink
                 New-HTMLNavFloat -Title 'Server Info' -TitleColor AirForceBlue -TaglineColor Amethyst {
                     New-NavFloatWidget -Type List {
                         New-NavFloatWidgetItem -IconColor AirForceBlue -IconSolid home -Name 'Home' -LinkHome
                         foreach ($SysInfo in $allcomp) { New-NavFloatWidgetItem -IconColor Blue -IconBrands bluetooth -Name "$($SysInfo.Hostname)" -InternalPageID "$($SysInfo.Hostname)" }
-                        foreach ($SysInfo in $allcomp) { New-NavFloatWidgetItem -IconColor red -IconBrands cuttlefish -Name "$($SysInfo.Hostname)(Alt View)" -InternalPageID "$($SysInfo.Hostname)(Alt View)" }                        
+                        foreach ($SysInfo in $allcomp) { New-NavFloatWidgetItem -IconColor red -IconBrands cuttlefish -Name "$($SysInfo.Hostname)(Alt View)" -InternalPageID "$($SysInfo.Hostname)(Alt View)" }
                     }
                 } -ButtonColor White -ButtonColorBackground red -ButtonLocationRight 30px -ButtonLocationTop 70px -ButtonColorBackgroundOnHover pink -ButtonColorOnHover White
-        
+
                 New-HTMLPanel -Invisible {
                     New-HTMLPanel -Invisible -Content { New-HTMLText -FontSize 40 -FontStyle normal -TextTransform capitalize -Color AirForceBlue -Alignment center -Text 'Welcome to your Server Info' }
                     New-HTMLPanel -Invisible -Content { New-HTMLText -FontSize 14 -FontStyle normal -TextTransform capitalize -Color AirForceBlue -Alignment center -Text "Date Collected: $($SysInfo.DateCollected)" }
@@ -295,7 +295,7 @@ Function Get-SystemInfo {
                         New-HTMLWinBox -BackgroundColor '#00203F' -NoCloseIcon -NoFullScreenIcon -NoMinmizeIcon -NoMaximizeIcon -Theme modern -Height 70% -Width 20% -Title 'OS' { New-HTMLTable -DataTable $SysInfo.OS @TableSettings } -X 40px -Y 40px
                         New-HTMLWinBox -BackgroundColor '#00203F' -NoCloseIcon -NoFullScreenIcon -NoMinmizeIcon -NoMaximizeIcon -Theme modern -Height 30% -Width 30% -Title 'AntiVirus' { New-HTMLTable -DataTable $SysInfo.AntiVirus @TableSettings } -X 70px -Y 70px
                         New-HTMLWinBox -BackgroundColor '#00203F' -NoCloseIcon -NoFullScreenIcon -NoMinmizeIcon -NoMaximizeIcon -Theme modern -Height 70% -Width 20% -Title 'Bios' { New-HTMLTable -DataTable $SysInfo.Bios @TableSettings } -X 100px -Y 100px
-                        New-HTMLWinBox -BackgroundColor '#00203F' -NoCloseIcon -NoFullScreenIcon -NoMinmizeIcon -NoMaximizeIcon -Theme modern -Height 70% -Width 20% -Title 'Environment' { New-HTMLTable -DataTable $SysInfo.Enviroment @TableSettings } -X 130px -Y 130px
+                        New-HTMLWinBox -BackgroundColor '#00203F' -NoCloseIcon -NoFullScreenIcon -NoMinmizeIcon -NoMaximizeIcon -Theme modern -Height 70% -Width 20% -Title 'Environment' { New-HTMLTable -DataTable $SysInfo.Environment @TableSettings } -X 130px -Y 130px
                         New-HTMLWinBox -BackgroundColor '#00203F' -NoCloseIcon -NoFullScreenIcon -NoMinmizeIcon -NoMaximizeIcon -Theme modern -Height 50% -Width 50% -Title 'EventViewer' { New-HTMLTable -DataTable $SysInfo.EventViewer @TableSettings {
                                 New-HTMLTableCondition -Name LevelDisplayName -ComparisonType string -Operator eq -Value 'Error' -Color GhostWhite -Row -BackgroundColor FaluRed
                                 New-HTMLTableCondition -Name LevelDisplayName -ComparisonType string -Operator eq -Value 'warning' -Color GhostWhite -Row -BackgroundColor InternationalOrange } } -X 160px -Y 160px
@@ -317,7 +317,7 @@ Function Get-SystemInfo {
                     New-HTMLSection -HeaderText $($_.name) @SectionSettings -Collapsed -Content {
                         New-HTMLTable -DataTable $SysInfo.$($_.name) @TableSettings {
                                 New-HTMLTableCondition -Name LevelDisplayName -ComparisonType string -Operator eq -Value 'Error' -Color GhostWhite -Row -BackgroundColor FaluRed
-                                New-HTMLTableCondition -Name LevelDisplayName -ComparisonType string -Operator eq -Value 'warning' -Color GhostWhite -Row -BackgroundColor InternationalOrange 
+                                New-HTMLTableCondition -Name LevelDisplayName -ComparisonType string -Operator eq -Value 'warning' -Color GhostWhite -Row -BackgroundColor InternationalOrange
                                 New-HTMLTableCondition -Name 'Status' -ComparisonType string -Operator eq -Value 'Stopped' -Color GhostWhite -Row -BackgroundColor FaluRed
                         }
                         }
@@ -332,8 +332,6 @@ Function Get-SystemInfo {
     }
     if ($Export -eq 'Host') { return $allcomp }
 
-    
 
 
-    
 } #end Function

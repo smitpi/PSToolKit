@@ -55,7 +55,7 @@ Limit the search results
 Set the default filter to this level and above.
 
 .PARAMETER FilterCitrix
-Only show CItrix errors
+Only show Citrix errors
 
 .PARAMETER Export
 Export results
@@ -94,7 +94,8 @@ Function Get-WinEventLogExtract {
     if ($ErrorLevel -like 'Warning') { $filter.Add('Level', @(1, 2, 3)) }
     if ($ErrorLevel -like 'Informational') { $filter.Add('Level', @(1, 2, 3, 4)) }
 
-    ForEach ($comp in $ComputerName) {
+    $ComputerName | ForEach-Object -Parallel {
+        $comp = $_
         Write-Host 'Processing Events for server: ' -ForegroundColor Cyan -NoNewline
         Write-Host "$($comp)" -ForegroundColor Yellow
         $filter.Remove('LogName')
@@ -122,9 +123,7 @@ Function Get-WinEventLogExtract {
                         Lognames = $tmpNames
                         Events   = $tmpEvents
                     })
-
-            }
-            catch { Write-Warning "Unable to get logs from $($comp):`n $($_.Exception.Message)" }
+            } catch {Write-Warning "Error: `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
         }
     }
 

@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ms
+.TAGS MS
 
 .LICENSEURI
 

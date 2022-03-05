@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -33,31 +33,30 @@ Created [15/01/2022_12:32] Initial Script Creating
 #>
 
 #Requires -Module PSWriteColor
-#Requires -Module Foil
 
-<# 
+<#
 
-.DESCRIPTION 
- Install chocolatey apps from a json list 
+.DESCRIPTION
+ Install chocolatey apps from a json list
 
-#> 
+#>
 
 
 <#
 .SYNOPSIS
- Install chocolatey apps from a json list 
+ Install chocolatey apps from a json list.
 
 .DESCRIPTION
- Install chocolatey apps from a json list 
+ Install chocolatey apps from a json list.
 
 .PARAMETER BaseApps
-Use buildin base app list
+Use build in base app list
 
 .PARAMETER ExtendedApps
 Use build in extended app list
 
 .PARAMETER OtherApps
-Spesify your own json list file
+Specify your own json list file
 
 .PARAMETER JsonPath
 Path to the json file
@@ -65,17 +64,24 @@ Path to the json file
 .EXAMPLE
 Install-ChocolateyApps -BaseApps
 
-.NOTES
-General notes
 #>
 Function Install-ChocolateyApps {
 	[Cmdletbinding(DefaultParameterSetName = 'Set1'	, HelpURI = 'https://smitpi.github.io/PSToolKit/Install-ChocolateyApps')]
 	PARAM(
 		[Parameter(ParameterSetName = 'Set1')]
+		[ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+				else { Throw 'Must be running an elevated prompt to use function' } })]
 		[switch]$BaseApps = $false,
 		[Parameter(ParameterSetName = 'Set1')]
+		[ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+				else { Throw 'Must be running an elevated prompt to use function' } })]
 		[switch]$ExtendedApps = $false,
 		[Parameter(ParameterSetName = 'Set2')]
+		[ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+				else { Throw 'Must be running an elevated prompt to use function' } })]
 		[switch]$OtherApps = $false,
 		[Parameter(ParameterSetName = 'Set2')]
 		[ValidateScript( { (Test-Path $_) -and ((Get-Item $_).Extension -eq '.json') })]
@@ -84,8 +90,7 @@ Function Install-ChocolateyApps {
 	try {
 		$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
 		$ConPath = Get-Item $ConfigPath
-	}
- catch { Write-Error 'Config path foes not exist' }
+	} catch { Write-Error 'Config path does not exist' }
 	if ($BaseApps) { $AppList = (Join-Path $ConPath.FullName -ChildPath BaseAppList.json) }
 	if ($ExtendedApps) { $AppList = (Join-Path $ConPath.FullName -ChildPath ExtendedAppsList.json) }
 	if ($OtherApps) { $AppList = Get-Item $JsonPath }
@@ -101,9 +106,9 @@ Function Install-ChocolateyApps {
 		$ChocoApp = choco search $app.name --exact --local-only --limit-output
 		if ($null -eq $ChocoApp) {
 			Write-Color 'Installing App: ', $($app.name), ' from source ', $app.Source -Color Cyan, Yellow, Cyan, Yellow
-			choco upgrade $($app.name) --accept-license --limit-output -y
-		}
-		else {
+			choco upgrade $($app.name) --accept-license --limit-output -y | Out-Null
+			if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $($app.name) Code: $($LASTEXITCODE)"}
+		} else {
 			Write-Color 'Using Installed App: ', $($ChocoApp.split('|')[0]), " -- (version: $($ChocoApp.split('|')[1]))" -Color Cyan, Green, Yellow
 		}
 	}

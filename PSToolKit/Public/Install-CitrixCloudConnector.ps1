@@ -35,16 +35,16 @@ Created [26/10/2021_22:32] Initial Script Creating
 <#
 
 .DESCRIPTION
- install CItrix cloud connector
+ install Citrix cloud connector
 
 #>
 
 <#
 .SYNOPSIS
-Install CItrix cloud connector
+Install Citrix cloud connector
 
 .DESCRIPTION
-Install CItrix cloud connector
+Install Citrix cloud connector
 
 .PARAMETER Customer_Id
 Parameter description
@@ -61,8 +61,6 @@ Parameter description
 .EXAMPLE
 Install-CitrixCloudConnector
 
-.NOTES
-General notes
 #>
 Function Install-CitrixCloudConnector {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Install-CitrixCloudConnector')]
@@ -85,8 +83,8 @@ Function Install-CitrixCloudConnector {
 		Write-Warning 'Installing missing module CTXCloudApi'
 		Install-Module -Name CTXCloudApi -Scope CurrentUser -Force -AllowClobber
 		Import-Module CTXCloudApi -Force
-	}	
-	
+	}
+
 	$splat = @{
 		Customer_Id   = $Customer_Id
 		Client_Id     = $Client_Id
@@ -94,7 +92,7 @@ Function Install-CitrixCloudConnector {
 		Customer_Name = $Customer_Name
 	}
 	$APIHeader = Connect-CTXAPI @splat
-	
+
 	$ResourceLocationId = (Get-CTXAPI_ResourceLocations $APIHeader | Out-GridView -Title 'Resource Locations' -OutputMode Single).id
 
 	if ((Test-Path -Path C:\Temp) -eq $false) { New-Item -Path C:\Temp -ItemType Directory -Force -ErrorAction SilentlyContinue }

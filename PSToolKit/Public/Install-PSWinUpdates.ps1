@@ -58,9 +58,5 @@ function Install-PSWinUpdates {
 		Install-WindowsUpdate -MicrosoftUpdate -UpdateType Driver -AcceptAll -IgnoreReboot
 
 		Test-PendingReboot -ComputerName $env:computername
-	}
-	Catch {
-		Write-Warning -Message $("Failed to update computer $($env:computername). Error: " + $_.Exception.Message)
-		Break;
-	}
+	} catch {Write-Warning "Error Updating: `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 }

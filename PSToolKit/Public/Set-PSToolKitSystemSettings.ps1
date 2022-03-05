@@ -106,6 +106,7 @@ Function Set-PSToolKitSystemSettings {
         [switch]$PSGallery,
         [switch]$ForcePSGallery,
         [switch]$IntranetZone,
+        [switch]$IntranetZoneIPRange,
         [switch]$PSTrustedHosts,
         [switch]$FileExplorerSettings,
         [switch]$DisableIPV6,
@@ -119,15 +120,15 @@ Function Set-PSToolKitSystemSettings {
     )
 
     if ($RunAll) {
-        $ExecutionPolicy = $PSGallery = $IntranetZone = $PSTrustedHosts = $FileExplorerSettings = $DisableIPV6 = $DisableFirewall = $DisableInternetExplorerESC = $DisableServerManager = $EnableRDP = $InstallVMWareTools = $InstallAnsibleRemote = $EnableNFSClient = $true
+        $ExecutionPolicy = $PSGallery = $IntranetZone = $IntranetZoneIPRange = $PSTrustedHosts = $FileExplorerSettings = $DisableIPV6 = $DisableFirewall = $DisableInternetExplorerESC = $DisableServerManager = $EnableRDP = $InstallVMWareTools = $InstallAnsibleRemote = $EnableNFSClient = $true
     }
 
     if ($ExecutionPolicy) {
         try {
-        Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope Process
-        Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope CurrentUser
-        Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope LocalMachine
-        Write-Color '[Set]', 'ExecutionPolicy: ', 'Complete' -Color Yellow, Cyan, Green
+            Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope Process
+            Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope CurrentUser
+            Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope LocalMachine
+            Write-Color '[Set]', 'ExecutionPolicy: ', 'Complete' -Color Yellow, Cyan, Green
         } catch { Write-Warning "[Set]ExecutionPolicy: Failed:`n $($_.Exception.Message)" }
 
     }
@@ -147,14 +148,13 @@ Function Set-PSToolKitSystemSettings {
                 foreach ($base in $BaseModules) {
                     Install-Module -Name $base -Force -AllowClobber -Scope AllUsers
                     Import-Module $base -Force
-                    $PSGet = Get-Module $base | Update-Module -Force -PassThru
+                    Get-Module $base | Update-Module -Force -PassThru
                     Import-Module $base -Force
                 }
 
                 Write-Color '[Set]', 'PSGallery: ', 'Complete' -Color Yellow, Cyan, Green
                 else { Write-Color '[Set]', 'PSGallery: ', 'Already Set' -Color Yellow, Cyan, Magenta }
-            }
-            catch { Write-Warning "[Set]PSGallery: Failed:`n $($_.Exception.Message)" }
+            } catch { Write-Warning "[Set]PSGallery: Failed:`n $($_.Exception.Message)" }
         }
     }
 
@@ -172,14 +172,13 @@ Function Set-PSToolKitSystemSettings {
             foreach ($base in $BaseModules) {
                 Install-Module -Name $base -Force -AllowClobber -Scope AllUsers
                 Import-Module $base -Force
-                $PSGet = Get-Module $base | Update-Module -Force -PassThru
+                Get-Module $base | Update-Module -Force -PassThru
                 Import-Module $base -Force
             }
 
             Write-Color '[Set]', 'PSGallery: ', 'Complete' -Color Yellow, Cyan, Green
             else { Write-Color '[Set]', 'PSGallery: ', 'Already Set' -Color Yellow, Cyan, Magenta }
-        }
-        catch { Write-Warning "[Set]PSGallery: Failed:`n $($_.Exception.Message)" }
+        } catch { Write-Warning "[Set]PSGallery: Failed:`n $($_.Exception.Message)" }
     }
 
 
@@ -191,7 +190,6 @@ Function Set-PSToolKitSystemSettings {
         $parent = 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap'
         $key = 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\Domains'
         $CompRegPath = Join-Path $key -ChildPath $LocalIntranetSite
-
         $DWord = 1
 
         try {
@@ -202,21 +200,45 @@ Function Set-PSToolKitSystemSettings {
                 New-Item -Path $key -ItemType File -Name "$LocalIntranetSite"
                 Set-ItemProperty -Path $CompRegPath -Name 'file' -Value $DWord
                 Write-Color '[Set]', "IntranetZone $($LocalIntranetSite): ", 'Complete' -Color Yellow, Cyan, Green
-            }
-            else { Write-Color '[Set]', "IntranetZone $($LocalIntranetSite): ", 'Already Set' -Color Yellow, Cyan, Magenta }
+            } else { Write-Color '[Set]', "IntranetZone $($LocalIntranetSite): ", 'Already Set' -Color Yellow, Cyan, Magenta }
 
-        }
-        Catch { Write-Warning "[Set]IntranetZone: Failed:`n $($_.Exception.Message)" }
+        } Catch { Write-Warning "[Set]IntranetZone: Failed:`n $($_.Exception.Message)" }
 
     } #end if
+
+    if ($IntranetZoneIPRange) {
+
+        $IPAddresses = Get-NetIPAddress -AddressState Preferred -AddressFamily IPv4 | Where-Object {$_.IPAddress -notlike '127*'}
+        foreach ($ip in $IPAddresses) {
+            $ipdata = $ip.IPAddress.Split('.')
+            $index = 1
+
+            $parent = 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap'
+            $key = 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\Ranges'
+            $keychild = "HKLM:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\Ranges\Range$($index)"
+            $DWord = 1
+
+            try {
+                if (-not(Test-Path -Path $Key)) { New-Item -Path $parent -ItemType File -Name 'Ranges'}
+                if (-not(Test-Path -Path $keychild)) {
+                    New-Item -Path $key -ItemType File -Name "Range$($index)"
+                    Set-ItemProperty -Path $keychild -Name 'file' -Value $DWord
+                    Set-ItemProperty -Path $keychild -Name ':Range' -Value "$($ipdata[0]).$($ipdata[1]).$($ipdata[2]).*"
+                    Write-Color '[Set]', "IntranetZone IP Range: $($ipdata[0]).$($ipdata[1]).$($ipdata[2]).*: ", 'Complete' -Color Yellow, Cyan, Green
+                } else {++$ingex}
+
+            } Catch { Write-Warning "[Set]IntranetZone Ip Range: Failed:`n $($_.Exception.Message)" }
+        }
+
+    } #end if
+
 
     if ($DisableIPV6) {
         try {
             Get-NetAdapterBinding -ComponentID ms_tcpip6 | Where-Object { $_.enabled -eq 'True' } | ForEach-Object { Disable-NetAdapterBinding -InterfaceAlias $_.Name -ComponentID ms_tcpip6 }
             Write-Color '[Disable]', 'IPv6: ', 'Complete' -Color Yellow, Cyan, Green
 
-        }
-        Catch { Write-Warning "[Disable]IPv6: Failed:`n $($_.Exception.Message)" }
+        } Catch { Write-Warning "[Disable]IPv6: Failed:`n $($_.Exception.Message)" }
 
 
     } #end if
@@ -226,8 +248,7 @@ Function Set-PSToolKitSystemSettings {
             Set-NetFirewallProfile -Profile Domain, Public, Private -Enabled False
             Write-Color '[Disable]', 'Firewall: ', 'Complete' -Color Yellow, Cyan, Green
 
-        }
-        Catch { Write-Warning "[Disable]Firewall: Failed:`n $($_.Exception.Message)" }
+        } Catch { Write-Warning "[Disable]Firewall: Failed:`n $($_.Exception.Message)" }
 
 
     } #end if
@@ -236,8 +257,7 @@ Function Set-PSToolKitSystemSettings {
         try {
             Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Value 0
             Write-Color '[Enable]', 'RDP: ', 'Complete' -Color Yellow, Cyan, Green
-        }
-        Catch { Write-Warning "[Enable]RDP: Failed:`n $($_.Exception.Message)" }
+        } Catch { Write-Warning "[Enable]RDP: Failed:`n $($_.Exception.Message)" }
     } #end if
 
     if ($DisableInternetExplorerESC) {
@@ -252,10 +272,8 @@ Function Set-PSToolKitSystemSettings {
                 Rundll32 iesetup.dll, IEHardenUser
                 Rundll32 iesetup.dll, IEHardenAdmin
                 Write-Color '[Disable]', 'IE Enhanced Security Configuration (ESC): ', 'Complete' -Color Yellow, Cyan, Green
-            }
-            else { Write-Color '[Disable]', 'IE Enhanced Security Configuration (ESC): ', 'No Server OS Detected' -Color Yellow, Cyan, Magenta }
-        }
-        catch { Write-Warning '[Disable]', "IE Enhanced Security Configuration (ESC): failed:`n $($_.Exception.Message)" }
+            } else { Write-Color '[Disable]', 'IE Enhanced Security Configuration (ESC): ', 'No Server OS Detected' -Color Yellow, Cyan, Magenta }
+        } catch { Write-Warning '[Disable]', "IE Enhanced Security Configuration (ESC): failed:`n $($_.Exception.Message)" }
 
     }
 
@@ -266,10 +284,8 @@ Function Set-PSToolKitSystemSettings {
                 if (Get-Process 'servermanager' -ErrorAction SilentlyContinue) { Stop-Process -Name servermanager -Force }
                 New-ItemProperty -Path HKCU:\Software\Microsoft\ServerManager -Name DoNotOpenServerManagerAtLogon -PropertyType DWORD -Value '0x1' -Force
                 Write-Color '[Disable]', 'ServerManager: ', 'Complete' -Color Yellow, Cyan, Green
-            }
-            else { Write-Color '[Disable]', 'ServerManager: ', 'Not Server OS' -Color Yellow, Cyan, Magenta }
-        }
-        catch { Write-Warning "[Disable]ServerManager: Failed:`n $($_.Exception.Message)" }
+            } else { Write-Color '[Disable]', 'ServerManager: ', 'Not Server OS' -Color Yellow, Cyan, Magenta }
+        } catch { Write-Warning "[Disable]ServerManager: Failed:`n $($_.Exception.Message)" }
 
     }
 
@@ -284,16 +300,14 @@ Function Set-PSToolKitSystemSettings {
                 Set-Item WSMan:\localhost\Client\TrustedHosts -Value "$DomainList" -Force
                 Write-Color '[Set]', 'TrustedHosts: ', 'Complete' -Color Yellow, Cyan, Green
 
-            }
-            else {
+            } else {
                 $currentlist += "*.$domainCheck"
                 $newlist = Join-String -Strings $currentlist -Separator ','
                 Set-Item WSMan:\localhost\Client\TrustedHosts -Value "$newlist" -Force
                 Write-Color '[Set]', 'TrustedHosts: ', 'Complete' -Color Yellow, Cyan, Green
 
             }
-        }
-        catch { Write-Warning "[Set]TrustedHosts: Failed:`n $($_.Exception.Message)" }
+        } catch { Write-Warning "[Set]TrustedHosts: Failed:`n $($_.Exception.Message)" }
 
     } #end if
 
@@ -333,34 +347,28 @@ Function Set-PSToolKitSystemSettings {
             Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name ShowSecondsInSystemClock -Value 1
             Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name SnapAssist -Value 1
             Write-Color '[Set]', 'File Explorer Settings: ', 'Complete' -Color Yellow, Cyan, Green
-        }
-        catch { Write-Warning "[Set]File Explorer Settings: Failed:`n $($_.Exception.Message)" }
+        } catch { Write-Warning "[Set]File Explorer Settings: Failed:`n $($_.Exception.Message)" }
 
     } #end if
 
     if ($InstallVMWareTools) {
         try {
-            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-            if (!(Get-Command choco.exe -ErrorAction SilentlyContinue)) {
-                Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-                Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-                Write-Color '[Installing] ', 'ChocolateyClient: ', 'Complete' -Color Yellow, Cyan, Green
-            }
             if ((Get-CimInstance -ClassName win32_bios).Manufacturer -like '*VMware*') {
+                Install-ChocolateyClient
                 choco upgrade vmware-tools -y --limit-output
             }
-        }
-        catch { Write-Warning "[Installing] VMWare Tools: Failed:`n $($_.Exception.Message)" }
+        } catch { Write-Warning "[Installing] VMWare Tools: Failed:`n $($_.Exception.Message)" }
 
     }
 
     if ($InstallAnsibleRemote) {
         try {
-            $ScriptFromGitHub = Invoke-WebRequest https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 -UseBasicParsing
-            Invoke-Expression $($ScriptFromGitHub.Content) -Verbose
+            $web = New-Object System.Net.WebClient
+            $web.DownloadFile('https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1', "$($env:TEMP)\ConfigureRemotingForAnsible.ps1")
+            & "$($env:TEMP)\ConfigureRemotingForAnsible.ps1"
+
             Write-Color '[Installing] ', 'Ansible Remote: ', 'Complete' -Color Yellow, Cyan, Green
-        }
-        catch { Write-Warning "[Installing]Ansible Remote: Failed:`n $($_.Exception.Message)" }
+        } catch { Write-Warning "[Installing]Ansible Remote: Failed:`n $($_.Exception.Message)" }
 
     } #end
 
@@ -382,8 +390,7 @@ Function Set-PSToolKitSystemSettings {
             Write-Color 'Useage:', 'mount -o anon <server>:/<path> <drive letter>' -Color Cyan, DarkCyan
             Write-Color '[Installing] ', 'NFS Client: ', 'Complete' -Color Yellow, Cyan, Green
 
-        }
-        catch { Write-Warning "[Installing] NFS Client: Failed:`n $($_.Exception.Message)" }
+        } catch { Write-Warning "[Installing] NFS Client: Failed:`n $($_.Exception.Message)" }
 
     
     } #end

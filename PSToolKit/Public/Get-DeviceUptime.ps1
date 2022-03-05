@@ -33,12 +33,12 @@ Created [24/02/2022_05:49] Initial Script Creating
 #>
 
 
-<# 
+<#
 
-.DESCRIPTION 
- Calculates the uptime of a system 
+.DESCRIPTION
+ Calculates the uptime of a system
 
-#> 
+#>
 
 
 <#
@@ -56,38 +56,39 @@ Get-DeviceUptime -ComputerName Neptune
 
 #>
 Function Get-DeviceUptime {
-	[Cmdletbinding(DefaultParameterSetName='Set1', HelpURI = "https://smitpi.github.io/PSToolKit/Get-DeviceUptime")]
-	                PARAM(
-		            [Parameter(Mandatory = $false)]
-					[Parameter(ParameterSetName = 'Set1')]
-        			[ValidateScript({if (Test-Connection -ComputerName $_ -Count 2 -Quiet) {$true}
-                            		else {throw "Unable to connect to $($_)"} })]
-        			[string[]]$ComputerName = $env:computername
-					)
+	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Get-DeviceUptime')]
+	[outputtype('System.Object[]')]
+	PARAM(
+		[Parameter(Mandatory = $false)]
+		[Parameter(ParameterSetName = 'Set1')]
+		[ValidateScript({if (Test-Connection -ComputerName $_ -Count 2 -Quiet) {$true}
+				else {throw "Unable to connect to $($_)"} })]
+		[string[]]$ComputerName = $env:computername
+	)
 
-[System.Collections.ArrayList]$ReturnObj = @()
-foreach ($computer in $ComputerName) {
-try {
-	$lastboottime = (Get-CimInstance -ComputerName $computer -ClassName Win32_OperatingSystem ).LastBootUpTime
-	$timespan = New-TimeSpan -Start $lastboottime -End (get-date)
-} catch {Throw "Unable to connect to $($computer)"}
-[void]$ReturnObj.add([PSCustomObject]@{
-	ComputerName 	 = $computer
-	Date         	 = $lastboottime
-    Summary =  [PSCustomObject]@{
-	    ComputerName 	 = $computer
-	    Date         	 = $lastboottime
-	    TotalDays		 = [math]::Round($timespan.totaldays)
-	    TotalHours		 = [math]::Round($timespan.totalhours)
+	[System.Collections.ArrayList]$ReturnObj = @()
+	foreach ($computer in $ComputerName) {
+		try {
+			$lastboottime = (Get-CimInstance -ComputerName $computer -ClassName Win32_OperatingSystem ).LastBootUpTime
+			$timespan = New-TimeSpan -Start $lastboottime -End (Get-Date)
+		} catch {Throw "Unable to connect to $($computer)"}
+		[void]$ReturnObj.add([PSCustomObject]@{
+				ComputerName = $computer
+				Date         = $lastboottime
+    Summary      = [PSCustomObject]@{
+	    ComputerName = $computer
+	    Date         = $lastboottime
+	    TotalDays    = [math]::Round($timespan.totaldays)
+	    TotalHours   = [math]::Round($timespan.totalhours)
     }
-	All = [PSCustomObject]@{
-	    ComputerName 	 = $computer
-	    Date         	 = $lastboottime
-        Timespan         = $timespan
+				All          = [PSCustomObject]@{
+	    ComputerName = $computer
+	    Date         = $lastboottime
+					Timespan     = $timespan
     }
-})
-}
-return $ReturnObj
+			})
+	}
+	return $ReturnObj
 
 
 } #end Function

@@ -3,7 +3,7 @@
     # subset of: Error, Warning and Information.
     # Uncomment the following line if you only want Errors and Warnings but
     # not Information diagnostic records.
-    Severity = @('Error','Warning')
+    Severity     = @('Error', 'Warning')
  
     # Use IncludeRules when you want to run only a subset of the default rule set.
     #IncludeRules = @('PSAvoidDefaultValueSwitchParameter',
@@ -19,9 +19,9 @@
     # and ExcludeRules, the rule will be excluded.
     ExcludeRules = @(
         'PSMissingModuleManifestField',
-	    'PSAvoidUsingWriteHost',
-'PSUseShouldProcessForStateChangingFunctions',
-'PSUseSingularNouns'
+        'PSAvoidUsingWriteHost',
+        'PSUseShouldProcessForStateChangingFunctions',
+        'PSUseSingularNouns'
     )
  
     # You can use the following entry to supply parameters to rules that take parameters.

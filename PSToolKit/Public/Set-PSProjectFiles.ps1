@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -32,12 +32,12 @@ Created [11/01/2022_18:41] Initial Script Creating
 
 #>
 
-<# 
+<#
 
-.DESCRIPTION 
- Creates and modify needed files for a PS project from existing module files 
+.DESCRIPTION
+ Creates and modify needed files for a PS project from existing module files
 
-#> 
+#>
 
 
 <#
@@ -59,8 +59,6 @@ Create and test the mkdocs site
 .EXAMPLE
 Set-PSProjectFiles -ModulePSM1 c:\temp\blah.psm1 -VersionBump Minor -mkdocs serve
 
-.NOTES
-General notes
 #>
 Function Set-PSProjectFiles {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Set-PSProjectFiles')]
@@ -71,7 +69,7 @@ Function Set-PSProjectFiles {
 		[ValidateSet('Minor', 'Build', 'CombineOnly')]
 		[string]$VersionBump = 'None',
 		[ValidateSet('serve', 'gh-deploy')]
-		[string]$mkdocs = 'None'                 
+		[string]$mkdocs = 'None'
 	)
 
 	#region module
@@ -157,11 +155,11 @@ Function Set-PSProjectFiles {
 					Catagory = 'External Help'
 					File     = $_.InputObject
 					details  = 'Did not create the .md file'
-				}) 
+				})
 		}
 
 		$MissingDocumentation = Select-String -Path (Join-Path $Moduledocs.FullName -ChildPath '\*.md') -Pattern '({{.*}})'
-		$group = $MissingDocumentation | Group-Object -Property line  
+		$group = $MissingDocumentation | Group-Object -Property Line
 		foreach ($gr in $group) {
 			foreach ($item in $gr.Group) {
 				$object = Get-Item $item.Path
@@ -208,7 +206,7 @@ Function Set-PSProjectFiles {
 			$instructions.Add('```')
 			$instructions.Add("- or from GitHub [GitHub Repo](https://github.com/smitpi/$($module.Name))")
 			$instructions.Add('```')
-			$instructions.Add("git clone https://github.com/smitpi/$($module.Name) (Join-Path (get-item (Join-Path (Get-Item `$profile).Directory 'Modules')).FullName -ChildPath $($Module.Name))")		
+			$instructions.Add("git clone https://github.com/smitpi/$($module.Name) (Join-Path (get-item (Join-Path (Get-Item `$profile).Directory 'Modules')).FullName -ChildPath $($Module.Name))")
 			$instructions.Add('```')
 			$instructions.Add('- Then import the module into your session')
 			$instructions.Add('```')
@@ -257,8 +255,8 @@ Function Set-PSProjectFiles {
 		$mkdocsFunc.add('  features:')
 		$mkdocsFunc.add('    - navigation.instant')
 		$mkdocsFunc.add('  language: en')
-		$mkdocsFunc.add("  favicon: `'https://mentorshipmovement.co.za/wp-content/uploads/2019/09/linkedin-profilepic-400x400.png`'")
-		$mkdocsFunc.add("  logo: `'https://mentorshipmovement.co.za/wp-content/uploads/2019/09/linkedin-profilepic-400x400.png`'")
+		$mkdocsFunc.add("  favicon: `'`'")
+		$mkdocsFunc.add("  logo: `'`'")
 		$mkdocsFunc.add('  palette:')
 		$mkdocsFunc.add('    - media: "(prefers-color-scheme: light)"')
 		$mkdocsFunc.add('      primary: blue grey')
@@ -291,14 +289,16 @@ Function Set-PSProjectFiles {
 			'PSMissingModuleManifestField',
 			'PSAvoidUsingWriteHost',
 			'PSUseShouldProcessForStateChangingFunctions',
-			'PSUseSingularNouns'
+			'PSUseSingularNouns',
+			'PSAvoidTrailingWhitespace',
+			'PSReviewUnusedParameter'
 		)
 		Write-Color '[Starting]', 'PSScriptAnalyzer' -Color Yellow, DarkCyan
 		Invoke-ScriptAnalyzer -Path $ModulePublicFunctions -Recurse -OutVariable Listissues -ExcludeRule $ExcludeRules | Out-Null
-		
-		foreach ($item in $Listissues) {      
+
+		foreach ($item in $Listissues) {
 			Write-Color "$($item.scriptname): ", $($item.Message) -Color Cyan, Yellow
-			$ScriptAnalyzerIssues.Add([PSCustomObject]@{
+			[void]$ScriptAnalyzerIssues.Add([PSCustomObject]@{
 					Catagory = 'ScriptAnalyzer'
 					File     = $item.scriptname
 					RuleName = $item.RuleName
@@ -320,21 +320,21 @@ Function Set-PSProjectFiles {
 		if ($null -notlike $PrivateFiles) {
 			Copy-Item -Path $ModulePrivateFunctions.FullName -Destination $ModuleOutput.fullname -Recurse -Exclude *.ps1 -Force
 		}
-    
+
 		$public = @(Get-ChildItem -Path "$($ModulePublicFunctions.FullName)\*.ps1" -Recurse -ErrorAction Stop)
 		$private = @(Get-ChildItem -Path "$($ModulePrivateFunctions.FullName)\*.ps1" -ErrorAction Stop)
 		$file = [System.Collections.Generic.List[string]]::new()
 		$file.add('#region Private Functions')
-		foreach ($privateitem in $private) { 
+		foreach ($privateitem in $private) {
 			$file.Add('########### Private Function ###############')
 			$file.Add("# source: $($privateitem.name)")
 			$file.Add("# Module: $($module.Name)")
 			$file.Add('############################################')
 			Write-Color '[Processing]: ', $($privateitem.name) -Color Cyan, Yellow
-			Get-Content $privateitem.fullname | ForEach-Object { $file.add($_) }    
+			Get-Content $privateitem.fullname | ForEach-Object { $file.add($_) }
 		}
 		$file.add('#endregion')
-		$file.add('#region Public Functions')        
+		$file.add('#region Public Functions')
 		foreach ($publicitem in $public) {
 			$file.add("#region $($publicitem.name)")
 			$file.Add('############################################')
@@ -354,15 +354,15 @@ Function Set-PSProjectFiles {
 			$file.Add("Export-ModuleMember -Function $($publicitem.BaseName)")
 			$file.add('#endregion')
 			$file.Add(' ')
-		} 
+		}
 		$file.add('#endregion')
 		$file | Set-Content -Path $rootModule -Encoding utf8 -Force
 
 		$newfunction = ((Select-String -Path $rootModule -Pattern '^# source:').Line).Replace('# source:', '').Replace('.ps1', '').Trim()
 		$ModCommands = Get-Command -Module $module | ForEach-Object { $_.name }
-	
+
 		Compare-Object -ReferenceObject $ModCommands -DifferenceObject $newfunction | ForEach-Object {
-			$Issues.Add([PSCustomObject]@{
+			[void]$Issues.Add([PSCustomObject]@{
 					Catagory = 'Not Copied'
 					File     = $_.InputObject
 					details  = $_.SideIndicator
@@ -385,7 +385,10 @@ Function Set-PSProjectFiles {
 		#endregion
 	}
 
-	if ($VersionBump -like 'CombineOnly') { combine }
+	if ($VersionBump -like 'CombineOnly') { 
+		combine
+		mkdocs
+	}
 	else {
 		exthelp
 		ScriptAnalyzer

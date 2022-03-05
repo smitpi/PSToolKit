@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -32,12 +32,12 @@ Created [05/02/2022_11:41] Initial Script Creating
 
 #>
 
-<# 
+<#
 
-.DESCRIPTION 
- Creates new profile files in the documents folder 
+.DESCRIPTION
+ Creates new profile files in the documents folder
 
-#> 
+#>
 
 #Requires -Module PSWriteColor
 
