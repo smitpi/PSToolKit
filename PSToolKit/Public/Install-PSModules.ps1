@@ -41,34 +41,37 @@ Created [26/10/2021_22:32] Initial Script Creating
 
 <#
 .SYNOPSIS
- Install modules from .json file
+ Install modules from .json file.
 
 .DESCRIPTION
- Install modules from .json file
+ Install modules from .json file.
 
 .PARAMETER BaseModules
-Only base list
+Only base list.
 
 .PARAMETER ExtendedModules
-Use longer list
+Use longer list.
+
+.PARAMETER Scope
+Scope to install modules (CurrentUser or AllUsers).
 
 .PARAMETER OtherModules
-Use Manual list
+Use Manual list.
 
 .PARAMETER JsonPath
-Path to manual list
+Path to manual list.
 
 .PARAMETER ForceInstall
-Force reinstall
+Force reinstall.
 
 .PARAMETER UpdateModules
-Update the modules
+Update the modules.
 
 .PARAMETER RemoveAll
-Remove the modules
+Remove the modules.
 
 .EXAMPLE
-Install-PSModules BaseModules
+Install-PSModules -BaseModules -Scope AllUsers
 
 #>
 Function Install-PSModules {
@@ -81,8 +84,8 @@ Function Install-PSModules {
 		[Parameter(ParameterSetName = 'base')]
 		[Parameter(ParameterSetName = 'ext')]
 		[Parameter(ParameterSetName = 'other')]
-		[validateset("CurrentUser","AllUsers")]
-		[string]$Scope = "CurrentUser",
+		[validateset('CurrentUser', 'AllUsers')]
+		[string]$Scope = 'CurrentUser',
 		[Parameter(ParameterSetName = 'other')]
 		[switch]$OtherModules = $false,
 		[Parameter(ParameterSetName = 'other')]
@@ -105,8 +108,7 @@ Function Install-PSModules {
 	$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
 	try {
 		$ConPath = Get-Item $ConfigPath
-	}
- catch { Write-Error 'Config path foes not exist'; exit }
+	} catch { Write-Error 'Config path foes not exist'; exit }
 	if ($BaseModules) { $ModuleList = (Join-Path $ConPath.FullName -ChildPath BaseModuleList.json) }
 	if ($ExtendedModules) { $ModuleList = (Join-Path $ConPath.FullName -ChildPath ExtendedModuleList.json) }
 	if ($OtherModules) { $ModuleList = Get-Item $JsonPath }
@@ -121,16 +123,14 @@ Function Install-PSModules {
 			$mods | ForEach-Object { Write-Host 'Uninstalling Module:' -ForegroundColor Cyan -NoNewline; Write-Host $_.Name -ForegroundColor red
 				Get-Module -Name $_.Name -ListAvailable | Uninstall-Module -AllVersions -Force
 			}
-		}
-		catch { Write-Error "Error Uninstalling $($mod.Name)" }
+		} catch { Write-Error "Error Uninstalling $($mod.Name)" }
 	}
 	if ($UpdateModules) {
 		try {
 			$mods | ForEach-Object { Write-Host 'Updating Module:' -ForegroundColor Cyan -NoNewline; Write-Host $_.Name -ForegroundColor yello
 				Get-Module -Name $_.Name -ListAvailable | Select-Object -First 1 | Update-Module -Force
 			}
-		}
-		catch { Write-Error "Error Updating $($mod.Name)" }
+		} catch { Write-Error "Error Updating $($mod.Name)" }
 	}
 
 	foreach ($mod in $mods) {
@@ -139,8 +139,7 @@ Function Install-PSModules {
 			Write-Host 'Installing Module:' -ForegroundColor Cyan -NoNewline
 			Write-Host $mod.Name -ForegroundColor Yellow
 			Install-Module -Name $mod.Name -Scope $Scope -AllowClobber -Force
-		}
-		else {
+		} else {
 			Write-Host 'Using Installed Module:' -ForegroundColor Cyan -NoNewline
 			Write-Host "$PSModule.Name - $PSModule.Path" -ForegroundColor Yellow
 		}
