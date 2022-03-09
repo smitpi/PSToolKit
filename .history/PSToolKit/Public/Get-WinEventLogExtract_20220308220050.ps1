@@ -85,6 +85,16 @@ Function Get-WinEventLogExtract {
         [System.IO.DirectoryInfo]$ReportPath = 'C:\Temp'
     )
     [System.Collections.ArrayList]$AllEvents = @()
+    [hashtable]$filter = @{
+        StartTime = $((Get-Date).AddDays(-$days))
+    }
+
+    if ($FilterCitrix) { $filter.Add('ProviderName', '*Citrix*') }
+    if ($ErrorLevel -like 'Critical') { $filter.Add('Level', @(1)) }
+    if ($ErrorLevel -like 'Error') { $filter.Add('Level', @(1, 2)) }
+    if ($ErrorLevel -like 'Warning') { $filter.Add('Level', @(1, 2, 3)) }
+    if ($ErrorLevel -like 'Informational') { $filter.Add('Level', @(1, 2, 3, 4)) }
+
     $ComputerName | ForEach-Object {
         $comp = $_
         Write-Host 'Processing Events for server: ' -ForegroundColor Cyan -NoNewline
@@ -92,16 +102,6 @@ Function Get-WinEventLogExtract {
         if (-not(Test-Connection $comp -Count 2 -Quiet)) { Write-Warning "Unable to connect to $($comp)" }
         else {
             try {
-                [hashtable]$filter = @{
-                    StartTime = $((Get-Date).AddDays(-$days))
-                }
-
-                if ($FilterCitrix) { $filter.Add('ProviderName', '*Citrix*') }
-                if ($ErrorLevel -like 'Critical') { $filter.Add('Level', @(1)) }
-                if ($ErrorLevel -like 'Error') { $filter.Add('Level', @(1, 2)) }
-                if ($ErrorLevel -like 'Warning') { $filter.Add('Level', @(1, 2, 3)) }
-                if ($ErrorLevel -like 'Informational') { $filter.Add('Level', @(1, 2, 3, 4)) }
-
                 $tmpNames = Get-WinEvent -ListLog * -ComputerName $comp | Where-Object { $_.IsEnabled -like 'True' -and $_.RecordCount -gt 0 -and $_.LogType -like 'Administrative' } | ForEach-Object {
                     [pscustomobject]@{
                         MachineName   = $comp
@@ -114,7 +114,7 @@ Function Get-WinEventLogExtract {
                         LastWriteTime = $_.LastWriteTime
                     }
                 }
-                $filter.Add('LogName',@("Application","System","Security","Setup") )
+                $filter.Add('LogName', $($tmpNames.logname))
                 $tmpEvents = Get-WinEvent -ComputerName $comp -FilterHashtable $filter | Select-Object MachineName, TimeCreated, UserId, Id, LevelDisplayName, LogName, ProviderName, Message
 
                 [void]$AllEvents.Add([pscustomobject]@{

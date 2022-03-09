@@ -114,8 +114,8 @@ Function Start-PSToolkitSystemInitialize {
 	if ($LabSetup) {
 		Set-PSToolKitSystemSettings -RunAll
         Update-PSToolKitConfigFiles -UpdateLocal -UpdateLocalFromModule
+        Install-PS7
 		Install-PSModules -BaseModules
-		Install-PS7
 		Install-ChocolateyClient
 		Install-ChocolateyApps -BaseApps
 	}

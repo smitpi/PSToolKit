@@ -114,7 +114,7 @@ Function Get-WinEventLogExtract {
                         LastWriteTime = $_.LastWriteTime
                     }
                 }
-                $filter.Add('LogName',@("Application","System","Security","Setup") )
+                $filter.Add('LogName', $($tmpNames.logname))
                 $tmpEvents = Get-WinEvent -ComputerName $comp -FilterHashtable $filter | Select-Object MachineName, TimeCreated, UserId, Id, LevelDisplayName, LogName, ProviderName, Message
 
                 [void]$AllEvents.Add([pscustomobject]@{

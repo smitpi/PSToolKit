@@ -85,7 +85,7 @@ Function Get-WinEventLogExtract {
         [System.IO.DirectoryInfo]$ReportPath = 'C:\Temp'
     )
     [System.Collections.ArrayList]$AllEvents = @()
-    $ComputerName | ForEach-Object {
+    $ComputerName | ForEach-Object -Parallel {
         $comp = $_
         Write-Host 'Processing Events for server: ' -ForegroundColor Cyan -NoNewline
         Write-Host "$($comp)" -ForegroundColor Yellow

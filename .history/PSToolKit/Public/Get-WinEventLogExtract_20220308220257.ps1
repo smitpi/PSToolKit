@@ -85,6 +85,7 @@ Function Get-WinEventLogExtract {
         [System.IO.DirectoryInfo]$ReportPath = 'C:\Temp'
     )
     [System.Collections.ArrayList]$AllEvents = @()
+    
     $ComputerName | ForEach-Object {
         $comp = $_
         Write-Host 'Processing Events for server: ' -ForegroundColor Cyan -NoNewline
@@ -114,7 +115,7 @@ Function Get-WinEventLogExtract {
                         LastWriteTime = $_.LastWriteTime
                     }
                 }
-                $filter.Add('LogName',@("Application","System","Security","Setup") )
+                $filter.Add('LogName', $($tmpNames.logname))
                 $tmpEvents = Get-WinEvent -ComputerName $comp -FilterHashtable $filter | Select-Object MachineName, TimeCreated, UserId, Id, LevelDisplayName, LogName, ProviderName, Message
 
                 [void]$AllEvents.Add([pscustomobject]@{
