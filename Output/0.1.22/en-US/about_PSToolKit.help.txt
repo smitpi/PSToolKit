@@ -84,7 +84,7 @@ Functions in this module:
 	 Update-LocalHelp -- Downloads and saves help files locally
 	 Update-PSModuleInfo -- Update PowerShell module manifest file
 	 Update-PSScriptInfo -- Update PowerShell ScriptFileInfo
-	 Update-PSToolKit -- Update local repository from GitHub
+	 Update-PSToolKit -- Update PSToolKit from GitHub.
 	 Update-PSToolKitConfigFiles -- Manages the config files for the PSToolKit Module.
 	 Write-PSToolKitLog -- Create a log for scripts
  

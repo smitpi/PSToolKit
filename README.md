@@ -100,6 +100,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Update-LocalHelp](https://smitpi.github.io/PSToolKit/#Update-LocalHelp) -- Downloads and saves help files locally
 - [Update-PSModuleInfo](https://smitpi.github.io/PSToolKit/#Update-PSModuleInfo) -- Update PowerShell module manifest file
 - [Update-PSScriptInfo](https://smitpi.github.io/PSToolKit/#Update-PSScriptInfo) -- Update PowerShell ScriptFileInfo
-- [Update-PSToolKit](https://smitpi.github.io/PSToolKit/#Update-PSToolKit) -- Update local repository from GitHub
+- [Update-PSToolKit](https://smitpi.github.io/PSToolKit/#Update-PSToolKit) -- Update PSToolKit from GitHub.
 - [Update-PSToolKitConfigFiles](https://smitpi.github.io/PSToolKit/#Update-PSToolKitConfigFiles) -- Manages the config files for the PSToolKit Module.
 - [Write-PSToolKitLog](https://smitpi.github.io/PSToolKit/#Write-PSToolKitLog) -- Create a log for scripts

@@ -246,6 +246,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://smitpi.github.io/PSToolKit/New-SuggestedInfraNames/</loc>
+         <lastmod>2022-03-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://smitpi.github.io/PSToolKit/Remove-CIMUserProfiles/</loc>
          <lastmod>2022-03-09</lastmod>
          <changefreq>daily</changefreq>
