@@ -13,7 +13,7 @@ My PS Profile for all sessions.
 ## SYNTAX
 
 ```
-Start-PSProfile [-ClearHost] [-AddFun] [-ShowModuleList] [-ShortenPrompt] [<CommonParameters>]
+Start-PSProfile [-ClearHost] [-AddFun] [-GalleryStats] [-ShowModuleList] [-ShortenPrompt] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -45,6 +45,21 @@ Accept wildcard characters: False
 
 ### -AddFun
 Add fun details in the output.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -GalleryStats
+Stats about my published modules..
 
 ```yaml
 Type: SwitchParameter

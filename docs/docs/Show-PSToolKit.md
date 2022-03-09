@@ -13,7 +13,7 @@ Show details of the commands in this module
 ## SYNTAX
 
 ```
-Show-PSToolKit [-ShowCommand] [-html] [<CommonParameters>]
+Show-PSToolKit [-ShowCommand] [-ExportToHTML] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,8 +43,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -html
-Create a website with the details
+### -ExportToHTML
+Create a HTML page with the details
 
 ```yaml
 Type: SwitchParameter

@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Get member data of an object.
-Use it to create other psobjects
+Use it to create other PSObjects.
 
 ## SYNTAX
 
@@ -19,7 +19,7 @@ Get-PropertiesToCSV [[-Data] <Object[]>] [<CommonParameters>]
 
 ## DESCRIPTION
 Get member data of an object.
-Use it to create other psobjects
+Use it to create other PSObjects.
 
 ## EXAMPLES
 

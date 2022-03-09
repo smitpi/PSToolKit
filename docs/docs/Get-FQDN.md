@@ -13,7 +13,7 @@ Get FQDN for a device, and checks if it is online
 ## SYNTAX
 
 ```
-Get-FQDN [-ComputerName] <String> [<CommonParameters>]
+Get-FQDN [-ComputerName] <String[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,7 +32,7 @@ get-FQDN -ComputerName Neptune
 Name or IP to use.
 
 ```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -50,6 +50,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.Object[]
 ## NOTES
 
 ## RELATED LINKS

@@ -64,7 +64,7 @@ Function Find-ChocolateyApps {
 
 	[System.Collections.ArrayList]$inst = @()
 
-	choco search $SearchString --limit-output --order-by-popularity --source chocolatey | Select-Object -First 25 | ForEach-Object {
+	choco search $SearchString --limit-output --order-by-popularity | Select-Object -First 25 | ForEach-Object {
 		$appdetail = (choco info ($_ -split '\|')[0])
 		New-Object -TypeName psobject -Property @{
 			id          = ($_ -split '\|')[0]

@@ -13,7 +13,7 @@ Connects to a server and renames a user profile folder, and delete the key from 
 ## SYNTAX
 
 ```
-Remove-UserProfile [-TargetServer] <String> [-UserName] <String> [<CommonParameters>]
+Remove-UserProfile -TargetServer <String> [-UserName] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,9 +37,9 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

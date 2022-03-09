@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -Author
-Who wrote the moduke
+Who wrote the module.
 
 ```yaml
 Type: String
@@ -126,6 +126,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.Collections.Hashtable
 ## NOTES
 
 ## RELATED LINKS

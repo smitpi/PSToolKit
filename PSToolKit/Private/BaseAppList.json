@@ -1,5 +1,8 @@
-
 [
+	{
+		"Name": "powershell-core",
+		"Source": "chocolatey"
+	},
 	{
 		"Name": "bandizip",
 		"Source": "chocolatey"
@@ -7,24 +10,17 @@
 	{
 		"Name": "cascadiacodepl",
 		"Source": "chocolatey"
-
 	},
 	{
 		"Name": "GoogleChrome",
 		"Source": "chocolatey"
-
 	},
 	{
 		"Name": "microsoft-edge",
 		"Source": "chocolatey"
-
 	},
 	{
 		"Name": "microsoft-windows-terminal",
 		"Source": "chocolatey"
-
 	}
 ]
-
-
-

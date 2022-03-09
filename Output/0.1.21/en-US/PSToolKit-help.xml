@@ -1213,7 +1213,16 @@
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
-    <command:returnValues />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
     <maml:alertSet>
       <maml:alert>
         <maml:para></maml:para>
@@ -2386,9 +2395,9 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
           <maml:description>
             <maml:para>Name or IP to use.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
-            <maml:name>String</maml:name>
+            <maml:name>String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -2401,16 +2410,25 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
         <maml:description>
           <maml:para>Name or IP to use.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
-          <maml:name>String</maml:name>
+          <maml:name>String[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
-    <command:returnValues />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
     <maml:alertSet>
       <maml:alert>
         <maml:para></maml:para>
@@ -2673,11 +2691,11 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>PropertiesToCSV</command:noun>
       <maml:description>
-        <maml:para>Get member data of an object. Use it to create other psobjects</maml:para>
+        <maml:para>Get member data of an object. Use it to create other PSObjects.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Get member data of an object. Use it to create other psobjects</maml:para>
+      <maml:para>Get member data of an object. Use it to create other PSObjects.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4938,7 +4956,7 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Remove-FaultyProfileList</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>TargetServer</maml:name>
           <maml:description>
             <maml:para>ServerName to connect to.</maml:para>
@@ -4953,7 +4971,7 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>TargetServer</maml:name>
         <maml:description>
           <maml:para>ServerName to connect to.</maml:para>
@@ -5179,18 +5197,6 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Remove-UserProfile</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
-          <maml:name>TargetServer</maml:name>
-          <maml:description>
-            <maml:para>Server to connect to.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>UserName</maml:name>
           <maml:description>
@@ -5203,10 +5209,22 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>TargetServer</maml:name>
+          <maml:description>
+            <maml:para>Server to connect to.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>TargetServer</maml:name>
         <maml:description>
           <maml:para>Server to connect to.</maml:para>
@@ -6296,9 +6314,9 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>html</maml:name>
+          <maml:name>ExportToHTML</maml:name>
           <maml:description>
-            <maml:para>Create a website with the details</maml:para>
+            <maml:para>Create a HTML page with the details</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -6322,9 +6340,9 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>html</maml:name>
+        <maml:name>ExportToHTML</maml:name>
         <maml:description>
-          <maml:para>Create a website with the details</maml:para>
+          <maml:para>Create a HTML page with the details</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -6493,7 +6511,16 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
-    <command:returnValues />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
     <maml:alertSet>
       <maml:alert>
         <maml:para></maml:para>
@@ -6548,6 +6575,17 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>GalleryStats</maml:name>
+          <maml:description>
+            <maml:para>Stats about my published modules..</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ShowModuleList</maml:name>
           <maml:description>
             <maml:para>Summary of installed modules.</maml:para>
@@ -6588,6 +6626,18 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
         <maml:name>AddFun</maml:name>
         <maml:description>
           <maml:para>Add fun details in the output.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>GalleryStats</maml:name>
+        <maml:description>
+          <maml:para>Stats about my published modules..</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -7283,7 +7333,16 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
-    <command:returnValues />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
     <maml:alertSet>
       <maml:alert>
         <maml:para></maml:para>
@@ -7644,7 +7703,7 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>Author</maml:name>
           <maml:description>
-            <maml:para>Who wrote the moduke</maml:para>
+            <maml:para>Who wrote the module.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -7718,7 +7777,7 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>Author</maml:name>
         <maml:description>
-          <maml:para>Who wrote the moduke</maml:para>
+          <maml:para>Who wrote the module.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -7777,7 +7836,16 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
-    <command:returnValues />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Collections.Hashtable</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
     <maml:alertSet>
       <maml:alert>
         <maml:para></maml:para>
@@ -7957,7 +8025,16 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
-    <command:returnValues />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Collections.Hashtable</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
     <maml:alertSet>
       <maml:alert>
         <maml:para></maml:para>
