@@ -88,7 +88,7 @@ Function Start-PSToolkitSystemInitialize {
 	$full = Get-Item "$($env:TEMP)\Update-PSToolKit.ps1"
 	Import-Module $full.FullName -Force
 	Update-PSToolKit -AllUsers -Verbose
-	Remove-Item $full.FullName
+	Remove-Item "$($env:TEMP)\Update-PSToolKit.ps1"
 
 	Import-Module PSToolKit -Force
 	New-PSProfile

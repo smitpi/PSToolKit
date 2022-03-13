@@ -66,31 +66,28 @@ Function Update-PSToolKit {
 		$ModulePath = [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'WindowsPowerShell', 'Modules', 'PSToolKit')
 	}
 
-	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Checking] Temp folder $($env:tmp) "
-	if ((Test-Path $env:tmp\private.zip) -eq $true ) { Remove-Item $env:tmp\private.zip -Force }
+		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Checking] Temp folder $($env:tmp) "
+		if ((Test-Path $env:tmp\private.zip) -eq $true ) { Remove-Item $env:tmp\private.zip -Force }
 
-	if ((Test-Path $ModulePath  )) {
+		if ((Test-Path $ModulePath  )) {
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Backup old folder to $(Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip')"
-		Get-ChildItem -Directory $ModulePath | Compress-Archive -DestinationPath (Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip') -Update
-		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Remove old folder $($ModulePath)"
-		Get-ChildItem -Directory $ModulePath | Remove-Item -Recurse -Force
-	} else {
-		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Creating Module directory $($ModulePath)"
-		New-Item $ModulePath -ItemType Directory -Force | Out-Null
-	}
+			Get-ChildItem -Directory $ModulePath | Compress-Archive -DestinationPath (Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip') -Update
+			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Remove old folder"
+			Get-ChildItem -Directory $ModulePath | Remove-Item -Recurse -Force
+		} else {
+			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Creating Module directory"
+			New-Item $ModulePath -ItemType Directory -Force | Out-Null
+		}
 
-	$PathFullName = Get-Item $ModulePath
-	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] download from github"
-	Invoke-WebRequest -Uri https://codeload.github.com/smitpi/PSToolKit/zip/refs/heads/master -OutFile $env:tmp\private.zip
-	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] expand into module folder"
-	Expand-Archive $env:tmp\private.zip $env:tmp -Force
+		$PathFullName = Get-Item $ModulePath
+		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] download from github"
+		Invoke-WebRequest -Uri https://codeload.github.com/smitpi/PSToolKit/zip/refs/heads/master -OutFile $env:tmp\private.zip
+		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] expand into module folder"
+		Expand-Archive $env:tmp\private.zip $env:tmp -Force
 
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Copying to $($PathFullName.FullName)"
-	Copy-Item -Path $env:tmp\PSToolKit-master\Output\* -Destination $PathFullName.FullName -Recurse
-	
-	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Removing temp files"
-	Remove-Item $env:tmp\private.zip
-	Remove-Item $env:tmp\PSToolKit-master -Recurse
-	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Complete]"
+		Copy-Item -Path $env:tmp\PSToolKit-master\Output\* -Destination $PathFullName.FullName -Recurse
+		Remove-Item $env:tmp\private.zip
+		Remove-Item $env:tmp\PSToolKit-master -Recurse
 
 } #end Function

@@ -72,10 +72,10 @@ Function Update-PSToolKit {
 	if ((Test-Path $ModulePath  )) {
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Backup old folder to $(Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip')"
 		Get-ChildItem -Directory $ModulePath | Compress-Archive -DestinationPath (Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip') -Update
-		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Remove old folder $($ModulePath)"
+		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Remove old folder"
 		Get-ChildItem -Directory $ModulePath | Remove-Item -Recurse -Force
 	} else {
-		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Creating Module directory $($ModulePath)"
+		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Creating Module directory"
 		New-Item $ModulePath -ItemType Directory -Force | Out-Null
 	}
 
@@ -87,10 +87,8 @@ Function Update-PSToolKit {
 
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Copying to $($PathFullName.FullName)"
 	Copy-Item -Path $env:tmp\PSToolKit-master\Output\* -Destination $PathFullName.FullName -Recurse
-	
-	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Removing temp files"
+		
 	Remove-Item $env:tmp\private.zip
 	Remove-Item $env:tmp\PSToolKit-master -Recurse
-	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Complete]"
 
 } #end Function

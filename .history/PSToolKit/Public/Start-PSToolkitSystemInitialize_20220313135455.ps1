@@ -87,8 +87,8 @@ Function Start-PSToolkitSystemInitialize {
 	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-PSToolKit.ps1', "$($env:TEMP)\Update-PSToolKit.ps1")
 	$full = Get-Item "$($env:TEMP)\Update-PSToolKit.ps1"
 	Import-Module $full.FullName -Force
-	Update-PSToolKit -AllUsers -Verbose
-	Remove-Item $full.FullName
+	Update-PSToolKit -AllUsers
+	Remove-Item "$($env:TEMP)\Update-PSToolKit.ps1"
 
 	Import-Module PSToolKit -Force
 	New-PSProfile
