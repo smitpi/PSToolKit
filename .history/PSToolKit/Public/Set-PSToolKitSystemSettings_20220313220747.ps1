@@ -88,7 +88,7 @@ Closes and set server manager not to open on start.
 Enable RDP to this device.
 
 .PARAMETER InstallVMWareTools
-Install VMware tools if device is a VM.
+Install VMware tools if device is a vm.
 
 .PARAMETER InstallAnsibleRemote
 Configure ps remoting for ansible.

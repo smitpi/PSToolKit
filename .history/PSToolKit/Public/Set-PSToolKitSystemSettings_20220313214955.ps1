@@ -88,7 +88,7 @@ Closes and set server manager not to open on start.
 Enable RDP to this device.
 
 .PARAMETER InstallVMWareTools
-Install VMware tools if device is a VM.
+Install VMware tools if device is a vm.
 
 .PARAMETER InstallAnsibleRemote
 Configure ps remoting for ansible.
@@ -359,8 +359,9 @@ Function Set-PSToolKitSystemSettings {
             if ((Get-CimInstance -ClassName win32_bios).Manufacturer -like '*VMware*') {
                 Install-ChocolateyClient
                 Write-Color 'Installing App: ', 'vmware-tools', ' from source ', 'chocolatey' -Color Cyan, Yellow, Cyan, Yellow
-                choco upgrade vmware-tools --accept-license --limit-output -y --source  chocolatey | Out-Null
+                choco upgrade vmware-tools --accept-license --limit-output -y | Out-Null
                 if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing vmware-tools Code: $($LASTEXITCODE)"}
+                choco upgrade vmware-tools -y --limit-output
             }
         } catch { Write-Warning "[Installing] VMWare Tools: Failed:`n $($_.Exception.Message)" }
 
@@ -396,6 +397,8 @@ Function Set-PSToolKitSystemSettings {
             Write-Color '[Installing] ', 'NFS Client: ', 'Complete' -Color Yellow, Cyan, Green
 
         } catch { Write-Warning "[Installing] NFS Client: Failed:`n $($_.Exception.Message)" }
+
+    
     } #end
 
 } #end Function

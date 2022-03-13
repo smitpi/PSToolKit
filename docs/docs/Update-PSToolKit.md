@@ -8,16 +8,16 @@ schema: 2.0.0
 # Update-PSToolKit
 
 ## SYNOPSIS
-Update local repository from GitHub
+Update PSToolKit from GitHub.
 
 ## SYNTAX
 
 ```
-Update-PSToolKit [<CommonParameters>]
+Update-PSToolKit [-AllUsers] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Update local repository from GitHub
+Update PSToolKit from GitHub.
 
 ## EXAMPLES
 
@@ -27,6 +27,21 @@ Update-PSToolKit
 ```
 
 ## PARAMETERS
+
+### -AllUsers
+Will update to the AllUsers Scope
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).

@@ -79,17 +79,16 @@ Function Start-PSToolkitSystemInitialize {
 		$null = Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 	}
 	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'Needed Powershell modules' -ForegroundColor Yellow
+	Install-Module ImportExcel, PSWriteHTML, PSWriteColor, PSScriptTools, PoshRegistry, Microsoft.PowerShell.Archive -Scope AllUsers
 
 	"ImportExcel", "PSWriteHTML", "PSWriteColor", "PSScriptTools", "PoshRegistry", "Microsoft.PowerShell.Archive" | ForEach-Object {
 		$module = $_
 		if (-not(get-module $module) -and -not(get-module $module -ListAvailable)) {
-			try {
-			Write-Host '[Installing] Module: ' -NoNewline -ForegroundColor Cyan; Write-Host "$($module)" -ForegroundColor Yellow
-			Install-Module -Name $module -Scope AllUsers -AllowClobber -ErrorAction stop
-			} catch {Write-Warning "Error installing module $($module): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
+			Write-Host '[Installing]: ' -NoNewline -ForegroundColor Cyan; Write-Host '' -ForegroundColor Yellow
 		}
 	}
 
+	#Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-PSToolKit.ps1'))
 	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'PSToolKit Module' -ForegroundColor Yellow
 	$web = New-Object System.Net.WebClient
 	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-PSToolKit.ps1', "$($env:TEMP)\Update-PSToolKit.ps1")
@@ -99,10 +98,11 @@ Function Start-PSToolkitSystemInitialize {
 	Remove-Item $full.FullName
 
 	Import-Module PSToolKit -Force
+	New-PSProfile
+	Start-PSProfile
 	if ($LabSetup) {
-		New-PSProfile
 		Set-PSToolKitSystemSettings -RunAll
-		Add-ChocolateyPrivateRepo -RepoName Proget -RepoURL http://progetserver.internal.lab/nuget/htpcza-choco/ -Priority 1
+		Add-ChocolateyPrivateRepo -RepoName Proget -RepoURL http://progetserver.internal.lab/nuget/htpcza-choco/ -Priority 1	
 		Update-PSToolKitConfigFiles -UpdateLocal -UpdateLocalFromModule
 		Install-PSModules -BaseModules
 		Install-PS7
@@ -113,5 +113,4 @@ Function Start-PSToolkitSystemInitialize {
 		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'Installing Other Modules' -ForegroundColor Yellow
 		Install-Module CTXCloudApi, PSConfigFile, PSLauncher, XDHealthCheck -Scope AllUsers -Force -SkipPublisherCheck -AllowClobber
 	}
-	Start-PSProfile -ClearHost -AddFun -ShowModuleList
 } #end Function

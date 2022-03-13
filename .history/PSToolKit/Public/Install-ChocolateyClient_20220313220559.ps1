@@ -74,7 +74,7 @@ Function Install-ChocolateyClient {
     choco config set --name="'useEnhancedExitCodes'" --value="'true'"
     choco config set --name="'allowGlobalConfirmation'" --value="'true'"
     choco config set --name="'removePackageInformationOnUninstall'" --value="'true'"
-    Write-Color '[Set] ', 'Chocolatey Client Config: ', 'Complete' -Color Cyan, Yellow, Green
+    Write-Color '[Installing] ', 'ChocolateyClient: ', 'Config set' -Color Cyan, Yellow, Green
   }
   else {
     Write-Color '[Installing] ', 'Chocolatey Client: ', 'Aleady Installed' -Color Cyan, Yellow, Green

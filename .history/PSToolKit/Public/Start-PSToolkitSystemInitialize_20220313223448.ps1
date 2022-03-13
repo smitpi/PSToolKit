@@ -99,8 +99,8 @@ Function Start-PSToolkitSystemInitialize {
 	Remove-Item $full.FullName
 
 	Import-Module PSToolKit -Force
+	New-PSProfile
 	if ($LabSetup) {
-		New-PSProfile
 		Set-PSToolKitSystemSettings -RunAll
 		Add-ChocolateyPrivateRepo -RepoName Proget -RepoURL http://progetserver.internal.lab/nuget/htpcza-choco/ -Priority 1
 		Update-PSToolKitConfigFiles -UpdateLocal -UpdateLocalFromModule

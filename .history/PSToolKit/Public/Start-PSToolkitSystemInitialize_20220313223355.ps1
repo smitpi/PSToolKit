@@ -99,8 +99,9 @@ Function Start-PSToolkitSystemInitialize {
 	Remove-Item $full.FullName
 
 	Import-Module PSToolKit -Force
+	New-PSProfile
+	Start-PSProfile -ClearHost -AddFun -ShowModuleList
 	if ($LabSetup) {
-		New-PSProfile
 		Set-PSToolKitSystemSettings -RunAll
 		Add-ChocolateyPrivateRepo -RepoName Proget -RepoURL http://progetserver.internal.lab/nuget/htpcza-choco/ -Priority 1
 		Update-PSToolKitConfigFiles -UpdateLocal -UpdateLocalFromModule
@@ -113,5 +114,4 @@ Function Start-PSToolkitSystemInitialize {
 		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'Installing Other Modules' -ForegroundColor Yellow
 		Install-Module CTXCloudApi, PSConfigFile, PSLauncher, XDHealthCheck -Scope AllUsers -Force -SkipPublisherCheck -AllowClobber
 	}
-	Start-PSProfile -ClearHost -AddFun -ShowModuleList
 } #end Function

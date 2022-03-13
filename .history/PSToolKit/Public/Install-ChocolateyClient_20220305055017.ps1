@@ -71,12 +71,14 @@ Function Install-ChocolateyClient {
     $web.DownloadFile('https://community.chocolatey.org/install.ps1', "$($env:TEMP)\choco-install.ps1")
     & "$($env:TEMP)\choco-install.ps1"
     Write-Color '[Installing] ', 'Chocolatey Client: ', 'Complete' -Color Cyan, Yellow, Green
-    choco config set --name="'useEnhancedExitCodes'" --value="'true'"
-    choco config set --name="'allowGlobalConfirmation'" --value="'true'"
-    choco config set --name="'removePackageInformationOnUninstall'" --value="'true'"
-    Write-Color '[Set] ', 'Chocolatey Client Config: ', 'Complete' -Color Cyan, Yellow, Green
   }
   else {
     Write-Color '[Installing] ', 'Chocolatey Client: ', 'Aleady Installed' -Color Cyan, Yellow, Green
   }
+
+  choco config set --name="'useEnhancedExitCodes'" --value="'true'"
+  choco config set --name="'allowGlobalConfirmation'" --value="'true'"
+  choco config set --name="'removePackageInformationOnUninstall'" --value="'true'"
+  Write-Color '[Installing] ', 'ChocolateyClient: ', 'Config set' -Color Cyan, Yellow, Green
+
 } #end Function

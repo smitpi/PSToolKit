@@ -88,7 +88,7 @@ Closes and set server manager not to open on start.
 Enable RDP to this device.
 
 .PARAMETER InstallVMWareTools
-Install VMware tools if device is a VM.
+Install VMware tools if device is a vm.
 
 .PARAMETER InstallAnsibleRemote
 Configure ps remoting for ansible.
@@ -396,6 +396,8 @@ Function Set-PSToolKitSystemSettings {
             Write-Color '[Installing] ', 'NFS Client: ', 'Complete' -Color Yellow, Cyan, Green
 
         } catch { Write-Warning "[Installing] NFS Client: Failed:`n $($_.Exception.Message)" }
+
+    
     } #end
 
 } #end Function
