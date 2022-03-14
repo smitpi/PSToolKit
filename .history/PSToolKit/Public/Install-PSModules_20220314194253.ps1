@@ -141,7 +141,7 @@ Function Install-PSModules {
 			Write-Color '[Installing] ', $($mod.Name), ' to Scope: ', $($Scope) -Color Yellow, Cyan, Green, Cyan
 			Install-Module -Name $mod.Name -Scope $Scope -AllowClobber -Force
 		} else {
-			Write-Color '[Installing] ', "$($PSModule.Name): ", "(Path: $($PSModule.Path))", 'Already Installed' -Color Yellow, Cyan, Green, DarkRed
+			Write-Color '[Installing] ',"$($PSModule.Name): ", 'Already Installed - ',  " (Path: $($PSModule.Path))" -Color Yellow, Cyan, DarkRed, Cyan
 		}
 	}
 }

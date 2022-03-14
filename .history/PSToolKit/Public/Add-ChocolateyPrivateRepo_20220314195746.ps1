@@ -89,10 +89,10 @@ Function Add-ChocolateyPrivateRepo {
   [System.Collections.ArrayList]$sources = @()
   choco source list --limit-output | ForEach-Object {
     [void]$sources.Add([pscustomobject]@{
-        Name     = $_.split('|')[0]
-        URL      = $_.split('|')[1]
-        Priority = $_.split('|')[5]
-      })
+      Name     = $_.split('|')[0]
+      URL      = $_.split('|')[1]
+      Priority = $_.split('|')[5]
+    })
   }
   $RepoExists = $RepoURL -in $sources.Url
   if (!$RepoExists) {
@@ -106,11 +106,13 @@ Function Add-ChocolateyPrivateRepo {
       Write-Color '[Installing]', 'Chocolatey Private Repo: ', 'Complete' -Color Yellow, Cyan, Green
       Write-Output $sources
       Write-Output '_______________________________________'
-    } catch { Write-Warning "[Installing] Chocolatey Private Repo Failed:`n $($_.Exception.Message)" }
+    }
+    catch { Write-Warning "[Installing] Chocolatey Private Repo Failed:`n $($_.Exception.Message)" }
 
-  } else {
-    Write-Color '[Installing]', "Chocolatey Private Repo $($RepoName): ", 'Already Exists' -Color Yellow, Cyan, DarkRed
   }
+  else {
+    Write-Color '[Installing]', "Chocolatey Private Repo $($RepoName): ", 'Already Exists' -Color Yellow, Cyan, DarkRed
+}
 
   if ($null -notlike $RepoApiKey) {
     choco apikey --source="$($RepoURL)" --api-key="$($RepoApiKey)" --limit-output | Out-Null
@@ -121,7 +123,7 @@ Function Add-ChocolateyPrivateRepo {
     choco source disable --name=chocolatey --limit-output | Out-Null
     if ($LASTEXITCODE -ne 0) {Write-Warning "Error disabling repo Code: $($LASTEXITCODE)"}
     else {Write-Color '[Disabling] ', 'Chocolatey Repo: ', 'Complete' -Color Yellow, Cyan, Green}
-  }
+     }
 
 
 } #end Function

@@ -84,44 +84,39 @@ Function Add-ChocolateyPrivateRepo {
   )
 
   [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-  if (!(Get-Command choco.exe -ErrorAction SilentlyContinue)) {Install-ChocolateyClient}
+  if (!(Get-Command choco.exe -ErrorAction SilentlyContinue)) {
+   Install-ChocolateyClient
+  }
 
   [System.Collections.ArrayList]$sources = @()
   choco source list --limit-output | ForEach-Object {
-    [void]$sources.Add([pscustomobject]@{
-        Name     = $_.split('|')[0]
-        URL      = $_.split('|')[1]
-        Priority = $_.split('|')[5]
-      })
+    $tmp = [pscustomobject]@{
+      Name     = $_.split('|')[0]
+      URL      = $_.split('|')[1]
+      Priority = $_.split('|')[5]
+    }
+    $sources.Add($tmp) | Out-Null
   }
   $RepoExists = $RepoURL -in $sources.Url
   if (!$RepoExists) {
     try {
       choco source add --name="$($RepoName)" --source=$($RepoURL) --priority=$($Priority) --limit-output
-      [void]$sources.add([pscustomobject]@{
+      $sources.add([pscustomobject]@{
           Name     = $($RepoName)
           URL      = $($RepoURL)
           Priority = $($Priority)
-        })
-      Write-Color '[Installing]', 'Chocolatey Private Repo: ', 'Complete' -Color Yellow, Cyan, Green
+        }) | Out-Null
+      Write-Color '[Install]', 'Private Repo: ', 'Complete' -Color Yellow, Cyan, Green
       Write-Output $sources
       Write-Output '_______________________________________'
-    } catch { Write-Warning "[Installing] Chocolatey Private Repo Failed:`n $($_.Exception.Message)" }
+    }
+    catch { Write-Warning "[Install] Private Repo: Failed:`n $($_.Exception.Message)" }
 
-  } else {
-    Write-Color '[Installing]', "Chocolatey Private Repo $($RepoName): ", 'Already Exists' -Color Yellow, Cyan, DarkRed
   }
+  else { Write-Warning "Private repo $RepoName already exists on $env:computername." }
 
-  if ($null -notlike $RepoApiKey) {
-    choco apikey --source="$($RepoURL)" --api-key="$($RepoApiKey)" --limit-output | Out-Null
-    if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing APIKey Code: $($LASTEXITCODE)"}
-    else {Write-Color '[Installing] ', 'RepoAPIKey: ', 'Complete' -Color Yellow, Cyan, Green}
-  }
-  if ($DisableCommunityRepo) {
-    choco source disable --name=chocolatey --limit-output | Out-Null
-    if ($LASTEXITCODE -ne 0) {Write-Warning "Error disabling repo Code: $($LASTEXITCODE)"}
-    else {Write-Color '[Disabling] ', 'Chocolatey Repo: ', 'Complete' -Color Yellow, Cyan, Green}
-  }
+  if ($null -notlike $RepoApiKey) { choco apikey --source="$($RepoURL)" --api-key="$($RepoApiKey)" --limit-output }
+  if ($DisableCommunityRepo) { choco source disable --name=chocolatey --limit-output }
 
 
 } #end Function
