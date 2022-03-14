@@ -105,6 +105,9 @@ Install MS Remote Admin Tools.
 .PARAMETER InstallMSUpdates
 Perform a Windows Update
 
+.PARAMETER InstallAnsibleRemote
+Configure ps remoting for ansible.
+
 .PARAMETER EnableNFSClient
 Install NFS Client.
 
@@ -205,7 +208,7 @@ Function Set-PSToolKitSystemSettings {
     )
 
     if ($RunAll) {
-        $ExecutionPolicy = $PSGallery = $IntranetZone = $IntranetZoneIPRange = $PSTrustedHosts = $FileExplorerSettings = $DisableIPV6 = $DisableFirewall = $DisableInternetExplorerESC = $DisableServerManager = $EnableRDP = $InstallPS7 = $InstallMSTerminal = $InstallVMWareTools = $InstallRSAT = $InstallMSUpdates = $EnableNFSClient = $PerformReboot = $true
+        $ExecutionPolicy = $PSGallery = $IntranetZone = $IntranetZoneIPRange = $PSTrustedHosts = $FileExplorerSettings = $DisableIPV6 = $DisableFirewall = $DisableInternetExplorerESC = $DisableServerManager = $EnableRDP = $InstallPS7 = $InstallMSTerminal = $InstallVMWareTools = $InstallRSAT  = $InstallMSUpdates = $EnableNFSClient = $PerformReboot = $true
     }
 
     if ($RunFrequent) {
@@ -544,21 +547,21 @@ Function Set-PSToolKitSystemSettings {
             } else {
                 if (-not(Get-Command choco.exe -ErrorAction SilentlyContinue)) { Install-ChocolateyClient}
                 'microsoft-windows-terminal', 'cascadia-code-nerd-font', 'cascadiacodepl' | ForEach-Object {
-                    $ChocoApp = choco search $_ --exact --local-only --limit-output
-                    $ChocoAppOnline = choco search $_ --exact --limit-output
-                    if ($null -eq $ChocoApp) {
-                        Write-Color '[Installing] ', $($_), ' from source ', 'chocolatey' -Color Yellow, Cyan, Green, Cyan
+                $ChocoApp = choco search $_ --exact --local-only --limit-output
+                $ChocoAppOnline = choco search $_ --exact --limit-output
+                if ($null -eq $ChocoApp) {
+                    Write-Color '[Installing] ', $($_), ' from source ', 'chocolatey' -Color Yellow, Cyan, Green, Cyan
+                    choco upgrade $($_) --accept-license --limit-output -y | Out-Null
+                    if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $($_) Code: $($LASTEXITCODE)"}
+                } else {
+                    Write-Color '[Installing] ', $($ChocoApp.split('|')[0]), " (Version: $($ChocoApp.split('|')[1]))", ' Already Installed' -Color Yellow, Cyan, Green, DarkRed
+                    if ($($ChocoApp.split('|')[1]) -lt $($ChocoAppOnline.split('|')[1])) {
+                        Write-Color '[Updating] ', $($_), " (Version:$($ChocoAppOnline.split('|')[1]))", ' from source ', 'chocolatey' -Color Yellow, Cyan, Yellow, Green, Cyan
                         choco upgrade $($_) --accept-license --limit-output -y | Out-Null
                         if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $($_) Code: $($LASTEXITCODE)"}
-                    } else {
-                        Write-Color '[Installing] ', $($ChocoApp.split('|')[0]), " (Version: $($ChocoApp.split('|')[1]))", ' Already Installed' -Color Yellow, Cyan, Green, DarkRed
-                        if ($($ChocoApp.split('|')[1]) -lt $($ChocoAppOnline.split('|')[1])) {
-                            Write-Color '[Updating] ', $($_), " (Version:$($ChocoAppOnline.split('|')[1]))", ' from source ', 'chocolatey' -Color Yellow, Cyan, Yellow, Green, Cyan
-                            choco upgrade $($_) --accept-license --limit-output -y | Out-Null
-                            if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $($_) Code: $($LASTEXITCODE)"}
-                        }
                     }
                 }
+            }
             }
             if (Get-Command wt.exe -ErrorAction SilentlyContinue) {
                 Write-Color '[Installing]', ' Microsoft Terminal: ', 'Complete' -Color Yellow, Cyan, Green

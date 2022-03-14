@@ -105,6 +105,9 @@ Install MS Remote Admin Tools.
 .PARAMETER InstallMSUpdates
 Perform a Windows Update
 
+.PARAMETER InstallAnsibleRemote
+Configure ps remoting for ansible.
+
 .PARAMETER EnableNFSClient
 Install NFS Client.
 
@@ -193,6 +196,10 @@ Function Set-PSToolKitSystemSettings {
         [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
                 if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
                 else { Throw 'Must be running an elevated prompt to use function' } })]
+        [switch]$InstallAnsibleRemote = $false,
+        [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+                if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+                else { Throw 'Must be running an elevated prompt to use function' } })]
         [switch]$InstallMSUpdates = $false,
         [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
                 if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
@@ -205,7 +212,7 @@ Function Set-PSToolKitSystemSettings {
     )
 
     if ($RunAll) {
-        $ExecutionPolicy = $PSGallery = $IntranetZone = $IntranetZoneIPRange = $PSTrustedHosts = $FileExplorerSettings = $DisableIPV6 = $DisableFirewall = $DisableInternetExplorerESC = $DisableServerManager = $EnableRDP = $InstallPS7 = $InstallMSTerminal = $InstallVMWareTools = $InstallRSAT = $InstallMSUpdates = $EnableNFSClient = $PerformReboot = $true
+        $ExecutionPolicy = $PSGallery = $IntranetZone = $IntranetZoneIPRange = $PSTrustedHosts = $FileExplorerSettings = $DisableIPV6 = $DisableFirewall = $DisableInternetExplorerESC = $DisableServerManager = $EnableRDP = $InstallPS7 = $InstallMSTerminal = $InstallVMWareTools = $InstallRSAT = $InstallAnsibleRemote = $InstallMSUpdates = $EnableNFSClient = $PerformReboot = $true
     }
 
     if ($RunFrequent) {
@@ -495,6 +502,17 @@ Function Set-PSToolKitSystemSettings {
 
     }
 
+    if ($InstallAnsibleRemote) {
+        try {
+            $web = New-Object System.Net.WebClient
+            $web.DownloadFile('https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1', "$($env:TEMP)\ConfigureRemotingForAnsible.ps1")
+            & "$($env:TEMP)\ConfigureRemotingForAnsible.ps1"
+
+            Write-Color '[Installing] ', 'Ansible Remote: ', 'Complete' -Color Yellow, Cyan, Green
+        } catch { Write-Warning "[Installing]Ansible Remote: Failed:`n $($_.Exception.Message)" }
+
+    } #end
+
     if ($EnableNFSClient) {
         try {
             if ((Get-WindowsOptionalFeature -Online -FeatureName *nfs*).state -contains 'Disabled') {
@@ -502,15 +520,15 @@ Function Set-PSToolKitSystemSettings {
                 if ($checkver -like '*server*') {
                     Enable-WindowsOptionalFeature -Online -FeatureName 'ServicesForNFS-ServerAndClient' -All | Out-Null
                 } else {
-                    Enable-WindowsOptionalFeature -Online -FeatureName 'ServicesForNFS-ClientOnly' -All | Out-Null
+                    Enable-WindowsOptionalFeature -Online -FeatureName 'ServicesForNFS-ClientOnly' -All  | Out-Null
                 }
-                Enable-WindowsOptionalFeature -Online -FeatureName 'ClientForNFS-Infrastructure' -All | Out-Null
-                Enable-WindowsOptionalFeature -Online -FeatureName 'NFS-Administration' -All | Out-Null
-                nfsadmin client stop | Out-Null
-                Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default' -Name 'AnonymousUID' -Type DWord -Value 0 | Out-Null
-                Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default' -Name 'AnonymousGID' -Type DWord -Value 0 | Out-Null
-                nfsadmin client start | Out-Null
-                nfsadmin client localhost config fileaccess=755 SecFlavors=+sys -krb5 -krb5i | Out-Null
+                Enable-WindowsOptionalFeature -Online -FeatureName 'ClientForNFS-Infrastructure' -All  | Out-Null
+                Enable-WindowsOptionalFeature -Online -FeatureName 'NFS-Administration' -All  | Out-Null
+                nfsadmin client stop  | Out-Null
+                Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default' -Name 'AnonymousUID' -Type DWord -Value 0  | Out-Null
+                Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default' -Name 'AnonymousGID' -Type DWord -Value 0  | Out-Null
+                nfsadmin client start  | Out-Null
+                nfsadmin client localhost config fileaccess=755 SecFlavors=+sys -krb5 -krb5i  | Out-Null
                 Write-Color 'Useage:', 'mount -o anon <server>:/<path> <drive letter>' -Color Cyan, DarkCyan
                 Write-Color '[Installing] ', 'NFS Client: ', 'Complete' -Color Yellow, Cyan, Green
             } else {
@@ -543,23 +561,21 @@ Function Set-PSToolKitSystemSettings {
                 Write-Color '[Installing]', ' Microsoft Terminal: ', 'Already Installed' -Color Yellow, Cyan, DarkRed
             } else {
                 if (-not(Get-Command choco.exe -ErrorAction SilentlyContinue)) { Install-ChocolateyClient}
-                'microsoft-windows-terminal', 'cascadia-code-nerd-font', 'cascadiacodepl' | ForEach-Object {
-                    $ChocoApp = choco search $_ --exact --local-only --limit-output
-                    $ChocoAppOnline = choco search $_ --exact --limit-output
+                    $ChocoApp = choco search 'microsoft-windows-terminal' --exact --local-only --limit-output
+                    $ChocoAppOnline = choco search 'microsoft-windows-terminal' --exact --limit-output
                     if ($null -eq $ChocoApp) {
-                        Write-Color '[Installing] ', $($_), ' from source ', 'chocolatey' -Color Yellow, Cyan, Green, Cyan
-                        choco upgrade $($_) --accept-license --limit-output -y | Out-Null
-                        if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $($_) Code: $($LASTEXITCODE)"}
+                        Write-Color '[Installing] ', $('microsoft-windows-terminal'), ' from source ', 'chocolatey' -Color Yellow, Cyan, Green, Cyan
+                        choco upgrade $('microsoft-windows-terminal') --accept-license --limit-output -y | Out-Null
+                        if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $('microsoft-windows-terminal') Code: $($LASTEXITCODE)"}
                     } else {
                         Write-Color '[Installing] ', $($ChocoApp.split('|')[0]), " (Version: $($ChocoApp.split('|')[1]))", ' Already Installed' -Color Yellow, Cyan, Green, DarkRed
                         if ($($ChocoApp.split('|')[1]) -lt $($ChocoAppOnline.split('|')[1])) {
-                            Write-Color '[Updating] ', $($_), " (Version:$($ChocoAppOnline.split('|')[1]))", ' from source ', 'chocolatey' -Color Yellow, Cyan, Yellow, Green, Cyan
-                            choco upgrade $($_) --accept-license --limit-output -y | Out-Null
-                            if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $($_) Code: $($LASTEXITCODE)"}
+                            Write-Color '[Updating] ', $('microsoft-windows-terminal'), " (Version:$($ChocoAppOnline.split('|')[1]))", ' from source ', 'chocolatey' -Color Yellow, Cyan, Yellow, Green, Cyan
+                            choco upgrade $('microsoft-windows-terminal') --accept-license --limit-output -y | Out-Null
+                            if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $('microsoft-windows-terminal') Code: $($LASTEXITCODE)"}
                         }
                     }
                 }
-            }
             if (Get-Command wt.exe -ErrorAction SilentlyContinue) {
                 Write-Color '[Installing]', ' Microsoft Terminal: ', 'Complete' -Color Yellow, Cyan, Green
 
@@ -569,6 +585,35 @@ Function Set-PSToolKitSystemSettings {
                 Invoke-WebRequest -Uri 'https://git.io/JMTRv' -OutFile $SetFile.FullName
                 Write-Color '[Installing]', ' Microsoft Terminal Settings: ', 'Complete' -Color Yellow, Cyan, Green
 
+                $ChocoApp = choco search 'cascadia-code-nerd-font' --exact --local-only --limit-output
+                    $ChocoAppOnline = choco search 'cascadia-code-nerd-font' --exact --limit-output
+                    if ($null -eq $ChocoApp) {
+                        Write-Color '[Installing] ', $('cascadia-code-nerd-font'), ' from source ', 'chocolatey' -Color Yellow, Cyan, Green, Cyan
+                        choco upgrade $('cascadia-code-nerd-font') --accept-license --limit-output -y | Out-Null
+                        if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $('cascadia-code-nerd-font') Code: $($LASTEXITCODE)"}
+                    } else {
+                        Write-Color '[Installing] ', $($ChocoApp.split('|')[0]), " (Version: $($ChocoApp.split('|')[1]))", ' Already Installed' -Color Yellow, Cyan, Green, DarkRed
+                        if ($($ChocoApp.split('|')[1]) -lt $($ChocoAppOnline.split('|')[1])) {
+                            Write-Color '[Updating] ', $('cascadia-code-nerd-font'), " (Version:$($ChocoAppOnline.split('|')[1]))", ' from source ', 'chocolatey' -Color Yellow, Cyan, Yellow, Green, Cyan
+                            choco upgrade $('cascadia-code-nerd-font') --accept-license --limit-output -y | Out-Null
+                            if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $('cascadia-code-nerd-font') Code: $($LASTEXITCODE)"}
+                        }
+                    }
+                    $ChocoApp = choco search 'cascadiacodepl' --exact --local-only --limit-output
+                    $ChocoAppOnline = choco search 'cascadiacodepl' --exact --limit-output
+                    if ($null -eq $ChocoApp) {
+                        Write-Color '[Installing] ', $('cascadiacodepl'), ' from source ', 'chocolatey' -Color Yellow, Cyan, Green, Cyan
+                        choco upgrade $('cascadiacodepl') --accept-license --limit-output -y | Out-Null
+                        if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $('cascadiacodepl') Code: $($LASTEXITCODE)"}
+                    } else {
+                        Write-Color '[Installing] ', $($ChocoApp.split('|')[0]), " (Version: $($ChocoApp.split('|')[1]))", ' Already Installed' -Color Yellow, Cyan, Green, DarkRed
+                        if ($($ChocoApp.split('|')[1]) -lt $($ChocoAppOnline.split('|')[1])) {
+                            Write-Color '[Updating] ', $('cascadiacodepl'), " (Version:$($ChocoAppOnline.split('|')[1]))", ' from source ', 'chocolatey' -Color Yellow, Cyan, Yellow, Green, Cyan
+                            choco upgrade $('cascadiacodepl') --accept-license --limit-output -y | Out-Null
+                            if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $('cascadiacodepl') Code: $($LASTEXITCODE)"}
+                        }
+                    }
+                Write-Color '[Installing]', ' Microsoft Terminal Fonts: ', 'Complete' -Color Yellow, Cyan, Green
             } else {
                 Write-Color '[Installing]', ' Microsoft Terminal: ', 'Failed' -Color Yellow, Cyan, DarkRed
             }

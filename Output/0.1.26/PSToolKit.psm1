@@ -5086,9 +5086,6 @@ Install MS Remote Admin Tools.
 .PARAMETER InstallMSUpdates
 Perform a Windows Update
 
-.PARAMETER InstallAnsibleRemote
-Configure ps remoting for ansible.
-
 .PARAMETER EnableNFSClient
 Install NFS Client.
 
@@ -5177,10 +5174,6 @@ Function Set-PSToolKitSystemSettings {
         [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
                 if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
                 else { Throw 'Must be running an elevated prompt to use function' } })]
-        [switch]$InstallAnsibleRemote = $false,
-        [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-                if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
-                else { Throw 'Must be running an elevated prompt to use function' } })]
         [switch]$InstallMSUpdates = $false,
         [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
                 if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
@@ -5193,7 +5186,7 @@ Function Set-PSToolKitSystemSettings {
     )
 
     if ($RunAll) {
-        $ExecutionPolicy = $PSGallery = $IntranetZone = $IntranetZoneIPRange = $PSTrustedHosts = $FileExplorerSettings = $DisableIPV6 = $DisableFirewall = $DisableInternetExplorerESC = $DisableServerManager = $EnableRDP = $InstallPS7 = $InstallMSTerminal = $InstallVMWareTools = $InstallRSAT = $InstallAnsibleRemote = $InstallMSUpdates = $EnableNFSClient = $PerformReboot = $true
+        $ExecutionPolicy = $PSGallery = $IntranetZone = $IntranetZoneIPRange = $PSTrustedHosts = $FileExplorerSettings = $DisableIPV6 = $DisableFirewall = $DisableInternetExplorerESC = $DisableServerManager = $EnableRDP = $InstallPS7 = $InstallMSTerminal = $InstallVMWareTools = $InstallRSAT = $InstallMSUpdates = $EnableNFSClient = $PerformReboot = $true
     }
 
     if ($RunFrequent) {
@@ -5483,33 +5476,22 @@ Function Set-PSToolKitSystemSettings {
 
     }
 
-    if ($InstallAnsibleRemote) {
-        try {
-            $web = New-Object System.Net.WebClient
-            $web.DownloadFile('https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1', "$($env:TEMP)\ConfigureRemotingForAnsible.ps1")
-            & "$($env:TEMP)\ConfigureRemotingForAnsible.ps1"
-
-            Write-Color '[Installing] ', 'Ansible Remote: ', 'Complete' -Color Yellow, Cyan, Green
-        } catch { Write-Warning "[Installing]Ansible Remote: Failed:`n $($_.Exception.Message)" }
-
-    } #end
-
     if ($EnableNFSClient) {
         try {
             if ((Get-WindowsOptionalFeature -Online -FeatureName *nfs*).state -contains 'Disabled') {
                 $checkver = Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object caption
                 if ($checkver -like '*server*') {
-                    Enable-WindowsOptionalFeature -Online -FeatureName 'ServicesForNFS-ServerAndClient' -All
+                    Enable-WindowsOptionalFeature -Online -FeatureName 'ServicesForNFS-ServerAndClient' -All | Out-Null
                 } else {
-                    Enable-WindowsOptionalFeature -Online -FeatureName 'ServicesForNFS-ClientOnly' -All
+                    Enable-WindowsOptionalFeature -Online -FeatureName 'ServicesForNFS-ClientOnly' -All | Out-Null
                 }
-                Enable-WindowsOptionalFeature -Online -FeatureName 'ClientForNFS-Infrastructure' -All
-                Enable-WindowsOptionalFeature -Online -FeatureName 'NFS-Administration' -All
-                nfsadmin client stop
-                Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default' -Name 'AnonymousUID' -Type DWord -Value 0
-                Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default' -Name 'AnonymousGID' -Type DWord -Value 0
-                nfsadmin client start
-                nfsadmin client localhost config fileaccess=755 SecFlavors=+sys -krb5 -krb5i
+                Enable-WindowsOptionalFeature -Online -FeatureName 'ClientForNFS-Infrastructure' -All | Out-Null
+                Enable-WindowsOptionalFeature -Online -FeatureName 'NFS-Administration' -All | Out-Null
+                nfsadmin client stop | Out-Null
+                Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default' -Name 'AnonymousUID' -Type DWord -Value 0 | Out-Null
+                Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default' -Name 'AnonymousGID' -Type DWord -Value 0 | Out-Null
+                nfsadmin client start | Out-Null
+                nfsadmin client localhost config fileaccess=755 SecFlavors=+sys -krb5 -krb5i | Out-Null
                 Write-Color 'Useage:', 'mount -o anon <server>:/<path> <drive letter>' -Color Cyan, DarkCyan
                 Write-Color '[Installing] ', 'NFS Client: ', 'Complete' -Color Yellow, Cyan, Green
             } else {
@@ -5538,41 +5520,28 @@ Function Set-PSToolKitSystemSettings {
 
     if ($InstallMSTerminal) {
         try {
-            $package = Get-AppxPackage -Name Microsoft.WindowsTerminal
-            if ($package.Status -like 'OK') {
+            if (Get-Command wt.exe -ErrorAction SilentlyContinue) {
                 Write-Color '[Installing]', ' Microsoft Terminal: ', 'Already Installed' -Color Yellow, Cyan, DarkRed
             } else {
-                if (Get-Command choco.exe -ErrorAction SilentlyContinue) {
-                    $ChocoApp = choco search 'microsoft-windows-terminal' --exact --local-only --limit-output
-                    $ChocoAppOnline = choco search 'microsoft-windows-terminal' --exact --limit-output
+                if (-not(Get-Command choco.exe -ErrorAction SilentlyContinue)) { Install-ChocolateyClient}
+                'microsoft-windows-terminal', 'cascadia-code-nerd-font', 'cascadiacodepl' | ForEach-Object {
+                    $ChocoApp = choco search $_ --exact --local-only --limit-output
+                    $ChocoAppOnline = choco search $_ --exact --limit-output
                     if ($null -eq $ChocoApp) {
-                        Write-Color '[Installing] ', $('microsoft-windows-terminal'), ' from source ', 'chocolatey' -Color Yellow, Cyan, Green, Cyan
-                        choco upgrade $('microsoft-windows-terminal') --accept-license --limit-output -y | Out-Null
-                        if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $('microsoft-windows-terminal') Code: $($LASTEXITCODE)"}
+                        Write-Color '[Installing] ', $($_), ' from source ', 'chocolatey' -Color Yellow, Cyan, Green, Cyan
+                        choco upgrade $($_) --accept-license --limit-output -y | Out-Null
+                        if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $($_) Code: $($LASTEXITCODE)"}
                     } else {
                         Write-Color '[Installing] ', $($ChocoApp.split('|')[0]), " (Version: $($ChocoApp.split('|')[1]))", ' Already Installed' -Color Yellow, Cyan, Green, DarkRed
                         if ($($ChocoApp.split('|')[1]) -lt $($ChocoAppOnline.split('|')[1])) {
-                            Write-Color '[Updating] ', $('microsoft-windows-terminal'), " (Version:$($ChocoAppOnline.split('|')[1]))", ' from source ', 'chocolatey' -Color Yellow, Cyan, Yellow, Green, Cyan
-                            choco upgrade $('microsoft-windows-terminal') --accept-license --limit-output -y | Out-Null
-                            if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $('microsoft-windows-terminal') Code: $($LASTEXITCODE)"}
+                            Write-Color '[Updating] ', $($_), " (Version:$($ChocoAppOnline.split('|')[1]))", ' from source ', 'chocolatey' -Color Yellow, Cyan, Yellow, Green, Cyan
+                            choco upgrade $($_) --accept-license --limit-output -y | Out-Null
+                            if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $($_) Code: $($LASTEXITCODE)"}
                         }
                     }
-                } else {
-                    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-                    $url = 'https://github.com/microsoft/terminal/releases/latest/'
-                    $request = [System.Net.WebRequest]::Create($url)
-                    $request.AllowAutoRedirect = $false
-                    $response = $request.GetResponse()
-                    $ver = ($([String]$response.GetResponseHeader('Location')).split('/'))[-1].Replace('v', '')
-                    $DownloadLink = $([String]$response.GetResponseHeader('Location')).Replace('tag', 'download') + "/Microsoft.WindowsTerminal_$($ver)_8wekyb3d8bbwe.msixbundle"
-                    $OutFile = [IO.Path]::Combine('c:\temp', 'MSTerminal-latest.msixbundle')
-                    if ((Test-Path -Path C:\Temp) -eq $false) { New-Item -Path C:\Temp -ItemType Directory -Force -ErrorAction SilentlyContinue }
-                    Invoke-WebRequest -Uri $DownloadLink -OutFile $OutFile
-                    Add-AppxPackage -Path $OutFile -ForceUpdateFromAnyVersion -InstallAllResources
                 }
             }
-            $package = Get-AppxPackage -Name Microsoft.WindowsTerminal
-            if ($package.Status -like 'OK') {
+            if (Get-Command wt.exe -ErrorAction SilentlyContinue) {
                 Write-Color '[Installing]', ' Microsoft Terminal: ', 'Complete' -Color Yellow, Cyan, Green
 
                 $settingsFile = [IO.Path]::Combine($env:LOCALAPPDATA, 'Packages', $((Get-AppxPackage -Name Microsoft.WindowsTerminal).PackageFamilyName), 'LocalState', 'Settings.json')
@@ -5581,22 +5550,6 @@ Function Set-PSToolKitSystemSettings {
                 Invoke-WebRequest -Uri 'https://git.io/JMTRv' -OutFile $SetFile.FullName
                 Write-Color '[Installing]', ' Microsoft Terminal Settings: ', 'Complete' -Color Yellow, Cyan, Green
 
-                [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-                $url = 'https://github.com/microsoft/cascadia-code/releases/latest/'
-                $request = [System.Net.WebRequest]::Create($url)
-                $request.AllowAutoRedirect = $false
-                $response = $request.GetResponse()
-                $ver = ($([String]$response.GetResponseHeader('Location')).split('/'))[-1].Replace('v', '')
-                $DownloadLink = $([String]$response.GetResponseHeader('Location')).Replace('tag', 'download') + "/CascadiaCode-$($ver).zip"
-                $OutFile = [IO.Path]::Combine('c:\temp', 'CascadiaCode.zip')
-                $ExpandDir = New-Item ([IO.Path]::Combine('c:\temp', 'CascadiaCode')) -ItemType Directory -Force
-                $ttf = [IO.Path]::Combine('c:\temp', 'CascadiaCode', 'ttf', 'CascadiaCodePL.ttf')
-                Invoke-WebRequest -Uri $DownloadLink -OutFile $OutFile -Verbose
-                Expand-Archive -Path $OutFile -OutputPath $ExpandDir -ShowProgress
-                $fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
-                $tt = Get-Item $ttf
-                $tt | ForEach-Object { $fonts.CopyHere($_.fullname) }
-                Write-Color '[Installing]', ' Microsoft Terminal Fonts: ', 'Complete' -Color Yellow, Cyan, Green
             } else {
                 Write-Color '[Installing]', ' Microsoft Terminal: ', 'Failed' -Color Yellow, Cyan, DarkRed
             }
