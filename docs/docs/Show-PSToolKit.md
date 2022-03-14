@@ -13,7 +13,7 @@ Show details of the commands in this module
 ## SYNTAX
 
 ```
-Show-PSToolKit [-ShowCommand] [-ExportToHTML] [<CommonParameters>]
+Show-PSToolKit [-ShowMetaData] [-ShowCommand] [-ExportToHTML] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,6 +27,21 @@ Show-PSToolKit
 ```
 
 ## PARAMETERS
+
+### -ShowMetaData
+Show only version, date and path.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -ShowCommand
 Use the show-command command

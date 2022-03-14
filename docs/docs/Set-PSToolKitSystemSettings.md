@@ -13,10 +13,11 @@ Set multiple settings on desktop or server
 ## SYNTAX
 
 ```
-Set-PSToolKitSystemSettings [-RunAll] [-ExecutionPolicy] [-PSGallery] [-ForcePSGallery] [-IntranetZone]
- [-IntranetZoneIPRange] [-PSTrustedHosts] [-FileExplorerSettings] [-DisableIPV6] [-DisableFirewall]
- [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-InstallVMWareTools]
- [-InstallAnsibleRemote] [-EnableNFSClient] [<CommonParameters>]
+Set-PSToolKitSystemSettings [-RunAll] [-RunFrequent] [-ExecutionPolicy] [-PSGallery] [-ForcePSGallery]
+ [-IntranetZone] [-IntranetZoneIPRange] [-PSTrustedHosts] [-FileExplorerSettings] [-DisableIPV6]
+ [-DisableFirewall] [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-InstallPS7]
+ [-InstallMSTerminal] [-InstallVMWareTools] [-InstallRSAT] [-InstallAnsibleRemote] [-InstallMSUpdates]
+ [-EnableNFSClient] [-PerformReboot] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,6 +34,21 @@ Set-PSToolKitSystemSettings -RunAll
 
 ### -RunAll
 Enable all the options in this function.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RunFrequent
+Enable selected frequently used options in this function.
 
 ```yaml
 Type: SwitchParameter
@@ -226,8 +242,53 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -InstallPS7
+Install PowerShell 7 with defaults.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -InstallMSTerminal
+Install MS Terminal.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -InstallVMWareTools
 Install VMware tools if device is a VM.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -InstallRSAT
+Install MS Remote Admin Tools.
 
 ```yaml
 Type: SwitchParameter
@@ -256,8 +317,38 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -InstallMSUpdates
+Perform a Windows Update
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -EnableNFSClient
 Install NFS Client.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PerformReboot
+Reboot after all the setting changes.
 
 ```yaml
 Type: SwitchParameter
