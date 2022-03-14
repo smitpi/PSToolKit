@@ -6660,12 +6660,12 @@ Function Start-PSToolkitSystemInitialize {
 	}
 	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'Needed Powershell modules' -ForegroundColor Yellow
 
-	"ImportExcel", "PSWriteHTML", "PSWriteColor", "PSScriptTools", "PoshRegistry", "Microsoft.PowerShell.Archive" | ForEach-Object {
+	'ImportExcel', 'PSWriteHTML', 'PSWriteColor', 'PSScriptTools', 'PoshRegistry', 'Microsoft.PowerShell.Archive' | ForEach-Object {
 		$module = $_
-		if (-not(get-module $module) -and -not(get-module $module -ListAvailable)) {
+		if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
 			try {
-			Write-Host '[Installing] Module: ' -NoNewline -ForegroundColor Cyan; Write-Host "$($module)" -ForegroundColor Yellow
-			Install-Module -Name $module -Scope AllUsers -AllowClobber -ErrorAction stop
+				Write-Host '[Installing] Module: ' -NoNewline -ForegroundColor Cyan; Write-Host "$($module)" -ForegroundColor Yellow
+				Install-Module -Name $module -Scope AllUsers -AllowClobber -ErrorAction stop
 			} catch {Write-Warning "Error installing module $($module): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 		}
 	}
@@ -6681,23 +6681,9 @@ Function Start-PSToolkitSystemInitialize {
 	Import-Module PSToolKit -Force
 	if ($LabSetup) {
 		New-PSProfile
-		Set-PSToolKitSystemSettings -ExecutionPolicy
-		Set-PSToolKitSystemSettings -PSGallery
-		Set-PSToolKitSystemSettings -IntranetZone
-		Set-PSToolKitSystemSettings -IntranetZoneIPRange
-		Set-PSToolKitSystemSettings -PSTrustedHosts
-		Set-PSToolKitSystemSettings -FileExplorerSettings
-		Set-PSToolKitSystemSettings -DisableIPV6
-		Set-PSToolKitSystemSettings -DisableFirewall
-		Set-PSToolKitSystemSettings -DisableInternetExplorerESC
-		Set-PSToolKitSystemSettings -DisableServerManager
-		Set-PSToolKitSystemSettings -EnableRDP
-		Set-PSToolKitSystemSettings -InstallVMWareTools
-		Set-PSToolKitSystemSettings -InstallAnsibleRemote
-		Set-PSToolKitSystemSettings -EnableNFSClient
+		Set-PSToolKitSystemSettings -RunAll
 		Update-PSToolKitConfigFiles -UpdateLocal -UpdateLocalFromModule
 		Install-PSModules -BaseModules
-		Install-PS7
 		Install-ChocolateyClient
 		Add-ChocolateyPrivateRepo -RepoName Proget -RepoURL http://progetserver.internal.lab/nuget/htpcza-choco/ -Priority 1
 		Install-ChocolateyApps -BaseApps
