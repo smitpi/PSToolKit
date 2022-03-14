@@ -176,17 +176,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://smitpi.github.io/PSToolKit/Install-CitrixCloudConnector/</loc>
-         <lastmod>2022-03-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://smitpi.github.io/PSToolKit/Install-MSWinget/</loc>
-         <lastmod>2022-03-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://smitpi.github.io/PSToolKit/Install-PS7/</loc>
          <lastmod>2022-03-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -196,22 +186,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://smitpi.github.io/PSToolKit/Install-PSWinUpdates/</loc>
-         <lastmod>2022-03-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://smitpi.github.io/PSToolKit/Install-RSAT/</loc>
-         <lastmod>2022-03-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://smitpi.github.io/PSToolKit/Install-SSHServer/</loc>
-         <lastmod>2022-03-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://smitpi.github.io/PSToolKit/Install-WindowsTerminal/</loc>
          <lastmod>2022-03-14</lastmod>
          <changefreq>daily</changefreq>
     </url>

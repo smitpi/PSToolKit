@@ -759,38 +759,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../Install-CitrixCloudConnector/" class="md-nav__link">
-        Install-CitrixCloudConnector
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../Install-MSWinget/" class="md-nav__link">
         Install-MSWinget
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Install-PS7/" class="md-nav__link">
-        Install-PS7
       </a>
     </li>
   
@@ -819,53 +789,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../Install-PSWinUpdates/" class="md-nav__link">
-        Install-PSWinUpdates
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Install-RSAT/" class="md-nav__link">
-        Install-RSAT
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../Install-SSHServer/" class="md-nav__link">
         Install-SSHServer
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Install-WindowsTerminal/" class="md-nav__link">
-        Install-WindowsTerminal
       </a>
     </li>
   
@@ -1179,6 +1104,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-runfrequent" class="md-nav__link">
+    -RunFrequent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-executionpolicy" class="md-nav__link">
     -ExecutionPolicy
   </a>
@@ -1263,8 +1195,29 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-installps7" class="md-nav__link">
+    -InstallPS7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-installmsterminal" class="md-nav__link">
+    -InstallMSTerminal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-installvmwaretools" class="md-nav__link">
     -InstallVMWareTools
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-installrsat" class="md-nav__link">
+    -InstallRSAT
   </a>
   
 </li>
@@ -1277,8 +1230,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-installmsupdates" class="md-nav__link">
+    -InstallMSUpdates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-enablenfsclient" class="md-nav__link">
     -EnableNFSClient
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-performreboot" class="md-nav__link">
+    -PerformReboot
   </a>
   
 </li>
@@ -1744,6 +1711,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-runfrequent" class="md-nav__link">
+    -RunFrequent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-executionpolicy" class="md-nav__link">
     -ExecutionPolicy
   </a>
@@ -1828,8 +1802,29 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-installps7" class="md-nav__link">
+    -InstallPS7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-installmsterminal" class="md-nav__link">
+    -InstallMSTerminal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-installvmwaretools" class="md-nav__link">
     -InstallVMWareTools
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-installrsat" class="md-nav__link">
+    -InstallRSAT
   </a>
   
 </li>
@@ -1842,8 +1837,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-installmsupdates" class="md-nav__link">
+    -InstallMSUpdates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-enablenfsclient" class="md-nav__link">
     -EnableNFSClient
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-performreboot" class="md-nav__link">
+    -PerformReboot
   </a>
   
 </li>
@@ -1910,10 +1919,11 @@
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Set multiple settings on desktop or server</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Set-PSToolKitSystemSettings [-RunAll] [-ExecutionPolicy] [-PSGallery] [-ForcePSGallery] [-IntranetZone]
- [-IntranetZoneIPRange] [-PSTrustedHosts] [-FileExplorerSettings] [-DisableIPV6] [-DisableFirewall]
- [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-InstallVMWareTools]
- [-InstallAnsibleRemote] [-EnableNFSClient] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Set-PSToolKitSystemSettings [-RunAll] [-RunFrequent] [-ExecutionPolicy] [-PSGallery] [-ForcePSGallery]
+ [-IntranetZone] [-IntranetZoneIPRange] [-PSTrustedHosts] [-FileExplorerSettings] [-DisableIPV6]
+ [-DisableFirewall] [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-InstallPS7]
+ [-InstallMSTerminal] [-InstallVMWareTools] [-InstallRSAT] [-InstallAnsibleRemote] [-InstallMSUpdates]
+ [-EnableNFSClient] [-PerformReboot] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Set multiple settings on desktop or server</p>
@@ -1924,6 +1934,18 @@
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-runall">-RunAll</h3>
 <p>Enable all the options in this function.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-runfrequent">-RunFrequent</h3>
+<p>Enable selected frequently used options in this function.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
@@ -2078,8 +2100,44 @@
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
+<h3 id="-installps7">-InstallPS7</h3>
+<p>Install PowerShell 7 with defaults.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-installmsterminal">-InstallMSTerminal</h3>
+<p>Install MS Terminal.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
 <h3 id="-installvmwaretools">-InstallVMWareTools</h3>
 <p>Install VMware tools if device is a VM.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-installrsat">-InstallRSAT</h3>
+<p>Install MS Remote Admin Tools.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
@@ -2102,8 +2160,32 @@
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
+<h3 id="-installmsupdates">-InstallMSUpdates</h3>
+<p>Perform a Windows Update</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
 <h3 id="-enablenfsclient">-EnableNFSClient</h3>
 <p>Install NFS Client.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-performreboot">-PerformReboot</h3>
+<p>Reboot after all the setting changes.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
