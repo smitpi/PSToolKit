@@ -16,8 +16,8 @@ Set multiple settings on desktop or server
 Set-PSToolKitSystemSettings [-RunAll] [-RunFrequent] [-ExecutionPolicy] [-PSGallery] [-ForcePSGallery]
  [-IntranetZone] [-IntranetZoneIPRange] [-PSTrustedHosts] [-FileExplorerSettings] [-DisableIPV6]
  [-DisableFirewall] [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-InstallPS7]
- [-InstallMSTerminal] [-InstallVMWareTools] [-InstallRSAT] [-InstallAnsibleRemote] [-InstallMSUpdates]
- [-EnableNFSClient] [-PerformReboot] [<CommonParameters>]
+ [-InstallMSTerminal] [-InstallVMWareTools] [-InstallRSAT] [-InstallMSUpdates] [-EnableNFSClient]
+ [-PerformReboot] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -289,21 +289,6 @@ Accept wildcard characters: False
 
 ### -InstallRSAT
 Install MS Remote Admin Tools.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -InstallAnsibleRemote
-Configure ps remoting for ansible.
 
 ```yaml
 Type: SwitchParameter

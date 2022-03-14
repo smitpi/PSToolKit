@@ -557,16 +557,14 @@ Function Set-PSToolKitSystemSettings {
                     }
                 }
             }
-            $settingsFile = ([IO.Path]::Combine($env:LOCALAPPDATA, 'Packages', '*Terminal*', 'LocalState', 'Settings.json'))
+            $settingsFile = [IO.Path]::Combine($env:LOCALAPPDATA, 'Packages', $((Get-AppxPackage -Name Microsoft.WindowsTerminal).PackageFamilyName), 'LocalState', 'Settings.json')
 
             if (Test-Path $settingsFile) {
                 $SetFile = Get-Item $settingsFile
                 Rename-Item -Path $SetFile.FullName -NewName "Settings-$(Get-Date -Format yyyy.MM.dd_HHMM).json" -Force | Out-Null
-            } else {
-                New-Item -Path ([IO.Path]::Combine($env:LOCALAPPDATA, 'Packages', '*Terminal*', 'LocalState')) -Name 'Settings.json' -ItemType File | Out-Null
-                $SetFile = Get-Item $settingsFile
             }
-            Invoke-WebRequest -Uri 'https://git.io/JMTRv' -OutFile $SetFile.FullName
+            else {New-Item $settingsFile -ItemType File -Force | Out-Null}
+            Invoke-WebRequest -Uri 'https://git.io/JMTRv' -OutFile $settingsFile
             Write-Color '[Installing]', ' Microsoft Terminal Settings: ', 'Complete' -Color Yellow, Cyan, Green
         } catch { Write-Warning "[Installing] Microsoft Terminal: Failed:`n $($_.Exception.Message)" }
     }
