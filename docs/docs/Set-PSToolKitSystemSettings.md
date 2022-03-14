@@ -227,7 +227,7 @@ Accept wildcard characters: False
 ```
 
 ### -InstallVMWareTools
-Install VMware tools if device is a vm.
+Install VMware tools if device is a VM.
 
 ```yaml
 Type: SwitchParameter
