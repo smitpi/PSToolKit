@@ -5288,7 +5288,9 @@ Function Set-PSToolKitSystemSettings {
             $DWord = 1
 
             try {
-                if (-not(Test-Path -Path $Key)) { New-Item -Path $parent -ItemType File -Name 'Ranges'}
+                if (-not(Test-Path -Path $Key)) {
+                    New-Item -Path $parent -ItemType File -Name 'Ranges' | Out-Null
+                }
                 if (-not(Test-Path -Path $keychild)) {
                     New-Item -Path $key -ItemType File -Name "Range$($index)" | Out-Null
                     Set-ItemProperty -Path $keychild -Name 'file' -Value $DWord | Out-Null
@@ -5435,7 +5437,7 @@ Function Set-PSToolKitSystemSettings {
     if ($InstallVMWareTools) {
         try {
             if ((Get-CimInstance -ClassName win32_bios).Manufacturer -like '*VMware*') {
-                Install-ChocolateyClient
+                if (-not(Get-Command choco.exe -ErrorAction SilentlyContinue)) { Install-ChocolateyClient}
                 Write-Color '[Installing] ', 'VMWare Tools', ' from source ', 'chocolatey' -Color Yellow, Cyan, green, Cyan
                 choco upgrade vmware-tools --accept-license --limit-output -y --source chocolatey | Out-Null
                 if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing vmware-tools Code: $($LASTEXITCODE)"}
@@ -5446,7 +5448,7 @@ Function Set-PSToolKitSystemSettings {
 
     if ($InstallRSAT) {
         try {
-            Install-ChocolateyClient
+            if (-not(Get-Command choco.exe -ErrorAction SilentlyContinue)) { Install-ChocolateyClient}
             Write-Color '[Installing] ', 'RSAT Tools', ' from source ', 'chocolatey' -Color Yellow, Cyan, green, Cyan -LinesAfter 1
 
             Write-Color '[Installing] ', 'RSAT Tools: ', 'Active Directory' -Color Yellow, Cyan, green
@@ -5492,7 +5494,6 @@ Function Set-PSToolKitSystemSettings {
                 Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default' -Name 'AnonymousGID' -Type DWord -Value 0 | Out-Null
                 nfsadmin client start | Out-Null
                 nfsadmin client localhost config fileaccess=755 SecFlavors=+sys -krb5 -krb5i | Out-Null
-                Write-Color 'Useage:', 'mount -o anon <server>:/<path> <drive letter>' -Color Cyan, DarkCyan
                 Write-Color '[Installing] ', 'NFS Client: ', 'Complete' -Color Yellow, Cyan, Green
             } else {
                 Write-Color '[Installing] ', 'NFS Client: ', 'Already Installed' -Color Yellow, Cyan, DarkRed
@@ -5520,39 +5521,28 @@ Function Set-PSToolKitSystemSettings {
 
     if ($InstallMSTerminal) {
         try {
-            if (Get-Command wt.exe -ErrorAction SilentlyContinue) {
-                Write-Color '[Installing]', ' Microsoft Terminal: ', 'Already Installed' -Color Yellow, Cyan, DarkRed
-            } else {
-                if (-not(Get-Command choco.exe -ErrorAction SilentlyContinue)) { Install-ChocolateyClient}
-                'microsoft-windows-terminal', 'cascadia-code-nerd-font', 'cascadiacodepl' | ForEach-Object {
-                    $ChocoApp = choco search $_ --exact --local-only --limit-output
-                    $ChocoAppOnline = choco search $_ --exact --limit-output
-                    if ($null -eq $ChocoApp) {
-                        Write-Color '[Installing] ', $($_), ' from source ', 'chocolatey' -Color Yellow, Cyan, Green, Cyan
+            if (-not(Get-Command choco.exe -ErrorAction SilentlyContinue)) { Install-ChocolateyClient}
+            'microsoft-windows-terminal', 'cascadia-code-nerd-font', 'cascadiacodepl' | ForEach-Object {
+                $ChocoApp = choco search $_ --exact --local-only --limit-output
+                $ChocoAppOnline = choco search $_ --exact --limit-output
+                if ($null -eq $ChocoApp) {
+                    Write-Color '[Installing] ', $($_), ' from source ', 'chocolatey' -Color Yellow, Cyan, Green, Cyan
+                    choco upgrade $($_) --accept-license --limit-output -y | Out-Null
+                    if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $($_) Code: $($LASTEXITCODE)"}
+                } else {
+                    Write-Color '[Installing] ', $($ChocoApp.split('|')[0]), " (Version: $($ChocoApp.split('|')[1]))", ' Already Installed' -Color Yellow, Cyan, Green, DarkRed
+                    if ($($ChocoApp.split('|')[1]) -lt $($ChocoAppOnline.split('|')[1])) {
+                        Write-Color '[Updating] ', $($_), " (Version:$($ChocoAppOnline.split('|')[1]))", ' from source ', 'chocolatey' -Color Yellow, Cyan, Yellow, Green, Cyan
                         choco upgrade $($_) --accept-license --limit-output -y | Out-Null
                         if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $($_) Code: $($LASTEXITCODE)"}
-                    } else {
-                        Write-Color '[Installing] ', $($ChocoApp.split('|')[0]), " (Version: $($ChocoApp.split('|')[1]))", ' Already Installed' -Color Yellow, Cyan, Green, DarkRed
-                        if ($($ChocoApp.split('|')[1]) -lt $($ChocoAppOnline.split('|')[1])) {
-                            Write-Color '[Updating] ', $($_), " (Version:$($ChocoAppOnline.split('|')[1]))", ' from source ', 'chocolatey' -Color Yellow, Cyan, Yellow, Green, Cyan
-                            choco upgrade $($_) --accept-license --limit-output -y | Out-Null
-                            if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $($_) Code: $($LASTEXITCODE)"}
-                        }
                     }
                 }
             }
-            if (Get-Command wt.exe -ErrorAction SilentlyContinue) {
-                Write-Color '[Installing]', ' Microsoft Terminal: ', 'Complete' -Color Yellow, Cyan, Green
-
-                $settingsFile = [IO.Path]::Combine($env:LOCALAPPDATA, 'Packages', $((Get-AppxPackage -Name Microsoft.WindowsTerminal).PackageFamilyName), 'LocalState', 'Settings.json')
-                $SetFile = Get-Item $settingsFile
-                if (Test-Path $SetFile.FullName) {Rename-Item -Path $SetFile.FullName -NewName "Settings-$(Get-Date -Format yyyy.MM.dd_HHMM).json" -Force | Out-Null}
-                Invoke-WebRequest -Uri 'https://git.io/JMTRv' -OutFile $SetFile.FullName
-                Write-Color '[Installing]', ' Microsoft Terminal Settings: ', 'Complete' -Color Yellow, Cyan, Green
-
-            } else {
-                Write-Color '[Installing]', ' Microsoft Terminal: ', 'Failed' -Color Yellow, Cyan, DarkRed
-            }
+            $settingsFile = [IO.Path]::Combine($env:LOCALAPPDATA, 'Packages', $((Get-AppxPackage -Name Microsoft.WindowsTerminal).PackageFamilyName), 'LocalState', 'Settings.json')
+            $SetFile = Get-Item $settingsFile
+            if (Test-Path $SetFile.FullName) {Rename-Item -Path $SetFile.FullName -NewName "Settings-$(Get-Date -Format yyyy.MM.dd_HHMM).json" -Force | Out-Null}
+            Invoke-WebRequest -Uri 'https://git.io/JMTRv' -OutFile $SetFile.FullName
+            Write-Color '[Installing]', ' Microsoft Terminal Settings: ', 'Complete' -Color Yellow, Cyan, Green
         } catch { Write-Warning "[Installing] Microsoft Terminal: Failed:`n $($_.Exception.Message)" }
     }
 
