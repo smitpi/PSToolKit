@@ -6,5 +6,8 @@
 		"latex",
 		"plaintext",
 		"powershell"
+	],
+	"cSpell.words": [
+		"ipdata"
 	]
 }

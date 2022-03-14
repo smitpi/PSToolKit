@@ -90,7 +90,7 @@ Function Install-ChocolateyApps {
 	try {
 		$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
 		$ConPath = Get-Item $ConfigPath
-	} catch { Throw "Config path does not exist`nRun Update-PSToolKitConfigFiles to install the config files" }
+	} catch { Write-Error 'Config path does not exist' }
 	if ($BaseApps) { $AppList = (Join-Path $ConPath.FullName -ChildPath BaseAppList.json) }
 	if ($ExtendedApps) { $AppList = (Join-Path $ConPath.FullName -ChildPath ExtendedAppsList.json) }
 	if ($OtherApps) { $AppList = Get-Item $JsonPath }
@@ -112,7 +112,7 @@ Function Install-ChocolateyApps {
 		} else {
 			Write-Color 'Using Installed App: ', $($ChocoApp.split('|')[0]), " -- (version: $($ChocoApp.split('|')[1]))" -Color Cyan, Green, Yellow
 			if ($($ChocoApp.split('|')[1]) -lt $($ChocoAppOnline.split('|')[1])) {
-				Write-Color 'Update Available: ', $($app.name), " (Version:$($ChocoAppOnline.split('|')[1]))", ' from source ', $app.Source -Color Cyan, green, Yellow, Cyan, Yellow
+				Write-Color 'Update Available: ', $($app.name),"New Version $($ChocoAppOnline.split('|')[1])", ' from source ', $app.Source -Color Cyan,green, Yellow, Cyan, Yellow
 				choco upgrade $($app.name) --accept-license --limit-output -y | Out-Null
 				if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $($app.name) Code: $($LASTEXITCODE)"}
 			}

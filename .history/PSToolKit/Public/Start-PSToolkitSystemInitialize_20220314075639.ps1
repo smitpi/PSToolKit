@@ -95,26 +95,13 @@ Function Start-PSToolkitSystemInitialize {
 	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-PSToolKit.ps1', "$($env:TEMP)\Update-PSToolKit.ps1")
 	$full = Get-Item "$($env:TEMP)\Update-PSToolKit.ps1"
 	Import-Module $full.FullName -Force
-	Update-PSToolKit -AllUsers
+	Update-PSToolKit -AllUsers -Verbose
 	Remove-Item $full.FullName
 
 	Import-Module PSToolKit -Force
 	if ($LabSetup) {
 		New-PSProfile
-		Set-PSToolKitSystemSettings -ExecutionPolicy
-		Set-PSToolKitSystemSettings -PSGallery
-		Set-PSToolKitSystemSettings -IntranetZone
-		Set-PSToolKitSystemSettings -IntranetZoneIPRange
-		Set-PSToolKitSystemSettings -PSTrustedHosts
-		Set-PSToolKitSystemSettings -FileExplorerSettings
-		Set-PSToolKitSystemSettings -DisableIPV6
-		Set-PSToolKitSystemSettings -DisableFirewall
-		Set-PSToolKitSystemSettings -DisableInternetExplorerESC
-		Set-PSToolKitSystemSettings -DisableServerManager
-		Set-PSToolKitSystemSettings -EnableRDP
-		Set-PSToolKitSystemSettings -InstallVMWareTools
-		Set-PSToolKitSystemSettings -InstallAnsibleRemote
-		Set-PSToolKitSystemSettings -EnableNFSClient
+		Set-PSToolKitSystemSettings -ExecutionPolicy -PSGallery -IntranetZone -IntranetZoneIPRange -PSTrustedHosts -FileExplorerSettings -DisableIPV6 -DisableFirewall -DisableInternetExplorerESC -DisableServerManager -EnableRDP -InstallVMWareTools -InstallAnsibleRemote -EnableNFSClient
 		Update-PSToolKitConfigFiles -UpdateLocal -UpdateLocalFromModule
 		Install-PSModules -BaseModules
 		Install-PS7

@@ -90,7 +90,7 @@ Function Install-ChocolateyApps {
 	try {
 		$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
 		$ConPath = Get-Item $ConfigPath
-	} catch { Throw "Config path does not exist`nRun Update-PSToolKitConfigFiles to install the config files" }
+	} catch { Write-Error 'Config path does not exist`n Run Update-PSToolKitConfigFiles to install the config files' }
 	if ($BaseApps) { $AppList = (Join-Path $ConPath.FullName -ChildPath BaseAppList.json) }
 	if ($ExtendedApps) { $AppList = (Join-Path $ConPath.FullName -ChildPath ExtendedAppsList.json) }
 	if ($OtherApps) { $AppList = Get-Item $JsonPath }

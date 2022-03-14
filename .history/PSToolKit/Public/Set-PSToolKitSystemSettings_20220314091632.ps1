@@ -157,8 +157,9 @@ Function Set-PSToolKitSystemSettings {
                 }
 
                 Write-Color '[Set]', 'PSGallery: ', 'Complete' -Color Yellow, Cyan, Green
+                else { Write-Color '[Set]', 'PSGallery: ', 'Already Set' -Color Yellow, Cyan, DarkRed }
             } catch { Write-Warning "[Set]PSGallery: Failed:`n $($_.Exception.Message)" }
-        } else {Write-Color '[Set]', 'PSGallery: ', 'Already Set' -Color Yellow, Cyan, DarkRed}
+        }
     }
 
     if ($ForcePSGallery) {
@@ -296,7 +297,7 @@ Function Set-PSToolKitSystemSettings {
                 } else {
                     Write-Color '[Disable]', 'ServerManager: ', 'Already Set' -Color Yellow, Cyan, DarkRed
                 }
-            } else { Write-Color '[Disable]', 'ServerManager: ', 'No Server OS Detected' -Color Yellow, Cyan, DarkRed }
+            } else { Write-Color '[Disable]', 'ServerManager: ', 'Not Server OS' -Color Yellow, Cyan, Magenta }
         } catch { Write-Warning "[Disable]ServerManager: Failed:`n $($_.Exception.Message)" }
 
     }
