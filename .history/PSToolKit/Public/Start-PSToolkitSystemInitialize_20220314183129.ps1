@@ -80,12 +80,12 @@ Function Start-PSToolkitSystemInitialize {
 	}
 	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'Needed Powershell modules' -ForegroundColor Yellow
 
-	'ImportExcel', 'PSWriteHTML', 'PSWriteColor', 'PSScriptTools', 'PoshRegistry', 'Microsoft.PowerShell.Archive' | ForEach-Object {
+	"ImportExcel", "PSWriteHTML", "PSWriteColor", "PSScriptTools", "PoshRegistry", "Microsoft.PowerShell.Archive" | ForEach-Object {
 		$module = $_
-		if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
+		if (-not(get-module $module) -and -not(get-module $module -ListAvailable)) {
 			try {
-				Write-Host '[Installing] Module: ' -NoNewline -ForegroundColor Cyan; Write-Host "$($module)" -ForegroundColor Yellow
-				Install-Module -Name $module -Scope AllUsers -AllowClobber -ErrorAction stop
+			Write-Host '[Installing] Module: ' -NoNewline -ForegroundColor Cyan; Write-Host "$($module)" -ForegroundColor Yellow
+			Install-Module -Name $module -Scope AllUsers -AllowClobber -ErrorAction stop
 			} catch {Write-Warning "Error installing module $($module): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 		}
 	}
