@@ -13,7 +13,8 @@ Search the online repo for software
 ## SYNTAX
 
 ```
-Find-ChocolateyApps [[-SearchString] <String>] [<CommonParameters>]
+Find-ChocolateyApps [-SearchString] <String> [[-SelectTop] <Int32>] [-GridView] [-TableView]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,16 +30,61 @@ Find-ChocolateyApps -SearchString Citrix
 ## PARAMETERS
 
 ### -SearchString
-What to search for
+What to search for.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 1
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SelectTop
+Limit the results
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: 25
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -GridView
+Open in grid view.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TableView
+Open in table view.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -50,6 +96,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.Object[]
 ## NOTES
 
 ## RELATED LINKS

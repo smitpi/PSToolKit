@@ -123,7 +123,7 @@ Accept wildcard characters: False
 ```
 
 ### -IntranetZoneIPRange
-Setup intranet zones for mapped drives from ip addresses.
+Setup intranet zones for mapped drives from IP addresses.
 
 ```yaml
 Type: SwitchParameter

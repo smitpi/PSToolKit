@@ -13,8 +13,8 @@ Extract Event logs of a server list, and create html / excel report
 ## SYNTAX
 
 ```
-Get-WinEventLogExtract [[-ComputerName] <String[]>] [[-Days] <Int32>] [[-ErrorLevel] <String>] [-FilterCitrix]
- [[-Export] <String>] [[-ReportPath] <DirectoryInfo>] [<CommonParameters>]
+Get-WinEventLogExtract [-ComputerName] <String[]> [-Days] <Int32> [-ErrorLevel] <String> [-Export <String>]
+ [-ReportPath <DirectoryInfo>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,10 +37,10 @@ Type: String[]
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 1
-Default value: @($($env:COMPUTERNAME))
-Accept pipeline input: False
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
@@ -52,9 +52,9 @@ Type: Int32
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 2
-Default value: 7
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -67,24 +67,9 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 3
-Default value: Warning
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FilterCitrix
-Only show Citrix errors
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -98,7 +83,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: Named
 Default value: Host
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -113,7 +98,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: Named
 Default value: C:\Temp
 Accept pipeline input: False
 Accept wildcard characters: False
