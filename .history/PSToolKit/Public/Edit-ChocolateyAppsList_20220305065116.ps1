@@ -90,7 +90,9 @@ Function Edit-ChocolateyAppsList {
 		[ValidateScript( { $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
 				else { Throw 'Must be running an elevated prompt.' } })]
-		[string]$AddApp,
+		[switch]$AddApp,
+		[Parameter(ParameterSetName = 'Add')]
+		[string]$ChocoID,
 		[Parameter(ParameterSetName = 'Add')]
 		[string]$ChocoSource = 'chocolatey'
 	)
@@ -120,7 +122,7 @@ Function Edit-ChocolateyAppsList {
 
 	if ($ShowCurrent) { listapps $installs.name }
 
-	if ($RemoveApp) {
+	if ($removeApp) {
 		do {
 			Clear-Host
 			ListApps $installs.name
@@ -134,12 +136,12 @@ Function Edit-ChocolateyAppsList {
 		ListApps $installs.name
 	}
 
-	if (-not($RemoveApp) -and -not($ShowCurrent	)) {
-		$AppSearch = choco search $($AddApp) --source=$($ChocoSource) --limit-output | ForEach-Object { ($_ -split '\|')[0] }
+	if ($AddApp) {
+		$AppSearch = choco search $($ChocoID) --source=$($ChocoSource) --limit-output | ForEach-Object { ($_ -split '\|')[0] }
 		if ($null -like $AppSearch) { Write-Error "Could not find the app in source: $($ChocoSource)" }
 		if ($AppSearch.count -eq 1) {
 			$tmp = New-Object -TypeName psobject -Property @{
-				'Name'   = $AddApp
+				'Name'   = $ChocoID
 				'Source' = $ChocoSource
 			}
 			$installs.Add($tmp)

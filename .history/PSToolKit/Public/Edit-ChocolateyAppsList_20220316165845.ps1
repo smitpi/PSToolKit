@@ -139,7 +139,7 @@ Function Edit-ChocolateyAppsList {
 		if ($null -like $AppSearch) { Write-Error "Could not find the app in source: $($ChocoSource)" }
 		if ($AppSearch.count -eq 1) {
 			$tmp = New-Object -TypeName psobject -Property @{
-				'Name'   = $AddApp
+				'Name'   = $ChocoID
 				'Source' = $ChocoSource
 			}
 			$installs.Add($tmp)

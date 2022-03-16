@@ -110,23 +110,16 @@ Function Start-PSToolkitSystemInitialize {
 	}
 	if ($InstallMyModules) {
 		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Cyan; Write-Host 'Installing Other Modules' -ForegroundColor Yellow
-		'CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck' | ForEach-Object {
+		"CTXCloudApi", "PSConfigFile", "PSLauncher", "XDHealthCheck" | ForEach-Object {
 			$module = $_
-			Write-Host '[Checking] Module: ' -NoNewline -ForegroundColor Cyan; Write-Host "$($module)" -ForegroundColor Yellow
 			if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
 				try {
 					Write-Host '[Installing] Module: ' -NoNewline -ForegroundColor Cyan; Write-Host "$($module)" -ForegroundColor Yellow
 					Install-Module -Name $module -Scope AllUsers -AllowClobber -ErrorAction stop
 				} catch {Write-Warning "Error installing module $($module): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
-			} else {
-				$LocalMod = Get-Module $module
-				if (-not($LocalMod)) {$LocalMod = Get-Module $module -ListAvailable}
-				if (($LocalMod[0].Version) -lt (Find-Module $module).Version) {
-					try {
-						Write-Host '[Upgrading] Module: ' -NoNewline -ForegroundColor Cyan; Write-Host "$($module)" -ForegroundColor Yellow
-						Update-Module -Name $module -Force -Scope AllUsers
-					} catch {Write-Warning "Error installing module $($module): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
-				}
+			}
+			else {
+				
 			}
 		}
 	}

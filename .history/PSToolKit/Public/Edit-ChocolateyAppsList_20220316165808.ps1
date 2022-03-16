@@ -120,7 +120,7 @@ Function Edit-ChocolateyAppsList {
 
 	if ($ShowCurrent) { listapps $installs.name }
 
-	if ($RemoveApp) {
+	if ($removeApp) {
 		do {
 			Clear-Host
 			ListApps $installs.name
@@ -134,12 +134,12 @@ Function Edit-ChocolateyAppsList {
 		ListApps $installs.name
 	}
 
-	if (-not($RemoveApp) -and -not($ShowCurrent	)) {
+	if (-not($removeApp) -and -not($ShowCurrent)) {
 		$AppSearch = choco search $($AddApp) --source=$($ChocoSource) --limit-output | ForEach-Object { ($_ -split '\|')[0] }
 		if ($null -like $AppSearch) { Write-Error "Could not find the app in source: $($ChocoSource)" }
 		if ($AppSearch.count -eq 1) {
 			$tmp = New-Object -TypeName psobject -Property @{
-				'Name'   = $AddApp
+				'Name'   = $ChocoID
 				'Source' = $ChocoSource
 			}
 			$installs.Add($tmp)
