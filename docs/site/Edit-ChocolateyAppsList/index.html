@@ -447,13 +447,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#-chocoid" class="md-nav__link">
-    -ChocoID
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#-chocosource" class="md-nav__link">
     -ChocoSource
   </a>
@@ -1674,13 +1667,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#-chocoid" class="md-nav__link">
-    -ChocoID
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#-chocosource" class="md-nav__link">
     -ChocoSource
   </a>
@@ -1756,8 +1742,7 @@
 <div class="highlight"><pre><span></span><code>Edit-ChocolateyAppsList -List &lt;String&gt; [-RemoveApp] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="add">Add</h3>
-<div class="highlight"><pre><span></span><code>Edit-ChocolateyAppsList -List &lt;String&gt; [-AddApp] [-ChocoID &lt;String&gt;] [-ChocoSource &lt;String&gt;]
- [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Edit-ChocolateyAppsList -List &lt;String&gt; [-AddApp &lt;String&gt;] [-ChocoSource &lt;String&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Add or remove apps from the json file used in Install-ChocolateyApps</p>
@@ -1804,18 +1789,6 @@
 </code></pre></div>
 <h3 id="-addapp">-AddApp</h3>
 <p>add an app to the list.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
-
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-</code></pre></div>
-<h3 id="-chocoid">-ChocoID</h3>
-<p>Name or ID of the app.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>

@@ -24,8 +24,7 @@ Edit-ChocolateyAppsList -List <String> [-RemoveApp] [<CommonParameters>]
 
 ### Add
 ```
-Edit-ChocolateyAppsList -List <String> [-AddApp] [-ChocoID <String>] [-ChocoSource <String>]
- [<CommonParameters>]
+Edit-ChocolateyAppsList -List <String> [-AddApp <String>] [-ChocoSource <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -87,21 +86,6 @@ Accept wildcard characters: False
 
 ### -AddApp
 add an app to the list.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Add
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ChocoID
-Name or ID of the app.
 
 ```yaml
 Type: String
