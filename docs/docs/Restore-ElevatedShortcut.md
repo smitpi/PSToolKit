@@ -13,7 +13,7 @@ Restore the RunAss shortcuts, from a zip file
 ## SYNTAX
 
 ```
-Restore-ElevatedShortcut [-ZipFilePath <FileInfo>] [-ForceReinstall] [<CommonParameters>]
+Restore-ElevatedShortcut [-ZipFilePath] <FileInfo> [-ForceReinstall] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,8 +36,8 @@ Type: FileInfo
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: Named
+Required: True
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

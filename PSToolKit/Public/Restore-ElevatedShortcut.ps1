@@ -59,26 +59,28 @@ Restore-ElevatedShortcut -ZipFilePath c:\temp\bck.zip -ForceReinstall
 
 #>
 Function Restore-ElevatedShortcut {
-    [Cmdletbinding(DefaultParameterSetName = 'Set1'	, HelpURI = 'https://smitpi.github.io/PSToolKit/Restore-ElevatedShortcut')]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Restore-ElevatedShortcut')]
     PARAM(
         [Parameter(Mandatory = $true)]
-        [Parameter(ParameterSetName = 'Set1')]
+        [ValidateScript( { $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+                if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+                else { Throw 'Must be running an elevated prompt.' } })]
         [ValidateScript( { (Test-Path $_) -and ((Get-Item $_).Extension -eq '.zip') })]
         [System.IO.FileInfo]$ZipFilePath,
         [switch]$ForceReinstall = $false
 				)
+    try {
+        $ZipFile = Get-Item $ZipFilePath
+        Pscx\Expand-Archive -Path $ZipFile.FullName -OutputPath $env:TMP -Force
+    } catch {Write-Warning "Error: `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 
-    if ((Test-Path -Path C:\Temp) -eq $false) { New-Item -Path C:\Temp -ItemType Directory -Force -ErrorAction SilentlyContinue }
-
-    Expand-Archive $ZipFilePath -DestinationPath C:\Temp -Force
-    $files = Get-ChildItem C:\temp\Tasks\*.xml
+    $files = Get-ChildItem $env:TMP\Tasks\*.xml
     foreach ($file in $files) {
         $checktask = $null
         try {
             if ($ForceReinstall) { Get-ScheduledTask -TaskName "$($file.BaseName)" -TaskPath '\RunAs\' | Unregister-ScheduledTask -Confirm:$false }
             $checktask = Get-ScheduledTaskInfo "\RunAs\$($file.BaseName)" -ErrorAction SilentlyContinue
-        }
-        catch { $checktask = $null }
+        } catch { $checktask = $null }
         if ( $null -eq $checktask) {
             try {
                 Write-Host 'Task:' -ForegroundColor Cyan -NoNewline
@@ -87,11 +89,10 @@ Function Restore-ElevatedShortcut {
                 $sid = (New-Object System.Security.Principal.NTAccount($env:USERNAME)).Translate([System.Security.Principal.SecurityIdentifier]).value
                 $importfile.Task.Principals.Principal.UserId = $sid
                 Register-ScheduledTask -Xml ($importfile.OuterXml | Out-String) -TaskName "\RunAs\$($file.BaseName)" -ErrorAction SilentlyContinue
-            }
-            Catch { Write-Warning "$($_.BaseName) - wrong domain" }
+            } Catch { Write-Warning "$($_.BaseName) - wrong domain" }
             finally { Write-Warning "$($_.BaseName)" }
         }
     }
-    Remove-Item -Path C:\Temp\Tasks -Recurse
-
+    Remove-Item -Path $env:TMP\Tasks\*.xml -Recurse
+    Remove-Item -Path $env:TMP\Tasks
 } #end Function

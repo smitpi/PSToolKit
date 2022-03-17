@@ -386,7 +386,6 @@ Function Set-PSProjectFiles {
 		mkdocs
 	} else {
 		exthelp
-		ScriptAnalyzer
 		combine
 		mkdocs
 	}
