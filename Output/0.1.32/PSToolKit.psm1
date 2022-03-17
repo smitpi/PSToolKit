@@ -5,7 +5,7 @@
 ############################################
 # source: Add-ChocolateyPrivateRepo.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -103,7 +103,7 @@ Export-ModuleMember -Function Add-ChocolateyPrivateRepo
 ############################################
 # source: Backup-ElevatedShortcut.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -148,7 +148,7 @@ Export-ModuleMember -Function Backup-ElevatedShortcut
 ############################################
 # source: Backup-PowerShellProfile.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -203,7 +203,7 @@ Export-ModuleMember -Function Backup-PowerShellProfile
 ############################################
 # source: Connect-VMWareCluster.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -255,7 +255,7 @@ Export-ModuleMember -Function Connect-VMWareCluster
 ############################################
 # source: Edit-ChocolateyAppsList.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -392,7 +392,7 @@ Export-ModuleMember -Function Edit-ChocolateyAppsList
 ############################################
 # source: Edit-HostsFile.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -524,7 +524,7 @@ Export-ModuleMember -Function Edit-HostsFile
 ############################################
 # source: Edit-PSModulesLists.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -635,7 +635,7 @@ Export-ModuleMember -Function Edit-PSModulesLists
 ############################################
 # source: Enable-RemoteHostPSRemoting.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -694,7 +694,7 @@ Export-ModuleMember -Function Enable-RemoteHostPSRemoting
 ############################################
 # source: Export-CitrixPolicySettings.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -781,7 +781,7 @@ Export-ModuleMember -Function Export-CitrixPolicySettings
 ############################################
 # source: Export-ESXTemplates.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -830,7 +830,7 @@ Export-ModuleMember -Function Export-ESXTemplates
 ############################################
 # source: Export-PSGallery.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -906,7 +906,7 @@ Export-ModuleMember -Function Export-PSGallery
 ############################################
 # source: Find-ChocolateyApps.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -988,7 +988,7 @@ Export-ModuleMember -Function Find-ChocolateyApps
 ############################################
 # source: Find-OnlineModule.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1049,7 +1049,7 @@ Export-ModuleMember -Function Find-OnlineModule
 ############################################
 # source: Find-OnlineScript.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1109,7 +1109,7 @@ Export-ModuleMember -Function Find-OnlineScript
 ############################################
 # source: Find-PSScripts.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1285,7 +1285,7 @@ Export-ModuleMember -Function Find-PSScripts
 ############################################
 # source: Format-AllObjectsInAListView.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1324,7 +1324,7 @@ Export-ModuleMember -Function Format-AllObjectsInAListView
 ############################################
 # source: Get-AllUsersInGroup.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1397,7 +1397,7 @@ Export-ModuleMember -Function Get-AllUsersInGroup
 ############################################
 # source: Get-CitrixClientVersions.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1493,7 +1493,7 @@ Export-ModuleMember -Function Get-CitrixClientVersions
 ############################################
 # source: Get-CommandFiltered.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1553,7 +1553,7 @@ Export-ModuleMember -Function Get-CommandFiltered
 ############################################
 # source: Get-DeviceUptime.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1617,7 +1617,7 @@ Export-ModuleMember -Function Get-DeviceUptime
 ############################################
 # source: Get-FolderSize.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1784,7 +1784,7 @@ Export-ModuleMember -Function Get-FolderSize
 ############################################
 # source: Get-FQDN.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1830,7 +1830,7 @@ Export-ModuleMember -Function Get-FQDN
 ############################################
 # source: Get-FullADUserDetail.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1882,7 +1882,7 @@ Export-ModuleMember -Function Get-FullADUserDetail
 ############################################
 # source: Get-MyPSGalleryStats.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1911,6 +1911,8 @@ Function Get-MyPSGalleryStats {
 
     [System.Collections.ArrayList]$newObject = @()
     $ResultModule = Find-Module CTXCloudApi, PSConfigFile, PSLauncher, XDHealthCheck -Repository PSGallery
+    $TotalDownloads = 0
+    $ResultModule.AdditionalMetadata.downloadCount | ForEach-Object {$TotalDownloads = $TotalDownloads + $_}
     foreach ($mod in $ResultModule) {
         [void]$newObject.Add([PSCustomObject]@{
                 Sum = [PSCustomObject]@{
@@ -1921,13 +1923,16 @@ Function Get-MyPSGalleryStats {
                     VersionDownload = $mod.AdditionalMetadata.versionDownloadCount
                 }
                 All = $mod
+                TotalDownloads = $TotalDownloads
             })
     }
+
     if ($Display -like 'GridView') {$newObject.Sum | ConvertTo-WPFGrid}
-    if ($Display -like 'TableView') {$newObject.Sum | Format-Table -AutoSize}
+    if ($Display -like 'TableView') {
+        Write-Color 'Total Downloads: ', "$($newObject.TotalDownloads[0])" -Color Cyan,yellow -LinesBefore 1
+        $newObject.Sum | Sort-Object -Property VersionDownload -Descending | Format-Table -AutoSize
+    }
     if ($Display -like 'Host') {$newObject}
-
-
 } #end Function
 
 
@@ -1939,7 +1944,7 @@ Export-ModuleMember -Function Get-MyPSGalleryStats
 ############################################
 # source: Get-ProcessPerformance.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2001,7 +2006,7 @@ Export-ModuleMember -Function Get-ProcessPerformance
 ############################################
 # source: Get-PropertiesToCSV.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2040,7 +2045,7 @@ Export-ModuleMember -Function Get-PropertiesToCSV
 ############################################
 # source: Get-SoftwareAudit.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2117,7 +2122,7 @@ Export-ModuleMember -Function Get-SoftwareAudit
 ############################################
 # source: Get-SystemInfo.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2425,7 +2430,7 @@ Export-ModuleMember -Function Get-SystemInfo
 ############################################
 # source: Get-WinEventLogExtract.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2517,15 +2522,13 @@ Function Get-WinEventLogExtract {
         }
 
         if ($Export -eq 'Excel') {
-            $AllEvents | ForEach-Object {
             $path = Get-Item $ReportPath
-            $ExcelPath = Join-Path $Path.FullName -ChildPath "$($_.host)-WinEvents-$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx"
-                $_.Events | Export-Excel -Path $ExcelPath -WorksheetName EventsRawData -AutoSize -AutoFilter -Title "$($_.host)" -TitleBold -TitleSize 20 -FreezePane 3 -IncludePivotTable -TitleFillPattern DarkGrid -PivotTableName 'Events Summery' -PivotRows MachineName, LevelDisplayName, ProviderName -PivotData @{'Message' = 'count' } -NoTotalsInPivot -FreezeTopRow -TableStyle Dark8 -BoldTopRow -ConditionalText $(
-                    New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' -PatternType Gray125
-                    New-ConditionalText -Text 'Error' -ConditionalTextColor white -BackgroundColor red -Range 'E:E' -PatternType Gray125
-                ) -Show
+            $ExcelPath = Join-Path $Path.FullName -ChildPath "WinEvents-$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx"
+            $AllEvents.Events | Export-Excel -Path $ExcelPath -WorksheetName EventsRawData -AutoSize -AutoFilter -Title "All Events" -TitleBold -TitleSize 20 -FreezePane 3 -IncludePivotTable -TitleFillPattern DarkGrid -PivotTableName 'Events Summery' -PivotRows MachineName, LevelDisplayName, ProviderName -PivotData @{'Message' = 'count' } -NoTotalsInPivot -FreezeTopRow -TableStyle Dark8 -BoldTopRow -ConditionalText $(
+                New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' -PatternType Gray125
+                New-ConditionalText -Text 'Error' -ConditionalTextColor white -BackgroundColor red -Range 'E:E' -PatternType Gray125
+            ) -Show
             }
-        }
 
         if ($Export -eq 'HTML') {
             $SectionSettings = @{
@@ -2586,7 +2589,7 @@ Export-ModuleMember -Function Get-WinEventLogExtract
 ############################################
 # source: Import-CitrixSiteConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2630,7 +2633,7 @@ Export-ModuleMember -Function Import-CitrixSiteConfigFile
 ############################################
 # source: Import-XamlConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2760,7 +2763,7 @@ Export-ModuleMember -Function Import-XamlConfigFile
 ############################################
 # source: Install-ChocolateyApps.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2852,7 +2855,7 @@ Export-ModuleMember -Function Install-ChocolateyApps
 ############################################
 # source: Install-ChocolateyClient.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2905,7 +2908,7 @@ Export-ModuleMember -Function Install-ChocolateyClient
 ############################################
 # source: Install-ChocolateyServer.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3027,7 +3030,7 @@ Export-ModuleMember -Function Install-ChocolateyServer
 ############################################
 # source: Install-MSWinget.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3114,7 +3117,7 @@ Export-ModuleMember -Function Install-MSWinget
 ############################################
 # source: Install-PSModules.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3229,85 +3232,11 @@ Function Install-PSModules {
 Export-ModuleMember -Function Install-PSModules
 #endregion
  
-#region Install-SSHServer.ps1
-############################################
-# source: Install-SSHServer.ps1
-# Module: PSToolKit
-# version: 0.1.30
-# Author: Pierre Smit
-# Company: HTPCZA Tech
-#############################################
- 
-<#
-.SYNOPSIS
-Install and setup OpenSSH on device.
-
-.DESCRIPTION
-Install and setup OpenSSH on device.
-
-.PARAMETER AddPowerShellSubsystem
-Add the ps subsystem to the ssh config file.
-
-.EXAMPLE
- Install-SSHServer
-
-#>
-Function Install-SSHServer {
-	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Install-SSHServer')]
-	PARAM(
-		[switch]$AddPowerShellSubsystem = $false
-	)
-	
-	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-	if (!(Get-Command choco.exe -ErrorAction SilentlyContinue)) {
-		$url = 'https://github.com/PowerShell/Win32-OpenSSH/releases/latest/'
-		$request = [System.Net.WebRequest]::Create($url)
-		$request.AllowAutoRedirect = $false
-		$response = $request.GetResponse()
-		$DownloadLink = $([String]$response.GetResponseHeader('Location')).Replace('tag', 'download') + '/OpenSSH-Win64.zip'
-		$OutFile = $env:TEMP + '\OpenSSH-Win64.zip'
-		Invoke-WebRequest -Uri $DownloadLink -OutFile $OutFile -Verbose
-		if (Test-Path 'C:\Program Files\OpenSSH-Win64') { Rename-Item -Path 'C:\Program Files\OpenSSH-Win64' -NewName OpenSSH-Win64-old -Force }
-		New-Item 'C:\Program Files\OpenSSH-Win64' -ItemType Directory -Force
-		Expand-Archive -Path $OutFile -OutputPath 'C:\Program Files\OpenSSH-Win64' -ShowProgress -FlattenPaths
-	} else {
-		Get-ChocoPackage -Name openssh -Exact | Install-ChocoPackage -Force
-	}
-	Import-Module 'C:\Program Files\OpenSSH-Win64\install-sshd.ps1'
-	New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
-	'sshd', 'ssh-agent' | Set-Service -StartupType Automatic -Status Running -Verbose
-
-	$SSHConf = Get-Content "$env:ProgramData\ssh\sshd_config"
-	$NewSSHConf = $SSHConf -replace ('#PasswordAuthentication yes', 'PasswordAuthentication yes')
-	$NewSSHConf = $NewSSHConf -replace ('#PubkeyAuthentication yes', 'PubkeyAuthentication yes')
-	$NewSSHConf | Set-Content "$env:ProgramData\ssh\sshd_config" -Force
-	'sshd', 'ssh-agent' | Get-Service | Stop-Service
-	'sshd', 'ssh-agent' | Get-Service | Start-Service -Verbose
-
-	if ($AddPowerShellSubsystem) {
-		$PowerShellPath = (Get-Command -Name pwsh.exe).Path
-		$fso = New-Object -ComObject Scripting.FileSystemObject
-		$NewSSHConf += ' '
-		$NewSSHConf += '# Required (Windows): Define the PowerShell subsystem'
-		$NewSSHConf += 'Subsystem powershell ' + $fso.GetFile($PowerShellPath).ShortPath + ' -sshs -NoLogo'
-		$NewSSHConf | Set-Content "$env:ProgramData\ssh\sshd_config" -Force
-
-		'sshd', 'ssh-agent' | Get-Service | Stop-Service
-		'sshd', 'ssh-agent' | Get-Service | Start-Service -Verbose
-
-	}
-
-} #end Function
-
- 
-Export-ModuleMember -Function Install-SSHServer
-#endregion
- 
 #region New-CitrixSiteConfigFile.ps1
 ############################################
 # source: New-CitrixSiteConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3449,7 +3378,7 @@ Export-ModuleMember -Function New-CitrixSiteConfigFile
 ############################################
 # source: New-ElevatedShortcut.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3527,7 +3456,7 @@ Export-ModuleMember -Function New-ElevatedShortcut
 ############################################
 # source: New-GodModeFolder.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3561,7 +3490,7 @@ Export-ModuleMember -Function New-GodModeFolder
 ############################################
 # source: New-PSModule.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3655,7 +3584,7 @@ Export-ModuleMember -Function New-PSModule
 ############################################
 # source: New-PSProfile.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3736,7 +3665,7 @@ Export-ModuleMember -Function New-PSProfile
 ############################################
 # source: New-PSScript.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3875,7 +3804,7 @@ Export-ModuleMember -Function New-PSScript
 ############################################
 # source: New-SuggestedInfraNames.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3964,7 +3893,7 @@ Export-ModuleMember -Function New-SuggestedInfraNames
 ############################################
 # source: Remove-CIMUserProfiles.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4008,7 +3937,7 @@ Export-ModuleMember -Function Remove-CIMUserProfiles
 ############################################
 # source: Remove-FaultyProfileList.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4083,7 +4012,7 @@ Export-ModuleMember -Function Remove-FaultyProfileList
 ############################################
 # source: Remove-HiddenDevices.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4478,7 +4407,7 @@ Export-ModuleMember -Function Remove-HiddenDevices
 ############################################
 # source: Remove-UserProfile.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4554,7 +4483,7 @@ Export-ModuleMember -Function Remove-UserProfile
 ############################################
 # source: Restore-ElevatedShortcut.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4622,7 +4551,7 @@ Export-ModuleMember -Function Restore-ElevatedShortcut
 ############################################
 # source: Search-Scripts.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4681,7 +4610,7 @@ Export-ModuleMember -Function Search-Scripts
 ############################################
 # source: Set-PSProjectFiles.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5050,7 +4979,7 @@ Export-ModuleMember -Function Set-PSProjectFiles
 ############################################
 # source: Set-PSToolKitSystemSettings.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5118,6 +5047,9 @@ Install MS Remote Admin Tools.
 
 .PARAMETER InstallMSUpdates
 Perform a Windows Update
+
+.PARAMETER InstallSSHServer
+Install openssh server and client.
 
 .PARAMETER EnableNFSClient
 Install NFS Client.
@@ -5211,6 +5143,10 @@ Function Set-PSToolKitSystemSettings {
         [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
                 if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
                 else { Throw 'Must be running an elevated prompt to use function' } })]
+        [switch]$InstallSSHServer = $false,
+        [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+                if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+                else { Throw 'Must be running an elevated prompt to use function' } })]
         [switch]$EnableNFSClient = $false,
         [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
                 if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
@@ -5219,7 +5155,7 @@ Function Set-PSToolKitSystemSettings {
     )
 
     if ($RunAll) {
-        $ExecutionPolicy = $PSGallery = $IntranetZone = $IntranetZoneIPRange = $PSTrustedHosts = $FileExplorerSettings = $DisableIPV6 = $DisableFirewall = $DisableInternetExplorerESC = $DisableServerManager = $EnableRDP = $InstallPS7 = $InstallMSTerminal = $InstallVMWareTools = $InstallRSAT = $InstallMSUpdates = $EnableNFSClient = $PerformReboot = $true
+        $ExecutionPolicy = $PSGallery = $IntranetZone = $IntranetZoneIPRange = $PSTrustedHosts = $FileExplorerSettings = $DisableIPV6 = $DisableFirewall = $DisableInternetExplorerESC = $DisableServerManager = $EnableRDP = $InstallPS7 = $InstallMSTerminal = $InstallVMWareTools = $InstallRSAT = $InstallMSUpdates = $EnableNFSClient = $InstallSSHServer = $PerformReboot = $true
     }
 
     if ($RunFrequent) {
@@ -5479,32 +5415,30 @@ Function Set-PSToolKitSystemSettings {
 
     if ($InstallRSAT) {
         try {
-            if (-not(Get-Command choco.exe -ErrorAction SilentlyContinue)) { Install-ChocolateyClient}
-            Write-Color '[Installing] ', 'RSAT Tools', ' from source ', 'chocolatey' -Color Yellow, Cyan, green, Cyan -LinesAfter 1
-
-            Write-Color '[Installing] ', 'RSAT Tools: ', 'Active Directory' -Color Yellow, Cyan, green
-            choco upgrade rsat -params '"/AD"' --accept-license --limit-output -y --source chocolatey | Out-Null
-            if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing vmware-tools Code: $($LASTEXITCODE)"}
-
-            Write-Color '[Installing] ', 'RSAT Tools: ', 'Group Policy' -Color Yellow, Cyan, green
-            choco upgrade rsat -params '"/GP"' --accept-license --limit-output -y --source chocolatey | Out-Null
-            if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing vmware-tools Code: $($LASTEXITCODE)"}
-
-            Write-Color '[Installing] ', 'RSAT Tools: ', 'Server Manager' -Color Yellow, Cyan, green
-            choco upgrade rsat -params '"/SM"' --accept-license --limit-output -y --source chocolatey | Out-Null
-            if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing vmware-tools Code: $($LASTEXITCODE)"}
-
-            Write-Color '[Installing] ', 'RSAT Tools: ', 'File System' -Color Yellow, Cyan, green
-            choco upgrade rsat -params '"/FS"' --accept-license --limit-output -y --source chocolatey | Out-Null
-            if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing vmware-tools Code: $($LASTEXITCODE)"}
-
-            Write-Color '[Installing] ', 'RSAT Tools: ', 'Domain Name System' -Color Yellow, Cyan, green
-            choco upgrade rsat -params '"/DNS"' --accept-license --limit-output -y --source chocolatey | Out-Null
-            if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing vmware-tools Code: $($LASTEXITCODE)"}
-
-            Write-Color '[Installing] ', 'RSAT Tools: ', 'Dynamic Host Configuration Protocol' -Color Yellow, Cyan, green
-            choco upgrade rsat -params '"/DHCP"' --accept-license --limit-output -y --source chocolatey | Out-Null
-            if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing vmware-tools Code: $($LASTEXITCODE)"}
+            $checkver = Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object caption
+            if ($checkver -notlike '*server*') {
+                Write-Color '[Installing] ', 'RSAT Tools', ' for a ', 'Workstation OS' -Color Yellow, Cyan, green, Cyan
+                $Roles = @('Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0', 'Rsat.DHCP.Tools~~~~0.0.1.0', 'Rsat.Dns.Tools~~~~0.0.1.0', 'Rsat.FileServices.Tools~~~~0.0.1.0', 'Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0', 'Rsat.ServerManager.Tools~~~~0.0.1.0', 'Rsat.SystemInsights.Management.Tools~~~~0.0.1.0')
+                $Roles | ForEach-Object {
+                    if (-not(Get-WindowsCapability -Name $_ -Online)) {
+                        Write-Color '[Installing] ', 'RSAT Tool: ', "$($_.split('~')[0].split('.')[1])-$($_.split('~')[0].split('.')[2])" -Color Yellow, Cyan, green, Cyan
+                        Add-WindowsCapability -Name $_ -Online | Out-Null
+                    } else {
+                        Write-Color '[Installing] ', 'RSAT Tool: ', "$($_.split('~')[0].split('.')[1])-$($_.split('~')[0].split('.')[2])", ' Already Installed' -Color Yellow, Cyan, green, DarkRed
+                    }
+                }
+            } else {
+                Write-Color '[Installing] ', 'RSAT Tools', ' for a ', 'Server OS' -Color Yellow, Cyan, green, Cyan
+                $roles = @('RSAT-Role-Tools', 'RSAT-AD-Tools', 'RSAT-AD-PowerShell', 'RSAT-ADDS', 'RSAT-AD-AdminCenter', 'RSAT-ADDS-Tools', 'RSAT-ADLDS', 'RSAT-Hyper-V-Tools', 'RSAT-DHCP', 'RSAT-DNS-Server', 'RSAT-File-Services')
+                $roles | ForEach-Object {
+                    if ((Get-WindowsFeature -Name $_).InstallState -notlike 'Installed') {
+                        Write-Color '[Installing] ', 'RSAT Tool: ', "$($_.Split('-')[1])($($_.Split('-')[2]))" -Color Yellow, Cyan, green, Cyan
+                        Install-WindowsFeature -Name $_ -IncludeAllSubFeature | Out-Null
+                    } else {
+                        Write-Color '[Installing] ', 'RSAT Tool: ', "$($_.Split('-')[1])($($_.Split('-')[2]))", ' Already Installed' -Color Yellow, Cyan, green, DarkRed
+                    }
+                }
+            }
         } catch { Write-Warning "[Installing] RSAT Tools: Failed:`n $($_.Exception.Message)" }
 
     }
@@ -5586,6 +5520,11 @@ Function Set-PSToolKitSystemSettings {
     if ($InstallSSHServer) {
         try {
             if (-not(Get-Service sshd -ErrorAction SilentlyContinue)) {
+                if (-not(Get-WindowsCapability -Name OpenSSH.Client~~~~0.0.1.0 -Online )) {
+                    Write-Color '[Installing] ', 'SSH Client' -Color Yellow, Cyan
+                    Add-WindowsCapability -Name OpenSSH.Client~~~~0.0.1.0 -Online | Out-Null
+                }
+
                 if (-not(Get-Command choco.exe -ErrorAction SilentlyContinue)) { Install-ChocolateyClient}
                 Write-Color '[Installing] ', 'SSH Server', ' from source ', 'chocolatey' -Color Yellow, Cyan, green, Cyan
                 choco upgrade openssh --accept-license --limit-output -y --source chocolatey | Out-Null
@@ -5596,7 +5535,7 @@ Function Set-PSToolKitSystemSettings {
 
                 $PowerShellPath = (Get-Command -Name pwsh.exe).Path
                 $fso = New-Object -ComObject Scripting.FileSystemObject
-                $SSHConf = Get-Content "$env:ProgramData\ssh\sshd_config"
+                $SSHConf = Get-Content "$env:ProgramFiles\OpenSSH-Win64\sshd_config_default"
                 $NewSSHConf = $SSHConf -replace ('#PasswordAuthentication yes', 'PasswordAuthentication yes')
                 $NewSSHConf = $NewSSHConf -replace ('#PubkeyAuthentication yes', 'PubkeyAuthentication yes')
                 $NewSSHConf += ' '
@@ -5613,6 +5552,7 @@ Function Set-PSToolKitSystemSettings {
         } catch { Write-Warning "[Installing] SSH Server: Failed:`n $($_.Exception.Message)" }
 
     }
+
     if ($InstallMSUpdates) {
         try {
             $UpdateModule = Get-Module PSWindowsUpdate
@@ -5652,7 +5592,7 @@ Export-ModuleMember -Function Set-PSToolKitSystemSettings
 ############################################
 # source: Set-SharedPSProfile.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5709,7 +5649,7 @@ Export-ModuleMember -Function Set-SharedPSProfile
 ############################################
 # source: Set-StaticIP.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5758,7 +5698,7 @@ Export-ModuleMember -Function Set-StaticIP
 ############################################
 # source: Set-TempFolder.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5797,7 +5737,7 @@ Export-ModuleMember -Function Set-TempFolder
 ############################################
 # source: Set-WindowsAutoLogin.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5914,7 +5854,7 @@ Export-ModuleMember -Function Set-WindowsAutoLogin
 ############################################
 # source: Show-ComputerManagement.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5950,7 +5890,7 @@ Export-ModuleMember -Function Show-ComputerManagement
 ############################################
 # source: Show-PSToolKit.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6148,7 +6088,7 @@ Export-ModuleMember -Function Show-PSToolKit
 ############################################
 # source: Start-PSModuleMaintenance.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6322,7 +6262,7 @@ Export-ModuleMember -Function Start-PSModuleMaintenance
 ############################################
 # source: Start-PSProfile.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6553,7 +6493,7 @@ Export-ModuleMember -Function Start-PSProfile
 ############################################
 # source: Start-PSRoboCopy.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6671,7 +6611,7 @@ Export-ModuleMember -Function Start-PSRoboCopy
 ############################################
 # source: Start-PSToolkitSystemInitialize.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6776,7 +6716,7 @@ Export-ModuleMember -Function Start-PSToolkitSystemInitialize
 ############################################
 # source: Sync-PSFolders.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6943,7 +6883,7 @@ Export-ModuleMember -Function Sync-PSFolders
 ############################################
 # source: Test-CitrixCloudConnector.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7049,7 +6989,7 @@ Export-ModuleMember -Function Test-CitrixCloudConnector
 ############################################
 # source: Test-CitrixVDAPorts.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7148,7 +7088,7 @@ Export-ModuleMember -Function Test-CitrixVDAPorts
 ############################################
 # source: Test-PendingReboot.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7329,7 +7269,7 @@ Export-ModuleMember -Function Test-PendingReboot
 ############################################
 # source: Test-PSRemote.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7386,7 +7326,7 @@ Export-ModuleMember -Function Test-PSRemote
 ############################################
 # source: Update-ListOfDDCs.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7450,7 +7390,7 @@ Export-ModuleMember -Function Update-ListOfDDCs
 ############################################
 # source: Update-LocalHelp.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7491,7 +7431,7 @@ Export-ModuleMember -Function Update-LocalHelp
 ############################################
 # source: Update-PSModuleInfo.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7594,7 +7534,7 @@ Export-ModuleMember -Function Update-PSModuleInfo
 ############################################
 # source: Update-PSScriptInfo.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7709,7 +7649,7 @@ Export-ModuleMember -Function Update-PSScriptInfo
 ############################################
 # source: Update-PSToolKit.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7769,7 +7709,9 @@ Function Update-PSToolKit {
 	Remove-Item $env:tmp\private.zip
 	Remove-Item $env:tmp\PSToolKit-master -Recurse
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Complete]"
-
+	Remove-Module PSToolKit -Force
+	Import-Module PSToolKit -Force
+	Show-PSToolKit -ShowMetaData
 } #end Function
  
 Export-ModuleMember -Function Update-PSToolKit
@@ -7779,7 +7721,7 @@ Export-ModuleMember -Function Update-PSToolKit
 ############################################
 # source: Update-PSToolKitConfigFiles.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7926,7 +7868,7 @@ Export-ModuleMember -Function Update-PSToolKitConfigFiles
 ############################################
 # source: Write-PSToolKitLog.ps1
 # Module: PSToolKit
-# version: 0.1.30
+# version: 0.1.32
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################

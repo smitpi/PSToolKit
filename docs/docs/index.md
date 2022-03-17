@@ -60,7 +60,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Install-ChocolateyServer](https://smitpi.github.io/PSToolKit/#Install-ChocolateyServer) -- This will download, install and setup a new Chocolatey Repo Server
 - [Install-MSWinget](https://smitpi.github.io/PSToolKit/#Install-MSWinget) -- Install the package manager winget
 - [Install-PSModules](https://smitpi.github.io/PSToolKit/#Install-PSModules) -- Install modules from .json file.
-- [Install-SSHServer](https://smitpi.github.io/PSToolKit/#Install-SSHServer) -- Install and setup OpenSSH on device.
 - [New-CitrixSiteConfigFile](https://smitpi.github.io/PSToolKit/#New-CitrixSiteConfigFile) -- All a config file with Citrix server details. To be imported as variables.
 - [New-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#New-ElevatedShortcut) -- Creates a shortcut to a script or exe that runs as admin, without UNC
 - [New-GodModeFolder](https://smitpi.github.io/PSToolKit/#New-GodModeFolder) -- Creates a God Mode Folder

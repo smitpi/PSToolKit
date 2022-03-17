@@ -12,7 +12,7 @@
 RootModule = 'PSToolKit.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.30'
+ModuleVersion = '0.1.32'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -87,12 +87,12 @@ FunctionsToExport = 'Add-ChocolateyPrivateRepo', 'Backup-ElevatedShortcut',
                'Get-WinEventLogExtract', 'Import-CitrixSiteConfigFile', 
                'Import-XamlConfigFile', 'Install-ChocolateyApps', 
                'Install-ChocolateyClient', 'Install-ChocolateyServer', 
-               'Install-MSWinget', 'Install-PSModules', 'Install-SSHServer', 
-               'New-CitrixSiteConfigFile', 'New-ElevatedShortcut', 
-               'New-GodModeFolder', 'New-PSModule', 'New-PSProfile', 'New-PSScript', 
-               'New-SuggestedInfraNames', 'Remove-CIMUserProfiles', 
-               'Remove-FaultyProfileList', 'Remove-HiddenDevices', 
-               'Remove-UserProfile', 'Restore-ElevatedShortcut', 'Search-Scripts', 
+               'Install-MSWinget', 'Install-PSModules', 'New-CitrixSiteConfigFile', 
+               'New-ElevatedShortcut', 'New-GodModeFolder', 'New-PSModule', 
+               'New-PSProfile', 'New-PSScript', 'New-SuggestedInfraNames', 
+               'Remove-CIMUserProfiles', 'Remove-FaultyProfileList', 
+               'Remove-HiddenDevices', 'Remove-UserProfile', 
+               'Restore-ElevatedShortcut', 'Search-Scripts', 
                'Set-PSToolKitSystemSettings', 'Set-SharedPSProfile', 'Set-StaticIP', 
                'Set-TempFolder', 'Set-WindowsAutoLogin', 'Show-ComputerManagement', 
                'Show-PSToolKit', 'Start-PSModuleMaintenance', 'Start-PSProfile', 

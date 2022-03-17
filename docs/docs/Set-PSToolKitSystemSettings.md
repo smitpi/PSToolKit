@@ -16,8 +16,8 @@ Set multiple settings on desktop or server
 Set-PSToolKitSystemSettings [-RunAll] [-RunFrequent] [-ExecutionPolicy] [-PSGallery] [-ForcePSGallery]
  [-IntranetZone] [-IntranetZoneIPRange] [-PSTrustedHosts] [-FileExplorerSettings] [-DisableIPV6]
  [-DisableFirewall] [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-InstallPS7]
- [-InstallMSTerminal] [-InstallVMWareTools] [-InstallRSAT] [-InstallMSUpdates] [-EnableNFSClient]
- [-PerformReboot] [<CommonParameters>]
+ [-InstallMSTerminal] [-InstallVMWareTools] [-InstallRSAT] [-InstallMSUpdates] [-InstallSSHServer]
+ [-EnableNFSClient] [-PerformReboot] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -304,6 +304,21 @@ Accept wildcard characters: False
 
 ### -InstallMSUpdates
 Perform a Windows Update
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -InstallSSHServer
+Install openssh server and client.
 
 ```yaml
 Type: SwitchParameter
