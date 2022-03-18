@@ -432,7 +432,6 @@ Function Set-PSToolKitSystemSettings {
 
     if ($PSTrustedHosts) {
         try {
-            Enable-PSRemoting -Force | Out-Null
             $domainCheck = [System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain()
             $currentlist = @()
             [array]$currentlist += (Get-Item WSMan:\localhost\Client\TrustedHosts).value.split(',')
@@ -451,6 +450,7 @@ Function Set-PSToolKitSystemSettings {
                 }
             } else {Write-Color '[Set]', 'TrustedHosts: ', 'Already Set' -Color Yellow, Cyan, DarkRed}
         } catch { Write-Warning "[Set]TrustedHosts: Failed:`n $($_.Exception.Message)" }
+
     } #end if
 
     if ($FileExplorerSettings) {

@@ -432,7 +432,7 @@ Function Set-PSToolKitSystemSettings {
 
     if ($PSTrustedHosts) {
         try {
-            Enable-PSRemoting -Force | Out-Null
+            Enable-PSRemoting -Force 
             $domainCheck = [System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain()
             $currentlist = @()
             [array]$currentlist += (Get-Item WSMan:\localhost\Client\TrustedHosts).value.split(',')
