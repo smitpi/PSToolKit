@@ -83,6 +83,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Start-PSModuleMaintenance](https://smitpi.github.io/PSToolKit/#Start-PSModuleMaintenance) -- Goes through all the installed modules, and allow you to upgrade(If available), or remove old and duplicate versions.
 - [Start-PSProfile](https://smitpi.github.io/PSToolKit/#Start-PSProfile) -- My PS Profile for all sessions.
 - [Start-PSRoboCopy](https://smitpi.github.io/PSToolKit/#Start-PSRoboCopy) -- My wrapper for default robocopy switches
+- [Start-PSScriptAnalyzer](https://smitpi.github.io/PSToolKit/#Start-PSScriptAnalyzer) -- Run and report ScriptAnalyzer output
 - [Start-PSToolkitSystemInitialize](https://smitpi.github.io/PSToolKit/#Start-PSToolkitSystemInitialize) -- Initialize a blank machine.
 - [Sync-PSFolders](https://smitpi.github.io/PSToolKit/#Sync-PSFolders) -- Compare two directories and copy the differences
 - [Test-CitrixCloudConnector](https://smitpi.github.io/PSToolKit/#Test-CitrixCloudConnector) -- Perform basic connection tests to CItrix cloud.

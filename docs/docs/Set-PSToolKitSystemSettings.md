@@ -14,7 +14,8 @@ Set multiple settings on desktop or server
 
 ```
 Set-PSToolKitSystemSettings [-RunAll] [-RunFrequent] [-ExecutionPolicy] [-PSGallery] [-ForcePSGallery]
- [-IntranetZone] [-IntranetZoneIPRange] [-PSTrustedHosts] [-FileExplorerSettings] [-DisableIPV6]
+ [-IntranetZone] [-IntranetZoneIPRange] [-PSTrustedHosts] [-FileExplorerSettings] [-SystemDefaults]
+ [-DisableIEFirstRun] [-DisableFirstLogonAnimation] [-SetPhotoViewer] [-DisableShutdownTracker] [-DisableIPV6]
  [-DisableFirewall] [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-InstallPS7]
  [-InstallMSTerminal] [-InstallVMWareTools] [-InstallRSAT] [-InstallMSUpdates] [-InstallSSHServer]
  [-EnableNFSClient] [-PerformReboot] [<CommonParameters>]
@@ -154,6 +155,81 @@ Accept wildcard characters: False
 
 ### -FileExplorerSettings
 Change explorer settings to what I like.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SystemDefaults
+Set some system settings.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DisableIEFirstRun
+Disable IE first run
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DisableFirstLogonAnimation
+Disable Hi Message
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SetPhotoViewer
+Set photo viewer
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DisableShutdownTracker
+Disable shutdown tracker
 
 ```yaml
 Type: SwitchParameter

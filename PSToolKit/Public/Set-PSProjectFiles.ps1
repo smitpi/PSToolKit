@@ -280,30 +280,6 @@ Function Set-PSProjectFiles {
 		$indexFile | Set-Content -Path $ModfuleIndex -Force
 		#endregion
 	}
-	function ScriptAnalyzer {
-		#region ScriptAnalyzer
-		$Listissues = $Null
-		$ExcludeRules = @(
-			'PSMissingModuleManifestField',
-			'PSAvoidUsingWriteHost',
-			'PSUseSingularNouns',
-			'PSReviewUnusedParameter'
-		)
-		Write-Color '[Starting]', 'PSScriptAnalyzer' -Color Yellow, DarkCyan
-		Invoke-ScriptAnalyzer -Path $ModulePublicFunctions -Recurse -OutVariable Listissues -ExcludeRule $ExcludeRules | Out-Null
-
-		foreach ($item in $Listissues) {
-			Write-Color "$($item.scriptname): ", $($item.Message) -Color Cyan, Yellow
-			[void]$ScriptAnalyzerIssues.Add([PSCustomObject]@{
-					Catagory = 'ScriptAnalyzer'
-					File     = $item.scriptname
-					RuleName = $item.RuleName
-					line     = $item.line
-					Message  = $item.Message
-				})
-		}
-		#endregion
-	}
 	function combine {
 		#region copy files
 		Write-Color '[Starting]', 'Creating new module files' -Color Yellow, DarkCyan
@@ -389,7 +365,6 @@ Function Set-PSProjectFiles {
 		combine
 		mkdocs
 	}
-	if ($null -notlike $ScriptAnalyzerIssues) { $ScriptAnalyzerIssues | Export-Excel -Path $ModuleIssuesExcel -WorksheetName ScriptAnalyzer -AutoSize -AutoFilter -BoldTopRow -FreezeTopRow -PivotTableName Summery -PivotRows RuleName -PivotData Message }
 	if ($null -notlike $Issues) { $issues | Export-Excel -Path $ModuleIssuesExcel -WorksheetName Other -AutoSize -AutoFilter -BoldTopRow -FreezeTopRow }
 
 	#endregion

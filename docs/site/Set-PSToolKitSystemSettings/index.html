@@ -1145,6 +1145,41 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-systemdefaults" class="md-nav__link">
+    -SystemDefaults
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-disableiefirstrun" class="md-nav__link">
+    -DisableIEFirstRun
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-disablefirstlogonanimation" class="md-nav__link">
+    -DisableFirstLogonAnimation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-setphotoviewer" class="md-nav__link">
+    -SetPhotoViewer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-disableshutdowntracker" class="md-nav__link">
+    -DisableShutdownTracker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-disableipv6" class="md-nav__link">
     -DisableIPV6
   </a>
@@ -1413,6 +1448,21 @@
     <li class="md-nav__item">
       <a href="../Start-PSRoboCopy/" class="md-nav__link">
         Start-PSRoboCopy
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Start-PSScriptAnalyzer/" class="md-nav__link">
+        Start-PSScriptAnalyzer
       </a>
     </li>
   
@@ -1752,6 +1802,41 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-systemdefaults" class="md-nav__link">
+    -SystemDefaults
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-disableiefirstrun" class="md-nav__link">
+    -DisableIEFirstRun
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-disablefirstlogonanimation" class="md-nav__link">
+    -DisableFirstLogonAnimation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-setphotoviewer" class="md-nav__link">
+    -SetPhotoViewer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-disableshutdowntracker" class="md-nav__link">
+    -DisableShutdownTracker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-disableipv6" class="md-nav__link">
     -DisableIPV6
   </a>
@@ -1905,7 +1990,8 @@
 <p>Set multiple settings on desktop or server</p>
 <h2 id="syntax">SYNTAX</h2>
 <div class="highlight"><pre><span></span><code>Set-PSToolKitSystemSettings [-RunAll] [-RunFrequent] [-ExecutionPolicy] [-PSGallery] [-ForcePSGallery]
- [-IntranetZone] [-IntranetZoneIPRange] [-PSTrustedHosts] [-FileExplorerSettings] [-DisableIPV6]
+ [-IntranetZone] [-IntranetZoneIPRange] [-PSTrustedHosts] [-FileExplorerSettings] [-SystemDefaults]
+ [-DisableIEFirstRun] [-DisableFirstLogonAnimation] [-SetPhotoViewer] [-DisableShutdownTracker] [-DisableIPV6]
  [-DisableFirewall] [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-InstallPS7]
  [-InstallMSTerminal] [-InstallVMWareTools] [-InstallRSAT] [-InstallMSUpdates] [-InstallSSHServer]
  [-EnableNFSClient] [-PerformReboot] [&lt;CommonParameters&gt;]
@@ -2015,6 +2101,66 @@
 </code></pre></div>
 <h3 id="-fileexplorersettings">-FileExplorerSettings</h3>
 <p>Change explorer settings to what I like.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-systemdefaults">-SystemDefaults</h3>
+<p>Set some system settings.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-disableiefirstrun">-DisableIEFirstRun</h3>
+<p>Disable IE first run</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-disablefirstlogonanimation">-DisableFirstLogonAnimation</h3>
+<p>Disable Hi Message</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-setphotoviewer">-SetPhotoViewer</h3>
+<p>Set photo viewer</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-disableshutdowntracker">-DisableShutdownTracker</h3>
+<p>Disable shutdown tracker</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
