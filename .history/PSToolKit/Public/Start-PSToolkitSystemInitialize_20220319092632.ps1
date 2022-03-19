@@ -104,6 +104,7 @@ Function Start-PSToolkitSystemInitialize {
 		Update-PSToolKitConfigFiles -UpdateLocal -UpdateLocalFromModule
 		Install-PSModules -BaseModules -Scope AllUsers
 		Install-ChocolateyClient
+		Add-ChocolateyPrivateRepo -RepoName Proget -RepoURL http://progetserver.internal.lab/nuget/htpcza-choco/ -Priority 1
 		Install-ChocolateyApps -BaseApps
 	}
 	if ($InstallMyModules) {
