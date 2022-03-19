@@ -53,6 +53,9 @@ Name of the shortcut
 .PARAMETER FilePath
 Path to the executable or ps1 file
 
+.PARAMETER OpenPath
+Open explorer to the .lnk file.
+
 .EXAMPLE
 New-ElevatedShortcut -ShortcutName blah -FilePath cmd.exe
 
@@ -62,10 +65,14 @@ Function New-ElevatedShortcut {
 
 	PARAM(
 		[Parameter(Mandatory = $true)]
+		[ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+				else { Throw 'Must be running an elevated prompt to use function' } })]
 		[string]$ShortcutName,
 		[Parameter(Mandatory = $true)]
 		[ValidateScript( { (Test-Path $_) -and ((Get-Item $_).Extension -eq '.ps1') -or ((Get-Item $_).Extension -eq '.exe') })]
-		[string]$FilePath
+		[string]$FilePath,
+        [switch]$OpenPath = $false
 	)
 
 	$ScriptInfo = Get-Item $FilePath
@@ -102,6 +109,7 @@ Function New-ElevatedShortcut {
 	#Save the Shortcut to the TargetPath
 	$Shortcut.Save()
 
+if ($OpenPath){
 	Start-Process -FilePath explorer.exe -ArgumentList $($ScriptInfo.DirectoryName)
-
+}
 } #end Function
