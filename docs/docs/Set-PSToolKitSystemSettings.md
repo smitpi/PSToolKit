@@ -13,12 +13,12 @@ Set multiple settings on desktop or server
 ## SYNTAX
 
 ```
-Set-PSToolKitSystemSettings [-RunAll] [-RunFrequent] [-ExecutionPolicy] [-PSGallery] [-ForcePSGallery]
- [-IntranetZone] [-IntranetZoneIPRange] [-PSTrustedHosts] [-FileExplorerSettings] [-SystemDefaults]
- [-DisableIEFirstRun] [-DisableFirstLogonAnimation] [-SetPhotoViewer] [-DisableShutdownTracker] [-DisableIPV6]
- [-DisableFirewall] [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-InstallPS7]
- [-InstallMSTerminal] [-InstallVMWareTools] [-InstallRSAT] [-InstallMSUpdates] [-InstallSSHServer]
- [-EnableNFSClient] [-PerformReboot] [<CommonParameters>]
+Set-PSToolKitSystemSettings [-RunAll] [-ExecutionPolicy] [-PSGallery] [-ForcePSGallery] [-IntranetZone]
+ [-IntranetZoneIPRange] [-PSTrustedHosts] [-FileExplorerSettings] [-SystemDefaults] [-DisableIEFirstRun]
+ [-DisableFirstLogonAnimation] [-SetPhotoViewer] [-DisableShutdownTracker] [-DisableIPV6] [-DisableFirewall]
+ [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-InstallPS7] [-InstallMSTerminal]
+ [-InstallVMWareTools] [-InstallRSAT] [-InstallMSUpdates] [-EnableNFSClient] [-PerformReboot]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -35,21 +35,7 @@ Set-PSToolKitSystemSettings -RunAll
 
 ### -RunAll
 Enable all the options in this function.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -RunFrequent
-Enable selected frequently used options in this function.
+Except windows update and reboot.
 
 ```yaml
 Type: SwitchParameter
@@ -380,21 +366,6 @@ Accept wildcard characters: False
 
 ### -InstallMSUpdates
 Perform a Windows Update
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -InstallSSHServer
-Install openssh server and client.
 
 ```yaml
 Type: SwitchParameter

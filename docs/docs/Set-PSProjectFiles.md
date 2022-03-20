@@ -5,34 +5,34 @@ online version:
 schema: 2.0.0
 ---
 
-# New-ElevatedShortcut
+# Set-PSProjectFiles
 
 ## SYNOPSIS
-Creates a shortcut to a script or exe that runs as admin, without UNC
+Creates and modify needed files for a PS project from existing module files.
 
 ## SYNTAX
 
 ```
-New-ElevatedShortcut [-ShortcutName] <String> [-FilePath] <String> [-OpenPath] [<CommonParameters>]
+Set-PSProjectFiles [-ModulePSM1] <FileInfo> [[-VersionBump] <String>] [[-mkdocs] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Creates a shortcut to a script or exe that runs as admin, without UNC
+Creates and modify needed files for a PS project from existing module files.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-New-ElevatedShortcut -ShortcutName blah -FilePath cmd.exe
+Set-PSProjectFiles -ModulePSM1 c:\temp\blah.psm1 -VersionBump Minor -mkdocs serve
 ```
 
 ## PARAMETERS
 
-### -ShortcutName
-Name of the shortcut
+### -ModulePSM1
+Path to module .psm1 file.
 
 ```yaml
-Type: String
+Type: FileInfo
 Parameter Sets: (All)
 Aliases:
 
@@ -43,32 +43,32 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -FilePath
-Path to the executable or ps1 file
+### -VersionBump
+This will increase the version of the module.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OpenPath
-Open explorer to the .lnk file.
+### -mkdocs
+Create and test the mkdocs site
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: False
+Position: 3
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
