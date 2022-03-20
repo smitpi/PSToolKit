@@ -96,4 +96,5 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Update-PSScriptInfo](https://smitpi.github.io/PSToolKit/#Update-PSScriptInfo) -- Update PowerShell ScriptFileInfo
 - [Update-PSToolKit](https://smitpi.github.io/PSToolKit/#Update-PSToolKit) -- Update PSToolKit from GitHub.
 - [Update-PSToolKitConfigFiles](https://smitpi.github.io/PSToolKit/#Update-PSToolKitConfigFiles) -- Manages the config files for the PSToolKit Module.
+- [Write-Ascii](https://smitpi.github.io/PSToolKit/#Write-Ascii) -- Create Ascii Art
 - [Write-PSToolKitLog](https://smitpi.github.io/PSToolKit/#Write-PSToolKitLog) -- Create a log for scripts

@@ -80,6 +80,7 @@ Functions in this module:
 	 Update-PSScriptInfo -- Update PowerShell ScriptFileInfo
 	 Update-PSToolKit -- Update PSToolKit from GitHub.
 	 Update-PSToolKitConfigFiles -- Manages the config files for the PSToolKit Module.
+	 Write-Ascii -- Create Ascii Art
 	 Write-PSToolKitLog -- Create a log for scripts
  
 SEE ALSO

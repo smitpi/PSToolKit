@@ -5,7 +5,7 @@
 ############################################
 # source: Add-ChocolateyPrivateRepo.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -103,7 +103,7 @@ Export-ModuleMember -Function Add-ChocolateyPrivateRepo
 ############################################
 # source: Backup-ElevatedShortcut.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -148,7 +148,7 @@ Export-ModuleMember -Function Backup-ElevatedShortcut
 ############################################
 # source: Backup-PowerShellProfile.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -203,7 +203,7 @@ Export-ModuleMember -Function Backup-PowerShellProfile
 ############################################
 # source: Connect-VMWareCluster.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -255,7 +255,7 @@ Export-ModuleMember -Function Connect-VMWareCluster
 ############################################
 # source: Edit-ChocolateyAppsList.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -392,7 +392,7 @@ Export-ModuleMember -Function Edit-ChocolateyAppsList
 ############################################
 # source: Edit-HostsFile.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -524,7 +524,7 @@ Export-ModuleMember -Function Edit-HostsFile
 ############################################
 # source: Edit-PSModulesLists.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -635,7 +635,7 @@ Export-ModuleMember -Function Edit-PSModulesLists
 ############################################
 # source: Enable-RemoteHostPSRemoting.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -694,7 +694,7 @@ Export-ModuleMember -Function Enable-RemoteHostPSRemoting
 ############################################
 # source: Export-CitrixPolicySettings.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -781,7 +781,7 @@ Export-ModuleMember -Function Export-CitrixPolicySettings
 ############################################
 # source: Export-ESXTemplates.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -830,7 +830,7 @@ Export-ModuleMember -Function Export-ESXTemplates
 ############################################
 # source: Export-PSGallery.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -906,7 +906,7 @@ Export-ModuleMember -Function Export-PSGallery
 ############################################
 # source: Find-ChocolateyApps.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -988,7 +988,7 @@ Export-ModuleMember -Function Find-ChocolateyApps
 ############################################
 # source: Find-OnlineModule.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1049,7 +1049,7 @@ Export-ModuleMember -Function Find-OnlineModule
 ############################################
 # source: Find-OnlineScript.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1109,7 +1109,7 @@ Export-ModuleMember -Function Find-OnlineScript
 ############################################
 # source: Find-PSScripts.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1285,7 +1285,7 @@ Export-ModuleMember -Function Find-PSScripts
 ############################################
 # source: Format-AllObjectsInAListView.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1324,7 +1324,7 @@ Export-ModuleMember -Function Format-AllObjectsInAListView
 ############################################
 # source: Get-AllUsersInGroup.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1397,7 +1397,7 @@ Export-ModuleMember -Function Get-AllUsersInGroup
 ############################################
 # source: Get-CitrixClientVersions.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1493,7 +1493,7 @@ Export-ModuleMember -Function Get-CitrixClientVersions
 ############################################
 # source: Get-CommandFiltered.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1553,7 +1553,7 @@ Export-ModuleMember -Function Get-CommandFiltered
 ############################################
 # source: Get-DeviceUptime.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1617,7 +1617,7 @@ Export-ModuleMember -Function Get-DeviceUptime
 ############################################
 # source: Get-FolderSize.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1784,7 +1784,7 @@ Export-ModuleMember -Function Get-FolderSize
 ############################################
 # source: Get-FQDN.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1830,7 +1830,7 @@ Export-ModuleMember -Function Get-FQDN
 ############################################
 # source: Get-FullADUserDetail.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1882,7 +1882,7 @@ Export-ModuleMember -Function Get-FullADUserDetail
 ############################################
 # source: Get-MyPSGalleryStats.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1944,7 +1944,7 @@ Export-ModuleMember -Function Get-MyPSGalleryStats
 ############################################
 # source: Get-ProcessPerformance.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2006,7 +2006,7 @@ Export-ModuleMember -Function Get-ProcessPerformance
 ############################################
 # source: Get-PropertiesToCSV.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2045,7 +2045,7 @@ Export-ModuleMember -Function Get-PropertiesToCSV
 ############################################
 # source: Get-SoftwareAudit.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2122,7 +2122,7 @@ Export-ModuleMember -Function Get-SoftwareAudit
 ############################################
 # source: Get-SystemInfo.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2430,7 +2430,7 @@ Export-ModuleMember -Function Get-SystemInfo
 ############################################
 # source: Get-WinEventLogExtract.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2589,7 +2589,7 @@ Export-ModuleMember -Function Get-WinEventLogExtract
 ############################################
 # source: Import-CitrixSiteConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2633,7 +2633,7 @@ Export-ModuleMember -Function Import-CitrixSiteConfigFile
 ############################################
 # source: Import-XamlConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2763,7 +2763,7 @@ Export-ModuleMember -Function Import-XamlConfigFile
 ############################################
 # source: Install-ChocolateyApps.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2855,7 +2855,7 @@ Export-ModuleMember -Function Install-ChocolateyApps
 ############################################
 # source: Install-ChocolateyClient.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2908,7 +2908,7 @@ Export-ModuleMember -Function Install-ChocolateyClient
 ############################################
 # source: Install-ChocolateyServer.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3030,7 +3030,7 @@ Export-ModuleMember -Function Install-ChocolateyServer
 ############################################
 # source: Install-MSWinget.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3117,7 +3117,7 @@ Export-ModuleMember -Function Install-MSWinget
 ############################################
 # source: Install-PSModules.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3236,7 +3236,7 @@ Export-ModuleMember -Function Install-PSModules
 ############################################
 # source: New-CitrixSiteConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3378,7 +3378,7 @@ Export-ModuleMember -Function New-CitrixSiteConfigFile
 ############################################
 # source: New-ElevatedShortcut.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3464,7 +3464,7 @@ Export-ModuleMember -Function New-ElevatedShortcut
 ############################################
 # source: New-GodModeFolder.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3498,7 +3498,7 @@ Export-ModuleMember -Function New-GodModeFolder
 ############################################
 # source: New-PSModule.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3592,7 +3592,7 @@ Export-ModuleMember -Function New-PSModule
 ############################################
 # source: New-PSProfile.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3673,7 +3673,7 @@ Export-ModuleMember -Function New-PSProfile
 ############################################
 # source: New-PSScript.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3812,7 +3812,7 @@ Export-ModuleMember -Function New-PSScript
 ############################################
 # source: New-SuggestedInfraNames.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3901,7 +3901,7 @@ Export-ModuleMember -Function New-SuggestedInfraNames
 ############################################
 # source: Remove-CIMUserProfiles.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3945,7 +3945,7 @@ Export-ModuleMember -Function Remove-CIMUserProfiles
 ############################################
 # source: Remove-FaultyProfileList.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4020,7 +4020,7 @@ Export-ModuleMember -Function Remove-FaultyProfileList
 ############################################
 # source: Remove-HiddenDevices.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4415,7 +4415,7 @@ Export-ModuleMember -Function Remove-HiddenDevices
 ############################################
 # source: Remove-UserProfile.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4491,7 +4491,7 @@ Export-ModuleMember -Function Remove-UserProfile
 ############################################
 # source: Restore-ElevatedShortcut.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4560,7 +4560,7 @@ Export-ModuleMember -Function Restore-ElevatedShortcut
 ############################################
 # source: Search-Scripts.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4619,7 +4619,7 @@ Export-ModuleMember -Function Search-Scripts
 ############################################
 # source: Set-PSProjectFiles.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4976,7 +4976,7 @@ Export-ModuleMember -Function Set-PSProjectFiles
 ############################################
 # source: Set-PSToolKitSystemSettings.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5755,7 +5755,7 @@ Export-ModuleMember -Function Set-PSToolKitSystemSettings
 ############################################
 # source: Set-SharedPSProfile.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5812,7 +5812,7 @@ Export-ModuleMember -Function Set-SharedPSProfile
 ############################################
 # source: Set-StaticIP.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5861,7 +5861,7 @@ Export-ModuleMember -Function Set-StaticIP
 ############################################
 # source: Set-TempFolder.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5900,7 +5900,7 @@ Export-ModuleMember -Function Set-TempFolder
 ############################################
 # source: Set-WindowsAutoLogin.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6017,7 +6017,7 @@ Export-ModuleMember -Function Set-WindowsAutoLogin
 ############################################
 # source: Show-ComputerManagement.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6053,7 +6053,7 @@ Export-ModuleMember -Function Show-ComputerManagement
 ############################################
 # source: Show-PSToolKit.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6131,19 +6131,28 @@ Function Show-PSToolKit {
             Name = "PSToolKit"
             Object = "PowerShell Module"
             Version = $version
-            Date = (get-date($CreateDate) -Format yyyy/MM/dd)
+            Date = (get-date($CreateDate) -Format F)
             Path = $module.Path
         }
         $Details
     }
 
     if (-not($ShowCommand) -and (-not($ShowMetaData)) -and (-not($ExportToHTML))) {
-        $out = ConvertTo-ASCIIArt -Text 'PSToolKit' -Font basic
+
+        # $out = ConvertTo-ASCIIArt -Text 'PSToolKit' -Font basic
+        # $out += "`n"
+        # $out += ConvertTo-ASCIIArt -Text $version -Font basic
+        # $out += "`n"
+        # $out += ("Module Path: $($module.Path)" | Out-String)
+        # $out += ("Created on: $(Get-Date($CreateDate) -Format F)" | Out-String)
+        # Add-Border -TextBlock $out -Character % -ANSIBorder "$([char]0x1b)[38;5;47m" -ANSIText "$([char]0x1b)[93m"
+
+        $out = (Write-Ascii "PSToolKit" -ForegroundColor Yellow | Out-String)
         $out += "`n"
-        $out += ConvertTo-ASCIIArt -Text $version -Font basic
+        $out += (Write-Ascii $($version) -ForegroundColor Yellow)
         $out += "`n"
         $out += ("Module Path: $($module.Path)" | Out-String)
-        $out += ("Created on: $(Get-Date($CreateDate) -Format D)" | Out-String)
+        $out += ("Created on: $(Get-Date($CreateDate) -Format F)" | Out-String)
         Add-Border -TextBlock $out -Character % -ANSIBorder "$([char]0x1b)[38;5;47m" -ANSIText "$([char]0x1b)[93m"
 
         $commands = @()
@@ -6251,7 +6260,7 @@ Export-ModuleMember -Function Show-PSToolKit
 ############################################
 # source: Start-PSModuleMaintenance.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6425,7 +6434,7 @@ Export-ModuleMember -Function Start-PSModuleMaintenance
 ############################################
 # source: Start-PSProfile.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6656,7 +6665,7 @@ Export-ModuleMember -Function Start-PSProfile
 ############################################
 # source: Start-PSRoboCopy.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6774,7 +6783,7 @@ Export-ModuleMember -Function Start-PSRoboCopy
 ############################################
 # source: Start-PSScriptAnalyzer.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6900,7 +6909,7 @@ Export-ModuleMember -Function Start-PSScriptAnalyzer
 ############################################
 # source: Start-PSToolkitSystemInitialize.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7003,7 +7012,7 @@ Export-ModuleMember -Function Start-PSToolkitSystemInitialize
 ############################################
 # source: Sync-PSFolders.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7170,7 +7179,7 @@ Export-ModuleMember -Function Sync-PSFolders
 ############################################
 # source: Test-CitrixCloudConnector.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7276,7 +7285,7 @@ Export-ModuleMember -Function Test-CitrixCloudConnector
 ############################################
 # source: Test-CitrixVDAPorts.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7375,7 +7384,7 @@ Export-ModuleMember -Function Test-CitrixVDAPorts
 ############################################
 # source: Test-PendingReboot.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7556,7 +7565,7 @@ Export-ModuleMember -Function Test-PendingReboot
 ############################################
 # source: Test-PSRemote.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7613,7 +7622,7 @@ Export-ModuleMember -Function Test-PSRemote
 ############################################
 # source: Update-ListOfDDCs.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7677,7 +7686,7 @@ Export-ModuleMember -Function Update-ListOfDDCs
 ############################################
 # source: Update-LocalHelp.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7718,7 +7727,7 @@ Export-ModuleMember -Function Update-LocalHelp
 ############################################
 # source: Update-PSModuleInfo.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7821,7 +7830,7 @@ Export-ModuleMember -Function Update-PSModuleInfo
 ############################################
 # source: Update-PSScriptInfo.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7936,7 +7945,7 @@ Export-ModuleMember -Function Update-PSScriptInfo
 ############################################
 # source: Update-PSToolKit.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7979,16 +7988,17 @@ Function Update-PSToolKit {
 	if ((Test-Path $env:tmp\private.zip) -eq $true ) { Remove-Item $env:tmp\private.zip -Force }
 
 	if ((Test-Path $ModulePath)) {
-		$InstalledVer = (Get-ChildItem -Directory $ModulePath -ErrorAction SilentlyContinue | Sort-Object -Property Name -Descending)[0].Name
-		$OnlineVer = Invoke-RestMethod 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/Version.json'
-		if ($InstalledVer -lt $OnlineVer.Version) {
+		$InstalledVer = $OnlineVer = $null
+		[version]$InstalledVer = (Get-ChildItem -Directory $ModulePath -ErrorAction SilentlyContinue | Sort-Object -Property Name -Descending)[0].Name
+		[version]$OnlineVer = (Invoke-RestMethod 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/Version.json').version
+		if ($InstalledVer -lt $OnlineVer) {
 			$ForceUpdate = $true
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Backup old folder to $(Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip')"
 			Get-ChildItem -Directory $ModulePath | Compress-Archive -DestinationPath (Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip') -Update
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Remove old folder $($ModulePath)"
 			Get-ChildItem -Directory $ModulePath | Remove-Item -Recurse -Force
 		} else {
-			Write-Host '[Updating]: ' -NoNewline -ForegroundColor Yellow; Write-Host "PSToolKit ($($OnlineVer.Version)): " -ForegroundColor Cyan -NoNewline; Write-Host 'Already Up To Date' -ForegroundColor DarkRed
+			Write-Host '[Updating]: ' -NoNewline -ForegroundColor Yellow; Write-Host "PSToolKit ($($OnlineVer.ToString())): " -ForegroundColor Cyan -NoNewline; Write-Host 'Already Up To Date' -ForegroundColor DarkRed
 		}
 	} else {
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Creating Module directory $($ModulePath)"
@@ -8013,7 +8023,6 @@ Function Update-PSToolKit {
 	}
 	$ForceUpdate = $false
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Complete]"
-	Remove-Module PSToolKit -Force -ErrorAction SilentlyContinue
 	Import-Module PSToolKit -Force -ErrorAction SilentlyContinue
 	Show-PSToolKit -ShowMetaData
 } #end Function
@@ -8025,7 +8034,7 @@ Export-ModuleMember -Function Update-PSToolKit
 ############################################
 # source: Update-PSToolKitConfigFiles.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8168,11 +8177,402 @@ Function Update-PSToolKitConfigFiles {
 Export-ModuleMember -Function Update-PSToolKitConfigFiles
 #endregion
  
+#region Write-Ascii.ps1
+############################################
+# source: Write-Ascii.ps1
+# Module: PSToolKit
+# version: 0.1.41
+# Author: Pierre Smit
+# Company: HTPCZA Tech
+#############################################
+ 
+<#
+.SYNOPSIS
+Create Ascii Art
+
+.DESCRIPTION
+Create Ascii Art
+
+.EXAMPLE
+Write-Ascii
+
+#>
+function Write-Ascii {
+# Wrapping the script in a function to make it a module
+
+[CmdletBinding()]
+param(
+    [Parameter(
+        ValueFromPipeline = $True,
+        Mandatory = $True)]
+        [Alias('InputText')]
+        [String[]] $InputObject,
+    [Switch] $PrependChar,
+    [Alias('Compression')] [Switch] $Compress,
+    [ValidateSet("Black", "Blue", "Cyan", "DarkBlue", "DarkCyan", "DarkGray",
+        "DarkGreen", "DarkMagenta", "DarkRed", "DarkYellow", "Default", "Gray", "Green",
+        "Magenta", "Red", "Rainbow", "White", "Yellow")]
+        [String] $ForegroundColor = 'Default',
+    [ValidateSet("Black", "Blue", "Cyan", "DarkBlue", "DarkCyan", "DarkGray",
+        "DarkGreen", "DarkMagenta", "DarkRed", "DarkYellow", "Default", "Gray", "Green",
+        "Magenta", "Red", "Rainbow", "White", "Yellow")]
+    [String] $BackgroundColor = 'Default'
+    #[int] $MaxChars = '25'
+    )
+
+begin {
+    
+    Set-StrictMode -Version Latest
+    $ErrorActionPreference = 'Stop'
+    
+    # Algorithm from hell... This was painful. I hope there's a better way.
+    function Get-Ascii {
+    
+        param([String] $Text)
+    
+        $LetterArray = [Char[]] $Text.ToLower()
+    
+        #Write-Host -fore green $LetterArray
+    
+        # Find the letter with the most lines.
+        $MaxLines = 0
+        $LetterArray | ForEach-Object {
+            if ($Letters.([String] $_).Lines -gt $MaxLines ) {
+                $MaxLines = $Letters.([String] $_).Lines
+            }
+         }
+    
+        # Now this sure was a simple way of making sure all letter align tidily without changing a lot of code!
+        if (-not $Compress) { $MaxLines = 6 }
+    
+        $LetterWidthArray = $LetterArray | ForEach-Object {
+            $Letter = [String] $_
+            $Letters.$Letter.Width
+        }
+        $LetterLinesArray = $LetterArray | ForEach-Object {
+            $Letter = [String] $_
+            $Letters.$Letter.Lines
+        }
+    
+        #$LetterLinesArray
+    
+        $Lines = @{
+            '1' = ''
+            '2' = ''
+            '3' = ''
+            '4' = ''
+            '5' = ''
+            '6' = ''
+        }
+    
+        #$LineLengths = @(0, 0, 0, 0, 0, 0)
+    
+        # Debug
+        #Write-Host "MaxLines: $Maxlines"
+
+        $LetterPos = 0
+        foreach ($Letter in $LetterArray) {
+        
+            # We need to work with strings for indexing the hash by letter
+            $Letter = [String] $Letter
+        
+            # Each ASCII letter can be from 4 to 6 lines.
+        
+            # If the letter has the maximum of 6 lines, populate hash with all lines.
+            if ($LetterLinesArray[$LetterPos] -eq 6) {
+            
+                #Write-Host "Six letter letter"
+
+                foreach ($Num in 1..6) {
+                    
+                    $LineFragment = [String](($Letters.$Letter.ASCII).Split("`n"))[$Num-1]
+                    
+                    if ($LineFragment.Length -lt $Letters.$Letter.Width) {
+                        $LineFragment += ' ' * ($Letters.$Letter.Width - $LineFragment.Length)
+                    }
+                    
+                    $StringNum = [String] $Num
+                    $Lines.$StringNum += $LineFragment
+                    
+                }
+            
+            }
+        
+            # Add padding for line 1 for letters with 5 lines and populate lines 2-6.
+            ## Changed to top-adjust 5-line letters if there are 6 total.
+            ## Added XML properties for letter alignment. Most are "default", which is top-aligned.
+            ## Also added script logic to handle it (2012-12-29): <fixation>bottom</fixation>
+            elseif ($LetterLinesArray[$LetterPos] -eq 5) {
+            
+                if ($MaxLines -lt 6 -or $Letters.$Letter.fixation -eq 'bottom') {
+                
+                    $Padding = ' ' * $LetterWidthArray[$LetterPos]
+                    $Lines.'1' += $Padding
+                
+                    foreach ($Num in 2..6) {
+                    
+                        $LineFragment = [String](($Letters.$Letter.ASCII).Split("`n"))[$Num-2]
+                    
+                        if ($LineFragment.Length -lt $Letters.$Letter.Width) {
+                            $LineFragment += ' ' * ($Letters.$Letter.Width - $LineFragment.Length)
+                        }
+                    
+                        $StringNum = [String] $Num
+                        $Lines.$StringNum += $LineFragment
+                    
+                    }
+                
+                }
+            
+                else {
+                
+                    $Padding = ' ' * $LetterWidthArray[$LetterPos]
+                    $Lines.'6' += $Padding
+                
+                    foreach ($Num in 1..5) {
+                    
+                        $StringNum = [String] $Num
+                    
+                        $LineFragment = [String](($Letters.$Letter.ASCII).Split("`n"))[$Num-1]
+                    
+                        if ($LineFragment.Length -lt $Letters.$Letter.Width) {
+                            $LineFragment += ' ' * ($Letters.$Letter.Width - $LineFragment.Length)
+                        }
+                    
+                        $Lines.$StringNum += $LineFragment
+                    
+                    }
+                
+                }
+            
+            }
+        
+            # Here we deal with letters with four lines.
+            # Dynamic algorithm that places four-line letters on the bottom line if there are
+            # 4 or 5 lines only in the letter with the most lines.
+            else {
+            
+                # Default to putting the 4-liners at line 3-6
+                $StartRange, $EndRange, $IndexSubtract = 3, 6, 3
+                $Padding = ' ' * $LetterWidthArray[$LetterPos]
+            
+                # If there are 4 or 5 lines...
+                if ($MaxLines -lt 6) {
+                
+                    $Lines.'2' += $Padding
+                
+                }
+           
+                # There are 6 lines maximum, put 4-line letters in the middle.
+                else {
+                
+                    $Lines.'1' += $Padding
+                    $Lines.'6' += $Padding
+                    $StartRange, $EndRange, $IndexSubtract = 2, 5, 2
+                
+                }
+            
+                # There will always be at least four lines. Populate lines 2-5 or 3-6 in the hash.
+                foreach ($Num in $StartRange..$EndRange) {
+                
+                    $StringNum = [String] $Num
+                
+                    $LineFragment = [String](($Letters.$Letter.ASCII).Split("`n"))[$Num-$IndexSubtract]
+                
+                    if ($LineFragment.Length -lt $Letters.$Letter.Width) {
+                        $LineFragment += ' ' * ($Letters.$Letter.Width - $LineFragment.Length)
+                    }
+                
+                    $Lines.$StringNum += $LineFragment
+                
+                }
+            
+            }
+        
+            $LetterPos++
+        
+        } # end of LetterArray foreach
+    
+        # Return stuff
+        $Lines.GetEnumerator() |
+            Sort-Object -Property Name |
+            Select -ExpandProperty Value |
+            Where-Object {
+                $_ -match '\S'
+            } | ForEach-Object {
+                if ($PrependChar) {
+                    "'" + $_
+                }
+                else {
+                    $_
+                }
+            }
+    
+    }
+
+    # Populate the $Letters hashtable with character data from the XML.
+    Function Get-LetterXML {
+    
+       
+        $LetterFile = Join-Path (Get-Module PSToolKit).ModuleBase -ChildPath "\Private\letters.xml"
+        $Xml = [xml] (Get-Content $LetterFile)
+    
+        $Xml.Chars.Char | ForEach-Object {
+        
+            $Letters.($_.Name) = New-Object PSObject -Property @{
+            
+                'Fixation' = $_.fixation
+                'Lines'    = $_.lines
+                'ASCII'    = $_.data
+                'Width'    = $_.width
+            
+            }
+        
+        }
+    
+    }
+
+    function Write-RainbowString {
+    
+        param([String] $Line,
+              [String] $ForegroundColor = '',
+              [String] $BackgroundColor = '')
+
+        $Colors = @('Black', 'DarkBlue', 'DarkGreen', 'DarkCyan', 'DarkRed', 'DarkMagenta', 'DarkYellow',
+            'Gray', 'DarkGray', 'Blue', 'Green', 'Cyan', 'Red', 'Magenta', 'Yellow', 'White')
+
+
+        # $Colors[(Get-Random -Min 0 -Max 16)]
+
+        [Char[]] $Line | %{
+        
+            if ($ForegroundColor -and $ForegroundColor -ieq 'rainbow') {
+            
+                if ($BackgroundColor -and $BackgroundColor -ieq 'rainbow') {
+                    Write-Host -ForegroundColor $Colors[(
+                        Get-Random -Min 0 -Max 16
+                    )] -BackgroundColor $Colors[(
+                        Get-Random -Min 0 -Max 16
+                    )] -NoNewline $_
+                }
+                elseif ($BackgroundColor) {
+                    Write-Host -ForegroundColor $Colors[(
+                        Get-Random -Min 0 -Max 16
+                    )] -BackgroundColor $BackgroundColor `
+                    -NoNewline $_
+                }
+                else {
+                    Write-Host -ForegroundColor $Colors[(
+                        Get-Random -Min 0 -Max 16
+                    )] -NoNewline $_
+                }
+
+            }
+            # One of them has to be a rainbow, so we know the background is a rainbow here...
+            else {
+            
+                if ($ForegroundColor) {
+                    Write-Host -ForegroundColor $ForegroundColor -BackgroundColor $Colors[(
+                        Get-Random -Min 0 -Max 16
+                    )] -NoNewline $_
+                }
+                else {
+                    Write-Host -BackgroundColor $Colors[(Get-Random -Min 0 -Max 16)] -NoNewline $_
+                }
+            }
+
+        }
+    
+        Write-Host ''
+    
+    }
+
+    # Get ASCII art letters/characters and data from XML. Make it persistent for the module.
+    if (-not (Get-Variable -EA SilentlyContinue -Scope Script -Name Letters)) {
+        $script:Letters = @{}
+        Get-LetterXML
+    }
+
+    # Turn the [string[]] into a [String] the only way I could figure out how... wtf
+    #$Text = ''
+    #$InputObject | ForEach-Object { $Text += "$_ " }
+
+    # Limit to 30 characters
+    #$MaxChars = 30
+    #if ($Text.Length -gt $MaxChars) { "Too long text. There's a maximum of $MaxChars characters."; return }
+
+    # Replace spaces with underscores (that's what's used for spaces in the XML).
+    #$Text = $Text -replace ' ', '_'
+
+    # Define accepted characters (which are found in XML).
+    #$AcceptedChars = '[^a-z0-9 _,!?./;:<>()¤{}\[\]\|\^=\$\-''+`\\"æøåâàáéèêóòôü]' # Some chars only works when sent as UTF-8 on IRC
+    $LetterArray = [string[]]($Letters.GetEnumerator() | Sort Name | Select -ExpandProperty Name)
+    $AcceptedChars = [regex] ( '(?i)[^' + ([regex]::Escape(($LetterArray -join '')) -replace '-', '\-' -replace '\]', '\]') + ' ]' )
+    # Debug
+    #Write-Host -fore cyan $AcceptedChars.ToString()
+    }
+
+    process {
+        if ($InputObject -match $AcceptedChars) {
+            "Unsupported character, using these accepted characters: " + ($LetterArray -replace '^template$' -join ', ') + "."
+            return
+        }
+
+        # Filthy workaround (now worked around in the foreach creating the string).
+        #if ($Text.Length -eq 1) { $Text += '_' }
+
+        $Lines = @()
+
+        foreach ($Text in $InputObject) {
+        
+            $ASCII = Get-Ascii ($Text -replace ' ', '_')
+
+            if ($ForegroundColor -ne 'Default' -and $BackgroundColor -ne 'Default') {
+                if ($ForegroundColor -ieq 'rainbow' -or $BackGroundColor -ieq 'rainbow') {
+                    $ASCII | ForEach-Object {
+                        Write-RainbowString -ForegroundColor $ForegroundColor -BackgroundColor $BackgroundColor -Line $_
+                    }
+                }
+                else {
+                    Write-Host -ForegroundColor $ForegroundColor -BackgroundColor $BackgroundColor ($ASCII -join "`n")
+                }
+            }
+            elseif ($ForegroundColor -ne 'Default') {
+                if ($ForegroundColor -ieq 'rainbow') {
+                    $ASCII | ForEach-Object {
+                        Write-RainbowString -ForegroundColor $ForegroundColor -Line $_
+                    }
+                }
+                else {    
+                    Write-Host -ForegroundColor $ForegroundColor ($ASCII -join "`n")
+                }
+            }
+            elseif ($BackgroundColor -ne 'Default') {
+                if ($BackgroundColor -ieq 'rainbow') {
+                    $ASCII | ForEach-Object {
+                        Write-RainbowString -BackgroundColor $BackgroundColor -Line $_
+                    }
+                }    
+                else {
+                    Write-Host -BackgroundColor $BackgroundColor ($ASCII -join "`n")
+                }
+            }
+            else { $ASCII -replace '\s+$' }
+
+        } # end of foreach
+
+    } # end of process block
+    
+} # end of function
+ 
+Export-ModuleMember -Function Write-Ascii
+#endregion
+ 
 #region Write-PSToolKitLog.ps1
 ############################################
 # source: Write-PSToolKitLog.ps1
 # Module: PSToolKit
-# version: 0.1.40
+# version: 0.1.41
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
