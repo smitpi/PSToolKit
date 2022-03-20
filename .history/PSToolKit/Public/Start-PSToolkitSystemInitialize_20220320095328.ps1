@@ -100,7 +100,6 @@ Function Start-PSToolkitSystemInitialize {
 
 	Import-Module PSToolKit -Force
 	if ($LabSetup) {
-		New-PSProfile
 		Update-PSToolKitConfigFiles -UpdateLocal -UpdateLocalFromModule
 		Install-PSModules -BaseModules -Scope AllUsers
 		Install-ChocolateyClient
@@ -121,12 +120,12 @@ Function Start-PSToolkitSystemInitialize {
 				if (-not($LocalMod)) {$LocalMod = Get-Module $module -ListAvailable}
 				if (($LocalMod[0].Version) -lt (Find-Module $module).Version) {
 					try {
-						Write-Host '[Upgrading]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
+						Write-Host '[Upgrading] Module: ' -NoNewline -ForegroundColor Cyan; Write-Host "$($module)" -ForegroundColor Yellow
 						Update-Module -Name $module -Force -Scope AllUsers
 					} catch {Write-Warning "Error installing module $($module): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 				}
 			}
 		}
 	}
-	Start-PSProfile -ClearHost
+	Start-PSProfile -ClearHost -AddFun -ShowModuleList -GalleryStats
 } #end Function

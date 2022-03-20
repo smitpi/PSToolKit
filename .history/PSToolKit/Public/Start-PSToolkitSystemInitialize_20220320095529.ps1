@@ -100,7 +100,6 @@ Function Start-PSToolkitSystemInitialize {
 
 	Import-Module PSToolKit -Force
 	if ($LabSetup) {
-		New-PSProfile
 		Update-PSToolKitConfigFiles -UpdateLocal -UpdateLocalFromModule
 		Install-PSModules -BaseModules -Scope AllUsers
 		Install-ChocolateyClient
@@ -128,5 +127,5 @@ Function Start-PSToolkitSystemInitialize {
 			}
 		}
 	}
-	Start-PSProfile -ClearHost
+	Start-PSProfile -ClearHost -AddFun -ShowModuleList -GalleryStats
 } #end Function
