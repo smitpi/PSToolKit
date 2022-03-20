@@ -12,21 +12,21 @@
         <meta name="author" content="Pierre Smit">
       
       
-        <link rel="canonical" href="https://smitpi.github.io/PSToolKit/">
+        <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Add-ChocolateyPrivateRepo/">
       
-      <link rel="icon" href=".">
+      <link rel="icon" href="..">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.5">
     
     
       
-        <title>PSToolKit</title>
+        <title>Add-ChocolateyPrivateRepo - PSToolKit</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.2d9f7617.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.2d9f7617.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
@@ -41,7 +41,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pstoolkit" class="md-skip">
+        <a href="#add-chocolateyprivaterepo" class="md-skip">
           Skip to content
         </a>
       
@@ -83,7 +83,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="PSToolKit" class="md-header__button md-logo" aria-label="PSToolKit" data-md-component="logo">
+    <a href=".." title="PSToolKit" class="md-header__button md-logo" aria-label="PSToolKit" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              PSToolKit
+              Add-ChocolateyPrivateRepo
             
           </span>
         </div>
@@ -203,7 +203,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="PSToolKit" class="md-nav__button md-logo" aria-label="PSToolKit" data-md-component="logo">
+    <a href=".." title="PSToolKit" class="md-nav__button md-logo" aria-label="PSToolKit" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -232,6 +232,21 @@
 
   
   
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        PSToolKit
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
     
   
   
@@ -244,12 +259,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          PSToolKit
+          Add-ChocolateyPrivateRepo
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="." class="md-nav__link md-nav__link--active">
-        PSToolKit
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Add-ChocolateyPrivateRepo
       </a>
       
         
@@ -268,22 +283,125 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#synopsis" class="md-nav__link">
+    SYNOPSIS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    SYNTAX
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#description" class="md-nav__link">
-    Description
+    DESCRIPTION
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    Getting Started
+  <a href="#examples" class="md-nav__link">
+    EXAMPLES
+  </a>
+  
+    <nav class="md-nav" aria-label="EXAMPLES">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1" class="md-nav__link">
+    EXAMPLE 1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    PARAMETERS
+  </a>
+  
+    <nav class="md-nav" aria-label="PARAMETERS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-reponame" class="md-nav__link">
+    -RepoName
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-repourl" class="md-nav__link">
+    -RepoURL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-priority" class="md-nav__link">
+    -Priority
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-repoapikey" class="md-nav__link">
+    -RepoApiKey
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-disablecommunityrepo" class="md-nav__link">
+    -DisableCommunityRepo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commonparameters" class="md-nav__link">
+    CommonParameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inputs" class="md-nav__link">
+    INPUTS
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
+  <a href="#outputs" class="md-nav__link">
+    OUTPUTS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    NOTES
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-links" class="md-nav__link">
+    RELATED LINKS
   </a>
   
 </li>
@@ -304,22 +422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Add-ChocolateyPrivateRepo/" class="md-nav__link">
-        Add-ChocolateyPrivateRepo
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="Backup-ElevatedShortcut/" class="md-nav__link">
+      <a href="../Backup-ElevatedShortcut/" class="md-nav__link">
         Backup-ElevatedShortcut
       </a>
     </li>
@@ -334,7 +437,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Backup-PowerShellProfile/" class="md-nav__link">
+      <a href="../Backup-PowerShellProfile/" class="md-nav__link">
         Backup-PowerShellProfile
       </a>
     </li>
@@ -349,7 +452,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Connect-VMWareCluster/" class="md-nav__link">
+      <a href="../Connect-VMWareCluster/" class="md-nav__link">
         Connect-VMWareCluster
       </a>
     </li>
@@ -364,7 +467,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Edit-ChocolateyAppsList/" class="md-nav__link">
+      <a href="../Edit-ChocolateyAppsList/" class="md-nav__link">
         Edit-ChocolateyAppsList
       </a>
     </li>
@@ -379,7 +482,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Edit-HostsFile/" class="md-nav__link">
+      <a href="../Edit-HostsFile/" class="md-nav__link">
         Edit-HostsFile
       </a>
     </li>
@@ -394,7 +497,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Edit-PSModulesLists/" class="md-nav__link">
+      <a href="../Edit-PSModulesLists/" class="md-nav__link">
         Edit-PSModulesLists
       </a>
     </li>
@@ -409,7 +512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Enable-RemoteHostPSRemoting/" class="md-nav__link">
+      <a href="../Enable-RemoteHostPSRemoting/" class="md-nav__link">
         Enable-RemoteHostPSRemoting
       </a>
     </li>
@@ -424,7 +527,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Export-CitrixPolicySettings/" class="md-nav__link">
+      <a href="../Export-CitrixPolicySettings/" class="md-nav__link">
         Export-CitrixPolicySettings
       </a>
     </li>
@@ -439,7 +542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Export-ESXTemplates/" class="md-nav__link">
+      <a href="../Export-ESXTemplates/" class="md-nav__link">
         Export-ESXTemplates
       </a>
     </li>
@@ -454,7 +557,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Export-PSGallery/" class="md-nav__link">
+      <a href="../Export-PSGallery/" class="md-nav__link">
         Export-PSGallery
       </a>
     </li>
@@ -469,7 +572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Find-ChocolateyApps/" class="md-nav__link">
+      <a href="../Find-ChocolateyApps/" class="md-nav__link">
         Find-ChocolateyApps
       </a>
     </li>
@@ -484,7 +587,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Find-OnlineModule/" class="md-nav__link">
+      <a href="../Find-OnlineModule/" class="md-nav__link">
         Find-OnlineModule
       </a>
     </li>
@@ -499,7 +602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Find-OnlineScript/" class="md-nav__link">
+      <a href="../Find-OnlineScript/" class="md-nav__link">
         Find-OnlineScript
       </a>
     </li>
@@ -514,7 +617,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Find-PSScripts/" class="md-nav__link">
+      <a href="../Find-PSScripts/" class="md-nav__link">
         Find-PSScripts
       </a>
     </li>
@@ -529,7 +632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Format-AllObjectsInAListView/" class="md-nav__link">
+      <a href="../Format-AllObjectsInAListView/" class="md-nav__link">
         Format-AllObjectsInAListView
       </a>
     </li>
@@ -544,7 +647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Get-AllUsersInGroup/" class="md-nav__link">
+      <a href="../Get-AllUsersInGroup/" class="md-nav__link">
         Get-AllUsersInGroup
       </a>
     </li>
@@ -559,7 +662,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Get-CitrixClientVersions/" class="md-nav__link">
+      <a href="../Get-CitrixClientVersions/" class="md-nav__link">
         Get-CitrixClientVersions
       </a>
     </li>
@@ -574,7 +677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Get-CommandFiltered/" class="md-nav__link">
+      <a href="../Get-CommandFiltered/" class="md-nav__link">
         Get-CommandFiltered
       </a>
     </li>
@@ -589,7 +692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Get-DeviceUptime/" class="md-nav__link">
+      <a href="../Get-DeviceUptime/" class="md-nav__link">
         Get-DeviceUptime
       </a>
     </li>
@@ -604,7 +707,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Get-FQDN/" class="md-nav__link">
+      <a href="../Get-FQDN/" class="md-nav__link">
         Get-FQDN
       </a>
     </li>
@@ -619,7 +722,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Get-FolderSize/" class="md-nav__link">
+      <a href="../Get-FolderSize/" class="md-nav__link">
         Get-FolderSize
       </a>
     </li>
@@ -634,7 +737,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Get-FullADUserDetail/" class="md-nav__link">
+      <a href="../Get-FullADUserDetail/" class="md-nav__link">
         Get-FullADUserDetail
       </a>
     </li>
@@ -649,7 +752,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Get-MyPSGalleryStats/" class="md-nav__link">
+      <a href="../Get-MyPSGalleryStats/" class="md-nav__link">
         Get-MyPSGalleryStats
       </a>
     </li>
@@ -664,7 +767,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Get-ProcessPerformance/" class="md-nav__link">
+      <a href="../Get-ProcessPerformance/" class="md-nav__link">
         Get-ProcessPerformance
       </a>
     </li>
@@ -679,7 +782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Get-PropertiesToCSV/" class="md-nav__link">
+      <a href="../Get-PropertiesToCSV/" class="md-nav__link">
         Get-PropertiesToCSV
       </a>
     </li>
@@ -694,7 +797,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Get-SoftwareAudit/" class="md-nav__link">
+      <a href="../Get-SoftwareAudit/" class="md-nav__link">
         Get-SoftwareAudit
       </a>
     </li>
@@ -709,7 +812,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Get-SystemInfo/" class="md-nav__link">
+      <a href="../Get-SystemInfo/" class="md-nav__link">
         Get-SystemInfo
       </a>
     </li>
@@ -724,7 +827,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Get-WinEventLogExtract/" class="md-nav__link">
+      <a href="../Get-WinEventLogExtract/" class="md-nav__link">
         Get-WinEventLogExtract
       </a>
     </li>
@@ -739,7 +842,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Import-CitrixSiteConfigFile/" class="md-nav__link">
+      <a href="../Import-CitrixSiteConfigFile/" class="md-nav__link">
         Import-CitrixSiteConfigFile
       </a>
     </li>
@@ -754,7 +857,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Import-XamlConfigFile/" class="md-nav__link">
+      <a href="../Import-XamlConfigFile/" class="md-nav__link">
         Import-XamlConfigFile
       </a>
     </li>
@@ -769,7 +872,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Install-BGInfo/" class="md-nav__link">
+      <a href="../Install-BGInfo/" class="md-nav__link">
         Install-BGInfo
       </a>
     </li>
@@ -784,7 +887,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Install-ChocolateyApps/" class="md-nav__link">
+      <a href="../Install-ChocolateyApps/" class="md-nav__link">
         Install-ChocolateyApps
       </a>
     </li>
@@ -799,7 +902,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Install-ChocolateyClient/" class="md-nav__link">
+      <a href="../Install-ChocolateyClient/" class="md-nav__link">
         Install-ChocolateyClient
       </a>
     </li>
@@ -814,7 +917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Install-ChocolateyServer/" class="md-nav__link">
+      <a href="../Install-ChocolateyServer/" class="md-nav__link">
         Install-ChocolateyServer
       </a>
     </li>
@@ -829,7 +932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Install-MSWinget/" class="md-nav__link">
+      <a href="../Install-MSWinget/" class="md-nav__link">
         Install-MSWinget
       </a>
     </li>
@@ -844,7 +947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Install-PSModules/" class="md-nav__link">
+      <a href="../Install-PSModules/" class="md-nav__link">
         Install-PSModules
       </a>
     </li>
@@ -859,7 +962,7 @@
   
   
     <li class="md-nav__item">
-      <a href="New-CitrixSiteConfigFile/" class="md-nav__link">
+      <a href="../New-CitrixSiteConfigFile/" class="md-nav__link">
         New-CitrixSiteConfigFile
       </a>
     </li>
@@ -874,7 +977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="New-ElevatedShortcut/" class="md-nav__link">
+      <a href="../New-ElevatedShortcut/" class="md-nav__link">
         New-ElevatedShortcut
       </a>
     </li>
@@ -889,7 +992,7 @@
   
   
     <li class="md-nav__item">
-      <a href="New-GodModeFolder/" class="md-nav__link">
+      <a href="../New-GodModeFolder/" class="md-nav__link">
         New-GodModeFolder
       </a>
     </li>
@@ -904,7 +1007,7 @@
   
   
     <li class="md-nav__item">
-      <a href="New-PSModule/" class="md-nav__link">
+      <a href="../New-PSModule/" class="md-nav__link">
         New-PSModule
       </a>
     </li>
@@ -919,7 +1022,7 @@
   
   
     <li class="md-nav__item">
-      <a href="New-PSProfile/" class="md-nav__link">
+      <a href="../New-PSProfile/" class="md-nav__link">
         New-PSProfile
       </a>
     </li>
@@ -934,7 +1037,7 @@
   
   
     <li class="md-nav__item">
-      <a href="New-PSScript/" class="md-nav__link">
+      <a href="../New-PSScript/" class="md-nav__link">
         New-PSScript
       </a>
     </li>
@@ -949,7 +1052,7 @@
   
   
     <li class="md-nav__item">
-      <a href="New-SuggestedInfraNames/" class="md-nav__link">
+      <a href="../New-SuggestedInfraNames/" class="md-nav__link">
         New-SuggestedInfraNames
       </a>
     </li>
@@ -964,7 +1067,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Remove-CIMUserProfiles/" class="md-nav__link">
+      <a href="../Remove-CIMUserProfiles/" class="md-nav__link">
         Remove-CIMUserProfiles
       </a>
     </li>
@@ -979,7 +1082,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Remove-FaultyProfileList/" class="md-nav__link">
+      <a href="../Remove-FaultyProfileList/" class="md-nav__link">
         Remove-FaultyProfileList
       </a>
     </li>
@@ -994,7 +1097,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Remove-HiddenDevices/" class="md-nav__link">
+      <a href="../Remove-HiddenDevices/" class="md-nav__link">
         Remove-HiddenDevices
       </a>
     </li>
@@ -1009,7 +1112,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Remove-UserProfile/" class="md-nav__link">
+      <a href="../Remove-UserProfile/" class="md-nav__link">
         Remove-UserProfile
       </a>
     </li>
@@ -1024,7 +1127,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Restore-ElevatedShortcut/" class="md-nav__link">
+      <a href="../Restore-ElevatedShortcut/" class="md-nav__link">
         Restore-ElevatedShortcut
       </a>
     </li>
@@ -1039,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Search-Scripts/" class="md-nav__link">
+      <a href="../Search-Scripts/" class="md-nav__link">
         Search-Scripts
       </a>
     </li>
@@ -1054,7 +1157,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Set-PSProjectFiles/" class="md-nav__link">
+      <a href="../Set-PSProjectFiles/" class="md-nav__link">
         Set-PSProjectFiles
       </a>
     </li>
@@ -1069,7 +1172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Set-PSToolKitSystemSettings/" class="md-nav__link">
+      <a href="../Set-PSToolKitSystemSettings/" class="md-nav__link">
         Set-PSToolKitSystemSettings
       </a>
     </li>
@@ -1084,7 +1187,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Set-SharedPSProfile/" class="md-nav__link">
+      <a href="../Set-SharedPSProfile/" class="md-nav__link">
         Set-SharedPSProfile
       </a>
     </li>
@@ -1099,7 +1202,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Set-StaticIP/" class="md-nav__link">
+      <a href="../Set-StaticIP/" class="md-nav__link">
         Set-StaticIP
       </a>
     </li>
@@ -1114,7 +1217,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Set-TempFolder/" class="md-nav__link">
+      <a href="../Set-TempFolder/" class="md-nav__link">
         Set-TempFolder
       </a>
     </li>
@@ -1129,7 +1232,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Set-WindowsAutoLogin/" class="md-nav__link">
+      <a href="../Set-WindowsAutoLogin/" class="md-nav__link">
         Set-WindowsAutoLogin
       </a>
     </li>
@@ -1144,7 +1247,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Show-ComputerManagement/" class="md-nav__link">
+      <a href="../Show-ComputerManagement/" class="md-nav__link">
         Show-ComputerManagement
       </a>
     </li>
@@ -1159,7 +1262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Show-PSToolKit/" class="md-nav__link">
+      <a href="../Show-PSToolKit/" class="md-nav__link">
         Show-PSToolKit
       </a>
     </li>
@@ -1174,7 +1277,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Start-PSModuleMaintenance/" class="md-nav__link">
+      <a href="../Start-PSModuleMaintenance/" class="md-nav__link">
         Start-PSModuleMaintenance
       </a>
     </li>
@@ -1189,7 +1292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Start-PSProfile/" class="md-nav__link">
+      <a href="../Start-PSProfile/" class="md-nav__link">
         Start-PSProfile
       </a>
     </li>
@@ -1204,7 +1307,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Start-PSRoboCopy/" class="md-nav__link">
+      <a href="../Start-PSRoboCopy/" class="md-nav__link">
         Start-PSRoboCopy
       </a>
     </li>
@@ -1219,7 +1322,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Start-PSScriptAnalyzer/" class="md-nav__link">
+      <a href="../Start-PSScriptAnalyzer/" class="md-nav__link">
         Start-PSScriptAnalyzer
       </a>
     </li>
@@ -1234,7 +1337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Start-PSToolkitSystemInitialize/" class="md-nav__link">
+      <a href="../Start-PSToolkitSystemInitialize/" class="md-nav__link">
         Start-PSToolkitSystemInitialize
       </a>
     </li>
@@ -1249,7 +1352,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Sync-PSFolders/" class="md-nav__link">
+      <a href="../Sync-PSFolders/" class="md-nav__link">
         Sync-PSFolders
       </a>
     </li>
@@ -1264,7 +1367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Test-CitrixCloudConnector/" class="md-nav__link">
+      <a href="../Test-CitrixCloudConnector/" class="md-nav__link">
         Test-CitrixCloudConnector
       </a>
     </li>
@@ -1279,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Test-CitrixVDAPorts/" class="md-nav__link">
+      <a href="../Test-CitrixVDAPorts/" class="md-nav__link">
         Test-CitrixVDAPorts
       </a>
     </li>
@@ -1294,7 +1397,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Test-PSRemote/" class="md-nav__link">
+      <a href="../Test-PSRemote/" class="md-nav__link">
         Test-PSRemote
       </a>
     </li>
@@ -1309,7 +1412,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Test-PendingReboot/" class="md-nav__link">
+      <a href="../Test-PendingReboot/" class="md-nav__link">
         Test-PendingReboot
       </a>
     </li>
@@ -1324,7 +1427,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Update-ListOfDDCs/" class="md-nav__link">
+      <a href="../Update-ListOfDDCs/" class="md-nav__link">
         Update-ListOfDDCs
       </a>
     </li>
@@ -1339,7 +1442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Update-LocalHelp/" class="md-nav__link">
+      <a href="../Update-LocalHelp/" class="md-nav__link">
         Update-LocalHelp
       </a>
     </li>
@@ -1354,7 +1457,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Update-PSModuleInfo/" class="md-nav__link">
+      <a href="../Update-PSModuleInfo/" class="md-nav__link">
         Update-PSModuleInfo
       </a>
     </li>
@@ -1369,7 +1472,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Update-PSScriptInfo/" class="md-nav__link">
+      <a href="../Update-PSScriptInfo/" class="md-nav__link">
         Update-PSScriptInfo
       </a>
     </li>
@@ -1384,7 +1487,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Update-PSToolKit/" class="md-nav__link">
+      <a href="../Update-PSToolKit/" class="md-nav__link">
         Update-PSToolKit
       </a>
     </li>
@@ -1399,7 +1502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Update-PSToolKitConfigFiles/" class="md-nav__link">
+      <a href="../Update-PSToolKitConfigFiles/" class="md-nav__link">
         Update-PSToolKitConfigFiles
       </a>
     </li>
@@ -1414,7 +1517,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Write-Ascii/" class="md-nav__link">
+      <a href="../Write-Ascii/" class="md-nav__link">
         Write-Ascii
       </a>
     </li>
@@ -1429,7 +1532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Write-PSToolKitLog/" class="md-nav__link">
+      <a href="../Write-PSToolKitLog/" class="md-nav__link">
         Write-PSToolKitLog
       </a>
     </li>
@@ -1463,22 +1566,125 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#synopsis" class="md-nav__link">
+    SYNOPSIS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    SYNTAX
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#description" class="md-nav__link">
-    Description
+    DESCRIPTION
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    Getting Started
+  <a href="#examples" class="md-nav__link">
+    EXAMPLES
+  </a>
+  
+    <nav class="md-nav" aria-label="EXAMPLES">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1" class="md-nav__link">
+    EXAMPLE 1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    PARAMETERS
+  </a>
+  
+    <nav class="md-nav" aria-label="PARAMETERS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-reponame" class="md-nav__link">
+    -RepoName
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-repourl" class="md-nav__link">
+    -RepoURL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-priority" class="md-nav__link">
+    -Priority
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-repoapikey" class="md-nav__link">
+    -RepoApiKey
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-disablecommunityrepo" class="md-nav__link">
+    -DisableCommunityRepo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commonparameters" class="md-nav__link">
+    CommonParameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inputs" class="md-nav__link">
+    INPUTS
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
+  <a href="#outputs" class="md-nav__link">
+    OUTPUTS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    NOTES
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-links" class="md-nav__link">
+    RELATED LINKS
   </a>
   
 </li>
@@ -1495,110 +1701,92 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/smitpi/PSToolKit/edit/master/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Add-ChocolateyPrivateRepo.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
 
-<h1 id="pstoolkit">PSToolKit</h1>
-<h2 id="description">Description</h2>
-<p>Powershell Scripts and functions for a system administrator</p>
-<h2 id="getting-started">Getting Started</h2>
-<ul>
-<li>Install from PowerShell Gallery <a href="https://www.powershellgallery.com/packages/PSToolKit">PS Gallery</a>
-<div class="highlight"><pre><span></span><code>Install-Module -Name PSToolKit -Verbose
-</code></pre></div></li>
-<li>or from GitHub <a href="https://github.com/smitpi/PSToolKit">GitHub Repo</a>
-<div class="highlight"><pre><span></span><code>git clone https://github.com/smitpi/PSToolKit (Join-Path (get-item (Join-Path (Get-Item $profile).Directory &#39;Modules&#39;)).FullName -ChildPath PSToolKit)
-</code></pre></div></li>
-<li>Then import the module into your session
-<div class="highlight"><pre><span></span><code>Import-Module PSToolKit -Verbose -Force
-</code></pre></div></li>
-<li>or run these commands for more help and details.
-<div class="highlight"><pre><span></span><code>Get-Command -Module PSToolKit
-Get-Help about_PSToolKit
+<h1 id="add-chocolateyprivaterepo">Add-ChocolateyPrivateRepo</h1>
+<h2 id="synopsis">SYNOPSIS</h2>
+<p>Add a private repository to Chocolatey.</p>
+<h2 id="syntax">SYNTAX</h2>
+<div class="highlight"><pre><span></span><code>Add-ChocolateyPrivateRepo [-RepoName] &lt;String&gt; [-RepoURL] &lt;String&gt; [-Priority] &lt;Int32&gt; [[-RepoApiKey] &lt;String&gt;]
+ [-DisableCommunityRepo] [&lt;CommonParameters&gt;]
 </code></pre></div>
-Documentation can be found at: <a href="https://smitpi.github.io/PSToolKit">Github_Pages</a></li>
-</ul>
-<h2 id="functions">Functions</h2>
-<ul>
-<li><a href="https://smitpi.github.io/PSToolKit/#Add-ChocolateyPrivateRepo">Add-ChocolateyPrivateRepo</a> -- Add a private repository to Chocolatey.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Backup-ElevatedShortcut">Backup-ElevatedShortcut</a> -- Exports the RunAss shortcuts, to a zip file</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Backup-PowerShellProfile">Backup-PowerShellProfile</a> -- Creates a zip file from the ps profile directories</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Connect-VMWareCluster">Connect-VMWareCluster</a> -- Connect to a vSphere cluster to perform other commands or scripts</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Edit-ChocolateyAppsList">Edit-ChocolateyAppsList</a> -- Add or remove apps from the json file used in Install-ChocolateyApps</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Edit-HostsFile">Edit-HostsFile</a> -- Edit the hosts file</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Edit-PSModulesLists">Edit-PSModulesLists</a> -- Edit the Modules json files.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Enable-RemoteHostPSRemoting">Enable-RemoteHostPSRemoting</a> -- enable ps remote remotely</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Export-CitrixPolicySettings">Export-CitrixPolicySettings</a> -- Citrix policy export.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Export-ESXTemplates">Export-ESXTemplates</a> -- Export all VM Templates from vSphere to local disk.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Export-PSGallery">Export-PSGallery</a> -- Export details of all modules and scripts on psgallery to excel</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Find-ChocolateyApps">Find-ChocolateyApps</a> -- Search the online repo for software</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Find-OnlineModule">Find-OnlineModule</a> -- Find a module on psgallery</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Find-OnlineScript">Find-OnlineScript</a> -- Find Script on PSGallery</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Find-PSScripts">Find-PSScripts</a> -- Find and update script info</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Format-AllObjectsInAListView">Format-AllObjectsInAListView</a> -- Cast an array or psobject and display it in list view</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Get-AllUsersInGroup">Get-AllUsersInGroup</a> -- Get details of all users in a group</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Get-CitrixClientVersions">Get-CitrixClientVersions</a> -- Report on the CItrix workspace versions the users are using.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Get-CommandFiltered">Get-CommandFiltered</a> -- Finds commands on the system and sort it according to module</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Get-DeviceUptime">Get-DeviceUptime</a> -- Calculates the uptime of a system</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Get-FolderSize">Get-FolderSize</a> -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Get-FQDN">Get-FQDN</a> -- Get FQDN for a device, and checks if it is online</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Get-FullADUserDetail">Get-FullADUserDetail</a> -- Extract handy info of an AD user</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Get-MyPSGalleryStats">Get-MyPSGalleryStats</a> -- Show stats about my published modules.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Get-ProcessPerformance">Get-ProcessPerformance</a> -- Gets the top 10 processes by CPU %</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Get-PropertiesToCSV">Get-PropertiesToCSV</a> -- Get member data of an object. Use it to create other PSObjects.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Get-SoftwareAudit">Get-SoftwareAudit</a> -- Connects to a remote hosts and collect installed software details</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Get-SystemInfo">Get-SystemInfo</a> -- Get system details of a remote device</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Get-WinEventLogExtract">Get-WinEventLogExtract</a> -- Extract Event logs of a server list, and create html / excel report</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Import-CitrixSiteConfigFile">Import-CitrixSiteConfigFile</a> -- Import the Citrix config file, and created a variable with the details</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Import-XamlConfigFile">Import-XamlConfigFile</a> -- Import the wpf xaml file and create variables from objects</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Install-BGInfo">Install-BGInfo</a> -- Install and auto runs bginfo at startup.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Install-ChocolateyApps">Install-ChocolateyApps</a> -- Install chocolatey apps from a json list.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Install-ChocolateyClient">Install-ChocolateyClient</a> -- Downloads and installs the Chocolatey client.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Install-ChocolateyServer">Install-ChocolateyServer</a> -- This will download, install and setup a new Chocolatey Repo Server</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Install-MSWinget">Install-MSWinget</a> -- Install the package manager winget</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Install-PSModules">Install-PSModules</a> -- Install modules from .json file.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#New-CitrixSiteConfigFile">New-CitrixSiteConfigFile</a> -- All a config file with Citrix server details. To be imported as variables.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#New-ElevatedShortcut">New-ElevatedShortcut</a> -- Creates a shortcut to a script or exe that runs as admin, without UNC</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#New-GodModeFolder">New-GodModeFolder</a> -- Creates a God Mode Folder</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#New-PSModule">New-PSModule</a> -- Creates a new PowerShell module.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#New-PSProfile">New-PSProfile</a> -- Creates new profile files in the documents folder</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#New-PSScript">New-PSScript</a> -- Creates a new PowerShell script. With PowerShell Script Info</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#New-SuggestedInfraNames">New-SuggestedInfraNames</a> -- Generates a list of usernames and server names, that can be used as test / demo data.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Remove-CIMUserProfiles">Remove-CIMUserProfiles</a> -- Uses CimInstance to remove a user profile</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Remove-FaultyProfileList">Remove-FaultyProfileList</a> -- Fixes Profilelist in the registry. To fix user logon with temp profile.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Remove-HiddenDevices">Remove-HiddenDevices</a> -- Removes ghost devices from your system</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Remove-UserProfile">Remove-UserProfile</a> -- Connects to a server and renames a user profile folder, and delete the key from Profilelist in the registry</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Restore-ElevatedShortcut">Restore-ElevatedShortcut</a> -- Restore the RunAss shortcuts, from a zip file</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Search-Scripts">Search-Scripts</a> -- Search for a string in a directory of ps1 scripts.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Set-PSToolKitSystemSettings">Set-PSToolKitSystemSettings</a> -- Set multiple settings on desktop or server</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Set-SharedPSProfile">Set-SharedPSProfile</a> -- Redirects PowerShell profile to network share.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Set-StaticIP">Set-StaticIP</a> -- Set static IP on device</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Set-TempFolder">Set-TempFolder</a> -- Set all the temp environmental variables to c:\temp</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Set-WindowsAutoLogin">Set-WindowsAutoLogin</a> -- Enable autologin on a device.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Show-ComputerManagement">Show-ComputerManagement</a> -- Opens the Computer Management of the system or remote system</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Show-PSToolKit">Show-PSToolKit</a> -- Show details of the commands in this module</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Start-PSModuleMaintenance">Start-PSModuleMaintenance</a> -- Goes through all the installed modules, and allow you to upgrade(If available), or remove old and duplicate versions.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Start-PSProfile">Start-PSProfile</a> -- My PS Profile for all sessions.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Start-PSRoboCopy">Start-PSRoboCopy</a> -- My wrapper for default robocopy switches</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Start-PSScriptAnalyzer">Start-PSScriptAnalyzer</a> -- Run and report ScriptAnalyzer output</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Start-PSToolkitSystemInitialize">Start-PSToolkitSystemInitialize</a> -- Initialize a blank machine.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Sync-PSFolders">Sync-PSFolders</a> -- Compare two directories and copy the differences</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Test-CitrixCloudConnector">Test-CitrixCloudConnector</a> -- Perform basic connection tests to CItrix cloud.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Test-CitrixVDAPorts">Test-CitrixVDAPorts</a> -- Test connection between ddc and vda</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Test-PendingReboot">Test-PendingReboot</a> -- This script tests various registry values to see if the local computer is pending a reboot.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Test-PSRemote">Test-PSRemote</a> -- Test PSb Remote to a device.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Update-ListOfDDCs">Update-ListOfDDCs</a> -- Update list of ListOfDDCs in the registry</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Update-LocalHelp">Update-LocalHelp</a> -- Downloads and saves help files locally</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Update-PSModuleInfo">Update-PSModuleInfo</a> -- Update PowerShell module manifest file</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Update-PSScriptInfo">Update-PSScriptInfo</a> -- Update PowerShell ScriptFileInfo</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Update-PSToolKit">Update-PSToolKit</a> -- Update PSToolKit from GitHub.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Update-PSToolKitConfigFiles">Update-PSToolKitConfigFiles</a> -- Manages the config files for the PSToolKit Module.</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Write-Ascii">Write-Ascii</a> -- Create Ascii Art</li>
-<li><a href="https://smitpi.github.io/PSToolKit/#Write-PSToolKitLog">Write-PSToolKitLog</a> -- Create a log for scripts</li>
-</ul>
+<h2 id="description">DESCRIPTION</h2>
+<p>Add a private repository to Chocolatey.</p>
+<h2 id="examples">EXAMPLES</h2>
+<h3 id="example-1">EXAMPLE 1</h3>
+<div class="highlight"><pre><span></span><code>Add-ChocolateyPrivateRepo -RepoName XXX -RepoURL https://choco.xxx.lab/chocolatey -Priority 3
+</code></pre></div>
+<h2 id="parameters">PARAMETERS</h2>
+<h3 id="-reponame">-RepoName</h3>
+<p>Name of the repo</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-repourl">-RepoURL</h3>
+<p>URL of the repo</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-priority">-Priority</h3>
+<p>Priority of server, 1 being the highest.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Int32</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-repoapikey">-RepoApiKey</h3>
+<p>API key to allow uploads to the server.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-disablecommunityrepo">-DisableCommunityRepo</h3>
+<p>Disable the community repo, and will only use the private one.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="commonparameters">CommonParameters</h3>
+<p>This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see <a href="http://go.microsoft.com/fwlink/?LinkID=113216">about_CommonParameters</a>.</p>
+<h2 id="inputs">INPUTS</h2>
+<h2 id="outputs">OUTPUTS</h2>
+<h2 id="notes">NOTES</h2>
+<h2 id="related-links">RELATED LINKS</h2>
 
               
             </article>
@@ -1611,15 +1799,30 @@ Documentation can be found at: <a href="https://smitpi.github.io/PSToolKit">Gith
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
+        
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: PSToolKit" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              PSToolKit
+            </div>
+          </div>
+        </a>
+      
       
         
-        <a href="Add-ChocolateyPrivateRepo/" class="md-footer__link md-footer__link--next" aria-label="Next: Add-ChocolateyPrivateRepo" rel="next">
+        <a href="../Backup-ElevatedShortcut/" class="md-footer__link md-footer__link--next" aria-label="Next: Backup-ElevatedShortcut" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Add-ChocolateyPrivateRepo
+              Backup-ElevatedShortcut
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -1666,10 +1869,10 @@ Documentation can be found at: <a href="https://smitpi.github.io/PSToolKit">Gith
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
     
     
-      <script src="assets/javascripts/bundle.467223ff.min.js"></script>
+      <script src="../assets/javascripts/bundle.467223ff.min.js"></script>
       
     
   </body>
