@@ -270,7 +270,7 @@ begin {
     Function Get-LetterXML {
     
        
-        $LetterFile = Join-Path (Get-Module PSToolKit).ModuleBase -ChildPath "\Private\letters.xml"
+        $LetterFile = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config','letters.xml')
         $Xml = [xml] (Get-Content $LetterFile)
     
         $Xml.Chars.Char | ForEach-Object {
