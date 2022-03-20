@@ -105,7 +105,7 @@ Function Update-PSToolKitConfigFiles {
 			try {
 				$module = Get-Module PSToolKit
 				if (!$module) { $module = Get-Module PSToolKit -ListAvailable }
-				Get-ChildItem (Join-Path $module.ModuleBase -ChildPath \private) | ForEach-Object {
+				Get-ChildItem (Join-Path $module.ModuleBase -ChildPath "\private\Config") | ForEach-Object {
 					Copy-Item -Path $_.FullName -Destination $ModuleConfigPath.FullName -Force
 					Write-Color '[Update]', "$($_.name): ", 'Completed' -Color Yellow, Cyan, Green
 				}
