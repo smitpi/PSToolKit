@@ -83,7 +83,7 @@ Function Install-BGInfo {
 		$bgInfoRegPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run'
 		$bgInfoRegKey = 'BgInfo'
 		$bgInfoRegType = 'String'
-		$bgInfoRegKeyValue = 'C:\Program Files\PSToolKit\BGInfo\Bginfo64.exe C:\Program Files\PSToolKit\BGInfo\PSToolKit.bgi /timer:0 /nolicprompt'
+		$bgInfoRegKeyValue = '"C:\Program Files\PSToolKit\BGInfo\Bginfo64.exe" "C:\Program Files\PSToolKit\BGInfo\PSToolKit.bgi" /timer:0 /nolicprompt'
 		$regKeyExists = (Get-Item $bgInfoRegPath -ErrorAction SilentlyContinue).Property -contains $bgInfoRegkey
 
 		If ($regKeyExists -eq $True) {
