@@ -4913,11 +4913,6 @@ Function Set-PSProjectFiles {
 		$file.add('#endregion')
 		$file | Set-Content -Path $rootModule -Encoding utf8 -Force
 
-		$versionfile = [System.Collections.Generic.List[string]]::new()
-		$versionfile.add()
-		
-
-
 		$versionfile = [System.Collections.Generic.List[PSObject]]::New()
 		$versionfile.add([pscustomobject]@{
 				version = $($moduleManifest.version).ToString()
