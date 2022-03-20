@@ -11,7 +11,8 @@ function mybuild {
 	Get-Module PSToolKit | Remove-Module -Force
 	Import-Module 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\Public\Set-PSProjectFiles.ps1' -Force
 	try {
-		Copy-Item 'C:\Program Files\PSToolKit\Config\*' -Destination 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\Private' -Force -ErrorAction Stop
+		Copy-Item 'C:\Program Files\PSToolKit\Config\*' -Destination 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\Private\Config' -Force -ErrorAction Stop
+		Copy-Item 'C:\Program Files\PSToolKit\BGInfo\*' -Destination 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\Private\BGInfo' -Force -ErrorAction Stop	
 	} catch {throw "Cant copy config files`nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 
 
