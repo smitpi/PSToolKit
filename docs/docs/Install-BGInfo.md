@@ -13,7 +13,7 @@ Install and auto runs bginfo at startup.
 ## SYNTAX
 
 ```
-Install-BGInfo [-RunBGInfo] <String> [<CommonParameters>]
+Install-BGInfo [-RunBGInfo] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,13 +32,13 @@ Install-BGInfo -RunBGInfo
 Execute bginfo at the end of the script
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
-Default value: None
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
