@@ -56,6 +56,9 @@ This will increase the version of the module.
 .PARAMETER mkdocs
 Create and test the mkdocs site
 
+.PARAMETER GitPush
+Run Git Push when done.
+
 .EXAMPLE
 Set-PSProjectFiles -ModulePSM1 c:\temp\blah.psm1 -VersionBump Minor -mkdocs serve
 
@@ -69,7 +72,8 @@ Function Set-PSProjectFiles {
 		[ValidateSet('Minor', 'Build', 'CombineOnly')]
 		[string]$VersionBump = 'None',
 		[ValidateSet('serve', 'gh-deploy')]
-		[string]$mkdocs = 'None'
+		[string]$mkdocs = 'None',
+        [Switch]$GitPush = $false
 	)
 
 	#region module
@@ -380,6 +384,17 @@ Function Set-PSProjectFiles {
 		mkdocs
 	}
 	if ($null -notlike $Issues) { $issues | Export-Excel -Path $ModuleIssuesExcel -WorksheetName Other -AutoSize -AutoFilter -BoldTopRow -FreezeTopRow }
+    
+    if ($GitPush) {
+    if (Get-Command git.exe -ErrorAction SilentlyContinue) {
+        Write-Color '[Starting]', 'Git Push' -Color Yellow, DarkCyan
+        Set-Location $ModuleBase
+        Start-Sleep 15
+	    git add --all
+	    git commit --all -m "To Version: $($moduleManifest.version).ToString()"
+	    git push
+    } else {Write-Warning "Git is not installed"}
+    }
 
 	#endregion
 
