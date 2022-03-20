@@ -13,7 +13,8 @@ Creates and modify needed files for a PS project from existing module files.
 ## SYNTAX
 
 ```
-Set-PSProjectFiles [-ModulePSM1] <FileInfo> [[-VersionBump] <String>] [[-mkdocs] <String>] [<CommonParameters>]
+Set-PSProjectFiles [-ModulePSM1] <FileInfo> [[-VersionBump] <String>] [[-mkdocs] <String>] [-GitPush]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -69,6 +70,21 @@ Aliases:
 Required: False
 Position: 3
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -GitPush
+Run Git Push when done.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

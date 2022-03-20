@@ -391,7 +391,7 @@ Function Set-PSProjectFiles {
         Set-Location $ModuleBase
         Start-Sleep 15
 	    git add --all
-	    git commit --all -m "To Version: $($moduleManifest.version).ToString()"
+	    git commit --all -m "To Version: $($moduleManifest.version.tostring())"
 	    git push
     } else {Write-Warning "Git is not installed"}
     }

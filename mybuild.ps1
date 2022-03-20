@@ -20,9 +20,9 @@ function mybuild {
 			Remove-Item 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\docs' -Force -Recurse -ErrorAction Stop
 			Remove-Item 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\Output' -Force -Recurse -ErrorAction Stop
 		} catch {Write-Warning "Cant delete files`nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
-		Set-PSProjectFiles -ModulePSM1 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\PSToolKit.psm1' -VersionBump Build -mkdocs gh-deploy
+		Set-PSProjectFiles -ModulePSM1 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\PSToolKit.psm1' -VersionBump Build -mkdocs gh-deploy -GitPush
 	} else {
-		Set-PSProjectFiles -ModulePSM1 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\PSToolKit.psm1' -VersionBum CombineOnly -mkdocs serve
+		Set-PSProjectFiles -ModulePSM1 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\PSToolKit.psm1' -VersionBum CombineOnly -mkdocs serve -GitPush
 	}
 
 	try {
@@ -31,11 +31,4 @@ function mybuild {
 		Get-ChildItem -Directory 'C:\Program Files\WindowsPowerShell\Modules\PSToolKit' | Remove-Item -Recurse -Force
 		Copy-Item -Path $newmod.FullName -Destination 'C:\Program Files\WindowsPowerShell\Modules\PSToolKit\' -Force -Recurse
 	} catch {Write-Warning "Unable to copy the new module `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
-
-
-	Set-Location 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit'
-	Start-Sleep 15
-	git add --all
-	git commit --all -m "To Version: $((Get-ChildItem -Directory D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\Output).name.ToString())"
-	git push
 }
