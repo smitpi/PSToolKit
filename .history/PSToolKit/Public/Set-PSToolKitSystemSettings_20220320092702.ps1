@@ -49,7 +49,10 @@ Set multiple settings on desktop or server
 Set multiple settings on desktop or server
 
 .PARAMETER RunAll
-Enable all the options in this function. Except windows update and reboot.
+Enable all the options in this function.
+
+.PARAMETER RunFrequent
+Enable selected frequently used options in this function.
 
 .PARAMETER ExecutionPolicy
 Set ps execution policy to unrestricted.
@@ -137,6 +140,10 @@ Function Set-PSToolKitSystemSettings {
                 if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
                 else { Throw 'Must be running an elevated prompt to use function' } })]
         [switch]$RunAll = $false,
+        [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+                if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+                else { Throw 'Must be running an elevated prompt to use function' } })]
+        [switch]$RunFrequent = $false,
         [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
                 if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
                 else { Throw 'Must be running an elevated prompt to use function' } })]
@@ -228,6 +235,10 @@ Function Set-PSToolKitSystemSettings {
         [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
                 if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
                 else { Throw 'Must be running an elevated prompt to use function' } })]
+        [switch]$InstallSSHServer = $false,
+        [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+                if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+                else { Throw 'Must be running an elevated prompt to use function' } })]
         [switch]$EnableNFSClient = $false,
         [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
                 if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
@@ -236,27 +247,11 @@ Function Set-PSToolKitSystemSettings {
     )
 
     if ($RunAll) {
-        ExecutionPolicy = $True
-        PSGallery = $True
-        IntranetZone = $True
-        IntranetZoneIPRange = $True
-        PSTrustedHosts = $True
-        FileExplorerSettings = $True
-        SystemDefaults = $True
-        DisableIEFirstRun = $True
-        DisableFirstLogonAnimation = $True
-        SetPhotoViewer = $True
-        DisableShutdownTracker = $True
-        DisableIPV6 = $True
-        DisableFirewall = $True
-        DisableInternetExplorerESC = $True
-        DisableServerManager = $True
-        EnableRDP = $True
-        InstallPS7 = $True
-        InstallMSTerminal = $True
-        InstallVMWareTools = $True
-        InstallRSAT = $True
-        EnableNFSClient = $True
+        $ExecutionPolicy = $PSGallery = $IntranetZone = $IntranetZoneIPRange = $PSTrustedHosts = $FileExplorerSettings = $DisableIPV6 = $DisableFirewall = $DisableInternetExplorerESC = $DisableServerManager = $DisableIEFirstRun = $DisableFirstLogonAnimation = $SetPhotoViewer = $DisableShutdownTracker = $SystemDefaults = $EnableRDP = $InstallPS7 = $InstallMSTerminal = $InstallVMWareTools = $InstallRSAT = $EnableNFSClient = $InstallSSHServer = $true
+    }
+
+    if ($RunFrequent) {
+        $ExecutionPolicy = $PSGallery = $IntranetZone = $IntranetZoneIPRange = $DisableIPV6 = $FileExplorerSettings = $DisableFirewall = $DisableInternetExplorerESC = $EnableRDP = $DisableServerManager = $true
     }
 
     if ($ExecutionPolicy) {
@@ -651,7 +646,7 @@ Function Set-PSToolKitSystemSettings {
         $checkver = Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object caption
         if ($checkver -notlike '*server*') {
             Enable-ComputerRestore -Drive "$env:SYSTEMDRIVE"
-            vssadmin Resize ShadowStorage /On=$env:SYSTEMDRIVE /For=$env:SYSTEMDRIVE /MaxSize=10GB | Out-Null
+            vssadmin Resize ShadowStorage /On=$env:SYSTEMDRIVE /For=$env:SYSTEMDRIVE /MaxSize=10GB |out-null
             Write-Color '[Set]', 'EnableRestorePoints: ', 'Complete' -Color Yellow, Cyan, Green -StartTab 1
         }
         Set-ItemProperty -Path 'HKCU:\Control Panel\Mouse' -Name 'MouseSpeed' -Type String -Value '1'
@@ -774,6 +769,42 @@ Function Set-PSToolKitSystemSettings {
             Invoke-WebRequest -Uri 'https://git.io/JMTRv' -OutFile $SetFile.FullName
             Write-Color '[Installing]', ' Microsoft Terminal Settings: ', 'Complete' -Color Yellow, Cyan, Green
         } catch { Write-Warning "[Installing] Microsoft Terminal: Failed:`n $($_.Exception.Message)" }
+    }
+
+    if ($InstallSSHServer) {
+        try {
+            if (-not(Get-Service sshd -ErrorAction SilentlyContinue)) {
+                if (-not(Get-WindowsCapability -Name OpenSSH.Client~~~~0.0.1.0 -Online )) {
+                    Write-Color '[Installing] ', 'SSH Client' -Color Yellow, Cyan
+                    Add-WindowsCapability -Name OpenSSH.Client~~~~0.0.1.0 -Online | Out-Null
+                }
+
+                if (-not(Get-Command choco.exe -ErrorAction SilentlyContinue)) { Install-ChocolateyClient}
+                Write-Color '[Installing] ', 'SSH Server', ' from source ', 'chocolatey' -Color Yellow, Cyan, green, Cyan
+                choco upgrade openssh --accept-license --limit-output -y --source chocolatey | Out-Null
+                if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing vmware-tools Code: $($LASTEXITCODE)"}
+
+                Import-Module 'C:\Program Files\OpenSSH-Win64\install-sshd.ps1'
+                New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
+
+                $PowerShellPath = (Get-Command -Name pwsh.exe).Path
+                $fso = New-Object -ComObject Scripting.FileSystemObject
+                $SSHConf = Get-Content "$env:ProgramFiles\OpenSSH-Win64\sshd_config_default"
+                $NewSSHConf = $SSHConf -replace ('#PasswordAuthentication yes', 'PasswordAuthentication yes')
+                $NewSSHConf = $NewSSHConf -replace ('#PubkeyAuthentication yes', 'PubkeyAuthentication yes')
+                $NewSSHConf += ' '
+                $NewSSHConf += '# Required (Windows): Define the PowerShell subsystem'
+                $NewSSHConf += 'Subsystem powershell ' + $fso.GetFile($PowerShellPath).ShortPath + ' -sshs -NoLogo'
+                $NewSSHConf | Set-Content "$env:ProgramData\ssh\sshd_config" -Force
+                'sshd', 'ssh-agent' | Get-Service | Set-Service -StartupType Automatic -Status Running
+                'sshd', 'ssh-agent' | Get-Service | Stop-Service
+                'sshd', 'ssh-agent' | Get-Service | Start-Service
+                Write-Color '[Installing] ', 'SSH Server: ', 'Complete' -Color Yellow, Cyan, Green
+            } else {
+                Write-Color '[Installing] ', 'SSH Server: ', 'Already Installed' -Color Yellow, Cyan, DarkRed
+            }
+        } catch { Write-Warning "[Installing] SSH Server: Failed:`n $($_.Exception.Message)" }
+
     }
 
     if ($InstallMSUpdates) {

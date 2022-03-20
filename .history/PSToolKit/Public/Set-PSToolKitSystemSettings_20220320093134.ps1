@@ -49,7 +49,7 @@ Set multiple settings on desktop or server
 Set multiple settings on desktop or server
 
 .PARAMETER RunAll
-Enable all the options in this function. Except windows update and reboot.
+Enable all the options in this function.
 
 .PARAMETER ExecutionPolicy
 Set ps execution policy to unrestricted.
@@ -236,27 +236,27 @@ Function Set-PSToolKitSystemSettings {
     )
 
     if ($RunAll) {
-        ExecutionPolicy = $True
-        PSGallery = $True
-        IntranetZone = $True
-        IntranetZoneIPRange = $True
-        PSTrustedHosts = $True
-        FileExplorerSettings = $True
-        SystemDefaults = $True
-        DisableIEFirstRun = $True
-        DisableFirstLogonAnimation = $True
-        SetPhotoViewer = $True
-        DisableShutdownTracker = $True
-        DisableIPV6 = $True
-        DisableFirewall = $True
-        DisableInternetExplorerESC = $True
-        DisableServerManager = $True
-        EnableRDP = $True
-        InstallPS7 = $True
-        InstallMSTerminal = $True
-        InstallVMWareTools = $True
-        InstallRSAT = $True
-        EnableNFSClient = $True
+        $ExecutionPolicy = $true
+        $PSGallery = $true
+        $IntranetZone = $true
+        $IntranetZoneIPRange = $true
+        $PSTrustedHosts = $true
+        $FileExplorerSettings = $true
+        $DisableIPV6 = $true
+        $DisableFirewall = $true
+        $DisableInternetExplorerESC = $true
+        $DisableServerManager = $true
+        $DisableIEFirstRun = $true
+        $DisableFirstLogonAnimation = $true
+        $SetPhotoViewer = $true
+        $DisableShutdownTracker = $true
+        $SystemDefaults = $true
+        $EnableRDP = $true
+        $InstallPS7 = $true
+        $InstallMSTerminal = $true
+        $InstallVMWareTools = $true
+        $InstallRSAT = $true
+        $EnableNFSClient = $true
     }
 
     if ($ExecutionPolicy) {

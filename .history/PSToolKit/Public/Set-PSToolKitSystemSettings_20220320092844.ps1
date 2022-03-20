@@ -49,7 +49,10 @@ Set multiple settings on desktop or server
 Set multiple settings on desktop or server
 
 .PARAMETER RunAll
-Enable all the options in this function. Except windows update and reboot.
+Enable all the options in this function.
+
+.PARAMETER RunFrequent
+Enable selected frequently used options in this function.
 
 .PARAMETER ExecutionPolicy
 Set ps execution policy to unrestricted.
@@ -137,6 +140,10 @@ Function Set-PSToolKitSystemSettings {
                 if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
                 else { Throw 'Must be running an elevated prompt to use function' } })]
         [switch]$RunAll = $false,
+        [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+                if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+                else { Throw 'Must be running an elevated prompt to use function' } })]
+        [switch]$RunFrequent = $false,
         [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
                 if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
                 else { Throw 'Must be running an elevated prompt to use function' } })]
@@ -228,6 +235,10 @@ Function Set-PSToolKitSystemSettings {
         [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
                 if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
                 else { Throw 'Must be running an elevated prompt to use function' } })]
+        [switch]$InstallSSHServer = $false,
+        [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+                if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+                else { Throw 'Must be running an elevated prompt to use function' } })]
         [switch]$EnableNFSClient = $false,
         [ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
                 if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
@@ -236,27 +247,7 @@ Function Set-PSToolKitSystemSettings {
     )
 
     if ($RunAll) {
-        ExecutionPolicy = $True
-        PSGallery = $True
-        IntranetZone = $True
-        IntranetZoneIPRange = $True
-        PSTrustedHosts = $True
-        FileExplorerSettings = $True
-        SystemDefaults = $True
-        DisableIEFirstRun = $True
-        DisableFirstLogonAnimation = $True
-        SetPhotoViewer = $True
-        DisableShutdownTracker = $True
-        DisableIPV6 = $True
-        DisableFirewall = $True
-        DisableInternetExplorerESC = $True
-        DisableServerManager = $True
-        EnableRDP = $True
-        InstallPS7 = $True
-        InstallMSTerminal = $True
-        InstallVMWareTools = $True
-        InstallRSAT = $True
-        EnableNFSClient = $True
+        $ExecutionPolicy = $PSGallery = $IntranetZone = $IntranetZoneIPRange = $PSTrustedHosts = $FileExplorerSettings = $DisableIPV6 = $DisableFirewall = $DisableInternetExplorerESC = $DisableServerManager = $DisableIEFirstRun = $DisableFirstLogonAnimation = $SetPhotoViewer = $DisableShutdownTracker = $SystemDefaults = $EnableRDP = $InstallPS7 = $InstallMSTerminal = $InstallVMWareTools = $InstallRSAT = $EnableNFSClient = $InstallSSHServer = $true
     }
 
     if ($ExecutionPolicy) {
@@ -651,7 +642,7 @@ Function Set-PSToolKitSystemSettings {
         $checkver = Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object caption
         if ($checkver -notlike '*server*') {
             Enable-ComputerRestore -Drive "$env:SYSTEMDRIVE"
-            vssadmin Resize ShadowStorage /On=$env:SYSTEMDRIVE /For=$env:SYSTEMDRIVE /MaxSize=10GB | Out-Null
+            vssadmin Resize ShadowStorage /On=$env:SYSTEMDRIVE /For=$env:SYSTEMDRIVE /MaxSize=10GB |out-null
             Write-Color '[Set]', 'EnableRestorePoints: ', 'Complete' -Color Yellow, Cyan, Green -StartTab 1
         }
         Set-ItemProperty -Path 'HKCU:\Control Panel\Mouse' -Name 'MouseSpeed' -Type String -Value '1'

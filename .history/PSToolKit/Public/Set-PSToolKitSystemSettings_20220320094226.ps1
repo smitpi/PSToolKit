@@ -49,7 +49,7 @@ Set multiple settings on desktop or server
 Set multiple settings on desktop or server
 
 .PARAMETER RunAll
-Enable all the options in this function. Except windows update and reboot.
+Enable all the options in this function.
 
 .PARAMETER ExecutionPolicy
 Set ps execution policy to unrestricted.
