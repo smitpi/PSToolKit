@@ -121,6 +121,7 @@ Function Set-PSProjectFiles {
 	$ModuleMkdocs = [IO.Path]::Combine($ModuleBase, 'docs', 'mkdocs.yml')
 	$ModfuleIndex = [IO.Path]::Combine($ModuleBase, 'docs', 'docs', 'index.md')
 	[System.Collections.ArrayList]$Issues = @()
+	[System.Collections.ArrayList]$ScriptAnalyzerIssues = @()
 	#endregion
 
 	function exthelp {
@@ -334,13 +335,13 @@ Function Set-PSProjectFiles {
 		
 
 
-		$versionfile = [System.Collections.Generic.List[PSObject]]::New()
-		$versionfile.add([pscustomobject]@{
-				version = $($moduleManifest.version).ToString()
-				Author  = $($moduleManifest.author)
-				Date    = (Get-Date -Format u)
+	$versionfile = [System.Collections.Generic.List[PSObject]]::New()
+	$versionfile.add([pscustomobject]@{
+		version =  $($moduleManifest.version)
+		Author =  $($moduleManifest.author)
+		Date = (Get-Date -Format u)
 			})
-        $versionfile | ConvertTo-Json | Set-Content (Join-Path $ModuleBase -ChildPath "Output\Version.json") -Force
+			
 
 		$newfunction = ((Select-String -Path $rootModule -Pattern '^# source:').Line).Replace('# source:', '').Replace('.ps1', '').Trim()
 		$ModCommands = Get-Command -Module $module | ForEach-Object { $_.name }
