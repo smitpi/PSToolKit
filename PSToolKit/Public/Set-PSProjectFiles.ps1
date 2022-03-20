@@ -335,7 +335,7 @@ Function Set-PSProjectFiles {
 				Author  = $($moduleManifest.author)
 				Date    = (Get-Date -Format u)
 			})
-        $versionfile | ConvertTo-Json | Set-Content (Join-Path $ModuleBase -ChildPath "Output\Version.json") -Force
+        $versionfile | ConvertTo-Json | Set-Content (Join-Path $ModuleBase -ChildPath "Version.json") -Force
 
 		$newfunction = ((Select-String -Path $rootModule -Pattern '^# source:').Line).Replace('# source:', '').Replace('.ps1', '').Trim()
 		$ModCommands = Get-Command -Module $module | ForEach-Object { $_.name }

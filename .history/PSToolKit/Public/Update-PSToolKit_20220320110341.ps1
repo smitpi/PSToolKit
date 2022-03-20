@@ -47,9 +47,6 @@ Update PSToolKit from GitHub.
 .PARAMETER AllUsers
 Will update to the AllUsers Scope
 
-.PARAMETER Force
-Force the download and install.
-
 .EXAMPLE
 Update-PSToolKit
 
@@ -100,8 +97,7 @@ Function Update-PSToolKit {
 		Expand-Archive $env:tmp\private.zip $env:tmp -Force
 
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Copying to $($PathFullName.FullName)"
-		$NewModule = Get-ChildItem -Directory $env:tmp\PSToolKit-master\Output
-        Copy-Item -Path $NewModule.FullName -Destination $PathFullName.FullName -Recurse
+		Get-ChildItem -Directory $env:tmp\PSToolKit-master\Output | Copy-Item -Destination $PathFullName.FullName -Recurse
 
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Removing temp files"
 		Remove-Item $env:tmp\private.zip

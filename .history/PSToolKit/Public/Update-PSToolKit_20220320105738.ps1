@@ -47,9 +47,6 @@ Update PSToolKit from GitHub.
 .PARAMETER AllUsers
 Will update to the AllUsers Scope
 
-.PARAMETER Force
-Force the download and install.
-
 .EXAMPLE
 Update-PSToolKit
 
@@ -74,7 +71,7 @@ Function Update-PSToolKit {
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Checking] Temp folder $($env:tmp) "
 	if ((Test-Path $env:tmp\private.zip) -eq $true ) { Remove-Item $env:tmp\private.zip -Force }
 
-	if ((Test-Path $ModulePath)) {
+	if ((Test-Path $ModulePath  )) {
 		$InstalledVer = (Get-ChildItem -Directory $ModulePath | Sort-Object -Property Name -Descending)[0].Name
 		$OnlineVer = Invoke-RestMethod 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/Output/Version.json'
 		if ($InstalledVer -lt $OnlineVer.Version) {
@@ -84,7 +81,7 @@ Function Update-PSToolKit {
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Remove old folder $($ModulePath)"
 			Get-ChildItem -Directory $ModulePath | Remove-Item -Recurse -Force
 		} else {
-			Write-Host '[Updating]: ' -NoNewline -ForegroundColor Yellow; Write-Host "PSToolKit ($($OnlineVer.Version)): " -ForegroundColor Cyan -NoNewline; Write-Host 'Already Up To Date' -ForegroundColor DarkRed
+			Write-Host '[Updating]: ' -NoNewline -ForegroundColor Yellow; Write-Host "PSToolKit ($($OnlineVer.Version)): " -ForegroundColor Cyan -NoNewline; Write-Host 'Already Installed' -ForegroundColor DarkRed
 		}
 	} else {
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Creating Module directory $($ModulePath)"
@@ -100,8 +97,7 @@ Function Update-PSToolKit {
 		Expand-Archive $env:tmp\private.zip $env:tmp -Force
 
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Copying to $($PathFullName.FullName)"
-		$NewModule = Get-ChildItem -Directory $env:tmp\PSToolKit-master\Output
-        Copy-Item -Path $NewModule.FullName -Destination $PathFullName.FullName -Recurse
+		Copy-Item -Path $env:tmp\PSToolKit-master\Output\* -Destination $PathFullName.FullName -Recurse
 
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Removing temp files"
 		Remove-Item $env:tmp\private.zip

@@ -47,9 +47,6 @@ Update PSToolKit from GitHub.
 .PARAMETER AllUsers
 Will update to the AllUsers Scope
 
-.PARAMETER Force
-Force the download and install.
-
 .EXAMPLE
 Update-PSToolKit
 
@@ -74,39 +71,32 @@ Function Update-PSToolKit {
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Checking] Temp folder $($env:tmp) "
 	if ((Test-Path $env:tmp\private.zip) -eq $true ) { Remove-Item $env:tmp\private.zip -Force }
 
-	if ((Test-Path $ModulePath)) {
+	if ((Test-Path $ModulePath  )) {
 		$InstalledVer = (Get-ChildItem -Directory $ModulePath | Sort-Object -Property Name -Descending)[0].Name
 		$OnlineVer = Invoke-RestMethod 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/Output/Version.json'
-		if ($InstalledVer -lt $OnlineVer.Version) {
-			$Force = $true
-			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Backup old folder to $(Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip')"
-			Get-ChildItem -Directory $ModulePath | Compress-Archive -DestinationPath (Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip') -Update
-			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Remove old folder $($ModulePath)"
-			Get-ChildItem -Directory $ModulePath | Remove-Item -Recurse -Force
-		} else {
-			Write-Host '[Updating]: ' -NoNewline -ForegroundColor Yellow; Write-Host "PSToolKit ($($OnlineVer.Version)): " -ForegroundColor Cyan -NoNewline; Write-Host 'Already Up To Date' -ForegroundColor DarkRed
-		}
+		if ($)
+
+		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Backup old folder to $(Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip')"
+		Get-ChildItem -Directory $ModulePath | Compress-Archive -DestinationPath (Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip') -Update
+		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Remove old folder $($ModulePath)"
+		Get-ChildItem -Directory $ModulePath | Remove-Item -Recurse -Force
 	} else {
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Creating Module directory $($ModulePath)"
 		New-Item $ModulePath -ItemType Directory -Force | Out-Null
-		$Force = $true
 	}
 
-	if ($Force) {
-		$PathFullName = Get-Item $ModulePath
-		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] download from github"
-		Invoke-WebRequest -Uri https://codeload.github.com/smitpi/PSToolKit/zip/refs/heads/master -OutFile $env:tmp\private.zip
-		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] expand into module folder"
-		Expand-Archive $env:tmp\private.zip $env:tmp -Force
+	$PathFullName = Get-Item $ModulePath
+	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] download from github"
+	Invoke-WebRequest -Uri https://codeload.github.com/smitpi/PSToolKit/zip/refs/heads/master -OutFile $env:tmp\private.zip
+	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] expand into module folder"
+	Expand-Archive $env:tmp\private.zip $env:tmp -Force
 
-		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Copying to $($PathFullName.FullName)"
-		$NewModule = Get-ChildItem -Directory $env:tmp\PSToolKit-master\Output
-        Copy-Item -Path $NewModule.FullName -Destination $PathFullName.FullName -Recurse
+	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Copying to $($PathFullName.FullName)"
+	Copy-Item -Path $env:tmp\PSToolKit-master\Output\* -Destination $PathFullName.FullName -Recurse
 
-		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Removing temp files"
-		Remove-Item $env:tmp\private.zip
-		Remove-Item $env:tmp\PSToolKit-master -Recurse
-	}
+	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Removing temp files"
+	Remove-Item $env:tmp\private.zip
+	Remove-Item $env:tmp\PSToolKit-master -Recurse
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Complete]"
 	Remove-Module PSToolKit -Force -ErrorAction SilentlyContinue
 	Import-Module PSToolKit -Force -ErrorAction SilentlyContinue
