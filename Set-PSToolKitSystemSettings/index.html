@@ -714,6 +714,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../Install-BGInfo/" class="md-nav__link">
+        Install-BGInfo
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Install-ChocolateyApps/" class="md-nav__link">
         Install-ChocolateyApps
       </a>
@@ -1089,6 +1104,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-runfrequent" class="md-nav__link">
+    -RunFrequent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-executionpolicy" class="md-nav__link">
     -ExecutionPolicy
   </a>
@@ -1238,6 +1260,13 @@
           <li class="md-nav__item">
   <a href="#-installmsupdates" class="md-nav__link">
     -InstallMSUpdates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-installsshserver" class="md-nav__link">
+    -InstallSSHServer
   </a>
   
 </li>
@@ -1747,6 +1776,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-runfrequent" class="md-nav__link">
+    -RunFrequent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-executionpolicy" class="md-nav__link">
     -ExecutionPolicy
   </a>
@@ -1901,6 +1937,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-installsshserver" class="md-nav__link">
+    -InstallSSHServer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-enablenfsclient" class="md-nav__link">
     -EnableNFSClient
   </a>
@@ -1976,12 +2019,12 @@
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Set multiple settings on desktop or server</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Set-PSToolKitSystemSettings [-RunAll] [-ExecutionPolicy] [-PSGallery] [-ForcePSGallery] [-IntranetZone]
- [-IntranetZoneIPRange] [-PSTrustedHosts] [-FileExplorerSettings] [-SystemDefaults] [-DisableIEFirstRun]
- [-DisableFirstLogonAnimation] [-SetPhotoViewer] [-DisableShutdownTracker] [-DisableIPV6] [-DisableFirewall]
- [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-InstallPS7] [-InstallMSTerminal]
- [-InstallVMWareTools] [-InstallRSAT] [-InstallMSUpdates] [-EnableNFSClient] [-PerformReboot]
- [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Set-PSToolKitSystemSettings [-RunAll] [-RunFrequent] [-ExecutionPolicy] [-PSGallery] [-ForcePSGallery]
+ [-IntranetZone] [-IntranetZoneIPRange] [-PSTrustedHosts] [-FileExplorerSettings] [-SystemDefaults]
+ [-DisableIEFirstRun] [-DisableFirstLogonAnimation] [-SetPhotoViewer] [-DisableShutdownTracker] [-DisableIPV6]
+ [-DisableFirewall] [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-InstallPS7]
+ [-InstallMSTerminal] [-InstallVMWareTools] [-InstallRSAT] [-InstallMSUpdates] [-InstallSSHServer]
+ [-EnableNFSClient] [-PerformReboot] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Set multiple settings on desktop or server</p>
@@ -1991,8 +2034,19 @@
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-runall">-RunAll</h3>
-<p>Enable all the options in this function.
-Except windows update and reboot.</p>
+<p>Enable all the options in this function.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-runfrequent">-RunFrequent</h3>
+<p>Enable selected frequently used options in this function.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
@@ -2257,6 +2311,18 @@ Except windows update and reboot.</p>
 </code></pre></div>
 <h3 id="-installmsupdates">-InstallMSUpdates</h3>
 <p>Perform a Windows Update</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-installsshserver">-InstallSSHServer</h3>
+<p>Install openssh server and client.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>

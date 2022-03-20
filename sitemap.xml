@@ -161,6 +161,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://smitpi.github.io/PSToolKit/Install-BGInfo/</loc>
+         <lastmod>2022-03-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://smitpi.github.io/PSToolKit/Install-ChocolateyApps/</loc>
          <lastmod>2022-03-20</lastmod>
          <changefreq>daily</changefreq>
