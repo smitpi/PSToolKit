@@ -72,23 +72,23 @@ Function Update-PSToolKit {
 
 
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Checking] Temp folder $($env:tmp) "
-	if ((Test-Path $env:tmp\private.zip) -eq $true ) { Remove-Item $env:tmp\private.zip -Force }
+	if ((Test-Path $env:tmp\private.zip) -eq $true ) { Remove-Item $env:tmp\private.zip -ForceUpdate }
 
 	if ((Test-Path $ModulePath)) {
-		$InstalledVer = (Get-ChildItem -Directory $ModulePath -ErrorAction SilentlyContinue | Sort-Object -Property Name -Descending)[0].Name
+		$InstalledVer = (Get-ChildItem -Directory $ModulePath | Sort-Object -Property Name -Descending)[0].Name
 		$OnlineVer = Invoke-RestMethod 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/Version.json'
 		if ($InstalledVer -lt $OnlineVer.Version) {
 			$ForceUpdate = $true
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Backup old folder to $(Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip')"
 			Get-ChildItem -Directory $ModulePath | Compress-Archive -DestinationPath (Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip') -Update
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Remove old folder $($ModulePath)"
-			Get-ChildItem -Directory $ModulePath | Remove-Item -Recurse -Force
+			Get-ChildItem -Directory $ModulePath | Remove-Item -Recurse -ForceUpdate
 		} else {
 			Write-Host '[Updating]: ' -NoNewline -ForegroundColor Yellow; Write-Host "PSToolKit ($($OnlineVer.Version)): " -ForegroundColor Cyan -NoNewline; Write-Host 'Already Up To Date' -ForegroundColor DarkRed
 		}
 	} else {
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Creating Module directory $($ModulePath)"
-		New-Item $ModulePath -ItemType Directory -Force | Out-Null
+		New-Item $ModulePath -ItemType Directory -ForceUpdate | Out-Null
 		$ForceUpdate = $true
 	}
 
@@ -97,19 +97,19 @@ Function Update-PSToolKit {
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] download from github"
 		Invoke-WebRequest -Uri https://codeload.github.com/smitpi/PSToolKit/zip/refs/heads/master -OutFile $env:tmp\private.zip
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] expand into module folder"
-		Expand-Archive $env:tmp\private.zip $env:tmp -Force
+		Expand-Archive $env:tmp\private.zip $env:tmp -ForceUpdate
 
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Copying to $($PathFullName.FullName)"
 		$NewModule = Get-ChildItem -Directory $env:tmp\PSToolKit-master\Output
-		Copy-Item -Path $NewModule.FullName -Destination $PathFullName.FullName -Recurse
+        Copy-Item -Path $NewModule.FullName -Destination $PathFullName.FullName -Recurse
 
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Removing temp files"
 		Remove-Item $env:tmp\private.zip
 		Remove-Item $env:tmp\PSToolKit-master -Recurse
 	}
-	$ForceUpdate = $false
+    $ForceUpdate = $false
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Complete]"
-	Remove-Module PSToolKit -Force -ErrorAction SilentlyContinue
-	Import-Module PSToolKit -Force -ErrorAction SilentlyContinue
+	Remove-Module PSToolKit -ForceUpdate -ErrorAction SilentlyContinue
+	Import-Module PSToolKit -ForceUpdate -ErrorAction SilentlyContinue
 	Show-PSToolKit -ShowMetaData
 } #end Function

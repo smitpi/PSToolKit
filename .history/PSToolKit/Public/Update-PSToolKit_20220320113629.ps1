@@ -75,7 +75,7 @@ Function Update-PSToolKit {
 	if ((Test-Path $env:tmp\private.zip) -eq $true ) { Remove-Item $env:tmp\private.zip -Force }
 
 	if ((Test-Path $ModulePath)) {
-		$InstalledVer = (Get-ChildItem -Directory $ModulePath -ErrorAction SilentlyContinue | Sort-Object -Property Name -Descending)[0].Name
+		$InstalledVer = (Get-ChildItem -Directory $ModulePath | Sort-Object -Property Name -Descending)[0].Name -ErorAction SilentlyContinue
 		$OnlineVer = Invoke-RestMethod 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/Version.json'
 		if ($InstalledVer -lt $OnlineVer.Version) {
 			$ForceUpdate = $true

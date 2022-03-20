@@ -94,7 +94,14 @@ Function Set-PSProjectFiles {
 				ModuleVersion     = $ModuleversionTMP
 				FunctionsToExport = (Get-Command -Module $module.Name | Select-Object name).name | Sort-Object
 			}
+            try {
 			Update-ModuleManifest @manifestProperties
+    		$ModuleManifestFile = Get-Item ($ModuleFunctionFile.FullName.Replace('psm1', 'psd1'))
+            $FileContent = Get-Content $ModuleManifestFile
+            $DateLine = Select-String -InputObject $ModuleManifestFile -Pattern '# Generated on:'
+            $FileContent[($DateLine.LineNumber -1)] = "# Generated on: $(get-date -Format u)"
+            $FileContent | Set-Content $ModuleManifestFile -Force
+            } catch {Write-Warning "Error: `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 		} else {
 			$ModuleFunctionFile = Get-Item $ModulePSM1
 			$module = Import-Module $ModuleFunctionFile.FullName -Force -PassThru

@@ -13,7 +13,7 @@ Update PSToolKit from GitHub.
 ## SYNTAX
 
 ```
-Update-PSToolKit [-AllUsers] [<CommonParameters>]
+Update-PSToolKit [-AllUsers] [-ForceUpdate] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,6 +30,21 @@ Update-PSToolKit
 
 ### -AllUsers
 Will update to the AllUsers Scope
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ForceUpdate
+ForceUpdate the download and install.
 
 ```yaml
 Type: SwitchParameter
