@@ -55,6 +55,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Get-WinEventLogExtract](https://smitpi.github.io/PSToolKit/#Get-WinEventLogExtract) -- Extract Event logs of a server list, and create html / excel report
 - [Import-CitrixSiteConfigFile](https://smitpi.github.io/PSToolKit/#Import-CitrixSiteConfigFile) -- Import the Citrix config file, and created a variable with the details
 - [Import-XamlConfigFile](https://smitpi.github.io/PSToolKit/#Import-XamlConfigFile) -- Import the wpf xaml file and create variables from objects
+- [Install-BGInfo](https://smitpi.github.io/PSToolKit/#Install-BGInfo) -- Install and auto runs bginfo at startup.
 - [Install-ChocolateyApps](https://smitpi.github.io/PSToolKit/#Install-ChocolateyApps) -- Install chocolatey apps from a json list.
 - [Install-ChocolateyClient](https://smitpi.github.io/PSToolKit/#Install-ChocolateyClient) -- Downloads and installs the Chocolatey client.
 - [Install-ChocolateyServer](https://smitpi.github.io/PSToolKit/#Install-ChocolateyServer) -- This will download, install and setup a new Chocolatey Repo Server

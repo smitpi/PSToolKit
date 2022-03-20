@@ -24,13 +24,13 @@ Create Ascii Art
 
 ### EXAMPLE 1
 ```
-Write-Ascii
+Write-Ascii Blah
 ```
 
 ## PARAMETERS
 
 ### -InputObject
-{{ Fill InputObject Description }}
+The string
 
 ```yaml
 Type: String[]
@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -PrependChar
-{{ Fill PrependChar Description }}
+char
 
 ```yaml
 Type: SwitchParameter
@@ -60,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -Compress
-{{ Fill Compress Description }}
+compress output
 
 ```yaml
 Type: SwitchParameter
@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -ForegroundColor
-{{ Fill ForegroundColor Description }}
+ForegroundColor
 
 ```yaml
 Type: String
@@ -90,7 +90,7 @@ Accept wildcard characters: False
 ```
 
 ### -BackgroundColor
-\[int\] $MaxChars = '25'
+BackgroundColor
 
 ```yaml
 Type: String
