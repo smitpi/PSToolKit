@@ -72,7 +72,7 @@ Function New-ElevatedShortcut {
 		[Parameter(Mandatory = $true)]
 		[ValidateScript( { (Test-Path $_) -and ((Get-Item $_).Extension -eq '.ps1') -or ((Get-Item $_).Extension -eq '.exe') })]
 		[string]$FilePath,
-		[switch]$OpenPath = $false
+        [switch]$OpenPath = $false
 	)
 
 	$ScriptInfo = Get-Item $FilePath
@@ -80,7 +80,7 @@ Function New-ElevatedShortcut {
 	if ($ScriptInfo.Extension -eq '.ps1') {
 		$taskActionSettings = @{
 			Execute  = 'powershell.exe'
-			Argument = "-NoLogo -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File ""$($ScriptInfo.FullName)"" -Verb RunAs"
+			Argument = "-NoLogo -NoProfile -ExecutionPolicy Bypass -File ""$($ScriptInfo.FullName)"" -Verb RunAs"
 		}
 	}
 	if ($ScriptInfo.Extension -eq '.exe') {
@@ -109,7 +109,7 @@ Function New-ElevatedShortcut {
 	#Save the Shortcut to the TargetPath
 	$Shortcut.Save()
 
-	if ($OpenPath) {
-		Start-Process -FilePath explorer.exe -ArgumentList $($ScriptInfo.DirectoryName)
-	}
+if ($OpenPath){
+	Start-Process -FilePath explorer.exe -ArgumentList $($ScriptInfo.DirectoryName)
+}
 } #end Function

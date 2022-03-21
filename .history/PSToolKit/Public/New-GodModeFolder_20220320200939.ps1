@@ -32,12 +32,12 @@ Created [19/02/2022_11:19] Initial Script Creating
 
 #>
 
-<#
+<# 
 
-.DESCRIPTION
- Creates a God Mode Folder
+.DESCRIPTION 
+ Creates a God Mode Folder 
 
-#>
+#> 
 
 
 <#
@@ -52,10 +52,12 @@ New-GodModeFolder
 
 #>
 Function New-GodModeFolder {
-	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/New-GodModeFolder')]
-	PARAM()
+	[Cmdletbinding(HelpURI = "https://smitpi.github.io/PSToolKit/New-GodModeFolder")]
+                PARAM()
 
 
-	New-Item -Path ([Environment]::GetFolderPath('Desktop')) -Name 'God Mode .{ED7BA470-8E54-465E-825C-99712043E01C}' -ItemType directory -Force
+$link = New-Item -Path ([Environment]::GetFolderPath('Desktop')) -Name 'God Mode .{ED7BA470-8E54-465E-825C-99712043E01C}' -ItemType directory -Force
+
+explorer.exe $link
 
 } #end Function
