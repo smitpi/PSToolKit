@@ -15,6 +15,7 @@ Functions in this module:
 	 Edit-ChocolateyAppsList -- Add or remove apps from the json file used in Install-ChocolateyApps
 	 Edit-HostsFile -- Edit the hosts file
 	 Edit-PSModulesLists -- Edit the Modules json files.
+	 Edit-SSHConfigFile -- Creates and modifies the ssh config file in their profile.
 	 Enable-RemoteHostPSRemoting -- enable ps remote remotely
 	 Export-CitrixPolicySettings -- Citrix policy export.
 	 Export-ESXTemplates -- Export all VM Templates from vSphere to local disk.
@@ -22,7 +23,6 @@ Functions in this module:
 	 Find-ChocolateyApps -- Search the online repo for software
 	 Find-OnlineModule -- Find a module on psgallery
 	 Find-OnlineScript -- Find Script on PSGallery
-	 Find-PSScripts -- Find and update script info
 	 Format-AllObjectsInAListView -- Cast an array or psobject and display it in list view
 	 Get-AllUsersInGroup -- Get details of all users in a group
 	 Get-CitrixClientVersions -- Report on the CItrix workspace versions the users are using.
@@ -78,7 +78,6 @@ Functions in this module:
 	 Update-ListOfDDCs -- Update list of ListOfDDCs in the registry
 	 Update-LocalHelp -- Downloads and saves help files locally
 	 Update-PSModuleInfo -- Update PowerShell module manifest file
-	 Update-PSScriptInfo -- Update PowerShell ScriptFileInfo
 	 Update-PSToolKit -- Update PSToolKit from GitHub.
 	 Update-PSToolKitConfigFiles -- Manages the config files for the PSToolKit Module.
 	 Write-Ascii -- Create Ascii Art

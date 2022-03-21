@@ -31,6 +31,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Edit-ChocolateyAppsList](https://smitpi.github.io/PSToolKit/#Edit-ChocolateyAppsList) -- Add or remove apps from the json file used in Install-ChocolateyApps
 - [Edit-HostsFile](https://smitpi.github.io/PSToolKit/#Edit-HostsFile) -- Edit the hosts file
 - [Edit-PSModulesLists](https://smitpi.github.io/PSToolKit/#Edit-PSModulesLists) -- Edit the Modules json files.
+- [Edit-SSHConfigFile](https://smitpi.github.io/PSToolKit/#Edit-SSHConfigFile) -- Creates and modifies the ssh config file in their profile.
 - [Enable-RemoteHostPSRemoting](https://smitpi.github.io/PSToolKit/#Enable-RemoteHostPSRemoting) -- enable ps remote remotely
 - [Export-CitrixPolicySettings](https://smitpi.github.io/PSToolKit/#Export-CitrixPolicySettings) -- Citrix policy export.
 - [Export-ESXTemplates](https://smitpi.github.io/PSToolKit/#Export-ESXTemplates) -- Export all VM Templates from vSphere to local disk.
@@ -38,7 +39,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Find-ChocolateyApps](https://smitpi.github.io/PSToolKit/#Find-ChocolateyApps) -- Search the online repo for software
 - [Find-OnlineModule](https://smitpi.github.io/PSToolKit/#Find-OnlineModule) -- Find a module on psgallery
 - [Find-OnlineScript](https://smitpi.github.io/PSToolKit/#Find-OnlineScript) -- Find Script on PSGallery
-- [Find-PSScripts](https://smitpi.github.io/PSToolKit/#Find-PSScripts) -- Find and update script info
 - [Format-AllObjectsInAListView](https://smitpi.github.io/PSToolKit/#Format-AllObjectsInAListView) -- Cast an array or psobject and display it in list view
 - [Get-AllUsersInGroup](https://smitpi.github.io/PSToolKit/#Get-AllUsersInGroup) -- Get details of all users in a group
 - [Get-CitrixClientVersions](https://smitpi.github.io/PSToolKit/#Get-CitrixClientVersions) -- Report on the CItrix workspace versions the users are using.
@@ -94,7 +94,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Update-ListOfDDCs](https://smitpi.github.io/PSToolKit/#Update-ListOfDDCs) -- Update list of ListOfDDCs in the registry
 - [Update-LocalHelp](https://smitpi.github.io/PSToolKit/#Update-LocalHelp) -- Downloads and saves help files locally
 - [Update-PSModuleInfo](https://smitpi.github.io/PSToolKit/#Update-PSModuleInfo) -- Update PowerShell module manifest file
-- [Update-PSScriptInfo](https://smitpi.github.io/PSToolKit/#Update-PSScriptInfo) -- Update PowerShell ScriptFileInfo
 - [Update-PSToolKit](https://smitpi.github.io/PSToolKit/#Update-PSToolKit) -- Update PSToolKit from GitHub.
 - [Update-PSToolKitConfigFiles](https://smitpi.github.io/PSToolKit/#Update-PSToolKitConfigFiles) -- Manages the config files for the PSToolKit Module.
 - [Write-Ascii](https://smitpi.github.io/PSToolKit/#Write-Ascii) -- Create Ascii Art
