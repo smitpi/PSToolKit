@@ -108,7 +108,7 @@ Function Start-PSToolkitSystemInitialize {
 	}
 	if ($InstallMyModules) {
 		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Installing Other Modules' -ForegroundColor Cyan
-		'CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck' | ForEach-Object {
+		'CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray' | ForEach-Object {
 			$module = $_
 			Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
 			if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
