@@ -99,12 +99,7 @@ Function Set-PSProjectFiles {
 				FunctionsToExport = (Get-Command -Module $module.Name | Select-Object name).name | Sort-Object
 			}
             try {
-			Update-ModuleManifest @manifestProperties
-    		$ModuleManifestFile = Get-Item ($ModuleFunctionFile.FullName.Replace('psm1', 'psd1'))
-            $FileContent = Get-Content $ModuleManifestFile
-            $DateLine = Select-String -InputObject $ModuleManifestFile -Pattern '# Generated on:'
-            $FileContent[($DateLine.LineNumber -1)] = "# Generated on: $(get-date -Format u)"
-            $FileContent | Set-Content $ModuleManifestFile -Force
+			    Update-ModuleManifest @manifestProperties
             } catch {Write-Warning "Error: `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 		} else {
 			$ModuleFunctionFile = Get-Item $ModulePSM1
@@ -114,8 +109,15 @@ Function Set-PSProjectFiles {
 				$module = Import-Module $ModuleFunctionFile.FullName -Force -PassThru
 			}
 		}
-		$ModuleManifestFile = Get-Item ($ModuleFunctionFile.FullName.Replace('psm1', 'psd1'))
-		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object *
+        try {
+            $ModuleManifestFile = Get-Item ($ModuleFunctionFile.FullName.Replace('psm1', 'psd1'))
+		    $ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object *
+            $FileContent = Get-Content $ModuleManifestFile
+            $DateLine = Select-String -InputObject $ModuleManifestFile -Pattern '# Generated on:'
+            $FileContent[($DateLine.LineNumber -1)] = "# Generated on: $(get-date -Format u)"
+            $FileContent | Set-Content $ModuleManifestFile -Force
+          } catch {Write-Warning "Error: `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
+
 	} catch { Write-Error 'Unable to load module.'; exit }
 
 	Write-Color '[Starting]', 'Creating Folder Structure' -Color Yellow, DarkCyan
