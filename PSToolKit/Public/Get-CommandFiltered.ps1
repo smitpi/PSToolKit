@@ -61,7 +61,7 @@ General notes
 #>
 Function Get-CommandFiltered {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-CommandFiltered')]
-	[Alias('fcmd')]
+	[Alias("fcmd")]
 	PARAM(
 		[string]$Filter,
 		[switch]$PrettyAnswer = $false
@@ -86,4 +86,4 @@ Function Get-CommandFiltered {
 	}
 	else { $cmd }
 } #end Function
-New-Alias -Name fcmd -Value Get-CommandFiltered -Description 'Filter Get-command with keyword' -Option AllScope -Force
+#New-Alias -Name fcmd -Value Get-CommandFiltered -Description 'Filter Get-command with keyword' -Option AllScope -Force

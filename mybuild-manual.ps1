@@ -30,7 +30,7 @@ function mybuild {
 	}
 
 	try {
-		$newmod = ((Get-ChildItem -Directory (Join-Path $PSScriptRoot "\Output")) | Sort-Object -Property Name -Descending)[0]
+		$newmod = ((Get-ChildItem -Directory (Join-Path $script.FullName "\Output")) | Sort-Object -Property Name -Descending)[0]
 		Get-ChildItem -Directory 'C:\Program Files\WindowsPowerShell\Modules\PSToolKit' | Compress-Archive -DestinationPath 'C:\Program Files\WindowsPowerShell\Modules\PSToolKit\oldmodule.zip' -Update
 		Get-ChildItem -Directory 'C:\Program Files\WindowsPowerShell\Modules\PSToolKit' | Remove-Item -Recurse -Force
 		Copy-Item -Path $newmod.FullName -Destination 'C:\Program Files\WindowsPowerShell\Modules\PSToolKit\' -Force -Recurse
