@@ -96,11 +96,8 @@ Function Update-PSToolKit {
 	if ($ForceUpdate) {
 		$PathFullName = Get-Item $ModulePath
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] download from github"
-		if (Get-Command Start-BitsTransfer) {
-			Start-BitsTransfer -Source 'https://codeload.github.com/smitpi/PSToolKit/zip/refs/heads/master' -Destination "$env:tmp\private.zip"
-		} else {
-			Invoke-WebRequest -Uri https://codeload.github.com/smitpi/PSToolKit/zip/refs/heads/master -OutFile $env:tmp\private.zip
-		}
+		
+		Invoke-WebRequest -Uri https://codeload.github.com/smitpi/PSToolKit/zip/refs/heads/master -OutFile $env:tmp\private.zip
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] expand into module folder"
 		Expand-Archive $env:tmp\private.zip $env:tmp -Force
 
