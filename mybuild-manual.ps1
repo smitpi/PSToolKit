@@ -7,6 +7,8 @@ function mybuild {
 		[ValidateSet('Combine', 'Build')]
 		[string]$Update
 	)
+    # $ModulePSM1 = '.\PSToolKit\PSToolKit.psm1'
+    # $VersionBump = 'Build'
     $script = Get-Item .
 	Get-Module PSToolKit | Remove-Module -Force
 	Import-Module (Join-Path $script.FullName "\PSToolKit\Public\Set-PSProjectFiles.ps1") -Force
