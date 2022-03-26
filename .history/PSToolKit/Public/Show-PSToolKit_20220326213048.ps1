@@ -74,6 +74,7 @@ Function Show-PSToolKit {
     $latestModule = $module | Sort-Object -Property version -Descending | Select-Object -First 1
     [string]$version = (Test-ModuleManifest -Path $($latestModule.Path.Replace('psm1', 'psd1'))).Version
     [datetime]$CreateDate = (Get-Content -Path $($latestModule.Path.Replace('psm1', 'psd1')) | Where-Object {$_ -like '# Generated on: *'}).replace('# Generated on: ','')
+    
     $CreateDate = $CreateDate.ToUniversalTime()
 
     if ($ShowCommand) {
