@@ -13,7 +13,7 @@ Redirects PowerShell profile to network share.
 ## SYNTAX
 
 ```
-Set-SharedPSProfile [[-PathToSharedProfile] <String[]>] [<CommonParameters>]
+Set-SharedPSProfile [[-PathToSharedProfile] <DirectoryInfo>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,7 +32,7 @@ Set-SharedPSProfile PathToSharedProfile "\\nas01\profile"
 The new path.
 
 ```yaml
-Type: String[]
+Type: DirectoryInfo
 Parameter Sets: (All)
 Aliases:
 

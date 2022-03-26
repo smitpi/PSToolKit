@@ -6253,9 +6253,9 @@
           <maml:description>
             <maml:para>The new path.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
           <dev:type>
-            <maml:name>String[]</maml:name>
+            <maml:name>DirectoryInfo</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -6268,9 +6268,9 @@
         <maml:description>
           <maml:para>The new path.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
         <dev:type>
-          <maml:name>String[]</maml:name>
+          <maml:name>DirectoryInfo</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>

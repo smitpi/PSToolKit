@@ -56,24 +56,37 @@ Set-SharedPSProfile PathToSharedProfile "\\nas01\profile"
 function Set-SharedPSProfile {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Set-SharedPSProfile')]
 	param (
-		[Parameter(Mandatory = $false, Position = 0)]
 		[ValidateNotNullOrEmpty()]
 		[ValidateScript( {
-				if (-Not (Test-Path $_) ) { stop }
-				$true
+				if (Test-Path $_) { $true }
+                else {throw "Not a valid Location"}
 			})]
-		[string[]]$PathToSharedProfile
+		[System.IO.DirectoryInfo]$PathToSharedProfile
 	)
 
+try{
 	$PersonalDocuments = [Environment]::GetFolderPath('MyDocuments')
-	$PersonalPSFolder = $PersonalDocuments + '\WindowsPowerShell'
-	if ((Test-Path $PersonalPSFolder) -eq $true ) {
+	$WindowsPowerShell = [IO.Path]::Combine($PersonalDocuments, 'WindowsPowerShell')
+	$PowerShell = [IO.Path]::Combine($PersonalDocuments, 'PowerShell')
+
+	if ((Test-Path $WindowsPowerShell) -eq $true ) {
 		Write-Warning 'Folder exists, renamig now...'
-		Rename-Item -Path $PersonalPSFolder -NewName "WindowsPowerShell-$(Get-Random)" -Force -Verbose
+		Rename-Item -Path $WindowsPowerShell -NewName "WindowsPowerShell-$(Get-Random)" -Force -Verbose
+
 	}
 
-	if ((Test-Path $PersonalPSFolder) -eq $false ) {
-		New-Item -ItemType SymbolicLink -Name WindowsPowerShell -Path $PersonalDocuments -Value (Get-Item $PathToSharedProfile).FullName
+	if ((Test-Path $PowerShell) -eq $true ) {
+		Write-Warning 'Folder exists, renamig now...'
+		Rename-Item -Path $PowerShell -NewName "WindowsPowerShell-$(Get-Random)" -Force -Verbose
+	}
+} catch {Write-Warning "Error: `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
+
+	if (-not(Test-Path $WindowsPowerShell) -and -not(Test-Path $PowerShell)) {
+	    $NewWindowsPowerShell = [IO.Path]::Combine($PathToSharedProfile, 'WindowsPowerShell')
+	    $NewPowerShell = [IO.Path]::Combine($PathToSharedProfile, 'PowerShell')
+
+		New-Item -ItemType SymbolicLink -Name WindowsPowerShell -Path $PersonalDocuments -Value $NewWindowsPowerShell
+		New-Item -ItemType SymbolicLink -Name PowerShell -Path $PersonalDocuments -Value $NewPowerShell
 
 		Write-Host 'Move PS Profile to the shared location: ' -ForegroundColor Cyan -NoNewline
 		Write-Host Completed -ForegroundColor green
