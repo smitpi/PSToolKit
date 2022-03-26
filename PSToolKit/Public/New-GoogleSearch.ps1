@@ -74,3 +74,4 @@ if ($Clipboard) {
 else {start "$google $Query"}
 
 } #end Function
+New-Alias -Name "google" -Value New-GoogleSearch -Description "PSToolKit: Does google search" -Option AllScope -Scope global -Force

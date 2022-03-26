@@ -86,4 +86,4 @@ Function Get-CommandFiltered {
 	}
 	else { $cmd }
 } #end Function
-#New-Alias -Name fcmd -Value Get-CommandFiltered -Description 'Filter Get-command with keyword' -Option AllScope -Force
+New-Alias -Name fcmd -Value Get-CommandFiltered -Description 'Filter Get-command with keyword' -Option AllScope -Scope global -Force

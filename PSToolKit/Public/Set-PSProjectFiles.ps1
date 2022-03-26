@@ -340,6 +340,8 @@ Function Set-PSProjectFiles {
 			$file.Add(' ')
 		}
 		$file.add('#endregion')
+        $file.Add(' ')
+        (Select-String -Path $public -Pattern "New-Alias").Line | ForEach-Object { $file.Add($_) }
 		$file | Set-Content -Path $rootModule -Encoding utf8 -Force
 
 		$versionfile = [System.Collections.Generic.List[PSObject]]::New()
