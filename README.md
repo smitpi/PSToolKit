@@ -74,6 +74,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Remove-UserProfile](https://smitpi.github.io/PSToolKit/#Remove-UserProfile) -- Connects to a server and renames a user profile folder, and delete the key from Profilelist in the registry
 - [Restore-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#Restore-ElevatedShortcut) -- Restore the RunAss shortcuts, from a zip file
 - [Search-Scripts](https://smitpi.github.io/PSToolKit/#Search-Scripts) -- Search for a string in a directory of ps1 scripts.
+- [Set-PSProjectFiles](https://smitpi.github.io/PSToolKit/#Set-PSProjectFiles) -- Creates and modify needed files for a PS project from existing module files.
 - [Set-PSToolKitSystemSettings](https://smitpi.github.io/PSToolKit/#Set-PSToolKitSystemSettings) -- Set multiple settings on desktop or server
 - [Set-SharedPSProfile](https://smitpi.github.io/PSToolKit/#Set-SharedPSProfile) -- Redirects PowerShell profile to network share.
 - [Set-StaticIP](https://smitpi.github.io/PSToolKit/#Set-StaticIP) -- Set static IP on device
@@ -91,6 +92,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Test-CitrixVDAPorts](https://smitpi.github.io/PSToolKit/#Test-CitrixVDAPorts) -- Test connection between ddc and vda
 - [Test-PendingReboot](https://smitpi.github.io/PSToolKit/#Test-PendingReboot) -- This script tests various registry values to see if the local computer is pending a reboot.
 - [Test-PSRemote](https://smitpi.github.io/PSToolKit/#Test-PSRemote) -- Test PSb Remote to a device.
+- [Update-AllPSModules](https://smitpi.github.io/PSToolKit/#Update-AllPSModules) -- This script will update all locally installed PowerShell modules to the newest ones if can find online.
 - [Update-ListOfDDCs](https://smitpi.github.io/PSToolKit/#Update-ListOfDDCs) -- Update list of ListOfDDCs in the registry
 - [Update-LocalHelp](https://smitpi.github.io/PSToolKit/#Update-LocalHelp) -- Downloads and saves help files locally
 - [Update-PSModuleInfo](https://smitpi.github.io/PSToolKit/#Update-PSModuleInfo) -- Update PowerShell module manifest file
