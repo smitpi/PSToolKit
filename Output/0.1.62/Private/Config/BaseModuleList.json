@@ -3,10 +3,7 @@
         "Name":  "Carbon"
     },
     {
-        "Name":  "Foil"
-    },
-    {
-        "Name":  "MrToolkit"
+        "Name":  "ImportExcel"
     },
     {
         "Name":  "PoshRegistry"
@@ -25,9 +22,8 @@
     },
     {
         "Name":  "PSWriteColor"
+    },
+    {
+        "Name":  "PSWriteHTML"
     }
 ]
-
-
-
-

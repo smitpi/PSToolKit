@@ -8,6 +8,10 @@
     "Source": "chocolatey"
   },
   {
+    "Name": "barrier",
+    "Source": "chocolatey"
+  },
+  {
     "Name": "cascadia-code-nerd-font",
     "Source": "chocolatey"
   },
@@ -132,10 +136,6 @@
     "Source": "chocolatey"
   },
   {
-    "Name": "reflect-free",
-    "Source": "chocolatey"
-  },
-  {
     "Name": "rescuetime",
     "Source": "chocolatey"
   },
@@ -157,6 +157,10 @@
   },
   {
     "Name": "sumatrapdf",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "tailscale",
     "Source": "chocolatey"
   },
   {
