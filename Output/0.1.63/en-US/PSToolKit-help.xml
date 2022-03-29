@@ -7301,13 +7301,13 @@
       <command:syntaxItem>
         <maml:name>Start-PSScriptAnalyzer</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>Path</maml:name>
+          <maml:name>Paths</maml:name>
           <maml:description>
-            <maml:para>Path to ps1 files</maml:para>
+            <maml:para>{{ Fill Paths Description }}</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">DirectoryInfo[]</command:parameterValue>
           <dev:type>
-            <maml:name>DirectoryInfo</maml:name>
+            <maml:name>DirectoryInfo[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -7352,13 +7352,13 @@
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>Path</maml:name>
+        <maml:name>Paths</maml:name>
         <maml:description>
-          <maml:para>Path to ps1 files</maml:para>
+          <maml:para>{{ Fill Paths Description }}</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">DirectoryInfo[]</command:parameterValue>
         <dev:type>
-          <maml:name>DirectoryInfo</maml:name>
+          <maml:name>DirectoryInfo[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -7503,114 +7503,6 @@
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>Start-PSToolkitSystemInitialize -InstallMyModules</dev:code>
-        <dev:remarks>
-          <maml:para></maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks />
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Sync-PSFolders</command:name>
-      <command:verb>Sync</command:verb>
-      <command:noun>PSFolders</command:noun>
-      <maml:description>
-        <maml:para>Compare two directories and copy the differences</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>Compare two directories and copy the differences. Newest file wins</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Sync-PSFolders</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>LeftFolder</maml:name>
-          <maml:description>
-            <maml:para>First Folder to compare</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
-          <dev:type>
-            <maml:name>DirectoryInfo</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>RightFolder</maml:name>
-          <maml:description>
-            <maml:para>Second folder to compare</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
-          <dev:type>
-            <maml:name>DirectoryInfo</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>SetLongPathRegKey</maml:name>
-          <maml:description>
-            <maml:para>Enable long file path in registry</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>LeftFolder</maml:name>
-        <maml:description>
-          <maml:para>First Folder to compare</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
-        <dev:type>
-          <maml:name>DirectoryInfo</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>RightFolder</maml:name>
-        <maml:description>
-          <maml:para>Second folder to compare</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
-        <dev:type>
-          <maml:name>DirectoryInfo</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>SetLongPathRegKey</maml:name>
-        <maml:description>
-          <maml:para>Enable long file path in registry</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes />
-    <command:returnValues />
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para>General notes</maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Sync-PSFolders -LeftFolder C:\Temp\one -RightFolder C:\Temp\6</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>

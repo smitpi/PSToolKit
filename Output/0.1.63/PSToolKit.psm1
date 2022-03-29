@@ -5,7 +5,7 @@
 ############################################
 # source: Add-ChocolateyPrivateRepo.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -103,7 +103,7 @@ Export-ModuleMember -Function Add-ChocolateyPrivateRepo
 ############################################
 # source: Backup-ElevatedShortcut.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -148,7 +148,7 @@ Export-ModuleMember -Function Backup-ElevatedShortcut
 ############################################
 # source: Backup-PowerShellProfile.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -203,7 +203,7 @@ Export-ModuleMember -Function Backup-PowerShellProfile
 ############################################
 # source: Connect-VMWareCluster.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -255,7 +255,7 @@ Export-ModuleMember -Function Connect-VMWareCluster
 ############################################
 # source: Edit-ChocolateyAppsList.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -392,7 +392,7 @@ Export-ModuleMember -Function Edit-ChocolateyAppsList
 ############################################
 # source: Edit-HostsFile.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -524,7 +524,7 @@ Export-ModuleMember -Function Edit-HostsFile
 ############################################
 # source: Edit-PSModulesLists.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -635,7 +635,7 @@ Export-ModuleMember -Function Edit-PSModulesLists
 ############################################
 # source: Edit-SSHConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -811,7 +811,7 @@ Export-ModuleMember -Function Edit-SSHConfigFile
 ############################################
 # source: Enable-RemoteHostPSRemoting.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -870,7 +870,7 @@ Export-ModuleMember -Function Enable-RemoteHostPSRemoting
 ############################################
 # source: Export-CitrixPolicySettings.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -957,7 +957,7 @@ Export-ModuleMember -Function Export-CitrixPolicySettings
 ############################################
 # source: Export-ESXTemplates.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1006,7 +1006,7 @@ Export-ModuleMember -Function Export-ESXTemplates
 ############################################
 # source: Export-PSGallery.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1082,7 +1082,7 @@ Export-ModuleMember -Function Export-PSGallery
 ############################################
 # source: Find-ChocolateyApps.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1164,7 +1164,7 @@ Export-ModuleMember -Function Find-ChocolateyApps
 ############################################
 # source: Find-OnlineModule.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1225,7 +1225,7 @@ Export-ModuleMember -Function Find-OnlineModule
 ############################################
 # source: Find-OnlineScript.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1285,7 +1285,7 @@ Export-ModuleMember -Function Find-OnlineScript
 ############################################
 # source: Format-AllObjectsInAListView.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1324,7 +1324,7 @@ Export-ModuleMember -Function Format-AllObjectsInAListView
 ############################################
 # source: Get-AllUsersInGroup.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1397,7 +1397,7 @@ Export-ModuleMember -Function Get-AllUsersInGroup
 ############################################
 # source: Get-CitrixClientVersions.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1493,7 +1493,7 @@ Export-ModuleMember -Function Get-CitrixClientVersions
 ############################################
 # source: Get-CommandFiltered.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1553,7 +1553,7 @@ Export-ModuleMember -Function Get-CommandFiltered
 ############################################
 # source: Get-DeviceUptime.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1617,7 +1617,7 @@ Export-ModuleMember -Function Get-DeviceUptime
 ############################################
 # source: Get-FolderSize.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1784,7 +1784,7 @@ Export-ModuleMember -Function Get-FolderSize
 ############################################
 # source: Get-FQDN.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1830,7 +1830,7 @@ Export-ModuleMember -Function Get-FQDN
 ############################################
 # source: Get-FullADUserDetail.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1882,7 +1882,7 @@ Export-ModuleMember -Function Get-FullADUserDetail
 ############################################
 # source: Get-MyPSGalleryStats.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1950,7 +1950,7 @@ Export-ModuleMember -Function Get-MyPSGalleryStats
 ############################################
 # source: Get-ProcessPerformance.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2012,7 +2012,7 @@ Export-ModuleMember -Function Get-ProcessPerformance
 ############################################
 # source: Get-PropertiesToCSV.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2051,7 +2051,7 @@ Export-ModuleMember -Function Get-PropertiesToCSV
 ############################################
 # source: Get-SoftwareAudit.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2128,7 +2128,7 @@ Export-ModuleMember -Function Get-SoftwareAudit
 ############################################
 # source: Get-SystemInfo.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2436,7 +2436,7 @@ Export-ModuleMember -Function Get-SystemInfo
 ############################################
 # source: Get-WinEventLogExtract.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2595,7 +2595,7 @@ Export-ModuleMember -Function Get-WinEventLogExtract
 ############################################
 # source: Import-CitrixSiteConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2639,7 +2639,7 @@ Export-ModuleMember -Function Import-CitrixSiteConfigFile
 ############################################
 # source: Import-XamlConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2769,7 +2769,7 @@ Export-ModuleMember -Function Import-XamlConfigFile
 ############################################
 # source: Install-BGInfo.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2845,7 +2845,7 @@ Export-ModuleMember -Function Install-BGInfo
 ############################################
 # source: Install-ChocolateyApps.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2937,7 +2937,7 @@ Export-ModuleMember -Function Install-ChocolateyApps
 ############################################
 # source: Install-ChocolateyClient.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2990,7 +2990,7 @@ Export-ModuleMember -Function Install-ChocolateyClient
 ############################################
 # source: Install-ChocolateyServer.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3112,7 +3112,7 @@ Export-ModuleMember -Function Install-ChocolateyServer
 ############################################
 # source: Install-MSWinget.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3199,7 +3199,7 @@ Export-ModuleMember -Function Install-MSWinget
 ############################################
 # source: Install-PSModules.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3318,7 +3318,7 @@ Export-ModuleMember -Function Install-PSModules
 ############################################
 # source: New-CitrixSiteConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3460,7 +3460,7 @@ Export-ModuleMember -Function New-CitrixSiteConfigFile
 ############################################
 # source: New-ElevatedShortcut.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3546,7 +3546,7 @@ Export-ModuleMember -Function New-ElevatedShortcut
 ############################################
 # source: New-GodModeFolder.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3578,7 +3578,7 @@ Export-ModuleMember -Function New-GodModeFolder
 ############################################
 # source: New-GoogleSearch.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3626,7 +3626,7 @@ Export-ModuleMember -Function New-GoogleSearch
 ############################################
 # source: New-PSModule.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3720,7 +3720,7 @@ Export-ModuleMember -Function New-PSModule
 ############################################
 # source: New-PSProfile.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3756,11 +3756,38 @@ Function New-PSProfile {
     $vscode = 'Microsoft.VSCode_profile.ps1'
 
     foreach ($folder in $folders) {
-        if (-not(Test-Path ([IO.Path]::Combine($folder.FullName, 'Config')))) { New-Item ([IO.Path]::Combine($folder.FullName, 'Config')) -ItemType Directory | Out-Null }
+        if (-not(Test-Path ([IO.Path]::Combine($folder.FullName, 'Config')))) { $ConfigPath = New-Item ([IO.Path]::Combine($folder.FullName, 'Config')) -ItemType Directory }
+        else {
+            $ConfigPath = Get-Item ([IO.Path]::Combine($folder.FullName, 'Config')) 
+            $BCKDestination = Join-Path -Path $ConfigPath.FullName -ChildPath "$(Get-Date -Format yyyy.MM.dd_HH.mm)"
+        }
 
-        if (Test-Path ([IO.Path]::Combine($folder.FullName, $ise))) { Move-Item ([IO.Path]::Combine($folder.FullName, $ise)) -Destination ([IO.Path]::Combine($folder.FullName, 'Config', "ISEProfile-$(Get-Date -Format yyyy-MM-dd).ps1")) -Force }
-        if (Test-Path ([IO.Path]::Combine($folder.FullName, $ps))) { Move-Item ([IO.Path]::Combine($folder.FullName, $ps)) -Destination ([IO.Path]::Combine($folder.FullName, 'Config', "PSProfile-$(Get-Date -Format yyyy-MM-dd).ps1")) -Force }
-        if (Test-Path ([IO.Path]::Combine($folder.FullName, $vscode))) { Move-Item ([IO.Path]::Combine($folder.FullName, $vscode)) -Destination ([IO.Path]::Combine($folder.FullName, 'Config', "VSCodeProfile-$(Get-Date -Format yyyy-MM-dd).ps1"))-Force }
+        if (Test-Path ([IO.Path]::Combine($folder.FullName, $ise))) {
+            if (-not(Test-Path $BCKDestination )) {
+                $BCKDest = New-Item $BCKDestination -ItemType directory
+            } else {
+                $BCKDest = Get-Item $BCKDestination
+            }
+            Move-Item ([IO.Path]::Combine($folder.FullName, $ise)) -Destination $BCKDest.FullName -Force
+        }
+        if (Test-Path ([IO.Path]::Combine($folder.FullName, $ps))) {
+            if (-not(Test-Path $BCKDestination )) {
+                $BCKDest = New-Item $BCKDestination -ItemType directory
+            } else {
+                $BCKDest = Get-Item $BCKDestination
+            }
+            Move-Item ([IO.Path]::Combine($folder.FullName, $ps)) -Destination $BCKDest.FullName -Force
+        }
+        if (Test-Path ([IO.Path]::Combine($folder.FullName, $vscode))) {
+            if (-not(Test-Path $BCKDestination )) {
+                $BCKDest = New-Item $BCKDestination -ItemType directory
+            } else {
+                $BCKDest = Get-Item $BCKDestination
+            }
+            Move-Item ([IO.Path]::Combine($folder.FullName, $vscode)) -Destination $BCKDest.FullName -Force
+        }
+        $BCKDest.FullName | Compress-Archive -DestinationPath (Join-Path -Path $ConfigPath.fullname -ChildPath 'NewPSProfile-BCK.zip') -Update
+        $BCKDest.FullName | Remove-Item -Recurse -Force
 
         $ModModules = Get-Module PSToolKit
         if (-not($ModModules)) { $ModModules = Get-Module PSToolKit -ListAvailable }
@@ -3801,7 +3828,7 @@ Export-ModuleMember -Function New-PSProfile
 ############################################
 # source: New-PSScript.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3940,7 +3967,7 @@ Export-ModuleMember -Function New-PSScript
 ############################################
 # source: New-SuggestedInfraNames.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4029,7 +4056,7 @@ Export-ModuleMember -Function New-SuggestedInfraNames
 ############################################
 # source: Remove-CIMUserProfiles.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4073,7 +4100,7 @@ Export-ModuleMember -Function Remove-CIMUserProfiles
 ############################################
 # source: Remove-FaultyProfileList.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4148,7 +4175,7 @@ Export-ModuleMember -Function Remove-FaultyProfileList
 ############################################
 # source: Remove-HiddenDevices.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4543,7 +4570,7 @@ Export-ModuleMember -Function Remove-HiddenDevices
 ############################################
 # source: Remove-UserProfile.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4619,7 +4646,7 @@ Export-ModuleMember -Function Remove-UserProfile
 ############################################
 # source: Restore-ElevatedShortcut.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4688,7 +4715,7 @@ Export-ModuleMember -Function Restore-ElevatedShortcut
 ############################################
 # source: Search-Scripts.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4747,7 +4774,7 @@ Export-ModuleMember -Function Search-Scripts
 ############################################
 # source: Set-PSProjectFiles.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5123,7 +5150,7 @@ Export-ModuleMember -Function Set-PSProjectFiles
 ############################################
 # source: Set-PSToolKitSystemSettings.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5849,17 +5876,7 @@ Function Set-PSToolKitSystemSettings {
                     }
                 }
             }
-            $settingsFile = ([IO.Path]::Combine($env:LOCALAPPDATA, 'Packages', '*Terminal*', 'LocalState', 'Settings.json'))
 
-            if (Test-Path $settingsFile) {
-                $SetFile = Get-Item $settingsFile
-                Rename-Item -Path $SetFile.FullName -NewName "Settings-$(Get-Date -Format yyyy.MM.dd_HHMM).json" -Force | Out-Null
-            } else {
-                New-Item -Path ([IO.Path]::Combine($env:LOCALAPPDATA, 'Packages', '*Terminal*', 'LocalState')) -Name 'Settings.json' -ItemType File | Out-Null
-                $SetFile = Get-Item $settingsFile
-            }
-            Invoke-WebRequest -Uri 'https://git.io/JMTRv' -OutFile $SetFile.FullName
-            Write-Color '[Installing]', ' Microsoft Terminal Settings: ', 'Complete' -Color Yellow, Cyan, Green
         } catch { Write-Warning "[Installing] Microsoft Terminal: Failed:`n $($_.Exception.Message)" }
     }
 
@@ -5902,7 +5919,7 @@ Export-ModuleMember -Function Set-PSToolKitSystemSettings
 ############################################
 # source: Set-SharedPSProfile.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5972,7 +5989,7 @@ Export-ModuleMember -Function Set-SharedPSProfile
 ############################################
 # source: Set-StaticIP.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6021,7 +6038,7 @@ Export-ModuleMember -Function Set-StaticIP
 ############################################
 # source: Set-TempFolder.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6060,7 +6077,7 @@ Export-ModuleMember -Function Set-TempFolder
 ############################################
 # source: Set-WindowsAutoLogin.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6177,7 +6194,7 @@ Export-ModuleMember -Function Set-WindowsAutoLogin
 ############################################
 # source: Show-ComputerManagement.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6213,7 +6230,7 @@ Export-ModuleMember -Function Show-ComputerManagement
 ############################################
 # source: Show-PSToolKit.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6421,7 +6438,7 @@ Export-ModuleMember -Function Show-PSToolKit
 ############################################
 # source: Start-PSModuleMaintenance.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6595,7 +6612,7 @@ Export-ModuleMember -Function Start-PSModuleMaintenance
 ############################################
 # source: Start-PSProfile.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6826,7 +6843,7 @@ Export-ModuleMember -Function Start-PSProfile
 ############################################
 # source: Start-PSRoboCopy.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6944,7 +6961,7 @@ Export-ModuleMember -Function Start-PSRoboCopy
 ############################################
 # source: Start-PSScriptAnalyzer.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6982,7 +6999,7 @@ Function Start-PSScriptAnalyzer {
 				$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {$True}
 				else {Throw 'Must be running an elevated prompt to use ClearARPCache'}})]
-		[System.IO.DirectoryInfo]$Path,
+		[System.IO.DirectoryInfo[]]$Paths,
 		[String[]]$ExcludeRules,
 		[ValidateSet('Excel', 'HTML')]
 		[string]$Export = 'Host',
@@ -6993,12 +7010,7 @@ Function Start-PSScriptAnalyzer {
 	)
 
 	[System.Collections.ArrayList]$ScriptAnalyzerIssues = @()
-	# $ExcludeRules = @(
-	# 	'PSMissingModuleManifestField',
-	# 	'PSAvoidUsingWriteHost',
-	# 	'PSUseSingularNouns',
-	# 	'PSReviewUnusedParameter'
-	# )
+foreach ($path in $paths) {
 
 	Write-Color '[Starting]', 'PSScriptAnalyzer' -Color Yellow, DarkCyan
 	if ($ExcludeRules -like $null) {
@@ -7017,9 +7029,10 @@ Function Start-PSScriptAnalyzer {
 			})
 	}
 	#endregion
+}
 
 	if ($Export -eq 'Excel') { $ScriptAnalyzerIssues | Export-Excel -Path $(Join-Path -Path $ReportPath -ChildPath "\PSScriptAnalyzer-$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx") -WorksheetName ScriptAnalyzer -AutoSize -AutoFilter -BoldTopRow -FreezeTopRow -PivotTableName Summery -PivotRows RuleName -PivotData Message}
-	if ($Export -eq 'HTML') { 
+	if ($Export -eq 'HTML') {
 		#region html settings
 		$SectionSettings = @{
 			HeaderTextSize        = '16'
@@ -7070,7 +7083,7 @@ Export-ModuleMember -Function Start-PSScriptAnalyzer
 ############################################
 # source: Start-PSToolkitSystemInitialize.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7142,13 +7155,13 @@ Function Start-PSToolkitSystemInitialize {
 		Install-ChocolateyApps -BaseApps
 	}
 	if ($InstallMyModules) {
-		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Installing Other Modules' -ForegroundColor Cyan
+		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Installing My Modules' -ForegroundColor Cyan
 		'CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray' | ForEach-Object {
 			$module = $_
 			Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
 			if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
 				try {
-					Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
+					Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
 					Install-Module -Name $module -Scope AllUsers -AllowClobber -ErrorAction stop
 				} catch {Write-Warning "Error installing module $($module): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 			} else {
@@ -7156,7 +7169,7 @@ Function Start-PSToolkitSystemInitialize {
 				if (-not($LocalMod)) {$LocalMod = Get-Module $module -ListAvailable}
 				if (($LocalMod[0].Version) -lt (Find-Module $module).Version) {
 					try {
-						Write-Host '[Upgrading]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
+						Write-Host "`t[Upgrading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
 						Update-Module -Name $module -Force -Scope AllUsers
 					} catch {Write-Warning "Error installing module $($module): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 				}
@@ -7169,178 +7182,11 @@ Function Start-PSToolkitSystemInitialize {
 Export-ModuleMember -Function Start-PSToolkitSystemInitialize
 #endregion
  
-#region Sync-PSFolders.ps1
-############################################
-# source: Sync-PSFolders.ps1
-# Module: PSToolKit
-# version: 0.1.62
-# Author: Pierre Smit
-# Company: HTPCZA Tech
-#############################################
- 
-<#
-.SYNOPSIS
-Compare two directories and copy the differences
-
-.DESCRIPTION
-Compare two directories and copy the differences. Newest file wins
-
-.PARAMETER LeftFolder
-First Folder to compare
-
-.PARAMETER RightFolder
-Second folder to compare
-
-.PARAMETER SetLongPathRegKey
-Enable long file path in registry
-
-.EXAMPLE
-Sync-PSFolders -LeftFolder C:\Temp\one -RightFolder C:\Temp\6
-
-.NOTES
-General notes
-#>
-function Sync-PSFolders {
-	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Sync-PSFolders')]
-	Param(
-		[parameter(Mandatory = $true)]
-		[System.IO.DirectoryInfo]$LeftFolder,
-		[parameter(Mandatory = $true)]
-		[System.IO.DirectoryInfo]$RightFolder,
-		[switch]$SetLongPathRegKey = $false
-	)
-
-	function Write-Log {
-		param(
-			[ValidateSet('Debug', 'Information', 'Warning', 'Error')]
-			[string]$Severity = 'Information',
-			[ValidateNotNullOrEmpty()]
-			[string]$Message,
-			[ValidateNotNullOrEmpty()]
-			[string]$LogPath,
-			[ValidateNotNullOrEmpty()]
-			[switch]$ExportFinal = $false
-		)
-
-		$object = [PSCustomObject]@{
-			Time     = '[' + (Get-Date -f g) + '] '
-			Severity = "[$Severity] "
-			Message  = $Message
-		} | Select-Object Time, Severity, Message
-
-
-		[array]$script:ExportLogs += $object
-
-		if ($script:ExportLogs[-1].Severity -notlike '*Debug*') { $script:ExportLogs[-1] | Format-Table -HideTableHeaders -RepeatHeader -Wrap }
-
-		if ($ExportFinal) {
-			$script:ExportLogs | Format-Table -AutoSize
-		}
-
-	}
-
-	$ErrorActionPreference = 'Stop'
-	if ($SetLongPathRegKey) { Set-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem -Name LongPathsEnabled -Value 1; Get-Process explorer | Stop-Process }
-	[array]$script:ExportLogs = @()
-	if (!(Test-Path $LeftFolder)) { write-log -Severity Warning -Message "Creating $($LeftFolder)"; New-Item $LeftFolder -ItemType Directory | Out-Null }
-	if (!(Test-Path $RightFolder)) { write-log -Severity Warning -Message "Creating $($RightFolder)"; New-Item $RightFolder -ItemType Directory | Out-Null }
-
-	try {
-		$LeftFolder = Get-Item $LeftFolder
-		$RightFolder = Get-Item $RightFolder
-		write-log -Severity Information -Message 'Collecting Left Folder Content'
-		$LeftFolderContent = Get-ChildItem -Path $($LeftFolder.FullName) -Recurse -ErrorAction Stop
-		write-log -Severity Information -Message 'Collecting Right Folder Content'
-		$RightFolderContent = Get-ChildItem -Path $($RightFolder.FullName) -Recurse -ErrorAction Stop
-	}
-	catch { Write-Log -Severity Error -Message "Object = $($_.TargetObject)"; Write-Log -Severity Error -Message "ErrorDetail = $($_.Exception.Message)" }
-
-
-	#if ($LeftFolder.FullName -like "*\\*") {$LeftFolderContent = Get-ChildItem -LiteralPath "\\?\UNC\$($LeftFolder.FullName.Replace('\\',''))" -Recurse -ErrorAction Stop} else {$LeftFolderContent = Get-ChildItem -LiteralPath "\\?\$($LeftFolder.FullName)" -Recurse -ErrorAction Stop }
-	#if ($RightFolder.FullName -like "*\\*") {$RightFolderContent = Get-ChildItem -LiteralPath "\\?\UNC\$($RightFolder.FullName.Replace('\\',''))" -Recurse -ErrorAction Stop} else {$RightFolderContent = Get-ChildItem -LiteralPath "\\?\$($RightFolder.FullName)" -Recurse -ErrorAction Stop }
-
-	try {
-		if ($null -eq $LeftFolderContent) {
-			write-log -Severity Warning -Message "$($LeftFolder) is empty, copying all files"
-			Copy-Item "$RightFolder\*" -Destination $LeftFolder.FullName -Recurse -PassThru | ForEach-Object { Write-Log -Severity Debug -Message "$($_.fullname)" }
-			$LeftFolderContent = Get-ChildItem -Path $($LeftFolder.FullName) -Recurse -ErrorAction Stop
-
-		}
-		if ($null -eq $RightFolderContent) {
-			write-log -Severity Warning -Message "$($RightFolder) is empty, copying all files"
-			Copy-Item "$LeftFolder\*" -Destination $RightFolder.FullName -Recurse -PassThru | ForEach-Object { Write-Log -Severity Debug -Message "$($_.fullname)" }
-			$RightFolderContent = Get-ChildItem -Path $($RightFolder.FullName) -Recurse -ErrorAction Stop
-
-		}
-
-	}
-	catch { Write-Log -Severity Error -Message "Object = $($_.TargetObject)"; Write-Log -Severity Error -Message "ErrorDetail = $($_.Exception.Message)" }
-
-	try {
-		write-log -Severity Information -Message 'Comparing the folder stucture'
-		$1stdir = (($LeftFolderContent | Where-Object { $_.Attributes -like 'Directory' }).FullName).Replace($($LeftFolder.FullName), '')
-		$2ndDir = (($RightFolderContent | Where-Object { $_.Attributes -like 'Directory' }).FullName).Replace($($RightFolder.FullName), '')
-
-		$DirDiffs = Compare-Object -ReferenceObject $1stdir -DifferenceObject $2ndDir | Sort-Object -Property SideIndicator | Sort-Object -Property InputObject
-		foreach ($Dir in $Dirdiffs) {
-			if ($Dir.SideIndicator -eq '=>') {
-				Write-Log -Severity Debug -Message "Creating folder $(Join-Path $LeftFolder.FullName -ChildPath $Dir.InputObject)"
-				New-Item -Path (Join-Path $LeftFolder.FullName -ChildPath $Dir.InputObject) -ItemType Directory
-			}
-			if ($Dir.SideIndicator -eq '<=') {
-				Write-Log -Severity Debug -Message "Creating folder $(Join-Path $LeftFolder.FullName -ChildPath $Dir.InputObject)"
-				New-Item -Path (Join-Path $RightFolder.FullName -ChildPath $Dir.InputObject) -ItemType Directory
-			}
-		}
-	}
-	catch { Write-Log -Severity Error -Message "Object = $($_.TargetObject)"; Write-Log -Severity Error -Message "ErrorDetail = $($_.Exception.Message)" }
-
-	write-log -Severity Information -Message 'Comparing the file structure'
-	$1stFileList = (($LeftFolderContent | Where-Object { $_.Attributes -notlike 'Directory' }).FullName).Replace($($LeftFolder.FullName), '')
-	$2ndFileList = (($RightFolderContent | Where-Object { $_.Attributes -notlike 'Directory' }).FullName).Replace($($RightFolder.FullName), '')
-	$FileDiffs = Compare-Object -ReferenceObject $1stFileList -DifferenceObject $2ndFileList -IncludeEqual | Sort-Object -Property SideIndicator | Sort-Object -Property InputObject
-	foreach (${File} in ${Filediffs}) {
-		try {
-			if ($file.SideIndicator -like '=>') {
-				$Copyfile = Get-Item (Join-Path $RightFolder.FullName -ChildPath $File.InputObject)
-				Write-Log -Severity Debug -Message "Copying $($Copyfile.FullName) to $($Copyfile.DirectoryName.Replace($RightFolder.FullName, $LeftFolder.FullName))"
-				Copy-Item -Path $Copyfile.FullName -Destination ($Copyfile.DirectoryName.Replace($RightFolder.FullName, $LeftFolder.FullName))
-			}
-			if ($file.SideIndicator -like '<=') {
-				$Copyfile = Get-Item (Join-Path $LeftFolder.FullName -ChildPath $File.InputObject)
-				Write-Log -Severity Debug -Message "Copying $($Copyfile.FullName) to $($Copyfile.DirectoryName.Replace($LeftFolder.FullName, $RightFolder.FullName))"
-				Copy-Item -Path $Copyfile.FullName -Destination ($Copyfile.DirectoryName.Replace($LeftFolder.FullName, $RightFolder.FullName))
-			}
-  }
-		catch { Write-Log -Severity Error -Message "Object = $($_.TargetObject)"; Write-Log -Severity Error -Message "ErrorDetail = $($_.Exception.Message)" }
-		try {
-			if ($file.SideIndicator -eq '==') {
-				$1st = Get-Item (Join-Path $LeftFolder.FullName -ChildPath $File.InputObject)
-				$2nd = Get-Item (Join-Path $RightFolder.FullName -ChildPath $File.InputObject)
-				if ($1st.LastWriteTime -gt $2nd.LastWriteTime) {
-					Write-Log -Severity Warning -Message "$($1st.FullName) is newer, and will replace file in $($2nd.DirectoryName)"
-					Copy-Item $1st.FullName -Destination $2nd.DirectoryName -Force
-				}
-				if ($2nd.LastWriteTime -gt $1st.LastWriteTime) {
-					Write-Log -Severity Warning -Message "$($2nd.FullName) is newer, and will replace file in $($1st.DirectoryName)"
-					Copy-Item $2nd.FullName -Destination $1st.DirectoryName -Force
-				}
-			}
-  }
-		catch { Write-Log -Severity Error -Message "Object = $($_.TargetObject)"; Write-Log -Severity Error -Message "ErrorDetail = $($_.Exception.Message)" }
-	}
-	write-log -Severity Information -Message 'End of Transmission' -ExportFinal
-	$ErrorActionPreference = 'Continue'
-}
- 
-Export-ModuleMember -Function Sync-PSFolders
-#endregion
- 
 #region Test-CitrixCloudConnector.ps1
 ############################################
 # source: Test-CitrixCloudConnector.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7446,7 +7292,7 @@ Export-ModuleMember -Function Test-CitrixCloudConnector
 ############################################
 # source: Test-CitrixVDAPorts.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7545,7 +7391,7 @@ Export-ModuleMember -Function Test-CitrixVDAPorts
 ############################################
 # source: Test-PendingReboot.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7726,7 +7572,7 @@ Export-ModuleMember -Function Test-PendingReboot
 ############################################
 # source: Test-PSRemote.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7783,7 +7629,7 @@ Export-ModuleMember -Function Test-PSRemote
 ############################################
 # source: Update-AllPSModules.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8089,7 +7935,7 @@ Export-ModuleMember -Function Update-AllPSModules
 ############################################
 # source: Update-ListOfDDCs.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8153,7 +7999,7 @@ Export-ModuleMember -Function Update-ListOfDDCs
 ############################################
 # source: Update-LocalHelp.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8194,7 +8040,7 @@ Export-ModuleMember -Function Update-LocalHelp
 ############################################
 # source: Update-PSModuleInfo.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8297,7 +8143,7 @@ Export-ModuleMember -Function Update-PSModuleInfo
 ############################################
 # source: Update-PSToolKit.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8390,7 +8236,7 @@ Export-ModuleMember -Function Update-PSToolKit
 ############################################
 # source: Update-PSToolKitConfigFiles.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8537,7 +8383,7 @@ Export-ModuleMember -Function Update-PSToolKitConfigFiles
 ############################################
 # source: Write-Ascii.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8932,7 +8778,7 @@ Export-ModuleMember -Function Write-Ascii
 ############################################
 # source: Write-PSToolKitLog.ps1
 # Module: PSToolKit
-# version: 0.1.62
+# version: 0.1.63
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################

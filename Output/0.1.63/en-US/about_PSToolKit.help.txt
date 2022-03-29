@@ -71,7 +71,6 @@ Functions in this module:
 	 Start-PSRoboCopy -- My wrapper for default robocopy switches
 	 Start-PSScriptAnalyzer -- Run and report ScriptAnalyzer output
 	 Start-PSToolkitSystemInitialize -- Initialize a blank machine.
-	 Sync-PSFolders -- Compare two directories and copy the differences
 	 Test-CitrixCloudConnector -- Perform basic connection tests to CItrix cloud.
 	 Test-CitrixVDAPorts -- Test connection between ddc and vda
 	 Test-PendingReboot -- This script tests various registry values to see if the local computer is pending a reboot.

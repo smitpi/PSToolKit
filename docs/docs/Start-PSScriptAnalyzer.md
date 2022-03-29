@@ -13,7 +13,7 @@ Run and report ScriptAnalyzer output
 ## SYNTAX
 
 ```
-Start-PSScriptAnalyzer [-Path] <DirectoryInfo> [[-ExcludeRules] <String[]>] [[-Export] <String>]
+Start-PSScriptAnalyzer [-Paths] <DirectoryInfo[]> [[-ExcludeRules] <String[]>] [[-Export] <String>]
  [[-ReportPath] <DirectoryInfo>] [<CommonParameters>]
 ```
 
@@ -29,11 +29,11 @@ Start-PSScriptAnalyzer -Path C:\temp
 
 ## PARAMETERS
 
-### -Path
-Path to ps1 files
+### -Paths
+{{ Fill Paths Description }}
 
 ```yaml
-Type: DirectoryInfo
+Type: DirectoryInfo[]
 Parameter Sets: (All)
 Aliases:
 

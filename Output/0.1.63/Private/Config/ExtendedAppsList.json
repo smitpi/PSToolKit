@@ -160,6 +160,10 @@
     "Source": "chocolatey"
   },
   {
+    "Source": "chocolatey",
+    "Name": "synctrayzor"
+  },
+  {
     "Name": "tailscale",
     "Source": "chocolatey"
   },
