@@ -83,16 +83,23 @@ Function Start-PSScriptAnalyzer {
 
 	[System.Collections.ArrayList]$ScriptAnalyzerIssues = @()
 foreach ($path in $paths) {
-
-	Write-Color '[Starting]', 'PSScriptAnalyzer' -Color Yellow, DarkCyan
+    $Listissues = $null
+	Write-Color '[Starting]', 'PSScriptAnalyzer', " on ", "$($path)"  -Color Yellow, Cyan, Green,Cyan -LinesBefore 2 -LinesAfter 1
 	if ($ExcludeRules -like $null) {
-		Invoke-ScriptAnalyzer -Path $Path -Recurse -OutVariable Listissues | Out-Null
+        Get-ChildItem -Path "$($path)\*.ps1" -Recurse | ForEach-Object {
+            Write-Color "[Processing]", " $($_.Name)" -Color Yellow,Cyan
+            Invoke-ScriptAnalyzer -Path $_.FullName -IncludeDefaultRules -Severity Information,warning,error -Fix -OutVariable tmp | Out-Null
+            $Listissues = $Listissues + $tmp
+        }
  } else {
-		Invoke-ScriptAnalyzer -Path $Path -Recurse -OutVariable Listissues -ExcludeRule $ExcludeRules | Out-Null
+        Get-ChildItem -Path "$($path)\*.ps1" -Recurse | ForEach-Object {
+            Write-Color "[Processing]", " $($_.Name)" -Color Yellow,Cyan
+            Invoke-ScriptAnalyzer -Path $_.FullName -IncludeDefaultRules -Severity Information,warning,error -Fix -OutVariable tmp -ExcludeRule $ExcludeRules | Out-Null
+            $Listissues = $Listissues + $tmp
+        }
 	}
 
 	foreach ($item in $Listissues) {
-		Write-Color "$($item.scriptname): ", $($item.Message) -Color Cyan, Yellow
 		[void]$ScriptAnalyzerIssues.Add([PSCustomObject]@{
 				File     = $item.scriptname
 				RuleName = $item.RuleName

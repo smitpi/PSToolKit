@@ -121,12 +121,14 @@ Function Start-PSToolkitSystemInitialize {
 				if (-not($LocalMod)) {$LocalMod = Get-Module $module -ListAvailable}
 				if (($LocalMod[0].Version) -lt (Find-Module $module).Version) {
 					try {
-						Write-Host "`t[Upgrading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
+						Write-Host "`t`t[Upgrading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
 						Update-Module -Name $module -Force -Scope AllUsers
 					} catch {Write-Warning "Error installing module $($module): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 				}
 			}
 		}
 	}
-	Start-PSProfile -ClearHost
+	Start-PSProfile -ClearHost -AddFun
+Write-Host '[Complete] ' -NoNewline -ForegroundColor Yellow; Write-Host "PSToolKit System Initialization" -ForegroundColor DarkRed
+Start-Sleep 10
 } #end Function

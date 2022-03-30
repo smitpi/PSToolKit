@@ -613,6 +613,18 @@ Function Set-PSToolKitSystemSettings {
         Write-Color '[Set]', 'EnableEnhPointerPrecision: ', 'Complete' -Color Yellow, Cyan, Green -StartTab 1
     }
 
+    if ($InstallVMWareTools) {
+        try {
+            if ((Get-CimInstance -ClassName win32_bios).Manufacturer -like '*VMware*') {
+                if (-not(Get-Command choco.exe -ErrorAction SilentlyContinue)) { Install-ChocolateyClient}
+                Write-Color '[Installing] ', 'VMWare Tools', ' from source ', 'chocolatey' -Color Yellow, Cyan, green, Cyan
+                choco upgrade vmware-tools --accept-license --limit-output -y --source chocolatey | Out-Null
+                if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing vmware-tools Code: $($LASTEXITCODE)"}
+            } else {Write-Color '[Installing]', 'VMWare Tools:', ' Not a VMWare VM' -Color Yellow, Cyan, DarkRed}
+        } catch { Write-Warning "[Installing] VMWare Tools: Failed:`n $($_.Exception.Message)" }
+
+    }
+
     if ($InstallRSAT) {
         try {
             $checkver = Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object caption
@@ -685,7 +697,25 @@ Function Set-PSToolKitSystemSettings {
     }
 
     if ($InstallMSTerminal) {
-      
+        try {
+            if (-not(Get-Command choco.exe -ErrorAction SilentlyContinue)) { Install-ChocolateyClient}
+            'microsoft-windows-terminal', 'cascadia-code-nerd-font', 'cascadiacodepl' | ForEach-Object {
+                $ChocoApp = choco search $_ --exact --local-only --limit-output
+                $ChocoAppOnline = choco search $_ --exact --limit-output
+                if ($null -eq $ChocoApp) {
+                    Write-Color '[Installing] ', $($_), ' from source ', 'chocolatey' -Color Yellow, Cyan, Green, Cyan
+                    choco upgrade $($_) --accept-license --limit-output -y | Out-Null
+                    if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $($_) Code: $($LASTEXITCODE)"}
+                } else {
+                    Write-Color '[Installing] ', $($ChocoApp.split('|')[0]), " (Version: $($ChocoApp.split('|')[1]))", ' Already Installed' -Color Yellow, Cyan, Green, DarkRed
+                    if ($($ChocoApp.split('|')[1]) -lt $($ChocoAppOnline.split('|')[1])) {
+                        Write-Color '[Updating] ', $($_), " (Version:$($ChocoAppOnline.split('|')[1]))", ' from source ', 'chocolatey' -Color Yellow, Cyan, Yellow, Green, Cyan
+                        choco upgrade $($_) --accept-license --limit-output -y | Out-Null
+                        if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing $($_) Code: $($LASTEXITCODE)"}
+                    }
+                }
+            }
+
         } catch { Write-Warning "[Installing] Microsoft Terminal: Failed:`n $($_.Exception.Message)" }
     }
 
