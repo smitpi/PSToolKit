@@ -81,7 +81,7 @@ Function New-PSProfile {
         $configfolder = [IO.Path]::Combine($folder.FullName, 'Config')
         $BCKFolder = [IO.Path]::Combine($folder.FullName, 'Config', "$(Get-Date -Format yyyy.MM.dd_HH.mm)")
 
-        $Profilefiles = Get-ChildItem -File "$($folder.FullName)\*profile*.ps1"
+        $Profilefiles = Get-ChildItem -File "$($folder.FullName)\*profile*.ps1" 
         if ($Profilefiles) {
             if (-not(Test-Path $configfolder)) {New-Item $configfolder -ItemType directory -Force}
             $BCKDest = New-Item $BCKFolder -ItemType directory -Force

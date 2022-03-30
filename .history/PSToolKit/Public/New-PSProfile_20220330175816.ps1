@@ -73,23 +73,45 @@ Function New-PSProfile {
     $ps = 'Microsoft.PowerShell_profile.ps1'
     $vscode = 'Microsoft.VSCode_profile.ps1'
 
-    $ModModules = Get-Module PSToolKit
-    if (-not($ModModules)) { $ModModules = Get-Module PSToolKit -ListAvailable }
-    if (-not($ModModules)) { throw 'Module not found' }
-
     foreach ($folder in $folders) {
-        $configfolder = [IO.Path]::Combine($folder.FullName, 'Config')
-        $BCKFolder = [IO.Path]::Combine($folder.FullName, 'Config', "$(Get-Date -Format yyyy.MM.dd_HH.mm)")
 
-        $Profilefiles = Get-ChildItem -File "$($folder.FullName)\*profile*.ps1"
-        if ($Profilefiles) {
-            if (-not(Test-Path $configfolder)) {New-Item $configfolder -ItemType directory -Force}
-            $BCKDest = New-Item $BCKFolder -ItemType directory -Force
-            $Profilefiles | Move-Item -Destination $BCKDest.FullName
-
-            $BCKDest.FullName | Compress-Archive -DestinationPath (Join-Path -Path $configfolder -ChildPath 'NewPSProfile-BCK.zip') -Update
-            $BCKDest.FullName | Remove-Item -Recurse -Force
+        
+        if (-not(Test-Path ([IO.Path]::Combine($folder.FullName, 'Config')))) { $ConfigPath = New-Item ([IO.Path]::Combine($folder.FullName, 'Config')) -ItemType Directory }
+        else {
+            $ConfigPath = Get-Item ([IO.Path]::Combine($folder.FullName, 'Config')) 
+            $BCKDestination = Join-Path -Path $ConfigPath.FullName -ChildPath "$(Get-Date -Format yyyy.MM.dd_HH.mm)"
         }
+
+        if (Test-Path ([IO.Path]::Combine($folder.FullName, $ise))) {
+            if (-not(Test-Path $BCKDestination )) {
+                $BCKDest = New-Item $BCKDestination -ItemType directory
+            } else {
+                $BCKDest = Get-Item $BCKDestination
+            }
+            Move-Item ([IO.Path]::Combine($folder.FullName, $ise)) -Destination $BCKDest.FullName -Force
+        }
+        if (Test-Path ([IO.Path]::Combine($folder.FullName, $ps))) {
+            if (-not(Test-Path $BCKDestination )) {
+                $BCKDest = New-Item $BCKDestination -ItemType directory
+            } else {
+                $BCKDest = Get-Item $BCKDestination
+            }
+            Move-Item ([IO.Path]::Combine($folder.FullName, $ps)) -Destination $BCKDest.FullName -Force
+        }
+        if (Test-Path ([IO.Path]::Combine($folder.FullName, $vscode))) {
+            if (-not(Test-Path $BCKDestination )) {
+                $BCKDest = New-Item $BCKDestination -ItemType directory
+            } else {
+                $BCKDest = Get-Item $BCKDestination
+            }
+            Move-Item ([IO.Path]::Combine($folder.FullName, $vscode)) -Destination $BCKDest.FullName -Force
+        }
+        $BCKDest.FullName | Compress-Archive -DestinationPath (Join-Path -Path $ConfigPath.fullname -ChildPath 'NewPSProfile-BCK.zip') -Update
+        $BCKDest.FullName | Remove-Item -Recurse -Force
+
+        $ModModules = Get-Module PSToolKit
+        if (-not($ModModules)) { $ModModules = Get-Module PSToolKit -ListAvailable }
+        if (-not($ModModules)) { throw 'Module not found' }
 
         $NewFile = @"
 #Force TLS 1.2 for all connections
