@@ -103,10 +103,16 @@ Function Start-PSToolkitSystemInitialize {
 		New-PSProfile
 		Update-PSToolKitConfigFiles -UpdateLocal -UpdateLocalFromModule
 		Reset-PSGallery
+        Set-PSToolKitSystemSettings -RunAll
 		Install-PSModules -BaseModules -Scope AllUsers
 		Install-ChocolateyClient
+        Install-VMWareTools
+        Install-PowerShell7x
+        Install-MicrosoftTerminal -DefaultSettings
 		Install-ChocolateyApps -BaseApps
-		
+        Install-RSAT
+        Install-MSUpdates
+
 	}
 	if ($InstallMyModules) {
 		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Installing My Modules' -ForegroundColor Cyan

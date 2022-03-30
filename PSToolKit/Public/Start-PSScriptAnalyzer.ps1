@@ -45,7 +45,7 @@ Run and report ScriptAnalyzer output
 .DESCRIPTION
 Run and report ScriptAnalyzer output
 
-.PARAMETER Path
+.PARAMETER Paths
 Path to ps1 files
 
 .PARAMETER ExcludeRules
