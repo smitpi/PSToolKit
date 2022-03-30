@@ -73,9 +73,9 @@ Function Install-ChocolateyClient {
     
     if (Get-Command choco -ErrorAction SilentlyContinue) {
       Write-Color '[Installing] ', 'Chocolatey Client: ', 'Complete' -Color Yellow, Cyan, Green
-      choco config set --name="'useEnhancedExitCodes'" --value="'true'" --limit-output
-      choco config set --name="'allowGlobalConfirmation'" --value="'true'" --limit-output
-      choco config set --name="'removePackageInformationOnUninstall'" --value="'true'" --limit-output
+      choco config set --name="'useEnhancedExitCodes'" --value="'true'"
+      choco config set --name="'allowGlobalConfirmation'" --value="'true'"
+      choco config set --name="'removePackageInformationOnUninstall'" --value="'true'"
       Write-Color '[Set] ', 'Chocolatey Client Config: ', 'Complete' -Color Yellow, Cyan, Green
     } else {Write-Color '[Installing] ', 'Chocolatey Client: ', 'Failed' -Color Yellow, Cyan, red}
   } else {

@@ -61,7 +61,7 @@ Function Install-ChocolateyClient {
   }
 
 		$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-  if (-not($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))) { Throw 'Must be running an elevated prompt to use function' }
+    if (-not($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))) { Throw 'Must be running an elevated prompt to use function' }
 
   [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
   if (-not(Get-Command choco.exe -ErrorAction SilentlyContinue)) {
@@ -69,16 +69,15 @@ Function Install-ChocolateyClient {
     [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
     $web = New-Object System.Net.WebClient
     $web.DownloadFile('https://community.chocolatey.org/install.ps1', "$($env:TEMP)\choco-install.ps1")
-    & "$($env:TEMP)\choco-install.ps1" *> $null
-    
-    if (Get-Command choco -ErrorAction SilentlyContinue) {
-      Write-Color '[Installing] ', 'Chocolatey Client: ', 'Complete' -Color Yellow, Cyan, Green
-      choco config set --name="'useEnhancedExitCodes'" --value="'true'" --limit-output
-      choco config set --name="'allowGlobalConfirmation'" --value="'true'" --limit-output
-      choco config set --name="'removePackageInformationOnUninstall'" --value="'true'" --limit-output
-      Write-Color '[Set] ', 'Chocolatey Client Config: ', 'Complete' -Color Yellow, Cyan, Green
-    } else {Write-Color '[Installing] ', 'Chocolatey Client: ', 'Failed' -Color Yellow, Cyan, red}
-  } else {
+    & "$($env:TEMP)\choco-install.ps1" | Out-Null
+    if ()
+    Write-Color '[Installing] ', 'Chocolatey Client: ', 'Complete' -Color Yellow, Cyan, Green
+    choco config set --name="'useEnhancedExitCodes'" --value="'true'"
+    choco config set --name="'allowGlobalConfirmation'" --value="'true'"
+    choco config set --name="'removePackageInformationOnUninstall'" --value="'true'"
+    Write-Color '[Set] ', 'Chocolatey Client Config: ', 'Complete' -Color Yellow, Cyan, Green
+  }
+  else {
     Write-Color '[Installing] ', 'Chocolatey Client: ', 'Aleady Installed' -Color Yellow, Cyan, DarkRed
   }
 } #end Function

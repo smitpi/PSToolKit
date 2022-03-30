@@ -75,21 +75,19 @@ Function Update-PSToolKit {
 	if ((Test-Path $env:tmp\private.zip) -eq $true ) { Remove-Item $env:tmp\private.zip -Force }
 
 	if ((Test-Path $ModulePath)) {
-		$ModChild = $InstalledVer = $OnlineVer = $null
-		$ModChild = Get-ChildItem -Directory $ModulePath -ErrorAction SilentlyContinue
-		if ($null -like $ModChild) {$ForceUpdate = $true}
-		else {
-			[version]$InstalledVer = ($ModChild | Sort-Object -Property Name -Descending)[0].Name
-			[version]$OnlineVer = (Invoke-RestMethod 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/Version.json').version
-			if ($InstalledVer -lt $OnlineVer) {
-				$ForceUpdate = $true
-				Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Backup old folder to $(Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip')"
-				Get-ChildItem -Directory $ModulePath | Compress-Archive -DestinationPath (Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip') -Update
-				Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Remove old folder $($ModulePath)"
-				Get-ChildItem -Directory $ModulePath | Remove-Item -Recurse -Force
-			} else {
-				Write-Host '[Updating]: ' -NoNewline -ForegroundColor Yellow; Write-Host "PSToolKit ($($OnlineVer.ToString())): " -ForegroundColor Cyan -NoNewline; Write-Host 'Already Up To Date' -ForegroundColor DarkRed
-			}
+		$InstalledVer = $OnlineVer = $null
+		$ModChild = (Get-ChildItem -Directory $ModulePath -ErrorAction SilentlyContinue
+		
+		[version]$InstalledVer =  | Sort-Object -Property Name -Descending)[0].Name
+		[version]$OnlineVer = (Invoke-RestMethod 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/Version.json').version
+		if ($InstalledVer -lt $OnlineVer) {
+			$ForceUpdate = $true
+			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Backup old folder to $(Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip')"
+			Get-ChildItem -Directory $ModulePath | Compress-Archive -DestinationPath (Join-Path -Path $ModulePath -ChildPath 'PSToolKit-BCK.zip') -Update
+			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Remove old folder $($ModulePath)"
+			Get-ChildItem -Directory $ModulePath | Remove-Item -Recurse -Force
+		} else {
+			Write-Host '[Updating]: ' -NoNewline -ForegroundColor Yellow; Write-Host "PSToolKit ($($OnlineVer.ToString())): " -ForegroundColor Cyan -NoNewline; Write-Host 'Already Up To Date' -ForegroundColor DarkRed
 		}
 	} else {
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Creating Module directory $($ModulePath)"
