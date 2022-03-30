@@ -1,0 +1,98 @@
+
+PSToolKit
+	 about_PSToolKit
+ 
+SHORT DESCRIPTION
+	 Powershell Scripts and functions for a system administrator
+
+ 
+NOTES
+Functions in this module:
+	 Add-ChocolateyPrivateRepo -- Add a private repository to Chocolatey.
+	 Backup-ElevatedShortcut -- Exports the RunAss shortcuts, to a zip file
+	 Backup-PowerShellProfile -- Creates a zip file from the ps profile directories
+	 Connect-VMWareCluster -- Connect to a vSphere cluster to perform other commands or scripts
+	 Edit-ChocolateyAppsList -- Add or remove apps from the json file used in Install-ChocolateyApps
+	 Edit-HostsFile -- Edit the hosts file
+	 Edit-PSModulesLists -- Edit the Modules json files.
+	 Edit-SSHConfigFile -- Creates and modifies the ssh config file in their profile.
+	 Enable-RemoteHostPSRemoting -- enable ps remote remotely
+	 Export-CitrixPolicySettings -- Citrix policy export.
+	 Export-ESXTemplates -- Export all VM Templates from vSphere to local disk.
+	 Export-PSGallery -- Export details of all modules and scripts on psgallery to excel
+	 Find-ChocolateyApps -- Search the online repo for software
+	 Find-OnlineModule -- Find a module on psgallery
+	 Find-OnlineScript -- Find Script on PSGallery
+	 Format-AllObjectsInAListView -- Cast an array or psobject and display it in list view
+	 Get-AllUsersInGroup -- Get details of all users in a group
+	 Get-CitrixClientVersions -- Report on the CItrix workspace versions the users are using.
+	 Get-CommandFiltered -- Finds commands on the system and sort it according to module
+	 Get-DeviceUptime -- Calculates the uptime of a system
+	 Get-FolderSize -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option
+	 Get-FQDN -- Get FQDN for a device, and checks if it is online
+	 Get-FullADUserDetail -- Extract handy info of an AD user
+	 Get-MyPSGalleryStats -- Show stats about my published modules.
+	 Get-ProcessPerformance -- Gets the top 10 processes by CPU %
+	 Get-PropertiesToCSV -- Get member data of an object. Use it to create other PSObjects.
+	 Get-SoftwareAudit -- Connects to a remote hosts and collect installed software details
+	 Get-SystemInfo -- Get system details of a remote device
+	 Get-WinEventLogExtract -- Extract Event logs of a server list, and create html / excel report
+	 Import-CitrixSiteConfigFile -- Import the Citrix config file, and created a variable with the details
+	 Import-XamlConfigFile -- Import the wpf xaml file and create variables from objects
+	 Install-BGInfo -- Install and auto runs bginfo at startup.
+	 Install-ChocolateyApps -- Install chocolatey apps from a json list.
+	 Install-ChocolateyClient -- Downloads and installs the Chocolatey client.
+	 Install-ChocolateyServer -- This will download, install and setup a new Chocolatey Repo Server
+	 Install-MicrosoftTerminal -- Install MicrosoftTerminal on your device.
+	 Install-MSUpdates -- Perform windows update
+	 Install-MSWinget -- Install the package manager winget
+	 Install-NFSClient -- Install NFS Client for windows
+	 Install-PowerShell7x -- Install ps7
+	 Install-PSModules -- Install modules from .json file.
+	 Install-RSAT -- Install Remote Admin Tools
+	 Install-VMWareTools -- Install vmware tools from chocolatety
+	 New-CitrixSiteConfigFile -- All a config file with Citrix server details. To be imported as variables.
+	 New-ElevatedShortcut -- Creates a shortcut to a script or exe that runs as admin, without UNC
+	 New-GodModeFolder -- Creates a God Mode Folder
+	 New-GoogleSearch -- Start a new browser tab with search string.
+	 New-PSModule -- Creates a new PowerShell module.
+	 New-PSProfile -- Creates new profile files in the documents folder
+	 New-PSScript -- Creates a new PowerShell script. With PowerShell Script Info
+	 New-SuggestedInfraNames -- Generates a list of usernames and server names, that can be used as test / demo data.
+	 Remove-CIMUserProfiles -- Uses CimInstance to remove a user profile
+	 Remove-FaultyProfileList -- Fixes Profilelist in the registry. To fix user logon with temp profile.
+	 Remove-HiddenDevices -- Removes ghost devices from your system
+	 Remove-UserProfile -- Connects to a server and renames a user profile folder, and delete the key from Profilelist in the registry
+	 Reset-PSGallery -- Reset gallery to degault settings
+	 Restore-ElevatedShortcut -- Restore the RunAss shortcuts, from a zip file
+	 Search-Scripts -- Search for a string in a directory of ps1 scripts.
+	 Set-PSToolKitSystemSettings -- Set multiple settings on desktop or server
+	 Set-SharedPSProfile -- Redirects PowerShell profile to network share.
+	 Set-StaticIP -- Set static IP on device
+	 Set-TempFolder -- Set all the temp environmental variables to c:\temp
+	 Set-WindowsAutoLogin -- Enable autologin on a device.
+	 Show-ComputerManagement -- Opens the Computer Management of the system or remote system
+	 Show-PSToolKit -- Show details of the commands in this module
+	 Start-PSModuleMaintenance -- Goes through all the installed modules, and allow you to upgrade(If available), or remove old and duplicate versions.
+	 Start-PSProfile -- My PS Profile for all sessions.
+	 Start-PSRoboCopy -- My wrapper for default robocopy switches
+	 Start-PSScriptAnalyzer -- Run and report ScriptAnalyzer output
+	 Start-PSToolkitSystemInitialize -- Initialize a blank machine.
+	 Test-CitrixCloudConnector -- Perform basic connection tests to CItrix cloud.
+	 Test-CitrixVDAPorts -- Test connection between ddc and vda
+	 Test-PendingReboot -- This script tests various registry values to see if the local computer is pending a reboot.
+	 Test-PSRemote -- Test PSb Remote to a device.
+	 Update-AllPSModules -- This script will update all locally installed PowerShell modules to the newest ones if can find online.
+	 Update-ListOfDDCs -- Update list of ListOfDDCs in the registry
+	 Update-LocalHelp -- Downloads and saves help files locally
+	 Update-PSModuleInfo -- Update PowerShell module manifest file
+	 Update-PSToolKit -- Update PSToolKit from GitHub.
+	 Update-PSToolKitConfigFiles -- Manages the config files for the PSToolKit Module.
+	 Write-Ascii -- Create Ascii Art
+	 Write-PSToolKitLog -- Create a log for scripts
+ 
+SEE ALSO
+	 https://github.com/smitpi/PSToolKit
+
+	 https://smitpi.github.io/PSToolKit
+

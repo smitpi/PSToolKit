@@ -13,11 +13,9 @@ Set multiple settings on desktop or server
 ## SYNTAX
 
 ```
-Set-PSToolKitSystemSettings [-RunAll] [-ExecutionPolicy] [-PSGallery] [-ForcePSGallery] [-IntranetZone]
- [-IntranetZoneIPRange] [-PSTrustedHosts] [-FileExplorerSettings] [-SystemDefaults] [-DisableIEFirstRun]
- [-DisableFirstLogonAnimation] [-SetPhotoViewer] [-DisableShutdownTracker] [-DisableIPV6] [-DisableFirewall]
- [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-InstallPS7] [-InstallMSTerminal]
- [-InstallVMWareTools] [-InstallRSAT] [-InstallMSUpdates] [-EnableNFSClient] [-PerformReboot]
+Set-PSToolKitSystemSettings [-RunAll] [-ExecutionPolicy] [-IntranetZone] [-IntranetZoneIPRange]
+ [-PSTrustedHosts] [-FileExplorerSettings] [-SystemDefaults] [-SetPhotoViewer] [-DisableIPV6]
+ [-DisableFirewall] [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-PerformReboot]
  [<CommonParameters>]
 ```
 
@@ -51,36 +49,6 @@ Accept wildcard characters: False
 
 ### -ExecutionPolicy
 Set ps execution policy to unrestricted.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PSGallery
-Enable and set PS gallery to defaults
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ForcePSGallery
-Force the reinstall of ps gallery
 
 ```yaml
 Type: SwitchParameter
@@ -169,53 +137,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DisableIEFirstRun
-Disable IE first run
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DisableFirstLogonAnimation
-Disable Hi Message
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -SetPhotoViewer
 Set photo viewer
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DisableShutdownTracker
-Disable shutdown tracker
 
 ```yaml
 Type: SwitchParameter
@@ -291,96 +214,6 @@ Accept wildcard characters: False
 
 ### -EnableRDP
 Enable RDP to this device.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -InstallPS7
-Install PowerShell 7 with defaults.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -InstallMSTerminal
-Install MS Terminal.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -InstallVMWareTools
-Install VMware tools if device is a VM.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -InstallRSAT
-Install MS Remote Admin Tools.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -InstallMSUpdates
-Perform a Windows Update
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -EnableNFSClient
-Install NFS Client.
 
 ```yaml
 Type: SwitchParameter

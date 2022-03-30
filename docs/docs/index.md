@@ -59,8 +59,14 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Install-ChocolateyApps](https://smitpi.github.io/PSToolKit/#Install-ChocolateyApps) -- Install chocolatey apps from a json list.
 - [Install-ChocolateyClient](https://smitpi.github.io/PSToolKit/#Install-ChocolateyClient) -- Downloads and installs the Chocolatey client.
 - [Install-ChocolateyServer](https://smitpi.github.io/PSToolKit/#Install-ChocolateyServer) -- This will download, install and setup a new Chocolatey Repo Server
+- [Install-MicrosoftTerminal](https://smitpi.github.io/PSToolKit/#Install-MicrosoftTerminal) -- Install MicrosoftTerminal on your device.
+- [Install-MSUpdates](https://smitpi.github.io/PSToolKit/#Install-MSUpdates) -- Perform windows update
 - [Install-MSWinget](https://smitpi.github.io/PSToolKit/#Install-MSWinget) -- Install the package manager winget
+- [Install-NFSClient](https://smitpi.github.io/PSToolKit/#Install-NFSClient) -- Install NFS Client for windows
+- [Install-PowerShell7x](https://smitpi.github.io/PSToolKit/#Install-PowerShell7x) -- Install ps7
 - [Install-PSModules](https://smitpi.github.io/PSToolKit/#Install-PSModules) -- Install modules from .json file.
+- [Install-RSAT](https://smitpi.github.io/PSToolKit/#Install-RSAT) -- Install Remote Admin Tools
+- [Install-VMWareTools](https://smitpi.github.io/PSToolKit/#Install-VMWareTools) -- Install vmware tools from chocolatety
 - [New-CitrixSiteConfigFile](https://smitpi.github.io/PSToolKit/#New-CitrixSiteConfigFile) -- All a config file with Citrix server details. To be imported as variables.
 - [New-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#New-ElevatedShortcut) -- Creates a shortcut to a script or exe that runs as admin, without UNC
 - [New-GodModeFolder](https://smitpi.github.io/PSToolKit/#New-GodModeFolder) -- Creates a God Mode Folder
@@ -73,6 +79,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Remove-FaultyProfileList](https://smitpi.github.io/PSToolKit/#Remove-FaultyProfileList) -- Fixes Profilelist in the registry. To fix user logon with temp profile.
 - [Remove-HiddenDevices](https://smitpi.github.io/PSToolKit/#Remove-HiddenDevices) -- Removes ghost devices from your system
 - [Remove-UserProfile](https://smitpi.github.io/PSToolKit/#Remove-UserProfile) -- Connects to a server and renames a user profile folder, and delete the key from Profilelist in the registry
+- [Reset-PSGallery](https://smitpi.github.io/PSToolKit/#Reset-PSGallery) -- Reset gallery to degault settings
 - [Restore-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#Restore-ElevatedShortcut) -- Restore the RunAss shortcuts, from a zip file
 - [Search-Scripts](https://smitpi.github.io/PSToolKit/#Search-Scripts) -- Search for a string in a directory of ps1 scripts.
 - [Set-PSToolKitSystemSettings](https://smitpi.github.io/PSToolKit/#Set-PSToolKitSystemSettings) -- Set multiple settings on desktop or server
