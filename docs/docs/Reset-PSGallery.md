@@ -29,7 +29,7 @@ Reset-PSGallery
 ## PARAMETERS
 
 ### -Force
-{{ Fill Force Description }}
+Force the reinstall
 
 ```yaml
 Type: SwitchParameter
@@ -50,7 +50,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object[]
 ## NOTES
 
 ## RELATED LINKS

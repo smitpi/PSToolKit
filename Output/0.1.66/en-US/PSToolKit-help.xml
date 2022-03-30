@@ -5555,7 +5555,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Force Description }}</maml:para>
+            <maml:para>Force the reinstall</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -5569,7 +5569,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Force Description }}</maml:para>
+          <maml:para>Force the reinstall</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -5580,16 +5580,7 @@
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object[]</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
+    <command:returnValues />
     <maml:alertSet>
       <maml:alert>
         <maml:para></maml:para>
@@ -7383,7 +7374,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Paths</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Paths Description }}</maml:para>
+            <maml:para>Path to ps1 files</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">DirectoryInfo[]</command:parameterValue>
           <dev:type>
@@ -7434,7 +7425,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Paths</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Paths Description }}</maml:para>
+          <maml:para>Path to ps1 files</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">DirectoryInfo[]</command:parameterValue>
         <dev:type>

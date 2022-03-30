@@ -48,18 +48,20 @@ Reset gallery to degault settings
 .DESCRIPTION
 Reset gallery to degault settings
 
+.PARAMETER Force
+Force the reinstall
+
 .EXAMPLE
 Reset-PSGallery
 
 #>
 Function Reset-PSGallery {
-	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Reset-PSGallery')]
-	[OutputType([System.Object[]])]
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Reset-PSGallery')]
 	PARAM(
 		[ValidateScript({$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {$True}
 				else {Throw 'Must be running an elevated prompt to use ClearARPCache'}})]
-		[switch]$Force
+		[switch]$Force = $false
 	)
 
 	if (((Get-PSRepository -Name PSGallery).InstallationPolicy -ne 'Trusted') -or ($Force)) {

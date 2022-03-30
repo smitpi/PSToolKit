@@ -30,7 +30,7 @@ Start-PSScriptAnalyzer -Path C:\temp
 ## PARAMETERS
 
 ### -Paths
-{{ Fill Paths Description }}
+Path to ps1 files
 
 ```yaml
 Type: DirectoryInfo[]
