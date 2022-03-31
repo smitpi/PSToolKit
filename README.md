@@ -1,5 +1,7 @@
 # PSToolKit
- 
+<a href='http://boxstarter.org/package/url?http://192.168.10.30:8077/PSToolKit/Start-Initial.ps1'>Lab-Build</a>
+<a href='iex ((New-Object System.Net.WebClient).DownloadString('http://192.168.10.30:8077/PSToolKit/Start-Initial.ps1'))'>Lab-Build2</a>
+
 ## Description
 Powershell Scripts and functions for a system administrator
  
