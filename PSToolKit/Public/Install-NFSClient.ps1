@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -35,12 +35,12 @@ Created [30/03/2022_15:27] Initial Script Creating
 
 #Requires -Module PSWriteColor
 
-<# 
+<#
 
-.DESCRIPTION 
- Install NFS Client for windows 
+.DESCRIPTION
+ Install NFS Client for windows
 
-#> 
+#>
 
 
 <#

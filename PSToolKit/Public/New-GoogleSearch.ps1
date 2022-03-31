@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -32,12 +32,12 @@ Created [26/03/2022_20:55] Initial Script Creating
 
 #>
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
  Start a new browser tab with search string.
 
-#> 
+#>
 
 
 <#
@@ -69,9 +69,9 @@ $google = "https://www.google.com/search?q="
 
 if ($Clipboard) {
     $clip = Get-Clipboard
-    start "$google $clip"
+    Start-Process "$google $clip"
 }
-else {start "$google $Query"}
+else {Start-Process "$google $Query"}
 
 } #end Function
 New-Alias -Name "google" -Value New-GoogleSearch -Description "PSToolKit: Does google search" -Option AllScope -Scope global -Force

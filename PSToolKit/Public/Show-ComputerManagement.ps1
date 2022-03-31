@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -34,12 +34,12 @@ Created [20/02/2022_22:02] Initial Script Creating
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
- Opens the Computer Management of the system or remote system 
+.DESCRIPTION
+ Opens the Computer Management of the system or remote system
 
-#> 
+#>
 
 
 <#

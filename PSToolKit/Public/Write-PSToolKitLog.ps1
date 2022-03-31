@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -35,12 +35,12 @@ Created [20/01/2022_13:17] Initial Script Creating
 #Requires -Module ImportExcel
 #Requires -Module PSWriteColor
 
-<# 
+<#
 
-.DESCRIPTION 
- Create a log for scripts 
+.DESCRIPTION
+ Create a log for scripts
 
-#> 
+#>
 
 
 <#
@@ -122,7 +122,7 @@ Function Write-PSToolKitLog {
 
     if ($ExportFinal) {
         if ($Export -eq 'Excel') { $ExportLogs | Export-Excel -Path ($ReportPath + '\PrivRepoLog-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
-        if ($Export -eq 'HTML') { $ExportLogs | Out-GridHtml -DisablePaging -Title 'PrivRepoLog' -HideFooter -SearchHighlight -FixedHeader }
+        if ($Export -eq 'HTML') { $ExportLogs | Out-HtmlView -DisablePaging -Title 'PrivRepoLog' -HideFooter -SearchHighlight -FixedHeader }
         if ($Export -eq 'Host') { $ExportLogs | Format-Table -AutoSize }
     }
 } #end Function

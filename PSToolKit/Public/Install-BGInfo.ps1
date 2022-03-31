@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -33,12 +33,12 @@ Created [20/03/2022_19:30] Initial Script Creating
 #>
 
 
-<# 
+<#
 
-.DESCRIPTION 
- Setup BGInfo 
+.DESCRIPTION
+ Setup BGInfo
 
-#> 
+#>
 <#
 .SYNOPSIS
 Install and auto runs bginfo at startup.
@@ -62,11 +62,11 @@ Function Install-BGInfo {
 				else { Throw 'Must be running an elevated prompt.' } })]
 		[switch]$RunBGInfo = $false
 	)
-				
+
 
 	$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'BGInfo')
-	if (-not(Test-Path $ConfigPath)) { 
-		$ModuleConfigPath = New-Item $ConfigPath -ItemType Directory -Force 
+	if (-not(Test-Path $ConfigPath)) {
+		$ModuleConfigPath = New-Item $ConfigPath -ItemType Directory -Force
 		Write-Color '[Creating] ', 'Config Folder:', ' Completed' -Color Yellow, Cyan, Green
 	} else { $ModuleConfigPath = Get-Item $ConfigPath }
 

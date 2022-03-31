@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.1
@@ -37,7 +37,7 @@ Updated [05/03/2022_06:35] added fun
 
 <#
 
-.DESCRIPTION 
+.DESCRIPTION
 Creates new profile files in the documents folder
 
 #>

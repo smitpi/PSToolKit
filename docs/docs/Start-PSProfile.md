@@ -13,7 +13,7 @@ My PS Profile for all sessions.
 ## SYNTAX
 
 ```
-Start-PSProfile [-ClearHost] [-AddFun] [-GalleryStats] [-ShowModuleList] [-ShortenPrompt] [<CommonParameters>]
+Start-PSProfile [-ClearHost] [-GalleryStats] [-ShowModuleList] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,21 +30,6 @@ Start-PSProfile -ClearHost
 
 ### -ClearHost
 Clear the screen before loading.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AddFun
-Add fun details in the output.
 
 ```yaml
 Type: SwitchParameter
@@ -75,21 +60,6 @@ Accept wildcard characters: False
 
 ### -ShowModuleList
 Summary of installed modules.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ShortenPrompt
-Shorten the command prompt for more coding space.
 
 ```yaml
 Type: SwitchParameter

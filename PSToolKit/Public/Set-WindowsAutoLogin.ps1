@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -33,12 +33,12 @@ Created [25/02/2022_02:36] Initial Script Creating
 #>
 
 
-<# 
+<#
 
-.DESCRIPTION 
- Enable autologin on a device 
+.DESCRIPTION
+ Enable autologin on a device
 
-#> 
+#>
 
 
 <#
@@ -113,11 +113,11 @@ Function Set-WindowsAutoLogin {
 					}
 				}
 				catch { Throw 'Cant add account to the local admin groups' }
-	
+
 				$CheckCurrentSetting = Invoke-Command -ComputerName $Comp -ScriptBlock { Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name AutoAdminLogon }
 				if ($CheckCurrentSetting -eq '1') { Throw 'AutoLogin Already configured. Disable first and rerun.' }
 				else {
-					Invoke-Command -ComputerName $Comp -ScriptBlock { 
+					Invoke-Command -ComputerName $Comp -ScriptBlock {
 						Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultDomainName -Value $using:userdomain
 						Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultUserName -Value $using:username
 						Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultPassword -Value $using:UserPassword
@@ -127,19 +127,19 @@ Function Set-WindowsAutoLogin {
 				}
 			}
 			if ($Action -like 'Diable') {
-				Invoke-Command -ComputerName $Comp -ScriptBlock { 
+				Invoke-Command -ComputerName $Comp -ScriptBlock {
 					Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultDomainName -Value " "
 					Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultUserName -Value ' '
 					Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultPassword -Value ' '
-					Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name AutoAdminLogon -Value '0'	
+					Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name AutoAdminLogon -Value '0'
 				}
-				
-				Write-Color '[Set]', "AutoLogin on $($comp): ", 'Disabled' -Color Yellow, Cyan, Green			
+
+				Write-Color '[Set]', "AutoLogin on $($comp): ", 'Disabled' -Color Yellow, Cyan, Green
 			}
 
-			if ($RestartHost) { 
+			if ($RestartHost) {
 				Write-Color '[Restarting] ', "Host:", " $($comp)" -Color Yellow, Cyan, Green
-				Restart-Computer -ComputerName $Comp -Force 
+				Restart-Computer -ComputerName $Comp -Force
 			}
 		}
 		catch { Write-Warning "[Set]Autologin: Failed on $($comp):`n $($_.Exception.Message)" }

@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -36,12 +36,12 @@ Created [21/03/2022_06:59] Initial Script Creating
 #Requires -Module PSWriteHTML
 #Requires -Module PSWriteColor
 
-<# 
+<#
 
-.DESCRIPTION 
- Creates and modifies the ssh config file in their profile 
+.DESCRIPTION
+ Creates and modifies the ssh config file in their profile
 
-#> 
+#>
 
 <#
 .SYNOPSIS
@@ -109,7 +109,7 @@ Function Edit-SSHConfigFile {
 	}
 
 	$content = Get-Content $SSHconfigFile.FullName
-	
+
 	if ($content[1] -notcontains '# Managed by PSToolKit') {
 		Write-Warning 'Not managed by PStoolKit, Creating new file'
 		Rename-Item -Path $SSHconfigFile.FullName -NewName "config_$(Get-Date -Format yyyyMMdd_HHmm)"
@@ -175,7 +175,7 @@ Function Edit-SSHConfigFile {
 	if ($OpenInNotepad) {& notepad.exe $SSHconfigFile.FullName}
 	if ($Show) {
 		Clear-Host
-		displayout $SSHObject 
+		displayout $SSHObject
 	}
 	if ($Remove) {
 		do {

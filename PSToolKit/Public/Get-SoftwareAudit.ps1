@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -97,13 +97,13 @@ Function Get-SoftwareAudit {
 			}
 		}
 		catch { Write-Warning "Error: $($_.Exception.Message)" }
-	} 
+	}
 	$Software = $Software | Sort-Object -Property DisplayName -Unique
 
 	if ($Export -eq 'Excel') {
 		$Software | Export-Excel -Path ($ReportPath + '\SoftwareAudit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show
 	}
-	if ($Export -eq 'HTML') { $Software | Out-GridHtml -DisablePaging -Title 'SoftwareAudit' -HideFooter -SearchHighlight -FixedHeader }
+	if ($Export -eq 'HTML') { $Software | Out-HtmlView -DisablePaging -Title 'SoftwareAudit' -HideFooter -SearchHighlight -FixedHeader }
 	if ($Export -eq 'Host') { $Software }
 
 

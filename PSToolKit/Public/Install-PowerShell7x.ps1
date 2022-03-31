@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -34,12 +34,12 @@ Created [30/03/2022_15:37] Initial Script Creating
 
 #Requires -Module PSWriteColor
 
-<# 
+<#
 
-.DESCRIPTION 
- Install ps7 
+.DESCRIPTION
+ Install ps7
 
-#> 
+#>
 
 
 <#

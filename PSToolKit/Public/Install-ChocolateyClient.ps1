@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -70,7 +70,7 @@ Function Install-ChocolateyClient {
     $web = New-Object System.Net.WebClient
     $web.DownloadFile('https://community.chocolatey.org/install.ps1', "$($env:TEMP)\choco-install.ps1")
     & "$($env:TEMP)\choco-install.ps1" *> $null
-    
+
     if (Get-Command choco -ErrorAction SilentlyContinue) {
       Write-Color '[Installing] ', 'Chocolatey Client: ', 'Complete' -Color Yellow, Cyan, Green
       choco config set --name="'useEnhancedExitCodes'" --value="'true'" --limit-output

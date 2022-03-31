@@ -223,7 +223,7 @@ Function Show-PSToolKit {
                 $filtered = $commands | Where-Object { $_.Verb -like $item }
                 New-HTMLSection -HeaderText "$($item)" @SectionSettings -Width 50% -AlignContent center -AlignItems center -Collapsed {
                     New-HTMLPanel -Content {
-                        $filtered | ForEach-Object { New-HTMLContent -Invisible -Content {
+                        $filtered | ForEach-Object { New-HTMLSection -Invisible -Content {
                                 New-HTMLPanel -BackgroundColor GhostWhite -Content { New-HTMLText -Text "$($_.name)" -Color BlackRussian -FontSize 18 -Alignment right }
                                 New-HTMLPanel -BackgroundColor GhostWhite -Content { New-HTMLText -Text "$($_.description) [More]($($_.HelpUri))" -Color FreeSpeechRed -FontSize 16 -Alignment left }
                             }

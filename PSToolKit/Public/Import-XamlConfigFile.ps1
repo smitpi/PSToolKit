@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -33,12 +33,12 @@ Created [21/01/2022_18:20] Initial Script Creating
 #>
 
 
-<# 
+<#
 
-.DESCRIPTION 
- Import the wpf xaml file and create variables from objects 
+.DESCRIPTION
+ Import the wpf xaml file and create variables from objects
 
-#> 
+#>
 
 <#
 .SYNOPSIS
@@ -86,7 +86,7 @@ Function Import-XamlConfigFile {
 
     #Read XAML
 
-    $reader = (New-Object System.Xml.XmlNodeReader $xaml) 
+    $reader = (New-Object System.Xml.XmlNodeReader $xaml)
     try {
         $Form = [Windows.Markup.XamlReader]::Load( $reader )
         New-Variable -Name $FormName -Value $Form -Force -Scope global
@@ -109,12 +109,12 @@ Function Import-XamlConfigFile {
 
     $xaml.SelectNodes('//*[@Name]') | ForEach-Object { New-Variable -Name "WPF_$($_.Name)" -Value $Form.FindName($_.Name) -Scope global -Force }
 
-    Function Get-FormVariables {
+    Function Get-FormVariable {
         if ($global:ReadmeDisplay -ne $true) { Write-Host 'If you need to reference this display again, run Get-FormVariables' -ForegroundColor Yellow; $global:ReadmeDisplay = $true }
         Write-Host 'Found the following interactable elements from our form' -ForegroundColor Cyan
         Get-Variable WPF*
     }
-    
+
 
     Get-FormVariables
 
