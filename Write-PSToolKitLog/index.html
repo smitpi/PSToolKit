@@ -1513,8 +1513,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#set-default" class="md-nav__link">
-    Set (Default)
+  <a href="#log-default" class="md-nav__link">
+    log (Default)
   </a>
   
 </li>
@@ -1574,8 +1574,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#-createarray" class="md-nav__link">
-    -CreateArray
+  <a href="#-initialize" class="md-nav__link">
+    -Initialize
   </a>
   
 </li>
@@ -1583,6 +1583,20 @@
           <li class="md-nav__item">
   <a href="#-severity" class="md-nav__link">
     -Severity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-action" class="md-nav__link">
+    -Action
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-object" class="md-nav__link">
+    -Object
   </a>
   
 </li>
@@ -1611,6 +1625,13 @@
           <li class="md-nav__item">
   <a href="#-export" class="md-nav__link">
     -Export
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-logname" class="md-nav__link">
+    -LogName
   </a>
   
 </li>
@@ -1670,6 +1691,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Write-PSToolKitMessage/" class="md-nav__link">
+        Write-PSToolKitMessage
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1712,8 +1748,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#set-default" class="md-nav__link">
-    Set (Default)
+  <a href="#log-default" class="md-nav__link">
+    log (Default)
   </a>
   
 </li>
@@ -1773,8 +1809,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#-createarray" class="md-nav__link">
-    -CreateArray
+  <a href="#-initialize" class="md-nav__link">
+    -Initialize
   </a>
   
 </li>
@@ -1782,6 +1818,20 @@
           <li class="md-nav__item">
   <a href="#-severity" class="md-nav__link">
     -Severity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-action" class="md-nav__link">
+    -Action
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-object" class="md-nav__link">
+    -Object
   </a>
   
 </li>
@@ -1810,6 +1860,13 @@
           <li class="md-nav__item">
   <a href="#-export" class="md-nav__link">
     -Export
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-logname" class="md-nav__link">
+    -LogName
   </a>
   
 </li>
@@ -1883,24 +1940,26 @@
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Create a log for scripts</p>
 <h2 id="syntax">SYNTAX</h2>
-<h3 id="set-default">Set (Default)</h3>
-<div class="highlight"><pre><span></span><code>Write-PSToolKitLog [-Severity &lt;String&gt;] [-Message &lt;String&gt;] [-ShowVerbose] [&lt;CommonParameters&gt;]
+<h3 id="log-default">log (Default)</h3>
+<div class="highlight"><pre><span></span><code>Write-PSToolKitLog [-Severity &lt;String&gt;] [-Action &lt;String&gt;] [-Object &lt;String[]&gt;] [-Message &lt;String&gt;]
+ [-ShowVerbose] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="create">Create</h3>
-<div class="highlight"><pre><span></span><code>Write-PSToolKitLog [-CreateArray] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Write-PSToolKitLog [-Initialize] [-Object &lt;String[]&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="export">Export</h3>
-<div class="highlight"><pre><span></span><code>Write-PSToolKitLog [-ExportFinal] [-Export &lt;String&gt;] [-ReportPath &lt;DirectoryInfo&gt;] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Write-PSToolKitLog [-Object &lt;String[]&gt;] [-ExportFinal] [-Export &lt;String&gt;] [-LogName &lt;String&gt;]
+ [-ReportPath &lt;DirectoryInfo&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Create a log for scripts</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Write-PSToolKitLog -Severity Information -Message &#39;Where details are?&#39;
+<div class="highlight"><pre><span></span><code>dir | Write-PSToolKitLog -Severity Error -Action Starting -Message &#39;file list&#39; -ShowVerbose
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
-<h3 id="-createarray">-CreateArray</h3>
-<p>Run at the begining to create the initial arrray.</p>
+<h3 id="-initialize">-Initialize</h3>
+<p>Create the initial array.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
@@ -1912,9 +1971,9 @@
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
 <h3 id="-severity">-Severity</h3>
-<p>Level of the message to be logged.</p>
+<p>Severity of the entry.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
@@ -1923,10 +1982,44 @@
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
-<h3 id="-message">-Message</h3>
-<p>Details to be logged.</p>
+<h3 id="-action">-Action</h3>
+<p>Action for the object.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-object">-Object</h3>
+<p>The object to be reported on.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create, Export</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-message">-Message</h3>
+<p>Details.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
@@ -1936,9 +2029,9 @@
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
 <h3 id="-showverbose">-ShowVerbose</h3>
-<p>Also show output to screen.</p>
+<p>Show every entry as it is logged.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
@@ -1948,7 +2041,7 @@
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
 <h3 id="-exportfinal">-ExportFinal</h3>
-<p>Run at the end to finalize the report.</p>
+<p>Export the final log file.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Export</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
@@ -1960,7 +2053,7 @@
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
 <h3 id="-export">-Export</h3>
-<p>Export the log to excel of html.</p>
+<p>Export the log,</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Export</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
@@ -1971,15 +2064,27 @@
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
+<h3 id="-logname">-LogName</h3>
+<p>Name for the log file.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Export</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PSToolKitLog</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
 <h3 id="-reportpath">-ReportPath</h3>
-<p>Where to save the log.</p>
+<p>Path where it will be saved.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DirectoryInfo</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Export</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$env:TEMP&quot;</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C:\Temp</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
@@ -1988,7 +2093,6 @@
 <h2 id="inputs">INPUTS</h2>
 <h2 id="outputs">OUTPUTS</h2>
 <h2 id="notes">NOTES</h2>
-<p>General notes</p>
 <h2 id="related-links">RELATED LINKS</h2>
 
               
@@ -2017,6 +2121,21 @@
           </div>
         </a>
       
+      
+        
+        <a href="../Write-PSToolKitMessage/" class="md-footer__link md-footer__link--next" aria-label="Next: Write-PSToolKitMessage" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Write-PSToolKitMessage
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
       
     </nav>
   
