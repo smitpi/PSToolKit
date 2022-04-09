@@ -93,6 +93,8 @@ function Get-FolderSize {
     begin {
         $FSO = New-Object -ComObject Scripting.FileSystemObject -ErrorAction Stop
         function Get-RoboFolderSizeInternal {
+            [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/')]
+
             param(
                 # Paths to report size, file count, dir count, etc. for.
                 [string[]] $Path,

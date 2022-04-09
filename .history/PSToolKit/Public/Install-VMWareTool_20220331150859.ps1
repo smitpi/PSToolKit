@@ -67,7 +67,7 @@ Function Install-VMWareTool {
 			Write-Color '[Installing] ', 'VMWare Tools', ' from source ', 'chocolatey' -Color Yellow, Cyan, green, Cyan
 			choco upgrade vmware-tools --accept-license --limit-output -y --source chocolatey | Out-Null
 			if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing vmware-tools Code: $($LASTEXITCODE)"}
-		} else {Write-Color '[Installing] ', 'VMWare Tools:', ' Not a VMWare VM' -Color Yellow, Cyan, DarkRed}
+		} else {Write-Color '[Installing]', 'VMWare Tools:', ' Not a VMWare VM' -Color Yellow, Cyan, DarkRed}
 	} catch { Write-Warning "[Installing] VMWare Tools: Failed:`n $($_.Exception.Message)" }
 
 } #end Function

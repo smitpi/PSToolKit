@@ -49,9 +49,6 @@ Show stats about my published modules.
 .PARAMETER Display
 How to display the output.
 
-.PARAMETER OpenProfilePage
-Open my profile page on psgallery
-
 .EXAMPLE
 Get-MyPSGalleryStats -Display TableView
 
@@ -65,7 +62,6 @@ Function Get-MyPSGalleryStat {
         [Switch]$OpenProfilePage
     )
 
-    if ($OpenProfilePage) {{Start-Process 'https://www.powershellgallery.com/profiles/smitpi'}}
     $ModLists = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray')
 
     [System.Collections.ArrayList]$newObject = @()
@@ -90,6 +86,7 @@ Function Get-MyPSGalleryStat {
 
     if ($Display -like 'GridView') {$newObject.Sum | ConvertTo-WPFGrid}
     if ($Display -like 'TableView') {
+
         Write-Color 'Total Downloads: ', "$(($newObject.TotalDownloads | Sort-Object -Descending)[0])" -Color Cyan, yellow -LinesBefore 1
         $newObject.Sum | Sort-Object -Property VersionDownload -Descending | Format-Table -AutoSize
     }

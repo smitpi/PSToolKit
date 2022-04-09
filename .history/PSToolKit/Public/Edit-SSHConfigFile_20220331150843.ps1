@@ -106,7 +106,6 @@ Function Edit-SSHConfigFile {
 		$out += "# Managed by PSToolKit`n"
 		$out += "##########################`n"
 		$out | Set-Content $SSHconfig -Force
-		$SSHconfigFile = Get-Item $SSHconfig
 	}
 
 	$content = Get-Content $SSHconfigFile.FullName

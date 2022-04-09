@@ -49,8 +49,7 @@ Show stats about my published modules.
 .PARAMETER Display
 How to display the output.
 
-.PARAMETER OpenProfilePage
-Open my profile page on psgallery
+.PARAMETER Display
 
 .EXAMPLE
 Get-MyPSGalleryStats -Display TableView
