@@ -89,6 +89,7 @@ Functions in this module:
 	 Update-PSToolKitConfigFile -- Manages the config files for the PSToolKit Module.
 	 Write-Ascii -- Create Ascii Art
 	 Write-PSToolKitLog -- Create a log for scripts
+	 Write-PSToolKitMessage -- Writes the given into to screen
  
 SEE ALSO
 	 https://github.com/smitpi/PSToolKit

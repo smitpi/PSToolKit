@@ -12,19 +12,21 @@ Create a log for scripts
 
 ## SYNTAX
 
-### Set (Default)
+### log (Default)
 ```
-Write-PSToolKitLog [-Severity <String>] [-Message <String>] [-ShowVerbose] [<CommonParameters>]
+Write-PSToolKitLog [-Severity <String>] [-Action <String>] [-Object <String[]>] [-Message <String>]
+ [-ShowVerbose] [<CommonParameters>]
 ```
 
 ### Create
 ```
-Write-PSToolKitLog [-CreateArray] [<CommonParameters>]
+Write-PSToolKitLog [-Initialize] [-Object <String[]>] [<CommonParameters>]
 ```
 
 ### Export
 ```
-Write-PSToolKitLog [-ExportFinal] [-Export <String>] [-ReportPath <DirectoryInfo>] [<CommonParameters>]
+Write-PSToolKitLog [-Object <String[]>] [-ExportFinal] [-Export <String>] [-LogName <String>]
+ [-ReportPath <DirectoryInfo>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,13 +36,13 @@ Create a log for scripts
 
 ### EXAMPLE 1
 ```
-Write-PSToolKitLog -Severity Information -Message 'Where details are?'
+dir | Write-PSToolKitLog -Severity Error -Action Starting -Message 'file list' -ShowVerbose
 ```
 
 ## PARAMETERS
 
-### -CreateArray
-Run at the begining to create the initial arrray.
+### -Initialize
+Create the initial array.
 
 ```yaml
 Type: SwitchParameter
@@ -55,11 +57,11 @@ Accept wildcard characters: False
 ```
 
 ### -Severity
-Level of the message to be logged.
+Severity of the entry.
 
 ```yaml
 Type: String
-Parameter Sets: Set
+Parameter Sets: log
 Aliases:
 
 Required: False
@@ -69,12 +71,54 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Message
-Details to be logged.
+### -Action
+Action for the object.
 
 ```yaml
 Type: String
-Parameter Sets: Set
+Parameter Sets: log
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Object
+The object to be reported on.
+
+```yaml
+Type: String[]
+Parameter Sets: log
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+```yaml
+Type: String[]
+Parameter Sets: Create, Export
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Message
+Details.
+
+```yaml
+Type: String
+Parameter Sets: log
 Aliases:
 
 Required: False
@@ -85,11 +129,11 @@ Accept wildcard characters: False
 ```
 
 ### -ShowVerbose
-Also show output to screen.
+Show every entry as it is logged.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Set
+Parameter Sets: log
 Aliases:
 
 Required: False
@@ -100,7 +144,7 @@ Accept wildcard characters: False
 ```
 
 ### -ExportFinal
-Run at the end to finalize the report.
+Export the final log file.
 
 ```yaml
 Type: SwitchParameter
@@ -115,7 +159,7 @@ Accept wildcard characters: False
 ```
 
 ### -Export
-Export the log to excel of html.
+Export the log,
 
 ```yaml
 Type: String
@@ -129,8 +173,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -LogName
+Name for the log file.
+
+```yaml
+Type: String
+Parameter Sets: Export
+Aliases:
+
+Required: False
+Position: Named
+Default value: PSToolKitLog
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ReportPath
-Where to save the log.
+Path where it will be saved.
 
 ```yaml
 Type: DirectoryInfo
@@ -139,7 +198,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: "$env:TEMP"
+Default value: C:\Temp
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -152,6 +211,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-General notes
 
 ## RELATED LINKS
