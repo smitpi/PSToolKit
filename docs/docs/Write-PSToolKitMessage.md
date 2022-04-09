@@ -24,13 +24,13 @@ Writes the given into to screen
 
 ### EXAMPLE 1
 ```
-Write-PSToolKitMessage
+dir | Write-PSToolKitMessage -Action Exists -Severity Information -Message 'its already there'
 ```
 
 ## PARAMETERS
 
 ### -Action
-{{ Fill Action Description }}
+Action for the object.
 
 ```yaml
 Type: String
@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -Severity
-{{ Fill Severity Description }}
+Severity of the entry.
 
 ```yaml
 Type: String
@@ -60,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -Object
-{{ Fill Object Description }}
+The object to be reported on.
 
 ```yaml
 Type: String[]
@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -Message
-{{ Fill Message Description }}
+The Details.
 
 ```yaml
 Type: String[]

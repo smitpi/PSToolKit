@@ -39,6 +39,18 @@ Created [31/03/2022_15:53] Initial Script Creating
 
 #>
 
+
+<#
+.SYNOPSIS
+Writes the given into to screen
+
+.DESCRIPTION
+Writes the given into to screen
+
+.EXAMPLE
+Write-PSToolKitMessage
+
+#>
 <#
 .SYNOPSIS
 Writes the given into to screen
@@ -47,20 +59,22 @@ Writes the given into to screen
 Writes the given into to screen
 
 .PARAMETER Action
-Action for the object.
+Parameter description
 
 .PARAMETER Severity
-Severity of the entry.
+Parameter description
 
 .PARAMETER Object
-The object to be reported on.
+Parameter description
 
 .PARAMETER Message
-The Details.
+Parameter description
 
 .EXAMPLE
-dir | Write-PSToolKitMessage -Action Exists -Severity Information -Message 'its already there'
+An example
 
+.NOTES
+General notes
 #>
 Function Write-PSToolKitMessage {
 	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Write-PSToolKitMessage')]

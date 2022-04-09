@@ -9004,7 +9004,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Action</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Action Description }}</maml:para>
+            <maml:para>Action for the object.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -9016,7 +9016,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>Severity</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Severity Description }}</maml:para>
+            <maml:para>Severity of the entry.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -9028,7 +9028,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="3" aliases="none">
           <maml:name>Object</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Object Description }}</maml:para>
+            <maml:para>The object to be reported on.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -9040,7 +9040,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
           <maml:name>Message</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Message Description }}</maml:para>
+            <maml:para>The Details.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -9055,7 +9055,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Action</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Action Description }}</maml:para>
+          <maml:para>Action for the object.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -9067,7 +9067,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>Severity</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Severity Description }}</maml:para>
+          <maml:para>Severity of the entry.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -9079,7 +9079,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="3" aliases="none">
         <maml:name>Object</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Object Description }}</maml:para>
+          <maml:para>The object to be reported on.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -9091,7 +9091,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>Message</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Message Description }}</maml:para>
+          <maml:para>The Details.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -9120,7 +9120,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Write-PSToolKitMessage</dev:code>
+        <dev:code>dir | Write-PSToolKitMessage -Action Exists -Severity Information -Message 'its already there'</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>

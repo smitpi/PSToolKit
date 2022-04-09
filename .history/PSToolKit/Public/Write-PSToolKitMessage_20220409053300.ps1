@@ -39,6 +39,18 @@ Created [31/03/2022_15:53] Initial Script Creating
 
 #>
 
+
+<#
+.SYNOPSIS
+Writes the given into to screen
+
+.DESCRIPTION
+Writes the given into to screen
+
+.EXAMPLE
+Write-PSToolKitMessage
+
+#>
 <#
 .SYNOPSIS
 Writes the given into to screen

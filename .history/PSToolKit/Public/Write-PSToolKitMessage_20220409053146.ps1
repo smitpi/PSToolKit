@@ -39,6 +39,18 @@ Created [31/03/2022_15:53] Initial Script Creating
 
 #>
 
+
+<#
+.SYNOPSIS
+Writes the given into to screen
+
+.DESCRIPTION
+Writes the given into to screen
+
+.EXAMPLE
+Write-PSToolKitMessage
+
+#>
 <#
 .SYNOPSIS
 Writes the given into to screen
@@ -59,8 +71,10 @@ The object to be reported on.
 The Details.
 
 .EXAMPLE
-dir | Write-PSToolKitMessage -Action Exists -Severity Information -Message 'its already there'
+An example
 
+.NOTES
+General notes
 #>
 Function Write-PSToolKitMessage {
 	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Write-PSToolKitMessage')]
