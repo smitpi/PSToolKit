@@ -13,7 +13,7 @@ Show stats about my published modules.
 ## SYNTAX
 
 ```
-Get-MyPSGalleryStat [[-Display] <String>] [<CommonParameters>]
+Get-MyPSGalleryStat [[-Display] <String>] [-OpenProfilePage] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -39,6 +39,21 @@ Aliases:
 Required: False
 Position: 1
 Default value: Host
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -OpenProfilePage
+Open my profile page on psgallery
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
