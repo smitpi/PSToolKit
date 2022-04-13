@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -32,12 +32,12 @@ Created [05/03/2022_06:34] Initital Script Creating
 
 #>
 
-<# 
+<#
 
-.DESCRIPTION 
- Extract Event logs of a server list, and create html / excel report 
+.DESCRIPTION
+ Extract Event logs of a server list, and create html / excel report
 
-#> 
+#>
 
 <#
 .SYNOPSIS
@@ -71,6 +71,7 @@ Get-WinEventLogExtract -ComputerName localhost
 Function Get-WinEventLogExtract {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-WinEventLogExtract')]
     [OutputType([System.Object[]])]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '')]
     PARAM(
         [ValidateScript( {
                 $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())

@@ -13,7 +13,7 @@ Find a module on psgallery
 ## SYNTAX
 
 ```
-Find-OnlineModule [[-Keyword] <String>] [-install] [<CommonParameters>]
+Find-OnlineModule [-Keyword] <String> [-Offline] [-UpdateCache] [-Output <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,28 +23,29 @@ Find a module on psgallery
 
 ### EXAMPLE 1
 ```
-Find-OnlineModule -Keyword Citrix -install
+Find-OnlineModule -Keyword Citrix -Offline -Output AsObject
 ```
 
 ## PARAMETERS
 
 ### -Keyword
-What to search for
+What to search for.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -install
-install selected searched module
+### -Offline
+Uses a previously downloaded cache for the earch.
+If the cache doesnt exists, it will be created.
 
 ```yaml
 Type: SwitchParameter
@@ -58,6 +59,36 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -UpdateCache
+Update the local cache.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Output
+How to display the results.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: AsObject
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -65,6 +96,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.Object[]
 ## NOTES
 
 ## RELATED LINKS

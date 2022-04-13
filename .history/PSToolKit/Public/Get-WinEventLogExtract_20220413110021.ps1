@@ -71,7 +71,7 @@ Get-WinEventLogExtract -ComputerName localhost
 Function Get-WinEventLogExtract {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-WinEventLogExtract')]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '')]
-    #[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
     [OutputType([System.Object[]])]
     PARAM(
         [ValidateScript( {
@@ -137,6 +137,14 @@ Function Get-WinEventLogExtract {
             }
 
         if ($Export -eq 'HTML') {
+            $SectionSettings = @{
+                HeaderTextSize        = '16'
+                HeaderTextAlignment   = 'center'
+                HeaderBackGroundColor = '#00203F'
+                HeaderTextColor       = '#ADEFD1'
+                backgroundColor       = 'lightgrey'
+                CanCollapse           = $true
+            }
             $TableSettings = @{
                 SearchHighlight = $True
                 Style           = 'cell-border'
@@ -149,6 +157,8 @@ Function Get-WinEventLogExtract {
                 ScrollY         = $true
                 DisablePaging   = $true
             }
+
+
             $path = Get-Item $ReportPath
             $HTMLPath = Join-Path $Path.FullName -ChildPath "WinEvents-$(Get-Date -Format yyyy.MM.dd-HH.mm).html"
 

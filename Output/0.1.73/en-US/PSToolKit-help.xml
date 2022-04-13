@@ -1694,10 +1694,10 @@
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Find-OnlineModule</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Keyword</maml:name>
           <maml:description>
-            <maml:para>What to search for</maml:para>
+            <maml:para>What to search for.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1707,9 +1707,9 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>install</maml:name>
+          <maml:name>Offline</maml:name>
           <maml:description>
-            <maml:para>install selected searched module</maml:para>
+            <maml:para>Uses a previously downloaded cache for the earch. If the cache doesnt exists, it will be created.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1717,13 +1717,36 @@
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>UpdateCache</maml:name>
+          <maml:description>
+            <maml:para>Update the local cache.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Output</maml:name>
+          <maml:description>
+            <maml:para>How to display the results.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>AsObject</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Keyword</maml:name>
         <maml:description>
-          <maml:para>What to search for</maml:para>
+          <maml:para>What to search for.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1733,9 +1756,9 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>install</maml:name>
+        <maml:name>Offline</maml:name>
         <maml:description>
-          <maml:para>install selected searched module</maml:para>
+          <maml:para>Uses a previously downloaded cache for the earch. If the cache doesnt exists, it will be created.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1744,9 +1767,42 @@
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>UpdateCache</maml:name>
+        <maml:description>
+          <maml:para>Update the local cache.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Output</maml:name>
+        <maml:description>
+          <maml:para>How to display the results.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>AsObject</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes />
-    <command:returnValues />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
     <maml:alertSet>
       <maml:alert>
         <maml:para></maml:para>
@@ -1755,7 +1811,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Find-OnlineModule -Keyword Citrix -install</dev:code>
+        <dev:code>Find-OnlineModule -Keyword Citrix -Offline -Output AsObject</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>

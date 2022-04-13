@@ -38,6 +38,7 @@ Created [26/10/2021_22:32] Initial Script Creating
  Find a module on psgallery
 
 #>
+
 <#
 .SYNOPSIS
 Find a module on psgallery
@@ -46,42 +47,35 @@ Find a module on psgallery
 Find a module on psgallery
 
 .PARAMETER Keyword
-What to search for.
+What to search for
 
-.PARAMETER Offline
-Uses a previously downloaded cache for the earch. If the cache doesnt exists, it will be created.
-
-.PARAMETER UpdateCache
-Update the local cache.
-
-.PARAMETER Output
-How to display the results.
+.PARAMETER install
+install selected searched module
 
 .EXAMPLE
-Find-OnlineModule -Keyword Citrix -Offline -Output AsObject
+Find-OnlineModule -Keyword Citrix -install
+
 
 #>
 function Find-OnlineModule {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Find-OnlineModule')]
-	[OutputType([System.Object[]])]
-	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '')]
 	PARAM(
-		[Parameter(Mandatory = $true, Position = 0)]
 		[string]$Keyword,
 		[switch]$Offline,
 		[switch]$UpdateCache,
-		[validateset('SortDownloads', 'SortDate', 'AsObject')]
+		[validateset]('SortDownloads','SortDate','AsObject')
 		[String]$Output = 'AsObject'
 	)
 
-	if ($Offline) {
-		if (-not(Test-Path "$env:TEMP\psgallery.xml")) {
+	if ($Offline){
+		if (-not(Test-Path "$env:TEMP\psgallery.xml")){
 			$AllImport = Find-Module -Repository PSGallery
 			$AllImport | Export-Clixml -Path "$env:TEMP\psgallery.xml"
 		} else {$AllImport = Import-Clixml -Path "$env:TEMP\psgallery.xml"}
-	} else {$AllImport = Find-Module -Repository PSGallery}
+	}
+	else {$AllImport = Find-Module -Repository PSGallery}
 
-	if ($UpdateCache) {
+	if ($UpdateCache){
 		$cache = Find-Module -Repository PSGallery
 		$cache | Export-Clixml -Path "$env:TEMP\psgallery.xml"
 	}
@@ -95,14 +89,15 @@ function Find-OnlineModule {
 				PublishedDate        = [datetime]$_.PublishedDate
 				downloadCount        = [int32]$_.AdditionalMetadata.downloadCount
 				versionDownloadCount = [int32]$_.AdditionalMetadata.versionDownloadCount
-				#UpdatedDate          = [datetime]$_.AdditionalMetadata.updated
+				UpdatedDate          = [datetime]$_.AdditionalMetadata.updated
 				Authors              = $_.Author
 				releaseNotes         = $_.ReleaseNotes
 				tags                 = $_.Tags
 				summary              = $_.AdditionalMetadata.summary
 			} )
 	}
-	if ($Output -like 'SortDownloads') {$NewObject | Sort-Object -Property downloadCount -Descending | Format-Table -AutoSize}
-	if ($Output -like 'SortDate') {$NewObject | Sort-Object -Property PublishedDate -Descending | Format-Table -AutoSize}
-	if ($Output -like 'AsObject') {$NewObject}
+	if ($Output -like "SortDownloads") {$NewObject | Sort-Object -Property downloadCount -Descending | format-table -autosize}
+	if ($Output -like "SortDate")
+	if ($Output -like "AsObject")
+	
 }

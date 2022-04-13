@@ -38,6 +38,25 @@ Created [26/10/2021_22:32] Initial Script Creating
  Find a module on psgallery
 
 #>
+
+<#
+.SYNOPSIS
+Find a module on psgallery
+
+.DESCRIPTION
+Find a module on psgallery
+
+.PARAMETER Keyword
+What to search for
+
+.PARAMETER install
+install selected searched module
+
+.EXAMPLE
+Find-OnlineModule -Keyword Citrix -install
+
+
+#>
 <#
 .SYNOPSIS
 Find a module on psgallery
@@ -58,13 +77,13 @@ Update the local cache.
 How to display the results.
 
 .EXAMPLE
-Find-OnlineModule -Keyword Citrix -Offline -Output AsObject
+An example
 
+.NOTES
+General notes
 #>
 function Find-OnlineModule {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Find-OnlineModule')]
-	[OutputType([System.Object[]])]
-	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '')]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[string]$Keyword,
@@ -105,4 +124,5 @@ function Find-OnlineModule {
 	if ($Output -like 'SortDownloads') {$NewObject | Sort-Object -Property downloadCount -Descending | Format-Table -AutoSize}
 	if ($Output -like 'SortDate') {$NewObject | Sort-Object -Property PublishedDate -Descending | Format-Table -AutoSize}
 	if ($Output -like 'AsObject') {$NewObject}
+	
 }

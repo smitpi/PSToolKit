@@ -63,7 +63,6 @@ Find-OnlineModule -Keyword Citrix -Offline -Output AsObject
 #>
 function Find-OnlineModule {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Find-OnlineModule')]
-	[OutputType([System.Object[]])]
 	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '')]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
