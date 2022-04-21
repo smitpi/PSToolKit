@@ -54,8 +54,11 @@ Uses a previously downloaded cache for the earch. If the cache doesnt exists, it
 .PARAMETER UpdateCache
 Update the local cache.
 
-.PARAMETER Output
+.PARAMETER ConsoleOutput
 How to display the results.
+
+.PARAMETER MarkdownOutput
+Export results to markdown file.
 
 .EXAMPLE
 Find-OnlineModule -Keyword Citrix -Offline -Output AsObject
@@ -71,20 +74,29 @@ function Find-OnlineModule {
 		[switch]$Offline,
 		[switch]$UpdateCache,
 		[validateset('SortDownloads', 'SortDate', 'AsObject')]
-		[String]$Output = 'AsObject'
+		[String]$ConsoleOutput = 'AsObject',
+		[validateset('SortDownloads', 'SortDate')]
+		[String]$MarkdownOutput
 	)
 
-	if ($Offline) {
-		if (-not(Test-Path "$env:TEMP\psgallery.xml")) {
-			$AllImport = Find-Module -Repository PSGallery
-			$AllImport | Export-Clixml -Path "$env:TEMP\psgallery.xml"
-		} else {$AllImport = Import-Clixml -Path "$env:TEMP\psgallery.xml"}
-	} else {$AllImport = Find-Module -Repository PSGallery}
-
 	if ($UpdateCache) {
+        Write-Host "[$(Get-Date)] Updating cache $($env:TEMP)\psgallery.xml" -ForegroundColor yellow
 		$cache = Find-Module -Repository PSGallery
 		$cache | Export-Clixml -Path "$env:TEMP\psgallery.xml"
 	}
+
+	if ($Offline -or $UpdateCache) {
+		if (-not(Test-Path "$env:TEMP\psgallery.xml")) {
+        Write-Host "[$(Get-Date)] Creating cache $($env:TEMP)\psgallery.xml" -ForegroundColor yellow
+			$AllImport = Find-Module -Repository PSGallery
+			$AllImport | Export-Clixml -Path "$env:TEMP\psgallery.xml"
+		} else {
+            Write-Host "[$(Get-Date)] Using cache $($env:TEMP)\psgallery.xml" -ForegroundColor yellow
+            $AllImport = Import-Clixml -Path "$env:TEMP\psgallery.xml"}
+	} else {
+            Write-Host "[$(Get-Date)] Going Online" -ForegroundColor yellow
+            $AllImport = Find-Module -Repository PSGallery
+   }
 
 
 	[System.Collections.ArrayList]$NewObject = @()
@@ -92,6 +104,8 @@ function Find-OnlineModule {
 		[void]$NewObject.Add(		[PSCustomObject]@{
 				Name                 = $_.Name
 				Version              = $_.Version
+                Description          = $_.Description
+                projecturi           = $_.ProjectUri.OriginalString
 				PublishedDate        = [datetime]$_.PublishedDate
 				downloadCount        = [int32]$_.AdditionalMetadata.downloadCount
 				versionDownloadCount = [int32]$_.AdditionalMetadata.versionDownloadCount
@@ -99,10 +113,35 @@ function Find-OnlineModule {
 				Authors              = $_.Author
 				releaseNotes         = $_.ReleaseNotes
 				tags                 = $_.Tags
-				summary              = $_.AdditionalMetadata.summary
 			} )
 	}
-	if ($Output -like 'SortDownloads') {$NewObject | Sort-Object -Property downloadCount -Descending | Format-Table -AutoSize}
-	if ($Output -like 'SortDate') {$NewObject | Sort-Object -Property PublishedDate -Descending | Format-Table -AutoSize}
-	if ($Output -like 'AsObject') {$NewObject}
+	if ($ConsoleOutput -like 'SortDownloads') {$NewObject | Sort-Object -Property downloadCount -Descending | Format-Table -AutoSize}
+	if ($ConsoleOutput -like 'SortDate') {$NewObject | Sort-Object -Property PublishedDate -Descending | Format-Table -AutoSize}
+	if ($ConsoleOutput -like 'AsObject') {$NewObject}
+	if ($MarkdownOutput -like 'SortDownloads') {$MarkObject = $NewObject | Sort-Object -Property downloadCount -Descending}
+	if ($MarkdownOutput -like 'SortDate') {$MarkObject = $NewObject | Sort-Object -Property PublishedDate -Descending }
+    if ($MarkdownOutput -like 'SortDate' -or $MarkdownOutput -like 'SortDownloads') {
+
+                $fragments = [system.collections.generic.list[string]]::new()
+                $fragments.Add("# PowerShell Filtered:$($Keyword)`n")
+                $fragments.Add("![PS](https://www.powershellgallery.com/Content/Images/Branding/psgallerylogo.svg)`n")
+                foreach ($item in $MarkObject) {
+                    $galleryLink = "https://www.powershellgallery.com/Packages/$($item.name)/$($item.version)"
+                    $fragments.Add("## <img src=`"https://e1.pngegg.com/pngimages/64/313/png-clipart-simply-styled-icon-set-731-icons-free-powershell-white-and-blue-logo-illustration-thumbnail.png`" align=`"left`" style=`"height: 32px`"/>")
+                    $fragments.Add(" [$($item.name)]($gallerylink) | $($item.version)`n")
+                    $fragments.Add("Published: $($item.PublishedDate) by $($item.Authors)`n")
+                    $fragments.Add("<span style='font-weight:Lighter;'>$($item.Description)</span>`n")
+                    $dl = "__Downloads__: {0:n0}" -f [int64]($item.versionDownloadCount)
+                    $repo = "__Repository__: $($item.projecturi)"
+                    $Fragments.Add("$dl | $repo`n")
+                    $Fragments.Add("---")
+                }
+
+                $fragments.add("*Updated: $(Get-Date -Format U) UTC*")
+                Write-Host "[$(Get-Date)] Saving report to $($env:TEMP)\PSGallery-$($Keyword).md" -ForegroundColor yellow
+                #need to make sure files are encoded to UTF8 for future PDF conversion
+                $fragments | Out-File "$($env:TEMP)\PSGallery-$($Keyword).md" -Encoding utf8 -Force
+                . "$($env:TEMP)\PSGallery-$($Keyword).md"
+                
+}
 }

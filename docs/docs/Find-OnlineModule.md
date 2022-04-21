@@ -13,7 +13,8 @@ Find a module on psgallery
 ## SYNTAX
 
 ```
-Find-OnlineModule [-Keyword] <String> [-Offline] [-UpdateCache] [-Output <String>] [<CommonParameters>]
+Find-OnlineModule [-Keyword] <String> [-Offline] [-UpdateCache] [-ConsoleOutput <String>]
+ [-MarkdownOutput <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -74,7 +75,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Output
+### -ConsoleOutput
 How to display the results.
 
 ```yaml
@@ -85,6 +86,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: AsObject
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MarkdownOutput
+Export results to markdown file.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
