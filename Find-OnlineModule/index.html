@@ -548,8 +548,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#-output" class="md-nav__link">
-    -Output
+  <a href="#-consoleoutput" class="md-nav__link">
+    -ConsoleOutput
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-markdownoutput" class="md-nav__link">
+    -MarkdownOutput
   </a>
   
 </li>
@@ -1747,8 +1754,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#-output" class="md-nav__link">
-    -Output
+  <a href="#-consoleoutput" class="md-nav__link">
+    -ConsoleOutput
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-markdownoutput" class="md-nav__link">
+    -MarkdownOutput
   </a>
   
 </li>
@@ -1828,7 +1842,8 @@
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Find a module on psgallery</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Find-OnlineModule [-Keyword] &lt;String&gt; [-Offline] [-UpdateCache] [-Output &lt;String&gt;] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Find-OnlineModule [-Keyword] &lt;String&gt; [-Offline] [-UpdateCache] [-ConsoleOutput &lt;String&gt;]
+ [-MarkdownOutput &lt;String&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Find a module on psgallery</p>
@@ -1874,7 +1889,7 @@ If the cache doesnt exists, it will be created.</p>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
-<h3 id="-output">-Output</h3>
+<h3 id="-consoleoutput">-ConsoleOutput</h3>
 <p>How to display the results.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
@@ -1883,6 +1898,18 @@ If the cache doesnt exists, it will be created.</p>
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AsObject</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-markdownoutput">-MarkdownOutput</h3>
+<p>Export results to markdown file.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
