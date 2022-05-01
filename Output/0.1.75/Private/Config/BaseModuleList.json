@@ -1,0 +1,29 @@
+[
+    {
+        "Name":  "Carbon"
+    },
+    {
+        "Name":  "ImportExcel"
+    },
+    {
+        "Name":  "PoshRegistry"
+    },
+    {
+        "Name":  "pscx"
+    },
+    {
+        "Name":  "PSReleaseTools"
+    },
+    {
+        "Name":  "PSScriptTools"
+    },
+    {
+        "Name":  "PSWindowsUpdate"
+    },
+    {
+        "Name":  "PSWriteColor"
+    },
+    {
+        "Name":  "PSWriteHTML"
+    }
+]
