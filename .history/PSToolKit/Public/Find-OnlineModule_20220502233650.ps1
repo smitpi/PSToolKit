@@ -69,7 +69,7 @@ function Find-OnlineModule {
 	[OutputType([System.Object[]])]
 	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '')]
 	PARAM(
-		[Parameter(Position = 0)]
+		[Parameter(Mandatory = $true, Position = 0)]
 		[string]$Keyword,
 		[switch]$Offline,
 		[switch]$UpdateCache,
