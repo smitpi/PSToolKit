@@ -54,13 +54,12 @@ AD User name to search.
 Get-FullADUserDetail -UserToQuery ps
 
 #>
-Function Get-FullADUserDetail {
+Function Get-FullADUserDetail3 {
 	[Cmdletbinding(DefaultParameterSetName = 'CurrentDomain' , HelpURI = 'https://smitpi.github.io/PSToolKit/Get-FullADUserDetail')]
 	PARAM(
 		[Parameter(ParameterSetName = 'CurrentDomain')]
-		[Parameter(Mandatory = $true, Position = 0)]
-		[ValidateNotNull()]
-		[ValidateNotNullOrEmpty()]
+		[Parameter(ParameterSetName = 'OtherDomain')]
+		[Parameter(Mandatory = $true)]
 		[string]$UserToQuery,
 		[Parameter(ParameterSetName = 'OtherDomain')]
 		[Parameter(Mandatory = $false)]
@@ -72,22 +71,36 @@ Function Get-FullADUserDetail {
 
 	if ($null -notlike $DomainFQDN) {
         if (-not($DomainCredential)) {$DomainCredential = Get-Credential -Message "Account to connnect to $($DomainFQDN)"}
-
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Starting] User Details"
-        $AllUserDetails = Get-ADUser $UserToQuery -Properties * -server $DomainFQDN -Credential $DomainCredential
+        try {
+        $AllUserDetails = Get-ADUser -Identity $UserToQuery -server $DomainFQDN -Credential $DomainCredential -Properties *
         [pscustomobject]@{
             UserSummary = $AllUserDetails | Select-Object Name, GivenName, Surname, UserPrincipalName, EmployeeID, EmployeeNumber, HomeDirectory, Enabled, Created, Modified, LastLogonDate, samaccountname
             AllUserDetails = $AllUserDetails
-            MemberOf = $AllUserDetails.memberof | ForEach-Object { Get-ADGroup $_ -server $DomainFQDN -Credential $DomainCredential}
+            MemberOf = $AllUserDetails.memberof | ForEach-Object { 
+                    $Cname = $_
+                    $Split = (($Cname.Split(",DC=")) | Where-Object {$null -notlike $_})
+                    $NewDomain = "$($Split[-3]).$($Split[-2]).$($Split[-1])"
+                    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Connecting] to doamin: $($Domain)"
+                    Get-ADGroup -Identity $_ -Server $NewDomain -Credential $DomainCredential
+            }
          }
+         } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 	} else {
-	    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Starting] User Details"
-        $AllUserDetails = Get-ADUser $UserToQuery -Properties *
+		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Starting] User Details"
+        try {
+        $AllUserDetails = Get-ADUser -Identity $UserToQuery -Properties *
         [pscustomobject]@{
             UserSummary = $AllUserDetails | Select-Object Name, GivenName, Surname, UserPrincipalName, EmployeeID, EmployeeNumber, HomeDirectory, Enabled, Created, Modified, LastLogonDate, samaccountname
             AllUserDetails = $AllUserDetails
-            MemberOf = $AllUserDetails.memberof | ForEach-Object { Get-ADGroup $_ }
+            MemberOf = $AllUserDetails.memberof | ForEach-Object { 
+                    $Cname = $_
+                    $Split = (($Cname.Split(",DC=")) | Where-Object {$null -notlike $_})
+                    $NewDomain = "$($Split[-3]).$($Split[-2]).$($Split[-1])"
+                    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Connecting] to doamin: $($Domain)"
+                    Get-ADGroup -Identity $_ -Server $NewDomain
+            }
          }
+      } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
     }
 } #end Function
-
