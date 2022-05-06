@@ -59,6 +59,7 @@ Functions in this module:
 	 New-PSModule -- Creates a new PowerShell module.
 	 New-PSProfile -- Creates new profile files in the documents folder
 	 New-PSScript -- Creates a new PowerShell script. With PowerShell Script Info
+	 New-RemoteDesktopFile -- Creates and saves a .rdp file
 	 New-SuggestedInfraName -- Generates a list of usernames and server names, that can be used as test / demo data.
 	 Remove-CIMUserProfile -- Uses CimInstance to remove a user profile
 	 Remove-FaultyProfileList -- Fixes Profilelist in the registry. To fix user logon with temp profile.

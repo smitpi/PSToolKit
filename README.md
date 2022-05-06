@@ -75,6 +75,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [New-PSModule](https://smitpi.github.io/PSToolKit/#New-PSModule) -- Creates a new PowerShell module.
 - [New-PSProfile](https://smitpi.github.io/PSToolKit/#New-PSProfile) -- Creates new profile files in the documents folder
 - [New-PSScript](https://smitpi.github.io/PSToolKit/#New-PSScript) -- Creates a new PowerShell script. With PowerShell Script Info
+- [New-RemoteDesktopFile](https://smitpi.github.io/PSToolKit/#New-RemoteDesktopFile) -- Creates and saves a .rdp file
 - [New-SuggestedInfraName](https://smitpi.github.io/PSToolKit/#New-SuggestedInfraName) -- Generates a list of usernames and server names, that can be used as test / demo data.
 - [Remove-CIMUserProfile](https://smitpi.github.io/PSToolKit/#Remove-CIMUserProfile) -- Uses CimInstance to remove a user profile
 - [Remove-FaultyProfileList](https://smitpi.github.io/PSToolKit/#Remove-FaultyProfileList) -- Fixes Profilelist in the registry. To fix user logon with temp profile.
