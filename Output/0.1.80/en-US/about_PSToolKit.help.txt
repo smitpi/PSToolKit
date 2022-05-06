@@ -31,7 +31,6 @@ Functions in this module:
 	 Get-DeviceUptime -- Calculates the uptime of a system
 	 Get-FolderSize -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option
 	 Get-FQDN -- Get FQDN for a device, and checks if it is online
-	 Get-FullADUserDetail -- Extract handy info of an AD user
 	 Get-MyPSGalleryStat -- Show stats about my published modules.
 	 Get-ProcessPerformance -- Gets the top 10 processes by CPU %
 	 Get-PropertiesToCSV -- Get member data of an object. Use it to create other PSObjects.

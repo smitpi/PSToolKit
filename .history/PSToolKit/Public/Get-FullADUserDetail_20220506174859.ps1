@@ -40,22 +40,15 @@ Created [26/10/2021_22:32] Initial Script Creating
 #>
 
 
-
 <#
 .SYNOPSIS
-Exstact user details from the domain
+Extract handy info of an AD user
 
 .DESCRIPTION
-Exstact user details from the domain
+Extract handy info of an AD user
 
 .PARAMETER UserToQuery
-User id to searh for.
-
-.PARAMETER DomainFQDN
-Domain to search
-
-.PARAMETER DomainCredential
-Userid to connect to that domain.
+AD User name to search.
 
 .EXAMPLE
 Get-FullADUserDetail -UserToQuery ps

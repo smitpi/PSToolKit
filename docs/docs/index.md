@@ -47,7 +47,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Get-DeviceUptime](https://smitpi.github.io/PSToolKit/#Get-DeviceUptime) -- Calculates the uptime of a system
 - [Get-FolderSize](https://smitpi.github.io/PSToolKit/#Get-FolderSize) -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option
 - [Get-FQDN](https://smitpi.github.io/PSToolKit/#Get-FQDN) -- Get FQDN for a device, and checks if it is online
-- [Get-FullADUserDetail](https://smitpi.github.io/PSToolKit/#Get-FullADUserDetail) -- Extract handy info of an AD user
 - [Get-MyPSGalleryStat](https://smitpi.github.io/PSToolKit/#Get-MyPSGalleryStat) -- Show stats about my published modules.
 - [Get-ProcessPerformance](https://smitpi.github.io/PSToolKit/#Get-ProcessPerformance) -- Gets the top 10 processes by CPU %
 - [Get-PropertiesToCSV](https://smitpi.github.io/PSToolKit/#Get-PropertiesToCSV) -- Get member data of an object. Use it to create other PSObjects.
