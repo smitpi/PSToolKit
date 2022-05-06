@@ -55,27 +55,39 @@ Get-FullADUserDetail -UserToQuery ps
 
 #>
 Function Get-FullADUserDetail {
-	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-FullADUserDetail')]
+	[Cmdletbinding(DefaultParameterSetName = 'CurrentDomain' , HelpURI = 'https://smitpi.github.io/PSToolKit/Get-FullADUserDetail')]
 	PARAM(
+		[Parameter(ParameterSetName = 'CurrentDomain')]
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNull()]
 		[ValidateNotNullOrEmpty()]
-		[string]$UserToQuery)
+		[string]$UserToQuery,
+		[Parameter(ParameterSetName = 'OtherDomain')]
+		[Parameter(Mandatory = $false)]
+		[string]$DomainFQDN,
+		[Parameter(ParameterSetName = 'OtherDomain')]
+		[Parameter(Mandatory = $false)]
+		[pscredential]$DomainCredential
+	)
 
+	if ($null -notlike $DomainFQDN) {
+        if (-not($DomainCredential)) {$DomainCredential = Get-Credential -Message "Account to connnect to $($DomainFQDN)"}
 
-	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Starting] User Details"
-	$UserSummery = Get-ADUser $UserToQuery -Properties * | Select-Object Name, GivenName, Surname, UserPrincipalName, EmailAddress, EmployeeID, EmployeeNumber, HomeDirectory, Enabled, Created, Modified, LastLogonDate, samaccountname
-	$AllUserDetails = Get-ADUser $UserToQuery -Properties *
-	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] User Groups"
-	$AllUserGroups = Get-ADUser $UserToQuery -Properties * | Select-Object -ExpandProperty memberof | ForEach-Object { Get-ADGroup $_ }
-	$CusObject = New-Object PSObject -Property @{
-		DateCollected  = (Get-Date -Format dd-MM-yyyy_HH:mm).ToString()
-		UserSummery    = $UserSummery
-		AllUserDetails = $AllUserDetails
-		AllUserGroups  = $AllUserGroups
-	}
-	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Ending] User Details"
-	$CusObject
-
+		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Starting] User Details"
+        $AllUserDetails = Get-ADUser $UserToQuery -Properties * -server $DomainFQDN -Credential $DomainCredential
+        [pscustomobject]@{
+            UserSummary = $AllUserDetails | Select-Object Name, GivenName, Surname, UserPrincipalName, EmployeeID, EmployeeNumber, HomeDirectory, Enabled, Created, Modified, LastLogonDate, samaccountname
+            AllUserDetails = $AllUserDetails
+            MemberOf = $AllUserDetails.memberof | ForEach-Object { Get-ADGroup $_ -server $DomainFQDN -Credential $DomainCredential}
+         }
+	} else {
+	    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Starting] User Details"
+        $AllUserDetails = Get-ADUser $UserToQuery -Properties *
+        [pscustomobject]@{
+            UserSummary = $AllUserDetails | Select-Object Name, GivenName, Surname, UserPrincipalName, EmployeeID, EmployeeNumber, HomeDirectory, Enabled, Created, Modified, LastLogonDate, samaccountname
+            AllUserDetails = $AllUserDetails
+            MemberOf = $AllUserDetails.memberof | ForEach-Object { Get-ADGroup $_ }
+         }
+    }
 } #end Function
 
