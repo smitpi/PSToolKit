@@ -67,6 +67,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Install-PSModule](https://smitpi.github.io/PSToolKit/#Install-PSModule) -- Install modules from .json file.
 - [Install-RSAT](https://smitpi.github.io/PSToolKit/#Install-RSAT) -- Install Remote Admin Tools
 - [Install-VMWareTool](https://smitpi.github.io/PSToolKit/#Install-VMWareTool) -- Install vmware tools from chocolatety
+- [Install-WSL2](https://smitpi.github.io/PSToolKit/#Install-WSL2) -- Enable Windows-Subsystem-Linux
 - [New-CitrixSiteConfigFile](https://smitpi.github.io/PSToolKit/#New-CitrixSiteConfigFile) -- All a config file with Citrix server details. To be imported as variables.
 - [New-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#New-ElevatedShortcut) -- Creates a shortcut to a script or exe that runs as admin, without UNC
 - [New-GodModeFolder](https://smitpi.github.io/PSToolKit/#New-GodModeFolder) -- Creates a God Mode Folder

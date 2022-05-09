@@ -5,40 +5,70 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-MyPSGalleryStat
+# Install-WSL2
 
 ## SYNOPSIS
-Show stats about my published modules.
+Enable Windows-Subsystem-Linux
 
 ## SYNTAX
 
 ```
-Get-MyPSGalleryStat [[-Display] <String>] [<CommonParameters>]
+Install-WSL2 [[-DistroPath] <DirectoryInfo>] [-Ubuntu] [-Debian] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Show stats about my published modules.
+Enable Windows-Subsystem-Linux
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-MyPSGalleryStats -Display TableView
+Install-WSL2
 ```
 
 ## PARAMETERS
 
-### -Display
-How to display the output.
+### -DistroPath
+{{ Fill DistroPath Description }}
 
 ```yaml
-Type: String
+Type: DirectoryInfo
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 1
-Default value: Host
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Ubuntu
+{{ Fill Ubuntu Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Debian
+{{ Fill Debian Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
