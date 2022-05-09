@@ -31,6 +31,7 @@ Functions in this module:
 	 Get-DeviceUptime -- Calculates the uptime of a system
 	 Get-FolderSize -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option
 	 Get-FQDN -- Get FQDN for a device, and checks if it is online
+	 Get-FullADUserDetail -- Exstact user details from the domain
 	 Get-MyPSGalleryStat -- Show stats about my published modules.
 	 Get-ProcessPerformance -- Gets the top 10 processes by CPU %
 	 Get-PropertiesToCSV -- Get member data of an object. Use it to create other PSObjects.
@@ -51,7 +52,6 @@ Functions in this module:
 	 Install-PSModule -- Install modules from .json file.
 	 Install-RSAT -- Install Remote Admin Tools
 	 Install-VMWareTool -- Install vmware tools from chocolatety
-	 Install-WSL2 -- Enable Windows-Subsystem-Linux
 	 New-CitrixSiteConfigFile -- All a config file with Citrix server details. To be imported as variables.
 	 New-ElevatedShortcut -- Creates a shortcut to a script or exe that runs as admin, without UNC
 	 New-GodModeFolder -- Creates a God Mode Folder

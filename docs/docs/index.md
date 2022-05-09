@@ -47,6 +47,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Get-DeviceUptime](https://smitpi.github.io/PSToolKit/#Get-DeviceUptime) -- Calculates the uptime of a system
 - [Get-FolderSize](https://smitpi.github.io/PSToolKit/#Get-FolderSize) -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option
 - [Get-FQDN](https://smitpi.github.io/PSToolKit/#Get-FQDN) -- Get FQDN for a device, and checks if it is online
+- [Get-FullADUserDetail](https://smitpi.github.io/PSToolKit/#Get-FullADUserDetail) -- Exstact user details from the domain
 - [Get-MyPSGalleryStat](https://smitpi.github.io/PSToolKit/#Get-MyPSGalleryStat) -- Show stats about my published modules.
 - [Get-ProcessPerformance](https://smitpi.github.io/PSToolKit/#Get-ProcessPerformance) -- Gets the top 10 processes by CPU %
 - [Get-PropertiesToCSV](https://smitpi.github.io/PSToolKit/#Get-PropertiesToCSV) -- Get member data of an object. Use it to create other PSObjects.
@@ -67,7 +68,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Install-PSModule](https://smitpi.github.io/PSToolKit/#Install-PSModule) -- Install modules from .json file.
 - [Install-RSAT](https://smitpi.github.io/PSToolKit/#Install-RSAT) -- Install Remote Admin Tools
 - [Install-VMWareTool](https://smitpi.github.io/PSToolKit/#Install-VMWareTool) -- Install vmware tools from chocolatety
-- [Install-WSL2](https://smitpi.github.io/PSToolKit/#Install-WSL2) -- Enable Windows-Subsystem-Linux
 - [New-CitrixSiteConfigFile](https://smitpi.github.io/PSToolKit/#New-CitrixSiteConfigFile) -- All a config file with Citrix server details. To be imported as variables.
 - [New-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#New-ElevatedShortcut) -- Creates a shortcut to a script or exe that runs as admin, without UNC
 - [New-GodModeFolder](https://smitpi.github.io/PSToolKit/#New-GodModeFolder) -- Creates a God Mode Folder

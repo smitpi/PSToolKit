@@ -61,7 +61,7 @@ Userid to connect to that domain.
 Get-FullADUserDetail -UserToQuery ps
 
 #>
-Function Get-FullADUserDetail {
+Function Get-FullADUserDetail3 {
 	[Cmdletbinding(DefaultParameterSetName = 'CurrentDomain' , HelpURI = 'https://smitpi.github.io/PSToolKit/Get-FullADUserDetail')]
 	PARAM(
 		[Parameter(ParameterSetName = 'CurrentDomain')]

@@ -12,14 +12,14 @@
         <meta name="author" content="Pierre Smit">
       
       
-        <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Install-WSL2/">
+        <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Get-FullADUserDetail/">
       
       <link rel="icon" href="..">
       <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.13">
     
     
       
-        <title>Install-WSL2 - PSToolKit</title>
+        <title>Get-FullADUserDetail - PSToolKit</title>
       
     
     
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#install-wsl2" class="md-skip">
+        <a href="#get-fulladuserdetail" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Install-WSL2
+              Get-FullADUserDetail
             
           </span>
         </div>
@@ -577,6 +577,185 @@
 
   
   
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Get-FullADUserDetail
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Get-FullADUserDetail
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#synopsis" class="md-nav__link">
+    SYNOPSIS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    SYNTAX
+  </a>
+  
+    <nav class="md-nav" aria-label="SYNTAX">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#currentdomain-default" class="md-nav__link">
+    CurrentDomain (Default)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#otherdomain" class="md-nav__link">
+    OtherDomain
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    DESCRIPTION
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    EXAMPLES
+  </a>
+  
+    <nav class="md-nav" aria-label="EXAMPLES">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1" class="md-nav__link">
+    EXAMPLE 1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    PARAMETERS
+  </a>
+  
+    <nav class="md-nav" aria-label="PARAMETERS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-usertoquery" class="md-nav__link">
+    -UserToQuery
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-domainfqdn" class="md-nav__link">
+    -DomainFQDN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-domaincredential" class="md-nav__link">
+    -DomainCredential
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commonparameters" class="md-nav__link">
+    CommonParameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inputs" class="md-nav__link">
+    INPUTS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    OUTPUTS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    NOTES
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-links" class="md-nav__link">
+    RELATED LINKS
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
   
     <li class="md-nav__item">
       <a href="../Get-MyPSGalleryStat/" class="md-nav__link">
@@ -867,178 +1046,6 @@
       <a href="../Install-VMWareTool/" class="md-nav__link">
         Install-VMWareTool
       </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Install-WSL2
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        Install-WSL2
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#synopsis" class="md-nav__link">
-    SYNOPSIS
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#syntax" class="md-nav__link">
-    SYNTAX
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#description" class="md-nav__link">
-    DESCRIPTION
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    EXAMPLES
-  </a>
-  
-    <nav class="md-nav" aria-label="EXAMPLES">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-1" class="md-nav__link">
-    EXAMPLE 1
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    PARAMETERS
-  </a>
-  
-    <nav class="md-nav" aria-label="PARAMETERS">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#-distropath" class="md-nav__link">
-    -DistroPath
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-ubuntu" class="md-nav__link">
-    -Ubuntu
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-debian" class="md-nav__link">
-    -Debian
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#commonparameters" class="md-nav__link">
-    CommonParameters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inputs" class="md-nav__link">
-    INPUTS
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#outputs" class="md-nav__link">
-    OUTPUTS
-  </a>
-  
-    <nav class="md-nav" aria-label="OUTPUTS">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#systemobject" class="md-nav__link">
-    System.Object[]
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
-    NOTES
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#related-links" class="md-nav__link">
-    RELATED LINKS
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1696,6 +1703,26 @@
     SYNTAX
   </a>
   
+    <nav class="md-nav" aria-label="SYNTAX">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#currentdomain-default" class="md-nav__link">
+    CurrentDomain (Default)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#otherdomain" class="md-nav__link">
+    OtherDomain
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1734,22 +1761,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#-distropath" class="md-nav__link">
-    -DistroPath
+  <a href="#-usertoquery" class="md-nav__link">
+    -UserToQuery
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#-ubuntu" class="md-nav__link">
-    -Ubuntu
+  <a href="#-domainfqdn" class="md-nav__link">
+    -DomainFQDN
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#-debian" class="md-nav__link">
-    -Debian
+  <a href="#-domaincredential" class="md-nav__link">
+    -DomainCredential
   </a>
   
 </li>
@@ -1777,19 +1804,6 @@
   <a href="#outputs" class="md-nav__link">
     OUTPUTS
   </a>
-  
-    <nav class="md-nav" aria-label="OUTPUTS">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#systemobject" class="md-nav__link">
-    System.Object[]
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1819,58 +1833,64 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Install-WSL2.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Get-FullADUserDetail.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<h1 id="install-wsl2">Install-WSL2</h1>
+<h1 id="get-fulladuserdetail">Get-FullADUserDetail</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Enable Windows-Subsystem-Linux</p>
+<p>Exstact user details from the domain</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Install-WSL2 [[-DistroPath] &lt;DirectoryInfo&gt;] [-Ubuntu] [-Debian] [&lt;CommonParameters&gt;]
+<h3 id="currentdomain-default">CurrentDomain (Default)</h3>
+<div class="highlight"><pre><span></span><code>Get-FullADUserDetail [-UserToQuery &lt;String&gt;] [-DomainFQDN &lt;String&gt;] [-DomainCredential &lt;PSCredential&gt;]
+ [&lt;CommonParameters&gt;]
+</code></pre></div>
+<h3 id="otherdomain">OtherDomain</h3>
+<div class="highlight"><pre><span></span><code>Get-FullADUserDetail [-UserToQuery &lt;String&gt;] [-DomainFQDN &lt;String&gt;] [-DomainCredential &lt;PSCredential&gt;]
+ [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
-<p>Enable Windows-Subsystem-Linux</p>
+<p>Exstact user details from the domain</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Install-WSL2
+<div class="highlight"><pre><span></span><code>Get-FullADUserDetail -UserToQuery ps
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
-<h3 id="-distropath">-DistroPath</h3>
-<p>{{ Fill DistroPath Description }}</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DirectoryInfo</span><span class="w"></span>
+<h3 id="-usertoquery">-UserToQuery</h3>
+<p>User id to searh for.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
-<h3 id="-ubuntu">-Ubuntu</h3>
-<p>{{ Fill Ubuntu Description }}</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<h3 id="-domainfqdn">-DomainFQDN</h3>
+<p>Domain to search</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
-<h3 id="-debian">-Debian</h3>
-<p>{{ Fill Debian Description }}</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<h3 id="-domaincredential">-DomainCredential</h3>
+<p>Userid to connect to that domain.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PSCredential</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
@@ -1878,7 +1898,6 @@
 <p>This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see <a href="http://go.microsoft.com/fwlink/?LinkID=113216">about_CommonParameters</a>.</p>
 <h2 id="inputs">INPUTS</h2>
 <h2 id="outputs">OUTPUTS</h2>
-<h3 id="systemobject">System.Object[]</h3>
 <h2 id="notes">NOTES</h2>
 <h2 id="related-links">RELATED LINKS</h2>
 
@@ -1894,7 +1913,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../Install-VMWareTool/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Install-VMWareTool" rel="prev">
+        <a href="../Get-FolderSize/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Get-FolderSize" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -1903,20 +1922,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Install-VMWareTool
+              Get-FolderSize
             </div>
           </div>
         </a>
       
       
         
-        <a href="../New-CitrixSiteConfigFile/" class="md-footer__link md-footer__link--next" aria-label="Next: New-CitrixSiteConfigFile" rel="next">
+        <a href="../Get-MyPSGalleryStat/" class="md-footer__link md-footer__link--next" aria-label="Next: Get-MyPSGalleryStat" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              New-CitrixSiteConfigFile
+              Get-MyPSGalleryStat
             </div>
           </div>
           <div class="md-footer__button md-icon">

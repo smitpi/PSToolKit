@@ -5,70 +5,78 @@ online version:
 schema: 2.0.0
 ---
 
-# Install-WSL2
+# Get-FullADUserDetail
 
 ## SYNOPSIS
-Enable Windows-Subsystem-Linux
+Exstact user details from the domain
 
 ## SYNTAX
 
+### CurrentDomain (Default)
 ```
-Install-WSL2 [[-DistroPath] <DirectoryInfo>] [-Ubuntu] [-Debian] [<CommonParameters>]
+Get-FullADUserDetail [-UserToQuery <String>] [-DomainFQDN <String>] [-DomainCredential <PSCredential>]
+ [<CommonParameters>]
+```
+
+### OtherDomain
+```
+Get-FullADUserDetail [-UserToQuery <String>] [-DomainFQDN <String>] [-DomainCredential <PSCredential>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Enable Windows-Subsystem-Linux
+Exstact user details from the domain
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Install-WSL2
+Get-FullADUserDetail -UserToQuery ps
 ```
 
 ## PARAMETERS
 
-### -DistroPath
-{{ Fill DistroPath Description }}
+### -UserToQuery
+User id to searh for.
 
 ```yaml
-Type: DirectoryInfo
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Ubuntu
-{{ Fill Ubuntu Description }}
+### -DomainFQDN
+Domain to search
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Debian
-{{ Fill Debian Description }}
+### -DomainCredential
+Userid to connect to that domain.
 
 ```yaml
-Type: SwitchParameter
+Type: PSCredential
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -80,7 +88,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object[]
 ## NOTES
 
 ## RELATED LINKS

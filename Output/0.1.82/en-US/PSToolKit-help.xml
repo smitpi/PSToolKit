@@ -2606,6 +2606,115 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-FullADUserDetail</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>FullADUserDetail</command:noun>
+      <maml:description>
+        <maml:para>Exstact user details from the domain</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Exstact user details from the domain</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-FullADUserDetail</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>UserToQuery</maml:name>
+          <maml:description>
+            <maml:para>User id to searh for.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>DomainFQDN</maml:name>
+          <maml:description>
+            <maml:para>Domain to search</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>DomainCredential</maml:name>
+          <maml:description>
+            <maml:para>Userid to connect to that domain.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+          <dev:type>
+            <maml:name>PSCredential</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>UserToQuery</maml:name>
+        <maml:description>
+          <maml:para>User id to searh for.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>DomainFQDN</maml:name>
+        <maml:description>
+          <maml:para>Domain to search</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>DomainCredential</maml:name>
+        <maml:description>
+          <maml:para>Userid to connect to that domain.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+        <dev:type>
+          <maml:name>PSCredential</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-FullADUserDetail -UserToQuery ps</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-MyPSGalleryStat</command:name>
       <command:verb>Get</command:verb>
       <command:noun>MyPSGalleryStat</command:noun>
@@ -4412,122 +4521,6 @@
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>Install-VMWareTools</dev:code>
-        <dev:remarks>
-          <maml:para></maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks />
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Install-WSL2</command:name>
-      <command:verb>Install</command:verb>
-      <command:noun>WSL2</command:noun>
-      <maml:description>
-        <maml:para>Enable Windows-Subsystem-Linux</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>Enable Windows-Subsystem-Linux</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Install-WSL2</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>DistroPath</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill DistroPath Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
-          <dev:type>
-            <maml:name>DirectoryInfo</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Ubuntu</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill Ubuntu Description }}</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Debian</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill Debian Description }}</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>DistroPath</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill DistroPath Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
-        <dev:type>
-          <maml:name>DirectoryInfo</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Ubuntu</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill Ubuntu Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Debian</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill Debian Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes />
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object[]</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Install-WSL2</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
