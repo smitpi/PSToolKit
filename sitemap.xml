@@ -381,11 +381,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://smitpi.github.io/PSToolKit/Update-AllPSModule/</loc>
-         <lastmod>2022-05-10</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://smitpi.github.io/PSToolKit/Update-ListOfDDC/</loc>
          <lastmod>2022-05-10</lastmod>
          <changefreq>daily</changefreq>
