@@ -68,7 +68,6 @@ Functions in this module:
 	 Reset-PSGallery -- Reset gallery to degault settings
 	 Restore-ElevatedShortcut -- Restore the RunAss shortcuts, from a zip file
 	 Search-Script -- Search for a string in a directory of ps1 scripts.
-	 Set-PSProjectFile -- Creates and modify needed files for a PS project from existing module files.
 	 Set-PSToolKitSystemSetting -- Set multiple settings on desktop or server
 	 Set-SharedPSProfile -- Redirects PowerShell profile to network share.
 	 Set-StaticIP -- Set static IP on device
@@ -84,7 +83,6 @@ Functions in this module:
 	 Test-CitrixCloudConnector -- Perform basic connection tests to CItrix cloud.
 	 Test-PendingReboot -- This script tests various registry values to see if the local computer is pending a reboot.
 	 Test-PSRemote -- Test PSb Remote to a device.
-	 Update-AllPSModule -- This script will update all locally installed PowerShell modules to the newest ones if can find online.
 	 Update-ListOfDDC -- Update list of ListOfDDCs in the registry
 	 Update-LocalHelp -- Downloads and saves help files locally
 	 Update-PSModuleInfo -- Update PowerShell module manifest file

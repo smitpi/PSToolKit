@@ -84,7 +84,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Reset-PSGallery](https://smitpi.github.io/PSToolKit/#Reset-PSGallery) -- Reset gallery to degault settings
 - [Restore-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#Restore-ElevatedShortcut) -- Restore the RunAss shortcuts, from a zip file
 - [Search-Script](https://smitpi.github.io/PSToolKit/#Search-Script) -- Search for a string in a directory of ps1 scripts.
-- [Set-PSProjectFile](https://smitpi.github.io/PSToolKit/#Set-PSProjectFile) -- Creates and modify needed files for a PS project from existing module files.
 - [Set-PSToolKitSystemSetting](https://smitpi.github.io/PSToolKit/#Set-PSToolKitSystemSetting) -- Set multiple settings on desktop or server
 - [Set-SharedPSProfile](https://smitpi.github.io/PSToolKit/#Set-SharedPSProfile) -- Redirects PowerShell profile to network share.
 - [Set-StaticIP](https://smitpi.github.io/PSToolKit/#Set-StaticIP) -- Set static IP on device
@@ -100,7 +99,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Test-CitrixCloudConnector](https://smitpi.github.io/PSToolKit/#Test-CitrixCloudConnector) -- Perform basic connection tests to CItrix cloud.
 - [Test-PendingReboot](https://smitpi.github.io/PSToolKit/#Test-PendingReboot) -- This script tests various registry values to see if the local computer is pending a reboot.
 - [Test-PSRemote](https://smitpi.github.io/PSToolKit/#Test-PSRemote) -- Test PSb Remote to a device.
-- [Update-AllPSModule](https://smitpi.github.io/PSToolKit/#Update-AllPSModule) -- This script will update all locally installed PowerShell modules to the newest ones if can find online.
 - [Update-ListOfDDC](https://smitpi.github.io/PSToolKit/#Update-ListOfDDC) -- Update list of ListOfDDCs in the registry
 - [Update-LocalHelp](https://smitpi.github.io/PSToolKit/#Update-LocalHelp) -- Downloads and saves help files locally
 - [Update-PSModuleInfo](https://smitpi.github.io/PSToolKit/#Update-PSModuleInfo) -- Update PowerShell module manifest file
