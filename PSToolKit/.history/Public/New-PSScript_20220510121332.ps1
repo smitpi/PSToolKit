@@ -139,7 +139,9 @@ Function $properverb-$propernoun {
 
 
 
-	if (`$Export -eq 'Excel') { `$data | Export-Excel -Path $(Join-Path -Path `$ReportPath -ChildPath "\$propernoun-$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx") -WorksheetName $propernoun -AutoSize -AutoFilter -Title $propernoun -TitleBold -TitleSize 28}
+	if (`$Export -eq 'Excel') { `$data | Export-Excel -Path `$(Join-Path -Path `$ReportPath -ChildPath "\$propernoun-`$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx") -AutoSize -AutoFilter -Show 
+		`$data | Export-Excel -Path $(Join-Path -Path `$ReportPath -ChildPath "\$propernoun-$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx") -WorksheetName $propernoun -AutoSize -AutoFilter -Title $propernoun -TitleBold -TitleSize 28
+	}
 	if (`$Export -eq 'HTML') { `$data | Out-GridHtml -DisablePaging -Title "$propernoun" -HideFooter -SearchHighlight -FixedHeader -FilePath `$(Join-Path -Path `$ReportPath -ChildPath "\$propernoun-`$(Get-Date -Format yyyy.MM.dd-HH.mm).html") }
 	if (`$Export -eq 'Host') { `$data }
 
