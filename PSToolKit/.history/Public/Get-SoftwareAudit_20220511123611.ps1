@@ -65,9 +65,10 @@ Get-SoftwareAudit -ComputerName Neptune -Export Excel
 
 #>
 Function Get-SoftwareAudit {
-	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-SoftwareAudit')]
+	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Get-SoftwareAudit')]
 	PARAM(
 		[Parameter(Mandatory = $true)]
+		[Parameter(ParameterSetName = 'Set1')]
 		[string[]]$ComputerName,
 		[ValidateNotNullOrEmpty()]
 		[Parameter(Mandatory = $false)]

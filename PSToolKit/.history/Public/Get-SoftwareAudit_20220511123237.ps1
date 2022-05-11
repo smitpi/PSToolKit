@@ -65,9 +65,10 @@ Get-SoftwareAudit -ComputerName Neptune -Export Excel
 
 #>
 Function Get-SoftwareAudit {
-	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-SoftwareAudit')]
+	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Get-SoftwareAudit')]
 	PARAM(
 		[Parameter(Mandatory = $true)]
+		[Parameter(ParameterSetName = 'Set1')]
 		[string[]]$ComputerName,
 		[ValidateNotNullOrEmpty()]
 		[Parameter(Mandatory = $false)]
@@ -83,7 +84,6 @@ Function Get-SoftwareAudit {
 			$check = Get-FQDN -ComputerName $CompName -ErrorAction Stop
 		} catch { Write-Warning "Error: $($_.Exception.Message)" }
 		if ($check.online -like 'True') {
-			Write-PSToolKitMessage -Action Starting -Severity Information -Object $($check.FQDN) -Message 'Collecting Software'
 			try {
 				$rawdata = Invoke-Command -ComputerName $CompName -ScriptBlock {
 					Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall | Get-ItemProperty

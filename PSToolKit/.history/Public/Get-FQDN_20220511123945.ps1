@@ -66,12 +66,11 @@ Function Get-FQDN {
 		[System.Collections.ArrayList]$outobject = @()
 		$ComputerName | ForEach-Object {
 			try {
-				[void]$outobject.add([pscustomobject]@{
-						Host   = $($_)
-						FQDN   = ([System.Net.Dns]::GetHostEntry(($($_)))).HostName
-						Online = Test-Connection -ComputerName $(([System.Net.Dns]::GetHostEntry(($($_)))).HostName) -Quiet -Count 2
-					})
-			} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+			[void]$outobject.add([pscustomobject]@{
+					Host   = $($_)
+					FQDN   = ([System.Net.Dns]::GetHostEntry(($($_)))).HostName
+					Online = Test-Connection -ComputerName $(([System.Net.Dns]::GetHostEntry(($($_)))).HostName) -Quiet -Count 2
+				})
 		}
 	}
 	end {return $outobject}

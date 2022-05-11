@@ -65,9 +65,10 @@ Get-SoftwareAudit -ComputerName Neptune -Export Excel
 
 #>
 Function Get-SoftwareAudit {
-	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-SoftwareAudit')]
+	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Get-SoftwareAudit')]
 	PARAM(
 		[Parameter(Mandatory = $true)]
+		[Parameter(ParameterSetName = 'Set1')]
 		[string[]]$ComputerName,
 		[ValidateNotNullOrEmpty()]
 		[Parameter(Mandatory = $false)]
@@ -79,30 +80,29 @@ Function Get-SoftwareAudit {
 	[System.Collections.ArrayList]$Software = @()
 	foreach ($CompName in $ComputerName) {
 		try {
-			$check = $null
 			$check = Get-FQDN -ComputerName $CompName -ErrorAction Stop
 		} catch { Write-Warning "Error: $($_.Exception.Message)" }
-		if ($check.online -like 'True') {
-			Write-PSToolKitMessage -Action Starting -Severity Information -Object $($check.FQDN) -Message 'Collecting Software'
-			try {
-				$rawdata = Invoke-Command -ComputerName $CompName -ScriptBlock {
-					Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall | Get-ItemProperty
-					Get-ChildItem HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall | Get-ItemProperty
+		if ($check.online -like "True") {
+		try {
+			$rawdata = Invoke-Command -ComputerName $CompName -ScriptBlock {
+				Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall | Get-ItemProperty
+				Get-ChildItem HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall | Get-ItemProperty
+			}
+			foreach ($item in $rawdata) {
+				if (-not($null -eq $item.DisplayName)) {
+					[void]$Software.Add([pscustomobject]@{
+						CompName        = $($item.PSComputerName)
+						DisplayName     = $item.DisplayName
+						DisplayVersion  = $item.DisplayVersion
+						Publisher       = $item.Publisher
+						EstimatedSize   = [Decimal]::Round([int]$item.EstimatedSize / 1024, 2)
+						UninstallString = $item.UninstallString
+					})
 				}
-				foreach ($item in $rawdata) {
-					if (-not($null -eq $item.DisplayName)) {
-						[void]$Software.Add([pscustomobject]@{
-								CompName        = $($check.FQDN)
-								DisplayName     = $item.DisplayName
-								DisplayVersion  = $item.DisplayVersion
-								Publisher       = $item.Publisher
-								EstimatedSize   = [Decimal]::Round([int]$item.EstimatedSize / 1024, 2)
-								UninstallString = $item.UninstallString
-							})
-					}
-				}
-			} catch { Write-Warning "Error: $($_.Exception.Message)" }
-		} else {Write-Warning "$($CompName) is offline"}
+			}
+		}
+		catch { Write-Warning "Error: $($_.Exception.Message)" }
+	} else {Write-Warning "$($CompName) is offline"}
 	}
 	if ($Export -eq 'Excel') {
 		$ExcelOptions = @{
