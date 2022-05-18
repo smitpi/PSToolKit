@@ -24,7 +24,6 @@ Get-Help about_PSToolKit
 Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit)
  
 ## Functions
-- [Get-BinRoot](https://smitpi.github.io/PSToolKit/#Get-BinRoot) -- Get-ToolsLocation
 - [Add-ChocolateyPrivateRepo](https://smitpi.github.io/PSToolKit/#Add-ChocolateyPrivateRepo) -- Add a private repository to Chocolatey.
 - [Backup-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#Backup-ElevatedShortcut) -- Exports the RunAss shortcuts, to a zip file
 - [Backup-PowerShellProfile](https://smitpi.github.io/PSToolKit/#Backup-PowerShellProfile) -- Creates a zip file from the ps profile directories
@@ -34,7 +33,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Edit-PSModulesList](https://smitpi.github.io/PSToolKit/#Edit-PSModulesList) -- Edit the Modules json files.
 - [Edit-SSHConfigFile](https://smitpi.github.io/PSToolKit/#Edit-SSHConfigFile) -- Creates and modifies the ssh config file in their profile.
 - [Enable-RemoteHostPSRemoting](https://smitpi.github.io/PSToolKit/#Enable-RemoteHostPSRemoting) -- enable ps remote remotely
-- [Export-CitrixPolicySetting](https://smitpi.github.io/PSToolKit/#Export-CitrixPolicySetting) -- Citrix policy export.
 - [Export-ESXTemplate](https://smitpi.github.io/PSToolKit/#Export-ESXTemplate) -- Export all VM Templates from vSphere to local disk.
 - [Export-PSGallery](https://smitpi.github.io/PSToolKit/#Export-PSGallery) -- Export details of all modules and scripts on psgallery to excel
 - [Find-ChocolateyApp](https://smitpi.github.io/PSToolKit/#Find-ChocolateyApp) -- Search the online repo for software
@@ -43,6 +41,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Format-AllObjectsInAListView](https://smitpi.github.io/PSToolKit/#Format-AllObjectsInAListView) -- Cast an array or psobject and display it in list view
 - [Get-AllUsersInGroup](https://smitpi.github.io/PSToolKit/#Get-AllUsersInGroup) -- Get details of all users in a group
 - [Get-CitrixClientVersion](https://smitpi.github.io/PSToolKit/#Get-CitrixClientVersion) -- Report on the CItrix workspace versions the users are using.
+- [Get-CitrixPolicies](https://smitpi.github.io/PSToolKit/#Get-CitrixPolicies) -- Export Citrix Policies
 - [Get-CommandFiltered](https://smitpi.github.io/PSToolKit/#Get-CommandFiltered) -- Finds commands on the system and sort it according to module
 - [Get-DeviceUptime](https://smitpi.github.io/PSToolKit/#Get-DeviceUptime) -- Calculates the uptime of a system
 - [Get-FolderSize](https://smitpi.github.io/PSToolKit/#Get-FolderSize) -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option

@@ -5,34 +5,35 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-SoftwareAudit
+# Get-CitrixPolicies
 
 ## SYNOPSIS
-Connects to a remote hosts and collect installed software details
+Export Citrix Policies
 
 ## SYNTAX
 
 ```
-Get-SoftwareAudit [-ComputerName] <String[]> [[-Export] <String>] [[-ReportPath] <String>] [<CommonParameters>]
+Get-CitrixPolicies [-Controller] <String> [[-Export] <String>] [[-ReportPath] <DirectoryInfo>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Connects to a remote hosts and collect installed software details
+Export Citrix Policies
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-SoftwareAudit -ComputerName Neptune -Export Excel
+Get-CitrixPolicies -Controller $ctxddc
 ```
 
 ## PARAMETERS
 
-### -ComputerName
-Name of the computers that will be audited
+### -Controller
+Name of the DDC
 
 ```yaml
-Type: String[]
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -44,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -Export
-Export the results to excel or html
+Export result to excel, html
 
 ```yaml
 Type: String
@@ -59,16 +60,16 @@ Accept wildcard characters: False
 ```
 
 ### -ReportPath
-Path to save the report.
+Where to save the report.
 
 ```yaml
-Type: String
+Type: DirectoryInfo
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 3
-Default value: "$env:TEMP"
+Default value: C:\Temp
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -80,6 +81,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.Object[]
 ## NOTES
 
 ## RELATED LINKS

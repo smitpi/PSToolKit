@@ -108,8 +108,14 @@ $Description
 .DESCRIPTION
 $Description
 
+.PARAMETER Export
+Export the result to a report file. (Excel or html). Or select Host to display the object on screen.
+
+.PARAMETER ReportPath
+Where to save the report.
+
 .EXAMPLE
-$properverb-$propernoun
+$properverb-$propernoun -Export HTML -ReportPath C:\temp
 
 #>
 Function $properverb-$propernoun {
@@ -119,22 +125,22 @@ Function $properverb-$propernoun {
 					[Parameter(Mandatory = `$true)]
 					[Parameter(ParameterSetName = 'Set1')]
 					[ValidateScript( { (Test-Path `$_) -and ((Get-Item `$_).Extension -eq ".csv") })]
-					[System.IO.FileInfo]`$InputObject = "c:\temp\tmp.csv",
+					[System.IO.FileInfo]`$InputObject,
 
 					[ValidateNotNullOrEmpty()]
 					[string]`$Username,
 
-					[ValidateSet('Excel', 'HTML')]
+					[ValidateSet('Excel', 'HTML', 'Host')]
 					[string]`$Export = 'Host',
 
                 	[ValidateScript( { if (Test-Path `$_) { `$true }
                                 else { New-Item -Path `$_ -ItemType Directory -Force | Out-Null; `$true }
-                        })]
+                    })]
                 	[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp',
 
 					[ValidateScript({`$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
             						if (`$IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {`$True}
-            						else {Throw "Must be running an elevated prompt to use ClearARPCache"}})]
+            						else {Throw "Must be running an elevated prompt to use this function"}})]
         			[switch]`$ClearARPCache,
 					
         			[ValidateScript({if (Test-Connection -ComputerName `$_ -Count 2 -Quiet) {`$true}
