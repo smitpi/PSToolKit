@@ -62,53 +62,75 @@ Start-PSScriptAnalyzer -Path C:\temp
 
 #>
 Function Start-PSScriptAnalyzer {
-	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Start-PSScriptAnalyzer')]
+	[Cmdletbinding(DefaultParameterSetName = 'ExDef', HelpURI = 'https://smitpi.github.io/PSToolKit/Start-PSScriptAnalyzer')]
 	[OutputType([System.Object[]])]
 	PARAM(
 		[Parameter(Mandatory = $true)]
+		[Parameter(ParameterSetName = 'ExDef')]
+		[Parameter(ParameterSetName = 'ExCus')]
 		[ValidateScript( { if (Test-Path $_) { $true }
 				else {throw 'Not a valid path'}
 				$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {$True}
 				else {Throw 'Must be running an elevated prompt to use ClearARPCache'}})]
 		[System.IO.DirectoryInfo[]]$Paths,
+
+		[Parameter(ParameterSetName = 'ExCus')]
 		[String[]]$ExcludeRules,
+
+		[Parameter(ParameterSetName = 'ExDef')]
+		[switch]$ExcludeDefault = $false,
+
+		[Parameter(ParameterSetName = 'ExDef')]
+		[Parameter(ParameterSetName = 'ExCus')]
 		[ValidateSet('Excel', 'HTML')]
 		[string]$Export = 'Host',
+
 		[ValidateScript( { if (Test-Path $_) { $true }
 				else { New-Item -Path $_ -ItemType Directory -Force | Out-Null; $true }
 			})]
+		[Parameter(ParameterSetName = 'ExDef')]
+		[Parameter(ParameterSetName = 'ExCus')]
 		[System.IO.DirectoryInfo]$ReportPath = 'C:\Temp'
 	)
 
-	[System.Collections.ArrayList]$ScriptAnalyzerIssues = @()
-foreach ($path in $paths) {
-    $Listissues = $null
-	Write-Color '[Starting]', 'PSScriptAnalyzer', " on ", "$($path)"  -Color Yellow, Cyan, Green,Cyan -LinesBefore 2 -LinesAfter 1
-	if ($ExcludeRules -like $null) {
-        Get-ChildItem -Path "$($path)\*.ps1" -Recurse | ForEach-Object {
-            Write-Color "[Processing]", " $($_.Name)" -Color Yellow,Cyan
-            Invoke-ScriptAnalyzer -Path $_.FullName -IncludeDefaultRules -Severity Information,warning,error -Fix -OutVariable tmp | Out-Null
-            $Listissues = $Listissues + $tmp
-        }
- } else {
-        Get-ChildItem -Path "$($path)\*.ps1" -Recurse | ForEach-Object {
-            Write-Color "[Processing]", " $($_.Name)" -Color Yellow,Cyan
-            Invoke-ScriptAnalyzer -Path $_.FullName -IncludeDefaultRules -Severity Information,warning,error -Fix -OutVariable tmp -ExcludeRule $ExcludeRules | Out-Null
-            $Listissues = $Listissues + $tmp
-        }
+	if ($ExcludeDefault) {
+		$ExcludeRules = @(
+			'PSAvoidTrailingWhitespace',
+			'PSUseShouldProcessForStateChangingFunctions',
+			'PSAvoidUsingWriteHost',
+			'PSUseSingularNouns'
+		)
 	}
 
-	foreach ($item in $Listissues) {
-		[void]$ScriptAnalyzerIssues.Add([PSCustomObject]@{
-				File     = $item.scriptname
-				RuleName = $item.RuleName
-				line     = $item.line
-				Message  = $item.Message
-			})
+	[System.Collections.ArrayList]$ScriptAnalyzerIssues = @()
+	foreach ($path in $paths) {
+		$Listissues = $null
+		Write-Color '[Starting]', 'PSScriptAnalyzer', ' on ', "$($path)" -Color Yellow, Cyan, Green, Cyan -LinesBefore 2 -LinesAfter 1
+		if ($ExcludeRules -like $null) {
+			Get-ChildItem -Path "$($path)\*.ps1" -Recurse | ForEach-Object {
+				Write-Color '[Processing]', " $($_.Name)" -Color Yellow, Cyan
+				Invoke-ScriptAnalyzer -Path $_.FullName -IncludeDefaultRules -Severity Information, warning, error -Fix -OutVariable tmp | Out-Null
+				$Listissues = $Listissues + $tmp
+			}
+		} else {
+			Get-ChildItem -Path "$($path)\*.ps1" -Recurse | ForEach-Object {
+				Write-Color '[Processing]', " $($_.Name)" -Color Yellow, Cyan
+				Invoke-ScriptAnalyzer -Path $_.FullName -IncludeDefaultRules -Severity Information, warning, error -Fix -OutVariable tmp -ExcludeRule $ExcludeRules | Out-Null
+				$Listissues = $Listissues + $tmp
+			}
+		}
+
+		foreach ($item in $Listissues) {
+			[void]$ScriptAnalyzerIssues.Add([PSCustomObject]@{
+					File     = $item.scriptname
+					RuleName = $item.RuleName
+					line     = $item.line
+					Message  = $item.Message
+				})
+		}
+		#endregion
 	}
-	#endregion
-}
 
 	if ($Export -eq 'Excel') { $ScriptAnalyzerIssues | Export-Excel -Path $(Join-Path -Path $ReportPath -ChildPath "\PSScriptAnalyzer-$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx") -WorksheetName ScriptAnalyzer -AutoSize -AutoFilter -BoldTopRow -FreezeTopRow -PivotTableName Summery -PivotRows RuleName -PivotData Message}
 	if ($Export -eq 'HTML') {

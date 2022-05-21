@@ -310,14 +310,18 @@ Function Set-PSProjectFile {
 		$file = [System.Collections.Generic.List[string]]::new()
 		$file.add('#region Private Functions')
 		foreach ($privateitem in $private) {
+			$file.add("#region $($privateitem.name)")
 			$file.Add('########### Private Function ###############')
 			$file.Add("# source: $($privateitem.name)")
 			$file.Add("# Module: $($module.Name)")
 			$file.Add('############################################')
 			Write-Color '[Processing]: ', $($privateitem.name) -Color Cyan, Yellow
 			Get-Content $privateitem.fullname | ForEach-Object { $file.add($_) }
+			$file.add('#endregion')
 		}
 		$file.add('#endregion')
+		$file.Add(' ')
+		$file.Add(' ')
 		$file.add('#region Public Functions')
 		foreach ($publicitem in $public) {
 			$file.add("#region $($publicitem.name)")
@@ -341,7 +345,6 @@ Function Set-PSProjectFile {
 		}
 		$file.add('#endregion')
         $file.Add(' ')
-        #(Select-String -Path $public -Pattern "New-Alias").Line | ForEach-Object { $file.Add($_) }
 		$file | Set-Content -Path $rootModule -Encoding utf8 -Force
 
 		$versionfile = [System.Collections.Generic.List[PSObject]]::New()

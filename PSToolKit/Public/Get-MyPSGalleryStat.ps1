@@ -65,35 +65,37 @@ Function Get-MyPSGalleryStat {
         [Switch]$OpenProfilePage
     )
 
-    if ($OpenProfilePage) {{Start-Process 'https://www.powershellgallery.com/profiles/smitpi'}}
-    $ModLists = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray')
+    if ($OpenProfilePage) {Start-Process 'https://www.powershellgallery.com/profiles/smitpi'}
+    else {
+        $ModLists = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray')
 
-    [System.Collections.ArrayList]$newObject = @()
-    $TotalDownloads = 0
+        [System.Collections.ArrayList]$newObject = @()
+        $TotalDownloads = 0
 
-    foreach ($Mod in $ModLists) {
-        Write-Color '[Collecting]', ' data for ', $($mod) -Color yellow, Green, Cyan
-        $ResultModule = Find-Module $mod -Repository PSGallery
-        $TotalDownloads = $TotalDownloads + [int]$ResultModule.AdditionalMetadata.downloadCount
-        [void]$newObject.Add([PSCustomObject]@{
-                Sum            = [PSCustomObject]@{
-                    Name            = $ResultModule.Name
-                    Version         = $ResultModule.Version
-                    Date            = [datetime]$ResultModule.AdditionalMetadata.published
-                    TotalDownload   = $ResultModule.AdditionalMetadata.downloadCount
-                    VersionDownload = $ResultModule.AdditionalMetadata.versionDownloadCount
-                }
-                All            = $ResultModule
-                TotalDownloads = $TotalDownloads
-            })
+        foreach ($Mod in $ModLists) {
+            Write-Color '[Collecting]', ' data for ', $($mod) -Color yellow, Green, Cyan
+            $ResultModule = Find-Module $mod -Repository PSGallery
+            $TotalDownloads = $TotalDownloads + [int]$ResultModule.AdditionalMetadata.downloadCount
+            [void]$newObject.Add([PSCustomObject]@{
+                    Sum            = [PSCustomObject]@{
+                        Name            = $ResultModule.Name
+                        Version         = $ResultModule.Version
+                        Date            = [datetime]$ResultModule.AdditionalMetadata.published
+                        TotalDownload   = $ResultModule.AdditionalMetadata.downloadCount
+                        VersionDownload = $ResultModule.AdditionalMetadata.versionDownloadCount
+                    }
+                    All            = $ResultModule
+                    TotalDownloads = $TotalDownloads
+                })
+        }
+
+        if ($Display -like 'GridView') {$newObject.Sum | ConvertTo-WPFGrid}
+        if ($Display -like 'TableView') {
+            Write-Color 'Total Downloads: ', "$(($newObject.TotalDownloads | Sort-Object -Descending)[0])" -Color Cyan, yellow -LinesBefore 1
+            $newObject.Sum | Sort-Object -Property VersionDownload -Descending | Format-Table -AutoSize
+        }
+        if ($Display -like 'Host') {$newObject}
     }
-
-    if ($Display -like 'GridView') {$newObject.Sum | ConvertTo-WPFGrid}
-    if ($Display -like 'TableView') {
-        Write-Color 'Total Downloads: ', "$(($newObject.TotalDownloads | Sort-Object -Descending)[0])" -Color Cyan, yellow -LinesBefore 1
-        $newObject.Sum | Sort-Object -Property VersionDownload -Descending | Format-Table -AutoSize
-    }
-    if ($Display -like 'Host') {$newObject}
 } #end Function
 
 

@@ -12,9 +12,16 @@ Run and report ScriptAnalyzer output
 
 ## SYNTAX
 
+### ExDef (Default)
 ```
-Start-PSScriptAnalyzer [-Paths] <DirectoryInfo[]> [[-ExcludeRules] <String[]>] [[-Export] <String>]
- [[-ReportPath] <DirectoryInfo>] [<CommonParameters>]
+Start-PSScriptAnalyzer [-Paths <DirectoryInfo[]>] [-ExcludeDefault] [-Export <String>]
+ [-ReportPath <DirectoryInfo>] [<CommonParameters>]
+```
+
+### ExCus
+```
+Start-PSScriptAnalyzer [-Paths <DirectoryInfo[]>] [-ExcludeRules <String[]>] [-Export <String>]
+ [-ReportPath <DirectoryInfo>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,8 +44,8 @@ Type: DirectoryInfo[]
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 1
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -49,12 +56,27 @@ Exclude rules from report.
 
 ```yaml
 Type: String[]
-Parameter Sets: (All)
+Parameter Sets: ExCus
 Aliases:
 
 Required: False
-Position: 2
+Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ExcludeDefault
+{{ Fill ExcludeDefault Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: ExDef
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -68,7 +90,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: Named
 Default value: Host
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -83,7 +105,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: Named
 Default value: C:\Temp
 Accept pipeline input: False
 Accept wildcard characters: False
