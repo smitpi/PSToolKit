@@ -143,7 +143,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'Updated [21/05/2022_14:58] Added functionality to add credentials to the configfile for importing.'
+        ReleaseNotes = 'Updated [21/05/2022_14:58] More personl scripts'
 
         # Prerelease string of this module
         # Prerelease = ''

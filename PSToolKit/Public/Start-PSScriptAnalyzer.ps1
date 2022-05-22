@@ -48,8 +48,11 @@ Run and report ScriptAnalyzer output
 .PARAMETER Paths
 Path to ps1 files
 
+.PARAMETER ExcludeDefault
+Will exclude these rules: PSAvoidTrailingWhitespace,PSUseShouldProcessForStateChangingFunctions,PSAvoidUsingWriteHost,PSUseSingularNouns
+
 .PARAMETER ExcludeRules
-Exclude rules from report.
+Exclude rules from report. Specify your own list.
 
 .PARAMETER Export
 Export results
