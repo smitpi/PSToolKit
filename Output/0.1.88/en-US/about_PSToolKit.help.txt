@@ -80,6 +80,7 @@ Functions in this module:
 	 Start-PSScriptAnalyzer -- Run and report ScriptAnalyzer output
 	 Start-PSToolkitSystemInitialize -- Initialize a blank machine.
 	 Test-CitrixCloudConnector -- Perform basic connection tests to CItrix cloud.
+	 Test-IsFileOpen -- Checks if a file is open
 	 Test-PendingReboot -- This script tests various registry values to see if the local computer is pending a reboot.
 	 Test-PSRemote -- Test PSb Remote to a device.
 	 Update-ListOfDDC -- Update list of ListOfDDCs in the registry

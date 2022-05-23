@@ -53,6 +53,7 @@ Accept wildcard characters: False
 
 ### -ExcludeRules
 Exclude rules from report.
+Specify your own list.
 
 ```yaml
 Type: String[]
@@ -67,7 +68,7 @@ Accept wildcard characters: False
 ```
 
 ### -ExcludeDefault
-{{ Fill ExcludeDefault Description }}
+Will exclude these rules: PSAvoidTrailingWhitespace,PSUseShouldProcessForStateChangingFunctions,PSAvoidUsingWriteHost,PSUseSingularNouns
 
 ```yaml
 Type: SwitchParameter
