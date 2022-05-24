@@ -51,6 +51,9 @@ Checks if a file is open
 .PARAMETER Path
 Path to the file to check.
 
+.PARAMETER FilterOpen
+Only show open files.
+
 .EXAMPLE
 dir | Test-IsFileOpen
 
@@ -87,8 +90,7 @@ Function Test-IsFileOpen {
 				}
 				if ($FilterOpen) {
 					if ($result.IsLocked -eq $True) {$result}
-				}
-				else {$result}
+				} else {$result}
 			}
 		}
 	}

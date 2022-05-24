@@ -13,7 +13,7 @@ Checks if a file is open
 ## SYNTAX
 
 ```
-Test-IsFileOpen [-Path] <String[]> [<CommonParameters>]
+Test-IsFileOpen [-Path] <String[]> [-FilterOpen] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,13 +23,13 @@ Checks if a file is open
 
 ### EXAMPLE 1
 ```
-Test-IsFileOpen -Path c:\temp\tmp.log
+dir | Test-IsFileOpen
 ```
 
 ## PARAMETERS
 
 ### -Path
-{{ Fill Path Description }}
+Path to the file to check.
 
 ```yaml
 Type: String[]
@@ -40,6 +40,21 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -FilterOpen
+Only show open files.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
