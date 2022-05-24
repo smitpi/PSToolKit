@@ -2,427 +2,427 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://smitpi.github.io/PSToolKit/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Add-ChocolateyPrivateRepo/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Backup-ElevatedShortcut/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Backup-PowerShellProfile/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Connect-VMWareCluster/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Edit-ChocolateyAppsList/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Edit-HostsFile/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Edit-PSModulesList/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Edit-SSHConfigFile/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Enable-RemoteHostPSRemoting/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Export-ESXTemplate/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Export-PSGallery/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Find-ChocolateyApp/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Find-OnlineModule/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Find-OnlineScript/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Format-AllObjectsInAListView/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Get-AllUsersInGroup/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Get-CitrixClientVersion/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Get-CitrixPolicies/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Get-CommandFiltered/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Get-DeviceUptime/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Get-FQDN/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Get-FolderSize/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Get-FullADUserDetail/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Get-MyPSGalleryStat/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Get-ProcessPerformance/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Get-PropertiesToCSV/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Get-SoftwareAudit/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Get-SystemInfo/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Get-WinEventLogExtract/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Import-CitrixSiteConfigFile/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Import-XamlConfigFile/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Install-BGInfo/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Install-ChocolateyApp/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Install-ChocolateyClient/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Install-ChocolateyServer/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Install-MSUpdate/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Install-MSWinget/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Install-MicrosoftTerminal/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Install-NFSClient/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Install-PSModule/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Install-PowerShell7x/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Install-RSAT/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Install-VMWareTool/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/New-CitrixSiteConfigFile/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/New-ElevatedShortcut/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/New-GodModeFolder/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/New-GoogleSearch/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/New-PSModule/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/New-PSProfile/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/New-PSScript/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/New-RemoteDesktopFile/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/New-SuggestedInfraName/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Remove-CIMUserProfile/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Remove-FaultyProfileList/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Remove-HiddenDevice/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Remove-UserProfile/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Reset-PSGallery/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Restore-ElevatedShortcut/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Search-Script/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Set-PSProjectFile/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Set-PSToolKitSystemSetting/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Set-SharedPSProfile/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Set-StaticIP/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Set-TempFolder/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Set-WindowsAutoLogin/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Show-ComputerManagement/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Show-PSToolKit/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Start-PSModuleMaintenance/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Start-PSProfile/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Start-PSRoboCopy/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Start-PSScriptAnalyzer/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Start-PSToolkitSystemInitialize/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Test-CitrixCloudConnector/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Test-IsFileOpen/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Test-PSRemote/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Test-PendingReboot/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Update-ListOfDDC/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Update-LocalHelp/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Update-PSModuleInfo/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Update-PSToolKit/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Update-PSToolKitConfigFile/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Write-Ascii/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Write-PSToolKitLog/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Write-PSToolKitMessage/</loc>
-         <lastmod>2022-05-23</lastmod>
+         <lastmod>2022-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
