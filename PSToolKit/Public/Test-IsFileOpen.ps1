@@ -49,9 +49,11 @@ Checks if a file is open
 Checks if a file is open
 
 .PARAMETER Path
+Path to the file to check.
 
 .EXAMPLE
-Test-IsFileOpen -Path c:\temp\tmp.log
+dir | Test-IsFileOpen
+
 
 #>
 Function Test-IsFileOpen {
@@ -63,7 +65,8 @@ Function Test-IsFileOpen {
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
 				else { Throw 'Must be running an elevated prompt.' } })]
 		[Alias('FullName')]
-		[string[]]$Path
+		[string[]]$Path,
+		[switch]$FilterOpen = $False
 	)
 	Process {
 		ForEach ($Item in $Path) {
@@ -76,15 +79,16 @@ Function Test-IsFileOpen {
 					$FileStream.Close()
 					$FileStream.Dispose()
 					$IsLocked = $False
-				} Catch [System.UnauthorizedAccessException] {
-					$IsLocked = 'AccessDenied'
-				} Catch {
-					$IsLocked = $True
-				}
-				[pscustomobject]@{
+				} Catch [System.UnauthorizedAccessException] {$IsLocked = 'AccessDenied'}
+				Catch { $IsLocked = $True}
+				$result = [pscustomobject]@{
 					File     = $Item
 					IsLocked = $IsLocked
 				}
+				if ($FilterOpen) {
+					if ($result.IsLocked -eq $True) {$result}
+				}
+				else {$result}
 			}
 		}
 	}
