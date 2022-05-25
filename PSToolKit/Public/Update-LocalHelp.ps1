@@ -55,9 +55,9 @@ function Update-LocalHelp {
     PARAM()
 
     Start-Job -Name UpdateHelp -ScriptBlock {
-        if ((Test-Path $profile) -eq $false ) {
+        if ((Test-Path $using:profile) -eq $false ) {
             Write-Warning 'Profile does not exist, creating file.'
-            New-Item -ItemType File -Path $Profile -Force
+            New-Item -ItemType File -Path $using:Profile -Force
             $psfolder = (Get-Item $profile).DirectoryName
         } else { $psfolder = (Get-Item $profile).DirectoryName }
         if ((Test-Path -Path $psfolder\Help) -eq $false) { New-Item -Path "$psfolder\Help" -ItemType Directory -Force -ErrorAction SilentlyContinue }
