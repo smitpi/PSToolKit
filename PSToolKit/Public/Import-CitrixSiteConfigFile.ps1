@@ -58,8 +58,8 @@ Function Import-CitrixSiteConfigFile {
 	PARAM(
 		[Parameter(Mandatory = $false, Position = 0)]
 		[ValidateScript( { (Test-Path $_) -and ((Get-Item $_).Extension -eq '.json') })]
-		[string]$CitrixSiteConfigFilePath = (Get-Item $profile).DirectoryName + '\Config\CTXSiteConfig.json'
-	)
+		[System.IO.FileInfo]$CitrixSiteConfigFilePath 
+		)
 
 	$JSONParameter = Get-Content ($CitrixSiteConfigFilePath) | ConvertFrom-Json
 	$JSONParameter.PSObject.Properties | Where-Object { $_.name -notlike 'CTXServers' } | ForEach-Object { Write-Color $_.name, ':', $_.value -Color DarkYellow, DarkCyan, Green -ShowTime }

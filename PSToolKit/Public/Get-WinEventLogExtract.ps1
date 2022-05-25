@@ -154,7 +154,6 @@ Function Get-WinEventLogExtract {
 
             New-HTML -TitleText "WinEvents-$(Get-Date -Format yyyy.MM.dd-HH.mm)" -FilePath $HTMLPath {
                     New-HTMLHeader {
-                        #New-HTMLText -FontSize 28 -FontStyle oblique -Color '#00203F' -Alignment center -Text "$(($_.host).ToUpper())"
                         New-HTMLText -FontSize 20 -FontStyle oblique -Color '#00203F' -Alignment center -Text "Date Collected: $(Get-Date)"
                     }
                    $AllEvents | ForEach-Object {

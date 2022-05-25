@@ -1,7 +1,8 @@
 # PSToolKit
  
 ## Description
-Powershell Scripts and functions for a system administrator
+a Repository of my random scripts and functions writen over the years, 
+there is a wyde range of tools in this module, used by a SysAdmin and EUC Administrator
  
 ## Getting Started
 - Install from PowerShell Gallery [PS Gallery](https://www.powershellgallery.com/packages/PSToolKit)
@@ -83,6 +84,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Reset-PSGallery](https://smitpi.github.io/PSToolKit/#Reset-PSGallery) -- Reset gallery to degault settings
 - [Restore-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#Restore-ElevatedShortcut) -- Restore the RunAss shortcuts, from a zip file
 - [Search-Script](https://smitpi.github.io/PSToolKit/#Search-Script) -- Search for a string in a directory of ps1 scripts.
+- [Set-FolderCustomIcon](https://smitpi.github.io/PSToolKit/#Set-FolderCustomIcon) -- Will change the icon of a folder to a custom selected icon
 - [Set-PSToolKitSystemSetting](https://smitpi.github.io/PSToolKit/#Set-PSToolKitSystemSetting) -- Set multiple settings on desktop or server
 - [Set-SharedPSProfile](https://smitpi.github.io/PSToolKit/#Set-SharedPSProfile) -- Redirects PowerShell profile to network share.
 - [Set-StaticIP](https://smitpi.github.io/PSToolKit/#Set-StaticIP) -- Set static IP on device

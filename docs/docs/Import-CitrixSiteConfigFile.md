@@ -13,7 +13,7 @@ Import the Citrix config file, and created a variable with the details
 ## SYNTAX
 
 ```
-Import-CitrixSiteConfigFile [[-CitrixSiteConfigFilePath] <String>] [<CommonParameters>]
+Import-CitrixSiteConfigFile [[-CitrixSiteConfigFilePath] <FileInfo>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,13 +32,13 @@ Import-CitrixSiteConfigFile -CitrixSiteConfigFilePath c:\temp\CTXSiteConfig.json
 Path to config file
 
 ```yaml
-Type: String
+Type: FileInfo
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 1
-Default value: (Get-Item $profile).DirectoryName + '\Config\CTXSiteConfig.json'
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
