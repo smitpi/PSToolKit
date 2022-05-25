@@ -35,19 +35,25 @@ Created [26/10/2021_22:32] Initial Script Creating
 <#
 
 .DESCRIPTION
- All a config file with Citrix server details. To be imported as variables.
+A config file with Citrix server details and URLs. To be used in scripts.
 
 #>
 
 <#
 .SYNOPSIS
- All a config file with Citrix server details. To be imported as variables.
+A config file with Citrix server details and URLs. To be used in scripts.
 
 .DESCRIPTION
- All a config file with Citrix server details. To be imported as variables.
+A config file with Citrix server details and URLs. To be used in scripts. Use the function Import-CitrixSiteConfigFile to create variables from the config.
+
+.PARAMETER ConfigName
+A Unique name for the site / farm.
+
+.PARAMETER Path
+Where the config file will be saved.
 
 .EXAMPLE
-New-CitrixSiteConfigFile
+New-CitrixSiteConfigFile -ConfigName TestFarm -Path C:\Tiles
 
 #>
 Function New-CitrixSiteConfigFile {

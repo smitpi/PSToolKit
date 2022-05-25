@@ -4512,11 +4512,11 @@
       <command:verb>New</command:verb>
       <command:noun>CitrixSiteConfigFile</command:noun>
       <maml:description>
-        <maml:para>All a config file with Citrix server details. To be imported as variables.</maml:para>
+        <maml:para>A config file with Citrix server details and URLs. To be used in scripts.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>All a config file with Citrix server details. To be imported as variables.</maml:para>
+      <maml:para>A config file with Citrix server details and URLs. To be used in scripts. Use the function Import-CitrixSiteConfigFile to create variables from the config.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4524,7 +4524,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>ConfigName</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ConfigName Description }}</maml:para>
+            <maml:para>A Unique name for the site / farm.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4536,7 +4536,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>Path</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Path Description }}</maml:para>
+            <maml:para>Where the config file will be saved.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
           <dev:type>
@@ -4551,7 +4551,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>ConfigName</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ConfigName Description }}</maml:para>
+          <maml:para>A Unique name for the site / farm.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4563,7 +4563,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>Path</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Path Description }}</maml:para>
+          <maml:para>Where the config file will be saved.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
         <dev:type>
@@ -4583,7 +4583,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>New-CitrixSiteConfigFile</dev:code>
+        <dev:code>New-CitrixSiteConfigFile -ConfigName TestFarm -Path C:\Tiles</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>

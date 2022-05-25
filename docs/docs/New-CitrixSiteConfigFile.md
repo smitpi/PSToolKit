@@ -8,8 +8,8 @@ schema: 2.0.0
 # New-CitrixSiteConfigFile
 
 ## SYNOPSIS
-All a config file with Citrix server details.
-To be imported as variables.
+A config file with Citrix server details and URLs.
+To be used in scripts.
 
 ## SYNTAX
 
@@ -18,20 +18,21 @@ New-CitrixSiteConfigFile [-ConfigName] <String> [[-Path] <DirectoryInfo>] [<Comm
 ```
 
 ## DESCRIPTION
-All a config file with Citrix server details.
-To be imported as variables.
+A config file with Citrix server details and URLs.
+To be used in scripts.
+Use the function Import-CitrixSiteConfigFile to create variables from the config.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-New-CitrixSiteConfigFile
+New-CitrixSiteConfigFile -ConfigName TestFarm -Path C:\Tiles
 ```
 
 ## PARAMETERS
 
 ### -ConfigName
-{{ Fill ConfigName Description }}
+A Unique name for the site / farm.
 
 ```yaml
 Type: String
@@ -46,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-{{ Fill Path Description }}
+Where the config file will be saved.
 
 ```yaml
 Type: DirectoryInfo

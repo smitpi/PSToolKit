@@ -1802,21 +1802,22 @@
 
 <h1 id="new-citrixsiteconfigfile">New-CitrixSiteConfigFile</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>All a config file with Citrix server details.
-To be imported as variables.</p>
+<p>A config file with Citrix server details and URLs.
+To be used in scripts.</p>
 <h2 id="syntax">SYNTAX</h2>
 <div class="highlight"><pre><span></span><code>New-CitrixSiteConfigFile [-ConfigName] &lt;String&gt; [[-Path] &lt;DirectoryInfo&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
-<p>All a config file with Citrix server details.
-To be imported as variables.</p>
+<p>A config file with Citrix server details and URLs.
+To be used in scripts.
+Use the function Import-CitrixSiteConfigFile to create variables from the config.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>New-CitrixSiteConfigFile
+<div class="highlight"><pre><span></span><code>New-CitrixSiteConfigFile -ConfigName TestFarm -Path C:\Tiles
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-configname">-ConfigName</h3>
-<p>{{ Fill ConfigName Description }}</p>
+<p>A Unique name for the site / farm.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
@@ -1828,7 +1829,7 @@ To be imported as variables.</p>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
 <h3 id="-path">-Path</h3>
-<p>{{ Fill Path Description }}</p>
+<p>Where the config file will be saved.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DirectoryInfo</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>

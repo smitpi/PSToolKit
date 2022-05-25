@@ -52,7 +52,7 @@ Functions in this module:
 	 Install-PSModule -- Install modules from .json file.
 	 Install-RSAT -- Install Remote Admin Tools
 	 Install-VMWareTool -- Install vmware tools from chocolatety
-	 New-CitrixSiteConfigFile -- All a config file with Citrix server details. To be imported as variables.
+	 New-CitrixSiteConfigFile -- A config file with Citrix server details and URLs. To be used in scripts.
 	 New-ElevatedShortcut -- Creates a shortcut to a script or exe that runs as admin, without UNC
 	 New-GodModeFolder -- Creates a God Mode Folder
 	 New-GoogleSearch -- Start a new browser tab with search string.
