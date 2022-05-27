@@ -43,7 +43,6 @@ Created [27/05/2022_08:34] Initial Script Creating
 
 #> 
 
-
 <#
 .SYNOPSIS
 Compare two users AD group memberships
@@ -51,14 +50,20 @@ Compare two users AD group memberships
 .DESCRIPTION
 Compare two users AD group memberships
 
-.PARAMETER Export
-Export the result to a report file. (Excel or html). Or select Host to display the object on screen.
+.PARAMETER ReferenceUser
+First user name.
 
-.PARAMETER ReportPath
-Where to save the report.
+.PARAMETER DifferenceUser
+Second user name
+
+.PARAMETER DomainFQDN
+Domain to search
+
+.PARAMETER DomainCredential
+Userid to connect to that domain.
 
 .EXAMPLE
-Compare-ADMembership -Export HTML -ReportPath C:\temp
+$compare = Compare-ADMembership -ReferenceUser ps -DifferenceUser ctxuser1
 
 #>
 Function Compare-ADMembership {

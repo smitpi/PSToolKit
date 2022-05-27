@@ -31,13 +31,13 @@ Compare two users AD group memberships
 
 ### EXAMPLE 1
 ```
-Compare-ADMembership -Export HTML -ReportPath C:\temp
+$compare = Compare-ADMembership -ReferenceUser ps -DifferenceUser ctxuser1
 ```
 
 ## PARAMETERS
 
 ### -ReferenceUser
-{{ Fill ReferenceUser Description }}
+First user name.
 
 ```yaml
 Type: String
@@ -52,7 +52,7 @@ Accept wildcard characters: False
 ```
 
 ### -DifferenceUser
-{{ Fill DifferenceUser Description }}
+Second user name
 
 ```yaml
 Type: String
@@ -67,7 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -DomainFQDN
-{{ Fill DomainFQDN Description }}
+Domain to search
 
 ```yaml
 Type: String
@@ -82,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -DomainCredential
-{{ Fill DomainCredential Description }}
+Userid to connect to that domain.
 
 ```yaml
 Type: PSCredential

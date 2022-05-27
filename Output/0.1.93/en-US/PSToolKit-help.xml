@@ -320,7 +320,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ReferenceUser</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ReferenceUser Description }}</maml:para>
+            <maml:para>First user name.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -332,7 +332,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>DifferenceUser</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DifferenceUser Description }}</maml:para>
+            <maml:para>Second user name</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -344,7 +344,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>DomainFQDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DomainFQDN Description }}</maml:para>
+            <maml:para>Domain to search</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -356,7 +356,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>DomainCredential</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DomainCredential Description }}</maml:para>
+            <maml:para>Userid to connect to that domain.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
           <dev:type>
@@ -371,7 +371,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ReferenceUser</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ReferenceUser Description }}</maml:para>
+          <maml:para>First user name.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -383,7 +383,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>DifferenceUser</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DifferenceUser Description }}</maml:para>
+          <maml:para>Second user name</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -395,7 +395,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>DomainFQDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DomainFQDN Description }}</maml:para>
+          <maml:para>Domain to search</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -407,7 +407,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>DomainCredential</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DomainCredential Description }}</maml:para>
+          <maml:para>Userid to connect to that domain.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
         <dev:type>
@@ -436,7 +436,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Compare-ADMembership -Export HTML -ReportPath C:\temp</dev:code>
+        <dev:code>$compare = Compare-ADMembership -ReferenceUser ps -DifferenceUser ctxuser1</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
