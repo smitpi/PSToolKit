@@ -43,13 +43,13 @@ Created [26/10/2021_22:32] Initial Script Creating
 
 <#
 .SYNOPSIS
-Exstact user details from the domain
+Extract user details from the domain
 
 .DESCRIPTION
-Exstact user details from the domain
+Extract user details from the domain
 
 .PARAMETER UserToQuery
-User id to searh for.
+User id to search for.
 
 .PARAMETER DomainFQDN
 Domain to search

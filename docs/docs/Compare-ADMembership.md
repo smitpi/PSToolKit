@@ -5,39 +5,54 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-FullADUserDetail
+# Compare-ADMembership
 
 ## SYNOPSIS
-Extract user details from the domain
+Compare two users AD group memberships
 
 ## SYNTAX
 
 ### CurrentDomain (Default)
 ```
-Get-FullADUserDetail [-UserToQuery <String>] [-DomainFQDN <String>] [-DomainCredential <PSCredential>]
- [<CommonParameters>]
+Compare-ADMembership [-ReferenceUser <String>] [-DifferenceUser <String>] [-DomainFQDN <String>]
+ [-DomainCredential <PSCredential>] [<CommonParameters>]
 ```
 
 ### OtherDomain
 ```
-Get-FullADUserDetail [-UserToQuery <String>] [-DomainFQDN <String>] [-DomainCredential <PSCredential>]
- [<CommonParameters>]
+Compare-ADMembership [-ReferenceUser <String>] [-DifferenceUser <String>] [-DomainFQDN <String>]
+ [-DomainCredential <PSCredential>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Extract user details from the domain
+Compare two users AD group memberships
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-FullADUserDetail -UserToQuery ps
+Compare-ADMembership -Export HTML -ReportPath C:\temp
 ```
 
 ## PARAMETERS
 
-### -UserToQuery
-User id to search for.
+### -ReferenceUser
+{{ Fill ReferenceUser Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DifferenceUser
+{{ Fill DifferenceUser Description }}
 
 ```yaml
 Type: String
@@ -52,7 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -DomainFQDN
-Domain to search
+{{ Fill DomainFQDN Description }}
 
 ```yaml
 Type: String
@@ -67,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -DomainCredential
-Userid to connect to that domain.
+{{ Fill DomainCredential Description }}
 
 ```yaml
 Type: PSCredential
@@ -88,6 +103,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.Object[]
 ## NOTES
 
 ## RELATED LINKS
