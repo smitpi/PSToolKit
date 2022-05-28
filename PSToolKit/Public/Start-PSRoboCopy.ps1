@@ -120,7 +120,7 @@ Function Start-PSRoboCopy {
 
         [void]$RoboArgs.Add('/W:0')
         [void]$RoboArgs.Add('/R:0')
-        [void]$RoboArgs.Add('/COPYALL')
+        #[void]$RoboArgs.Add('/COPYALL')
         #[void]$RoboArgs.Add('/NJS')
         #[void]$RoboArgs.Add('/NJH')
         [void]$RoboArgs.Add('/NP')
