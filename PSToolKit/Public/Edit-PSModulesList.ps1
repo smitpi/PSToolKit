@@ -88,8 +88,7 @@ Function Edit-PSModulesList {
 	$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
 	try {
 		$ConPath = Get-Item $ConfigPath
-	}
- catch { Write-Error 'Config path foes not exist'; exit }
+	} catch { Write-Error 'Config path foes not exist'; exit }
 	if ($List -like 'BaseModules') { $ModuleList = (Join-Path $ConPath.FullName -ChildPath BaseModuleList.json) }
 	if ($List -like 'ExtendedModules') { $ModuleList = (Join-Path $ConPath.FullName -ChildPath ExtendedModuleList.json) }
 
@@ -114,28 +113,30 @@ Function Edit-PSModulesList {
 		}
 		until ($select.toupper() -eq 'Q')
 
-		$SortMods =  $mods | Sort-Object -Property Name -Unique
-        $SortMods | ConvertTo-Json -Depth 3 | Set-Content -Path $ModuleList -Force
+		$SortMods = $mods | Sort-Object -Property Name -Unique
+		$SortMods | ConvertTo-Json -Depth 3 | Set-Content -Path $ModuleList -Force
 		[System.Collections.ArrayList]$mods = Get-Content $ModuleList | ConvertFrom-Json
 		ListStuff $mods.name
 
 	}
 	if (-not($RemoveModule) -and -not($ShowCurrent)) {
-		if ($null -like $AddModule) {throw "AddModule cant be an empty string"}
+		if ($null -like $AddModule) {throw 'AddModule cant be an empty string'}
 		$findmods = Find-Module -Filter $AddModule
 		if ($findmods.Name.count -gt 1) {
 			ListStuff -arg $findmods.name
 			$select = Read-Host 'Make a selection: '
-            $selectMod = $findmods[$select]
-			$mods.Add(@{Name = "$($selectMod.name)" }) | Out-Null
-		}
-		elseif ($findmods.Name.count -eq 1) {
-			$mods.Add(@{Name = "$ModuleName" }) | Out-Null
-		}
-		else { Write-Error "Could not find $($ModuleName);quit" }
+			$selectMod = $findmods[$select]
+			[void]$mods.Add([PSCustomObject]@{
+					Name = "$($selectMod.name)"
+				})		
+		} elseif ($findmods.Name.count -eq 1) {
+			[void]$mods.Add([PSCustomObject]@{
+					Name = "$($findmods.name)"
+				})
+		} else { Write-Error "Could not find $($ModuleName)" }
 
-		$SortMods =  $mods | Sort-Object -Property Name -Unique
-        $SortMods | ConvertTo-Json -Depth 3 | Set-Content -Path $ModuleList -Force
+		$SortMods = $mods | Sort-Object -Property Name -Unique
+		$SortMods | ConvertTo-Json -Depth 3 | Set-Content -Path $ModuleList -Force
 		[System.Collections.ArrayList]$mods = Get-Content $ModuleList | ConvertFrom-Json
 		ListStuff $mods.name
 	}

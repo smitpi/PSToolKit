@@ -14,20 +14,18 @@ Install modules from .json file.
 
 ### base (Default)
 ```
-Install-PSModule [-BaseModules] [-Scope <String>] [-ForceInstall] [-UpdateModules] [-RemoveAll]
- [<CommonParameters>]
+Install-PSModule [-BaseModules] [-Scope <String>] [-ForceInstall] [-RemoveAll] [<CommonParameters>]
 ```
 
 ### ext
 ```
-Install-PSModule [-ExtendedModules] [-Scope <String>] [-ForceInstall] [-UpdateModules] [-RemoveAll]
- [<CommonParameters>]
+Install-PSModule [-ExtendedModules] [-Scope <String>] [-ForceInstall] [-RemoveAll] [<CommonParameters>]
 ```
 
 ### other
 ```
-Install-PSModule [-Scope <String>] [-OtherModules] [-JsonPath <String>] [-ForceInstall] [-UpdateModules]
- [-RemoveAll] [<CommonParameters>]
+Install-PSModule [-Scope <String>] [-OtherModules] [-JsonPath <String>] [-ForceInstall] [-RemoveAll]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -119,21 +117,6 @@ Accept wildcard characters: False
 
 ### -ForceInstall
 Force reinstall.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UpdateModules
-Update the modules.
 
 ```yaml
 Type: SwitchParameter

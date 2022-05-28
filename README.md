@@ -25,6 +25,7 @@ Get-Help about_PSToolKit
 Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit)
  
 ## Functions
+- [Get-BinRoot](https://smitpi.github.io/PSToolKit/#Get-BinRoot) -- Get-ToolsLocation
 - [Add-ChocolateyPrivateRepo](https://smitpi.github.io/PSToolKit/#Add-ChocolateyPrivateRepo) -- Add a private repository to Chocolatey.
 - [Backup-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#Backup-ElevatedShortcut) -- Exports the RunAss shortcuts, to a zip file
 - [Backup-PowerShellProfile](https://smitpi.github.io/PSToolKit/#Backup-PowerShellProfile) -- Creates a zip file from the ps profile directories

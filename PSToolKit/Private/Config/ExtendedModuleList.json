@@ -1,8 +1,5 @@
 [
   {
-    "Name": "MarkdownPS"
-  },
-  {
     "Name": "AdminToolbox.ActiveDirectory"
   },
   {
@@ -40,6 +37,12 @@
   },
   {
     "Name": "Invoke-CommandAs"
+  },
+  {
+    "Name": "MarkdownPS"
+  },
+  {
+    "Name": "MarkdownToHtml"
   },
   {
     "Name": "Microsoft.PowerShell.consoleGuiTools"

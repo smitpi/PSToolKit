@@ -64,9 +64,6 @@ Path to manual list.
 .PARAMETER ForceInstall
 Force reinstall.
 
-.PARAMETER UpdateModules
-Update the modules.
-
 .PARAMETER RemoveAll
 Remove the modules.
 
@@ -98,10 +95,6 @@ Function Install-PSModule {
 		[Parameter(ParameterSetName = 'base')]
 		[Parameter(ParameterSetName = 'ext')]
 		[Parameter(ParameterSetName = 'other')]
-		[switch]$UpdateModules = $false,
-		[Parameter(ParameterSetName = 'base')]
-		[Parameter(ParameterSetName = 'ext')]
-		[Parameter(ParameterSetName = 'other')]
 		[switch]$RemoveAll = $false
 	)
 
@@ -126,14 +119,6 @@ Function Install-PSModule {
 			}
 		} catch {Write-Warning "Error Uninstalling $($mod.Name) `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 	}
-	if ($UpdateModules) {
-		try {
-			$mods | ForEach-Object {
-				Write-Color '[Upgrading] ', $($_.Name) -Color Yellow, Cyan
-				Get-Module -Name $_.Name -ListAvailable | Select-Object -First 1 | Update-Module -Force
-			}
-		} catch {Write-Warning "Error Updating: `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
-	}
 
 	foreach ($mod in $mods) {
 		if ($ForceInstall -eq $false) { $PSModule = Get-Module -Name $mod.Name -ListAvailable | Select-Object -First 1 }
@@ -142,6 +127,11 @@ Function Install-PSModule {
 			Install-Module -Name $mod.Name -Scope $Scope -AllowClobber -Force
 		} else {
 			Write-Color '[Installing] ', "$($PSModule.Name): ", "(Path: $($PSModule.Path))", 'Already Installed' -Color Yellow, Cyan, Green, DarkRed
+			$OnlineMod = Find-Module -Name $mod.Name
+			if ($PSModule.Version -lt $OnlineMod.Version) {
+				Write-Color "`t[Upgrading] ", "$($PSModule.Name): ", 'to version ', "$($OnlineMod.Version)" -Color Yellow, Cyan, Green, DarkRed
+				Get-Module -Name $PSModule.Name -ListAvailable | Select-Object -First 1 | Update-Module -Force
+			}
 		}
 	}
 }

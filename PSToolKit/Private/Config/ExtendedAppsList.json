@@ -100,10 +100,6 @@
     "Source": "chocolatey"
   },
   {
-    "Source": "chocolatey",
-    "Name": "fslogix"
-  },
-  {
     "Name": "git",
     "Source": "chocolatey"
   },
@@ -176,6 +172,10 @@
     "Source": "chocolatey"
   },
   {
+    "Name": "rambox",
+    "Source": "chocolatey"
+  },
+  {
     "Name": "rescuetime",
     "Source": "chocolatey"
   },
@@ -188,27 +188,11 @@
     "Source": "chocolatey"
   },
   {
-    "Name": "rvtools",
-    "Source": "chocolatey"
-  },
-  {
     "Source": "chocolatey",
     "Name": "salamander"
   },
   {
     "Name": "sumatrapdf",
-    "Source": "chocolatey"
-  },
-  {
-    "Source": "chocolatey",
-    "Name": "synctrayzor"
-  },
-  {
-    "Name": "tailscale",
-    "Source": "chocolatey"
-  },
-  {
-    "Name": "typora",
     "Source": "chocolatey"
   },
   {
@@ -225,10 +209,6 @@
   },
   {
     "Name": "vmrc",
-    "Source": "chocolatey"
-  },
-  {
-    "Name": "wavebox",
     "Source": "chocolatey"
   },
   {
