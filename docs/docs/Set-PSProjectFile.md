@@ -13,8 +13,8 @@ Creates and modify needed files for a PS project from existing module files.
 ## SYNTAX
 
 ```
-Set-PSProjectFile [-ModulePSM1] <FileInfo> [[-VersionBump] <String>] [[-mkdocs] <String>] [-GitPush]
- [<CommonParameters>]
+Set-PSProjectFile [-ModulePSM1] <FileInfo> [[-VersionBump] <String>] [-CopyNestedModules] [[-mkdocs] <String>]
+ [-GitPush] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -55,6 +55,21 @@ Aliases:
 Required: False
 Position: 2
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CopyNestedModules
+Will copy the required modules to the folder.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -85,6 +85,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Restore-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#Restore-ElevatedShortcut) -- Restore the RunAss shortcuts, from a zip file
 - [Search-Script](https://smitpi.github.io/PSToolKit/#Search-Script) -- Search for a string in a directory of ps1 scripts.
 - [Set-FolderCustomIcon](https://smitpi.github.io/PSToolKit/#Set-FolderCustomIcon) -- Will change the icon of a folder to a custom selected icon
+- [Set-PSProjectFile](https://smitpi.github.io/PSToolKit/#Set-PSProjectFile) -- Creates and modify needed files for a PS project from existing module files.
 - [Set-PSToolKitSystemSetting](https://smitpi.github.io/PSToolKit/#Set-PSToolKitSystemSetting) -- Set multiple settings on desktop or server
 - [Set-SharedPSProfile](https://smitpi.github.io/PSToolKit/#Set-SharedPSProfile) -- Redirects PowerShell profile to network share.
 - [Set-StaticIP](https://smitpi.github.io/PSToolKit/#Set-StaticIP) -- Set static IP on device

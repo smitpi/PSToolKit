@@ -50,6 +50,9 @@ Creates and modify needed files for a PS project from existing module files.
 .PARAMETER ModulePSM1
 Path to module .psm1 file.
 
+.PARAMETER CopyNestedModules
+Will copy the required modules to the folder.
+
 .PARAMETER VersionBump
 This will increase the version of the module.
 
@@ -71,10 +74,10 @@ Function Set-PSProjectFile {
 		[System.IO.FileInfo]$ModulePSM1,
 		[ValidateSet('Minor', 'Build', 'CombineOnly')]
 		[string]$VersionBump = 'None',
-		[ValidateSet('serve', 'gh-deploy')]
 		[switch]$CopyNestedModules = $false,
+		[ValidateSet('serve', 'gh-deploy')]
 		[string]$mkdocs = 'None',
-        [Switch]$GitPush = $false
+		[Switch]$GitPush = $false
 	)
 
 	#region module
@@ -99,9 +102,9 @@ Function Set-PSProjectFile {
 				ModuleVersion     = $ModuleversionTMP
 				FunctionsToExport = (Get-Command -Module $module.Name | Select-Object name).name | Sort-Object
 			}
-            try {
-			    Update-ModuleManifest @manifestProperties
-            } catch {Write-Warning "Error: `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
+			try {
+				Update-ModuleManifest @manifestProperties
+			} catch {Write-Warning "Error: `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 		} else {
 			$ModuleFunctionFile = Get-Item $ModulePSM1
 			$module = Import-Module $ModuleFunctionFile.FullName -Force -PassThru
@@ -110,14 +113,14 @@ Function Set-PSProjectFile {
 				$module = Import-Module $ModuleFunctionFile.FullName -Force -PassThru
 			}
 		}
-        try {
-            $ModuleManifestFile = Get-Item ($ModuleFunctionFile.FullName.Replace('psm1', 'psd1'))
-		    $ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object *
-            $FileContent = Get-Content $ModuleManifestFile
-            $DateLine = Select-String -InputObject $ModuleManifestFile -Pattern '# Generated on:'
-            $FileContent[($DateLine.LineNumber -1)] = "# Generated on: $(get-date -Format u)"
-            $FileContent | Set-Content $ModuleManifestFile -Force
-          } catch {Write-Warning "Error: `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
+		try {
+			$ModuleManifestFile = Get-Item ($ModuleFunctionFile.FullName.Replace('psm1', 'psd1'))
+			$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object *
+			$FileContent = Get-Content $ModuleManifestFile
+			$DateLine = Select-String -InputObject $ModuleManifestFile -Pattern '# Generated on:'
+			$FileContent[($DateLine.LineNumber - 1)] = "# Generated on: $(Get-Date -Format u)"
+			$FileContent | Set-Content $ModuleManifestFile -Force
+		} catch {Write-Warning "Error: `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 
 	} catch { Write-Error 'Unable to load module.'; exit }
 
@@ -345,7 +348,7 @@ Function Set-PSProjectFile {
 			$file.Add(' ')
 		}
 		$file.add('#endregion')
-        $file.Add(' ')
+		$file.Add(' ')
 		$file | Set-Content -Path $rootModule -Encoding utf8 -Force
 
 		$versionfile = [System.Collections.Generic.List[PSObject]]::New()
@@ -354,7 +357,7 @@ Function Set-PSProjectFile {
 				Author  = $($moduleManifest.author)
 				Date    = (Get-Date -Format u)
 			})
-        $versionfile | ConvertTo-Json | Set-Content (Join-Path $ModuleBase -ChildPath "Version.json") -Force
+		$versionfile | ConvertTo-Json | Set-Content (Join-Path $ModuleBase -ChildPath 'Version.json') -Force
 
 		$newfunction = ((Select-String -Path $rootModule -Pattern '^# source:').Line).Replace('# source:', '').Replace('.ps1', '').Trim()
 		$ModCommands = Get-Command -Module $module | ForEach-Object { $_.name }
@@ -371,11 +374,11 @@ Function Set-PSProjectFile {
 		Write-Color '[Starting]', 'Copying nested modules' -Color Yellow, DarkCyan
 
 		if (-not(Test-Path $(Join-Path -Path $ModuleOutput -ChildPath '\NestedModules'))) {
-			New-Item -Path "$(Join-Path -path $ModuleOutput -ChildPath "\NestedModules")" -ItemType Directory -Force | Out-Null
+			New-Item -Path "$(Join-Path -Path $ModuleOutput -ChildPath '\NestedModules')" -ItemType Directory -Force | Out-Null
 		}
 		foreach ($required in $ModuleManifest.RequiredModules) {
 			$latestmod = $null
-			import-module $required -Force
+			Import-Module $required -Force
 			$latestmod = Get-Module $required | Sort-Object -Property Version | Select-Object -First 1
 			if (-not($latestmod)) { $latestmod = Get-Module $required -ListAvailable | Sort-Object -Property Version | Select-Object -First 1}
 			
@@ -384,8 +387,9 @@ Function Set-PSProjectFile {
 		}
 		$nestedmodules = @()
 		$nestedmodules = (Get-ChildItem -Path "$ModuleOutput\NestedModules" -Directory).name
+		$rootManifest = ([IO.Path]::Combine($ModuleOutput.fullname, "$($module.Name).psd1"))
 
-		Update-ModuleManifest -Path $ModuleManifestFile.FullName -NestedModules $nestedmodules
+		Update-ModuleManifest -Path $rootManifest -NestedModules $nestedmodules
 	}
 
 	function mkdocs {
@@ -414,16 +418,16 @@ Function Set-PSProjectFile {
 	}
 	if ($null -notlike $Issues) { $issues | Export-Excel -Path $ModuleIssuesExcel -WorksheetName Other -AutoSize -AutoFilter -BoldTopRow -FreezeTopRow }
 
-    if ($GitPush) {
-    if (Get-Command git.exe -ErrorAction SilentlyContinue) {
-        Write-Color '[Starting]', 'Git Push' -Color Yellow, DarkCyan
-        Set-Location $ModuleBase 
-        Start-Sleep 15
-	    git add --all 2>&1 | write-host -BackgroundColor Yellow
-	    git commit --all -m "To Version: $($moduleManifest.version.tostring())" 2>&1 | write-host -BackgroundColor Yellow
-	    git push 2>&1 | write-host -BackgroundColor Yellow
-    } else {Write-Warning "Git is not installed"}
-    }
+	if ($GitPush) {
+		if (Get-Command git.exe -ErrorAction SilentlyContinue) {
+			Write-Color '[Starting]', 'Git Push' -Color Yellow, DarkCyan
+			Set-Location $ModuleBase 
+			Start-Sleep 15
+			git add --all 2>&1 | Write-Host -ForegroundColor Yellow
+			git commit --all -m "To Version: $($moduleManifest.version.tostring())" 2>&1 | Write-Host -ForegroundColor Yellow
+			git push 2>&1 | Write-Host -ForegroundColor Yellow
+		} else {Write-Warning 'Git is not installed'}
+	}
 
 	#endregion
 
