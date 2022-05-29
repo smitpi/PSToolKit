@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+format type data generated 10/07/2020 12:20:03 by PROSPERO\Jeff
+File created with New-PSFormatXML from the PSScriptTools module
+which can be installed from the PowerShell Gallery
+-->
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <!--Created 10/07/2020 12:20:03 by PROSPERO\Jeff-->
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>DirectoryStat</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <ScriptBlock>
+          If ($host.name -match 'console|code|remotehost') {
+            "$([char]27)[1;93m$($_.Parent)$([char]27)[0m"
+          }
+          else {
+            $_.Parent
+          }
+        </ScriptBlock>
+        <Label>Path</Label>
+      </GroupBy>
+      <WideControl>
+      <AutoSize />
+        <WideEntries>
+          <WideEntry>
+            <WideItem>
+              <ScriptBlock>
+              if ($host.name -match "console|code|remotehost") {
+              "$([char]27)[92m{0}$([char]27)[0m [{1}]" -f $_.Name,$_.filecount
+              }
+              else {
+                  "{0} [{1}]" -f $_.Name,$_.filecount
+              }
+              </ScriptBlock>
+            </WideItem>
+          </WideEntry>
+        </WideEntries>
+      </WideControl>
+    </View>
+    <View>
+      <!--Created 10/07/2020 12:23:20 by PROSPERO\Jeff-->
+      <Name>size</Name>
+      <ViewSelectedBy>
+        <TypeName>DirectoryStat</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+       <ScriptBlock>
+       If ($host.name -match 'console|code|remotehost') {
+            "$([char]27)[1;93m$($_.Parent)$([char]27)[0m"
+          }
+          else {
+            $_.Parent
+          }
+        </ScriptBlock>
+        <Label>Path</Label>
+      </GroupBy>
+      <WideControl>
+      <AutoSize />
+        <WideEntries>
+          <WideEntry>
+            <WideItem>
+              <ScriptBlock>
+              If ($host.name -match 'console|code|remotehost') {
+              "$([char]27)[92m{0}$([char]27)[0m [$([char]27)[38;5;147m{1}MB$([char]27)[0m]" -f $_.Name,([math]::Round($_.filesize/1mb,2))
+              }
+              else {
+              "{0} [{1}MB]" -f $_.Name,([math]::Round($_.filesize/1mb,2))
+              }
+              </ScriptBlock>
+            </WideItem>
+          </WideEntry>
+        </WideEntries>
+      </WideControl>
+    </View>
+    <View>
+      <!--Created 10/07/2020 12:23:20 by PROSPERO\Jeff-->
+      <Name>sizekb</Name>
+      <ViewSelectedBy>
+        <TypeName>DirectoryStat</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <ScriptBlock>
+          If ($host.name -match 'console|code|remotehost') {
+            "$([char]27)[1;93m$($_.Parent)$([char]27)[0m"
+          }
+          else {
+            $_.Parent
+          }
+          </ScriptBlock>
+        <Label>Path</Label>
+      </GroupBy>
+      <WideControl>
+        <WideEntries>
+          <WideEntry>
+            <WideItem>
+               <ScriptBlock>
+              If ($host.name -match 'console|code|remotehost') {
+              "$([char]27)[92m{0}$([char]27)[0m [$([char]27)[38;5;147m{1}MB$([char]27)[0m]" -f $_.Name,([math]::Round($_.filesize/1mb,2))
+              }
+              else {
+              "{0} [{1}MB]" -f $_.Name,([math]::Round($_.filesize/1mb,2))
+              }
+              </ScriptBlock>
+            </WideItem>
+          </WideEntry>
+        </WideEntries>
+      </WideControl>
+    </View>
+    <View>
+      <!--Created 10/07/2020 12:23:20 by PROSPERO\Jeff-->
+      <Name>sizemb</Name>
+      <ViewSelectedBy>
+        <TypeName>DirectoryStat</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <ScriptBlock>
+          If ($host.name -match 'console|code|remotehost') {
+            "$([char]27)[1;93m$($_.Parent)$([char]27)[0m"
+          }
+          else {
+            $_.Parent
+          }
+        </ScriptBlock>
+        <Label>Path</Label>
+      </GroupBy>
+      <WideControl>
+        <WideEntries>
+          <WideEntry>
+            <WideItem>
+              <ScriptBlock>
+              If ($host.name -match 'console|code|remotehost') {
+              "$([char]27)[92m{0}$([char]27)[0m [$([char]27)[38;5;147m{1}MB$([char]27)[0m]" -f $_.Name,([math]::Round($_.filesize/1mb,2))
+              }
+              else {
+              "{0} [{1}MB]" -f $_.Name,([math]::Round($_.filesize/1mb,2))
+              }
+              </ScriptBlock>
+            </WideItem>
+          </WideEntry>
+        </WideEntries>
+      </WideControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

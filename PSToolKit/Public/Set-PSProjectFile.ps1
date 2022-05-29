@@ -72,6 +72,7 @@ Function Set-PSProjectFile {
 		[ValidateSet('Minor', 'Build', 'CombineOnly')]
 		[string]$VersionBump = 'None',
 		[ValidateSet('serve', 'gh-deploy')]
+		[switch]$CopyNestedModules = $false,
 		[string]$mkdocs = 'None',
         [Switch]$GitPush = $false
 	)
@@ -366,6 +367,27 @@ Function Set-PSProjectFile {
 				})
 		}
 	}
+	if ($CopyNestedModules) {
+		Write-Color '[Starting]', 'Copying nested modules' -Color Yellow, DarkCyan
+
+		if (-not(Test-Path $(Join-Path -Path $ModuleOutput -ChildPath '\NestedModules'))) {
+			New-Item -Path "$(Join-Path -path $ModuleOutput -ChildPath "\NestedModules")" -ItemType Directory -Force | Out-Null
+		}
+		foreach ($required in $ModuleManifest.RequiredModules) {
+			$latestmod = $null
+			import-module $required -Force
+			$latestmod = Get-Module $required | Sort-Object -Property Version | Select-Object -First 1
+			if (-not($latestmod)) { $latestmod = Get-Module $required -ListAvailable | Sort-Object -Property Version | Select-Object -First 1}
+			
+			Write-Color "`t[Copying]", "$($required.Name)" -Color Yellow, DarkCyan
+			Copy-Item -Path (Get-Item $latestmod.path).Directory -Destination ([IO.Path]::Combine($ModuleOutput, 'NestedModules', $($required.Name))) -Recurse
+		}
+		$nestedmodules = @()
+		$nestedmodules = (Get-ChildItem -Path "$ModuleOutput\NestedModules" -Directory).name
+
+		Update-ModuleManifest -Path $ModuleManifestFile.FullName -NestedModules $nestedmodules
+	}
+
 	function mkdocs {
 		#region mkdocs
 		Write-Color '[Starting]', 'mkdocs' -Color Yellow, DarkCyan
@@ -395,11 +417,11 @@ Function Set-PSProjectFile {
     if ($GitPush) {
     if (Get-Command git.exe -ErrorAction SilentlyContinue) {
         Write-Color '[Starting]', 'Git Push' -Color Yellow, DarkCyan
-        Set-Location $ModuleBase
+        Set-Location $ModuleBase 
         Start-Sleep 15
-	    git add --all
-	    git commit --all -m "To Version: $($moduleManifest.version.tostring())"
-	    git push
+	    git add --all 2>&1 | write-host -BackgroundColor Yellow
+	    git commit --all -m "To Version: $($moduleManifest.version.tostring())" 2>&1 | write-host -BackgroundColor Yellow
+	    git push 2>&1 | write-host -BackgroundColor Yellow
     } else {Write-Warning "Git is not installed"}
     }
 
