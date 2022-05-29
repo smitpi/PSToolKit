@@ -425,6 +425,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-export" class="md-nav__link">
+    -Export
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-reportpath" class="md-nav__link">
+    -ReportPath
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#commonparameters" class="md-nav__link">
     CommonParameters
   </a>
@@ -1824,6 +1838,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-export" class="md-nav__link">
+    -Export
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-reportpath" class="md-nav__link">
+    -ReportPath
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#commonparameters" class="md-nav__link">
     CommonParameters
   </a>
@@ -1900,11 +1928,11 @@
 <h2 id="syntax">SYNTAX</h2>
 <h3 id="currentdomain-default">CurrentDomain (Default)</h3>
 <div class="highlight"><pre><span></span><code>Compare-ADMembership [-ReferenceUser &lt;String&gt;] [-DifferenceUser &lt;String&gt;] [-DomainFQDN &lt;String&gt;]
- [-DomainCredential &lt;PSCredential&gt;] [&lt;CommonParameters&gt;]
+ [-DomainCredential &lt;PSCredential&gt;] [-Export &lt;String&gt;] [-ReportPath &lt;DirectoryInfo&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="otherdomain">OtherDomain</h3>
 <div class="highlight"><pre><span></span><code>Compare-ADMembership [-ReferenceUser &lt;String&gt;] [-DifferenceUser &lt;String&gt;] [-DomainFQDN &lt;String&gt;]
- [-DomainCredential &lt;PSCredential&gt;] [&lt;CommonParameters&gt;]
+ [-DomainCredential &lt;PSCredential&gt;] [-Export &lt;String&gt;] [-ReportPath &lt;DirectoryInfo&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Compare two users AD group memberships</p>
@@ -1958,6 +1986,31 @@
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-export">-Export</h3>
+<p>Export the result to a report file.
+(Excel or html)</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Host</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-reportpath">-ReportPath</h3>
+<p>Where to save the report.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DirectoryInfo</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C:\Temp</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
