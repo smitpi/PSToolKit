@@ -25,7 +25,6 @@ Get-Help about_PSToolKit
 Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit)
  
 ## Functions
-- [Get-BinRoot](https://smitpi.github.io/PSToolKit/#Get-BinRoot) -- Get-ToolsLocation
 - [Add-ChocolateyPrivateRepo](https://smitpi.github.io/PSToolKit/#Add-ChocolateyPrivateRepo) -- Add a private repository to Chocolatey.
 - [Backup-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#Backup-ElevatedShortcut) -- Exports the RunAss shortcuts, to a zip file
 - [Backup-PowerShellProfile](https://smitpi.github.io/PSToolKit/#Backup-PowerShellProfile) -- Creates a zip file from the ps profile directories
@@ -37,9 +36,8 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Edit-SSHConfigFile](https://smitpi.github.io/PSToolKit/#Edit-SSHConfigFile) -- Creates and modifies the ssh config file in their profile.
 - [Enable-RemoteHostPSRemoting](https://smitpi.github.io/PSToolKit/#Enable-RemoteHostPSRemoting) -- enable ps remote remotely
 - [Export-ESXTemplate](https://smitpi.github.io/PSToolKit/#Export-ESXTemplate) -- Export all VM Templates from vSphere to local disk.
-- [Export-PSGallery](https://smitpi.github.io/PSToolKit/#Export-PSGallery) -- Export details of all modules and scripts on psgallery to excel
 - [Find-ChocolateyApp](https://smitpi.github.io/PSToolKit/#Find-ChocolateyApp) -- Search the online repo for software
-- [Find-OnlineModule](https://smitpi.github.io/PSToolKit/#Find-OnlineModule) -- Find a module on psgallery
+- [Find-OnlineModule](https://smitpi.github.io/PSToolKit/#Find-OnlineModule) -- Creates reports based on PSGallery.
 - [Find-OnlineScript](https://smitpi.github.io/PSToolKit/#Find-OnlineScript) -- Find Script on PSGallery
 - [Format-AllObjectsInAListView](https://smitpi.github.io/PSToolKit/#Format-AllObjectsInAListView) -- Cast an array or psobject and display it in list view
 - [Get-AllUsersInGroup](https://smitpi.github.io/PSToolKit/#Get-AllUsersInGroup) -- Get details of all users in a group
