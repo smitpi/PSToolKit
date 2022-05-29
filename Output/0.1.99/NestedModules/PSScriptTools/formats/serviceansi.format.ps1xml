@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <ViewDefinitions>
+      <View>
+        <!--Created 02/03/2020 14:51:45 by BOVINE320\Jeff-->
+        <Name>service</Name>
+        <ViewSelectedBy>
+          <TypeName>System.ServiceProcess.ServiceController</TypeName>
+        </ViewSelectedBy>
+        <TableControl>
+          <!--Delete the AutoSize node if you want to use the defined widths.-->
+          <TableHeaders>
+            <TableColumnHeader>
+              <Label>Status</Label>
+              <Width>8</Width>
+              <Alignment>left</Alignment>
+            </TableColumnHeader>
+            <TableColumnHeader>
+              <Label>Name</Label>
+              <Width>18</Width>
+              <Alignment>left</Alignment>
+            </TableColumnHeader>
+            <TableColumnHeader>
+              <Label>DisplayName</Label>
+              <Width>42</Width>
+              <Alignment>left</Alignment>
+            </TableColumnHeader>
+          </TableHeaders>
+          <TableRowEntries>
+            <TableRowEntry>
+              <TableColumnItems>
+                <TableColumnItem>
+                 <PropertyName>Status</PropertyName>
+                </TableColumnItem>
+                <TableColumnItem>
+                  <PropertyName>Name</PropertyName>
+                </TableColumnItem>
+                <TableColumnItem>
+                  <PropertyName>DisplayName</PropertyName>
+                </TableColumnItem>
+              </TableColumnItems>
+            </TableRowEntry>
+          </TableRowEntries>
+        </TableControl>
+      </View>
+<View>
+      <Name>Ansi</Name>
+      <ViewSelectedBy>
+        <TypeName>System.ServiceProcess.ServiceController</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <!--Delete the AutoSize node if you want to use the defined widths.-->
+        <AutoSize/>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Status</Label>
+            <Width>8</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Name</Label>
+            <Width>18</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>DisplayName</Label>
+            <Width>42</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <ScriptBlock>
+                if ($host.name -match 'console|code|remotehost') {
+
+                 If ($_.status -eq "stopped") {
+                   "$([char]27)[38;2;197;15;31m$($_.status)$([char]27)[0m"
+                  }
+                  elseif ($_.status -eq "running") {
+                    "$([char]27)[38;2;19;161;14m$($_.status)$([char]27)[0m"
+                  }
+                  elseif ($_.status -eq "paused") {
+                    "$([char]27)[38;2;252;127;0m$($_.status)$([char]27)[0m"
+                  }
+                  else {
+                    $_.status
+                  }
+                }
+                else {
+                  $_.status
+                }
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisplayName</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

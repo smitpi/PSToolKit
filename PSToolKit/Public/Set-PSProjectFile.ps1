@@ -370,7 +370,7 @@ Function Set-PSProjectFile {
 				})
 		}
 	}
-	if ($CopyNestedModules) {
+    function CopyNestedModules {
 		Write-Color '[Starting]', 'Copying nested modules' -Color Yellow, DarkCyan
 
 		if (-not(Test-Path $(Join-Path -Path $ModuleOutput -ChildPath '\NestedModules'))) {
@@ -390,8 +390,7 @@ Function Set-PSProjectFile {
 		$rootManifest = ([IO.Path]::Combine($ModuleOutput.fullname, "$($module.Name).psd1"))
 
 		Update-ModuleManifest -Path $rootManifest -NestedModules $nestedmodules
-	}
-
+}
 	function mkdocs {
 		#region mkdocs
 		Write-Color '[Starting]', 'mkdocs' -Color Yellow, DarkCyan
@@ -410,10 +409,12 @@ Function Set-PSProjectFile {
 
 	if ($VersionBump -like 'CombineOnly') {
 		combine
-		mkdocs
+		if ($CopyNestedModules) {CopyNestedModules}
+        mkdocs
 	} else {
 		exthelp
 		combine
+        if ($CopyNestedModules) {CopyNestedModules}
 		mkdocs
 	}
 	if ($null -notlike $Issues) { $issues | Export-Excel -Path $ModuleIssuesExcel -WorksheetName Other -AutoSize -AutoFilter -BoldTopRow -FreezeTopRow }
