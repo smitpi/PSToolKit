@@ -79,6 +79,7 @@ Function Set-PSProjectFile {
 		[string]$mkdocs = 'None',
 		[Switch]$GitPush = $false
 	)
+	
 
 	#region module
 	Write-Color '[Starting]', 'Module Import' -Color Yellow, DarkCyan
@@ -122,7 +123,7 @@ Function Set-PSProjectFile {
 			$FileContent | Set-Content $ModuleManifestFile -Force
 		} catch {Write-Warning "Error: `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 
-	} catch { Write-Error 'Unable to load module.'; exit }
+	} catch { Write-Error 'Unable to load module.' }
 
 	Write-Color '[Starting]', 'Creating Folder Structure' -Color Yellow, DarkCyan
 	$ModuleBase = Get-Item ((Get-Item $ModuleFunctionFile.Directory).Parent).FullName
@@ -138,21 +139,22 @@ Function Set-PSProjectFile {
 	$ModuleMkdocs = [IO.Path]::Combine($ModuleBase, 'docs', 'mkdocs.yml')
 	$ModfuleIndex = [IO.Path]::Combine($ModuleBase, 'docs', 'docs', 'index.md')
 	[System.Collections.ArrayList]$Issues = @()
-	#endregion
 
-	function exthelp {
-		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force }
+	try {
+
+		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force; Start-Sleep 5 }
 		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force }
 		if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force }
 		if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force }
-		if (Test-Path $ModuleIssuesExcel) { Remove-Item $ModuleIssuesExcel -Force }
-		if (Test-Path $ModuleMkdocs) { Remove-Item $ModuleMkdocs -Force }
+		if (Test-Path $ModuleIssuesExcel) {Remove-Item $ModuleIssuesExcel -Force }	
+	} catch {throw 'Unable to delete old folders.'}
 
-		$ModuleOutput = New-Item $ModuleOutput -ItemType Directory -Force | Get-Item
-		$Moduledocs = New-Item $Moduledocs -ItemType Directory -Force | Get-Item
-		$ModuleExternalHelp = New-Item $ModuleExternalHelp -ItemType Directory -Force | Get-Item
+	$ModuleOutput = New-Item $ModuleOutput -ItemType Directory -Force | Get-Item
+	$Moduledocs = New-Item $Moduledocs -ItemType Directory -Force | Get-Item
+	$ModuleExternalHelp = New-Item $ModuleExternalHelp -ItemType Directory -Force | Get-Item
+	#endregion
 
-
+	function exthelp {
 		#region platyps
 		Write-Color '[Starting]', 'Creating External help files' -Color Yellow, DarkCyan
 		$markdownParams = @{
@@ -370,7 +372,7 @@ Function Set-PSProjectFile {
 				})
 		}
 	}
-    function CopyNestedModules {
+	function CopyNestedModules {
 		Write-Color '[Starting]', 'Copying nested modules' -Color Yellow, DarkCyan
 
 		if (-not(Test-Path $(Join-Path -Path $ModuleOutput -ChildPath '\NestedModules'))) {
@@ -387,10 +389,11 @@ Function Set-PSProjectFile {
 		}
 		$nestedmodules = @()
 		$nestedmodules = (Get-ChildItem -Path "$ModuleOutput\NestedModules" -Directory).name
-		$rootManifest = ([IO.Path]::Combine($ModuleOutput.fullname, "$($module.Name).psd1"))
 
-		Update-ModuleManifest -Path $rootManifest -NestedModules $nestedmodules
-}
+		$rootManifest = Get-Item ([IO.Path]::Combine($ModuleOutput.fullname, "$($module.Name).psd1"))
+
+		Update-ModuleManifest -Path $rootManifest.FullName -NestedModules $nestedmodules
+	}
 	function mkdocs {
 		#region mkdocs
 		Write-Color '[Starting]', 'mkdocs' -Color Yellow, DarkCyan
@@ -410,11 +413,11 @@ Function Set-PSProjectFile {
 	if ($VersionBump -like 'CombineOnly') {
 		combine
 		if ($CopyNestedModules) {CopyNestedModules}
-        mkdocs
+		mkdocs
 	} else {
 		exthelp
 		combine
-        if ($CopyNestedModules) {CopyNestedModules}
+		if ($CopyNestedModules) {CopyNestedModules}
 		mkdocs
 	}
 	if ($null -notlike $Issues) { $issues | Export-Excel -Path $ModuleIssuesExcel -WorksheetName Other -AutoSize -AutoFilter -BoldTopRow -FreezeTopRow }
@@ -432,4 +435,4 @@ Function Set-PSProjectFile {
 
 	#endregion
 
-} #end Function
+}#end Function
