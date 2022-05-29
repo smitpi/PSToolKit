@@ -80,14 +80,14 @@ Function Get-FullADUserDetail {
 		if (-not($DomainCredential)) {$DomainCredential = Get-Credential -Message "Account to connnect to $($DomainFQDN)"}
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Starting] User Details"
 		try {
-			$AllUserDetails = Get-ADUser -Identity $UserToQuery -server $DomainFQDN -Credential $DomainCredential -Properties *
+			$AllUserDetails = Get-ADUser -Identity $UserToQuery -Server $DomainFQDN -Credential $DomainCredential -Properties *
 			[pscustomobject]@{
 				UserSummary    = $AllUserDetails | Select-Object Name, GivenName, Surname, UserPrincipalName, EmployeeID, EmployeeNumber, HomeDirectory, Enabled, Created, Modified, LastLogonDate, samaccountname
 				AllUserDetails = $AllUserDetails
 				MemberOf       = $AllUserDetails.memberof | ForEach-Object { 
 					$Cname = $_
-					$Split = (($Cname.Split(',DC=')) | Where-Object {$null -notlike $_})
-					$NewDomain = "$($Split[-3]).$($Split[-2]).$($Split[-1])"
+					$Split = ($Cname.Split(',') | Where-Object {$_ -like 'DC=*'}).replace('DC=', '')
+					$NewDomain = Join-String -Strings $Split -Separator .
 					Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Connecting] to doamin: $($Domain)"
 					Get-ADGroup -Identity $_ -Server $NewDomain -Credential $DomainCredential
 				}
@@ -102,8 +102,8 @@ Function Get-FullADUserDetail {
 				AllUserDetails = $AllUserDetails
 				MemberOf       = $AllUserDetails.memberof | ForEach-Object { 
 					$Cname = $_
-					$Split = (($Cname.Split(',DC=')) | Where-Object {$null -notlike $_})
-					$NewDomain = "$($Split[-3]).$($Split[-2]).$($Split[-1])"
+					$Split = ($Cname.Split(',') | Where-Object {$_ -like 'DC=*'}).replace('DC=', '')
+					$NewDomain = Join-String -Strings $Split -Separator .
 					Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Connecting] to doamin: $($Domain)"
 					Get-ADGroup -Identity $_ -Server $NewDomain
 				}

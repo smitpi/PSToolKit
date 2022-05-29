@@ -212,6 +212,10 @@
     "Source": "chocolatey"
   },
   {
+    "Source": "chocolatey",
+    "Name": "vmware-horizon-client"
+  },
+  {
     "Name": "win32-openssh",
     "Source": "chocolatey"
   }

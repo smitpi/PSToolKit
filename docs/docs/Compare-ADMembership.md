@@ -15,13 +15,13 @@ Compare two users AD group memberships
 ### CurrentDomain (Default)
 ```
 Compare-ADMembership [-ReferenceUser <String>] [-DifferenceUser <String>] [-DomainFQDN <String>]
- [-DomainCredential <PSCredential>] [<CommonParameters>]
+ [-DomainCredential <PSCredential>] [-Export <String>] [-ReportPath <DirectoryInfo>] [<CommonParameters>]
 ```
 
 ### OtherDomain
 ```
 Compare-ADMembership [-ReferenceUser <String>] [-DifferenceUser <String>] [-DomainFQDN <String>]
- [-DomainCredential <PSCredential>] [<CommonParameters>]
+ [-DomainCredential <PSCredential>] [-Export <String>] [-ReportPath <DirectoryInfo>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -92,6 +92,37 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Export
+Export the result to a report file.
+(Excel or html)
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: Host
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportPath
+Where to save the report.
+
+```yaml
+Type: DirectoryInfo
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: C:\Temp
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -7,7 +7,7 @@
 ############################################
 # source: Add-ChocolateyPrivateRepo.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -105,7 +105,7 @@ Export-ModuleMember -Function Add-ChocolateyPrivateRepo
 ############################################
 # source: Backup-ElevatedShortcut.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -150,7 +150,7 @@ Export-ModuleMember -Function Backup-ElevatedShortcut
 ############################################
 # source: Backup-PowerShellProfile.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -205,7 +205,7 @@ Export-ModuleMember -Function Backup-PowerShellProfile
 ############################################
 # source: Compare-ADMembership.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -228,6 +228,12 @@ Domain to search
 
 .PARAMETER DomainCredential
 Userid to connect to that domain.
+
+.PARAMETER Export
+Export the result to a report file. (Excel or html)
+
+.PARAMETER ReportPath
+Where to save the report.
 
 .EXAMPLE
 $compare = Compare-ADMembership -ReferenceUser ps -DifferenceUser ctxuser1
@@ -253,7 +259,19 @@ Function Compare-ADMembership {
 
 		[Parameter(ParameterSetName = 'OtherDomain')]
 		[Parameter(Mandatory = $false)]
-		[pscredential]$DomainCredential
+		[pscredential]$DomainCredential,
+
+		[Parameter(ParameterSetName = 'CurrentDomain')]
+		[Parameter(ParameterSetName = 'OtherDomain')]
+		[ValidateSet('Excel', 'Host', 'HTML')]
+		[string]$Export = 'Host',
+
+		[Parameter(ParameterSetName = 'CurrentDomain')]
+		[Parameter(ParameterSetName = 'OtherDomain')]
+		[ValidateScript( { if (Test-Path $_) { $true }
+				else { New-Item -Path $_ -ItemType Directory -Force | Out-Null; $true }
+			})]
+		[System.IO.DirectoryInfo]$ReportPath = 'C:\Temp'
 	)
 
 	if ($null -notlike $DomainFQDN) {
@@ -268,8 +286,11 @@ Function Compare-ADMembership {
 
 		$Compare = Compare-Object -ReferenceObject $FullReferenceUser.memberof -DifferenceObject $FullDifferenceUser.memberof -IncludeEqual
 
-		$DiffUserMissing = ($Compare | Where-Object {$_.SideIndicator -like '=>'}).InputObject | ForEach-Object {
-			$ADgroup = Get-ADGroup -Identity $_ -Server $DomainFQDN -Credential $DomainCredential
+		$DiffUserMissing = ($Compare | Where-Object {$_.SideIndicator -like '<='}).InputObject | ForEach-Object {
+			$Cname = $_
+			$Split = ($Cname.Split(',') | Where-Object {$_ -like 'DC=*'}).replace('DC=', '')
+			$NewDomain = Join-String -Strings $Split -Separator .
+			$ADgroup = Get-ADGroup -Identity $_ -Server $NewDomain -Credential $DomainCredential
 			[PSCustomObject]@{
 				UserName               = $FullDifferenceUser.DisplayName
 				UserSamAccountName     = $FullDifferenceUser.SamAccountName
@@ -278,8 +299,11 @@ Function Compare-ADMembership {
 				GroupDistinguishedName = $ADgroup.DistinguishedName
 			}
 		}
-		$ReffUserMissing = ($Compare | Where-Object {$_.SideIndicator -like '<='}).InputObject | ForEach-Object {
-			$ADgroup = Get-ADGroup -Identity $_ -Server $DomainFQDN -Credential $DomainCredential
+		$ReffUserMissing = ($Compare | Where-Object {$_.SideIndicator -like '=>'}).InputObject | ForEach-Object {
+			$Cname = $_
+			$Split = ($Cname.Split(',') | Where-Object {$_ -like 'DC=*'}).replace('DC=', '')
+			$NewDomain = Join-String -Strings $Split -Separator .
+			$ADgroup = Get-ADGroup -Identity $_ -Server $NewDomain -Credential $DomainCredential
 			[PSCustomObject]@{
 				UserName               = $FullReferenceUser.DisplayName
 				UserSamAccountName     = $FullReferenceUser.SamAccountName
@@ -288,9 +312,14 @@ Function Compare-ADMembership {
 				GroupDistinguishedName = $ADgroup.DistinguishedName
 			}
 		}
-		$EqualMembers = ($Compare | Where-Object {$_.SideIndicator -like '=='}).InputObject | ForEach-Object {Get-ADGroup -Identity $_ -Server $DomainFQDN -Credential $DomainCredential | Select-Object Name, DistinguishedName}
+		$EqualMembers = ($Compare | Where-Object {$_.SideIndicator -like '=='}).InputObject | ForEach-Object {
+			$Cname = $_
+			$Split = ($Cname.Split(',') | Where-Object {$_ -like 'DC=*'}).replace('DC=', '')
+			$NewDomain = Join-String -Strings $Split -Separator .
+			Get-ADGroup -Identity $_ -Server $NewDomain -Credential $DomainCredential | Select-Object Name, DistinguishedName
+		}
 		
-		[PSCustomObject]@{
+		$data = [PSCustomObject]@{
 			DiffUserMissing = $DiffUserMissing
 			ReffUserMissing = $ReffUserMissing
 			EqualMembers    = $EqualMembers
@@ -306,8 +335,11 @@ Function Compare-ADMembership {
 
 		$Compare = Compare-Object -ReferenceObject $FullReferenceUser.memberof -DifferenceObject $FullDifferenceUser.memberof -IncludeEqual
 
-		$DiffUserMissing = ($Compare | Where-Object {$_.SideIndicator -like '=>'}).InputObject | ForEach-Object {
-			$ADgroup = Get-ADGroup -Identity $_
+		$DiffUserMissing = ($Compare | Where-Object {$_.SideIndicator -like '<='}).InputObject | ForEach-Object {
+			$Cname = $_
+			$Split = ($Cname.Split(',') | Where-Object {$_ -like 'DC=*'}).replace('DC=', '')
+			$NewDomain = Join-String -Strings $Split -Separator .
+			$ADgroup = Get-ADGroup -Identity $_ -Server $NewDomain
 			[PSCustomObject]@{
 				UserName               = $FullDifferenceUser.DisplayName
 				UserSamAccountName     = $FullDifferenceUser.SamAccountName
@@ -316,8 +348,11 @@ Function Compare-ADMembership {
 				GroupDistinguishedName = $ADgroup.DistinguishedName
 			}
 		}
-		$ReffUserMissing = ($Compare | Where-Object {$_.SideIndicator -like '<='}).InputObject | ForEach-Object {
-			$ADgroup = Get-ADGroup -Identity $_
+		$ReffUserMissing = ($Compare | Where-Object {$_.SideIndicator -like '=>'}).InputObject | ForEach-Object {
+			$Cname = $_
+			$Split = ($Cname.Split(',') | Where-Object {$_ -like 'DC=*'}).replace('DC=', '')
+			$NewDomain = Join-String -Strings $Split -Separator .
+			$ADgroup = Get-ADGroup -Identity $_ -Server $NewDomain
 			[PSCustomObject]@{
 				UserName               = $FullReferenceUser.DisplayName
 				UserSamAccountName     = $FullReferenceUser.SamAccountName
@@ -326,13 +361,90 @@ Function Compare-ADMembership {
 				GroupDistinguishedName = $ADgroup.DistinguishedName
 			}
 		}
-		$EqualMembers = ($Compare | Where-Object {$_.SideIndicator -like '=='}).InputObject | ForEach-Object {Get-ADGroup -Identity $_ | Select-Object Name, DistinguishedName}
-		[PSCustomObject]@{
+		$EqualMembers = ($Compare | Where-Object {$_.SideIndicator -like '=='}).InputObject | ForEach-Object {
+			$Cname = $_
+			$Split = ($Cname.Split(',') | Where-Object {$_ -like 'DC=*'}).replace('DC=', '')
+			$NewDomain = Join-String -Strings $Split -Separator .
+			Get-ADGroup -Identity $_ -Server $NewDomain | Select-Object Name, DistinguishedName
+		}
+		
+
+		$Data = [PSCustomObject]@{
 			DiffUserMissing = $DiffUserMissing
 			ReffUserMissing = $ReffUserMissing
 			EqualMembers    = $EqualMembers
 		}
 	}
+	if ($Export -like 'Excel') {
+		$ExcelOptions = @{
+			Path             = $(Join-Path -Path $ReportPath -ChildPath "\AD_MemberShip-$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx")
+			AutoSize         = $True
+			AutoFilter       = $True
+			TitleBold        = $True
+			TitleSize        = '28'
+			TitleFillPattern = 'LightTrellis'
+			TableStyle       = 'Light20'
+			FreezeTopRow     = $True
+			FreezePane       = '3'
+		}
+		$Data.ReffUserMissing | Export-Excel -Title 'Reference User Missing' -WorksheetName ADMemberShip @ExcelOptions
+		$Data.DiffUserMissing | Export-Excel -Title 'Difference User Missing' -WorksheetName ADMemberShip @ExcelOptions -StartRow ($data.ReffUserMissing.count + 4)
+		$Data.EqualMembers.name | Export-Excel -Title 'Equal Members' -WorksheetName ADMemberShip @ExcelOptions -StartRow (($data.ReffUserMissing.count + 4) + ($data.DiffUserMissing.count + 4))
+	}
+
+	if ($Export -eq 'HTML') {
+		$ReportTitle = 'AD MemberShip'
+
+		$TableSettings = @{
+			SearchHighlight = $True
+			Style           = 'cell-border'
+			ScrollX         = $true
+			HideButtons     = $true
+			HideFooter      = $true
+			FixedHeader     = $true
+			TextWhenNoData  = 'No Data to display here'
+			ScrollCollapse  = $true
+			ScrollY         = $true
+			DisablePaging   = $true
+		}
+		$SectionSettings = @{
+			BackgroundColor       = 'LightGrey'
+			CanCollapse           = $true
+			HeaderBackGroundColor = '#00203F'
+			HeaderTextAlignment   = 'center'
+			HeaderTextColor       = '#ADEFD1'
+			HeaderTextSize        = '15'
+			BorderRadius          = '20px'
+		}
+		$TableSectionSettings = @{
+			BackgroundColor       = 'LightGrey'
+			CanCollapse           = $true
+			HeaderBackGroundColor = '#ADEFD1'
+			HeaderTextAlignment   = 'center'
+			HeaderTextColor       = '#00203F'
+			HeaderTextSize        = '15'
+			BorderRadius          = '20px'
+		}
+
+		$HeadingText = "$($ReportTitle) [$(Get-Date -Format dd) $(Get-Date -Format MMMM) $(Get-Date -Format yyyy) $(Get-Date -Format HH:mm)]"
+		New-HTML -TitleText $($ReportTitle) -FilePath $(Join-Path -Path $ReportPath -ChildPath "\$($ReportTitle.Replace(' ','_'))-$(Get-Date -Format yyyy.MM.dd-HH.mm).html") {
+			New-HTMLHeader {
+				New-HTMLText -FontSize 20 -FontStyle normal -Color '#00203F' -Alignment left -Text $HeadingText
+			}
+			New-HTMLSection @SectionSettings -HeaderText 'Refferencing User' {
+				New-HTMLSection @TableSectionSettings { New-HTMLTable -DataTable $($data.ReffUserMissing) @TableSettings}
+			}
+			New-HTMLSection @SectionSettings -HeaderText 'Differencing User' {
+				New-HTMLSection @TableSectionSettings { New-HTMLTable -DataTable $($data.DiffUserMissing) @TableSettings}
+			}
+			New-HTMLSection @SectionSettings -HeaderText 'Eqeal Groups' {
+				New-HTMLSection @TableSectionSettings { New-HTMLTable -DataTable $($data.EqualMembers) @TableSettings}
+			}
+		}
+ }
+
+ if ($Export -eq 'Host') {$data}
+
 } #end Function
  
 Export-ModuleMember -Function Compare-ADMembership
@@ -342,7 +454,7 @@ Export-ModuleMember -Function Compare-ADMembership
 ############################################
 # source: Connect-VMWareCluster.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -394,7 +506,7 @@ Export-ModuleMember -Function Connect-VMWareCluster
 ############################################
 # source: Edit-ChocolateyAppsList.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -531,7 +643,7 @@ Export-ModuleMember -Function Edit-ChocolateyAppsList
 ############################################
 # source: Edit-HostsFile.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -663,7 +775,7 @@ Export-ModuleMember -Function Edit-HostsFile
 ############################################
 # source: Edit-PSModulesList.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -771,7 +883,7 @@ Export-ModuleMember -Function Edit-PSModulesList
 ############################################
 # source: Edit-SSHConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -948,7 +1060,7 @@ Export-ModuleMember -Function Edit-SSHConfigFile
 ############################################
 # source: Enable-RemoteHostPSRemoting.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1007,7 +1119,7 @@ Export-ModuleMember -Function Enable-RemoteHostPSRemoting
 ############################################
 # source: Export-ESXTemplate.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1056,7 +1168,7 @@ Export-ModuleMember -Function Export-ESXTemplate
 ############################################
 # source: Find-ChocolateyApp.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1138,7 +1250,7 @@ Export-ModuleMember -Function Find-ChocolateyApp
 ############################################
 # source: Find-OnlineModule.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1303,7 +1415,7 @@ Export-ModuleMember -Function Find-OnlineModule
 ############################################
 # source: Find-OnlineScript.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1487,7 +1599,7 @@ Export-ModuleMember -Function Find-OnlineScript
 ############################################
 # source: Format-AllObjectsInAListView.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1526,7 +1638,7 @@ Export-ModuleMember -Function Format-AllObjectsInAListView
 ############################################
 # source: Get-AllUsersInGroup.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1599,7 +1711,7 @@ Export-ModuleMember -Function Get-AllUsersInGroup
 ############################################
 # source: Get-CitrixClientVersion.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1695,7 +1807,7 @@ Export-ModuleMember -Function Get-CitrixClientVersion
 ############################################
 # source: Get-CitrixPolicies.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1776,7 +1888,7 @@ Export-ModuleMember -Function Get-CitrixPolicies
 ############################################
 # source: Get-CommandFiltered.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1836,7 +1948,7 @@ Export-ModuleMember -Function Get-CommandFiltered
 ############################################
 # source: Get-DeviceUptime.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1900,7 +2012,7 @@ Export-ModuleMember -Function Get-DeviceUptime
 ############################################
 # source: Get-FolderSize.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2065,7 +2177,7 @@ Export-ModuleMember -Function Get-FolderSize
 ############################################
 # source: Get-FQDN.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2113,7 +2225,7 @@ Export-ModuleMember -Function Get-FQDN
 ############################################
 # source: Get-FullADUserDetail.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2157,14 +2269,14 @@ Function Get-FullADUserDetail {
 		if (-not($DomainCredential)) {$DomainCredential = Get-Credential -Message "Account to connnect to $($DomainFQDN)"}
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Starting] User Details"
 		try {
-			$AllUserDetails = Get-ADUser -Identity $UserToQuery -server $DomainFQDN -Credential $DomainCredential -Properties *
+			$AllUserDetails = Get-ADUser -Identity $UserToQuery -Server $DomainFQDN -Credential $DomainCredential -Properties *
 			[pscustomobject]@{
 				UserSummary    = $AllUserDetails | Select-Object Name, GivenName, Surname, UserPrincipalName, EmployeeID, EmployeeNumber, HomeDirectory, Enabled, Created, Modified, LastLogonDate, samaccountname
 				AllUserDetails = $AllUserDetails
 				MemberOf       = $AllUserDetails.memberof | ForEach-Object { 
 					$Cname = $_
-					$Split = (($Cname.Split(',DC=')) | Where-Object {$null -notlike $_})
-					$NewDomain = "$($Split[-3]).$($Split[-2]).$($Split[-1])"
+					$Split = ($Cname.Split(',') | Where-Object {$_ -like 'DC=*'}).replace('DC=', '')
+					$NewDomain = Join-String -Strings $Split -Separator .
 					Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Connecting] to doamin: $($Domain)"
 					Get-ADGroup -Identity $_ -Server $NewDomain -Credential $DomainCredential
 				}
@@ -2179,8 +2291,8 @@ Function Get-FullADUserDetail {
 				AllUserDetails = $AllUserDetails
 				MemberOf       = $AllUserDetails.memberof | ForEach-Object { 
 					$Cname = $_
-					$Split = (($Cname.Split(',DC=')) | Where-Object {$null -notlike $_})
-					$NewDomain = "$($Split[-3]).$($Split[-2]).$($Split[-1])"
+					$Split = ($Cname.Split(',') | Where-Object {$_ -like 'DC=*'}).replace('DC=', '')
+					$NewDomain = Join-String -Strings $Split -Separator .
 					Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Connecting] to doamin: $($Domain)"
 					Get-ADGroup -Identity $_ -Server $NewDomain
 				}
@@ -2196,7 +2308,7 @@ Export-ModuleMember -Function Get-FullADUserDetail
 ############################################
 # source: Get-MyPSGalleryStat.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2269,7 +2381,7 @@ Export-ModuleMember -Function Get-MyPSGalleryStat
 ############################################
 # source: Get-ProcessPerformance.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2331,7 +2443,7 @@ Export-ModuleMember -Function Get-ProcessPerformance
 ############################################
 # source: Get-PropertiesToCSV.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2370,7 +2482,7 @@ Export-ModuleMember -Function Get-PropertiesToCSV
 ############################################
 # source: Get-SoftwareAudit.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2460,7 +2572,7 @@ Export-ModuleMember -Function Get-SoftwareAudit
 ############################################
 # source: Get-SystemInfo.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2768,7 +2880,7 @@ Export-ModuleMember -Function Get-SystemInfo
 ############################################
 # source: Get-WinEventLogExtract.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2918,7 +3030,7 @@ Export-ModuleMember -Function Get-WinEventLogExtract
 ############################################
 # source: Import-CitrixSiteConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2962,7 +3074,7 @@ Export-ModuleMember -Function Import-CitrixSiteConfigFile
 ############################################
 # source: Import-XamlConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3092,7 +3204,7 @@ Export-ModuleMember -Function Import-XamlConfigFile
 ############################################
 # source: Install-BGInfo.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3168,7 +3280,7 @@ Export-ModuleMember -Function Install-BGInfo
 ############################################
 # source: Install-ChocolateyApp.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3260,7 +3372,7 @@ Export-ModuleMember -Function Install-ChocolateyApp
 ############################################
 # source: Install-ChocolateyClient.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3315,7 +3427,7 @@ Export-ModuleMember -Function Install-ChocolateyClient
 ############################################
 # source: Install-ChocolateyServer.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3437,7 +3549,7 @@ Export-ModuleMember -Function Install-ChocolateyServer
 ############################################
 # source: Install-MicrosoftTerminal.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3503,7 +3615,7 @@ Export-ModuleMember -Function Install-MicrosoftTerminal
 ############################################
 # source: Install-MSUpdate.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3564,7 +3676,7 @@ Export-ModuleMember -Function Install-MSUpdate
 ############################################
 # source: Install-MSWinget.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3651,7 +3763,7 @@ Export-ModuleMember -Function Install-MSWinget
 ############################################
 # source: Install-NFSClient.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3704,7 +3816,7 @@ Export-ModuleMember -Function Install-NFSClient
 ############################################
 # source: Install-PowerShell7x.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3753,7 +3865,7 @@ Export-ModuleMember -Function Install-PowerShell7x
 ############################################
 # source: Install-PSModule.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3862,7 +3974,7 @@ Export-ModuleMember -Function Install-PSModule
 ############################################
 # source: Install-RSAT.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3921,7 +4033,7 @@ Export-ModuleMember -Function Install-RSAT
 ############################################
 # source: Install-VMWareTool.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3964,7 +4076,7 @@ Export-ModuleMember -Function Install-VMWareTool
 ############################################
 # source: New-CitrixSiteConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4150,7 +4262,7 @@ Export-ModuleMember -Function New-CitrixSiteConfigFile
 ############################################
 # source: New-ElevatedShortcut.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4236,7 +4348,7 @@ Export-ModuleMember -Function New-ElevatedShortcut
 ############################################
 # source: New-GodModeFolder.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4268,7 +4380,7 @@ Export-ModuleMember -Function New-GodModeFolder
 ############################################
 # source: New-GoogleSearch.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4316,7 +4428,7 @@ Export-ModuleMember -Function New-GoogleSearch
 ############################################
 # source: New-PSModule.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4410,7 +4522,7 @@ Export-ModuleMember -Function New-PSModule
 ############################################
 # source: New-PSProfile.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4498,7 +4610,7 @@ Export-ModuleMember -Function New-PSProfile
 ############################################
 # source: New-PSScript.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4659,7 +4771,7 @@ Export-ModuleMember -Function New-PSScript
 ############################################
 # source: New-RemoteDesktopFile.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4757,7 +4869,7 @@ Export-ModuleMember -Function New-RemoteDesktopFile
 ############################################
 # source: New-SuggestedInfraName.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4846,7 +4958,7 @@ Export-ModuleMember -Function New-SuggestedInfraName
 ############################################
 # source: Remove-CIMUserProfile.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4890,7 +5002,7 @@ Export-ModuleMember -Function Remove-CIMUserProfile
 ############################################
 # source: Remove-FaultyProfileList.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4965,7 +5077,7 @@ Export-ModuleMember -Function Remove-FaultyProfileList
 ############################################
 # source: Remove-HiddenDevice.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5360,7 +5472,7 @@ Export-ModuleMember -Function Remove-HiddenDevice
 ############################################
 # source: Remove-UserProfile.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5436,7 +5548,7 @@ Export-ModuleMember -Function Remove-UserProfile
 ############################################
 # source: Reset-PSGallery.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5496,7 +5608,7 @@ Export-ModuleMember -Function Reset-PSGallery
 ############################################
 # source: Restore-ElevatedShortcut.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5565,7 +5677,7 @@ Export-ModuleMember -Function Restore-ElevatedShortcut
 ############################################
 # source: Search-Script.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5624,7 +5736,7 @@ Export-ModuleMember -Function Search-Script
 ############################################
 # source: Set-FolderCustomIcon.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5696,7 +5808,7 @@ Export-ModuleMember -Function Set-FolderCustomIcon
 ############################################
 # source: Set-PSProjectFile.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6075,7 +6187,7 @@ Export-ModuleMember -Function Set-PSProjectFile
 ############################################
 # source: Set-PSToolKitSystemSetting.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6577,7 +6689,7 @@ Export-ModuleMember -Function Set-PSToolKitSystemSetting
 ############################################
 # source: Set-SharedPSProfile.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6647,7 +6759,7 @@ Export-ModuleMember -Function Set-SharedPSProfile
 ############################################
 # source: Set-StaticIP.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6696,7 +6808,7 @@ Export-ModuleMember -Function Set-StaticIP
 ############################################
 # source: Set-TempFolder.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6735,7 +6847,7 @@ Export-ModuleMember -Function Set-TempFolder
 ############################################
 # source: Set-WindowsAutoLogin.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6852,7 +6964,7 @@ Export-ModuleMember -Function Set-WindowsAutoLogin
 ############################################
 # source: Show-ComputerManagement.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6888,7 +7000,7 @@ Export-ModuleMember -Function Show-ComputerManagement
 ############################################
 # source: Show-PSToolKit.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7096,7 +7208,7 @@ Export-ModuleMember -Function Show-PSToolKit
 ############################################
 # source: Start-PSModuleMaintenance.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7264,7 +7376,7 @@ Export-ModuleMember -Function Start-PSModuleMaintenance
 ############################################
 # source: Start-PSProfile.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7442,7 +7554,7 @@ Export-ModuleMember -Function Start-PSProfile
 ############################################
 # source: Start-PSRoboCopy.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7560,7 +7672,7 @@ Export-ModuleMember -Function Start-PSRoboCopy
 ############################################
 # source: Start-PSScriptAnalyzer.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7714,7 +7826,7 @@ Export-ModuleMember -Function Start-PSScriptAnalyzer
 ############################################
 # source: Start-PSToolkitSystemInitialize.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7824,7 +7936,7 @@ Export-ModuleMember -Function Start-PSToolkitSystemInitialize
 ############################################
 # source: Test-CitrixCloudConnector.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7930,7 +8042,7 @@ Export-ModuleMember -Function Test-CitrixCloudConnector
 ############################################
 # source: Test-CitrixVDAPorts.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8029,7 +8141,7 @@ Export-ModuleMember -Function Test-CitrixVDAPorts
 ############################################
 # source: Test-IsFileOpen.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8096,7 +8208,7 @@ Export-ModuleMember -Function Test-IsFileOpen
 ############################################
 # source: Test-PendingReboot.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8277,7 +8389,7 @@ Export-ModuleMember -Function Test-PendingReboot
 ############################################
 # source: Test-PSRemote.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8334,7 +8446,7 @@ Export-ModuleMember -Function Test-PSRemote
 ############################################
 # source: Update-ListOfDDC.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8398,7 +8510,7 @@ Export-ModuleMember -Function Update-ListOfDDC
 ############################################
 # source: Update-LocalHelp.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8440,7 +8552,7 @@ Export-ModuleMember -Function Update-LocalHelp
 ############################################
 # source: Update-PSModuleInfo.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8543,7 +8655,7 @@ Export-ModuleMember -Function Update-PSModuleInfo
 ############################################
 # source: Update-PSToolKit.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8645,7 +8757,7 @@ Export-ModuleMember -Function Update-PSToolKit
 ############################################
 # source: Update-PSToolKitConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8792,7 +8904,7 @@ Export-ModuleMember -Function Update-PSToolKitConfigFile
 ############################################
 # source: Write-Ascii.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -9187,7 +9299,7 @@ Export-ModuleMember -Function Write-Ascii
 ############################################
 # source: Write-PSToolKitLog.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -9302,7 +9414,7 @@ Export-ModuleMember -Function Write-PSToolKitLog
 ############################################
 # source: Write-PSToolKitMessage.ps1
 # Module: PSToolKit
-# version: 0.1.96
+# version: 0.1.97
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
