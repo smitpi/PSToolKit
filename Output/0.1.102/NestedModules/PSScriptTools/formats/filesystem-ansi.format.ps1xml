@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+    <SelectionSets>
+        <SelectionSet>
+            <Name>FileSystemTypes</Name>
+            <Types>
+                <TypeName>System.IO.DirectoryInfo</TypeName>
+                <TypeName>System.IO.FileInfo</TypeName>
+            </Types>
+        </SelectionSet>
+    </SelectionSets>
+
+    <!-- ################ GLOBAL CONTROL DEFINITIONS ################ -->
+    <Controls>
+        <Control>
+            <Name>FileSystemTypes-GroupingFormat</Name>
+                    <CustomControl>
+                        <CustomEntries>
+                            <CustomEntry>
+                                <CustomItem>
+                                    <Frame>
+                                        <LeftIndent>4</LeftIndent>
+                                        <CustomItem>
+                                            <Text AssemblyName="System.Management.Automation" BaseName="FileSystemProviderStrings" ResourceId="DirectoryDisplayGrouping"/>
+                                            <ExpressionBinding>
+                                              <ScriptBlock>
+                                                  $_.PSParentPath.Replace("Microsoft.PowerShell.Core\FileSystem::", "")
+                                              </ScriptBlock>
+                                            </ExpressionBinding>
+                                            <NewLine/>
+                                        </CustomItem>
+                                    </Frame>
+                                </CustomItem>
+                            </CustomEntry>
+                        </CustomEntries>
+            </CustomControl>
+        </Control>
+    </Controls>
+
+    <!-- ################ VIEW DEFINITIONS ################ -->
+
+    <ViewDefinitions>
+       <View>
+            <Name>ansi</Name>
+            <ViewSelectedBy>
+                <SelectionSetName>FileSystemTypes</SelectionSetName>
+            </ViewSelectedBy>
+            <GroupBy>
+                <PropertyName>PSParentPath</PropertyName>
+                <CustomControlName>FileSystemTypes-GroupingFormat</CustomControlName>
+            </GroupBy>
+            <TableControl>
+                <TableHeaders>
+                   <TableColumnHeader>
+                      <Label>Mode</Label>
+                      <Width>7</Width>
+                      <Alignment>left</Alignment>
+                   </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>LastWriteTime</Label>
+                        <Width>25</Width>
+                        <Alignment>right</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Length</Label>
+                        <Width>14</Width>
+                        <Alignment>right</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Name</Label>
+                        <Alignment>Left</Alignment>
+                    </TableColumnHeader>
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <Wrap/>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <PropertyName>Mode</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                                    [String]::Format("{0,10}  {1,8}", $_.LastWriteTime.ToString("d"), $_.LastWriteTime.ToString("t"))
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                           	<PropertyName>Length</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                                <!--$PSAnsiFileMap is a global variable importing the json color map-->
+                                $file = $_.name.trim()
+
+                                if ($host.name -match "console|code|remotehost") {
+                                  if ($_.PSIsContainer) {
+                                    $fmt = $PSAnsiFileMap.where({$_.description -eq 'topcontainer'})
+                                  }
+                                  else {
+                                      <!-- If there are duplicate matches, use the last one-->
+                                    $fmt= $($global:PSAnsiFileMap).where({($_.Pattern) -AND ($file -match $_.Pattern)}) | Select-Object -last 1
+                                  }
+                                    if ($fmt.description) {
+                                        $ansi = $fmt.ansi
+                                        "$ansi$file$([char]27)[0m"
+                                    }
+                                    else {
+                                        $file
+                                    }
+                                }
+                                else {
+                                    $file
+                                }
+                                </ScriptBlock>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+    </ViewDefinitions>
+</Configuration>
