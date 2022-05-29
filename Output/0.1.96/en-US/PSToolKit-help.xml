@@ -1861,11 +1861,11 @@
       <command:verb>Find</command:verb>
       <command:noun>OnlineScript</command:noun>
       <maml:description>
-        <maml:para>Find Script on PSGallery</maml:para>
+        <maml:para>Creates reports based on PSGallery. Filtered by scripts</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Find Script on PSGallery</maml:para>
+      <maml:para>Creates reports based on PSGallery. You can search for a keyword, and also exclude azure and aws scripts.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1873,7 +1873,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Keyword</maml:name>
           <maml:description>
-            <maml:para>What to search for</maml:para>
+            <maml:para>Limit the search to a keyword.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1885,7 +1885,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoAzureAWS</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoAzureAWS Description }}</maml:para>
+            <maml:para>This will exclude scripts with AWS and Azure in the name.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1896,7 +1896,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>MaxCount</maml:name>
           <maml:description>
-            <maml:para>{{ Fill MaxCount Description }}</maml:para>
+            <maml:para>Limit the amount of scripts to report, default is 250.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -1908,7 +1908,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Offline</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Offline Description }}</maml:para>
+            <maml:para>Uses a previously downloaded cache for the search. If the cache doesn't exists, it will be created.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1919,7 +1919,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>UpdateCache</maml:name>
           <maml:description>
-            <maml:para>{{ Fill UpdateCache Description }}</maml:para>
+            <maml:para>Update the local cache.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1930,7 +1930,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>SortOrder</maml:name>
           <maml:description>
-            <maml:para>{{ Fill SortOrder Description }}</maml:para>
+            <maml:para>Determines if the report will be sorted on the amount of downloads or the newest scripts.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1942,7 +1942,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Export</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Export Description }}</maml:para>
+            <maml:para>Export the result to a file. (Excel or markdown)</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1954,7 +1954,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ReportPath</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ReportPath Description }}</maml:para>
+            <maml:para>Where to save the report.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
           <dev:type>
@@ -1969,7 +1969,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Keyword</maml:name>
         <maml:description>
-          <maml:para>What to search for</maml:para>
+          <maml:para>Limit the search to a keyword.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1981,7 +1981,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>NoAzureAWS</maml:name>
         <maml:description>
-          <maml:para>{{ Fill NoAzureAWS Description }}</maml:para>
+          <maml:para>This will exclude scripts with AWS and Azure in the name.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1993,7 +1993,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>MaxCount</maml:name>
         <maml:description>
-          <maml:para>{{ Fill MaxCount Description }}</maml:para>
+          <maml:para>Limit the amount of scripts to report, default is 250.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -2005,7 +2005,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Offline</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Offline Description }}</maml:para>
+          <maml:para>Uses a previously downloaded cache for the search. If the cache doesn't exists, it will be created.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -2017,7 +2017,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>UpdateCache</maml:name>
         <maml:description>
-          <maml:para>{{ Fill UpdateCache Description }}</maml:para>
+          <maml:para>Update the local cache.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -2029,7 +2029,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>SortOrder</maml:name>
         <maml:description>
-          <maml:para>{{ Fill SortOrder Description }}</maml:para>
+          <maml:para>Determines if the report will be sorted on the amount of downloads or the newest scripts.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2041,7 +2041,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Export</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Export Description }}</maml:para>
+          <maml:para>Export the result to a file. (Excel or markdown)</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2053,7 +2053,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ReportPath</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ReportPath Description }}</maml:para>
+          <maml:para>Where to save the report.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
         <dev:type>
@@ -2067,13 +2067,13 @@
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>General notes</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Find-OnlineScript -Keyword blah -install</dev:code>
+        <dev:code>Find-OnlineScript -Keyword Citrix -Offline -SortOrder Downloads -Export Excel -ReportPath C:\temp</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>

@@ -8,7 +8,8 @@ schema: 2.0.0
 # Find-OnlineScript
 
 ## SYNOPSIS
-Find Script on PSGallery
+Creates reports based on PSGallery.
+Filtered by scripts
 
 ## SYNTAX
 
@@ -18,19 +19,20 @@ Find-OnlineScript [[-Keyword] <String>] [-NoAzureAWS] [-MaxCount <Int32>] [-Offl
 ```
 
 ## DESCRIPTION
-Find Script on PSGallery
+Creates reports based on PSGallery.
+You can search for a keyword, and also exclude azure and aws scripts.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Find-OnlineScript -Keyword blah -install
+Find-OnlineScript -Keyword Citrix -Offline -SortOrder Downloads -Export Excel -ReportPath C:\temp
 ```
 
 ## PARAMETERS
 
 ### -Keyword
-What to search for
+Limit the search to a keyword.
 
 ```yaml
 Type: String
@@ -45,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoAzureAWS
-{{ Fill NoAzureAWS Description }}
+This will exclude scripts with AWS and Azure in the name.
 
 ```yaml
 Type: SwitchParameter
@@ -60,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -MaxCount
-{{ Fill MaxCount Description }}
+Limit the amount of scripts to report, default is 250.
 
 ```yaml
 Type: Int32
@@ -75,7 +77,8 @@ Accept wildcard characters: False
 ```
 
 ### -Offline
-{{ Fill Offline Description }}
+Uses a previously downloaded cache for the search.
+If the cache doesn't exists, it will be created.
 
 ```yaml
 Type: SwitchParameter
@@ -90,7 +93,7 @@ Accept wildcard characters: False
 ```
 
 ### -UpdateCache
-{{ Fill UpdateCache Description }}
+Update the local cache.
 
 ```yaml
 Type: SwitchParameter
@@ -105,7 +108,7 @@ Accept wildcard characters: False
 ```
 
 ### -SortOrder
-{{ Fill SortOrder Description }}
+Determines if the report will be sorted on the amount of downloads or the newest scripts.
 
 ```yaml
 Type: String
@@ -120,7 +123,8 @@ Accept wildcard characters: False
 ```
 
 ### -Export
-{{ Fill Export Description }}
+Export the result to a file.
+(Excel or markdown)
 
 ```yaml
 Type: String
@@ -135,7 +139,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReportPath
-{{ Fill ReportPath Description }}
+Where to save the report.
 
 ```yaml
 Type: DirectoryInfo
@@ -157,6 +161,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-General notes
 
 ## RELATED LINKS

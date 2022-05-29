@@ -58,6 +58,42 @@ Find-OnlineScript -Keyword blah -install
 .NOTES
 General notes
 #>
+
+<#
+.SYNOPSIS
+Creates reports based on PSGallery. Filtered by scripts
+
+.DESCRIPTION
+Creates reports based on PSGallery. You can search for a keyword, and also exclude azure and aws scripts.
+
+.PARAMETER Keyword
+Limit the search to a keyword.
+
+.PARAMETER NoAzureAWS
+This will exclude scripts with AWS and Azure in the name.
+
+.PARAMETER MaxCount
+Limit the amount of scripts to report, default is 250.
+
+.PARAMETER Offline
+Uses a previously downloaded cache for the search. If the cache doesn't exists, it will be created.
+
+.PARAMETER UpdateCache
+Update the local cache.
+
+.PARAMETER SortOrder
+Determines if the report will be sorted on the amount of downloads or the newest scripts.
+
+.PARAMETER Export
+Export the result to a file. (Excel or markdown)
+
+.PARAMETER ReportPath
+Where to save the report.
+
+.EXAMPLE
+Find-OnlineScript -Keyword Citrix -Offline -SortOrder Downloads -Export Excel -ReportPath C:\temp
+
+#>
 function Find-OnlineScript {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Find-OnlineScript')]
 		PARAM(

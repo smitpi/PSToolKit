@@ -38,7 +38,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Export-ESXTemplate](https://smitpi.github.io/PSToolKit/#Export-ESXTemplate) -- Export all VM Templates from vSphere to local disk.
 - [Find-ChocolateyApp](https://smitpi.github.io/PSToolKit/#Find-ChocolateyApp) -- Search the online repo for software
 - [Find-OnlineModule](https://smitpi.github.io/PSToolKit/#Find-OnlineModule) -- Creates reports based on PSGallery.
-- [Find-OnlineScript](https://smitpi.github.io/PSToolKit/#Find-OnlineScript) -- Find Script on PSGallery
+- [Find-OnlineScript](https://smitpi.github.io/PSToolKit/#Find-OnlineScript) -- Creates reports based on PSGallery. Filtered by scripts
 - [Format-AllObjectsInAListView](https://smitpi.github.io/PSToolKit/#Format-AllObjectsInAListView) -- Cast an array or psobject and display it in list view
 - [Get-AllUsersInGroup](https://smitpi.github.io/PSToolKit/#Get-AllUsersInGroup) -- Get details of all users in a group
 - [Get-CitrixClientVersion](https://smitpi.github.io/PSToolKit/#Get-CitrixClientVersion) -- Report on the CItrix workspace versions the users are using.
