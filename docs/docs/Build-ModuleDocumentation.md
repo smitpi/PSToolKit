@@ -5,32 +5,32 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-PSProjectFile
+# Build-ModuleDocumentation
 
 ## SYNOPSIS
-Creates and modify needed files for a PS project from existing module files.
+Use Platyps to create documentation form help
 
 ## SYNTAX
 
 ```
-Set-PSProjectFile [-ModuleName] <FileInfo> [[-VersionBump] <String>] [[-mkdoc] <String>] [-CopyNestedModules]
- [-GitPush] [<CommonParameters>]
+Build-ModuleDocumentation [-ModulePSM1] <FileInfo> [[-VersionBump] <String>] [-CopyNestedModules]
+ [[-mkdocs] <String>] [-GitPush] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Creates and modify needed files for a PS project from existing module files.
+Use Platyps to create documentation form help
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Set-PSProjectFiles -ModuleName blah -VersionBump Minor -mkdocs serve
+Build-ModuleDocumentation -Export HTML -ReportPath C:\temp
 ```
 
 ## PARAMETERS
 
-### -ModuleName
-Path to module .psm1 file.
+### -ModulePSM1
+{{ Fill ModulePSM1 Description }}
 
 ```yaml
 Type: FileInfo
@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -VersionBump
-This will increase the version of the module.
+{{ Fill VersionBump Description }}
 
 ```yaml
 Type: String
@@ -54,28 +54,13 @@ Aliases:
 
 Required: False
 Position: 2
-Default value: CombineOnly
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -mkdoc
-{{ Fill mkdoc Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -CopyNestedModules
-Will copy the required modules to the folder.
+{{ Fill CopyNestedModules Description }}
 
 ```yaml
 Type: SwitchParameter
@@ -89,8 +74,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -mkdocs
+{{ Fill mkdocs Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -GitPush
-Run Git Push when done.
+{{ Fill GitPush Description }}
 
 ```yaml
 Type: SwitchParameter
@@ -111,6 +111,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.Object[]
 ## NOTES
 
 ## RELATED LINKS
