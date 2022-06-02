@@ -6444,25 +6444,24 @@ Function Set-PSProjectFile {
 	#region module
 	Write-Color '[Starting]', 'Module Import' -Color Yellow, DarkCyan
 	try {
-        
-        $modulefile = (Join-Path $([Environment]::GetFolderPath('MyDocuments')) -ChildPath ".\PowerShell\ProdModules\$($ModuleName)\$($ModuleName)\$($ModuleName).psm1") | get-item
+        $modulefile = (Join-Path $([Environment]::GetFolderPath('MyDocuments')) -ChildPath ".\PowerShell\ProdModules\$($ModuleName)\$($ModuleName)\$($ModuleName).psm1") | get-item -ErrorAction Stop
 		Remove-Module $ModuleName -Force -ErrorAction SilentlyContinue
-		Import-Module $modulefile -Force
-        $module = Get-Module $ModuleName
+		Import-Module $modulefile -Force -ErrorAction Stop
+        $module = Get-Module $ModuleName -ErrorAction Stop
 	} catch {Write-Error "Error: Importing Module `nMessage:$($_.Exception.message)"; exit}
 	try {
 		$ModuleManifestFile = Get-Item ($module.Path).Replace('.psm1', '.psd1')
-		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object *
-		$FileContent = Get-Content $ModuleManifestFile
+		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object * -ErrorAction Stop
+		$FileContent = Get-Content $ModuleManifestFile -ErrorAction Stop
 		$DateLine = Select-String -InputObject $ModuleManifestFile -Pattern '# Generated on:'
 		$FileContent[($DateLine.LineNumber - 1)] = "# Generated on: $(Get-Date -Format u)"
-		$FileContent | Set-Content $ModuleManifestFile -Force
+		$FileContent | Set-Content $ModuleManifestFile -Force -ErrorAction Stop
 	} catch {Write-Error "Error: Update versions `nMessage:$($_.Exception.message)"; exit}
 
 	if ($VersionBump -like 'Minor' -or $VersionBump -like 'Build' ) {
 		try {
 			$ModuleManifestFileTMP = Get-Item ($module.Path).Replace('.psm1', '.psd1')
-			[version]$ModuleversionTMP = (Test-ModuleManifest -Path $ModuleManifestFileTMP.FullName).version
+			[version]$ModuleversionTMP = (Test-ModuleManifest -Path $ModuleManifestFileTMP.FullName -ErrorAction Stop).version 
 
 			if ($VersionBump -like 'Minor') { [version]$ModuleversionTMP = '{0}.{1}.{2}' -f $ModuleversionTMP.Major, ($ModuleversionTMP.Minor + 1), $ModuleversionTMP.Build }
 			if ($VersionBump -like 'Build') { [version]$ModuleversionTMP = '{0}.{1}.{2}' -f $ModuleversionTMP.Major, $ModuleversionTMP.Minor, ($ModuleversionTMP.Build + 1) }
@@ -6472,7 +6471,7 @@ Function Set-PSProjectFile {
 				ModuleVersion     = $ModuleversionTMP
 				FunctionsToExport = (Get-Command -Module $module.Name | Select-Object name).name | Sort-Object
 			}
-			Update-ModuleManifest @manifestProperties
+			Update-ModuleManifest @manifestProperties -ErrorAction Stop
 		} catch {Write-Error "Error: Updateing Version `nMessage:$($_.Exception.message)"; exit}
 	} 
 		
@@ -6496,29 +6495,35 @@ Function Set-PSProjectFile {
 
 	try {
 
-		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force; Start-Sleep 5 }
-		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force }
-		if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force }
-		if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force }
-		if (Test-Path $ModuleIssuesExcel) {Remove-Item $ModuleIssuesExcel -Force }	
+		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop; Start-Sleep 5 }
+		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
+		if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }
+		if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force -ErrorAction Stop }
+		if (Test-Path $ModuleIssuesExcel) {Remove-Item $ModuleIssuesExcel -Force -ErrorAction Stop }	
 	} catch {throw 'Unable to delete old folders.' ; exit}
 
-	$ModuleOutput = New-Item $ModuleOutput -ItemType Directory -Force | Get-Item
-	$Moduledocs = New-Item $Moduledocs -ItemType Directory -Force | Get-Item
-	$ModuleExternalHelp = New-Item $ModuleExternalHelp -ItemType Directory -Force | Get-Item
-	#endregion
+    try {
+	$ModuleOutput = New-Item $ModuleOutput -ItemType Directory -Force | Get-Item -ErrorAction Stop
+	$Moduledocs = New-Item $Moduledocs -ItemType Directory -Force | Get-Item -ErrorAction Stop
+	$ModuleExternalHelp = New-Item $ModuleExternalHelp -ItemType Directory -Force | Get-Item -ErrorAction Stop
+    } catch {Write-Error "Error: Creating folders `nMessage:$($_.Exception.message)"; exit}
+
+    #endregion
 
 	#region platyps
-	Write-Color '[Starting]', 'Creating External help files' -Color Yellow, DarkCyan
-	$markdownParams = @{
-		Module         = $module.Name
-		OutputFolder   = $Moduledocs.FullName
-		WithModulePage = $false
-		Locale         = 'en-US'
-		HelpVersion    = $ModuleManifest.Version.ToString()
-	}
-	New-MarkdownHelp @markdownParams
+    try {
+	    Write-Color '[Starting]', 'Creating External help files' -Color Yellow, DarkCyan
+	    $markdownParams = @{
+		    Module         = $module.Name
+		    OutputFolder   = $Moduledocs.FullName
+		    WithModulePage = $false
+		    Locale         = 'en-US'
+		    HelpVersion    = $ModuleManifest.Version.ToString()
+	    }
+	    New-MarkdownHelp @markdownParams
+    } catch {Write-Error "Error: MarkdownHelp `nMessage:$($_.Exception.message)"; exit}
 
+    try {
 	Compare-Object -ReferenceObject (Get-ChildItem $ModulePublicFunctions).BaseName -DifferenceObject (Get-ChildItem $Moduledocs).BaseName | Where-Object { $_.SideIndicator -like '<=' } | ForEach-Object {
 		[void]$Issues.Add([PSCustomObject]@{
 				Catagory = 'External Help'
@@ -6541,7 +6546,9 @@ Function Set-PSProjectFile {
 				})
 		}
 	}
+    } catch {Write-Error "Error: Docs check `nMessage:$($_.Exception.message)"; exit}
 
+    try {
 	New-ExternalHelp -Path $Moduledocs.FullName -OutputPath $ModuleExternalHelp.FullName -Force -ShowProgress
 
 	$aboutfile = [System.Collections.Generic.List[string]]::new()
@@ -6648,8 +6655,10 @@ Function Set-PSProjectFile {
 	$indexFile.add(' ')
 	$indexFile.add('## Functions')
 	(Get-Command -Module $module).Name | ForEach-Object { $indexFile.add("- [$_](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
-	$indexFile | Set-Content -Path $ModfuleIndex -Force
-	#endregion
+	$indexFile | Set-Content -Path $ModuleIndex -Force
+    } catch {Write-Error "Error: Other Files `nMessage:$($_.Exception.message)"; exit}
+	
+#endregion
 	
 	#region Combine files
 	Write-Color '[Starting]', 'Creating new module files' -Color Yellow, DarkCyan
@@ -6815,7 +6824,7 @@ Function Set-PSProjectFile {
 		if (Get-Command git.exe -ErrorAction SilentlyContinue) {
 			Write-Color '[Starting]', 'Git Push' -Color Yellow, DarkCyan
 			Set-Location $ModuleBase 
-			Start-Sleep 15
+			Start-Sleep 5
 			git add --all 2>&1 | Write-Host -ForegroundColor Yellow
 			git commit --all -m "To Version: $($moduleManifest.version.tostring())" 2>&1 | Write-Host -ForegroundColor Yellow
 			git push 2>&1 | Write-Host -ForegroundColor Yellow

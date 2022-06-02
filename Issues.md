@@ -33,8 +33,9 @@ body {
 | External Help | Build-ModuleDocumentation.md | Build-ModuleDocumentation.md - ### -GitPush - {{ Fill GitPush Description }}                     |
 | External Help | Build-MonolithicModule.md    | Build-MonolithicModule.md - ### -OutputFolder - {{ Fill OutputFolder Description }}              |
 | External Help | Set-PSProjectFile.md         | Set-PSProjectFile.md - ### -mkdoc - {{ Fill mkdoc Description }}                                 |
+| Not Copied    | Set-PSProjectFile            | =>                                                                                               |
 | Not Copied    | Test-CitrixVDAPorts          | =>                                                                                               |
 
 ---
 
-*Updated: Tuesday, 31 May 2022 17:51:09 UTC*
+*Updated: Thursday, 02 June 2022 03:45:37 UTC*
