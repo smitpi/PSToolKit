@@ -51,7 +51,7 @@ Start a new browser tab with search string.
 What to search
 
 .PARAMETER Clipboard
-Use clipboad to search
+Use clipboard to search
 
 .EXAMPLE
 New-GoogleSearch blah
