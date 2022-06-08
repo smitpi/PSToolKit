@@ -24,8 +24,7 @@ body {
 | ------------- | ------------------- | --------------------------- |
 | External Help | Test-CitrixVDAPorts | Did not create the .md file |
 | Not Copied    | Test-CitrixVDAPorts | =>                          |
-| Not Copied    | Get-BinRoot         | <=                          |
 
 ---
 
-*Updated: Wednesday, 08 June 2022 04:29:03 UTC*
+*Updated: Wednesday, 08 June 2022 21:36:47 UTC*

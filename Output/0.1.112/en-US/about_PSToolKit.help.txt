@@ -9,7 +9,6 @@ there is a wyde range of tools in this module, used by a SysAdmin and EUC Admini
  
 NOTES
 Functions in this module:
-	 Get-BinRoot -- Get-ToolsLocation
 	 Add-ChocolateyPrivateRepo -- Add a private repository to Chocolatey.
 	 Backup-ElevatedShortcut -- Exports the RunAss shortcuts, to a zip file
 	 Backup-PowerShellProfile -- Creates a zip file from the ps profile directories
