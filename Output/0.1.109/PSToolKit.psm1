@@ -7,7 +7,7 @@
 ############################################
 # source: Add-ChocolateyPrivateRepo.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -105,7 +105,7 @@ Export-ModuleMember -Function Add-ChocolateyPrivateRepo
 ############################################
 # source: Backup-ElevatedShortcut.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -150,7 +150,7 @@ Export-ModuleMember -Function Backup-ElevatedShortcut
 ############################################
 # source: Backup-PowerShellProfile.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -205,7 +205,7 @@ Export-ModuleMember -Function Backup-PowerShellProfile
 ############################################
 # source: Compare-ADMembership.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -454,7 +454,7 @@ Export-ModuleMember -Function Compare-ADMembership
 ############################################
 # source: Connect-VMWareCluster.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -506,7 +506,7 @@ Export-ModuleMember -Function Connect-VMWareCluster
 ############################################
 # source: Edit-ChocolateyAppsList.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -643,7 +643,7 @@ Export-ModuleMember -Function Edit-ChocolateyAppsList
 ############################################
 # source: Edit-HostsFile.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -775,7 +775,7 @@ Export-ModuleMember -Function Edit-HostsFile
 ############################################
 # source: Edit-PSModulesList.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -883,7 +883,7 @@ Export-ModuleMember -Function Edit-PSModulesList
 ############################################
 # source: Edit-SSHConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1060,7 +1060,7 @@ Export-ModuleMember -Function Edit-SSHConfigFile
 ############################################
 # source: Enable-RemoteHostPSRemoting.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1119,7 +1119,7 @@ Export-ModuleMember -Function Enable-RemoteHostPSRemoting
 ############################################
 # source: Export-ESXTemplate.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1168,7 +1168,7 @@ Export-ModuleMember -Function Export-ESXTemplate
 ############################################
 # source: Find-ChocolateyApp.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1250,7 +1250,7 @@ Export-ModuleMember -Function Find-ChocolateyApp
 ############################################
 # source: Find-OnlineModule.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1415,7 +1415,7 @@ Export-ModuleMember -Function Find-OnlineModule
 ############################################
 # source: Find-OnlineScript.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1599,7 +1599,7 @@ Export-ModuleMember -Function Find-OnlineScript
 ############################################
 # source: Format-AllObjectsInAListView.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1638,7 +1638,7 @@ Export-ModuleMember -Function Format-AllObjectsInAListView
 ############################################
 # source: Get-AllUsersInGroup.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1711,7 +1711,7 @@ Export-ModuleMember -Function Get-AllUsersInGroup
 ############################################
 # source: Get-CitrixClientVersion.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1807,7 +1807,7 @@ Export-ModuleMember -Function Get-CitrixClientVersion
 ############################################
 # source: Get-CitrixPolicies.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1888,7 +1888,7 @@ Export-ModuleMember -Function Get-CitrixPolicies
 ############################################
 # source: Get-CommandFiltered.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1948,7 +1948,7 @@ Export-ModuleMember -Function Get-CommandFiltered
 ############################################
 # source: Get-DeviceUptime.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2012,7 +2012,7 @@ Export-ModuleMember -Function Get-DeviceUptime
 ############################################
 # source: Get-FolderSize.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2177,7 +2177,7 @@ Export-ModuleMember -Function Get-FolderSize
 ############################################
 # source: Get-FQDN.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2225,7 +2225,7 @@ Export-ModuleMember -Function Get-FQDN
 ############################################
 # source: Get-FullADUserDetail.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2308,7 +2308,7 @@ Export-ModuleMember -Function Get-FullADUserDetail
 ############################################
 # source: Get-MyPSGalleryStat.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2381,7 +2381,7 @@ Export-ModuleMember -Function Get-MyPSGalleryStat
 ############################################
 # source: Get-ProcessPerformance.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2443,7 +2443,7 @@ Export-ModuleMember -Function Get-ProcessPerformance
 ############################################
 # source: Get-PropertiesToCSV.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2482,7 +2482,7 @@ Export-ModuleMember -Function Get-PropertiesToCSV
 ############################################
 # source: Get-SoftwareAudit.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2572,7 +2572,7 @@ Export-ModuleMember -Function Get-SoftwareAudit
 ############################################
 # source: Get-SystemInfo.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -2880,7 +2880,7 @@ Export-ModuleMember -Function Get-SystemInfo
 ############################################
 # source: Get-WinEventLogExtract.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3030,7 +3030,7 @@ Export-ModuleMember -Function Get-WinEventLogExtract
 ############################################
 # source: Import-CitrixSiteConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3074,7 +3074,7 @@ Export-ModuleMember -Function Import-CitrixSiteConfigFile
 ############################################
 # source: Import-XamlConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3204,7 +3204,7 @@ Export-ModuleMember -Function Import-XamlConfigFile
 ############################################
 # source: Install-BGInfo.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3280,7 +3280,7 @@ Export-ModuleMember -Function Install-BGInfo
 ############################################
 # source: Install-ChocolateyApp.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3372,7 +3372,7 @@ Export-ModuleMember -Function Install-ChocolateyApp
 ############################################
 # source: Install-ChocolateyClient.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3427,7 +3427,7 @@ Export-ModuleMember -Function Install-ChocolateyClient
 ############################################
 # source: Install-ChocolateyServer.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3549,7 +3549,7 @@ Export-ModuleMember -Function Install-ChocolateyServer
 ############################################
 # source: Install-MicrosoftTerminal.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3615,7 +3615,7 @@ Export-ModuleMember -Function Install-MicrosoftTerminal
 ############################################
 # source: Install-MSUpdate.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3676,7 +3676,7 @@ Export-ModuleMember -Function Install-MSUpdate
 ############################################
 # source: Install-MSWinget.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3763,7 +3763,7 @@ Export-ModuleMember -Function Install-MSWinget
 ############################################
 # source: Install-NFSClient.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3816,7 +3816,7 @@ Export-ModuleMember -Function Install-NFSClient
 ############################################
 # source: Install-PowerShell7x.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3865,7 +3865,7 @@ Export-ModuleMember -Function Install-PowerShell7x
 ############################################
 # source: Install-PSModule.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -3974,7 +3974,7 @@ Export-ModuleMember -Function Install-PSModule
 ############################################
 # source: Install-RSAT.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4033,7 +4033,7 @@ Export-ModuleMember -Function Install-RSAT
 ############################################
 # source: Install-VMWareTool.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4076,7 +4076,7 @@ Export-ModuleMember -Function Install-VMWareTool
 ############################################
 # source: New-CitrixSiteConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4262,7 +4262,7 @@ Export-ModuleMember -Function New-CitrixSiteConfigFile
 ############################################
 # source: New-ElevatedShortcut.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4348,7 +4348,7 @@ Export-ModuleMember -Function New-ElevatedShortcut
 ############################################
 # source: New-GodModeFolder.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4380,7 +4380,7 @@ Export-ModuleMember -Function New-GodModeFolder
 ############################################
 # source: New-GoogleSearch.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4428,7 +4428,7 @@ Export-ModuleMember -Function New-GoogleSearch
 ############################################
 # source: New-PSModule.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4522,7 +4522,7 @@ Export-ModuleMember -Function New-PSModule
 ############################################
 # source: New-PSProfile.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4610,7 +4610,7 @@ Export-ModuleMember -Function New-PSProfile
 ############################################
 # source: New-PSScript.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4771,7 +4771,7 @@ Export-ModuleMember -Function New-PSScript
 ############################################
 # source: New-RemoteDesktopFile.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4869,7 +4869,7 @@ Export-ModuleMember -Function New-RemoteDesktopFile
 ############################################
 # source: New-SuggestedInfraName.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -4958,7 +4958,7 @@ Export-ModuleMember -Function New-SuggestedInfraName
 ############################################
 # source: Remove-CIMUserProfile.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5002,7 +5002,7 @@ Export-ModuleMember -Function Remove-CIMUserProfile
 ############################################
 # source: Remove-FaultyProfileList.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5077,7 +5077,7 @@ Export-ModuleMember -Function Remove-FaultyProfileList
 ############################################
 # source: Remove-HiddenDevice.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5472,7 +5472,7 @@ Export-ModuleMember -Function Remove-HiddenDevice
 ############################################
 # source: Remove-UserProfile.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5548,7 +5548,7 @@ Export-ModuleMember -Function Remove-UserProfile
 ############################################
 # source: Reset-PSGallery.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5608,7 +5608,7 @@ Export-ModuleMember -Function Reset-PSGallery
 ############################################
 # source: Restore-ElevatedShortcut.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5677,7 +5677,7 @@ Export-ModuleMember -Function Restore-ElevatedShortcut
 ############################################
 # source: Search-Script.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5736,7 +5736,7 @@ Export-ModuleMember -Function Search-Script
 ############################################
 # source: Set-FolderCustomIcon.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5808,7 +5808,7 @@ Export-ModuleMember -Function Set-FolderCustomIcon
 ############################################
 # source: Set-PSProjectFile.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -5902,7 +5902,7 @@ Function Set-PSProjectFile {
 	$ModuleIssuesExcel = [IO.Path]::Combine($ModuleBase, 'Issues.xlsx')
 	$ModulePublicFunctions = [IO.Path]::Combine($module.ModuleBase, 'Public') | Get-Item
 	$ModulePrivateFunctions = [IO.Path]::Combine($module.ModuleBase, 'Private') | Get-Item
-	$ModuleMkdocss = [IO.Path]::Combine($ModuleBase, 'docs', 'mkdocss.yml')
+	$Modulemkdocs = [IO.Path]::Combine($ModuleBase, 'docs', 'mkdocs.yml')
 	$ModuleIndex = [IO.Path]::Combine($ModuleBase, 'docs', 'docs', 'index.md')
 	[System.Collections.ArrayList]$Issues = @()
 
@@ -6016,51 +6016,51 @@ Function Set-PSProjectFile {
 	(Get-Command -Module $module).Name | ForEach-Object { $readme.add("- [$_](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
 		$readme | Set-Content -Path $ModuleReadme
 
-		$mkdocssFunc = [System.Collections.Generic.List[string]]::new()
-		$mkdocssFunc.add("site_name: `'$($module.Name)`'")
-		$mkdocssFunc.add("site_description: `'Documentation for PowerShell Module: $($module.Name)`'")
-		$mkdocssFunc.add("site_author: `'$(($ModuleManifest.Author | Out-String).Trim())`'")
-		$mkdocssFunc.add("site_url: `'https://smitpi.github.io/$($module.Name)`'")
-		$mkdocssFunc.add(' ')
-		$mkdocssFunc.add("repo_url: `'https://github.com/smitpi/$($module.Name)`'")
-		$mkdocssFunc.add("repo_name:  `'smitpi/$($module.Name)`'")
-		$mkdocssFunc.add(' ')
-		$mkdocssFunc.add("copyright: `'$(($ModuleManifest.Copyright | Out-String).Trim())`'")
-		$mkdocssFunc.add(' ')
-		$mkdocssFunc.add('extra:')
-		$mkdocssFunc.add('  manifest: manifest.webmanifest')
-		$mkdocssFunc.add('  social:')
-		$mkdocssFunc.add('    - icon: fontawesome/brands/github-square')
-		$mkdocssFunc.add("      link: `'https://smitpi.github.io/$($module.Name)`'")
-		$mkdocssFunc.add(' ')
-		$mkdocssFunc.add('markdown_extensions:')
-		$mkdocssFunc.add('  - pymdownx.keys')
-		$mkdocssFunc.add('  - pymdownx.snippets')
-		$mkdocssFunc.add('  - pymdownx.superfences')
-		$mkdocssFunc.add(' ')
-		$mkdocssFunc.add('theme:')
-		$mkdocssFunc.add('  name: material')
-		$mkdocssFunc.add('  features:')
-		$mkdocssFunc.add('    - navigation.instant')
-		$mkdocssFunc.add('  language: en')
-		$mkdocssFunc.add("  favicon: `'`'")
-		$mkdocssFunc.add("  logo: `'`'")
-		$mkdocssFunc.add('  palette:')
-		$mkdocssFunc.add('    - media: "(prefers-color-scheme: light)"')
-		$mkdocssFunc.add('      primary: blue grey')
-		$mkdocssFunc.add('      accent: indigo')
-		$mkdocssFunc.add('      scheme: default')
-		$mkdocssFunc.add('      toggle:')
-		$mkdocssFunc.add('        icon: material/toggle-switch-off-outline')
-		$mkdocssFunc.add('        name: Switch to dark mode')
-		$mkdocssFunc.add('    - media: "(prefers-color-scheme: dark)"')
-		$mkdocssFunc.add('      primary: blue grey')
-		$mkdocssFunc.add('      accent: indigo')
-		$mkdocssFunc.add('      scheme: slate')
-		$mkdocssFunc.add('      toggle:')
-		$mkdocssFunc.add('        icon: material/toggle-switch')
-		$mkdocssFunc.add('        name: Switch to light mode')
-		$mkdocssFunc | Set-Content -Path $ModuleMkdocss -Force
+		$mkdocsFunc = [System.Collections.Generic.List[string]]::new()
+		$mkdocsFunc.add("site_name: `'$($module.Name)`'")
+		$mkdocsFunc.add("site_description: `'Documentation for PowerShell Module: $($module.Name)`'")
+		$mkdocsFunc.add("site_author: `'$(($ModuleManifest.Author | Out-String).Trim())`'")
+		$mkdocsFunc.add("site_url: `'https://smitpi.github.io/$($module.Name)`'")
+		$mkdocsFunc.add(' ')
+		$mkdocsFunc.add("repo_url: `'https://github.com/smitpi/$($module.Name)`'")
+		$mkdocsFunc.add("repo_name:  `'smitpi/$($module.Name)`'")
+		$mkdocsFunc.add(' ')
+		$mkdocsFunc.add("copyright: `'$(($ModuleManifest.Copyright | Out-String).Trim())`'")
+		$mkdocsFunc.add(' ')
+		$mkdocsFunc.add('extra:')
+		$mkdocsFunc.add('  manifest: manifest.webmanifest')
+		$mkdocsFunc.add('  social:')
+		$mkdocsFunc.add('    - icon: fontawesome/brands/github-square')
+		$mkdocsFunc.add("      link: `'https://smitpi.github.io/$($module.Name)`'")
+		$mkdocsFunc.add(' ')
+		$mkdocsFunc.add('markdown_extensions:')
+		$mkdocsFunc.add('  - pymdownx.keys')
+		$mkdocsFunc.add('  - pymdownx.snippets')
+		$mkdocsFunc.add('  - pymdownx.superfences')
+		$mkdocsFunc.add(' ')
+		$mkdocsFunc.add('theme:')
+		$mkdocsFunc.add('  name: material')
+		$mkdocsFunc.add('  features:')
+		$mkdocsFunc.add('    - navigation.instant')
+		$mkdocsFunc.add('  language: en')
+		$mkdocsFunc.add("  favicon: `'`'")
+		$mkdocsFunc.add("  logo: `'`'")
+		$mkdocsFunc.add('  palette:')
+		$mkdocsFunc.add('    - media: "(prefers-color-scheme: light)"')
+		$mkdocsFunc.add('      primary: blue grey')
+		$mkdocsFunc.add('      accent: indigo')
+		$mkdocsFunc.add('      scheme: default')
+		$mkdocsFunc.add('      toggle:')
+		$mkdocsFunc.add('        icon: material/toggle-switch-off-outline')
+		$mkdocsFunc.add('        name: Switch to dark mode')
+		$mkdocsFunc.add('    - media: "(prefers-color-scheme: dark)"')
+		$mkdocsFunc.add('      primary: blue grey')
+		$mkdocsFunc.add('      accent: indigo')
+		$mkdocsFunc.add('      scheme: slate')
+		$mkdocsFunc.add('      toggle:')
+		$mkdocsFunc.add('        icon: material/toggle-switch')
+		$mkdocsFunc.add('        name: Switch to light mode')
+		$mkdocsFunc | Set-Content -Path $Modulemkdocs -Force
 
 		$indexFile = [System.Collections.Generic.List[string]]::new()
 		Get-Content -Path $ModulesInstuctions | ForEach-Object { $indexFile.add($_) }
@@ -6216,8 +6216,8 @@ Function Set-PSProjectFile {
 		$fragments | Out-File -FilePath $ModuleIssues -Encoding utf8 -Force
 	}
 	#endregion
-	#region mkdocss
-	Write-Color '[Starting]', 'mkdocss' -Color Yellow, DarkCyan
+	#region mkdocs
+	Write-Color '[Starting]', 'mkdocs' -Color Yellow, DarkCyan
 	if ($mkdocs -like 'serve') {
 		Set-Location (Split-Path -Path $Moduledocs -Parent)
 		mkdocs.exe serve 2>&1 | Write-Host -ForegroundColor Yellow
@@ -6259,7 +6259,7 @@ Export-ModuleMember -Function Set-PSProjectFile
 ############################################
 # source: Set-PSToolKitSystemSetting.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6761,7 +6761,7 @@ Export-ModuleMember -Function Set-PSToolKitSystemSetting
 ############################################
 # source: Set-SharedPSProfile.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6831,7 +6831,7 @@ Export-ModuleMember -Function Set-SharedPSProfile
 ############################################
 # source: Set-StaticIP.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6880,7 +6880,7 @@ Export-ModuleMember -Function Set-StaticIP
 ############################################
 # source: Set-TempFolder.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -6919,7 +6919,7 @@ Export-ModuleMember -Function Set-TempFolder
 ############################################
 # source: Set-WindowsAutoLogin.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7036,7 +7036,7 @@ Export-ModuleMember -Function Set-WindowsAutoLogin
 ############################################
 # source: Show-ComputerManagement.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7072,7 +7072,7 @@ Export-ModuleMember -Function Show-ComputerManagement
 ############################################
 # source: Show-PSToolKit.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7280,7 +7280,7 @@ Export-ModuleMember -Function Show-PSToolKit
 ############################################
 # source: Start-PSModuleMaintenance.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7448,7 +7448,7 @@ Export-ModuleMember -Function Start-PSModuleMaintenance
 ############################################
 # source: Start-PSProfile.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7626,7 +7626,7 @@ Export-ModuleMember -Function Start-PSProfile
 ############################################
 # source: Start-PSRoboCopy.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7744,7 +7744,7 @@ Export-ModuleMember -Function Start-PSRoboCopy
 ############################################
 # source: Start-PSScriptAnalyzer.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -7898,7 +7898,7 @@ Export-ModuleMember -Function Start-PSScriptAnalyzer
 ############################################
 # source: Start-PSToolkitSystemInitialize.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8008,7 +8008,7 @@ Export-ModuleMember -Function Start-PSToolkitSystemInitialize
 ############################################
 # source: Test-CitrixCloudConnector.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8114,7 +8114,7 @@ Export-ModuleMember -Function Test-CitrixCloudConnector
 ############################################
 # source: Test-CitrixVDAPorts.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8213,7 +8213,7 @@ Export-ModuleMember -Function Test-CitrixVDAPorts
 ############################################
 # source: Test-IsFileOpen.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8280,7 +8280,7 @@ Export-ModuleMember -Function Test-IsFileOpen
 ############################################
 # source: Test-PendingReboot.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8461,7 +8461,7 @@ Export-ModuleMember -Function Test-PendingReboot
 ############################################
 # source: Test-PSRemote.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8518,7 +8518,7 @@ Export-ModuleMember -Function Test-PSRemote
 ############################################
 # source: Update-ListOfDDC.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8582,7 +8582,7 @@ Export-ModuleMember -Function Update-ListOfDDC
 ############################################
 # source: Update-LocalHelp.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8624,7 +8624,7 @@ Export-ModuleMember -Function Update-LocalHelp
 ############################################
 # source: Update-PSModuleInfo.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8727,7 +8727,7 @@ Export-ModuleMember -Function Update-PSModuleInfo
 ############################################
 # source: Update-PSToolKit.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8829,7 +8829,7 @@ Export-ModuleMember -Function Update-PSToolKit
 ############################################
 # source: Update-PSToolKitConfigFile.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -8976,7 +8976,7 @@ Export-ModuleMember -Function Update-PSToolKitConfigFile
 ############################################
 # source: Write-Ascii.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -9371,7 +9371,7 @@ Export-ModuleMember -Function Write-Ascii
 ############################################
 # source: Write-PSToolKitLog.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -9486,7 +9486,7 @@ Export-ModuleMember -Function Write-PSToolKitLog
 ############################################
 # source: Write-PSToolKitMessage.ps1
 # Module: PSToolKit
-# version: 0.1.107
+# version: 0.1.109
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
