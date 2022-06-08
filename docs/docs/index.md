@@ -25,11 +25,10 @@ Get-Help about_PSToolKit
 Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit)
  
 ## Functions
+- [Get-BinRoot](https://smitpi.github.io/PSToolKit/#Get-BinRoot) -- Get-ToolsLocation
 - [Add-ChocolateyPrivateRepo](https://smitpi.github.io/PSToolKit/#Add-ChocolateyPrivateRepo) -- Add a private repository to Chocolatey.
 - [Backup-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#Backup-ElevatedShortcut) -- Exports the RunAss shortcuts, to a zip file
 - [Backup-PowerShellProfile](https://smitpi.github.io/PSToolKit/#Backup-PowerShellProfile) -- Creates a zip file from the ps profile directories
-- [Build-ModuleDocumentation](https://smitpi.github.io/PSToolKit/#Build-ModuleDocumentation) -- Use Platyps to create documentation form help
-- [Build-MonolithicModule](https://smitpi.github.io/PSToolKit/#Build-MonolithicModule) -- Combines ps1 files into one psm1 file
 - [Compare-ADMembership](https://smitpi.github.io/PSToolKit/#Compare-ADMembership) -- Compare two users AD group memberships
 - [Connect-VMWareCluster](https://smitpi.github.io/PSToolKit/#Connect-VMWareCluster) -- Connect to a vSphere cluster to perform other commands or scripts
 - [Edit-ChocolateyAppsList](https://smitpi.github.io/PSToolKit/#Edit-ChocolateyAppsList) -- Add or remove apps from the json file used in Install-ChocolateyApps
@@ -87,6 +86,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Restore-ElevatedShortcut](https://smitpi.github.io/PSToolKit/#Restore-ElevatedShortcut) -- Restore the RunAss shortcuts, from a zip file
 - [Search-Script](https://smitpi.github.io/PSToolKit/#Search-Script) -- Search for a string in a directory of ps1 scripts.
 - [Set-FolderCustomIcon](https://smitpi.github.io/PSToolKit/#Set-FolderCustomIcon) -- Will change the icon of a folder to a custom selected icon
+- [Set-PSProjectFile](https://smitpi.github.io/PSToolKit/#Set-PSProjectFile) -- Creates and modify needed files for a PS project from existing module files.
 - [Set-PSToolKitSystemSetting](https://smitpi.github.io/PSToolKit/#Set-PSToolKitSystemSetting) -- Set multiple settings on desktop or server
 - [Set-SharedPSProfile](https://smitpi.github.io/PSToolKit/#Set-SharedPSProfile) -- Redirects PowerShell profile to network share.
 - [Set-StaticIP](https://smitpi.github.io/PSToolKit/#Set-StaticIP) -- Set static IP on device

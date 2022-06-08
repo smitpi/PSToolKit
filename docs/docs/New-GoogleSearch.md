@@ -44,7 +44,7 @@ Accept wildcard characters: False
 ```
 
 ### -Clipboard
-Use clipboad to search
+Use clipboard to search
 
 ```yaml
 Type: SwitchParameter

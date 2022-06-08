@@ -84,19 +84,11 @@ Function Set-PSProjectFile {
 	#region module
 	Write-Color '[Starting]', 'Module Import' -Color Yellow, DarkCyan
 	try {
-        $modulefile = (Join-Path $([Environment]::GetFolderPath('MyDocuments')) -ChildPath ".\PowerShell\ProdModules\$($ModuleName)\$($ModuleName)\$($ModuleName).psm1") | get-item -ErrorAction Stop
+		$modulefile = (Join-Path $([Environment]::GetFolderPath('MyDocuments')) -ChildPath ".\PowerShell\ProdModules\$($ModuleName)\$($ModuleName)\$($ModuleName).psm1") | Get-Item -ErrorAction Stop
 		Remove-Module $ModuleName -Force -ErrorAction SilentlyContinue
 		Import-Module $modulefile -Force -ErrorAction Stop
-        $module = Get-Module $ModuleName -ErrorAction Stop
+		$module = Get-Module $ModuleName -ErrorAction Stop
 	} catch {Write-Error "Error: Importing Module `nMessage:$($_.Exception.message)"; exit}
-	try {
-		$ModuleManifestFile = Get-Item ($module.Path).Replace('.psm1', '.psd1')
-		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object * -ErrorAction Stop
-		$FileContent = Get-Content $ModuleManifestFile -ErrorAction Stop
-		$DateLine = Select-String -InputObject $ModuleManifestFile -Pattern '# Generated on:'
-		$FileContent[($DateLine.LineNumber - 1)] = "# Generated on: $(Get-Date -Format u)"
-		$FileContent | Set-Content $ModuleManifestFile -Force -ErrorAction Stop
-	} catch {Write-Error "Error: Update versions `nMessage:$($_.Exception.message)"; exit}
 
 	if ($VersionBump -like 'Minor' -or $VersionBump -like 'Build' ) {
 		try {
@@ -114,6 +106,15 @@ Function Set-PSProjectFile {
 			Update-ModuleManifest @manifestProperties -ErrorAction Stop
 		} catch {Write-Error "Error: Updateing Version `nMessage:$($_.Exception.message)"; exit}
 	} 
+
+	try {
+		$ModuleManifestFile = Get-Item ($module.Path).Replace('.psm1', '.psd1')
+		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object * -ErrorAction Stop
+		$FileContent = Get-Content $ModuleManifestFile -ErrorAction Stop
+		$DateLine = Select-String -InputObject $ModuleManifestFile -Pattern '# Generated on:'
+		$FileContent[($DateLine.LineNumber - 1)] = "# Generated on: $(Get-Date -Format u)"
+		$FileContent | Set-Content $ModuleManifestFile -Force -ErrorAction Stop
+	} catch {Write-Error "Error: Update versions `nMessage:$($_.Exception.message)"; exit}
 		
 	#endregion
 
@@ -134,7 +135,6 @@ Function Set-PSProjectFile {
 	[System.Collections.ArrayList]$Issues = @()
 
 	try {
-
 		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop; Start-Sleep 5 }
 		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
 		if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }
@@ -142,163 +142,163 @@ Function Set-PSProjectFile {
 		if (Test-Path $ModuleIssuesExcel) {Remove-Item $ModuleIssuesExcel -Force -ErrorAction Stop }	
 	} catch {throw 'Unable to delete old folders.' ; exit}
 
-    try {
-	$ModuleOutput = New-Item $ModuleOutput -ItemType Directory -Force | Get-Item -ErrorAction Stop
-	$Moduledocs = New-Item $Moduledocs -ItemType Directory -Force | Get-Item -ErrorAction Stop
-	$ModuleExternalHelp = New-Item $ModuleExternalHelp -ItemType Directory -Force | Get-Item -ErrorAction Stop
-    } catch {Write-Error "Error: Creating folders `nMessage:$($_.Exception.message)"; exit}
+	try {
+		$ModuleOutput = New-Item $ModuleOutput -ItemType Directory -Force | Get-Item -ErrorAction Stop
+		$Moduledocs = New-Item $Moduledocs -ItemType Directory -Force | Get-Item -ErrorAction Stop
+		$ModuleExternalHelp = New-Item $ModuleExternalHelp -ItemType Directory -Force | Get-Item -ErrorAction Stop
+	} catch {Write-Error "Error: Creating folders `nMessage:$($_.Exception.message)"; exit}
 
-    #endregion
+	#endregion
 
 	#region platyps
-    try {
-	    Write-Color '[Starting]', 'Creating External help files' -Color Yellow, DarkCyan
-	    $markdownParams = @{
-		    Module         = $module.Name
-		    OutputFolder   = $Moduledocs.FullName
-		    WithModulePage = $false
-		    Locale         = 'en-US'
-		    HelpVersion    = $ModuleManifest.Version.ToString()
-	    }
-	    New-MarkdownHelp @markdownParams
-    } catch {Write-Error "Error: MarkdownHelp `nMessage:$($_.Exception.message)"; exit}
+	try {
+		Write-Color '[Starting]', 'Creating External help files' -Color Yellow, DarkCyan
+		$markdownParams = @{
+			Module         = $module.Name
+			OutputFolder   = $Moduledocs.FullName
+			WithModulePage = $false
+			Locale         = 'en-US'
+			HelpVersion    = $ModuleManifest.Version.ToString()
+		}
+		New-MarkdownHelp @markdownParams
+	} catch {Write-Error "Error: MarkdownHelp `nMessage:$($_.Exception.message)"; exit}
 
-    try {
-	Compare-Object -ReferenceObject (Get-ChildItem $ModulePublicFunctions).BaseName -DifferenceObject (Get-ChildItem $Moduledocs).BaseName | Where-Object { $_.SideIndicator -like '<=' } | ForEach-Object {
-		[void]$Issues.Add([PSCustomObject]@{
-				Catagory = 'External Help'
-				File     = $_.InputObject
-				details  = 'Did not create the .md file'
-			})
-	}
-
-	$MissingDocumentation = Select-String -Path (Join-Path $Moduledocs.FullName -ChildPath '\*.md') -Pattern '({{.*}})'
-	$group = $MissingDocumentation | Group-Object -Property Line
-	foreach ($gr in $group) {
-		foreach ($item in $gr.Group) {
-			$object = Get-Item $item.Path
-			$mod = Get-Content -Path $object.FullName
-			Write-Color "$($object.name):", "$($mod[$($item.LineNumber -2)]) - $($mod[$($item.LineNumber -1)])" -Color Cyan, Yellow
+	try {
+		Compare-Object -ReferenceObject (Get-ChildItem $ModulePublicFunctions).BaseName -DifferenceObject (Get-ChildItem $Moduledocs).BaseName | Where-Object { $_.SideIndicator -like '<=' } | ForEach-Object {
 			[void]$Issues.Add([PSCustomObject]@{
 					Catagory = 'External Help'
-					File     = $object.name
-					details  = "$($object.name) - $($mod[$($item.LineNumber -2)]) - $($mod[$($item.LineNumber -1)])"
+					File     = $_.InputObject
+					details  = 'Did not create the .md file'
 				})
 		}
-	}
-    } catch {Write-Error "Error: Docs check `nMessage:$($_.Exception.message)"; exit}
 
-    try {
-	New-ExternalHelp -Path $Moduledocs.FullName -OutputPath $ModuleExternalHelp.FullName -Force -ShowProgress
+		$MissingDocumentation = Select-String -Path (Join-Path $Moduledocs.FullName -ChildPath '\*.md') -Pattern '({{.*}})'
+		$group = $MissingDocumentation | Group-Object -Property Line
+		foreach ($gr in $group) {
+			foreach ($item in $gr.Group) {
+				$object = Get-Item $item.Path
+				$mod = Get-Content -Path $object.FullName
+				Write-Color "$($object.name):", "$($mod[$($item.LineNumber -2)]) - $($mod[$($item.LineNumber -1)])" -Color Cyan, Yellow
+				[void]$Issues.Add([PSCustomObject]@{
+						Catagory = 'External Help'
+						File     = $object.name
+						details  = "$($object.name) - $($mod[$($item.LineNumber -2)]) - $($mod[$($item.LineNumber -1)])"
+					})
+			}
+		}
+	} catch {Write-Error "Error: Docs check `nMessage:$($_.Exception.message)"; exit}
 
-	$aboutfile = [System.Collections.Generic.List[string]]::new()
-	$aboutfile.Add('')
-	$aboutfile.Add("$($module.Name)")
-	$aboutfile.Add("`t about_$($module.Name)")
-	$aboutfile.Add(' ')
-	$aboutfile.Add('SHORT DESCRIPTION')
-	$aboutfile.Add("`t $(($ModuleManifest.Description | Out-String))")
-	$aboutfile.Add(' ')
-	$aboutfile.Add('NOTES')
-	$aboutfile.Add('Functions in this module:')
+	try {
+		New-ExternalHelp -Path $Moduledocs.FullName -OutputPath $ModuleExternalHelp.FullName -Force -ShowProgress
+
+		$aboutfile = [System.Collections.Generic.List[string]]::new()
+		$aboutfile.Add('')
+		$aboutfile.Add("$($module.Name)")
+		$aboutfile.Add("`t about_$($module.Name)")
+		$aboutfile.Add(' ')
+		$aboutfile.Add('SHORT DESCRIPTION')
+		$aboutfile.Add("`t $(($ModuleManifest.Description | Out-String))")
+		$aboutfile.Add(' ')
+		$aboutfile.Add('NOTES')
+		$aboutfile.Add('Functions in this module:')
 	(Get-Command -Module $module).Name | ForEach-Object { ($aboutfile.Add("`t $_ -- $((Get-Help $_).synopsis)")) }
-	$aboutfile.Add(' ')
-	$aboutfile.Add('SEE ALSO')
-	$aboutfile.Add("`t $(($ModuleManifest.ProjectUri.AbsoluteUri | Out-String))")
-	$aboutfile.Add("`t $(($ModuleManifest.HelpInfoUri | Out-String))")
-	$aboutfile | Set-Content -Path (Join-Path $ModuleExternalHelp.FullName -ChildPath "\about_$($module.Name).help.txt") -Force
+		$aboutfile.Add(' ')
+		$aboutfile.Add('SEE ALSO')
+		$aboutfile.Add("`t $(($ModuleManifest.ProjectUri.AbsoluteUri | Out-String))")
+		$aboutfile.Add("`t $(($ModuleManifest.HelpInfoUri | Out-String))")
+		$aboutfile | Set-Content -Path (Join-Path $ModuleExternalHelp.FullName -ChildPath "\about_$($module.Name).help.txt") -Force
 
-	if (!(Test-Path $ModulesInstuctions)) {
-		$instructions = [System.Collections.Generic.List[string]]::new()
-		$instructions.add("# $($module.Name)")
-		$instructions.Add(' ')
-		$instructions.add('## Description')
-		$instructions.add("$(($ModuleManifest.Description | Out-String).Trim())")
-		$instructions.Add(' ')
-		$instructions.Add('## Getting Started')
-		$instructions.Add("- Install from PowerShell Gallery [PS Gallery](https://www.powershellgallery.com/packages/$($module.Name))")
-		$instructions.Add('```')
-		$instructions.Add("Install-Module -Name $($module.Name) -Verbose")
-		$instructions.Add('```')
-		$instructions.Add("- or from GitHub [GitHub Repo](https://github.com/smitpi/$($module.Name))")
-		$instructions.Add('```')
-		$instructions.Add("git clone https://github.com/smitpi/$($module.Name) (Join-Path (get-item (Join-Path (Get-Item `$profile).Directory 'Modules')).FullName -ChildPath $($Module.Name))")
-		$instructions.Add('```')
-		$instructions.Add('- Then import the module into your session')
-		$instructions.Add('```')
-		$instructions.Add("Import-Module $($module.Name) -Verbose -Force")
-		$instructions.Add('```')
-		$instructions.Add('- or run these commands for more help and details.')
-		$instructions.Add('```')
-		$instructions.Add("Get-Command -Module $($module.Name)")
-		$instructions.Add("Get-Help about_$($module.Name)")
-		$instructions.Add('```')
-		$instructions.Add("Documentation can be found at: [Github_Pages](https://smitpi.github.io/$($module.Name))")
-		$instructions | Set-Content -Path $ModulesInstuctions
-	}
+		if (!(Test-Path $ModulesInstuctions)) {
+			$instructions = [System.Collections.Generic.List[string]]::new()
+			$instructions.add("# $($module.Name)")
+			$instructions.Add(' ')
+			$instructions.add('## Description')
+			$instructions.add("$(($ModuleManifest.Description | Out-String).Trim())")
+			$instructions.Add(' ')
+			$instructions.Add('## Getting Started')
+			$instructions.Add("- Install from PowerShell Gallery [PS Gallery](https://www.powershellgallery.com/packages/$($module.Name))")
+			$instructions.Add('```')
+			$instructions.Add("Install-Module -Name $($module.Name) -Verbose")
+			$instructions.Add('```')
+			$instructions.Add("- or from GitHub [GitHub Repo](https://github.com/smitpi/$($module.Name))")
+			$instructions.Add('```')
+			$instructions.Add("git clone https://github.com/smitpi/$($module.Name) (Join-Path (get-item (Join-Path (Get-Item `$profile).Directory 'Modules')).FullName -ChildPath $($Module.Name))")
+			$instructions.Add('```')
+			$instructions.Add('- Then import the module into your session')
+			$instructions.Add('```')
+			$instructions.Add("Import-Module $($module.Name) -Verbose -Force")
+			$instructions.Add('```')
+			$instructions.Add('- or run these commands for more help and details.')
+			$instructions.Add('```')
+			$instructions.Add("Get-Command -Module $($module.Name)")
+			$instructions.Add("Get-Help about_$($module.Name)")
+			$instructions.Add('```')
+			$instructions.Add("Documentation can be found at: [Github_Pages](https://smitpi.github.io/$($module.Name))")
+			$instructions | Set-Content -Path $ModulesInstuctions
+		}
 
-	$readme = [System.Collections.Generic.List[string]]::new()
-	Get-Content -Path $ModulesInstuctions | ForEach-Object { $readme.add($_) }
-	$readme.add(' ')
-	$readme.add('## Functions')
+		$readme = [System.Collections.Generic.List[string]]::new()
+		Get-Content -Path $ModulesInstuctions | ForEach-Object { $readme.add($_) }
+		$readme.add(' ')
+		$readme.add('## Functions')
 	(Get-Command -Module $module).Name | ForEach-Object { $readme.add("- [$_](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
-	$readme | Set-Content -Path $ModuleReadme
+		$readme | Set-Content -Path $ModuleReadme
 
-	$mkdocsFunc = [System.Collections.Generic.List[string]]::new()
-	$mkdocsFunc.add("site_name: `'$($module.Name)`'")
-	$mkdocsFunc.add("site_description: `'Documentation for PowerShell Module: $($module.Name)`'")
-	$mkdocsFunc.add("site_author: `'$(($ModuleManifest.Author | Out-String).Trim())`'")
-	$mkdocsFunc.add("site_url: `'https://smitpi.github.io/$($module.Name)`'")
-	$mkdocsFunc.add(' ')
-	$mkdocsFunc.add("repo_url: `'https://github.com/smitpi/$($module.Name)`'")
-	$mkdocsFunc.add("repo_name:  `'smitpi/$($module.Name)`'")
-	$mkdocsFunc.add(' ')
-	$mkdocsFunc.add("copyright: `'$(($ModuleManifest.Copyright | Out-String).Trim())`'")
-	$mkdocsFunc.add(' ')
-	$mkdocsFunc.add('extra:')
-	$mkdocsFunc.add('  manifest: manifest.webmanifest')
-	$mkdocsFunc.add('  social:')
-	$mkdocsFunc.add('    - icon: fontawesome/brands/github-square')
-	$mkdocsFunc.add("      link: `'https://smitpi.github.io/$($module.Name)`'")
-	$mkdocsFunc.add(' ')
-	$mkdocsFunc.add('markdown_extensions:')
-	$mkdocsFunc.add('  - pymdownx.keys')
-	$mkdocsFunc.add('  - pymdownx.snippets')
-	$mkdocsFunc.add('  - pymdownx.superfences')
-	$mkdocsFunc.add(' ')
-	$mkdocsFunc.add('theme:')
-	$mkdocsFunc.add('  name: material')
-	$mkdocsFunc.add('  features:')
-	$mkdocsFunc.add('    - navigation.instant')
-	$mkdocsFunc.add('  language: en')
-	$mkdocsFunc.add("  favicon: `'`'")
-	$mkdocsFunc.add("  logo: `'`'")
-	$mkdocsFunc.add('  palette:')
-	$mkdocsFunc.add('    - media: "(prefers-color-scheme: light)"')
-	$mkdocsFunc.add('      primary: blue grey')
-	$mkdocsFunc.add('      accent: indigo')
-	$mkdocsFunc.add('      scheme: default')
-	$mkdocsFunc.add('      toggle:')
-	$mkdocsFunc.add('        icon: material/toggle-switch-off-outline')
-	$mkdocsFunc.add('        name: Switch to dark mode')
-	$mkdocsFunc.add('    - media: "(prefers-color-scheme: dark)"')
-	$mkdocsFunc.add('      primary: blue grey')
-	$mkdocsFunc.add('      accent: indigo')
-	$mkdocsFunc.add('      scheme: slate')
-	$mkdocsFunc.add('      toggle:')
-	$mkdocsFunc.add('        icon: material/toggle-switch')
-	$mkdocsFunc.add('        name: Switch to light mode')
-	$mkdocsFunc | Set-Content -Path $ModuleMkdocs -Force
+		$mkdocsFunc = [System.Collections.Generic.List[string]]::new()
+		$mkdocsFunc.add("site_name: `'$($module.Name)`'")
+		$mkdocsFunc.add("site_description: `'Documentation for PowerShell Module: $($module.Name)`'")
+		$mkdocsFunc.add("site_author: `'$(($ModuleManifest.Author | Out-String).Trim())`'")
+		$mkdocsFunc.add("site_url: `'https://smitpi.github.io/$($module.Name)`'")
+		$mkdocsFunc.add(' ')
+		$mkdocsFunc.add("repo_url: `'https://github.com/smitpi/$($module.Name)`'")
+		$mkdocsFunc.add("repo_name:  `'smitpi/$($module.Name)`'")
+		$mkdocsFunc.add(' ')
+		$mkdocsFunc.add("copyright: `'$(($ModuleManifest.Copyright | Out-String).Trim())`'")
+		$mkdocsFunc.add(' ')
+		$mkdocsFunc.add('extra:')
+		$mkdocsFunc.add('  manifest: manifest.webmanifest')
+		$mkdocsFunc.add('  social:')
+		$mkdocsFunc.add('    - icon: fontawesome/brands/github-square')
+		$mkdocsFunc.add("      link: `'https://smitpi.github.io/$($module.Name)`'")
+		$mkdocsFunc.add(' ')
+		$mkdocsFunc.add('markdown_extensions:')
+		$mkdocsFunc.add('  - pymdownx.keys')
+		$mkdocsFunc.add('  - pymdownx.snippets')
+		$mkdocsFunc.add('  - pymdownx.superfences')
+		$mkdocsFunc.add(' ')
+		$mkdocsFunc.add('theme:')
+		$mkdocsFunc.add('  name: material')
+		$mkdocsFunc.add('  features:')
+		$mkdocsFunc.add('    - navigation.instant')
+		$mkdocsFunc.add('  language: en')
+		$mkdocsFunc.add("  favicon: `'`'")
+		$mkdocsFunc.add("  logo: `'`'")
+		$mkdocsFunc.add('  palette:')
+		$mkdocsFunc.add('    - media: "(prefers-color-scheme: light)"')
+		$mkdocsFunc.add('      primary: blue grey')
+		$mkdocsFunc.add('      accent: indigo')
+		$mkdocsFunc.add('      scheme: default')
+		$mkdocsFunc.add('      toggle:')
+		$mkdocsFunc.add('        icon: material/toggle-switch-off-outline')
+		$mkdocsFunc.add('        name: Switch to dark mode')
+		$mkdocsFunc.add('    - media: "(prefers-color-scheme: dark)"')
+		$mkdocsFunc.add('      primary: blue grey')
+		$mkdocsFunc.add('      accent: indigo')
+		$mkdocsFunc.add('      scheme: slate')
+		$mkdocsFunc.add('      toggle:')
+		$mkdocsFunc.add('        icon: material/toggle-switch')
+		$mkdocsFunc.add('        name: Switch to light mode')
+		$mkdocsFunc | Set-Content -Path $ModuleMkdocs -Force
 
-	$indexFile = [System.Collections.Generic.List[string]]::new()
-	Get-Content -Path $ModulesInstuctions | ForEach-Object { $indexFile.add($_) }
-	$indexFile.add(' ')
-	$indexFile.add('## Functions')
+		$indexFile = [System.Collections.Generic.List[string]]::new()
+		Get-Content -Path $ModulesInstuctions | ForEach-Object { $indexFile.add($_) }
+		$indexFile.add(' ')
+		$indexFile.add('## Functions')
 	(Get-Command -Module $module).Name | ForEach-Object { $indexFile.add("- [$_](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
-	$indexFile | Set-Content -Path $ModuleIndex -Force
-    } catch {Write-Error "Error: Other Files `nMessage:$($_.Exception.message)"; exit}
+		$indexFile | Set-Content -Path $ModuleIndex -Force
+	} catch {Write-Error "Error: Other Files `nMessage:$($_.Exception.message)"; exit}
 	
-#endregion
+	#endregion
 	
 	#region Combine files
 	Write-Color '[Starting]', 'Creating new module files' -Color Yellow, DarkCyan
@@ -396,7 +396,6 @@ Function Set-PSProjectFile {
 
 		$manifest = Import-PowerShellDataFile $ModuleManifest.Path
 		$manifest.Remove('CmdletsToExport')
-		#$manifest.Remove("RequiredModules")
 		$manifest.Remove('AliasesToExport')
 		$manifest.Remove('PrivateData')
 		if ($ModuleManifest.Tags) { $manifest.Add('Tags', $ModuleManifest.Tags)}
@@ -447,15 +446,15 @@ Function Set-PSProjectFile {
 	#endregion
 	#region mkdocs
 	Write-Color '[Starting]', 'mkdocs' -Color Yellow, DarkCyan
-	if ($mkdocs -like 'serve') {
+	if ($mkdoc -like 'serve') {
 		Set-Location (Split-Path -Path $Moduledocs -Parent)
-		Start-Process mkdocs serve
+		mkdocs serve 2>&1 | Write-Host -ForegroundColor Yellow
 		Start-Sleep 5
 		Start-Process "http://127.0.0.1:8000/$($module.Name)/"
 	}
-	if ($mkdocs -like 'deploy') {
+	if ($mkdoc -like 'deploy') {
 		Set-Location (Split-Path -Path $Moduledocs -Parent)
-		Start-Process mkdocs gh-deploy
+		mkdocs.exe gh-deploy 2>&1 | Write-Host -ForegroundColor Yellow 
 	}
 	#endregion
 
@@ -475,9 +474,8 @@ Function Set-PSProjectFile {
 }#end Function
  
 $scriptblock = {
-    param($commandName,$parameterName,$stringMatch)
+	param($commandName, $parameterName, $stringMatch)
     
-    Get-ChildItem -Path "D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\*" | Select-Object -ExpandProperty Name
+	Get-ChildItem -Path 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\*' | Select-Object -ExpandProperty Name
 }
-
 Register-ArgumentCompleter -CommandName Set-PSProjectFile -ParameterName ModuleName -ScriptBlock $scriptBlock

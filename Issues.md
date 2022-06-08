@@ -1,4 +1,4 @@
-﻿<style>
+<style>
 table {
     border-collapse: collapse;
 }
@@ -20,22 +20,13 @@ body {
 
 ---
 
-| Catagory      | File                         | details                                                                                          |
-| ------------- | ---------------------------- | ------------------------------------------------------------------------------------------------ |
-| External Help | Test-CitrixVDAPorts          | Did not create the .md file                                                                      |
-| External Help | Build-ModuleDocumentation.md | Build-ModuleDocumentation.md - ### -ModulePSM1 - {{ Fill ModulePSM1 Description }}               |
-| External Help | Build-MonolithicModule.md    | Build-MonolithicModule.md - ### -ModulePSM1 - {{ Fill ModulePSM1 Description }}                  |
-| External Help | Build-ModuleDocumentation.md | Build-ModuleDocumentation.md - ### -VersionBump - {{ Fill VersionBump Description }}             |
-| External Help | Build-MonolithicModule.md    | Build-MonolithicModule.md - ### -VersionBump - {{ Fill VersionBump Description }}                |
-| External Help | Build-ModuleDocumentation.md | Build-ModuleDocumentation.md - ### -CopyNestedModules - {{ Fill CopyNestedModules Description }} |
-| External Help | Build-MonolithicModule.md    | Build-MonolithicModule.md - ### -CopyNestedModules - {{ Fill CopyNestedModules Description }}    |
-| External Help | Build-ModuleDocumentation.md | Build-ModuleDocumentation.md - ### -mkdocs - {{ Fill mkdocs Description }}                       |
-| External Help | Build-ModuleDocumentation.md | Build-ModuleDocumentation.md - ### -GitPush - {{ Fill GitPush Description }}                     |
-| External Help | Build-MonolithicModule.md    | Build-MonolithicModule.md - ### -OutputFolder - {{ Fill OutputFolder Description }}              |
-| External Help | Set-PSProjectFile.md         | Set-PSProjectFile.md - ### -mkdoc - {{ Fill mkdoc Description }}                                 |
-| Not Copied    | Set-PSProjectFile            | =>                                                                                               |
-| Not Copied    | Test-CitrixVDAPorts          | =>                                                                                               |
+| Catagory      | File                 | details                                                          |
+| ------------- | -------------------- | ---------------------------------------------------------------- |
+| External Help | Test-CitrixVDAPorts  | Did not create the .md file                                      |
+| External Help | Set-PSProjectFile.md | Set-PSProjectFile.md - ### -mkdoc - {{ Fill mkdoc Description }} |
+| Not Copied    | Test-CitrixVDAPorts  | =>                                                               |
+| Not Copied    | Get-BinRoot          | <=                                                               |
 
 ---
 
-*Updated: Thursday, 02 June 2022 03:45:37 UTC*
+*Updated: Wednesday, 08 June 2022 04:23:48 UTC*
