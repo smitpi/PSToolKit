@@ -13,7 +13,7 @@ Creates and modify needed files for a PS project from existing module files.
 ## SYNTAX
 
 ```
-Set-PSProjectFile [-ModuleName] <FileInfo> [[-VersionBump] <String>] [[-mkdoc] <String>] [-CopyNestedModules]
+Set-PSProjectFile [-ModuleName] <FileInfo> [[-VersionBump] <String>] [[-mkdocs] <String>] [-CopyNestedModules]
  [-GitPush] [<CommonParameters>]
 ```
 
@@ -59,8 +59,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -mkdoc
-{{ Fill mkdoc Description }}
+### -mkdocs
+Create and test the mkdocs site
 
 ```yaml
 Type: String

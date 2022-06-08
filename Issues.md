@@ -20,13 +20,12 @@ body {
 
 ---
 
-| Catagory      | File                 | details                                                          |
-| ------------- | -------------------- | ---------------------------------------------------------------- |
-| External Help | Test-CitrixVDAPorts  | Did not create the .md file                                      |
-| External Help | Set-PSProjectFile.md | Set-PSProjectFile.md - ### -mkdoc - {{ Fill mkdoc Description }} |
-| Not Copied    | Test-CitrixVDAPorts  | =>                                                               |
-| Not Copied    | Get-BinRoot          | <=                                                               |
+| Catagory      | File                | details                     |
+| ------------- | ------------------- | --------------------------- |
+| External Help | Test-CitrixVDAPorts | Did not create the .md file |
+| Not Copied    | Test-CitrixVDAPorts | =>                          |
+| Not Copied    | Get-BinRoot         | <=                          |
 
 ---
 
-*Updated: Wednesday, 08 June 2022 04:23:48 UTC*
+*Updated: Wednesday, 08 June 2022 04:26:41 UTC*

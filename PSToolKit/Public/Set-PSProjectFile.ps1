@@ -71,12 +71,11 @@ Function Set-PSProjectFile {
 	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/CTXOnPrem/Convert-PSModule')]
 	PARAM(
 		[Parameter(Mandatory = $true)]
-		[ValidateScript( { (Get-Module $_) -or (Get-Module $_ -ListAvailable) })]
 		[System.IO.FileInfo]$ModuleName,
 		[ValidateSet('Minor', 'Build', 'CombineOnly')]
 		[string]$VersionBump = 'CombineOnly',
 		[ValidateSet('serve', 'deploy')]
-		[string]$mkdoc = 'None',
+		[string]$mkdocs = 'None',
 		[switch]$CopyNestedModules = $false,
 		[Switch]$GitPush = $false
 	)
@@ -130,7 +129,7 @@ Function Set-PSProjectFile {
 	$ModuleIssuesExcel = [IO.Path]::Combine($ModuleBase, 'Issues.xlsx')
 	$ModulePublicFunctions = [IO.Path]::Combine($module.ModuleBase, 'Public') | Get-Item
 	$ModulePrivateFunctions = [IO.Path]::Combine($module.ModuleBase, 'Private') | Get-Item
-	$ModuleMkdocs = [IO.Path]::Combine($ModuleBase, 'docs', 'mkdocs.yml')
+	$ModuleMkdocss = [IO.Path]::Combine($ModuleBase, 'docs', 'mkdocss.yml')
 	$ModuleIndex = [IO.Path]::Combine($ModuleBase, 'docs', 'docs', 'index.md')
 	[System.Collections.ArrayList]$Issues = @()
 
@@ -244,51 +243,51 @@ Function Set-PSProjectFile {
 	(Get-Command -Module $module).Name | ForEach-Object { $readme.add("- [$_](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
 		$readme | Set-Content -Path $ModuleReadme
 
-		$mkdocsFunc = [System.Collections.Generic.List[string]]::new()
-		$mkdocsFunc.add("site_name: `'$($module.Name)`'")
-		$mkdocsFunc.add("site_description: `'Documentation for PowerShell Module: $($module.Name)`'")
-		$mkdocsFunc.add("site_author: `'$(($ModuleManifest.Author | Out-String).Trim())`'")
-		$mkdocsFunc.add("site_url: `'https://smitpi.github.io/$($module.Name)`'")
-		$mkdocsFunc.add(' ')
-		$mkdocsFunc.add("repo_url: `'https://github.com/smitpi/$($module.Name)`'")
-		$mkdocsFunc.add("repo_name:  `'smitpi/$($module.Name)`'")
-		$mkdocsFunc.add(' ')
-		$mkdocsFunc.add("copyright: `'$(($ModuleManifest.Copyright | Out-String).Trim())`'")
-		$mkdocsFunc.add(' ')
-		$mkdocsFunc.add('extra:')
-		$mkdocsFunc.add('  manifest: manifest.webmanifest')
-		$mkdocsFunc.add('  social:')
-		$mkdocsFunc.add('    - icon: fontawesome/brands/github-square')
-		$mkdocsFunc.add("      link: `'https://smitpi.github.io/$($module.Name)`'")
-		$mkdocsFunc.add(' ')
-		$mkdocsFunc.add('markdown_extensions:')
-		$mkdocsFunc.add('  - pymdownx.keys')
-		$mkdocsFunc.add('  - pymdownx.snippets')
-		$mkdocsFunc.add('  - pymdownx.superfences')
-		$mkdocsFunc.add(' ')
-		$mkdocsFunc.add('theme:')
-		$mkdocsFunc.add('  name: material')
-		$mkdocsFunc.add('  features:')
-		$mkdocsFunc.add('    - navigation.instant')
-		$mkdocsFunc.add('  language: en')
-		$mkdocsFunc.add("  favicon: `'`'")
-		$mkdocsFunc.add("  logo: `'`'")
-		$mkdocsFunc.add('  palette:')
-		$mkdocsFunc.add('    - media: "(prefers-color-scheme: light)"')
-		$mkdocsFunc.add('      primary: blue grey')
-		$mkdocsFunc.add('      accent: indigo')
-		$mkdocsFunc.add('      scheme: default')
-		$mkdocsFunc.add('      toggle:')
-		$mkdocsFunc.add('        icon: material/toggle-switch-off-outline')
-		$mkdocsFunc.add('        name: Switch to dark mode')
-		$mkdocsFunc.add('    - media: "(prefers-color-scheme: dark)"')
-		$mkdocsFunc.add('      primary: blue grey')
-		$mkdocsFunc.add('      accent: indigo')
-		$mkdocsFunc.add('      scheme: slate')
-		$mkdocsFunc.add('      toggle:')
-		$mkdocsFunc.add('        icon: material/toggle-switch')
-		$mkdocsFunc.add('        name: Switch to light mode')
-		$mkdocsFunc | Set-Content -Path $ModuleMkdocs -Force
+		$mkdocssFunc = [System.Collections.Generic.List[string]]::new()
+		$mkdocssFunc.add("site_name: `'$($module.Name)`'")
+		$mkdocssFunc.add("site_description: `'Documentation for PowerShell Module: $($module.Name)`'")
+		$mkdocssFunc.add("site_author: `'$(($ModuleManifest.Author | Out-String).Trim())`'")
+		$mkdocssFunc.add("site_url: `'https://smitpi.github.io/$($module.Name)`'")
+		$mkdocssFunc.add(' ')
+		$mkdocssFunc.add("repo_url: `'https://github.com/smitpi/$($module.Name)`'")
+		$mkdocssFunc.add("repo_name:  `'smitpi/$($module.Name)`'")
+		$mkdocssFunc.add(' ')
+		$mkdocssFunc.add("copyright: `'$(($ModuleManifest.Copyright | Out-String).Trim())`'")
+		$mkdocssFunc.add(' ')
+		$mkdocssFunc.add('extra:')
+		$mkdocssFunc.add('  manifest: manifest.webmanifest')
+		$mkdocssFunc.add('  social:')
+		$mkdocssFunc.add('    - icon: fontawesome/brands/github-square')
+		$mkdocssFunc.add("      link: `'https://smitpi.github.io/$($module.Name)`'")
+		$mkdocssFunc.add(' ')
+		$mkdocssFunc.add('markdown_extensions:')
+		$mkdocssFunc.add('  - pymdownx.keys')
+		$mkdocssFunc.add('  - pymdownx.snippets')
+		$mkdocssFunc.add('  - pymdownx.superfences')
+		$mkdocssFunc.add(' ')
+		$mkdocssFunc.add('theme:')
+		$mkdocssFunc.add('  name: material')
+		$mkdocssFunc.add('  features:')
+		$mkdocssFunc.add('    - navigation.instant')
+		$mkdocssFunc.add('  language: en')
+		$mkdocssFunc.add("  favicon: `'`'")
+		$mkdocssFunc.add("  logo: `'`'")
+		$mkdocssFunc.add('  palette:')
+		$mkdocssFunc.add('    - media: "(prefers-color-scheme: light)"')
+		$mkdocssFunc.add('      primary: blue grey')
+		$mkdocssFunc.add('      accent: indigo')
+		$mkdocssFunc.add('      scheme: default')
+		$mkdocssFunc.add('      toggle:')
+		$mkdocssFunc.add('        icon: material/toggle-switch-off-outline')
+		$mkdocssFunc.add('        name: Switch to dark mode')
+		$mkdocssFunc.add('    - media: "(prefers-color-scheme: dark)"')
+		$mkdocssFunc.add('      primary: blue grey')
+		$mkdocssFunc.add('      accent: indigo')
+		$mkdocssFunc.add('      scheme: slate')
+		$mkdocssFunc.add('      toggle:')
+		$mkdocssFunc.add('        icon: material/toggle-switch')
+		$mkdocssFunc.add('        name: Switch to light mode')
+		$mkdocssFunc | Set-Content -Path $ModuleMkdocss -Force
 
 		$indexFile = [System.Collections.Generic.List[string]]::new()
 		Get-Content -Path $ModulesInstuctions | ForEach-Object { $indexFile.add($_) }
@@ -444,15 +443,15 @@ Function Set-PSProjectFile {
 		$fragments | Out-File -FilePath $ModuleIssues -Encoding utf8 -Force
 	}
 	#endregion
-	#region mkdocs
-	Write-Color '[Starting]', 'mkdocs' -Color Yellow, DarkCyan
-	if ($mkdoc -like 'serve') {
+	#region mkdocss
+	Write-Color '[Starting]', 'mkdocss' -Color Yellow, DarkCyan
+	if ($mkdocs -like 'serve') {
 		Set-Location (Split-Path -Path $Moduledocs -Parent)
-		mkdocs serve 2>&1 | Write-Host -ForegroundColor Yellow
+		mkdocs.exe serve 2>&1 | Write-Host -ForegroundColor Yellow
 		Start-Sleep 5
 		Start-Process "http://127.0.0.1:8000/$($module.Name)/"
 	}
-	if ($mkdoc -like 'deploy') {
+	if ($mkdocs -like 'deploy') {
 		Set-Location (Split-Path -Path $Moduledocs -Parent)
 		mkdocs.exe gh-deploy 2>&1 | Write-Host -ForegroundColor Yellow 
 	}
