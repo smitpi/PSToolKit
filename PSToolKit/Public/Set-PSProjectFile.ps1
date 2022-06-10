@@ -68,7 +68,6 @@ Set-PSProjectFiles -ModuleName blah -VersionBump Minor -mkdocs serve
 #>
 Function Set-PSProjectFile {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Set-PSProjectFiles')]
-	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/CTXOnPrem/Convert-PSModule')]
 	PARAM(
 		[Parameter(Mandatory = $true)]
 		[System.IO.FileInfo]$ModuleName,
@@ -77,20 +76,67 @@ Function Set-PSProjectFile {
 		[ValidateSet('serve', 'deploy')]
 		[string]$mkdocs = 'None',
 		[switch]$CopyNestedModules = $false,
-		[Switch]$GitPush = $false
+		[Switch]$GitPush = $false,
+		[ValidateScript( { $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+				else { Throw 'Must be running an elevated prompt.' } })]
+		[switch]$CopyToModulesFolder = $false
 	)
 	
 	#region module
-	Write-Color '[Starting]', 'Module Import' -Color Yellow, DarkCyan
+	Write-Color '[Starting]', ' Module Import' -Color Yellow, DarkCyan
 	try {
 		$modulefile = (Join-Path $([Environment]::GetFolderPath('MyDocuments')) -ChildPath ".\PowerShell\ProdModules\$($ModuleName)\$($ModuleName)\$($ModuleName).psm1") | Get-Item -ErrorAction Stop
 		Remove-Module $ModuleName -Force -ErrorAction SilentlyContinue
 		Import-Module $modulefile -Force -ErrorAction Stop
 		$module = Get-Module $ModuleName -ErrorAction Stop
-	} catch {Write-Error "Error: Importing Module `nMessage:$($_.Exception.message)"; exit}
+		$ModuleManifestFile = Get-Item ($module.Path).Replace('.psm1', '.psd1')
+		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object * -ErrorAction Stop
+	}
+ catch { Write-Error "Error: Importing Module `nMessage:$($_.Exception.message)"; exit }
+	#endregion
 
+	#region Create Folders
+	try {
+		Write-Color '[Starting]', ' Creating Folder Structure' -Color Yellow, DarkCyan
+		$ModuleBase = ((Get-Item $module.ModuleBase).Parent).fullname
+		$ModuleOutput = [IO.Path]::Combine($ModuleBase, 'Output', $($ModuleManifest.Version.ToString()))
+		$Moduledocs = [IO.Path]::Combine($ModuleBase, 'docs', 'docs')
+		$ModuleExternalHelp = [IO.Path]::Combine($ModuleOutput, 'en-US')
+		$ModulesInstuctions = [IO.Path]::Combine($ModuleBase, 'instructions.md')
+		$ModuleReadme = [IO.Path]::Combine($ModuleBase, 'README.md')
+		$ModuleIssues = [IO.Path]::Combine($ModuleBase, 'Issues.md')
+		$ModuleIssuesExcel = [IO.Path]::Combine($ModuleBase, 'Issues.xlsx')
+		$ModulePublicFunctions = [IO.Path]::Combine($module.ModuleBase, 'Public') | Get-Item
+		$ModulePrivateFunctions = [IO.Path]::Combine($module.ModuleBase, 'Private') | Get-Item
+		$Modulemkdocs = [IO.Path]::Combine($ModuleBase, 'docs', 'mkdocs.yml')
+		$ModuleIndex = [IO.Path]::Combine($ModuleBase, 'docs', 'docs', 'index.md')
+		[System.Collections.ArrayList]$Issues = @()
+
+		try {
+			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop; Start-Sleep 5 }
+			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
+			if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }
+			if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force -ErrorAction Stop }
+			if (Test-Path $ModuleIssuesExcel) { Remove-Item $ModuleIssuesExcel -Force -ErrorAction Stop }	
+		}
+		catch { Write-Error "Error: Deleting Old Folders `nMessage:$($_.Exception.message)"; exit }
+
+	}
+ catch { throw 'Error Creating Folder Structure' ; exit }
+
+	try {
+		$ModuleOutput = New-Item $ModuleOutput -ItemType Directory -Force | Get-Item -ErrorAction Stop
+		$Moduledocs = New-Item $Moduledocs -ItemType Directory -Force | Get-Item -ErrorAction Stop
+		$ModuleExternalHelp = New-Item $ModuleExternalHelp -ItemType Directory -Force | Get-Item -ErrorAction Stop
+	}
+	catch { Write-Error "Error: Creating folders `nMessage:$($_.Exception.message)"; exit }
+	#endregion
+    
+	#region versionbump
 	if ($VersionBump -like 'Minor' -or $VersionBump -like 'Build' ) {
 		try {
+			Write-Color '[Starting]', ' Version increase' -Color Yellow, DarkCyan
 			$ModuleManifestFileTMP = Get-Item ($module.Path).Replace('.psm1', '.psd1')
 			[version]$ModuleversionTMP = (Test-ModuleManifest -Path $ModuleManifestFileTMP.FullName -ErrorAction Stop).version 
 
@@ -103,55 +149,22 @@ Function Set-PSProjectFile {
 				FunctionsToExport = (Get-Command -Module $module.Name | Select-Object name).name | Sort-Object
 			}
 			Update-ModuleManifest @manifestProperties -ErrorAction Stop
-		} catch {Write-Error "Error: Updateing Version `nMessage:$($_.Exception.message)"; exit}
+		}
+		catch { Write-Error "Error: Updateing Version bump `nMessage:$($_.Exception.message)"; exit }
 	} 
 
 	try {
-		$ModuleManifestFile = Get-Item ($module.Path).Replace('.psm1', '.psd1')
-		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object * -ErrorAction Stop
 		$FileContent = Get-Content $ModuleManifestFile -ErrorAction Stop
 		$DateLine = Select-String -InputObject $ModuleManifestFile -Pattern '# Generated on:'
 		$FileContent[($DateLine.LineNumber - 1)] = "# Generated on: $(Get-Date -Format u)"
 		$FileContent | Set-Content $ModuleManifestFile -Force -ErrorAction Stop
-	} catch {Write-Error "Error: Update versions `nMessage:$($_.Exception.message)"; exit}
-		
-	#endregion
-
-	#region Create Folders
-	Write-Color '[Starting]', 'Creating Folder Structure' -Color Yellow, DarkCyan
-	$ModuleBase = ((Get-Item $module.ModuleBase).Parent).fullname
-	$ModuleOutput = [IO.Path]::Combine($ModuleBase, 'Output', $($ModuleManifest.Version.ToString()))
-	$Moduledocs = [IO.Path]::Combine($ModuleBase, 'docs', 'docs')
-	$ModuleExternalHelp = [IO.Path]::Combine($ModuleOutput, 'en-US')
-	$ModulesInstuctions = [IO.Path]::Combine($ModuleBase, 'instructions.md')
-	$ModuleReadme = [IO.Path]::Combine($ModuleBase, 'README.md')
-	$ModuleIssues = [IO.Path]::Combine($ModuleBase, 'Issues.md')
-	$ModuleIssuesExcel = [IO.Path]::Combine($ModuleBase, 'Issues.xlsx')
-	$ModulePublicFunctions = [IO.Path]::Combine($module.ModuleBase, 'Public') | Get-Item
-	$ModulePrivateFunctions = [IO.Path]::Combine($module.ModuleBase, 'Private') | Get-Item
-	$Modulemkdocs = [IO.Path]::Combine($ModuleBase, 'docs', 'mkdocs.yml')
-	$ModuleIndex = [IO.Path]::Combine($ModuleBase, 'docs', 'docs', 'index.md')
-	[System.Collections.ArrayList]$Issues = @()
-
-	try {
-		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop; Start-Sleep 5 }
-		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
-		if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }
-		if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force -ErrorAction Stop }
-		if (Test-Path $ModuleIssuesExcel) {Remove-Item $ModuleIssuesExcel -Force -ErrorAction Stop }	
-	} catch {throw 'Unable to delete old folders.' ; exit}
-
-	try {
-		$ModuleOutput = New-Item $ModuleOutput -ItemType Directory -Force | Get-Item -ErrorAction Stop
-		$Moduledocs = New-Item $Moduledocs -ItemType Directory -Force | Get-Item -ErrorAction Stop
-		$ModuleExternalHelp = New-Item $ModuleExternalHelp -ItemType Directory -Force | Get-Item -ErrorAction Stop
-	} catch {Write-Error "Error: Creating folders `nMessage:$($_.Exception.message)"; exit}
-
+	}
+ catch { Write-Error "Error: Updating Date in Module Manifest File  `nMessage:$($_.Exception.message)"; exit }
 	#endregion
 
 	#region platyps
 	try {
-		Write-Color '[Starting]', 'Creating External help files' -Color Yellow, DarkCyan
+		Write-Color '[Starting]', ' Creating Markdown help files' -Color Yellow, DarkCyan
 		$markdownParams = @{
 			Module         = $module.Name
 			OutputFolder   = $Moduledocs.FullName
@@ -159,8 +172,9 @@ Function Set-PSProjectFile {
 			Locale         = 'en-US'
 			HelpVersion    = $ModuleManifest.Version.ToString()
 		}
-		New-MarkdownHelp @markdownParams
-	} catch {Write-Error "Error: MarkdownHelp `nMessage:$($_.Exception.message)"; exit}
+		New-MarkdownHelp @markdownParams | Out-Null
+	}
+ catch { Write-Error "Error: MarkdownHelp `nMessage:$($_.Exception.message)"; exit }
 
 	try {
 		Compare-Object -ReferenceObject (Get-ChildItem $ModulePublicFunctions).BaseName -DifferenceObject (Get-ChildItem $Moduledocs).BaseName | Where-Object { $_.SideIndicator -like '<=' } | ForEach-Object {
@@ -185,11 +199,14 @@ Function Set-PSProjectFile {
 					})
 			}
 		}
-	} catch {Write-Error "Error: Docs check `nMessage:$($_.Exception.message)"; exit}
+	}
+ catch { Write-Error "Error: Docs check `nMessage:$($_.Exception.message)"; exit }
 
 	try {
-		New-ExternalHelp -Path $Moduledocs.FullName -OutputPath $ModuleExternalHelp.FullName -Force -ShowProgress
+		Write-Color '[Starting]', ' Creating External help files' -Color Yellow, DarkCyan
+		New-ExternalHelp -Path $Moduledocs.FullName -OutputPath $ModuleExternalHelp.FullName -Force | Out-Null
 
+		Write-Color '[Starting]', ' Creating About help files' -Color Yellow, DarkCyan
 		$aboutfile = [System.Collections.Generic.List[string]]::new()
 		$aboutfile.Add('')
 		$aboutfile.Add("$($module.Name)")
@@ -240,7 +257,7 @@ Function Set-PSProjectFile {
 		Get-Content -Path $ModulesInstuctions | ForEach-Object { $readme.add($_) }
 		$readme.add(' ')
 		$readme.add('## Functions')
-	(Get-Command -Module $module).Name | ForEach-Object { $readme.add("- [$_](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
+	(Get-Command -Module $module).Name | ForEach-Object { $readme.add("- [``$_``](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
 		$readme | Set-Content -Path $ModuleReadme
 
 		$mkdocsFunc = [System.Collections.Generic.List[string]]::new()
@@ -293,14 +310,15 @@ Function Set-PSProjectFile {
 		Get-Content -Path $ModulesInstuctions | ForEach-Object { $indexFile.add($_) }
 		$indexFile.add(' ')
 		$indexFile.add('## Functions')
-	(Get-Command -Module $module).Name | ForEach-Object { $indexFile.add("- [$_](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
+	(Get-Command -Module $module).Name | ForEach-Object { $indexFile.add("- [``$_``](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
 		$indexFile | Set-Content -Path $ModuleIndex -Force
-	} catch {Write-Error "Error: Other Files `nMessage:$($_.Exception.message)"; exit}
+	}
+ catch { Write-Error "Error: Other Files `nMessage:$($_.Exception.message)"; exit }
 	
 	#endregion
 	
 	#region Combine files
-	Write-Color '[Starting]', 'Creating new module files' -Color Yellow, DarkCyan
+	Write-Color '[Starting]', ' Creating new module files' -Color Yellow, DarkCyan
 
 	$ModuleOutput = Get-Item $ModuleOutput
 	$rootModule = ([IO.Path]::Combine($ModuleOutput.fullname, "$($module.Name).psm1"))
@@ -375,7 +393,7 @@ Function Set-PSProjectFile {
 	
 	#region NestedModules
 	if ($CopyNestedModules) {
-		Write-Color '[Starting]', 'Copying nested modules' -Color Yellow, DarkCyan
+		Write-Color '[Starting]', ' Copying nested modules' -Color Yellow, DarkCyan
 
 		if (-not(Test-Path $(Join-Path -Path $ModuleOutput -ChildPath '\NestedModules'))) {
 			New-Item -Path "$(Join-Path -Path $ModuleOutput -ChildPath '\NestedModules')" -ItemType Directory -Force | Out-Null
@@ -384,26 +402,26 @@ Function Set-PSProjectFile {
 			$latestmod = $null
 			Import-Module $required -Force -Verbose
 			$latestmod = Get-Module $required | Sort-Object -Property Version | Select-Object -First 1
-			if (-not($latestmod)) { $latestmod = Get-Module $required -ListAvailable | Sort-Object -Property Version | Select-Object -First 1}
+			if (-not($latestmod)) { $latestmod = Get-Module $required -ListAvailable | Sort-Object -Property Version | Select-Object -First 1 }
 			
 			Write-Color "`t[Copying]", "$($required.Name)" -Color Yellow, DarkCyan
 			Copy-Item -Path (Get-Item $latestmod.Path).Directory -Destination ([IO.Path]::Combine($ModuleOutput, 'NestedModules', $($required.Name), $($latestmod.Version))) -Recurse
 		}
 		$nestedmodules = @()
-		$nestedmodules = (Get-ChildItem -Path "$ModuleOutput\NestedModules\*.psm1" -Recurse).FullName | ForEach-Object {$_.Replace("$($ModuleOutput)\", '')}
+		$nestedmodules = (Get-ChildItem -Path "$ModuleOutput\NestedModules\*.psm1" -Recurse).FullName | ForEach-Object { $_.Replace("$($ModuleOutput)\", '') }
 		$rootManifest = Get-Item ([IO.Path]::Combine($ModuleOutput.fullname, "$($module.Name).psd1"))
 
 		$manifest = Import-PowerShellDataFile $ModuleManifest.Path
 		$manifest.Remove('CmdletsToExport')
 		$manifest.Remove('AliasesToExport')
 		$manifest.Remove('PrivateData')
-		if ($ModuleManifest.Tags) { $manifest.Add('Tags', $ModuleManifest.Tags)}
-		if ($ModuleManifest.LicenseUri) { $manifest.Add('LicenseUri', $ModuleManifest.LicenseUri)}
-		if ($ModuleManifest.ProjectUri) { $manifest.Add('ProjectUri', $ModuleManifest.ProjectUri)}
-		if ($ModuleManifest.IconUri) { $manifest.Add('IconUri', $ModuleManifest.IconUri)}
-		if ($ModuleManifest.ReleaseNotes) { $manifest.Add('ReleaseNotes', $ModuleManifest.ReleaseNotes)}
+		if ($ModuleManifest.Tags) { $manifest.Add('Tags', $ModuleManifest.Tags) }
+		if ($ModuleManifest.LicenseUri) { $manifest.Add('LicenseUri', $ModuleManifest.LicenseUri) }
+		if ($ModuleManifest.ProjectUri) { $manifest.Add('ProjectUri', $ModuleManifest.ProjectUri) }
+		if ($ModuleManifest.IconUri) { $manifest.Add('IconUri', $ModuleManifest.IconUri) }
+		if ($ModuleManifest.ReleaseNotes) { $manifest.Add('ReleaseNotes', $ModuleManifest.ReleaseNotes) }
 
-		if (Test-Path $rootManifest) {Remove-Item $rootManifest -Force}
+		if (Test-Path $rootManifest) { Remove-Item $rootManifest -Force }
 		New-ModuleManifest -Path $rootManifest.FullName -NestedModules $nestedmodules @manifest
 
 		$FileContent = Get-Content $rootManifest
@@ -415,26 +433,9 @@ Function Set-PSProjectFile {
 
 	#region report issues
 	if ($null -notlike $Issues) { 
+		Write-Color '[Starting]', ' Creating Issues Reports' -Color Yellow, DarkCyan
 		$issues | Export-Excel -Path $ModuleIssuesExcel -WorksheetName Other -AutoSize -AutoFilter -BoldTopRow -FreezeTopRow 
 		$fragments = [system.collections.generic.list[string]]::new()
-		$fragments.Add('<style>')
-		$fragments.Add('table {')
-		$fragments.Add('    border-collapse: collapse;')
-		$fragments.Add('}')
-		$fragments.Add('table, th, td {')
-		$fragments.Add('   border: 1px solid black;')
-		$fragments.Add('}')
-		$fragments.Add('blockquote {')
-		$fragments.Add('    border-left: solid blue;')
-		$fragments.Add('	padding-left: 10px;')
-		$fragments.Add('}')
-		$fragments.Add('@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,300);')
-		$fragments.Add('body {')
-		$fragments.Add('  color: #444;')
-		$fragments.Add("  font-family: 'Open Sans', Helvetica, sans-serif;")
-		$fragments.Add('  font-weight: 300;')
-		$fragments.Add('}')
-		$fragments.Add('</style>')
 		$fragments.Add((New-MDHeader "$($module.Name): Issues"))
 		$Fragments.Add("---`n")
 		$fragments.Add((New-MDTable -Object $Issues))
@@ -443,8 +444,9 @@ Function Set-PSProjectFile {
 		$fragments | Out-File -FilePath $ModuleIssues -Encoding utf8 -Force
 	}
 	#endregion
+	
 	#region mkdocs
-	Write-Color '[Starting]', 'mkdocs' -Color Yellow, DarkCyan
+	Write-Color '[Starting]', ' Creating MKDocs help files' -Color Yellow, DarkCyan
 	if ($mkdocs -like 'serve') {
 		Set-Location (Split-Path -Path $Moduledocs -Parent)
 		mkdocs.exe serve 2>&1 | Write-Host -ForegroundColor Yellow
@@ -460,13 +462,24 @@ Function Set-PSProjectFile {
 	#region Git push
 	if ($GitPush) {
 		if (Get-Command git.exe -ErrorAction SilentlyContinue) {
-			Write-Color '[Starting]', 'Git Push' -Color Yellow, DarkCyan
+			Write-Color '[Starting]', ' Git Push' -Color Yellow, DarkCyan
 			Set-Location $ModuleBase 
 			Start-Sleep 5
-			git add --all 2>&1 | Write-Host -ForegroundColor Yellow
-			git commit --all -m "To Version: $($moduleManifest.version.tostring())" 2>&1 | Write-Host -ForegroundColor Yellow
-			git push 2>&1 | Write-Host -ForegroundColor Yellow
-		} else {Write-Warning 'Git is not installed'}
+			git add --all 2>&1 | Write-Host -ForegroundColor DarkCyan
+			git commit --all -m "To Version: $($moduleManifest.version.tostring())" 2>&1 | Write-Host -ForegroundColor DarkGreen
+			git push 2>&1 | Write-Host -ForegroundColor DarkRed
+		}
+		else { Write-Warning 'Git is not installed' }
+	}
+	#endregion
+
+	#region CopytoDir
+	if ($CopyToModulesFolder) {
+		Write-Color '[Copying]', ' New Module ', "$($ModuleName) ver:($($ModuleManifest.Version.ToString())) ", 'to Program Files' -Color Yellow, DarkCyan, Green, DarkCyan
+		if (-not(Test-Path "C:\Program Files\WindowsPowerShell\Modules\$($ModuleName)")) { New-Item "C:\Program Files\WindowsPowerShell\Modules\$($ModuleName)" -ItemType Directory -Force | Out-Null }
+		Get-ChildItem -Directory "C:\Program Files\WindowsPowerShell\Modules\$($ModuleName)" | Compress-Archive -DestinationPath "C:\Program Files\WindowsPowerShell\Modules\$($ModuleName)\$($ModuleName)-bck.zip" -Update
+		Get-ChildItem -Directory "C:\Program Files\WindowsPowerShell\Modules\$($ModuleName)" | Remove-Item -Recurse -Force
+		Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\WindowsPowerShell\Modules\$($ModuleName)\" -Force -Recurse
 	}
 	#endregion
 

@@ -1,8 +1,7 @@
 # PSToolKit
  
 ## Description
-a Repository of my random scripts and functions writen over the years, 
-there is a wyde range of tools in this module, used by a SysAdmin and EUC Administrator
+A Repository of my random scripts and functions writen over the years, there is a wyde range of tools in this module, used by a SysAdmin and EUC Administrator.
  
 ## Getting Started
 - Install from PowerShell Gallery [PS Gallery](https://www.powershellgallery.com/packages/PSToolKit)

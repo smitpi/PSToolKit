@@ -3,12 +3,12 @@ PSToolKit
 	 about_PSToolKit
  
 SHORT DESCRIPTION
-	 a Repository of my random scripts and functions writen over the years, 
-there is a wyde range of tools in this module, used by a SysAdmin and EUC Administrator
+	 A Repository of my random scripts and functions writen over the years, there is a wyde range of tools in this module, used by a SysAdmin and EUC Administrator.
 
  
 NOTES
 Functions in this module:
+	 Get-BinRoot -- Get-ToolsLocation
 	 Add-ChocolateyPrivateRepo -- Add a private repository to Chocolatey.
 	 Backup-ElevatedShortcut -- Exports the RunAss shortcuts, to a zip file
 	 Backup-PowerShellProfile -- Creates a zip file from the ps profile directories
@@ -71,7 +71,7 @@ Functions in this module:
 	 Set-FolderCustomIcon -- Will change the icon of a folder to a custom selected icon
 	 Set-PSProjectFile -- Creates and modify needed files for a PS project from existing module files.
 	 Set-PSToolKitSystemSetting -- Set multiple settings on desktop or server
-	 Set-SharedPSProfile -- Redirects PowerShell profile to network share.
+	 Set-SharedPSProfile -- Redirects PowerShell and WindowsPowerShell profile folder to another path.
 	 Set-StaticIP -- Set static IP on device
 	 Set-TempFolder -- Set all the temp environmental variables to c:\temp
 	 Set-WindowsAutoLogin -- Enable autologin on a device.

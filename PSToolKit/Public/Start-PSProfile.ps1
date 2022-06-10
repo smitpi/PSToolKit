@@ -74,8 +74,9 @@ Function Start-PSProfile {
 	if ((Test-Path $profile) -eq $false ) {
 		Write-Warning 'Profile does not exist, creating file.'
 		New-Item -ItemType File -Path $Profile -Force
-		$psfolder = (Get-Item $profile).DirectoryName
-	} else { $psfolder = (Get-Item $profile).DirectoryName }
+		$Global:psfolder = (Get-Item $profile).DirectoryName
+	}
+ else { $Global:psfolder = (Get-Item $profile).DirectoryName }
 
 	$wc = New-Object System.Net.WebClient
 	$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
@@ -88,17 +89,23 @@ Function Start-PSProfile {
 		if ((Test-Path -Path $psfolder\Reports) -eq $false) { New-Item -Path "$psfolder\Reports" -ItemType Directory | Out-Null }
 		if ((Test-Path -Path $psfolder\Config) -eq $false) { New-Item -Path "$psfolder\Config" -ItemType Directory | Out-Null }
 		if ((Test-Path -Path $psfolder\Help) -eq $false) { New-Item -Path "$psfolder\Help" -ItemType Directory | Out-Null }
-	} catch { Write-Warning 'Unable to create default folders' }
+	}
+ catch { Write-Warning 'Unable to create default folders' }
+
+	# try {
+	# 	$ProdModules = (Join-Path $([Environment]::GetFolderPath('MyDocuments')) -ChildPath .\PowerShell\ProdModules)
+	# 	if (Test-Path $ProdModules) {
+	# 		Set-Location $ProdModules
+	# 	} else {
+	# 		$ScriptFolder = (Join-Path $([Environment]::GetFolderPath('MyDocuments')) -ChildPath .\WindowsPowerShell\Scripts) | Get-Item
+	# 		Set-Location $ScriptFolder
+	# 	}
+	# } catch { Write-Warning 'Unable to set location' }
 
 	try {
-		$ProdModules = (Join-Path $([Environment]::GetFolderPath('MyDocuments')) -ChildPath .\PowerShell\ProdModules)
-		if (Test-Path $ProdModules) {
-			Set-Location $ProdModules
-		} else {
-			$ScriptFolder = (Join-Path $([Environment]::GetFolderPath('MyDocuments')) -ChildPath .\WindowsPowerShell\Scripts) | Get-Item
-			Set-Location $ScriptFolder
-		}
-	} catch { Write-Warning 'Unable to set location' }
+		Set-Location $psfolder
+	}
+ catch { Write-Warning 'Unable to set location' }
 
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
 	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
@@ -108,7 +115,7 @@ Function Start-PSProfile {
 	try {
 		try {
 			$PSReadLineSplat = @{
-				PredictionSource              = 'history'
+				PredictionSource              = 'HistoryAndPlugin'
 				PredictionViewStyle           = 'InlineView'
 				HistorySearchCursorMovesToEnd = $true
 				HistorySaveStyle              = 'SaveIncrementally'
@@ -116,8 +123,9 @@ Function Start-PSProfile {
 				BellStyle                     = 'Visual'
 				HistorySavePath               = "$([environment]::GetFolderPath('ApplicationData'))\Microsoft\Windows\PowerShell\PSReadLine\history.txt"
 			}
-			Set-PSReadLineOption @PSReadLineSplat
-		} catch {
+			Set-PSReadLineOption @PSReadLineSplat -ErrorAction Stop
+		}
+		catch {
 			Set-PSReadLineOption @PSReadLineSplat -PredictionSource history -PredictionViewStyle InlineView
 		}
 		Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
@@ -126,7 +134,8 @@ Function Start-PSProfile {
 		Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
 		Write-Host (' {0,-36}: ' -f 'PSReadLineOptions Functions') -ForegroundColor Cyan -NoNewline
 		Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
-	} catch { Write-Warning 'PSReadLineOptions: Could not be loaded' }
+	}
+ catch { Write-Warning 'PSReadLineOptions: Could not be loaded' }
 
 	try {
 		$chocofunctions = Get-Item "$env:ChocolateyInstall\helpers\functions" -ErrorAction Stop
@@ -136,14 +145,16 @@ Function Start-PSProfile {
 		Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
 		Write-Host (' {0,-36}: ' -f 'Chocolatey Functions') -ForegroundColor Cyan -NoNewline
 		Write-Host ('{0,-21}' -f 'Complete') -ForegroundColor Green
-	} catch { Write-Warning 'Chocolatey: Could not be loaded' }
+	}
+ catch { Write-Warning 'Chocolatey: Could not be loaded' }
 
  try {
 		Add-PSSnapin citrix*
 		Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
 		Write-Host (' {0,-36}: ' -f 'Citrix SnapIns') -ForegroundColor Cyan -NoNewline
 		Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
-	} catch { Write-Warning 'Citrix SnapIns: Could not be loaded' }
+	}
+ catch { Write-Warning 'Citrix SnapIns: Could not be loaded' }
 
 	$ErrorActionPreference = 'Continue'
 	## Some Session Information
