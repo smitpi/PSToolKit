@@ -62,6 +62,9 @@ Create and test the mkdocs site
 .PARAMETER GitPush
 Run Git Push when done.
 
+.PARAMETER CopyToModulesFolder
+Copies the module to program files.
+
 .EXAMPLE
 Set-PSProjectFiles -ModuleName blah -VersionBump Minor -mkdocs serve
 
@@ -133,7 +136,7 @@ Function Set-PSProjectFile {
 	catch { Write-Error "Error: Creating folders `nMessage:$($_.Exception.message)"; exit }
 	#endregion
     
-	#region versionbump
+	#region version bump
 	if ($VersionBump -like 'Minor' -or $VersionBump -like 'Build' ) {
 		try {
 			Write-Color '[Starting]', ' Version increase' -Color Yellow, DarkCyan
@@ -448,14 +451,13 @@ Function Set-PSProjectFile {
 	#region mkdocs
 	Write-Color '[Starting]', ' Creating MKDocs help files' -Color Yellow, DarkCyan
 	if ($mkdocs -like 'serve') {
-		Set-Location (Split-Path -Path $Moduledocs -Parent)
-		mkdocs.exe serve 2>&1 | Write-Host -ForegroundColor Yellow
+		#Set-Location (Split-Path -Path $Moduledocs -Parent)
+		Start-Process -FilePath mkdocs.exe -ArgumentList serve -WorkingDirectory $Moduledocs -WindowStyle Normal
 		Start-Sleep 5
 		Start-Process "http://127.0.0.1:8000/$($module.Name)/"
 	}
 	if ($mkdocs -like 'deploy') {
-		Set-Location (Split-Path -Path $Moduledocs -Parent)
-		mkdocs.exe gh-deploy 2>&1 | Write-Host -ForegroundColor Yellow 
+		Start-Process -FilePath mkdocs.exe -ArgumentList serve -WorkingDirectory $Moduledocs -NoNewWindow   2>&1 | Write-Host -ForegroundColor Yellow 
 	}
 	#endregion
 
@@ -473,7 +475,7 @@ Function Set-PSProjectFile {
 	}
 	#endregion
 
-	#region CopytoDir
+	#region Copy to Dir
 	if ($CopyToModulesFolder) {
 		Write-Color '[Copying]', ' New Module ', "$($ModuleName) ver:($($ModuleManifest.Version.ToString())) ", 'to Program Files' -Color Yellow, DarkCyan, Green, DarkCyan
 		if (-not(Test-Path "C:\Program Files\WindowsPowerShell\Modules\$($ModuleName)")) { New-Item "C:\Program Files\WindowsPowerShell\Modules\$($ModuleName)" -ItemType Directory -Force | Out-Null }

@@ -14,7 +14,7 @@ Creates and modify needed files for a PS project from existing module files.
 
 ```
 Set-PSProjectFile [-ModuleName] <FileInfo> [[-VersionBump] <String>] [[-mkdocs] <String>] [-CopyNestedModules]
- [-GitPush] [<CommonParameters>]
+ [-GitPush] [-CopyToModulesFolder] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -91,6 +91,21 @@ Accept wildcard characters: False
 
 ### -GitPush
 Run Git Push when done.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CopyToModulesFolder
+Copies the module to program files.
 
 ```yaml
 Type: SwitchParameter

@@ -24,7 +24,6 @@ Get-Help about_PSToolKit
 Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit)
  
 ## Functions
-- [`Get-BinRoot`](https://smitpi.github.io/PSToolKit/#Get-BinRoot) -- Get-ToolsLocation
 - [`Add-ChocolateyPrivateRepo`](https://smitpi.github.io/PSToolKit/#Add-ChocolateyPrivateRepo) -- Add a private repository to Chocolatey.
 - [`Backup-ElevatedShortcut`](https://smitpi.github.io/PSToolKit/#Backup-ElevatedShortcut) -- Exports the RunAss shortcuts, to a zip file
 - [`Backup-PowerShellProfile`](https://smitpi.github.io/PSToolKit/#Backup-PowerShellProfile) -- Creates a zip file from the ps profile directories
@@ -99,6 +98,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Start-PSScriptAnalyzer`](https://smitpi.github.io/PSToolKit/#Start-PSScriptAnalyzer) -- Run and report ScriptAnalyzer output
 - [`Start-PSToolkitSystemInitialize`](https://smitpi.github.io/PSToolKit/#Start-PSToolkitSystemInitialize) -- Initialize a blank machine.
 - [`Test-CitrixCloudConnector`](https://smitpi.github.io/PSToolKit/#Test-CitrixCloudConnector) -- Perform basic connection tests to CItrix cloud.
+- [`Test-CitrixVDAPort`](https://smitpi.github.io/PSToolKit/#Test-CitrixVDAPort) -- Test connection between ddc and vda
 - [`Test-IsFileOpen`](https://smitpi.github.io/PSToolKit/#Test-IsFileOpen) -- Checks if a file is open
 - [`Test-PendingReboot`](https://smitpi.github.io/PSToolKit/#Test-PendingReboot) -- This script tests various registry values to see if the local computer is pending a reboot.
 - [`Test-PSRemote`](https://smitpi.github.io/PSToolKit/#Test-PSRemote) -- Test PSb Remote to a device.
