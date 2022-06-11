@@ -96,34 +96,33 @@ Function Set-PSProjectFile {
 	#endregion
 
 	#region deleting Folders
-	try {
-		Write-Color '[Starting]', ' Removing Old Folders' -Color Yellow, DarkCyan
-		$ModuleBase = ((Get-Item $module.ModuleBase).Parent).fullname
-		$ModulesInstuctions = [IO.Path]::Combine($ModuleBase, 'instructions.md')
-		$ModuleReadme = [IO.Path]::Combine($ModuleBase, 'README.md')
-		$ModuleIssues = [IO.Path]::Combine($ModuleBase, 'Issues.md')
-		$ModuleIssuesExcel = [IO.Path]::Combine($ModuleBase, 'Issues.xlsx')
-		$ModulePublicFunctions = [IO.Path]::Combine($module.ModuleBase, 'Public') | Get-Item
-		$ModulePrivateFunctions = [IO.Path]::Combine($module.ModuleBase, 'Private') | Get-Item
-		$Modulemkdocs = [IO.Path]::Combine($ModuleBase, 'docs', 'mkdocs.yml')
-		$ModuleIndex = [IO.Path]::Combine($ModuleBase, 'docs', 'docs', 'index.md')
-		[System.Collections.ArrayList]$Issues = @()
+	Write-Color '[Starting]', ' Removing Old Folders' -Color Yellow, DarkCyan
+	$ModuleBase = ((Get-Item $module.ModuleBase).Parent).fullname
+	$ModulesInstuctions = [IO.Path]::Combine($ModuleBase, 'instructions.md')
+	$ModuleReadme = [IO.Path]::Combine($ModuleBase, 'README.md')
+	$ModuleIssues = [IO.Path]::Combine($ModuleBase, 'Issues.md')
+	$ModuleIssuesExcel = [IO.Path]::Combine($ModuleBase, 'Issues.xlsx')
+	$ModulePublicFunctions = [IO.Path]::Combine($module.ModuleBase, 'Public') | Get-Item
+	$ModulePrivateFunctions = [IO.Path]::Combine($module.ModuleBase, 'Private') | Get-Item
+	$Modulemkdocs = [IO.Path]::Combine($ModuleBase, 'docs', 'mkdocs.yml')
+	$ModuleIndex = [IO.Path]::Combine($ModuleBase, 'docs', 'docs', 'index.md')
+	[System.Collections.ArrayList]$Issues = @()
 
+	try {
+		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop; Start-Sleep 5 }
+		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
+		if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }
+		if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force -ErrorAction Stop }
+		if (Test-Path $ModuleIssuesExcel) { Remove-Item $ModuleIssuesExcel -Force -ErrorAction Stop }	
+	}
+	catch {
 		try {
-			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop; Start-Sleep 5 }
-			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
-			if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }
-			if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force -ErrorAction Stop }
-			if (Test-Path $ModuleIssuesExcel) { Remove-Item $ModuleIssuesExcel -Force -ErrorAction Stop }	
-		}
-		catch {
 			Write-Warning "Error: Deleting Old Folders `nMessage:$($_.Exception.message)`nRetrying"
 			Start-Sleep 10
 			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop; Start-Sleep 5 }
 			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
 		}
-	}
-	catch { throw 'Error removing Folder Structure' ; exit }
+		catch { throw 'Error removing Folder Structure' ; exit }}
 	#endregion
     
 	#region version bump
@@ -139,7 +138,7 @@ Function Set-PSProjectFile {
 			$manifestProperties = @{
 				Path              = $ModuleManifestFileTMP.FullName
 				ModuleVersion     = $ModuleversionTMP
-				FunctionsToExport = (Get-Command -Module $module.Name | Select-Object name).name | Sort-Object
+				FunctionsToExport = (Get-Command -Module $module.Name -CommandType Function | Select-Object name).name | Sort-Object
 			}
 			Update-ModuleManifest @manifestProperties -ErrorAction Stop
 		}
@@ -180,7 +179,7 @@ Function Set-PSProjectFile {
 			Locale         = 'en-US'
 			HelpVersion    = $ModuleManifest.Version.ToString()
 		}
-		New-MarkdownHelp @markdownParams | Out-Null
+		New-MarkdownHelp @markdownParams
 	}
  catch { Write-Error "Error: MarkdownHelp `nMessage:$($_.Exception.message)"; exit }
 
@@ -212,7 +211,7 @@ Function Set-PSProjectFile {
 
 	try {
 		Write-Color '[Starting]', ' Creating External help files' -Color Yellow, DarkCyan
-		New-ExternalHelp -Path $Moduledocs.FullName -OutputPath $ModuleExternalHelp.FullName -Force | Out-Null
+		New-ExternalHelp -Path $Moduledocs.FullName -OutputPath $ModuleExternalHelp.FullName -Force -ShowProgress
 
 		Write-Color '[Starting]', ' Creating About help files' -Color Yellow, DarkCyan
 		$aboutfile = [System.Collections.Generic.List[string]]::new()
@@ -265,7 +264,7 @@ Function Set-PSProjectFile {
 		Get-Content -Path $ModulesInstuctions | ForEach-Object { $readme.add($_) }
 		$readme.add(' ')
 		$readme.add('## Functions')
-	(Get-Command -Module $module).Name | ForEach-Object { $readme.add("- [``$_``](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
+	(Get-Command -Module $module).Name | ForEach-Object { $readme.add("- [$_](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
 		$readme | Set-Content -Path $ModuleReadme
 
 		$mkdocsFunc = [System.Collections.Generic.List[string]]::new()
@@ -318,7 +317,7 @@ Function Set-PSProjectFile {
 		Get-Content -Path $ModulesInstuctions | ForEach-Object { $indexFile.add($_) }
 		$indexFile.add(' ')
 		$indexFile.add('## Functions')
-	(Get-Command -Module $module).Name | ForEach-Object { $indexFile.add("- [``$_``](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
+	(Get-Command -Module $module).Name | ForEach-Object { $indexFile.add("- [$_](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
 		$indexFile | Set-Content -Path $ModuleIndex -Force
 	}
  catch { Write-Error "Error: Other Files `nMessage:$($_.Exception.message)"; exit }
@@ -454,15 +453,15 @@ Function Set-PSProjectFile {
 	#endregion
 	
 	#region mkdocs
-	Write-Color '[Starting]', ' Creating MKDocs help files' -Color Yellow, DarkCyan
 	if ($mkdocs -like 'serve') {
+		Write-Color '[Starting]', ' Creating MKDocs help files' -Color Yellow, DarkCyan
 		#Set-Location (Split-Path -Path $Moduledocs -Parent)
-		Start-Process -FilePath mkdocs.exe -ArgumentList serve -WorkingDirectory $Moduledocs -WindowStyle Normal
+		Start-Process -FilePath mkdocs.exe -ArgumentList serve -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -WindowStyle Normal
 		Start-Sleep 5
 		Start-Process "http://127.0.0.1:8000/$($module.Name)/"
 	}
 	if ($mkdocs -like 'deploy') {
-		Start-Process -FilePath mkdocs.exe -ArgumentList serve -WorkingDirectory $Moduledocs -NoNewWindow 2>&1 | Write-Host -ForegroundColor Yellow 
+		Start-Process -FilePath mkdocs.exe -ArgumentList serve -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -NoNewWindow 2>&1 | Write-Host -ForegroundColor Yellow 
 	}
 	#endregion
 
