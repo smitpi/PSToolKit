@@ -17,14 +17,14 @@ Edit the Modules json files.
 Edit-PSModulesList [-List <String>] [-ShowCurrent] [<CommonParameters>]
 ```
 
-### Remove
-```
-Edit-PSModulesList [-RemoveModule] [<CommonParameters>]
-```
-
 ### Add
 ```
-Edit-PSModulesList [-AddModule <String>] [<CommonParameters>]
+Edit-PSModulesList [-List <String>] [-AddModule <String>] [<CommonParameters>]
+```
+
+### Remove
+```
+Edit-PSModulesList [-List <String>] [-RemoveModule] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,7 +44,7 @@ Which list to edit.
 
 ```yaml
 Type: String
-Parameter Sets: List
+Parameter Sets: (All)
 Aliases:
 
 Required: False

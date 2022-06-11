@@ -1,48 +1,41 @@
 ---
 external help file: PSToolKit-help.xml
 Module Name: PSToolKit
-online version:
+online version: https://smitpi.github.io/PSToolKit/Install-LocalPSRepository
 schema: 2.0.0
 ---
 
 # Install-PSModule
 
 ## SYNOPSIS
-Install modules from .json file.
+Uses a preconfigured json file or a newly created list of needed modules, and installs them.
 
 ## SYNTAX
 
 ### List (Default)
 ```
-Install-PSModule [-List <String>] [-DownloadModules] [-Path <DirectoryInfo>] [-Repository <String>]
- [-Scope <String>] [<CommonParameters>]
+Install-PSModule [-List <String>] [-Repository <String>] [-Scope <String>] [<CommonParameters>]
 ```
 
 ### Other
 ```
-Install-PSModule [-ModuleNamesList <String[]>] [-DownloadModules] [-Path <DirectoryInfo>]
- [-Repository <String>] [-Scope <String>] [<CommonParameters>]
-```
-
-### download
-```
-Install-PSModule [-DownloadModules] -Path <DirectoryInfo> [-Repository <String>] [<CommonParameters>]
+Install-PSModule [-ModuleNamesList <String[]>] [-Repository <String>] [-Scope <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Install modules from .json file.
+Uses a preconfigured json file or a newly created list of needed modules, and installs them.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Install-PSModule -BaseModules -Scope AllUsers
+Install-PSModule -List BaseModules -Repository PSGallery -Scope AllUsers
 ```
 
 ## PARAMETERS
 
 ### -List
-{{ Fill List Description }}
+Select the base or extended, to select one of the json config files.
 
 ```yaml
 Type: String
@@ -57,7 +50,7 @@ Accept wildcard characters: False
 ```
 
 ### -ModuleNamesList
-{{ Fill ModuleNamesList Description }}
+Or specify a string list with module names.
 
 ```yaml
 Type: String[]
@@ -71,50 +64,8 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -DownloadModules
-{{ Fill DownloadModules Description }}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Path
-{{ Fill Path Description }}
-
-```yaml
-Type: DirectoryInfo
-Parameter Sets: List, Other
-Aliases:
-
-Required: False
-Position: Named
-Default value: C:\Temp
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-```yaml
-Type: DirectoryInfo
-Parameter Sets: download
-Aliases:
-
-Required: True
-Position: Named
-Default value: C:\Temp
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Repository
-{{ Fill Repository Description }}
+From which repository it will install.
 
 ```yaml
 Type: String
@@ -129,11 +80,11 @@ Accept wildcard characters: False
 ```
 
 ### -Scope
-Scope to install modules (CurrentUser or AllUsers).
+To which scope, allusers or currentuser.
 
 ```yaml
 Type: String
-Parameter Sets: List, Other
+Parameter Sets: (All)
 Aliases:
 
 Required: False

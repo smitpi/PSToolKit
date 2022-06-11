@@ -8,6 +8,8 @@ SHORT DESCRIPTION
  
 NOTES
 Functions in this module:
+	 Get-BinRoot -- Get-ToolsLocation
+	 Get-PackageParameters -- Get-PackageParametersBuiltIn
 	 Add-ChocolateyPrivateRepo -- Add a private repository to Chocolatey.
 	 Backup-ElevatedShortcut -- Exports the RunAss shortcuts, to a zip file
 	 Backup-PowerShellProfile -- Creates a zip file from the ps profile directories

@@ -57,6 +57,9 @@
         "Name":  "Microsoft.PowerShell.ThreadJob"
     },
     {
+        "Name":  "MrInspector"
+    },
+    {
         "Name":  "MrToolkit"
     },
     {
@@ -133,6 +136,9 @@
     },
     {
         "Name":  "Sampler"
+    },
+    {
+        "Name":  "ShowPSAst"
     },
     {
         "Name":  "ugit"

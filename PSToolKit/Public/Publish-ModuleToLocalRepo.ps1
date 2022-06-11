@@ -32,14 +32,6 @@ Created [11/06/2022_18:22] Initial Script Creating
 
 #>
 
-
-<# 
-
-.DESCRIPTION 
- Checks for required modules and upload all to your local repo. 
-
-#> 
-
 <#
 .SYNOPSIS
 Checks for required modules and upload all to your local repo.
@@ -68,25 +60,27 @@ Function Publish-ModuleToLocalRepo {
 	)
 
 	foreach ($Man in $ManifestPaths) {
-        $ManifestPath = get-item $Man
+		$ManifestPath = Get-Item $Man
 		$ManifestData = Import-PowerShellDataFile -Path $ManifestPath.fullname
-		if ($ManifestData.RequiredModules) {$ManifestData.RequiredModules | ForEach-Object {
-			$Importmod = Import-Module $_ -Force -PassThru
-			if (-not(Find-Module $Importmod.Name -Repository $Repository -ErrorAction SilentlyContinue)) { 
-			    Write-Color '[Uploading] ', 'Required Module ', $($Importmod.Name) -Color Yellow, Cyan, DarkRed
-                Publish-Module -Name $Importmod.Name -Repository $Repository -Force 
-            }
-            else { Write-Color '[Uploading] ', 'Module ', $($Importmod.Name), "  Already Uploaded" -Color Yellow, Cyan, green, DarkRed}
+		if ($ManifestData.RequiredModules) {
+			$ManifestData.RequiredModules | ForEach-Object {
+				$Importmod = Import-Module $_ -Force -PassThru
+				if (-not(Find-Module $Importmod.Name -Repository $Repository -ErrorAction SilentlyContinue)) { 
+					Write-Color '[Uploading] ', 'Required Module ', $($Importmod.Name) -Color Yellow, Cyan, DarkRed
+					Publish-Module -Name $Importmod.Name -Repository $Repository -Force 
+				}
+				else { Write-Color '[Uploading] ', 'Module ', $($Importmod.Name), '  Already Uploaded' -Color Yellow, Cyan, green, DarkRed }
+			}
 		}
-        }
-        try {
-		    $NewImport = Import-Module (Get-Item $ManifestPath.fullname.Replace('.psd1', '.psm1')) -Force -PassThru
-        } catch {$NewImport = Import-Module $ManifestPath.Directory.Name -Force -PassThru}
-        if (-not(Find-Module $NewImport.Name -Repository $Repository -ErrorAction SilentlyContinue)) {
-            Write-Color '[Uploading] ', 'Module ', $($NewImport.Name) -Color Yellow, Cyan, DarkRed
-            Publish-Module -Name $NewImport.Name -Repository $Repository -Force
-        }
-        else { Write-Color '[Uploading] ', 'Module ', $($NewImport.Name), "  Already Uploaded" -Color Yellow, Cyan, green, DarkRed}
+		try {
+			$NewImport = Import-Module (Get-Item $ManifestPath.fullname.Replace('.psd1', '.psm1')) -Force -PassThru
+		}
+		catch { $NewImport = Import-Module $ManifestPath.Directory.Name -Force -PassThru }
+		if (-not(Find-Module $NewImport.Name -Repository $Repository -ErrorAction SilentlyContinue)) {
+			Write-Color '[Uploading] ', 'Module ', $($NewImport.Name) -Color Yellow, Cyan, DarkRed
+			Publish-Module -Name $NewImport.Name -Repository $Repository -Force
+		}
+		else { Write-Color '[Uploading] ', 'Module ', $($NewImport.Name), '  Already Uploaded' -Color Yellow, Cyan, green, DarkRed }
 	}
 } #end Function
 

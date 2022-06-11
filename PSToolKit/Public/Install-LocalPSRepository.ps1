@@ -32,19 +32,10 @@ Created [11/06/2022_05:40] Initial Script Creating
 
 #>
 
-#Requires -Module ImportExcel
-#Requires -Module PSWriteHTML
 #Requires -Module PSWriteColor
 
 <# 
 
-.DESCRIPTION 
- Creates a repository for offline installations 
-
-#> 
-
-
-<#
 <#
 .SYNOPSIS
 Short desCreates a repository for offline installations.

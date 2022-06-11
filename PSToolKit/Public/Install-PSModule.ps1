@@ -33,13 +33,6 @@ Created [26/10/2021_22:32] Initial Script Creating
 #>
 
 <#
-
-.DESCRIPTION
- Install modules from .json file
-
-#>
-
-<#
 .SYNOPSIS
 Uses a preconfigured json file or a newly created list of needed modules, and installs them.
 

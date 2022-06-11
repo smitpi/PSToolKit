@@ -1,7 +1,7 @@
 ---
 external help file: PSToolKit-help.xml
 Module Name: PSToolKit
-online version:
+online version: https://smitpi.github.io/PSToolKit/Install-LocalPSRepository
 schema: 2.0.0
 ---
 

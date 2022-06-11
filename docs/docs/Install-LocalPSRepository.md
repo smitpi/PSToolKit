@@ -1,39 +1,102 @@
 ---
 external help file: PSToolKit-help.xml
 Module Name: PSToolKit
-online version:
+online version: https://smitpi.github.io/PSToolKit/Install-LocalPSRepository
 schema: 2.0.0
 ---
 
 # Install-LocalPSRepository
 
 ## SYNOPSIS
-Creates a repository for offline installations
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Install-LocalPSRepository -RepoName <String[]> -RepoPath <DirectoryInfo> [-ImportPowerShellGet]
- [-ImportDirectory] [-ImportPath <DirectoryInfo>] [<CommonParameters>]
+Install-LocalPSRepository -RepoName <String> -RepoPath <DirectoryInfo> [-ImportPowerShellGet]
+ [-DownloadModules] [-List <String>] [-ModuleNamesList <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Creates a repository for offline installations
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Install-LocalPSRepository -Export HTML -ReportPath C:\temp
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
+{{ Add example description here }}
+
 ## PARAMETERS
+
+### -DownloadModules
+{{ Fill DownloadModules Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ImportPowerShellGet
+{{ Fill ImportPowerShellGet Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -List
+{{ Fill List Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: BaseModules, ExtendedModules
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ModuleNamesList
+{{ Fill ModuleNamesList Description }}
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
 
 ### -RepoName
 {{ Fill RepoName Description }}
 
 ```yaml
-Type: String[]
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -59,59 +122,20 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ImportPowerShellGet
-{{ Fill ImportPowerShellGet Description }}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ImportDirectory
-{{ Fill ImportDirectory Description }}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ImportPath
-{{ Fill ImportPath Description }}
-
-```yaml
-Type: DirectoryInfo
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
+### System.String[]
+
 ## OUTPUTS
 
 ### System.Object[]
+
 ## NOTES
 
 ## RELATED LINKS
+
+[https://smitpi.github.io/PSToolKit/Install-LocalPSRepository](https://smitpi.github.io/PSToolKit/Install-LocalPSRepository)
+

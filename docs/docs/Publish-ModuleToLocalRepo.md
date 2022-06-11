@@ -5,55 +5,55 @@ online version: https://smitpi.github.io/PSToolKit/Install-LocalPSRepository
 schema: 2.0.0
 ---
 
-# Restore-ElevatedShortcut
+# Publish-ModuleToLocalRepo
 
 ## SYNOPSIS
-Restore the RunAss shortcuts, from a zip file
+Checks for required modules and upload all to your local repo.
 
 ## SYNTAX
 
 ```
-Restore-ElevatedShortcut [-ZipFilePath] <FileInfo> [-ForceReinstall] [<CommonParameters>]
+Publish-ModuleToLocalRepo [[-ManifestPaths] <String[]>] [-Repository] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Restore the RunAss shortcuts, from a zip file
+Checks for required modules and upload all to your local repo.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Restore-ElevatedShortcut -ZipFilePath c:\temp\bck.zip -ForceReinstall
+Publish-ModuleToLocalRepo -ManifestPaths .\PSConfigFile\PSConfigFile\PSConfigFile.psd1 -Repository blah
 ```
 
 ## PARAMETERS
 
-### -ZipFilePath
-Path to the backup file
+### -ManifestPaths
+Path to the .psd1 file.
 
 ```yaml
-Type: FileInfo
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ForceReinstall
-Override existing shortcuts
-
-```yaml
-Type: SwitchParameter
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: False
+Position: 1
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Repository
+Name of the local repository.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -65,6 +65,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.Object[]
 ## NOTES
 
 ## RELATED LINKS
