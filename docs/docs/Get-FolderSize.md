@@ -40,9 +40,8 @@ Otherwise you should get a warning.
 ### EXAMPLE 1
 ```
 . .\Get-FolderSize.ps1
+PS C:\> 'C:\Windows', 'E:\temp' | Get-FolderSize
 ```
-
-PS C:\\\> 'C:\Windows', 'E:\temp' | Get-FolderSize
 
 ### EXAMPLE 2
 ```

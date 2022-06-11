@@ -90,22 +90,15 @@ Function Set-PSProjectFile {
 	Write-Color '[Starting]', ' Module Import' -Color Yellow, DarkCyan
 	try {
 		$modulefile = $ModuleScriptFile | Get-Item -ErrorAction Stop
-		Remove-Module $modulefile.basename -Force -ErrorAction SilentlyContinue
-		Import-Module $modulefile.FullName -Force -ErrorAction Stop
-		$module = Get-Module $modulefile.basename -ErrorAction Stop
-		$ModuleManifestFile = Get-Item ($module.Path).Replace('.psm1', '.psd1')
-		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object * -ErrorAction Stop
+		$module = Import-Module $modulefile.FullName -Force -PassThru -ErrorAction Stop
 	}
  catch { Write-Error "Error: Importing Module `nMessage:$($_.Exception.message)"; exit }
 	#endregion
 
-	#region Create Folders
+	#region deleting Folders
 	try {
-		Write-Color '[Starting]', ' Creating Folder Structure' -Color Yellow, DarkCyan
+		Write-Color '[Starting]', ' Removing Old Folders' -Color Yellow, DarkCyan
 		$ModuleBase = ((Get-Item $module.ModuleBase).Parent).fullname
-		$ModuleOutput = [IO.Path]::Combine($ModuleBase, 'Output', $($ModuleManifest.Version.ToString()))
-		$Moduledocs = [IO.Path]::Combine($ModuleBase, 'docs', 'docs')
-		$ModuleExternalHelp = [IO.Path]::Combine($ModuleOutput, 'en-US')
 		$ModulesInstuctions = [IO.Path]::Combine($ModuleBase, 'instructions.md')
 		$ModuleReadme = [IO.Path]::Combine($ModuleBase, 'README.md')
 		$ModuleIssues = [IO.Path]::Combine($ModuleBase, 'Issues.md')
@@ -123,17 +116,14 @@ Function Set-PSProjectFile {
 			if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force -ErrorAction Stop }
 			if (Test-Path $ModuleIssuesExcel) { Remove-Item $ModuleIssuesExcel -Force -ErrorAction Stop }	
 		}
-		catch { Write-Error "Error: Deleting Old Folders `nMessage:$($_.Exception.message)"; exit }
-
+		catch {
+			Write-Warning "Error: Deleting Old Folders `nMessage:$($_.Exception.message)`nRetrying"
+			Start-Sleep 10
+			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop; Start-Sleep 5 }
+			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
+		}
 	}
- catch { throw 'Error Creating Folder Structure' ; exit }
-
-	try {
-		$ModuleOutput = New-Item $ModuleOutput -ItemType Directory -Force | Get-Item -ErrorAction Stop
-		$Moduledocs = New-Item $Moduledocs -ItemType Directory -Force | Get-Item -ErrorAction Stop
-		$ModuleExternalHelp = New-Item $ModuleExternalHelp -ItemType Directory -Force | Get-Item -ErrorAction Stop
-	}
-	catch { Write-Error "Error: Creating folders `nMessage:$($_.Exception.message)"; exit }
+	catch { throw 'Error removing Folder Structure' ; exit }
 	#endregion
     
 	#region version bump
@@ -155,14 +145,29 @@ Function Set-PSProjectFile {
 		}
 		catch { Write-Error "Error: Updateing Version bump `nMessage:$($_.Exception.message)"; exit }
 	} 
-
+	#endregion
+	#region Folders
 	try {
+		Write-Color '[Starting]', ' Creating New Folder Structure' -Color Yellow, DarkCyan
+		$ModuleManifestFile = Get-Item ($module.Path).Replace('.psm1', '.psd1')
+		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object * -ErrorAction Stop
 		$FileContent = Get-Content $ModuleManifestFile -ErrorAction Stop
 		$DateLine = Select-String -InputObject $ModuleManifestFile -Pattern '# Generated on:'
 		$FileContent[($DateLine.LineNumber - 1)] = "# Generated on: $(Get-Date -Format u)"
 		$FileContent | Set-Content $ModuleManifestFile -Force -ErrorAction Stop
 	}
- catch { Write-Error "Error: Updating Date in Module Manifest File  `nMessage:$($_.Exception.message)"; exit }
+	catch { Write-Error "Error: Updating Date in Module Manifest File  `nMessage:$($_.Exception.message)"; exit }
+	try {
+		$ModuleOutputFolder = [IO.Path]::Combine($ModuleBase, 'Output', $($ModuleManifest.Version.ToString()))
+		$ModuleOutput = New-Item $ModuleOutputFolder -ItemType Directory -Force | Get-Item -ErrorAction Stop
+
+		$ModuledocsFolder = [IO.Path]::Combine($ModuleBase, 'docs', 'docs')
+		$Moduledocs = New-Item $ModuledocsFolder -ItemType Directory -Force | Get-Item -ErrorAction Stop
+
+		$ModuleExternalHelpFolder = [IO.Path]::Combine($ModuleOutput, 'en-US')
+		$ModuleExternalHelp = New-Item $ModuleExternalHelpFolder -ItemType Directory -Force | Get-Item -ErrorAction Stop
+	}
+	catch { Write-Error "Error: Creating folders `nMessage:$($_.Exception.message)"; exit }
 	#endregion
 
 	#region platyps
@@ -457,7 +462,7 @@ Function Set-PSProjectFile {
 		Start-Process "http://127.0.0.1:8000/$($module.Name)/"
 	}
 	if ($mkdocs -like 'deploy') {
-		Start-Process -FilePath mkdocs.exe -ArgumentList serve -WorkingDirectory $Moduledocs -NoNewWindow   2>&1 | Write-Host -ForegroundColor Yellow 
+		Start-Process -FilePath mkdocs.exe -ArgumentList serve -WorkingDirectory $Moduledocs -NoNewWindow 2>&1 | Write-Host -ForegroundColor Yellow 
 	}
 	#endregion
 
