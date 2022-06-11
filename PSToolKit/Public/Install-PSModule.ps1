@@ -41,34 +41,25 @@ Created [26/10/2021_22:32] Initial Script Creating
 
 <#
 .SYNOPSIS
- Install modules from .json file.
+Uses a preconfigured json file or a newly created list of needed modules, and installs them.
 
 .DESCRIPTION
- Install modules from .json file.
+Uses a preconfigured json file or a newly created list of needed modules, and installs them.
 
-.PARAMETER BaseModules
-Only base list.
+.PARAMETER List
+Select the base or extended, to select one of the json config files.
 
-.PARAMETER ExtendedModules
-Use longer list.
+.PARAMETER ModuleNamesList
+Or specify a string list with module names.
+
+.PARAMETER Repository
+From which repository it will install.
 
 .PARAMETER Scope
-Scope to install modules (CurrentUser or AllUsers).
-
-.PARAMETER OtherModules
-Use Manual list.
-
-.PARAMETER JsonPath
-Path to manual list.
-
-.PARAMETER ForceInstall
-Force reinstall.
-
-.PARAMETER RemoveAll
-Remove the modules.
+To which scope, allusers or currentuser.
 
 .EXAMPLE
-Install-PSModule -BaseModules -Scope AllUsers
+ Install-PSModule -List BaseModules -Repository PSGallery -Scope AllUsers  
 
 #>
 Function Install-PSModule {
@@ -81,64 +72,62 @@ Function Install-PSModule {
 		[Parameter(ParameterSetName = 'Other', ValueFromPipeline)]
 		[string[]]$ModuleNamesList,	
 
-		[Parameter(ParameterSetName = 'download')]
 		[Parameter(ParameterSetName = 'List')]
 		[Parameter(ParameterSetName = 'Other')]
-		[switch]$DownloadModules,
-
-		[Parameter(ParameterSetName = 'download', Mandatory)]
-		[Parameter(ParameterSetName = 'List')]
-		[Parameter(ParameterSetName = 'Other')]
-		[ValidateScript( { if (Test-Path $_) { $true }
-				else { New-Item -Path $_ -ItemType Directory -Force | Out-Null; $true }
-			})]
-		[System.IO.DirectoryInfo]$Path = 'C:\Temp',
-
 		[string]$Repository = 'PSGallery',
 
 		[Parameter(ParameterSetName = 'List')]
 		[Parameter(ParameterSetName = 'Other')]
 		[validateset('CurrentUser', 'AllUsers')]
 		[string]$Scope = 'AllUsers'
-
 	)
+
+	if ($Scope -like 'AllUsers') {
+		$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+		
+		if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
+		else { Throw 'Must be running an elevated prompt to install in AllUsers'; exit }
+	}
 
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 	$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
 	try {
 		$ConPath = Get-Item $ConfigPath
-	} catch { Write-Error 'Config path foes not exist'; exit }
-	if ($List -like 'BaseModules') { $mods = (Get-Content (Join-Path $ConPath.FullName -ChildPath BaseModuleList.json) | ConvertFrom-Json).name}
+	}
+ catch { Write-Error 'Config path foes not exist'; exit }
+	if ($List -like 'BaseModules') { $mods = (Get-Content (Join-Path $ConPath.FullName -ChildPath BaseModuleList.json) | ConvertFrom-Json).name }
 	elseif ($List -like 'ExtendedModules') { $mods = (Get-Content (Join-Path $ConPath.FullName -ChildPath ExtendedModuleList.json) | ConvertFrom-Json).name }
-	elseif ($ModuleNamesList) {$mods = $ModuleNamesList}
+	elseif ($ModuleNamesList) { $mods = $ModuleNamesList }
 
-	if (-not($mods)) {throw 'Couldnt get a valid modules list'}
+	if (-not($mods)) { throw 'Couldnt get a valid modules list'; exit }
 
-	if ($DownloadModules) {
-		$mods | ForEach-Object {
-			Write-Color '[Downloading] ', $($_), ' to folder: ', $($Path), ' from ', $($Repository) -Color Yellow, Cyan, Green, Cyan, Green, Cyan
-			#Save-Module -Name $_ -Repository $Repository -Path $Path -AcceptLicense -Force
-			Save-Package -Name $_ -Provider NuGet -Source https://www.powershellgallery.com/api/v2 -Path $Path | Out-Null
+	foreach ($mod in $mods) {
+		Remove-Variable -Name PSModule -ErrorAction SilentlyContinue
+		$PSModule = Get-Module -Name $mod | Sort-Object -Property Version -Descending | Select-Object -First 1
+		if ([string]::IsNullOrEmpty($PSModule)) { $PSModule = Get-Module -Name $mod -ListAvailable | Sort-Object -Property Version -Descending | Select-Object -First 1 }
+		if ([string]::IsNullOrEmpty($PSModule)) {
+			Write-Color '[Installing] ', $($mod), ' to Scope: ', $($Scope), ' from ', $($Repository) -Color Yellow, Cyan, Green, Cyan, Green, Cyan
+			Install-Module -Name $mod -Scope $Scope -AllowClobber -Force -Repository $Repository
 		}
-	} else {
-		foreach ($mod in $mods) {
-			$PSModule = Get-Module -Name $mod -ListAvailable | Select-Object -First 1
-			if ($PSModule.Name -like '') {
-				Write-Color '[Installing] ', $($mod), ' to Scope: ', $($Scope), ' from ', $($Repository) -Color Yellow, Cyan, Green, Cyan, Green, Cyan
-				Install-Module -Name $mod -Scope $Scope -AllowClobber -Force -Repository $Repository
-			} else {
-				Write-Color '[Installing] ', "$($PSModule.Name): ", "(Path: $($PSModule.Path))", ' Already Installed' -Color Yellow, Cyan, Green, DarkRed
-				$OnlineMod = Find-Module -Name $mod -Repository $Repository
-				if ($PSModule.Version -lt $OnlineMod.Version) {
-					Write-Color "`t[Upgrading] ", "$($PSModule.Name): ", 'to version ', "$($OnlineMod.Version)" -Color Yellow, Cyan, Green, DarkRed
-					try {
-						Get-Module -Name $PSModule.Name -ListAvailable | Select-Object -First 1 | Update-Module -Force -ErrorAction Stop
-					} catch {Get-Module -Name $PSModule.Name -ListAvailable | Select-Object -First 1 | install-module -Scope $Scope -Force -AllowClobber}
+		else {
+			Write-Color '[Installing] ', "$($PSModule.Name): ", ' Already Installed ', "(Path: $($PSModule.Path))" -Color Yellow, Cyan, DarkRed, DarkGreen
+			$OnlineMod = Find-Module -Name $mod -Repository $Repository
+			if ($PSModule.Version -lt $OnlineMod.Version) {
+				Write-Color "`t[Upgrading] ", "$($PSModule.Name): ", 'to version ', "$($OnlineMod.Version)" -Color Yellow, Cyan, Green, DarkRed
+				try {
+					Update-Module -Name $PSModule.Name -Scope $Scope -Force -ErrorAction Stop
 				}
+				catch {
+					try {
+						Install-Module -Name $PSModule.Name -Scope $Scope -Force -AllowClobber 
+					}
+					catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" }
+    }
 			}
 		}
 	}
-}
+	
+}# Function
 
 
 $scriptblock = {

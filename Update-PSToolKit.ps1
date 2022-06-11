@@ -102,7 +102,7 @@ Function Update-PSToolKit {
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] download from github"
 		if (Get-Command Start-BitsTransfer) {
             try {
-			    Start-BitsTransfer -Source 'https://codeload.github.com/smitpi/PSToolKit/zip/refs/heads/master' -Destination "$env:tmp\private.zip" -ErrorAction Stop
+			    Start-BitsTransfer -Source 'https://codeload.github.com/smitpi/PSToolKit/zip/refs/heads/master' -Destination "$env:tmp\private.zip"
             } catch {
                     Write-Warning "Bits Transer failed, defaulting to webrequest"
                     Invoke-WebRequest -Uri https://codeload.github.com/smitpi/PSToolKit/zip/refs/heads/master -OutFile $env:tmp\private.zip

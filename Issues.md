@@ -4,6 +4,7 @@
 
 | Catagory      | File                         | details                                                                                              |
 | ------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------- |
+| External Help | Publish-ModuleToLocalRepo    | Did not create the .md file                                                                          |
 | External Help | Install-LocalPSRepository.md | Install-LocalPSRepository.md - ### -RepoName - {{ Fill RepoName Description }}                       |
 | External Help | Install-LocalPSRepository.md | Install-LocalPSRepository.md - ### -RepoPath - {{ Fill RepoPath Description }}                       |
 | External Help | Install-LocalPSRepository.md | Install-LocalPSRepository.md - ### -ImportPowerShellGet - {{ Fill ImportPowerShellGet Description }} |
@@ -17,4 +18,4 @@
 
 ---
 
-*Updated: Saturday, 11 June 2022 09:32:51 UTC*
+*Updated: Saturday, 11 June 2022 19:55:13 UTC*

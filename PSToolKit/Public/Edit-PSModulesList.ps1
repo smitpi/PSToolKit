@@ -72,6 +72,8 @@ Function Edit-PSModulesList {
 	[Cmdletbinding(DefaultParameterSetName = 'List'	, HelpURI = 'https://smitpi.github.io/PSToolKit/Edit-PSModulesLists')]
 	PARAM(
 		[Parameter(ParameterSetName = 'List')]
+		[Parameter(ParameterSetName = 'Remove')]
+		[Parameter(ParameterSetName = 'Add')]
 		[ValidateSet('BaseModules', 'ExtendedModules')]
 		[ValidateScript( { $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
@@ -88,7 +90,8 @@ Function Edit-PSModulesList {
 	$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
 	try {
 		$ConPath = Get-Item $ConfigPath
-	} catch { Write-Error 'Config path foes not exist'; exit }
+	}
+ catch { Write-Error 'Config path foes not exist'; exit }
 	if ($List -like 'BaseModules') { $ModuleList = (Join-Path $ConPath.FullName -ChildPath BaseModuleList.json) }
 	if ($List -like 'ExtendedModules') { $ModuleList = (Join-Path $ConPath.FullName -ChildPath ExtendedModuleList.json) }
 
@@ -118,7 +121,7 @@ Function Edit-PSModulesList {
 		$SortMods | ConvertTo-Json -Depth 3 | Set-Content -Path $ModuleList -Force
 	}
 	if (-not($RemoveModule) -and -not($ShowCurrent)) {
-		if ($null -like $AddModule) {throw 'AddModule cant be an empty string'}
+		if ($null -like $AddModule) { throw 'AddModule cant be an empty string' }
 		$findmods = Find-Module -Filter $AddModule
 		if ($findmods.Name.count -gt 1) {
 			ListStuff -arg $findmods.name
@@ -127,11 +130,13 @@ Function Edit-PSModulesList {
 			[void]$mods.Add([PSCustomObject]@{
 					Name = "$($selectMod.name)"
 				})		
-		} elseif ($findmods.Name.count -eq 1) {
+		}
+		elseif ($findmods.Name.count -eq 1) {
 			[void]$mods.Add([PSCustomObject]@{
 					Name = "$($findmods.name)"
 				})
-		} else { Write-Error "Could not find $($ModuleName)" }
+		}
+		else { Write-Error "Could not find $($ModuleName)" }
 		ListStuff $mods.name
 		$SortMods = $mods | Sort-Object -Property Name -Unique
 		$SortMods | ConvertTo-Json -Depth 3 | Set-Content -Path $ModuleList -Force

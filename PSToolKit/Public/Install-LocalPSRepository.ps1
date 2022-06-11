@@ -45,20 +45,33 @@ Created [11/06/2022_05:40] Initial Script Creating
 
 
 <#
+<#
 .SYNOPSIS
-Creates a repository for offline installations
+Short desCreates a repository for offline installations.
 
 .DESCRIPTION
 Creates a repository for offline installations
 
-.PARAMETER Export
-Export the result to a report file. (Excel or html). Or select Host to display the object on screen.
+.PARAMETER RepoName
+Name of the local repository
 
-.PARAMETER ReportPath
-Where to save the report.
+.PARAMETER RepoPath
+Path to the folder for the repository.
+
+.PARAMETER ImportPowerShellGet
+Downloads an offline copy of PowerShellGet
+
+.PARAMETER DownloadModules
+Downloads an existing json list of modules to the new repository.
+
+.PARAMETER List
+The base or extended json module list.
+
+.PARAMETER ModuleNamesList
+A string list of module names to download.
 
 .EXAMPLE
-Install-LocalPSRepository -Export HTML -ReportPath C:\temp
+Install-LocalPSRepository -RepoName repo -RepoPath c:\utils\repo -DownloadModules -List BaseModules
 
 #>
 Function Install-LocalPSRepository {
@@ -69,7 +82,7 @@ Function Install-LocalPSRepository {
 		[ValidateScript( { if (-not(Get-PSRepository -Name $_)) { $true }
 				else { throw 'RepoName already exists' }
 			})]
-		[string[]]$RepoName,
+		[string]$RepoName,
 		[Parameter(Mandatory)]
 		[ValidateScript( { if (Test-Path $_) { $true }
 				else { New-Item -Path $_ -ItemType Directory -Force | Out-Null; $true }
@@ -83,40 +96,68 @@ Function Install-LocalPSRepository {
 		[switch]$ImportPowerShellGet,
 
 		[Parameter(ParameterSetName = 'import')]
-		[switch]$ImportDirectory,
-		[ValidateScript( { if (Test-Path $_) { $true }
-				else { throw 'Invalid path' }
-			})]
+		[switch]$DownloadModules,
+
 		[Parameter(ParameterSetName = 'import')]
-		[System.IO.DirectoryInfo]$ImportPath
+		[ValidateSet('BaseModules', 'ExtendedModules')]
+		[string]$List = 'ExtendedModules',
+
+		[Parameter(ParameterSetName = 'import', ValueFromPipeline)]
+		[string[]]$ModuleNamesList
 	)
 
 	try {
 		$options = @{
-			Name                 = $RepoName 
-			SourceLocation       = $RepoPath
-			ScriptSourceLocation = $RepoPath
-			InstallationPolicy   = 'Trusted'
+			Name                  = $RepoName 
+			SourceLocation        = $RepoPath.FullName
+			PublishLocation       = $RepoPath.FullName
+			ScriptSourceLocation  = $RepoPath.FullName
+			ScriptPublishLocation = $RepoPath.FullName
+			InstallationPolicy    = 'Trusted'
 		}
-		Register-PSRepository @options -ErrorAction Stop
-	} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+        Write-Color '[Installing] ',"Repo: ",$($RepoName), ' to folder: ', $($RepoPath) -Color Yellow, Cyan, Green, cyan, Green
+		Register-PSRepository @options
+	}
+ catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" }
 
 
 	if ($ImportPowerShellGet) {
-		if (-not(Test-Path "$($env:TMP)\OfflinePowerShellGetDeploy")) {New-Item "$($env:TMP)\OfflinePowerShellGetDeploy" -ItemType Directory -Force | Out-Null}
-		if (-not(Test-Path "$($env:TMP)\OfflinePowerShellGet")) {New-Item "$($env:TMP)\OfflinePowerShellGet" -ItemType Directory -Force | Out-Null}
+		try {
+			if (-not(Test-Path "$($env:TMP)\OfflinePowerShellGetDeploy")) { New-Item "$($env:TMP)\OfflinePowerShellGetDeploy" -ItemType Directory -Force | Out-Null }
+			if (-not(Test-Path "$($env:TMP)\OfflinePowerShellGet")) { New-Item "$($env:TMP)\OfflinePowerShellGet" -ItemType Directory -Force | Out-Null }
 
+            Write-Color '[Installing] ',"OfflinePowerShellGetDeploy", " Module" -Color Yellow, Cyan,green
+			Save-Module -Name OfflinePowerShellGetDeploy -Path "$($env:TMP)\OfflinePowerShellGetDeploy" -Repository PSGallery
+			Get-ChildItem "$($env:TMP)\OfflinePowerShellGetDeploy\*.psm1" -Recurse | Import-Module
 
-		Save-Module -Name OfflinePowerShellGetDeploy -Path "$($env:TMP)\OfflinePowerShellGetDeploy" -Repository PSGallery
-		Get-ChildItem "$($env:TMP)\OfflinePowerShellGetDeploy\*.psm1" -Recurse | Import-Module
-
-		Save-PowerShellGetForOffline -LocalFolder "$($env:TMP)\OfflinePowerShellGet"
-		Get-ChildItem "$($env:TMP)\OfflinePowerShellGet\*\*\*.psm1" | ForEach-Object {Publish-Module -Path $_.DirectoryName -Repository $RepoName -NuGetApiKey 'AnyStringWillDo'}
-
-	}
-	if ($ImportDirectory) {
+            Write-Color '[Installing] ',"PowerShellGet", " Offline" -Color Yellow, Cyan,Green
+			Save-PowerShellGetForOffline -LocalFolder "$($env:TMP)\OfflinePowerShellGet"
 			
+            Write-Color '[Uploading] ',"PackageManagement", " to ", $($RepoName) -Color Yellow, Cyan,Green,DarkRed
+            Get-ChildItem "$($env:TMP)\OfflinePowerShellGet\*\*\PackageManagement.psd1" | ForEach-Object { Publish-Module -Path $_.DirectoryName -Repository $RepoName -NuGetApiKey 'AnyStringWillDo' -Force }
+            
+            Write-Color '[Uploading] ',"PowerShellGet", " to ", $($RepoName) -Color Yellow, Cyan,Green,DarkRed
+            Get-ChildItem "$($env:TMP)\OfflinePowerShellGet\*\*\PowerShellGet.psd1"  | ForEach-Object { Publish-Module -Path $_.DirectoryName -Repository $RepoName -NuGetApiKey 'AnyStringWillDo' -Force }
+		}
+		catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" }
 	}
+	if ($DownloadModules) {
+		[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+		$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
+		try {
+			$ConPath = Get-Item $ConfigPath
+		}
+		catch { Write-Error 'Config path foes not exist'; exit }
+		if ($List -like 'BaseModules') { $mods = (Get-Content (Join-Path $ConPath.FullName -ChildPath BaseModuleList.json) | ConvertFrom-Json).name }
+		elseif ($List -like 'ExtendedModules') { $mods = (Get-Content (Join-Path $ConPath.FullName -ChildPath ExtendedModuleList.json) | ConvertFrom-Json).name }
+		elseif ($ModuleNamesList) { $mods = $ModuleNamesList }
 
-
+		if (-not($mods)) { throw 'Couldnt get a valid modules list'; exit }
+		else {
+			$mods | ForEach-Object {
+				Write-Color '[Installing] ', $($_), ' to folder: ', $($RepoPath) -Color Yellow, Cyan, Green, cyan, Green, DarkRed
+				Save-Package -Name $_ -Provider NuGet -Source https://www.powershellgallery.com/api/v2 -Path $RepoPath | Out-Null
+			}
+		}
+	}
 } #end Function
