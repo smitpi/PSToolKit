@@ -61,9 +61,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [Install-ChocolateyApp](https://smitpi.github.io/PSToolKit/#Install-ChocolateyApp) -- Install chocolatey apps from a json list.
 - [Install-ChocolateyClient](https://smitpi.github.io/PSToolKit/#Install-ChocolateyClient) -- Downloads and installs the Chocolatey client.
 - [Install-ChocolateyServer](https://smitpi.github.io/PSToolKit/#Install-ChocolateyServer) -- This will download, install and setup a new Chocolatey Repo Server
-- [Install-LocalPSRepository](https://smitpi.github.io/PSToolKit/#Install-LocalPSRepository) -- 
-Install-LocalPSRepository -RepoName <string> -RepoPath <DirectoryInfo> [-ImportPowerShellGet] [-DownloadModules] [-List <string>] [-ModuleNamesList <string[]>] [<CommonParameters>]
-
+- [Install-LocalPSRepository](https://smitpi.github.io/PSToolKit/#Install-LocalPSRepository) -- Short desCreates a repository for offline installations.
 - [Install-MicrosoftTerminal](https://smitpi.github.io/PSToolKit/#Install-MicrosoftTerminal) -- Install MicrosoftTerminal on your device.
 - [Install-MSUpdate](https://smitpi.github.io/PSToolKit/#Install-MSUpdate) -- Perform windows update
 - [Install-MSWinget](https://smitpi.github.io/PSToolKit/#Install-MSWinget) -- Install the package manager winget

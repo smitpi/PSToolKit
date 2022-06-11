@@ -493,7 +493,7 @@ Function Set-PSProjectFile {
  
 $scriptblock = {
 	param($commandName, $parameterName, $stringMatch)
-    
-	(Get-ChildItem -Path .\*.psm1 -Recurse).FullName
+    $here = (Get-Item .)
+	(Get-ChildItem -Path .\*.psm1 -Recurse).FullName | ForEach-Object {$_.Replace("$($here.FullName)",".")}
 }
 Register-ArgumentCompleter -CommandName Set-PSProjectFile -ParameterName ModuleScriptFile -ScriptBlock $scriptBlock

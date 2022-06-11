@@ -3,10 +3,8 @@
 		"en"
 	],
 	"spellright.documentTypes": [
-		"markdown",
 		"latex",
 		"plaintext",
-		"log",
 		"powershell"
 	],
 	"spellright.parserByClass": {

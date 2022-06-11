@@ -3,7 +3,7 @@
 
 .VERSION 0.1.0
 
-.GUID 40b7b319-2039-44cc-805a-2c02a1112940
+.GUID 6d394bf5-f1ec-4902-a1f8-6fdf2160167b
 
 .AUTHOR Pierre Smit
 
@@ -26,15 +26,21 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [11/06/2022_05:40] Initial Script Creating
+Created [11/06/2022_23:50] Initial Script Creating
 
 .PRIVATEDATA
 
 #>
-
 #Requires -Module PSWriteColor
 
 <# 
+
+.DESCRIPTION 
+ Creates a repository for offline installations 
+
+#> 
+
+
 
 <#
 .SYNOPSIS
