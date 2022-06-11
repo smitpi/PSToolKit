@@ -41,7 +41,7 @@ Created [11/06/2022_05:40] Initial Script Creating
 Short desCreates a repository for offline installations.
 
 .DESCRIPTION
-Creates a repository for offline installations
+Short desCreates a repository for offline installations.
 
 .PARAMETER RepoName
 Name of the local repository
@@ -106,7 +106,7 @@ Function Install-LocalPSRepository {
 			ScriptPublishLocation = $RepoPath.FullName
 			InstallationPolicy    = 'Trusted'
 		}
-        Write-Color '[Installing] ',"Repo: ",$($RepoName), ' to folder: ', $($RepoPath) -Color Yellow, Cyan, Green, cyan, Green
+		Write-Color '[Installing] ', 'Repo: ', $($RepoName), ' to folder: ', $($RepoPath) -Color Yellow, Cyan, Green, cyan, Green
 		Register-PSRepository @options
 	}
  catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" }
@@ -117,18 +117,18 @@ Function Install-LocalPSRepository {
 			if (-not(Test-Path "$($env:TMP)\OfflinePowerShellGetDeploy")) { New-Item "$($env:TMP)\OfflinePowerShellGetDeploy" -ItemType Directory -Force | Out-Null }
 			if (-not(Test-Path "$($env:TMP)\OfflinePowerShellGet")) { New-Item "$($env:TMP)\OfflinePowerShellGet" -ItemType Directory -Force | Out-Null }
 
-            Write-Color '[Installing] ',"OfflinePowerShellGetDeploy", " Module" -Color Yellow, Cyan,green
+			Write-Color '[Installing] ', 'OfflinePowerShellGetDeploy', ' Module' -Color Yellow, Cyan, green
 			Save-Module -Name OfflinePowerShellGetDeploy -Path "$($env:TMP)\OfflinePowerShellGetDeploy" -Repository PSGallery
 			Get-ChildItem "$($env:TMP)\OfflinePowerShellGetDeploy\*.psm1" -Recurse | Import-Module
 
-            Write-Color '[Installing] ',"PowerShellGet", " Offline" -Color Yellow, Cyan,Green
+			Write-Color '[Installing] ', 'PowerShellGet', ' Offline' -Color Yellow, Cyan, Green
 			Save-PowerShellGetForOffline -LocalFolder "$($env:TMP)\OfflinePowerShellGet"
 			
-            Write-Color '[Uploading] ',"PackageManagement", " to ", $($RepoName) -Color Yellow, Cyan,Green,DarkRed
-            Get-ChildItem "$($env:TMP)\OfflinePowerShellGet\*\*\PackageManagement.psd1" | ForEach-Object { Publish-Module -Path $_.DirectoryName -Repository $RepoName -NuGetApiKey 'AnyStringWillDo' -Force }
+			Write-Color '[Uploading] ', 'PackageManagement', ' to ', $($RepoName) -Color Yellow, Cyan, Green, DarkRed
+			Get-ChildItem "$($env:TMP)\OfflinePowerShellGet\*\*\PackageManagement.psd1" | ForEach-Object { Publish-Module -Path $_.DirectoryName -Repository $RepoName -NuGetApiKey 'AnyStringWillDo' -Force }
             
-            Write-Color '[Uploading] ',"PowerShellGet", " to ", $($RepoName) -Color Yellow, Cyan,Green,DarkRed
-            Get-ChildItem "$($env:TMP)\OfflinePowerShellGet\*\*\PowerShellGet.psd1"  | ForEach-Object { Publish-Module -Path $_.DirectoryName -Repository $RepoName -NuGetApiKey 'AnyStringWillDo' -Force }
+			Write-Color '[Uploading] ', 'PowerShellGet', ' to ', $($RepoName) -Color Yellow, Cyan, Green, DarkRed
+			Get-ChildItem "$($env:TMP)\OfflinePowerShellGet\*\*\PowerShellGet.psd1" | ForEach-Object { Publish-Module -Path $_.DirectoryName -Repository $RepoName -NuGetApiKey 'AnyStringWillDo' -Force }
 		}
 		catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" }
 	}

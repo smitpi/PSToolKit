@@ -179,7 +179,7 @@ Function Set-PSProjectFile {
 			Locale         = 'en-US'
 			HelpVersion    = $ModuleManifest.Version.ToString()
 		}
-		New-MarkdownHelp @markdownParams
+		New-MarkdownHelp @markdownParams -Force
 	}
  catch { Write-Error "Error: MarkdownHelp `nMessage:$($_.Exception.message)"; exit }
 
@@ -224,7 +224,7 @@ Function Set-PSProjectFile {
 		$aboutfile.Add(' ')
 		$aboutfile.Add('NOTES')
 		$aboutfile.Add('Functions in this module:')
-	(Get-Command -Module $module).Name | ForEach-Object { ($aboutfile.Add("`t $_ -- $((Get-Help $_).synopsis)")) }
+	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { ($aboutfile.Add("`t $_ -- $((Get-Help $_).synopsis)")) }
 		$aboutfile.Add(' ')
 		$aboutfile.Add('SEE ALSO')
 		$aboutfile.Add("`t $(($ModuleManifest.ProjectUri.AbsoluteUri | Out-String))")
@@ -264,7 +264,7 @@ Function Set-PSProjectFile {
 		Get-Content -Path $ModulesInstuctions | ForEach-Object { $readme.add($_) }
 		$readme.add(' ')
 		$readme.add('## Functions')
-	(Get-Command -Module $module).Name | ForEach-Object { $readme.add("- [$_](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
+	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $readme.add("- [$_](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
 		$readme | Set-Content -Path $ModuleReadme
 
 		$mkdocsFunc = [System.Collections.Generic.List[string]]::new()
@@ -456,9 +456,9 @@ Function Set-PSProjectFile {
 	if ($mkdocs -like 'serve') {
 		Write-Color '[Starting]', ' Creating MKDocs help files' -Color Yellow, DarkCyan
 		#Set-Location (Split-Path -Path $Moduledocs -Parent)
-		Start-Process -FilePath mkdocs.exe -ArgumentList serve -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -WindowStyle Normal
+		Start-Process -FilePath mkdocs.exe -ArgumentList 'serve -a localhost:7070 --livereload --dirtyreload' -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -WindowStyle Normal
 		Start-Sleep 5
-		Start-Process "http://127.0.0.1:8000/$($module.Name)/"
+		Start-Process "http://127.0.0.1:7070/$($module.Name)/"
 	}
 	if ($mkdocs -like 'deploy') {
 		Start-Process -FilePath mkdocs.exe -ArgumentList serve -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -NoNewWindow 2>&1 | Write-Host -ForegroundColor Yellow 
