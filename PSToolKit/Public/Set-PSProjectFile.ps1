@@ -47,7 +47,7 @@ Creates and modify needed files for a PS project from existing module files.
 .DESCRIPTION
 Creates and modify needed files for a PS project from existing module files.
 
-.PARAMETER ModuleName
+.PARAMETER ModuleScriptFile
 Path to module .psm1 file.
 
 .PARAMETER CopyNestedModules
@@ -66,14 +66,14 @@ Run Git Push when done.
 Copies the module to program files.
 
 .EXAMPLE
-Set-PSProjectFiles -ModuleName blah -VersionBump Minor -mkdocs serve
+Set-PSProjectFiles -ModuleScriptFile blah -VersionBump Minor -mkdocs serve
 
 #>
 Function Set-PSProjectFile {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Set-PSProjectFiles')]
 	PARAM(
 		[Parameter(Mandatory = $true)]
-		[System.IO.FileInfo]$ModuleName,
+		[System.IO.FileInfo]$ModuleScriptFile,
 		[ValidateSet('Minor', 'Build', 'CombineOnly')]
 		[string]$VersionBump = 'CombineOnly',
 		[ValidateSet('serve', 'deploy')]
@@ -89,10 +89,10 @@ Function Set-PSProjectFile {
 	#region module
 	Write-Color '[Starting]', ' Module Import' -Color Yellow, DarkCyan
 	try {
-		$modulefile = (Join-Path $([Environment]::GetFolderPath('MyDocuments')) -ChildPath ".\PowerShell\ProdModules\$($ModuleName)\$($ModuleName)\$($ModuleName).psm1") | Get-Item -ErrorAction Stop
-		Remove-Module $ModuleName -Force -ErrorAction SilentlyContinue
-		Import-Module $modulefile -Force -ErrorAction Stop
-		$module = Get-Module $ModuleName -ErrorAction Stop
+		$modulefile = $ModuleScriptFile | Get-Item -ErrorAction Stop
+		Remove-Module $modulefile.basename -Force -ErrorAction SilentlyContinue
+		Import-Module $modulefile.FullName -Force -ErrorAction Stop
+		$module = Get-Module $modulefile.basename -ErrorAction Stop
 		$ModuleManifestFile = Get-Item ($module.Path).Replace('.psm1', '.psd1')
 		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object * -ErrorAction Stop
 	}
@@ -477,11 +477,11 @@ Function Set-PSProjectFile {
 
 	#region Copy to Dir
 	if ($CopyToModulesFolder) {
-		Write-Color '[Copying]', ' New Module ', "$($ModuleName) ver:($($ModuleManifest.Version.ToString())) ", 'to Program Files' -Color Yellow, DarkCyan, Green, DarkCyan
-		if (-not(Test-Path "C:\Program Files\WindowsPowerShell\Modules\$($ModuleName)")) { New-Item "C:\Program Files\WindowsPowerShell\Modules\$($ModuleName)" -ItemType Directory -Force | Out-Null }
-		Get-ChildItem -Directory "C:\Program Files\WindowsPowerShell\Modules\$($ModuleName)" | Compress-Archive -DestinationPath "C:\Program Files\WindowsPowerShell\Modules\$($ModuleName)\$($ModuleName)-bck.zip" -Update
-		Get-ChildItem -Directory "C:\Program Files\WindowsPowerShell\Modules\$($ModuleName)" | Remove-Item -Recurse -Force
-		Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\WindowsPowerShell\Modules\$($ModuleName)\" -Force -Recurse
+		Write-Color '[Copying]', ' New Module ', "$($modulefile.basename) ver:($($ModuleManifest.Version.ToString())) ", 'to Program Files' -Color Yellow, DarkCyan, Green, DarkCyan
+		if (-not(Test-Path "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)")) { New-Item "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" -ItemType Directory -Force | Out-Null }
+		Get-ChildItem -Directory "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" | Compress-Archive -DestinationPath "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)\$($modulefile.basename)-bck.zip" -Update
+		Get-ChildItem -Directory "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" | Remove-Item -Recurse -Force
+		Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)\" -Force -Recurse
 	}
 	#endregion
 
@@ -490,6 +490,6 @@ Function Set-PSProjectFile {
 $scriptblock = {
 	param($commandName, $parameterName, $stringMatch)
     
-	Get-ChildItem -Path 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\*' | Select-Object -ExpandProperty Name
+	(Get-ChildItem -Path .\*.psm1 -Recurse).FullName
 }
-Register-ArgumentCompleter -CommandName Set-PSProjectFile -ParameterName ModuleName -ScriptBlock $scriptBlock
+Register-ArgumentCompleter -CommandName Set-PSProjectFile -ParameterName ModuleScriptFile -ScriptBlock $scriptBlock

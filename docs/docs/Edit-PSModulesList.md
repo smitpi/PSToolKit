@@ -14,17 +14,17 @@ Edit the Modules json files.
 
 ### List (Default)
 ```
-Edit-PSModulesList -List <String> [-ShowCurrent] [<CommonParameters>]
+Edit-PSModulesList [-List <String>] [-ShowCurrent] [<CommonParameters>]
 ```
 
 ### Remove
 ```
-Edit-PSModulesList -List <String> [-RemoveModule] [<CommonParameters>]
+Edit-PSModulesList [-RemoveModule] [<CommonParameters>]
 ```
 
 ### Add
 ```
-Edit-PSModulesList -List <String> [-AddModule <String>] [<CommonParameters>]
+Edit-PSModulesList [-AddModule <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,12 +44,12 @@ Which list to edit.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: List
 Aliases:
 
-Required: True
+Required: False
 Position: Named
-Default value: None
+Default value: ExtendedModules
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -616,7 +616,7 @@
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Edit-ChocolateyAppsList</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>List</maml:name>
           <maml:description>
             <maml:para>Which list to use.</maml:para>
@@ -626,7 +626,7 @@
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>ExtendedApps</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ShowCurrent</maml:name>
@@ -642,7 +642,7 @@
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Edit-ChocolateyAppsList</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>List</maml:name>
           <maml:description>
             <maml:para>Which list to use.</maml:para>
@@ -652,7 +652,7 @@
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>ExtendedApps</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>RemoveApp</maml:name>
@@ -668,7 +668,7 @@
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Edit-ChocolateyAppsList</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>List</maml:name>
           <maml:description>
             <maml:para>Which list to use.</maml:para>
@@ -678,7 +678,7 @@
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>ExtendedApps</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AddApp</maml:name>
@@ -707,7 +707,7 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>List</maml:name>
         <maml:description>
           <maml:para>Which list to use.</maml:para>
@@ -717,7 +717,7 @@
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>ExtendedApps</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ShowCurrent</maml:name>
@@ -1035,7 +1035,7 @@
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Edit-PSModulesList</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>List</maml:name>
           <maml:description>
             <maml:para>Which list to edit.</maml:para>
@@ -1045,7 +1045,7 @@
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>ExtendedModules</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ShowCurrent</maml:name>
@@ -1061,18 +1061,6 @@
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Edit-PSModulesList</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>List</maml:name>
-          <maml:description>
-            <maml:para>Which list to edit.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>RemoveModule</maml:name>
           <maml:description>
@@ -1087,18 +1075,6 @@
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Edit-PSModulesList</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>List</maml:name>
-          <maml:description>
-            <maml:para>Which list to edit.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AddModule</maml:name>
           <maml:description>
@@ -1114,7 +1090,7 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>List</maml:name>
         <maml:description>
           <maml:para>Which list to edit.</maml:para>
@@ -1124,7 +1100,7 @@
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>ExtendedModules</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ShowCurrent</maml:name>
@@ -1374,16 +1350,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>$rr = [PSCustomObject]@{
-	Host         = 'esx00'
-	HostName     = '192.168.10.19'
-	User         = 'root'
-	Port         = '22'
-	IdentityFile = 'C:\Users\xx\.ssh\yyy.id'
-}
-Edit-SSHConfigFile -AddObject $rr</dev:code>
+        <dev:code>$rr = [PSCustomObject]@{</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Host         = 'esx00' 	HostName     = '192.168.10.19' 	User         = 'root' 	Port         = '22' 	IdentityFile = 'C:\Users\xx\.ssh\yyy.id' } Edit-SSHConfigFile -AddObject $rr</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2839,10 +2808,9 @@ Edit-SSHConfigFile -AddObject $rr</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>. .\Get-FolderSize.ps1
-PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
+        <dev:code>. .\Get-FolderSize.ps1</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
@@ -4481,15 +4449,51 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
       <command:syntaxItem>
         <maml:name>Install-PSModule</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>BaseModules</maml:name>
+          <maml:name>List</maml:name>
           <maml:description>
-            <maml:para>Only base list.</maml:para>
+            <maml:para>{{ Fill List Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>ExtendedModules</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>DownloadModules</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill DownloadModules Description }}</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Path Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
+          <dev:type>
+            <maml:name>DirectoryInfo</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>C:\Temp</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Repository</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Repository Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>PSGallery</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Scope</maml:name>
@@ -4501,120 +4505,27 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>CurrentUser</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>ForceInstall</maml:name>
-          <maml:description>
-            <maml:para>Force reinstall.</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>RemoveAll</maml:name>
-          <maml:description>
-            <maml:para>Remove the modules.</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
+          <dev:defaultValue>AllUsers</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Install-PSModule</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>ExtendedModules</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
+          <maml:name>ModuleNamesList</maml:name>
           <maml:description>
-            <maml:para>Use longer list.</maml:para>
+            <maml:para>{{ Fill ModuleNamesList Description }}</maml:para>
           </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Scope</maml:name>
-          <maml:description>
-            <maml:para>Scope to install modules (CurrentUser or AllUsers).</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>CurrentUser</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>ForceInstall</maml:name>
-          <maml:description>
-            <maml:para>Force reinstall.</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>RemoveAll</maml:name>
-          <maml:description>
-            <maml:para>Remove the modules.</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Install-PSModule</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Scope</maml:name>
-          <maml:description>
-            <maml:para>Scope to install modules (CurrentUser or AllUsers).</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>CurrentUser</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>OtherModules</maml:name>
-          <maml:description>
-            <maml:para>Use Manual list.</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>JsonPath</maml:name>
-          <maml:description>
-            <maml:para>Path to manual list.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
+            <maml:name>String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>ForceInstall</maml:name>
+          <maml:name>DownloadModules</maml:name>
           <maml:description>
-            <maml:para>Force reinstall.</maml:para>
+            <maml:para>{{ Fill DownloadModules Description }}</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -4623,9 +4534,48 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>RemoveAll</maml:name>
+          <maml:name>Path</maml:name>
           <maml:description>
-            <maml:para>Remove the modules.</maml:para>
+            <maml:para>{{ Fill Path Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
+          <dev:type>
+            <maml:name>DirectoryInfo</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>C:\Temp</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Repository</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Repository Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>PSGallery</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Scope</maml:name>
+          <maml:description>
+            <maml:para>Scope to install modules (CurrentUser or AllUsers).</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>AllUsers</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Install-PSModule</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>DownloadModules</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill DownloadModules Description }}</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -4633,13 +4583,61 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Path Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
+          <dev:type>
+            <maml:name>DirectoryInfo</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>C:\Temp</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Repository</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Repository Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>PSGallery</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>BaseModules</maml:name>
+        <maml:name>List</maml:name>
         <maml:description>
-          <maml:para>Only base list.</maml:para>
+          <maml:para>{{ Fill List Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>ExtendedModules</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
+        <maml:name>ModuleNamesList</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill ModuleNamesList Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>DownloadModules</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill DownloadModules Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -4649,16 +4647,28 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>ExtendedModules</maml:name>
+        <maml:name>Path</maml:name>
         <maml:description>
-          <maml:para>Use longer list.</maml:para>
+          <maml:para>{{ Fill Path Description }}</maml:para>
         </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
         <dev:type>
-          <maml:name>SwitchParameter</maml:name>
+          <maml:name>DirectoryInfo</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
+        <dev:defaultValue>C:\Temp</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Repository</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill Repository Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>PSGallery</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Scope</maml:name>
@@ -4670,55 +4680,7 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>CurrentUser</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>OtherModules</maml:name>
-        <maml:description>
-          <maml:para>Use Manual list.</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>JsonPath</maml:name>
-        <maml:description>
-          <maml:para>Path to manual list.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>ForceInstall</maml:name>
-        <maml:description>
-          <maml:para>Force reinstall.</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>RemoveAll</maml:name>
-        <maml:description>
-          <maml:para>Remove the modules.</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
+        <dev:defaultValue>AllUsers</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
@@ -4731,7 +4693,7 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Install-PSModules -BaseModules -Scope AllUsers</dev:code>
+        <dev:code>Install-PSModule -BaseModules -Scope AllUsers</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -6057,58 +6019,51 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Lists all devices
-. Remove-HiddenDevices -listDevicesOnly</dev:code>
+        <dev:code>Lists all devices</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>. Remove-HiddenDevices -listDevicesOnly</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Save the list of devices as an object
-$Devices = . Remove-HiddenDevices -listDevicesOnly</dev:code>
+        <dev:code>Save the list of devices as an object</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>$Devices = . Remove-HiddenDevices -listDevicesOnly</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Lists all 'ghost' devices
-. Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
+        <dev:code>Lists all 'ghost' devices</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>. Remove-HiddenDevices -listGhostDevicesOnly</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-        <dev:code>Save the list of 'ghost' devices as an object
-$ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
+        <dev:code>Save the list of 'ghost' devices as an object</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>$ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-        <dev:code>Remove all ghost devices EXCEPT any devices that have "Intel" or "Citrix" in their friendly name
-. Remove-HiddenDevices -filterByFriendlyName @("Intel","Citrix")</dev:code>
+        <dev:code>Remove all ghost devices EXCEPT any devices that have "Intel" or "Citrix" in their friendly name</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>. Remove-HiddenDevices -filterByFriendlyName @("Intel","Citrix")</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
-        <dev:code>Remove all ghost devices EXCEPT any devices that are apart of the classes "LegacyDriver" or "Processor"
-. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor")</dev:code>
+        <dev:code>Remove all ghost devices EXCEPT any devices that are apart of the classes "LegacyDriver" or "Processor"</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor")</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
-        <dev:code>Remove all ghost devices EXCEPT for devices with a friendly name of "Intel" or "Citrix" or with a class of "LegacyDriver" or "Processor"
-. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor") -filterByFriendlyName @("Intel","Citrix")</dev:code>
+        <dev:code>Remove all ghost devices EXCEPT for devices with a friendly name of "Intel" or "Citrix" or with a class of "LegacyDriver" or "Processor"</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor") -filterByFriendlyName @("Intel","Citrix")</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -6609,7 +6564,7 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
       <command:syntaxItem>
         <maml:name>Set-PSProjectFile</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>ModuleName</maml:name>
+          <maml:name>ModuleScriptFile</maml:name>
           <maml:description>
             <maml:para>Path to module .psm1 file.</maml:para>
           </maml:description>
@@ -6681,7 +6636,7 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>ModuleName</maml:name>
+        <maml:name>ModuleScriptFile</maml:name>
         <maml:description>
           <maml:para>Path to module .psm1 file.</maml:para>
         </maml:description>
@@ -6763,7 +6718,7 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Set-PSProjectFiles -ModuleName blah -VersionBump Minor -mkdocs serve</dev:code>
+        <dev:code>Set-PSProjectFiles -ModuleScriptFile blah -VersionBump Minor -mkdocs serve</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>

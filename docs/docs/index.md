@@ -24,6 +24,7 @@ Get-Help about_PSToolKit
 Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit)
  
 ## Functions
+- [`Get-BinRoot`](https://smitpi.github.io/PSToolKit/#Get-BinRoot) -- Get-ToolsLocation
 - [`Add-ChocolateyPrivateRepo`](https://smitpi.github.io/PSToolKit/#Add-ChocolateyPrivateRepo) -- Add a private repository to Chocolatey.
 - [`Backup-ElevatedShortcut`](https://smitpi.github.io/PSToolKit/#Backup-ElevatedShortcut) -- Exports the RunAss shortcuts, to a zip file
 - [`Backup-PowerShellProfile`](https://smitpi.github.io/PSToolKit/#Backup-PowerShellProfile) -- Creates a zip file from the ps profile directories
@@ -59,6 +60,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Install-ChocolateyApp`](https://smitpi.github.io/PSToolKit/#Install-ChocolateyApp) -- Install chocolatey apps from a json list.
 - [`Install-ChocolateyClient`](https://smitpi.github.io/PSToolKit/#Install-ChocolateyClient) -- Downloads and installs the Chocolatey client.
 - [`Install-ChocolateyServer`](https://smitpi.github.io/PSToolKit/#Install-ChocolateyServer) -- This will download, install and setup a new Chocolatey Repo Server
+- [`Install-LocalPSRepository`](https://smitpi.github.io/PSToolKit/#Install-LocalPSRepository) -- Creates a repository for offline installations
 - [`Install-MicrosoftTerminal`](https://smitpi.github.io/PSToolKit/#Install-MicrosoftTerminal) -- Install MicrosoftTerminal on your device.
 - [`Install-MSUpdate`](https://smitpi.github.io/PSToolKit/#Install-MSUpdate) -- Perform windows update
 - [`Install-MSWinget`](https://smitpi.github.io/PSToolKit/#Install-MSWinget) -- Install the package manager winget

@@ -14,17 +14,17 @@ Add or remove apps from the json file used in Install-ChocolateyApps
 
 ### Current (Default)
 ```
-Edit-ChocolateyAppsList -List <String> [-ShowCurrent] [<CommonParameters>]
+Edit-ChocolateyAppsList [-List <String>] [-ShowCurrent] [<CommonParameters>]
 ```
 
 ### Remove
 ```
-Edit-ChocolateyAppsList -List <String> [-RemoveApp] [<CommonParameters>]
+Edit-ChocolateyAppsList [-List <String>] [-RemoveApp] [<CommonParameters>]
 ```
 
 ### Add
 ```
-Edit-ChocolateyAppsList -List <String> [-AddApp <String>] [-ChocoSource <String>] [<CommonParameters>]
+Edit-ChocolateyAppsList [-List <String>] [-AddApp <String>] [-ChocoSource <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -47,9 +47,9 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: Named
-Default value: None
+Default value: ExtendedApps
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

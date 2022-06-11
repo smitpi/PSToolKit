@@ -13,8 +13,8 @@ Creates and modify needed files for a PS project from existing module files.
 ## SYNTAX
 
 ```
-Set-PSProjectFile [-ModuleName] <FileInfo> [[-VersionBump] <String>] [[-mkdocs] <String>] [-CopyNestedModules]
- [-GitPush] [-CopyToModulesFolder] [<CommonParameters>]
+Set-PSProjectFile [-ModuleScriptFile] <FileInfo> [[-VersionBump] <String>] [[-mkdocs] <String>]
+ [-CopyNestedModules] [-GitPush] [-CopyToModulesFolder] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,12 +24,12 @@ Creates and modify needed files for a PS project from existing module files.
 
 ### EXAMPLE 1
 ```
-Set-PSProjectFiles -ModuleName blah -VersionBump Minor -mkdocs serve
+Set-PSProjectFiles -ModuleScriptFile blah -VersionBump Minor -mkdocs serve
 ```
 
 ## PARAMETERS
 
-### -ModuleName
+### -ModuleScriptFile
 Path to module .psm1 file.
 
 ```yaml

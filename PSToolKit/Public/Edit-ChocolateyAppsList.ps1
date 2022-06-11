@@ -73,12 +73,11 @@ Edit-ChocolateyAppsList -AddApp -ChocoID 7zip -ChocoSource chocolatey
 Function Edit-ChocolateyAppsList {
 	[Cmdletbinding(DefaultParameterSetName = 'Current', HelpURI = 'https://smitpi.github.io/PSToolKit/Edit-ChocolateyAppsList')]
 	PARAM(
-		[Parameter(Mandatory = $true)]
 		[ValidateSet('BaseApps', 'ExtendedApps')]
 		[ValidateScript( { $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
 				else { Throw 'Must be running an elevated prompt.' } })]
-		[string]$List,
+		[string]$List = 'ExtendedApps',
 		[Parameter(ParameterSetName = 'Current')]
 		[switch]$ShowCurrent,
 		[ValidateScript( { $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())

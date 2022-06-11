@@ -12,20 +12,21 @@ Install modules from .json file.
 
 ## SYNTAX
 
-### base (Default)
+### List (Default)
 ```
-Install-PSModule [-BaseModules] [-Scope <String>] [-ForceInstall] [-RemoveAll] [<CommonParameters>]
-```
-
-### ext
-```
-Install-PSModule [-ExtendedModules] [-Scope <String>] [-ForceInstall] [-RemoveAll] [<CommonParameters>]
+Install-PSModule [-List <String>] [-DownloadModules] [-Path <DirectoryInfo>] [-Repository <String>]
+ [-Scope <String>] [<CommonParameters>]
 ```
 
-### other
+### Other
 ```
-Install-PSModule [-Scope <String>] [-OtherModules] [-JsonPath <String>] [-ForceInstall] [-RemoveAll]
- [<CommonParameters>]
+Install-PSModule [-ModuleNamesList <String[]>] [-DownloadModules] [-Path <DirectoryInfo>]
+ [-Repository <String>] [-Scope <String>] [<CommonParameters>]
+```
+
+### download
+```
+Install-PSModule [-DownloadModules] -Path <DirectoryInfo> [-Repository <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -35,17 +36,47 @@ Install modules from .json file.
 
 ### EXAMPLE 1
 ```
-Install-PSModules -BaseModules -Scope AllUsers
+Install-PSModule -BaseModules -Scope AllUsers
 ```
 
 ## PARAMETERS
 
-### -BaseModules
-Only base list.
+### -List
+{{ Fill List Description }}
+
+```yaml
+Type: String
+Parameter Sets: List
+Aliases:
+
+Required: False
+Position: Named
+Default value: ExtendedModules
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ModuleNamesList
+{{ Fill ModuleNamesList Description }}
+
+```yaml
+Type: String[]
+Parameter Sets: Other
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -DownloadModules
+{{ Fill DownloadModules Description }}
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: base
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -55,17 +86,44 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ExtendedModules
-Use longer list.
+### -Path
+{{ Fill Path Description }}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: ext
+Type: DirectoryInfo
+Parameter Sets: List, Other
 Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: C:\Temp
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+```yaml
+Type: DirectoryInfo
+Parameter Sets: download
+Aliases:
+
+Required: True
+Position: Named
+Default value: C:\Temp
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Repository
+{{ Fill Repository Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: PSGallery
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -75,72 +133,12 @@ Scope to install modules (CurrentUser or AllUsers).
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: List, Other
 Aliases:
 
 Required: False
 Position: Named
-Default value: CurrentUser
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -OtherModules
-Use Manual list.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: other
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -JsonPath
-Path to manual list.
-
-```yaml
-Type: String
-Parameter Sets: other
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ForceInstall
-Force reinstall.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -RemoveAll
-Remove the modules.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
+Default value: AllUsers
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -68,70 +68,82 @@ Force reinstall.
 Remove the modules.
 
 .EXAMPLE
-Install-PSModules -BaseModules -Scope AllUsers
+Install-PSModule -BaseModules -Scope AllUsers
 
 #>
 Function Install-PSModule {
-	[Cmdletbinding(DefaultParameterSetName = 'base', HelpURI = 'https://smitpi.github.io/PSToolKit/Install-PSModules')]
+	[Cmdletbinding(DefaultParameterSetName = 'List', HelpURI = 'https://smitpi.github.io/PSToolKit/Install-PSModules')]
 	PARAM(
-		[Parameter(ParameterSetName = 'base')]
-		[switch]$BaseModules = $false,
-		[Parameter(ParameterSetName = 'ext')]
-		[switch]$ExtendedModules = $false,
-		[Parameter(ParameterSetName = 'base')]
-		[Parameter(ParameterSetName = 'ext')]
-		[Parameter(ParameterSetName = 'other')]
+		[Parameter(ParameterSetName = 'List')]
+		[ValidateSet('BaseModules', 'ExtendedModules')]
+		[string]$List = 'ExtendedModules',
+
+		[Parameter(ParameterSetName = 'Other', ValueFromPipeline)]
+		[string[]]$ModuleNamesList,	
+
+		[Parameter(ParameterSetName = 'download')]
+		[Parameter(ParameterSetName = 'List')]
+		[Parameter(ParameterSetName = 'Other')]
+		[switch]$DownloadModules,
+
+		[Parameter(ParameterSetName = 'download', Mandatory)]
+		[Parameter(ParameterSetName = 'List')]
+		[Parameter(ParameterSetName = 'Other')]
+		[ValidateScript( { if (Test-Path $_) { $true }
+				else { New-Item -Path $_ -ItemType Directory -Force | Out-Null; $true }
+			})]
+		[System.IO.DirectoryInfo]$Path = 'C:\Temp',
+
+		[string]$Repository = 'PSGallery',
+
+		[Parameter(ParameterSetName = 'List')]
+		[Parameter(ParameterSetName = 'Other')]
 		[validateset('CurrentUser', 'AllUsers')]
-		[string]$Scope = 'CurrentUser',
-		[Parameter(ParameterSetName = 'other')]
-		[switch]$OtherModules = $false,
-		[Parameter(ParameterSetName = 'other')]
-		[ValidateScript( { (Test-Path $_) -and ((Get-Item $_).Extension -eq '.json') })]
-		[string]$JsonPath,
-		[Parameter(ParameterSetName = 'base')]
-		[Parameter(ParameterSetName = 'ext')]
-		[Parameter(ParameterSetName = 'other')]
-		[switch]$ForceInstall = $false,
-		[Parameter(ParameterSetName = 'base')]
-		[Parameter(ParameterSetName = 'ext')]
-		[Parameter(ParameterSetName = 'other')]
-		[switch]$RemoveAll = $false
+		[string]$Scope = 'AllUsers'
+
 	)
 
+	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 	$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
 	try {
 		$ConPath = Get-Item $ConfigPath
-	} catch { Throw "Config path does not exist`nRun Update-PSToolKitConfigFiles to install the config files" }
-	if ($BaseModules) { $ModuleList = (Join-Path $ConPath.FullName -ChildPath BaseModuleList.json) }
-	if ($ExtendedModules) { $ModuleList = (Join-Path $ConPath.FullName -ChildPath ExtendedModuleList.json) }
-	if ($OtherModules) { $ModuleList = Get-Item $JsonPath }
+	} catch { Write-Error 'Config path foes not exist'; exit }
+	if ($List -like 'BaseModules') { $mods = (Get-Content (Join-Path $ConPath.FullName -ChildPath BaseModuleList.json) | ConvertFrom-Json).name}
+	elseif ($List -like 'ExtendedModules') { $mods = (Get-Content (Join-Path $ConPath.FullName -ChildPath ExtendedModuleList.json) | ConvertFrom-Json).name }
+	elseif ($ModuleNamesList) {$mods = $ModuleNamesList}
 
-	$wc = New-Object System.Net.WebClient
-	$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
-	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+	if (-not($mods)) {throw 'Couldnt get a valid modules list'}
 
-	$mods = Get-Content $ModuleList | ConvertFrom-Json
-	if ($RemoveAll) {
-		try {
-			$mods | ForEach-Object {
-				Write-Color '[Removing] ', $($_.Name) -Color Yellow, Cyan
-				Get-Module -Name $_.Name -ListAvailable | Uninstall-Module -AllVersions -Force
-			}
-		} catch {Write-Warning "Error Uninstalling $($mod.Name) `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
-	}
-
-	foreach ($mod in $mods) {
-		if ($ForceInstall -eq $false) { $PSModule = Get-Module -Name $mod.Name -ListAvailable | Select-Object -First 1 }
-		if ($PSModule.Name -like '') {
-			Write-Color '[Installing] ', $($mod.Name), ' to Scope: ', $($Scope) -Color Yellow, Cyan, Green, Cyan
-			Install-Module -Name $mod.Name -Scope $Scope -AllowClobber -Force
-		} else {
-			Write-Color '[Installing] ', "$($PSModule.Name): ", "(Path: $($PSModule.Path))", 'Already Installed' -Color Yellow, Cyan, Green, DarkRed
-			$OnlineMod = Find-Module -Name $mod.Name
-			if ($PSModule.Version -lt $OnlineMod.Version) {
-				Write-Color "`t[Upgrading] ", "$($PSModule.Name): ", 'to version ', "$($OnlineMod.Version)" -Color Yellow, Cyan, Green, DarkRed
-				Get-Module -Name $PSModule.Name -ListAvailable | Select-Object -First 1 | Update-Module -Force
+	if ($DownloadModules) {
+		$mods | ForEach-Object {
+			Write-Color '[Downloading] ', $($_), ' to folder: ', $($Path), ' from ', $($Repository) -Color Yellow, Cyan, Green, Cyan, Green, Cyan
+			#Save-Module -Name $_ -Repository $Repository -Path $Path -AcceptLicense -Force
+			Save-Package -Name $_ -Provider NuGet -Source https://www.powershellgallery.com/api/v2 -Path $Path | Out-Null
+		}
+	} else {
+		foreach ($mod in $mods) {
+			$PSModule = Get-Module -Name $mod -ListAvailable | Select-Object -First 1
+			if ($PSModule.Name -like '') {
+				Write-Color '[Installing] ', $($mod), ' to Scope: ', $($Scope), ' from ', $($Repository) -Color Yellow, Cyan, Green, Cyan, Green, Cyan
+				Install-Module -Name $mod -Scope $Scope -AllowClobber -Force -Repository $Repository
+			} else {
+				Write-Color '[Installing] ', "$($PSModule.Name): ", "(Path: $($PSModule.Path))", ' Already Installed' -Color Yellow, Cyan, Green, DarkRed
+				$OnlineMod = Find-Module -Name $mod -Repository $Repository
+				if ($PSModule.Version -lt $OnlineMod.Version) {
+					Write-Color "`t[Upgrading] ", "$($PSModule.Name): ", 'to version ', "$($OnlineMod.Version)" -Color Yellow, Cyan, Green, DarkRed
+					try {
+						Get-Module -Name $PSModule.Name -ListAvailable | Select-Object -First 1 | Update-Module -Force -ErrorAction Stop
+					} catch {Get-Module -Name $PSModule.Name -ListAvailable | Select-Object -First 1 | install-module -Scope $Scope -Force -AllowClobber}
+				}
 			}
 		}
 	}
 }
+
+
+$scriptblock = {
+	param($commandName, $parameterName, $stringMatch)
+    
+	(Get-PSRepository).Name
+}
+Register-ArgumentCompleter -CommandName Install-PSModule -ParameterName Repository -ScriptBlock $scriptBlock

@@ -6,6 +6,12 @@
 		"markdown",
 		"latex",
 		"plaintext",
+		"log",
 		"powershell"
-	]
+	],
+	"spellright.parserByClass": {
+		"log": {
+			"parser": "markdown"
+		}
+	}
 }

@@ -71,12 +71,12 @@ Edit-PSModulesLists -ShowCurrent
 Function Edit-PSModulesList {
 	[Cmdletbinding(DefaultParameterSetName = 'List'	, HelpURI = 'https://smitpi.github.io/PSToolKit/Edit-PSModulesLists')]
 	PARAM(
-		[Parameter(Mandatory = $true)]
+		[Parameter(ParameterSetName = 'List')]
 		[ValidateSet('BaseModules', 'ExtendedModules')]
 		[ValidateScript( { $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
 				else { Throw 'Must be running an elevated prompt.' } })]
-		[string]$List,
+		[string]$List = 'ExtendedModules',
 		[Parameter(ParameterSetName = 'List')]
 		[switch]$ShowCurrent,
 		[Parameter(ParameterSetName = 'Remove')]

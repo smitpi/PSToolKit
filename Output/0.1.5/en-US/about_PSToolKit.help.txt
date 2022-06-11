@@ -8,6 +8,7 @@ SHORT DESCRIPTION
  
 NOTES
 Functions in this module:
+	 Get-BinRoot -- Get-ToolsLocation
 	 Add-ChocolateyPrivateRepo -- Add a private repository to Chocolatey.
 	 Backup-ElevatedShortcut -- Exports the RunAss shortcuts, to a zip file
 	 Backup-PowerShellProfile -- Creates a zip file from the ps profile directories
@@ -43,6 +44,7 @@ Functions in this module:
 	 Install-ChocolateyApp -- Install chocolatey apps from a json list.
 	 Install-ChocolateyClient -- Downloads and installs the Chocolatey client.
 	 Install-ChocolateyServer -- This will download, install and setup a new Chocolatey Repo Server
+	 Install-LocalPSRepository -- Creates a repository for offline installations
 	 Install-MicrosoftTerminal -- Install MicrosoftTerminal on your device.
 	 Install-MSUpdate -- Perform windows update
 	 Install-MSWinget -- Install the package manager winget
