@@ -122,7 +122,8 @@ Function Set-PSProjectFile {
 			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop; Start-Sleep 5 }
 			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
 		}
-		catch { throw 'Error removing Folder Structure' ; exit }}
+		catch { throw 'Error removing Folder Structure' ; exit }
+ }
 	#endregion
     
 	#region version bump
@@ -317,11 +318,10 @@ Function Set-PSProjectFile {
 		Get-Content -Path $ModulesInstuctions | ForEach-Object { $indexFile.add($_) }
 		$indexFile.add(' ')
 		$indexFile.add('## Functions')
-	(Get-Command -Module $module).Name | ForEach-Object { $indexFile.add("- [$_](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
+	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $indexFile.add("- [$_](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
 		$indexFile | Set-Content -Path $ModuleIndex -Force
 	}
  catch { Write-Error "Error: Other Files `nMessage:$($_.Exception.message)"; exit }
-	
 	#endregion
 	
 	#region Combine files
@@ -493,7 +493,7 @@ Function Set-PSProjectFile {
  
 $scriptblock = {
 	param($commandName, $parameterName, $stringMatch)
-    $here = (Get-Item .)
-	(Get-ChildItem -Path .\*.psm1 -Recurse).FullName | ForEach-Object {$_.Replace("$($here.FullName)",".")}
+	$here = (Get-Item .)
+	(Get-ChildItem -Path .\*.psm1 -Recurse).FullName | ForEach-Object { $_.Replace("$($here.FullName)", '.') }
 }
 Register-ArgumentCompleter -CommandName Set-PSProjectFile -ParameterName ModuleScriptFile -ScriptBlock $scriptBlock

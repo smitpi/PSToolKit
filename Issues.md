@@ -1,4 +1,4 @@
-﻿# PSToolKit: Issues
+# PSToolKit: Issues
 
 ---
 
@@ -9,4 +9,4 @@
 
 ---
 
-*Updated: Saturday, 11 June 2022 22:00:59 UTC*
+*Updated: Sunday, 12 June 2022 08:26:26 UTC*
