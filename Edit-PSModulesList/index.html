@@ -411,15 +411,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove" class="md-nav__link">
-    Remove
+  <a href="#add" class="md-nav__link">
+    Add
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add" class="md-nav__link">
-    Add
+  <a href="#remove" class="md-nav__link">
+    Remove
   </a>
   
 </li>
@@ -953,6 +953,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../Install-LocalPSRepository/" class="md-nav__link">
+        Install-LocalPSRepository
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Install-MSUpdate/" class="md-nav__link">
         Install-MSUpdate
       </a>
@@ -1195,6 +1210,21 @@
     <li class="md-nav__item">
       <a href="../New-SuggestedInfraName/" class="md-nav__link">
         New-SuggestedInfraName
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Publish-ModuleToLocalRepo/" class="md-nav__link">
+        Publish-ModuleToLocalRepo
       </a>
     </li>
   
@@ -1538,6 +1568,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../Test-CitrixVDAPort/" class="md-nav__link">
+        Test-CitrixVDAPort
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Test-IsFileOpen/" class="md-nav__link">
         Test-IsFileOpen
       </a>
@@ -1744,15 +1789,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove" class="md-nav__link">
-    Remove
+  <a href="#add" class="md-nav__link">
+    Add
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add" class="md-nav__link">
-    Add
+  <a href="#remove" class="md-nav__link">
+    Remove
   </a>
   
 </li>
@@ -1888,13 +1933,13 @@
 <p>Edit the Modules json files.</p>
 <h2 id="syntax">SYNTAX</h2>
 <h3 id="list-default">List (Default)</h3>
-<div class="highlight"><pre><span></span><code>Edit-PSModulesList -List &lt;String&gt; [-ShowCurrent] [&lt;CommonParameters&gt;]
-</code></pre></div>
-<h3 id="remove">Remove</h3>
-<div class="highlight"><pre><span></span><code>Edit-PSModulesList -List &lt;String&gt; [-RemoveModule] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Edit-PSModulesList [-List &lt;String&gt;] [-ShowCurrent] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="add">Add</h3>
-<div class="highlight"><pre><span></span><code>Edit-PSModulesList -List &lt;String&gt; [-AddModule &lt;String&gt;] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Edit-PSModulesList [-List &lt;String&gt;] [-AddModule &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre></div>
+<h3 id="remove">Remove</h3>
+<div class="highlight"><pre><span></span><code>Edit-PSModulesList [-List &lt;String&gt;] [-RemoveModule] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Edit the Modules json files.</p>
@@ -1909,9 +1954,9 @@
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExtendedModules</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>

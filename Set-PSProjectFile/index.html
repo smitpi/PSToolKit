@@ -775,6 +775,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../Install-LocalPSRepository/" class="md-nav__link">
+        Install-LocalPSRepository
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Install-MSUpdate/" class="md-nav__link">
         Install-MSUpdate
       </a>
@@ -1030,6 +1045,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../Publish-ModuleToLocalRepo/" class="md-nav__link">
+        Publish-ModuleToLocalRepo
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Remove-CIMUserProfile/" class="md-nav__link">
         Remove-CIMUserProfile
       </a>
@@ -1233,8 +1263,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#-modulename" class="md-nav__link">
-    -ModuleName
+  <a href="#-modulescriptfile" class="md-nav__link">
+    -ModuleScriptFile
   </a>
   
 </li>
@@ -1263,6 +1293,13 @@
           <li class="md-nav__item">
   <a href="#-gitpush" class="md-nav__link">
     -GitPush
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-copytomodulesfolder" class="md-nav__link">
+    -CopyToModulesFolder
   </a>
   
 </li>
@@ -1518,6 +1555,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../Test-CitrixVDAPort/" class="md-nav__link">
+        Test-CitrixVDAPort
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Test-IsFileOpen/" class="md-nav__link">
         Test-IsFileOpen
       </a>
@@ -1751,8 +1803,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#-modulename" class="md-nav__link">
-    -ModuleName
+  <a href="#-modulescriptfile" class="md-nav__link">
+    -ModuleScriptFile
   </a>
   
 </li>
@@ -1781,6 +1833,13 @@
           <li class="md-nav__item">
   <a href="#-gitpush" class="md-nav__link">
     -GitPush
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-copytomodulesfolder" class="md-nav__link">
+    -CopyToModulesFolder
   </a>
   
 </li>
@@ -1847,17 +1906,17 @@
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Creates and modify needed files for a PS project from existing module files.</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Set-PSProjectFile [-ModuleName] &lt;FileInfo&gt; [[-VersionBump] &lt;String&gt;] [[-mkdocs] &lt;String&gt;] [-CopyNestedModules]
- [-GitPush] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Set-PSProjectFile [-ModuleScriptFile] &lt;FileInfo&gt; [[-VersionBump] &lt;String&gt;] [[-mkdocs] &lt;String&gt;]
+ [-CopyNestedModules] [-GitPush] [-CopyToModulesFolder] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Creates and modify needed files for a PS project from existing module files.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Set-PSProjectFiles -ModuleName blah -VersionBump Minor -mkdocs serve
+<div class="highlight"><pre><span></span><code>Set-PSProjectFiles -ModuleScriptFile blah -VersionBump Minor -mkdocs serve
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
-<h3 id="-modulename">-ModuleName</h3>
+<h3 id="-modulescriptfile">-ModuleScriptFile</h3>
 <p>Path to module .psm1 file.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FileInfo</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
@@ -1907,6 +1966,18 @@
 </code></pre></div>
 <h3 id="-gitpush">-GitPush</h3>
 <p>Run Git Push when done.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-copytomodulesfolder">-CopyToModulesFolder</h3>
+<p>Copies the module to program files.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
