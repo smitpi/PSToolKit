@@ -265,7 +265,7 @@ Function Set-PSProjectFile {
 		Get-Content -Path $ModulesInstuctions | ForEach-Object { $readme.add($_) }
 		$readme.add(' ')
 		$readme.add('## Functions')
-	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $readme.add("- [$_](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
+	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $readme.add("- [``$_``](https://smitpi.github.io/$($module.Name)/$_) -- " + (Get-Help $_).SYNOPSIS) }
 		$readme | Set-Content -Path $ModuleReadme
 
 		$mkdocsFunc = [System.Collections.Generic.List[string]]::new()
@@ -318,7 +318,7 @@ Function Set-PSProjectFile {
 		Get-Content -Path $ModulesInstuctions | ForEach-Object { $indexFile.add($_) }
 		$indexFile.add(' ')
 		$indexFile.add('## Functions')
-	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $indexFile.add("- [$_](https://smitpi.github.io/$($module.Name)/#$_) -- " + (Get-Help $_).SYNOPSIS) }
+	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $indexFile.add("- [``$_``](https://smitpi.github.io/$($module.Name)/$_) -- " + (Get-Help $_).SYNOPSIS) }
 		$indexFile | Set-Content -Path $ModuleIndex -Force
 	}
  catch { Write-Error "Error: Other Files `nMessage:$($_.Exception.message)"; exit }
@@ -461,7 +461,7 @@ Function Set-PSProjectFile {
 		Start-Process "http://127.0.0.1:7070/$($module.Name)/"
 	}
 	if ($mkdocs -like 'deploy') {
-		Start-Process -FilePath mkdocs.exe -ArgumentList serve -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -NoNewWindow 2>&1 | Write-Host -ForegroundColor Yellow 
+		Start-Process -FilePath mkdocs.exe -ArgumentList gh-deploy -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -NoNewWindow 2>&1 | Write-Host -ForegroundColor Yellow 
 	}
 	#endregion
 
