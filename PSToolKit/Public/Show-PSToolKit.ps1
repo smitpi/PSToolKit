@@ -135,7 +135,8 @@ Function Show-PSToolKit {
         $out += "`n"
         $out += ("Module Path: $($module.Path)" | Out-String)
         $out += ("Created on: $(Get-Date($CreateDate) -Format F)" | Out-String)
-        Add-Border -TextBlock $out -Character % -ANSIBorder "$([char]0x1b)[38;5;47m" -ANSIText "$([char]0x1b)[93m"
+        $out
+        #Add-Border -TextBlock $out -Character % -ANSIBorder "$([char]0x1b)[38;5;47m" -ANSIText "$([char]0x1b)[93m"
 
         $commands = @()
         $commands = Get-Command -Module PSToolKit | ForEach-Object {
