@@ -370,7 +370,7 @@ Function Set-PSProjectFile {
 	$file.add('#region Public Functions')
 	foreach ($PublicItem in $public) {
 		$file.add("#region $($PublicItem.name)")
-		$file.Add("### Function $($public.IndexOf($PublicItem)) of $($public.Count) ###")
+		$file.Add("######## Function $($public.IndexOf($PublicItem) + 1) of $($public.Count) ##################")
 		$file.Add(('{0,-20}{1}' -f '# Function:', $($PublicItem.BaseName)))
 		$file.Add(('{0,-20}{1}' -f '# Module:', $($module.Name)))
 		$file.Add(('{0,-20}{1}' -f '# ModuleVersion:', $($moduleManifest.version)))
