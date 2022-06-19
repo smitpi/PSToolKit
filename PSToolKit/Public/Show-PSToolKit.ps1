@@ -49,6 +49,9 @@ Show details of the commands in this module
 .PARAMETER ShowMetaData
 Show only version, date and path.
 
+.PARAMETER ShowModified
+Show new and modified functions.
+
 .PARAMETER ShowCommand
 Use the show-command command
 
@@ -63,6 +66,7 @@ Function Show-PSToolKit {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Show-PSToolKit')]
     PARAM(
         [switch]$ShowMetaData = $false,
+        [switch]$ShowModified = $false,
         [switch]$ShowCommand = $false,
         [switch]$ExportToHTML = $false
     )
@@ -75,6 +79,9 @@ Function Show-PSToolKit {
     [string]$version = (Test-ModuleManifest -Path $($latestModule.Path.Replace('psm1', 'psd1'))).Version
     [datetime]$CreateDate = (Get-Content -Path $($latestModule.Path.Replace('psm1', 'psd1')) | Where-Object { $_ -like '# Generated on: *' }).replace('# Generated on: ', '')
     $CreateDate = $CreateDate.ToUniversalTime()
+
+
+
 
     if ($ShowCommand) {
         $commands = @()
@@ -119,7 +126,40 @@ Function Show-PSToolKit {
         $Details
     }
 
-    if (-not($ShowCommand) -and (-not($ShowMetaData)) -and (-not($ExportToHTML))) {
+    if ($ShowModified) {
+        $ModulePSM = Get-Item (Join-Path $latestModule.ModuleBase -ChildPath $latestModule.RootModule)
+        $PSMContent = $PSMContent
+        [System.Collections.ArrayList]$FunctionObject = @()    
+        Select-String -Path $ModulePSM.FullName -Pattern '^# Function:*' | ForEach-Object {
+            [void]$FunctionObject.Add([PSCustomObject]@{
+                    Function   = ($PSMContent)[$_.LineNumber - 1].Replace('# Function:', '').Trim()
+                    # ModuleVersion = ($PSMContent)[$_.LineNumber + 1].Replace('# ModuleVersion:', '').Trim()
+                    # CreatedOn     = [datetime]($PSMContent)[$_.LineNumber + 4].Replace('# CreatedOn:', '').Trim()
+                    ModifiedOn = [datetime]($PSMContent)[$_.LineNumber + 5].Replace('# ModifiedOn:', '').Trim()
+                    Synopsis   = ($PSMContent)[$_.LineNumber + 6].Replace('# Synopsis:', '').Trim()
+                })
+        }
+        $modweek = $FunctionObject | Where-Object { $_.ModifiedOn -gt (Get-Date).AddDays(-7) } | Sort-Object -Property ModifiedOn -Descending 
+        $modMonth = $FunctionObject | Where-Object { $_.ModifiedOn -gt (Get-Date).AddMonths(-1) } | Sort-Object -Property ModifiedOn -Descending
+
+        $Details = @()
+        $Details = [PSCustomObject]@{
+            Name    = 'PSToolKit'
+            Object  = 'PowerShell Module'
+            Version = $version
+            Date    = (Get-Date($CreateDate) -Format F)
+            Path    = $module.Path
+        }
+        $Details
+        Write-Color 'Modified in the last week' -Color Cyan -LinesAfter 1
+        $modweek | Format-Table
+        Write-Color 'Modified in the last Month' -Color Cyan -LinesAfter 1 -LinesBefore 2
+        $modMonth | Format-Table
+        
+
+    }
+
+    if (-not($ShowCommand) -and (-not($ShowMetaData)) -and (-not($ExportToHTML)) -and (-not($ShowModified))) {
 
         # $out = ConvertTo-ASCIIArt -Text 'PSToolKit' -Font basic
         # $out += "`n"
