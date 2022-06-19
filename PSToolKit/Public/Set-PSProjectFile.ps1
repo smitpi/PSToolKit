@@ -320,8 +320,16 @@ Function Set-PSProjectFile {
 		$indexFile.add('## Functions')
 	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $indexFile.add("- [``$_``](https://smitpi.github.io/$($module.Name)/$_) -- " + (Get-Help $_).SYNOPSIS) }
 		$indexFile | Set-Content -Path $ModuleIndex -Force
+
+		$versionfile = [System.Collections.Generic.List[PSObject]]::New()
+		$versionfile.add([pscustomobject]@{
+				version = $($moduleManifest.version).ToString()
+				Author  = $($moduleManifest.author)
+				Date    = (Get-Date -Format u)
+			})
+		$versionfile | ConvertTo-Json | Set-Content (Join-Path $ModuleBase -ChildPath 'Version.json') -Force
 	}
- catch { Write-Error "Error: Other Files `nMessage:$($_.Exception.message)"; exit }
+ catch { Write-Error "Error: Creating Other Files `nMessage:$($_.Exception.message)"; exit }
 	#endregion
 	
 	#region Combine files
@@ -336,41 +344,50 @@ Function Set-PSProjectFile {
 		Copy-Item -Path $ModulePrivateFunctions.FullName -Destination $ModuleOutput.fullname -Recurse -Exclude *.ps1 -Force
 	}
 
-	$public = @(Get-ChildItem -Path "$($ModulePublicFunctions.FullName)\*.ps1" -Recurse -ErrorAction Stop)
-	$private = @(Get-ChildItem -Path "$($ModulePrivateFunctions.FullName)\*.ps1" -ErrorAction Stop)
+	$private = @(Get-ChildItem -Path "$($ModulePrivateFunctions.FullName)\*.ps1" -ErrorAction Stop | Sort-Object -Property Name)
+	$public = @(Get-ChildItem -Path "$($ModulePublicFunctions.FullName)\*.ps1" -Recurse -ErrorAction Stop | Sort-Object -Property Name)
+
 	$file = [System.Collections.Generic.List[string]]::new()
-	$file.add('#region Private Functions')
-	foreach ($privateitem in $private) {
-		$file.add("#region $($privateitem.name)")
-		$file.Add('########### Private Function ###############')
-		$file.Add("# source: $($privateitem.name)")
-		$file.Add("# Module: $($module.Name)")
-		$file.Add('############################################')
-		Write-Color '[Processing]: ', $($privateitem.name) -Color Cyan, Yellow
-		Get-Content $privateitem.fullname | ForEach-Object { $file.add($_) }
+	if ($private) {
+		$file.add('#region Private Functions')
+		foreach ($privateitem in $private) {
+			$file.add("#region $($privateitem.name)")
+			$file.Add('########### Private Function ###############')
+			$file.Add(('{0,-20}{1}' -f '# Source:', $($privateitem.name)))
+			$file.Add(('{0,-20}{1}' -f '# Module:', $($module.Name)))
+			$file.Add(('{0,-20}{1}' -f '# ModuleVersion:', $($moduleManifest.version)))
+			$file.Add(('{0,-20}{1}' -f '# Company:', $($moduleManifest.CompanyName)))
+			$file.Add(('{0,-20}{1}' -f '# CreatedOn:', $($privateitem.CreationTime)))
+			$file.Add(('{0,-20}{1}' -f '# ModifiedOn:', $($privateitem.LastWriteTime)))
+			$file.Add('############################################')
+			Write-Color '[Processing]: ', $($privateitem.name) -Color Cyan, Yellow
+			Get-Content $privateitem.fullname | ForEach-Object { $file.add($_) }
+			$file.add('#endregion')
+		}
 		$file.add('#endregion')
+		$file.Add(' ')
 	}
-	$file.add('#endregion')
-	$file.Add(' ')
-	$file.Add(' ')
 	$file.add('#region Public Functions')
-	foreach ($publicitem in $public) {
-		$file.add("#region $($publicitem.name)")
-		$file.Add('############################################')
-		$file.Add("# source: $($publicitem.name)")
-		$file.Add("# Module: $($module.Name)")
-		$file.Add("# version: $($moduleManifest.version)")
-		$file.Add("# Author: $($moduleManifest.author)")
-		$file.Add("# Company: $($moduleManifest.CompanyName)")
+	foreach ($PublicItem in $public) {
+		$file.add("#region $($PublicItem.name)")
+		$file.Add("### Function $($public.IndexOf($PublicItem)) of $($public.Count) ###")
+		$file.Add(('{0,-20}{1}' -f '# Function:', $($PublicItem.BaseName)))
+		$file.Add(('{0,-20}{1}' -f '# Module:', $($module.Name)))
+		$file.Add(('{0,-20}{1}' -f '# ModuleVersion:', $($moduleManifest.version)))
+		$file.Add(('{0,-20}{1}' -f '# Author:', $($moduleManifest.author)))
+		$file.Add(('{0,-20}{1}' -f '# Company:', $($moduleManifest.CompanyName)))
+		$file.Add(('{0,-20}{1}' -f '# CreatedOn:', $($PublicItem.CreationTime)))
+		$file.Add(('{0,-20}{1}' -f '# ModifiedOn:', $($PublicItem.LastWriteTime)))
+		$file.Add(('{0,-20}{1}' -f '# Synopsis:', $((Get-Help $($PublicItem.BaseName)).synopsis)))
 		$file.Add('#############################################')
 		$file.Add(' ')
-		Write-Color '[Processing]: ', $($publicitem.name) -Color Cyan, Yellow
+		Write-Color '[Processing]: ', $($PublicItem.name) -Color Cyan, Yellow
 
-		[int]$StartIndex = (Select-String -InputObject $publicitem -Pattern '.SYNOPSIS*').LineNumber[0] - 2
-		[int]$EndIndex = (Get-Content $publicitem.FullName).length
-		Get-Content -Path $publicitem.FullName | Select-Object -Index ($StartIndex..$EndIndex) | ForEach-Object { $file.Add($_) }
+		[int]$StartIndex = (Select-String -InputObject $PublicItem -Pattern '.SYNOPSIS*').LineNumber[0] - 2
+		[int]$EndIndex = (Get-Content $PublicItem.FullName).length
+		Get-Content -Path $PublicItem.FullName | Select-Object -Index ($StartIndex..$EndIndex) | ForEach-Object { $file.Add($_) }
 		$file.Add(' ')
-		$file.Add("Export-ModuleMember -Function $($publicitem.BaseName)")
+		$file.Add("Export-ModuleMember -Function $($PublicItem.BaseName)")
 		$file.add('#endregion')
 		$file.Add(' ')
 	}
@@ -378,15 +395,7 @@ Function Set-PSProjectFile {
 	$file.Add(' ')
 	$file | Set-Content -Path $rootModule -Encoding utf8 -Force
 
-	$versionfile = [System.Collections.Generic.List[PSObject]]::New()
-	$versionfile.add([pscustomobject]@{
-			version = $($moduleManifest.version).ToString()
-			Author  = $($moduleManifest.author)
-			Date    = (Get-Date -Format u)
-		})
-	$versionfile | ConvertTo-Json | Set-Content (Join-Path $ModuleBase -ChildPath 'Version.json') -Force
-
-	$newfunction = ((Select-String -Path $rootModule -Pattern '^# source:').Line).Replace('# source:', '').Replace('.ps1', '').Trim()
+	$newfunction = ((Select-String -Path $rootModule -Pattern '^# Function:').Line).Replace('# Function:', '').Trim()
 	$ModCommands = Get-Command -Module $module | ForEach-Object { $_.name }
 
 	Compare-Object -ReferenceObject $ModCommands -DifferenceObject $newfunction | ForEach-Object {
@@ -455,7 +464,6 @@ Function Set-PSProjectFile {
 	#region mkdocs
 	if ($mkdocs -like 'serve') {
 		Write-Color '[Starting]', ' Creating MKDocs help files' -Color Yellow, DarkCyan
-		#Set-Location (Split-Path -Path $Moduledocs -Parent)
 		Start-Process -FilePath mkdocs.exe -ArgumentList 'serve -a localhost:7070 --livereload --dirtyreload' -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -WindowStyle Normal
 		Start-Sleep 5
 		Start-Process "http://127.0.0.1:7070/$($module.Name)/"

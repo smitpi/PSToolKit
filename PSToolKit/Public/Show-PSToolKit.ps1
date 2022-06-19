@@ -73,7 +73,7 @@ Function Show-PSToolKit {
     if (-not($module)) { $module = Get-Module -Name PSToolKit -ListAvailable }
     $latestModule = $module | Sort-Object -Property version -Descending | Select-Object -First 1
     [string]$version = (Test-ModuleManifest -Path $($latestModule.Path.Replace('psm1', 'psd1'))).Version
-    [datetime]$CreateDate = (Get-Content -Path $($latestModule.Path.Replace('psm1', 'psd1')) | Where-Object {$_ -like '# Generated on: *'}).replace('# Generated on: ','')
+    [datetime]$CreateDate = (Get-Content -Path $($latestModule.Path.Replace('psm1', 'psd1')) | Where-Object { $_ -like '# Generated on: *' }).replace('# Generated on: ', '')
     $CreateDate = $CreateDate.ToUniversalTime()
 
     if ($ShowCommand) {
@@ -110,11 +110,11 @@ Function Show-PSToolKit {
     if ($ShowMetaData) {
         $Details = @()
         $Details = [PSCustomObject]@{
-            Name = "PSToolKit"
-            Object = "PowerShell Module"
+            Name    = 'PSToolKit'
+            Object  = 'PowerShell Module'
             Version = $version
-            Date = (get-date($CreateDate) -Format F)
-            Path = $module.Path
+            Date    = (Get-Date($CreateDate) -Format F)
+            Path    = $module.Path
         }
         $Details
     }
@@ -129,7 +129,7 @@ Function Show-PSToolKit {
         # $out += ("Created on: $(Get-Date($CreateDate) -Format F)" | Out-String)
         # Add-Border -TextBlock $out -Character % -ANSIBorder "$([char]0x1b)[38;5;47m" -ANSIText "$([char]0x1b)[93m"
 
-        $out = (Write-Ascii "PSToolKit" -ForegroundColor Yellow | Out-String)
+        $out = (Write-Ascii 'PSToolKit' -ForegroundColor Yellow | Out-String)
         $out += "`n"
         $out += (Write-Ascii $($version) -ForegroundColor Yellow)
         $out += "`n"
