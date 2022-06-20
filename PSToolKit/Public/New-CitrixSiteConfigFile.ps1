@@ -93,7 +93,6 @@ Function New-CitrixSiteConfigFile {
 				$UserInput = Read-Host 'Add more? (y/n)'
 			} else {$UserInput = 'n'}
 		} catch {Write-Warning "Error: `n`tMessage:$(_.Exception.Message)"}
-
 	}
 
 	[System.Collections.ArrayList]$storefont = @()
@@ -169,9 +168,6 @@ Function New-CitrixSiteConfigFile {
 		$CtxLic = Read-Host 'Citrix License Server'
 		if ($CtxLic) {$CTXLicenseServer = $((Get-FQDN -ComputerName ($CtxLic) ).FQDN)}
 		$siteName = Read-Host 'Site Name'
-		$funcionlevel = 'Unknown'
-		$version = 'Unknown'
-		$site = 'Unknown'
 	}
 
 	$RPath = Read-Host 'Default Reports Folder Path'
@@ -182,6 +178,8 @@ Function New-CitrixSiteConfigFile {
 		Write-Warning 'Trying to create the folder'
 		$ReportPath = New-Item $RPath -ItemType Directory -Force
 	}
+
+	#if ([string]::IsNullOrEmpty($siteName)) {$siteName}
 
 	$CTXSiteDetails = [PSCustomObject]@{
 		DateCollected = (Get-Date -Format yyyy-MM-ddTHH.mm)

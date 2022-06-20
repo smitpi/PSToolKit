@@ -350,18 +350,18 @@ Function Set-PSProjectFile {
 	$file = [System.Collections.Generic.List[string]]::new()
 	if ($private) {
 		$file.add('#region Private Functions')
-		foreach ($privateitem in $private) {
-			$file.add("#region $($privateitem.name)")
+		foreach ($PrivateItem in $private) {
+			$file.add("#region $($PrivateItem.name)")
 			$file.Add('########### Private Function ###############')
-			$file.Add(('{0,-20}{1}' -f '# Source:', $($privateitem.name)))
+			$file.Add(('{0,-20}{1}' -f '# Source:', $($PrivateItem.name)))
 			$file.Add(('{0,-20}{1}' -f '# Module:', $($module.Name)))
 			$file.Add(('{0,-20}{1}' -f '# ModuleVersion:', $($moduleManifest.version)))
 			$file.Add(('{0,-20}{1}' -f '# Company:', $($moduleManifest.CompanyName)))
-			$file.Add(('{0,-20}{1}' -f '# CreatedOn:', $($privateitem.CreationTime)))
-			$file.Add(('{0,-20}{1}' -f '# ModifiedOn:', $($privateitem.LastWriteTime)))
+			$file.Add(('{0,-20}{1}' -f '# CreatedOn:', $($PrivateItem.CreationTime)))
+			$file.Add(('{0,-20}{1}' -f '# ModifiedOn:', $($PrivateItem.LastWriteTime)))
 			$file.Add('############################################')
-			Write-Color '[Processing]: ', $($privateitem.name) -Color Cyan, Yellow
-			Get-Content $privateitem.fullname | ForEach-Object { $file.add($_) }
+			Write-Color '[Processing]: ', $($PrivateItem.name) -Color Cyan, Yellow
+			Get-Content $PrivateItem.fullname | ForEach-Object { $file.add($_) }
 			$file.add('#endregion')
 		}
 		$file.add('#endregion')
