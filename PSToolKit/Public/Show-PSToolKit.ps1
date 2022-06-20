@@ -128,7 +128,7 @@ Function Show-PSToolKit {
 
     if ($ShowModified) {
         $ModulePSM = Get-Item (Join-Path $latestModule.ModuleBase -ChildPath $latestModule.RootModule)
-        $PSMContent = $PSMContent
+        $PSMContent = Get-Content $ModulePSM.FullName
         [System.Collections.ArrayList]$FunctionObject = @()    
         Select-String -Path $ModulePSM.FullName -Pattern '^# Function:*' | ForEach-Object {
             [void]$FunctionObject.Add([PSCustomObject]@{
@@ -151,12 +151,10 @@ Function Show-PSToolKit {
             Path    = $module.Path
         }
         $Details
-        Write-Color 'Modified in the last week' -Color Cyan -LinesAfter 1
+        Write-Color 'Modified in the last week' -Color Cyan -StartTab 2
         $modweek | Format-Table
-        Write-Color 'Modified in the last Month' -Color Cyan -LinesAfter 1 -LinesBefore 2
+        Write-Color 'Modified in the last Month' -Color Cyan -StartTab 2
         $modMonth | Format-Table
-        
-
     }
 
     if (-not($ShowCommand) -and (-not($ShowMetaData)) -and (-not($ExportToHTML)) -and (-not($ShowModified))) {
