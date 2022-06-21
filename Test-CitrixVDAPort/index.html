@@ -1902,13 +1902,13 @@
 
 <h1 id="test-citrixvdaport">Test-CitrixVDAPort</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Test connection between ddc and vda</p>
+<p>Test connection between DDC and VDI</p>
 <h2 id="syntax">SYNTAX</h2>
 <div class="highlight"><pre><span></span><code>Test-CitrixVDAPort [-ServerList] &lt;ArrayList&gt; [[-PortsList] &lt;ArrayList&gt;] [[-Export] &lt;String&gt;]
  [[-ReportPath] &lt;String&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
-<p>Test connection between ddc and vda</p>
+<p>Test connection between DDC and VDI, you can also specify other ports.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
 <div class="highlight"><pre><span></span><code>Test-CitrixVDAPorts -ServerList $list
@@ -1927,7 +1927,7 @@
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
 <h3 id="-portslist">-PortsList</h3>
-<p>List of ports to test</p>
+<p>List of ports to test, by default the citrix ports are selected.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ArrayList</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
