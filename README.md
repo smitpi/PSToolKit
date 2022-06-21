@@ -48,6 +48,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Get-FQDN`](https://smitpi.github.io/PSToolKit/Get-FQDN) -- Get FQDN for a device, and checks if it is online
 - [`Get-FullADUserDetail`](https://smitpi.github.io/PSToolKit/Get-FullADUserDetail) -- Extract user details from the domain
 - [`Get-MyPSGalleryStat`](https://smitpi.github.io/PSToolKit/Get-MyPSGalleryStat) -- Show stats about my published modules.
+- [`Get-NestedADGroupMembers`](https://smitpi.github.io/PSToolKit/Get-NestedADGroupMembers) -- Extract users from an AD group recursive, 4 levels deep.
 - [`Get-ProcessPerformance`](https://smitpi.github.io/PSToolKit/Get-ProcessPerformance) -- Gets the top 10 processes by CPU %
 - [`Get-PropertiesToCSV`](https://smitpi.github.io/PSToolKit/Get-PropertiesToCSV) -- Get member data of an object. Use it to create other PSObjects.
 - [`Get-SoftwareAudit`](https://smitpi.github.io/PSToolKit/Get-SoftwareAudit) -- Connects to a remote hosts and collect installed software details
