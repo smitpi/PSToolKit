@@ -76,8 +76,8 @@ Function Start-PSProfile {
 		$Global:psfolder = Get-Item (Get-Item $profile).DirectoryName
 	} else { $Global:psfolder = Get-Item (Get-Item $profile).DirectoryName }
 
-	$wc = New-Object System.Net.WebClient
-	$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
+	#$wc = New-Object System.Net.WebClient
+	#$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 	try {
@@ -203,33 +203,4 @@ Function Start-PSProfile {
 		Write-Host "$((Get-MyPSGalleryStat -Display TableView) | Out-String)" -ForegroundColor Green
  }
 
-	function prompt {
-		$identity = [Security.Principal.WindowsIdentity]::GetCurrent()
-		$principal = [Security.Principal.WindowsPrincipal] $identity
-		$adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
-		$Seconds = (New-TimeSpan -Start (Get-History)[-1].StartExecutionTime -End (Get-History)[-1].EndExecutionTime).Seconds
-		
-		if (Test-Path variable:/PSDebugContext) {
-			$Part1 = '[DBG]'
-		} elseif ($principal.IsInRole($adminRole)) {
-			$Part1 = '[ADMIN]'
-		} else {
-			$Part1 = ''
-		}
-		if ($Part1) {
-			Write-Host $Part1 -NoNewline -ForegroundColor Red
-		}
-		Write-Host "($($Seconds)sec)[$($env:USERNAME.ToLower())@$($env:USERDNSDOMAIN.ToLower())] " -ForegroundColor Cyan -NoNewline
-		if ((Get-Location).ProviderPath.Length -lt 50) {
-			Write-Host "$(Get-Location)" -NoNewline
-		} else {
-			Write-Host "$((Get-Location).ProviderPath[0..2] | Join-String)....$((Get-Location).ProviderPath[-50..-1] | Join-String)" -NoNewline
-		}
-		if ($NestedPromptLevel -ge 1) { 
-			Write-Host ' >>' -NoNewline 
-		} else {
-			Write-Host ' >' -NoNewline
-		}
-		return ' '
-	}
 } #end Function

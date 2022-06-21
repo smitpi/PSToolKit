@@ -8,7 +8,7 @@ schema: 2.0.0
 # Test-CitrixCloudConnector
 
 ## SYNOPSIS
-Perform basic connection tests to CItrix cloud.
+Perform basic connection tests to Citrix cloud.
 
 ## SYNTAX
 
@@ -18,19 +18,19 @@ Test-CitrixCloudConnector [[-CustomerID] <String>] [[-Export] <String>] [[-Repor
 ```
 
 ## DESCRIPTION
-Perform basic connection tests to CItrix cloud.
+Perform basic connection tests to Citrix cloud.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-An example
+Test-CitrixCloudConnector -CustomerID yourID
 ```
 
 ## PARAMETERS
 
 ### -CustomerID
-get from CItrix cloud.
+get from Citrix cloud.
 
 ```yaml
 Type: String
@@ -82,6 +82,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-General notes
 
 ## RELATED LINKS

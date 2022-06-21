@@ -8,7 +8,7 @@ schema: 2.0.0
 # Test-CitrixVDAPort
 
 ## SYNOPSIS
-Test connection between ddc and vda
+Test connection between DDC and VDI
 
 ## SYNTAX
 
@@ -18,7 +18,7 @@ Test-CitrixVDAPort [-ServerList] <ArrayList> [[-PortsList] <ArrayList>] [[-Expor
 ```
 
 ## DESCRIPTION
-Test connection between ddc and vda
+Test connection between DDC and VDI, you can also specify other ports.
 
 ## EXAMPLES
 
@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -PortsList
-List of ports to test
+List of ports to test, by default the citrix ports are selected.
 
 ```yaml
 Type: ArrayList

@@ -7301,7 +7301,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>CurrentUser</maml:name>
           <maml:description>
-            <maml:para>Will change the currenly logged on user's folders.</maml:para>
+            <maml:para>Will change the currently logged on user's folders.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -7312,7 +7312,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>PathToSharedProfile</maml:name>
           <maml:description>
-            <maml:para>Path to new folder. Folders PowerShell and WindowsPowerShell will be created if it doesnt exists.</maml:para>
+            <maml:para>Path to new folder. Folders PowerShell and WindowsPowerShell will be created if it doesn't exists.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
           <dev:type>
@@ -7350,7 +7350,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>PathToSharedProfile</maml:name>
           <maml:description>
-            <maml:para>Path to new folder. Folders PowerShell and WindowsPowerShell will be created if it doesnt exists.</maml:para>
+            <maml:para>Path to new folder. Folders PowerShell and WindowsPowerShell will be created if it doesn't exists.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
           <dev:type>
@@ -7365,7 +7365,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>CurrentUser</maml:name>
         <maml:description>
-          <maml:para>Will change the currenly logged on user's folders.</maml:para>
+          <maml:para>Will change the currently logged on user's folders.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -7401,7 +7401,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>PathToSharedProfile</maml:name>
         <maml:description>
-          <maml:para>Path to new folder. Folders PowerShell and WindowsPowerShell will be created if it doesnt exists.</maml:para>
+          <maml:para>Path to new folder. Folders PowerShell and WindowsPowerShell will be created if it doesn't exists.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
         <dev:type>
@@ -8638,6 +8638,17 @@
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>PendingReboot</maml:name>
+          <maml:description>
+            <maml:para>Will reboot the device if it is needed.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -8657,6 +8668,18 @@
         <maml:name>InstallMyModules</maml:name>
         <maml:description>
           <maml:para>Install my other published modules.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>PendingReboot</maml:name>
+        <maml:description>
+          <maml:para>Will reboot the device if it is needed.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -8690,11 +8713,11 @@
       <command:verb>Test</command:verb>
       <command:noun>CitrixCloudConnector</command:noun>
       <maml:description>
-        <maml:para>Perform basic connection tests to CItrix cloud.</maml:para>
+        <maml:para>Perform basic connection tests to Citrix cloud.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Perform basic connection tests to CItrix cloud.</maml:para>
+      <maml:para>Perform basic connection tests to Citrix cloud.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -8702,7 +8725,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>CustomerID</maml:name>
           <maml:description>
-            <maml:para>get from CItrix cloud.</maml:para>
+            <maml:para>get from Citrix cloud.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -8741,7 +8764,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>CustomerID</maml:name>
         <maml:description>
-          <maml:para>get from CItrix cloud.</maml:para>
+          <maml:para>get from Citrix cloud.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -8779,13 +8802,13 @@
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>General notes</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>An example</dev:code>
+        <dev:code>Test-CitrixCloudConnector -CustomerID yourID</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -8799,11 +8822,11 @@
       <command:verb>Test</command:verb>
       <command:noun>CitrixVDAPort</command:noun>
       <maml:description>
-        <maml:para>Test connection between ddc and vda</maml:para>
+        <maml:para>Test connection between DDC and VDI</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Test connection between ddc and vda</maml:para>
+      <maml:para>Test connection between DDC and VDI, you can also specify other ports.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -8823,7 +8846,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>PortsList</maml:name>
           <maml:description>
-            <maml:para>List of ports to test</maml:para>
+            <maml:para>List of ports to test, by default the citrix ports are selected.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">ArrayList</command:parameterValue>
           <dev:type>
@@ -8874,7 +8897,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>PortsList</maml:name>
         <maml:description>
-          <maml:para>List of ports to test</maml:para>
+          <maml:para>List of ports to test, by default the citrix ports are selected.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">ArrayList</command:parameterValue>
         <dev:type>

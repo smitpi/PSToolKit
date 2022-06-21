@@ -54,7 +54,7 @@ function Update-LocalHelp {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Update-LocalHelp')]
     PARAM()
 
-    Start-Job -Name UpdateHelp -ScriptBlock {
+   
         if ((Test-Path $using:profile) -eq $false ) {
             Write-Warning 'Profile does not exist, creating file.'
             New-Item -ItemType File -Path $using:Profile -Force
@@ -63,8 +63,6 @@ function Update-LocalHelp {
         if ((Test-Path -Path $psfolder\Help) -eq $false) { New-Item -Path "$psfolder\Help" -ItemType Directory -Force -ErrorAction SilentlyContinue }
         $helpdir = Get-Item (Join-Path $psfolder -ChildPath 'Help')
 
- 
-        Update-Help -Force -Verbose -ErrorAction SilentlyContinue
-        Save-Help -DestinationPath $helpdir.FullName -Force
-    }
+
+        
 }

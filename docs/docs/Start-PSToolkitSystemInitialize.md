@@ -13,7 +13,7 @@ Initialize a blank machine.
 ## SYNTAX
 
 ```
-Start-PSToolkitSystemInitialize [-LabSetup] [-InstallMyModules] [<CommonParameters>]
+Start-PSToolkitSystemInitialize [-LabSetup] [-InstallMyModules] [-PendingReboot] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -45,6 +45,21 @@ Accept wildcard characters: False
 
 ### -InstallMyModules
 Install my other published modules.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PendingReboot
+Will reboot the device if it is needed.
 
 ```yaml
 Type: SwitchParameter

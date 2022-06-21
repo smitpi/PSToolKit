@@ -35,19 +35,19 @@ Created [26/10/2021_22:32] Initial Script Creating
 <#
 
 .DESCRIPTION
-Perform basic connection tests to CItrix cloud.
+Perform basic connection tests to Citrix cloud.
 
 #>
 
 <#
 .SYNOPSIS
-Perform basic connection tests to CItrix cloud.
+Perform basic connection tests to Citrix cloud.
 
 .DESCRIPTION
-Perform basic connection tests to CItrix cloud.
+Perform basic connection tests to Citrix cloud.
 
 .PARAMETER CustomerID
-get from CItrix cloud.
+get from Citrix cloud.
 
 .PARAMETER Export
 Export the results
@@ -56,10 +56,8 @@ Export the results
 Where report will be saved.
 
 .EXAMPLE
-An example
+Test-CitrixCloudConnector -CustomerID yourID
 
-.NOTES
-General notes
 #>
 Function Test-CitrixCloudConnector {
 	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Test-CitrixCloudConnector')]

@@ -34,16 +34,16 @@ Created [26/10/2021_22:32] Initial Script Creating
 
 <#
 .SYNOPSIS
- Test connection between ddc and vda
+ Test connection between DDC and VDI
 
 .DESCRIPTION
- Test connection between ddc and vda
+ Test connection between DDC and VDI, you can also specify other ports.
 
 .PARAMETER ServerList
 List servers to test
 
 .PARAMETER PortsList
-List of ports to test
+List of ports to test, by default the citrix ports are selected.
 
 .PARAMETER Export
 Export the results.

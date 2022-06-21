@@ -136,7 +136,6 @@ Function Start-PSScriptAnalyzer {
 
 	if ($Export -eq 'Excel') { $ScriptAnalyzerIssues | Export-Excel -Path $(Join-Path -Path $ReportPath -ChildPath "\PSScriptAnalyzer-$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx") -WorksheetName ScriptAnalyzer -AutoSize -AutoFilter -BoldTopRow -FreezeTopRow -PivotTableName Summery -PivotRows RuleName -PivotData Message}
 	if ($Export -eq 'HTML') {
-		#region html settings
 		$SectionSettings = @{
 			HeaderTextSize        = '16'
 			HeaderTextAlignment   = 'center'
@@ -156,13 +155,11 @@ Function Start-PSScriptAnalyzer {
 			TextWhenNoData  = 'No Data to display here'
 			DisableSearch   = $true
 			ScrollCollapse  = $true
-			#Buttons        =  @('searchBuilder','pdfHtml5','excelHtml5')
 			ScrollY         = $true
 			DisablePaging   = $true
 			PagingLength    = '10'
 		}
 		$ImageLink = 'https://gist.githubusercontent.com/smitpi/ecdaae80dd79ad585e571b1ba16ce272/raw/6d0645968c7ba4553e7ab762c55270ebcc054f04/default-monochrome-black-1.png'
-		#endregion
 
 		New-HTML -FilePath $(Join-Path -Path $ReportPath -ChildPath "\PSScriptAnalyzer-$(Get-Date -Format yyyy.MM.dd-HH.mm).html") -Title 'PSScriptAnalyzer' -ShowHTML {
 			New-HTMLHeader {

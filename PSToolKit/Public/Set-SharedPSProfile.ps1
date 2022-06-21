@@ -48,7 +48,7 @@ Redirects PowerShell and WindowsPowerShell profile folder to another path.
 Redirects PowerShell and WindowsPowerShell profile folder to another path.
 
 .PARAMETER CurrentUser
-Will change the currenly logged on user's folders.
+Will change the currently logged on user's folders.
 
 .PARAMETER OtherUser
 Will change another user's folders.
@@ -57,7 +57,7 @@ Will change another user's folders.
 The username of the other user.
 
 .PARAMETER PathToSharedProfile
-Path to new folder. Folders PowerShell and WindowsPowerShell will be created if it doesnt exists.
+Path to new folder. Folders PowerShell and WindowsPowerShell will be created if it doesn't exists.
 
 .EXAMPLE
 Set-SharedPSProfile -CurrentUser -PathToSharedProfile "\\nas01\profile"

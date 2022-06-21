@@ -99,8 +99,8 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Start-PSRoboCopy`](https://smitpi.github.io/PSToolKit/Start-PSRoboCopy) -- My wrapper for default robocopy switches
 - [`Start-PSScriptAnalyzer`](https://smitpi.github.io/PSToolKit/Start-PSScriptAnalyzer) -- Run and report ScriptAnalyzer output
 - [`Start-PSToolkitSystemInitialize`](https://smitpi.github.io/PSToolKit/Start-PSToolkitSystemInitialize) -- Initialize a blank machine.
-- [`Test-CitrixCloudConnector`](https://smitpi.github.io/PSToolKit/Test-CitrixCloudConnector) -- Perform basic connection tests to CItrix cloud.
-- [`Test-CitrixVDAPort`](https://smitpi.github.io/PSToolKit/Test-CitrixVDAPort) -- Test connection between ddc and vda
+- [`Test-CitrixCloudConnector`](https://smitpi.github.io/PSToolKit/Test-CitrixCloudConnector) -- Perform basic connection tests to Citrix cloud.
+- [`Test-CitrixVDAPort`](https://smitpi.github.io/PSToolKit/Test-CitrixVDAPort) -- Test connection between DDC and VDI
 - [`Test-IsFileOpen`](https://smitpi.github.io/PSToolKit/Test-IsFileOpen) -- Checks if a file is open
 - [`Test-PendingReboot`](https://smitpi.github.io/PSToolKit/Test-PendingReboot) -- This script tests various registry values to see if the local computer is pending a reboot.
 - [`Test-PSRemote`](https://smitpi.github.io/PSToolKit/Test-PSRemote) -- Test PSb Remote to a device.

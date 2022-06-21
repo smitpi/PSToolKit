@@ -1457,6 +1457,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-pendingreboot" class="md-nav__link">
+    -PendingReboot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#commonparameters" class="md-nav__link">
     CommonParameters
   </a>
@@ -1789,6 +1796,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-pendingreboot" class="md-nav__link">
+    -PendingReboot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#commonparameters" class="md-nav__link">
     CommonParameters
   </a>
@@ -1850,7 +1864,7 @@
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Initialize a blank machine.</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Start-PSToolkitSystemInitialize [-LabSetup] [-InstallMyModules] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Start-PSToolkitSystemInitialize [-LabSetup] [-InstallMyModules] [-PendingReboot] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Initialize a blank machine with PSToolKit tools and dependencies.</p>
@@ -1873,6 +1887,18 @@
 </code></pre></div>
 <h3 id="-installmymodules">-InstallMyModules</h3>
 <p>Install my other published modules.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-pendingreboot">-PendingReboot</h3>
+<p>Will reboot the device if it is needed.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>

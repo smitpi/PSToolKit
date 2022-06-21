@@ -50,6 +50,9 @@ Initialize a blank machine with PSToolKit tools and dependencies.
 .PARAMETER LabSetup
 Commands only for my HomeLab
 
+.PARAMETER PendingReboot
+Will reboot the device if it is needed.
+
 .PARAMETER InstallMyModules
 Install my other published modules.
 
@@ -61,11 +64,10 @@ Function Start-PSToolkitSystemInitialize {
 	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Start-PSToolkitSystemInitialize')]
 	PARAM(
 		[switch]$LabSetup = $false,
-		[switch]$InstallMyModules = $false
+		[switch]$InstallMyModules = $false,
+		[switch]$PendingReboot = $false
 	)
 
-	$wc = New-Object System.Net.WebClient
-	$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 	Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Powershell Script Execution' -ForegroundColor Cyan
@@ -99,19 +101,6 @@ Function Start-PSToolkitSystemInitialize {
 	Remove-Item $full.FullName
 
 	Import-Module PSToolKit -Force
-	if ($LabSetup) {
-		New-PSProfile
-		Update-PSToolKitConfigFile -UpdateLocal -UpdateLocalFromModule
-		Reset-PSGallery
-        Set-PSToolKitSystemSetting -RunAll
-		Install-PSModule -BaseModules -Scope AllUsers
-		Install-ChocolateyClient
-        Install-VMWareTool
-        Install-PowerShell7x
-		Install-ChocolateyApp -BaseApps
-        Install-RSAT
-        Install-MSUpdate
-	}
 	if ($InstallMyModules) {
 		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Installing My Modules' -ForegroundColor Cyan
 		'CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray' | ForEach-Object {
@@ -134,6 +123,31 @@ Function Start-PSToolkitSystemInitialize {
 			}
 		}
 	}
-Write-Host '[Complete] ' -NoNewline -ForegroundColor Yellow; Write-Host "PSToolKit System Initialization" -ForegroundColor DarkRed
-Start-Sleep 10
+
+	if ($LabSetup) {
+		New-PSProfile
+		Update-PSToolKitConfigFile -UpdateLocal -UpdateLocalFromModule
+		Reset-PSGallery
+		Set-PSToolKitSystemSetting -RunAll
+		Install-PSModule -List BaseModules -Repository PSGallery -Scope AllUsers
+		Install-ChocolateyClient
+		Install-VMWareTool
+		Install-PowerShell7x
+		Install-ChocolateyApp -BaseApps
+		Install-RSAT
+		Install-MSUpdate
+	}
+
+	if ($PendingReboot) {
+		Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Pending Reboot for $($env:COMPUTERNAME)" -ForegroundColor Cyan
+		if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot -like 'True') {
+			Write-Host "`t[Reboot Needed]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Rebooting in 60 sec' -ForegroundColor DarkRed
+			Start-Sleep 60
+			Restart-Computer -Force
+		} else {
+			Write-Host '[Reboot]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Not Necessary, continuing' -ForegroundColor Cyan
+		}
+	}
+
+	Write-Host '[Complete] ' -NoNewline -ForegroundColor Yellow; Write-Host 'System Initialization' -ForegroundColor DarkRed
 } #end Function

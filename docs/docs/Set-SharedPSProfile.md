@@ -36,7 +36,7 @@ Set-SharedPSProfile -CurrentUser -PathToSharedProfile "\\nas01\profile"
 ## PARAMETERS
 
 ### -CurrentUser
-Will change the currenly logged on user's folders.
+Will change the currently logged on user's folders.
 
 ```yaml
 Type: SwitchParameter
@@ -82,7 +82,7 @@ Accept wildcard characters: False
 
 ### -PathToSharedProfile
 Path to new folder.
-Folders PowerShell and WindowsPowerShell will be created if it doesnt exists.
+Folders PowerShell and WindowsPowerShell will be created if it doesn't exists.
 
 ```yaml
 Type: DirectoryInfo
