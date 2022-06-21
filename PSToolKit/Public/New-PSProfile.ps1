@@ -94,7 +94,7 @@ Function New-PSProfile {
         $NewFile = @"
 
 ################################
-regrion common settings       ##
+#region common settings       ##
 ################################
 #Force TLS 1.2 for all connections
 if (`$PSEdition -eq 'Desktop') {
@@ -105,19 +105,20 @@ if (`$PSEdition -eq 'Desktop') {
 if (`$psversiontable.psversion.major -ge 7) {
     `$ErrorView = 'ConciseView'
 }
-endregion
+#endregion
+
 
 ################################
-regrion Start PSToolKit       ##
+#region Start PSToolKit       ##
 ################################
 `$PRModule = Get-ChildItem `"$((Join-Path ((Get-Item $ModModules.ModuleBase).Parent).FullName "\*\$($ModModules.name).psm1"))`" | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1
 Import-Module `$PRModule.FullName -Force
 Start-PSProfile
 
-endregion
+#endregion
 
 ################################
-regrion Add custom prompt     ##
+#region Add custom prompt     ##
 ################################
 function prompt {
     `$identity = [Security.Principal.WindowsIdentity]::GetCurrent()
@@ -148,7 +149,8 @@ function prompt {
     }
     return ' '
 }
-endregion
+#endregion
+
 
 "@
 
