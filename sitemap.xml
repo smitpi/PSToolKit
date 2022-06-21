@@ -126,6 +126,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://smitpi.github.io/PSToolKit/Get-NestedADGroupMembers/</loc>
+         <lastmod>2022-06-21</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://smitpi.github.io/PSToolKit/Get-ProcessPerformance/</loc>
          <lastmod>2022-06-21</lastmod>
          <changefreq>daily</changefreq>
