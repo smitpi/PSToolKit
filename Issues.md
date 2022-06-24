@@ -6,8 +6,7 @@
 | ---------- | --------------------- | ------- |
 | Not Copied | Get-BinRoot           | <=      |
 | Not Copied | Get-PackageParameters | <=      |
-| Not Copied | Get-AllUsersInGroup   | <=      |
 
 ---
 
-*Updated: Tuesday, 21 June 2022 04:22:02 UTC*
+*Updated: Friday, 24 June 2022 06:03:56 UTC*

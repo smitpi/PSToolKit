@@ -88,6 +88,7 @@ Function Install-PSModule {
 		$ConPath = Get-Item $ConfigPath
 	}
  catch { Write-Error 'Config path foes not exist'; exit }
+ 
 	if ($List -like 'BaseModules') { $mods = (Get-Content (Join-Path $ConPath.FullName -ChildPath BaseModuleList.json) | ConvertFrom-Json).name }
 	elseif ($List -like 'ExtendedModules') { $mods = (Get-Content (Join-Path $ConPath.FullName -ChildPath ExtendedModuleList.json) | ConvertFrom-Json).name }
 	elseif ($ModuleNamesList) { $mods = $ModuleNamesList }

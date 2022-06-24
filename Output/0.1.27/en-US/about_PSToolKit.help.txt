@@ -23,7 +23,6 @@ Functions in this module:
 	 Find-OnlineModule -- Creates reports based on PSGallery.
 	 Find-OnlineScript -- Creates reports based on PSGallery. Filtered by scripts
 	 Format-AllObjectsInAListView -- Cast an array or psobject and display it in list view
-	 Get-AllUsersInGroup -- Get details of all users in a group
 	 Get-CitrixClientVersion -- Report on the CItrix workspace versions the users are using.
 	 Get-CitrixPolicies -- Export Citrix Policies
 	 Get-CommandFiltered -- Finds commands on the system and sort it according to module
@@ -69,6 +68,7 @@ Functions in this module:
 	 Remove-UserProfile -- Connects to a server and renames a user profile folder, and delete the key from Profilelist in the registry
 	 Reset-PSGallery -- Reset gallery to degault settings
 	 Restore-ElevatedShortcut -- Restore the RunAss shortcuts, from a zip file
+	 Save-PSModules -- Saves the modules to a local repo.
 	 Search-Script -- Search for a string in a directory of ps1 scripts.
 	 Set-FolderCustomIcon -- Will change the icon of a folder to a custom selected icon
 	 Set-PSProjectFile -- Creates and modify needed files for a PS project from existing module files.
