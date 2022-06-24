@@ -122,8 +122,10 @@ Function Edit-PSModulesList {
 	}
 	if (-not($RemoveModule) -and -not($ShowCurrent)) {
 		if ($null -like $AddModule) { throw 'AddModule cant be an empty string' }
-		$findmods = Find-Module -Filter $AddModule
-		if ($findmods.Name.count -gt 1) {
+        try {
+		    $findmods = Find-Module -Filter $AddModule -Repository psgallery
+        } catch {Write-Warning "$_"}
+		if ($findmods.name.count -gt 1) {
 			ListStuff -arg $findmods.name
 			$select = Read-Host 'Make a selection: '
 			$selectMod = $findmods[$select]
@@ -131,7 +133,7 @@ Function Edit-PSModulesList {
 					Name = "$($selectMod.name)"
 				})		
 		}
-		elseif ($findmods.Name.count -eq 1) {
+		elseif ($findmods.name.count -eq 1) {
 			[void]$mods.Add([PSCustomObject]@{
 					Name = "$($findmods.name)"
 				})

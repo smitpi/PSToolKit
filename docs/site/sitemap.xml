@@ -41,11 +41,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://smitpi.github.io/PSToolKit/Edit-PSModulesList/</loc>
-         <lastmod>2022-06-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://smitpi.github.io/PSToolKit/Edit-SSHConfigFile/</loc>
          <lastmod>2022-06-24</lastmod>
          <changefreq>daily</changefreq>

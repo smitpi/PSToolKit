@@ -24,6 +24,9 @@
         "Name":  "Cobalt"
     },
     {
+        "Name":  "CTXCloudApi"
+    },
+    {
         "Name":  "CustomizeWindows11"
     },
     {
@@ -99,7 +102,13 @@
         "Name":  "PSCommander.Extensions"
     },
     {
+        "Name":  "PSConfigFile"
+    },
+    {
         "Name":  "pscx"
+    },
+    {
+        "Name":  "PSLauncher"
     },
     {
         "Name":  "PSMenu"
@@ -115,6 +124,9 @@
     },
     {
         "Name":  "PSScriptTools"
+    },
+    {
+        "Name":  "PSSysTray"
     },
     {
         "Name":  "PSTypeExtensionTools"
@@ -163,6 +175,9 @@
     },
     {
         "Name":  "WTToolBox"
+    },
+    {
+        "Name":  "XDHealthCheck"
     },
     {
         "Name":  "youtube"
