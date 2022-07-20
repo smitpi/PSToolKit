@@ -94,7 +94,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Set-TempFolder`](https://smitpi.github.io/PSToolKit/Set-TempFolder) -- Set all the temp environmental variables to c:\temp
 - [`Set-WindowsAutoLogin`](https://smitpi.github.io/PSToolKit/Set-WindowsAutoLogin) -- Enable autologin on a device.
 - [`Show-ComputerManagement`](https://smitpi.github.io/PSToolKit/Show-ComputerManagement) -- Opens the Computer Management of the system or remote system
-- [`Show-PSToolKit`](https://smitpi.github.io/PSToolKit/Show-PSToolKit) -- Show details of the commands in this module
 - [`Start-PSModuleMaintenance`](https://smitpi.github.io/PSToolKit/Start-PSModuleMaintenance) -- Goes through all the installed modules, and allow you to upgrade(If available), or remove old and duplicate versions.
 - [`Start-PSProfile`](https://smitpi.github.io/PSToolKit/Start-PSProfile) -- My PS Profile for all sessions.
 - [`Start-PSRoboCopy`](https://smitpi.github.io/PSToolKit/Start-PSRoboCopy) -- My wrapper for default robocopy switches

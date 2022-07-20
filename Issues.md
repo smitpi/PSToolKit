@@ -6,8 +6,7 @@
 | ---------- | --------------------- | ------- |
 | Not Copied | Get-BinRoot           | <=      |
 | Not Copied | Get-PackageParameters | <=      |
-| Not Copied | Show-PSToolKit        | <=      |
 
 ---
 
-*Updated: Wednesday, 20 July 2022 22:33:03 UTC*
+*Updated: Wednesday, 20 July 2022 23:07:53 UTC*
