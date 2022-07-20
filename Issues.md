@@ -1,13 +1,13 @@
-﻿# PSToolKit: Issues
+# PSToolKit: Issues
 
 ---
 
-| Catagory      | File                  | details                     |
-| ------------- | --------------------- | --------------------------- |
-| External Help | Edit-PSModulesList    | Did not create the .md file |
-| Not Copied    | Get-BinRoot           | <=                          |
-| Not Copied    | Get-PackageParameters | <=                          |
+| Catagory   | File                  | details |
+| ---------- | --------------------- | ------- |
+| Not Copied | Get-BinRoot           | <=      |
+| Not Copied | Get-PackageParameters | <=      |
+| Not Copied | Show-PSToolKit        | <=      |
 
 ---
 
-*Updated: Friday, 24 June 2022 06:55:56 UTC*
+*Updated: Wednesday, 20 July 2022 22:33:03 UTC*

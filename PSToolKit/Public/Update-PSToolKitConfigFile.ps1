@@ -168,7 +168,6 @@ Function Update-PSToolKitConfigFile {
 				$null = Invoke-WebRequest -Headers $headers -Uri $Uri -Method Patch -Body $json -ErrorAction Stop
 				Write-Color '[Upload]', 'PSToolKit Config to Gist:', ' Completed' -Color Yellow, Cyan, Green
 			} catch {throw "Can't connect to gist:`n $($_.Exception.Message)"}
-
 		}
 
 	}

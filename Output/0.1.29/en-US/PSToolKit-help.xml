@@ -1022,6 +1022,167 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Edit-PSModulesList</command:name>
+      <command:verb>Edit</command:verb>
+      <command:noun>PSModulesList</command:noun>
+      <maml:description>
+        <maml:para>Edit the Modules json files.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Edit the Modules json files.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Edit-PSModulesList</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>Which list to edit.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>ExtendedModules</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ShowCurrent</maml:name>
+          <maml:description>
+            <maml:para>Currently in the list</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Edit-PSModulesList</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>Which list to edit.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>ExtendedModules</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>RemoveModule</maml:name>
+          <maml:description>
+            <maml:para>Remove form the list</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Edit-PSModulesList</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>Which list to edit.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>ExtendedModules</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AddModule</maml:name>
+          <maml:description>
+            <maml:para>Add to the list</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>List</maml:name>
+        <maml:description>
+          <maml:para>Which list to edit.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>ExtendedModules</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>ShowCurrent</maml:name>
+        <maml:description>
+          <maml:para>Currently in the list</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>RemoveModule</maml:name>
+        <maml:description>
+          <maml:para>Remove form the list</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AddModule</maml:name>
+        <maml:description>
+          <maml:para>Add to the list</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Edit-PSModulesLists -ShowCurrent</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Edit-SSHConfigFile</command:name>
       <command:verb>Edit</command:verb>
       <command:noun>SSHConfigFile</command:noun>
@@ -1213,9 +1374,16 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>$rr = [PSCustomObject]@{</dev:code>
+        <dev:code>$rr = [PSCustomObject]@{
+	Host         = 'esx00'
+	HostName     = '192.168.10.19'
+	User         = 'root'
+	Port         = '22'
+	IdentityFile = 'C:\Users\xx\.ssh\yyy.id'
+}
+Edit-SSHConfigFile -AddObject $rr</dev:code>
         <dev:remarks>
-          <maml:para>Host         = 'esx00' 	HostName     = '192.168.10.19' 	User         = 'root' 	Port         = '22' 	IdentityFile = 'C:\Users\xx\.ssh\yyy.id' } Edit-SSHConfigFile -AddObject $rr</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2514,9 +2682,10 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>. .\Get-FolderSize.ps1</dev:code>
+        <dev:code>. .\Get-FolderSize.ps1
+PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
         <dev:remarks>
-          <maml:para>PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
@@ -6017,51 +6186,58 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Lists all devices</dev:code>
+        <dev:code>Lists all devices
+. Remove-HiddenDevices -listDevicesOnly</dev:code>
         <dev:remarks>
-          <maml:para>. Remove-HiddenDevices -listDevicesOnly</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Save the list of devices as an object</dev:code>
+        <dev:code>Save the list of devices as an object
+$Devices = . Remove-HiddenDevices -listDevicesOnly</dev:code>
         <dev:remarks>
-          <maml:para>$Devices = . Remove-HiddenDevices -listDevicesOnly</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Lists all 'ghost' devices</dev:code>
+        <dev:code>Lists all 'ghost' devices
+. Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
         <dev:remarks>
-          <maml:para>. Remove-HiddenDevices -listGhostDevicesOnly</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-        <dev:code>Save the list of 'ghost' devices as an object</dev:code>
+        <dev:code>Save the list of 'ghost' devices as an object
+$ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
         <dev:remarks>
-          <maml:para>$ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-        <dev:code>Remove all ghost devices EXCEPT any devices that have "Intel" or "Citrix" in their friendly name</dev:code>
+        <dev:code>Remove all ghost devices EXCEPT any devices that have "Intel" or "Citrix" in their friendly name
+. Remove-HiddenDevices -filterByFriendlyName @("Intel","Citrix")</dev:code>
         <dev:remarks>
-          <maml:para>. Remove-HiddenDevices -filterByFriendlyName @("Intel","Citrix")</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
-        <dev:code>Remove all ghost devices EXCEPT any devices that are apart of the classes "LegacyDriver" or "Processor"</dev:code>
+        <dev:code>Remove all ghost devices EXCEPT any devices that are apart of the classes "LegacyDriver" or "Processor"
+. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor")</dev:code>
         <dev:remarks>
-          <maml:para>. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor")</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
-        <dev:code>Remove all ghost devices EXCEPT for devices with a friendly name of "Intel" or "Citrix" or with a class of "LegacyDriver" or "Processor"</dev:code>
+        <dev:code>Remove all ghost devices EXCEPT for devices with a friendly name of "Intel" or "Citrix" or with a class of "LegacyDriver" or "Processor"
+. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor") -filterByFriendlyName @("Intel","Citrix")</dev:code>
         <dev:remarks>
-          <maml:para>. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor") -filterByFriendlyName @("Intel","Citrix")</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

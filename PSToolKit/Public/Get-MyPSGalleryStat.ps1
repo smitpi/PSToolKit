@@ -67,7 +67,7 @@ Function Get-MyPSGalleryStat {
 
     if ($OpenProfilePage) {Start-Process 'https://www.powershellgallery.com/profiles/smitpi'}
     else {
-        $ModLists = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray')
+        $ModLists = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray','PWSHModule')
 
         [System.Collections.ArrayList]$newObject = @()
         $TotalDownloads = 0
