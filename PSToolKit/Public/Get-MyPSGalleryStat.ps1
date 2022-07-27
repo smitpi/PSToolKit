@@ -46,28 +46,27 @@ Show stats about my published modules.
 .DESCRIPTION
 Show stats about my published modules.
 
-.PARAMETER Display
-How to display the output.
-
 .PARAMETER OpenProfilePage
 Open my profile page on psgallery
 
+.PARAMETER ASObject
+Return output as an object.
+
 .EXAMPLE
-Get-MyPSGalleryStats -Display TableView
+Get-MyPSGalleryStats 
 
 #>
 Function Get-MyPSGalleryStat {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-MyPSGalleryStats')]
     [OutputType([System.Object[]])]
     PARAM(
-        [ValidateSet('GridView', 'TableView')]
-        [string]$Display = 'Host',
-        [Switch]$OpenProfilePage
+        [Switch]$OpenProfilePage,
+        [switch]$ASObject
     )
 
     if ($OpenProfilePage) {Start-Process 'https://www.powershellgallery.com/profiles/smitpi'}
     else {
-        $ModLists = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray','PWSHModule')
+        $ModLists = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule')
 
         [System.Collections.ArrayList]$newObject = @()
         $TotalDownloads = 0
@@ -88,13 +87,11 @@ Function Get-MyPSGalleryStat {
                     TotalDownloads = $TotalDownloads
                 })
         }
-
-        if ($Display -like 'GridView') {$newObject.Sum | ConvertTo-WPFGrid}
-        if ($Display -like 'TableView') {
+        if ($ASObject) {$newObject}
+        else {
             Write-Color 'Total Downloads: ', "$(($newObject.TotalDownloads | Sort-Object -Descending)[0])" -Color Cyan, yellow -LinesBefore 1
-            $newObject.Sum | Sort-Object -Property VersionDownload -Descending | Format-Table -AutoSize
+            $newObject.Sum | Sort-Object -Property TotalDownload -Descending | Format-Table -AutoSize
         }
-        if ($Display -like 'Host') {$newObject}
     }
 } #end Function
 

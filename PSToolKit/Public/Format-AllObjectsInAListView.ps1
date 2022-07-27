@@ -35,17 +35,17 @@ Created [26/10/2021_22:32] Initial Script Creating
 <#
 
 .DESCRIPTION
-Cast an array or psobject and display it in list view
+Cast an array or PSObject and display it in list view
 
 #>
 
 
 <#
 .SYNOPSIS
-Cast an array or psobject and display it in list view
+Cast an array or PSObject and display it in list view
 
 .DESCRIPTION
-Cast an array or psobject and display it in list view
+Cast an array or PSObject and display it in list view
 
 .PARAMETER Data
 The PSObject to transform

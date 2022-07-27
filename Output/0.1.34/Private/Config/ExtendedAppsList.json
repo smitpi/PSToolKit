@@ -120,6 +120,10 @@
     "Name": "internet-download-manager"
   },
   {
+    "Source": "chocolatey",
+    "Name": "marktext"
+  },
+  {
     "Name": "microsoft-edge",
     "Source": "chocolatey"
   },
@@ -169,10 +173,6 @@
   },
   {
     "Name": "python3",
-    "Source": "chocolatey"
-  },
-  {
-    "Name": "rambox",
     "Source": "chocolatey"
   },
   {

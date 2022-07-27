@@ -38,7 +38,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Find-ChocolateyApp`](https://smitpi.github.io/PSToolKit/Find-ChocolateyApp) -- Search the online repo for software
 - [`Find-OnlineModule`](https://smitpi.github.io/PSToolKit/Find-OnlineModule) -- Creates reports based on PSGallery.
 - [`Find-OnlineScript`](https://smitpi.github.io/PSToolKit/Find-OnlineScript) -- Creates reports based on PSGallery. Filtered by scripts
-- [`Format-AllObjectsInAListView`](https://smitpi.github.io/PSToolKit/Format-AllObjectsInAListView) -- Cast an array or psobject and display it in list view
+- [`Format-AllObjectsInAListView`](https://smitpi.github.io/PSToolKit/Format-AllObjectsInAListView) -- Cast an array or PSObject and display it in list view
 - [`Get-CitrixClientVersion`](https://smitpi.github.io/PSToolKit/Get-CitrixClientVersion) -- Report on the CItrix workspace versions the users are using.
 - [`Get-CitrixPolicies`](https://smitpi.github.io/PSToolKit/Get-CitrixPolicies) -- Export Citrix Policies
 - [`Get-CommandFiltered`](https://smitpi.github.io/PSToolKit/Get-CommandFiltered) -- Finds commands on the system and sort it according to module

@@ -13,7 +13,7 @@ Show stats about my published modules.
 ## SYNTAX
 
 ```
-Get-MyPSGalleryStat [[-Display] <String>] [-OpenProfilePage] [<CommonParameters>]
+Get-MyPSGalleryStat [-OpenProfilePage] [-ASObject] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,28 +23,28 @@ Show stats about my published modules.
 
 ### EXAMPLE 1
 ```
-Get-MyPSGalleryStats -Display TableView
+Get-MyPSGalleryStats
 ```
 
 ## PARAMETERS
 
-### -Display
-How to display the output.
+### -OpenProfilePage
+Open my profile page on psgallery
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
-Default value: Host
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OpenProfilePage
-Open my profile page on psgallery
+### -ASObject
+Return output as an object.
 
 ```yaml
 Type: SwitchParameter

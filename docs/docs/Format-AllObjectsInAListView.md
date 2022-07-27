@@ -8,7 +8,7 @@ schema: 2.0.0
 # Format-AllObjectsInAListView
 
 ## SYNOPSIS
-Cast an array or psobject and display it in list view
+Cast an array or PSObject and display it in list view
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Format-AllObjectsInAListView [[-Data] <Object[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Cast an array or psobject and display it in list view
+Cast an array or PSObject and display it in list view
 
 ## EXAMPLES
 
