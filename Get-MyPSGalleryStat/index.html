@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Get-MyPSGalleryStat/">
       
       <link rel="icon" href="..">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
     
     
       
@@ -663,15 +663,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#-display" class="md-nav__link">
-    -Display
+  <a href="#-openprofilepage" class="md-nav__link">
+    -OpenProfilePage
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#-openprofilepage" class="md-nav__link">
-    -OpenProfilePage
+  <a href="#-asobject" class="md-nav__link">
+    -ASObject
   </a>
   
 </li>
@@ -1450,21 +1450,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../Show-PSToolKit/" class="md-nav__link">
-        Show-PSToolKit
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../Start-PSModuleMaintenance/" class="md-nav__link">
         Start-PSModuleMaintenance
       </a>
@@ -1803,15 +1788,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#-display" class="md-nav__link">
-    -Display
+  <a href="#-openprofilepage" class="md-nav__link">
+    -OpenProfilePage
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#-openprofilepage" class="md-nav__link">
-    -OpenProfilePage
+  <a href="#-asobject" class="md-nav__link">
+    -ASObject
   </a>
   
 </li>
@@ -1891,29 +1876,29 @@
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Show stats about my published modules.</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Get-MyPSGalleryStat [[-Display] &lt;String&gt;] [-OpenProfilePage] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Get-MyPSGalleryStat [-OpenProfilePage] [-ASObject] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Show stats about my published modules.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Get-MyPSGalleryStats -Display TableView
+<div class="highlight"><pre><span></span><code>Get-MyPSGalleryStats
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
-<h3 id="-display">-Display</h3>
-<p>How to display the output.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
+<h3 id="-openprofilepage">-OpenProfilePage</h3>
+<p>Open my profile page on psgallery</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Host</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
-<h3 id="-openprofilepage">-OpenProfilePage</h3>
-<p>Open my profile page on psgallery</p>
+<h3 id="-asobject">-ASObject</h3>
+<p>Return output as an object.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
@@ -2018,7 +2003,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant"], "search": "../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
     
   </body>
