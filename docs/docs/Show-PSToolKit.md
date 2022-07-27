@@ -5,91 +5,85 @@ online version:
 schema: 2.0.0
 ---
 
-# Install-PSModule
+# Show-PSToolKit
 
 ## SYNOPSIS
-Uses a preconfigured json file or a newly created list of needed modules, and installs them.
+Show details of the commands in this module
 
 ## SYNTAX
 
-### List (Default)
 ```
-Install-PSModule [-List <String>] [-Repository <String>] [-Scope <String>] [<CommonParameters>]
-```
-
-### Other
-```
-Install-PSModule [-ModuleNamesList <String[]>] [-Repository <String>] [-Scope <String>] [<CommonParameters>]
+Show-PSToolKit [-ShowMetaData] [-ShowModified] [-ShowCommand] [-ExportToHTML] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Uses a preconfigured json file or a newly created list of needed modules, and installs them.
+Show details of the commands in this module
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Install-PSModule -List BaseModules -Repository PSGallery -Scope AllUsers
+Show-PSToolKit
 ```
 
 ## PARAMETERS
 
-### -List
-Select the base or extended, to select one of the json config files.
+### -ShowMetaData
+Show only version, date and path.
 
 ```yaml
-Type: String
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: ExtendedModules
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ModuleNamesList
-Or specify a string list with module names.
-
-```yaml
-Type: String[]
-Parameter Sets: Other
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -Repository
-From which repository it will install.
-
-```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: PSGallery
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Scope
-To which scope, allusers or currentuser.
+### -ShowModified
+Show new and modified functions.
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: AllUsers
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ShowCommand
+Use the show-command command
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ExportToHTML
+Create a HTML page with the details
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

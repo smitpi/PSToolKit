@@ -80,8 +80,8 @@ Function Get-MyPSGalleryStat {
                         Name            = $ResultModule.Name
                         Version         = $ResultModule.Version
                         Date            = [datetime]$ResultModule.AdditionalMetadata.published
-                        TotalDownload   = $ResultModule.AdditionalMetadata.downloadCount
-                        VersionDownload = $ResultModule.AdditionalMetadata.versionDownloadCount
+                        TotalDownload   = [Int]$ResultModule.AdditionalMetadata.downloadCount
+                        VersionDownload = [Int]$ResultModule.AdditionalMetadata.versionDownloadCount
                     }
                     All            = $ResultModule
                     TotalDownloads = $TotalDownloads
@@ -90,7 +90,7 @@ Function Get-MyPSGalleryStat {
         if ($ASObject) {$newObject}
         else {
             Write-Color 'Total Downloads: ', "$(($newObject.TotalDownloads | Sort-Object -Descending)[0])" -Color Cyan, yellow -LinesBefore 1
-            $newObject.Sum | Sort-Object -Property TotalDownload -Descending | Format-Table -AutoSize
+            $newObject.Sum | Sort-Object -Property TotalDownload -Descending | Format-Table -AutoSize -Wrap
         }
     }
 } #end Function

@@ -31,7 +31,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Connect-VMWareCluster`](https://smitpi.github.io/PSToolKit/Connect-VMWareCluster) -- Connect to a vSphere cluster to perform other commands or scripts
 - [`Edit-ChocolateyAppsList`](https://smitpi.github.io/PSToolKit/Edit-ChocolateyAppsList) -- Add or remove apps from the json file used in Install-ChocolateyApps
 - [`Edit-HostsFile`](https://smitpi.github.io/PSToolKit/Edit-HostsFile) -- Edit the hosts file
-- [`Edit-PSModulesList`](https://smitpi.github.io/PSToolKit/Edit-PSModulesList) -- Edit the Modules json files.
 - [`Edit-SSHConfigFile`](https://smitpi.github.io/PSToolKit/Edit-SSHConfigFile) -- Creates and modifies the ssh config file in their profile.
 - [`Enable-RemoteHostPSRemoting`](https://smitpi.github.io/PSToolKit/Enable-RemoteHostPSRemoting) -- enable ps remote remotely
 - [`Export-ESXTemplate`](https://smitpi.github.io/PSToolKit/Export-ESXTemplate) -- Export all VM Templates from vSphere to local disk.
@@ -65,7 +64,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Install-MSWinget`](https://smitpi.github.io/PSToolKit/Install-MSWinget) -- Install the package manager winget
 - [`Install-NFSClient`](https://smitpi.github.io/PSToolKit/Install-NFSClient) -- Install NFS Client for windows
 - [`Install-PowerShell7x`](https://smitpi.github.io/PSToolKit/Install-PowerShell7x) -- Install ps7
-- [`Install-PSModule`](https://smitpi.github.io/PSToolKit/Install-PSModule) -- Uses a preconfigured json file or a newly created list of needed modules, and installs them.
 - [`Install-RSAT`](https://smitpi.github.io/PSToolKit/Install-RSAT) -- Install Remote Admin Tools
 - [`Install-VMWareTool`](https://smitpi.github.io/PSToolKit/Install-VMWareTool) -- Install vmware tools from chocolatety
 - [`New-CitrixSiteConfigFile`](https://smitpi.github.io/PSToolKit/New-CitrixSiteConfigFile) -- A config file with Citrix server details and URLs. To be used in scripts.

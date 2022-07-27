@@ -15,7 +15,6 @@ Functions in this module:
 	 Connect-VMWareCluster -- Connect to a vSphere cluster to perform other commands or scripts
 	 Edit-ChocolateyAppsList -- Add or remove apps from the json file used in Install-ChocolateyApps
 	 Edit-HostsFile -- Edit the hosts file
-	 Edit-PSModulesList -- Edit the Modules json files.
 	 Edit-SSHConfigFile -- Creates and modifies the ssh config file in their profile.
 	 Enable-RemoteHostPSRemoting -- enable ps remote remotely
 	 Export-ESXTemplate -- Export all VM Templates from vSphere to local disk.
@@ -49,7 +48,6 @@ Functions in this module:
 	 Install-MSWinget -- Install the package manager winget
 	 Install-NFSClient -- Install NFS Client for windows
 	 Install-PowerShell7x -- Install ps7
-	 Install-PSModule -- Uses a preconfigured json file or a newly created list of needed modules, and installs them.
 	 Install-RSAT -- Install Remote Admin Tools
 	 Install-VMWareTool -- Install vmware tools from chocolatety
 	 New-CitrixSiteConfigFile -- A config file with Citrix server details and URLs. To be used in scripts.
