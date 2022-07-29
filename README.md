@@ -105,6 +105,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Test-PSRemote`](https://smitpi.github.io/PSToolKit/Test-PSRemote) -- Test PSb Remote to a device.
 - [`Update-ListOfDDC`](https://smitpi.github.io/PSToolKit/Update-ListOfDDC) -- Update list of ListOfDDCs in the registry
 - [`Update-LocalHelp`](https://smitpi.github.io/PSToolKit/Update-LocalHelp) -- Downloads and saves help files locally
+- [`Update-MyModulesFromGitHub`](https://smitpi.github.io/PSToolKit/Update-MyModulesFromGitHub) -- Updates my modules
 - [`Update-PSModuleInfo`](https://smitpi.github.io/PSToolKit/Update-PSModuleInfo) -- Update PowerShell module manifest file
 - [`Update-PSToolKit`](https://smitpi.github.io/PSToolKit/Update-PSToolKit) -- Update PSToolKit from GitHub.
 - [`Update-PSToolKitConfigFile`](https://smitpi.github.io/PSToolKit/Update-PSToolKitConfigFile) -- Manages the config files for the PSToolKit Module.

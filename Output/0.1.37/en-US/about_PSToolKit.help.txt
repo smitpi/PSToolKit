@@ -89,6 +89,7 @@ Functions in this module:
 	 Test-PSRemote -- Test PSb Remote to a device.
 	 Update-ListOfDDC -- Update list of ListOfDDCs in the registry
 	 Update-LocalHelp -- Downloads and saves help files locally
+	 Update-MyModulesFromGitHub -- Updates my modules
 	 Update-PSModuleInfo -- Update PowerShell module manifest file
 	 Update-PSToolKit -- Update PSToolKit from GitHub.
 	 Update-PSToolKitConfigFile -- Manages the config files for the PSToolKit Module.
