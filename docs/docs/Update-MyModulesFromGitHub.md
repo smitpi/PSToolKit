@@ -13,7 +13,7 @@ Updates my modules
 ## SYNTAX
 
 ```
-Update-MyModulesFromGitHub [-AllUsers] [-ForceUpdate] [<CommonParameters>]
+Update-MyModulesFromGitHub [[-Modules] <String[]>] [-AllUsers] [-ForceUpdate] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,6 +27,21 @@ Update-MyModulesFromGitHub -AllUsers
 ```
 
 ## PARAMETERS
+
+### -Modules
+{{ Fill Modules Description }}
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit')
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -AllUsers
 Will update to the AllUsers Scope

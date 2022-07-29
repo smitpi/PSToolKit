@@ -66,15 +66,17 @@ Function Update-MyModulesFromGitHub {
 	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/$($ModuleName)/Update-MyModulesFromGitHub')]
 	[OutputType([System.Object[]])]
 	PARAM(
+        [ValidateSet('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit')]
+        [string[]]$Modules = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit'),
 		[ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
 				else { Throw 'Must be running an elevated prompt run this function' } })]
 		[switch]$AllUsers,
 		[switch]$ForceUpdate = $false
 	)
-	$modules = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit')
 
-	foreach ($ModuleName in $modules) {
+	foreach ($ModuleName in $Modules) {
+        Write-Host '[Checking]: ' -ForegroundColor Yellow -NoNewline; Write-Host "$($ModuleName): " -ForegroundColor Cyan
 
 		if ($AllUsers) {
 			$ModulePath = [IO.Path]::Combine($env:ProgramFiles, 'WindowsPowerShell', 'Modules', "$($ModuleName)")
@@ -84,7 +86,7 @@ Function Update-MyModulesFromGitHub {
 
 
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Checking] Temp folder $($env:tmp) "
-		if ((Test-Path $env:tmp\private.zip) -eq $true ) { Remove-Item $env:tmp\private.zip -Force }
+		if ((Test-Path "$env:tmp\$($ModuleName).zip") -eq $true ) { Remove-Item "$env:tmp\$($ModuleName).zip" -Force }
 
 		if ((Test-Path $ModulePath)) {
 			$ModChild = $InstalledVer = $OnlineVer = $null
@@ -100,7 +102,7 @@ Function Update-MyModulesFromGitHub {
 					Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Remove old folder $($ModulePath)"
 					Get-ChildItem -Directory $ModulePath | Remove-Item -Recurse -Force
 				} else {
-					Write-Host '[Updating]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($ModuleName) ($($OnlineVer.ToString())): " -ForegroundColor Cyan -NoNewline; Write-Host 'Already Up To Date' -ForegroundColor DarkRed
+					Write-Host "`t[Done]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($ModuleName) ($($OnlineVer.ToString())): " -ForegroundColor Cyan -NoNewline; Write-Host 'Already Up To Date' -ForegroundColor DarkRed
 				}
 			}
 		} else {
@@ -112,29 +114,48 @@ Function Update-MyModulesFromGitHub {
 		if ($ForceUpdate) {
 			$PathFullName = Get-Item $ModulePath
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] download from github"
+			Write-Host "`t[Downloading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($ModuleName): " -ForegroundColor DarkRed
 			if (Get-Command Start-BitsTransfer) {
 				try {
-					Start-BitsTransfer -DisplayName 'Toolkit Download' -Source "https://codeload.github.com/smitpi/$($ModuleName)/zip/refs/heads/master" -Destination "$env:tmp\private.zip" -TransferType Download -ErrorAction Stop
+					Start-BitsTransfer -DisplayName "$($ModuleName) Download" -Source "https://codeload.github.com/smitpi/$($ModuleName)/zip/refs/heads/master" -Destination "$env:tmp\$($ModuleName).zip" -TransferType Download -ErrorAction Stop
 				} catch {
 					Write-Warning 'Bits Transer failed, defaulting to webrequest'
-					Invoke-WebRequest -Uri https://codeload.github.com/smitpi/$($ModuleName)/zip/refs/heads/master -OutFile $env:tmp\private.zip
+					Invoke-WebRequest -Uri https://codeload.github.com/smitpi/$($ModuleName)/zip/refs/heads/master -OutFile "$env:tmp\$($ModuleName).zip"
 				}
 			} else {
-				Invoke-WebRequest -Uri https://codeload.github.com/smitpi/$($ModuleName)/zip/refs/heads/master -OutFile $env:tmp\private.zip
+				Invoke-WebRequest -Uri https://codeload.github.com/smitpi/$($ModuleName)/zip/refs/heads/master -OutFile "$env:tmp\$($ModuleName).zip"
 			}
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] expand into module folder"
-			Expand-Archive $env:tmp\private.zip $env:tmp -Force
+			Expand-Archive "$env:tmp\$($ModuleName).zip" "$env:tmp" -Force
 
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Copying to $($PathFullName.FullName)"
-			$NewModule = Get-ChildItem -Directory $env:tmp\$($ModuleName)-master\Output
+			$NewModule = Get-ChildItem -Directory "$env:tmp\$($ModuleName)-master\Output"
 			Copy-Item -Path $NewModule.FullName -Destination $PathFullName.FullName -Recurse
 
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Removing temp files"
-			Remove-Item $env:tmp\private.zip
-			Remove-Item $env:tmp\$($ModuleName)-master -Recurse
+			Remove-Item "$env:tmp\$($ModuleName).zip"
+			Remove-Item "$env:tmp\$($ModuleName)-master" -Recurse
 		}
 		$ForceUpdate = $false
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Complete]"
-		Import-Module $($ModuleName) -Force -ErrorAction SilentlyContinue
+    Remove-Module -Name $($ModuleName) -Force -ErrorAction SilentlyContinue
+    Import-Module $($ModuleName) -Force -ErrorAction SilentlyContinue
+
+    $module = Get-Module -Name $($ModuleName)
+    if (-not($module)) { $module = Get-Module -Name $($ModuleName) -ListAvailable }
+    $latestModule = $module | Sort-Object -Property version -Descending | Select-Object -First 1
+    [string]$version = (Test-ModuleManifest -Path $($latestModule.Path.Replace('psm1', 'psd1'))).Version
+    $Description = (Test-ModuleManifest -Path $($latestModule.Path.Replace('psm1', 'psd1'))).Description
+    [datetime]$CreateDate = (Get-Content -Path $($latestModule.Path.Replace('psm1', 'psd1')) | Where-Object { $_ -like '# Generated on: *' }).replace('# Generated on: ', '')
+    $CreateDate = $CreateDate.ToUniversalTime()
+
+    write-host "`t[$($ModuleName)]" -NoNewline -ForegroundColor Cyan; Write-Host " Details" -ForegroundColor Green
+    [PSCustomObject]@{
+            Name         = $($ModuleName)
+            Description  = $Description
+            Version      = $version
+            Date         = (Get-Date($CreateDate) -Format F)
+            Path         = $module.Path
+        }
 	}
 } #end Function
