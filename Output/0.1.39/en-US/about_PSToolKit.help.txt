@@ -54,6 +54,7 @@ Functions in this module:
 	 New-ElevatedShortcut -- Creates a shortcut to a script or exe that runs as admin, without UNC
 	 New-GodModeFolder -- Creates a God Mode Folder
 	 New-GoogleSearch -- Start a new browser tab with search string.
+	 New-PSGenericList -- Creates a .net list object
 	 New-PSModule -- Creates a new PowerShell module.
 	 New-PSProfile -- Creates new profile files in the documents folder
 	 New-PSScript -- Creates a new PowerShell script. With PowerShell Script Info
@@ -64,12 +65,12 @@ Functions in this module:
 	 Remove-FaultyProfileList -- Fixes Profilelist in the registry. To fix user logon with temp profile.
 	 Remove-HiddenDevice -- Removes ghost devices from your system
 	 Remove-UserProfile -- Connects to a server and renames a user profile folder, and delete the key from Profilelist in the registry
-	 Reset-PSGallery -- Reset gallery to degault settings
+	 Reset-PSGallery -- Reset gallery to default settings
+	 Resolve-SID -- Resolves the Sid
 	 Restore-ElevatedShortcut -- Restore the RunAss shortcuts, from a zip file
 	 Save-PSModules -- Saves the modules to a local repo.
 	 Search-Script -- Search for a string in a directory of ps1 scripts.
 	 Set-FolderCustomIcon -- Will change the icon of a folder to a custom selected icon
-	 Set-PSProjectFile -- Creates and modify needed files for a PS project from existing module files.
 	 Set-PSToolKitSystemSetting -- Set multiple settings on desktop or server
 	 Set-SharedPSProfile -- Redirects PowerShell and WindowsPowerShell profile folder to another path.
 	 Set-StaticIP -- Set static IP on device
@@ -91,7 +92,6 @@ Functions in this module:
 	 Update-LocalHelp -- Downloads and saves help files locally
 	 Update-MyModulesFromGitHub -- Updates my modules
 	 Update-PSModuleInfo -- Update PowerShell module manifest file
-	 Update-PSToolKit -- Update PSToolKit from GitHub.
 	 Update-PSToolKitConfigFile -- Manages the config files for the PSToolKit Module.
 	 Write-Ascii -- Create Ascii Art
 	 Write-PSToolKitLog -- Create a log for scripts

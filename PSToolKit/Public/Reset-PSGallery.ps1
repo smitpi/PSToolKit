@@ -36,17 +36,17 @@ Created [30/03/2022_14:30] Initial Script Creating
 <#
 
 .DESCRIPTION
- Reset gallery to degault settings
+ Reset gallery to default settings
 
 #>
 
 
 <#
 .SYNOPSIS
-Reset gallery to degault settings
+Reset gallery to default settings
 
 .DESCRIPTION
-Reset gallery to degault settings
+Reset gallery to default settings
 
 .PARAMETER Force
 Force the reinstall
@@ -65,6 +65,9 @@ Function Reset-PSGallery {
 	)
 
 	if (((Get-PSRepository -Name PSGallery).InstallationPolicy -ne 'Trusted') -or ($Force)) {
+
+		
+
 		try {
 			$wc = New-Object System.Net.WebClient
 			$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
@@ -74,17 +77,35 @@ Function Reset-PSGallery {
 			Register-PSRepository -Default | Out-Null
 			Set-PSRepository -Name PSGallery -InstallationPolicy Trusted | Out-Null
 
-			$BaseModules = @('PowerShellGet', 'PackageManagement')
-			foreach ($base in $BaseModules) {
-				Install-Module -Name $base -Force -AllowClobber -Scope AllUsers
-				Remove-Module $base -Force -ErrorAction SilentlyContinue
-				Import-Module $base -Force
-				Get-Module $base | Update-Module -Force -PassThru
-				Remove-Module $base -Force -ErrorAction SilentlyContinue
-				Import-Module $base -Force
-			}
-			Write-Color '[Set]', 'PSGallery: ', 'Complete' -Color Yellow, Cyan, Green
-		} catch { Write-Warning "[Set]PSGallery: Failed:`n $($_.Exception.Message)" }
-	} else {Write-Color '[Set]', 'PSGallery: ', 'Already Set' -Color Yellow, Cyan, DarkRed}
+			Start-Job -ScriptBlock {
+				$PowerShellGet = Get-Module 'PowerShellGet' -ListAvailable | 
+					Sort-Object Version -Descending | 
+						Select-Object -First 1
 
-} #end Function
+						if ($PowerShellGet.Version -lt [version]'2.2.5') {
+							Write-Color '[Updating]', 'PowerShell PackageManagement' -Color Yellow, Cyan
+
+							$installOptions = @{
+								Repository = 'PSGallery'
+								Force      = $true
+								Scope      = 'AllUsers'
+							}							
+							try {
+								Install-Module -Name PackageManagement @installOptions
+								Write-Color '[Installing]', 'PackageManagement: ', 'Complete' -Color Yellow, Cyan, Green
+							} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+							try {
+								Install-Module -Name PowerShellGet @installOptions
+								Write-Color '[Installing]', 'PowerShellGet: ', 'Complete' -Color Yellow, Cyan, Green
+							} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+						} else {
+							Write-Color '[Updating]', 'PowerShell PackageManagement ', 'Not Needed' -Color Yellow, Cyan, DarkRed
+						}
+					
+					} | Wait-Job | Receive-Job
+
+					Write-Color '[Set]', 'PSGallery: ', 'Complete' -Color Yellow, Cyan, Green
+				} catch { Write-Warning "[Set]PSGallery: Failed:`n $($_.Exception.Message)" }
+			} else {Write-Color '[Set]', 'PSGallery: ', 'Already Set' -Color Yellow, Cyan, DarkRed}
+
+		} #end Function

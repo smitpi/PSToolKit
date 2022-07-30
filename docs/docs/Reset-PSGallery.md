@@ -8,7 +8,7 @@ schema: 2.0.0
 # Reset-PSGallery
 
 ## SYNOPSIS
-Reset gallery to degault settings
+Reset gallery to default settings
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Reset-PSGallery [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Reset gallery to degault settings
+Reset gallery to default settings
 
 ## EXAMPLES
 

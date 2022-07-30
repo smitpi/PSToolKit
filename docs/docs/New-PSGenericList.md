@@ -5,56 +5,56 @@ online version:
 schema: 2.0.0
 ---
 
-# Update-PSToolKit
+# New-PSGenericList
 
 ## SYNOPSIS
-Update PSToolKit from GitHub.
+Creates a .net list object
 
 ## SYNTAX
 
 ```
-Update-PSToolKit [-AllUsers] [-ForceUpdate] [<CommonParameters>]
+New-PSGenericList [[-Type] <Type>] [-Values <Object[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Update PSToolKit from GitHub.
+Creates a .net list object
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Update-PSToolKit
+$list = New-GenericList -Type string -Values 'blah','two','one'
 ```
 
 ## PARAMETERS
 
-### -AllUsers
-Will update to the AllUsers Scope
+### -Type
+The type of objects in the list
 
 ```yaml
-Type: SwitchParameter
+Type: Type
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
+Position: 1
+Default value: String
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -ForceUpdate
-ForceUpdate the download and install.
+### -Values
+Data to add.
 
 ```yaml
-Type: SwitchParameter
+Type: Object[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: False
-Accept pipeline input: False
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -65,6 +65,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.Collections.Generic.List[<type>]
 ## NOTES
 
 ## RELATED LINKS

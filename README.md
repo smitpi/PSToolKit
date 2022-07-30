@@ -70,6 +70,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`New-ElevatedShortcut`](https://smitpi.github.io/PSToolKit/New-ElevatedShortcut) -- Creates a shortcut to a script or exe that runs as admin, without UNC
 - [`New-GodModeFolder`](https://smitpi.github.io/PSToolKit/New-GodModeFolder) -- Creates a God Mode Folder
 - [`New-GoogleSearch`](https://smitpi.github.io/PSToolKit/New-GoogleSearch) -- Start a new browser tab with search string.
+- [`New-PSGenericList`](https://smitpi.github.io/PSToolKit/New-PSGenericList) -- Creates a .net list object
 - [`New-PSModule`](https://smitpi.github.io/PSToolKit/New-PSModule) -- Creates a new PowerShell module.
 - [`New-PSProfile`](https://smitpi.github.io/PSToolKit/New-PSProfile) -- Creates new profile files in the documents folder
 - [`New-PSScript`](https://smitpi.github.io/PSToolKit/New-PSScript) -- Creates a new PowerShell script. With PowerShell Script Info
@@ -80,12 +81,12 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Remove-FaultyProfileList`](https://smitpi.github.io/PSToolKit/Remove-FaultyProfileList) -- Fixes Profilelist in the registry. To fix user logon with temp profile.
 - [`Remove-HiddenDevice`](https://smitpi.github.io/PSToolKit/Remove-HiddenDevice) -- Removes ghost devices from your system
 - [`Remove-UserProfile`](https://smitpi.github.io/PSToolKit/Remove-UserProfile) -- Connects to a server and renames a user profile folder, and delete the key from Profilelist in the registry
-- [`Reset-PSGallery`](https://smitpi.github.io/PSToolKit/Reset-PSGallery) -- Reset gallery to degault settings
+- [`Reset-PSGallery`](https://smitpi.github.io/PSToolKit/Reset-PSGallery) -- Reset gallery to default settings
+- [`Resolve-SID`](https://smitpi.github.io/PSToolKit/Resolve-SID) -- Resolves the Sid
 - [`Restore-ElevatedShortcut`](https://smitpi.github.io/PSToolKit/Restore-ElevatedShortcut) -- Restore the RunAss shortcuts, from a zip file
 - [`Save-PSModules`](https://smitpi.github.io/PSToolKit/Save-PSModules) -- Saves the modules to a local repo.
 - [`Search-Script`](https://smitpi.github.io/PSToolKit/Search-Script) -- Search for a string in a directory of ps1 scripts.
 - [`Set-FolderCustomIcon`](https://smitpi.github.io/PSToolKit/Set-FolderCustomIcon) -- Will change the icon of a folder to a custom selected icon
-- [`Set-PSProjectFile`](https://smitpi.github.io/PSToolKit/Set-PSProjectFile) -- Creates and modify needed files for a PS project from existing module files.
 - [`Set-PSToolKitSystemSetting`](https://smitpi.github.io/PSToolKit/Set-PSToolKitSystemSetting) -- Set multiple settings on desktop or server
 - [`Set-SharedPSProfile`](https://smitpi.github.io/PSToolKit/Set-SharedPSProfile) -- Redirects PowerShell and WindowsPowerShell profile folder to another path.
 - [`Set-StaticIP`](https://smitpi.github.io/PSToolKit/Set-StaticIP) -- Set static IP on device
@@ -107,7 +108,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Update-LocalHelp`](https://smitpi.github.io/PSToolKit/Update-LocalHelp) -- Downloads and saves help files locally
 - [`Update-MyModulesFromGitHub`](https://smitpi.github.io/PSToolKit/Update-MyModulesFromGitHub) -- Updates my modules
 - [`Update-PSModuleInfo`](https://smitpi.github.io/PSToolKit/Update-PSModuleInfo) -- Update PowerShell module manifest file
-- [`Update-PSToolKit`](https://smitpi.github.io/PSToolKit/Update-PSToolKit) -- Update PSToolKit from GitHub.
 - [`Update-PSToolKitConfigFile`](https://smitpi.github.io/PSToolKit/Update-PSToolKitConfigFile) -- Manages the config files for the PSToolKit Module.
 - [`Write-Ascii`](https://smitpi.github.io/PSToolKit/Write-Ascii) -- Create Ascii Art
 - [`Write-PSToolKitLog`](https://smitpi.github.io/PSToolKit/Write-PSToolKitLog) -- Create a log for scripts

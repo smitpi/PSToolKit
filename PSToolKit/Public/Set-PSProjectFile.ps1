@@ -91,8 +91,7 @@ Function Set-PSProjectFile {
 	try {
 		$modulefile = $ModuleScriptFile | Get-Item -ErrorAction Stop
 		$module = Import-Module $modulefile.FullName -Force -PassThru -ErrorAction Stop
-	}
- catch { Write-Error "Error: Importing Module `nMessage:$($_.Exception.message)"; exit }
+	} catch { Write-Error "Error: Importing Module `nMessage:$($_.Exception.message)"; exit }
 	#endregion
 
 	#region deleting Folders
@@ -114,15 +113,13 @@ Function Set-PSProjectFile {
 		if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }
 		if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force -ErrorAction Stop }
 		if (Test-Path $ModuleIssuesExcel) { Remove-Item $ModuleIssuesExcel -Force -ErrorAction Stop }	
-	}
-	catch {
+	} catch {
 		try {
 			Write-Warning "Error: Deleting Old Folders `nMessage:$($_.Exception.message)`nRetrying"
 			Start-Sleep 10
 			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop; Start-Sleep 5 }
 			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
-		}
-		catch { throw 'Error removing Folder Structure' ; exit }
+		} catch { throw 'Error removing Folder Structure' ; exit }
  }
 	#endregion
     
@@ -142,8 +139,7 @@ Function Set-PSProjectFile {
 				FunctionsToExport = (Get-Command -Module $module.Name -CommandType Function | Select-Object name).name | Sort-Object
 			}
 			Update-ModuleManifest @manifestProperties -ErrorAction Stop
-		}
-		catch { Write-Error "Error: Updateing Version bump `nMessage:$($_.Exception.message)"; exit }
+		} catch { Write-Error "Error: Updateing Version bump `nMessage:$($_.Exception.message)"; exit }
 	} 
 	#endregion
 	#region Folders
@@ -155,8 +151,7 @@ Function Set-PSProjectFile {
 		$DateLine = Select-String -InputObject $ModuleManifestFile -Pattern '# Generated on:'
 		$FileContent[($DateLine.LineNumber - 1)] = "# Generated on: $(Get-Date -Format u)"
 		$FileContent | Set-Content $ModuleManifestFile -Force -ErrorAction Stop
-	}
-	catch { Write-Error "Error: Updating Date in Module Manifest File  `nMessage:$($_.Exception.message)"; exit }
+	} catch { Write-Error "Error: Updating Date in Module Manifest File  `nMessage:$($_.Exception.message)"; exit }
 	try {
 		$ModuleOutputFolder = [IO.Path]::Combine($ModuleBase, 'Output', $($ModuleManifest.Version.ToString()))
 		$ModuleOutput = New-Item $ModuleOutputFolder -ItemType Directory -Force | Get-Item -ErrorAction Stop
@@ -166,8 +161,7 @@ Function Set-PSProjectFile {
 
 		$ModuleExternalHelpFolder = [IO.Path]::Combine($ModuleOutput, 'en-US')
 		$ModuleExternalHelp = New-Item $ModuleExternalHelpFolder -ItemType Directory -Force | Get-Item -ErrorAction Stop
-	}
-	catch { Write-Error "Error: Creating folders `nMessage:$($_.Exception.message)"; exit }
+	} catch { Write-Error "Error: Creating folders `nMessage:$($_.Exception.message)"; exit }
 	#endregion
 
 	#region platyps
@@ -181,8 +175,7 @@ Function Set-PSProjectFile {
 			HelpVersion    = $ModuleManifest.Version.ToString()
 		}
 		New-MarkdownHelp @markdownParams -Force
-	}
- catch { Write-Error "Error: MarkdownHelp `nMessage:$($_.Exception.message)"; exit }
+	} catch { Write-Error "Error: MarkdownHelp `nMessage:$($_.Exception.message)"; exit }
 
 	try {
 		Compare-Object -ReferenceObject (Get-ChildItem $ModulePublicFunctions).BaseName -DifferenceObject (Get-ChildItem $Moduledocs).BaseName | Where-Object { $_.SideIndicator -like '<=' } | ForEach-Object {
@@ -207,8 +200,7 @@ Function Set-PSProjectFile {
 					})
 			}
 		}
-	}
- catch { Write-Error "Error: Docs check `nMessage:$($_.Exception.message)"; exit }
+	} catch { Write-Error "Error: Docs check `nMessage:$($_.Exception.message)"; exit }
 
 	try {
 		Write-Color '[Starting]', ' Creating External help files' -Color Yellow, DarkCyan
@@ -328,8 +320,7 @@ Function Set-PSProjectFile {
 				Date    = (Get-Date -Format u)
 			})
 		$versionfile | ConvertTo-Json | Set-Content (Join-Path $ModuleBase -ChildPath 'Version.json') -Force
-	}
- catch { Write-Error "Error: Creating Other Files `nMessage:$($_.Exception.message)"; exit }
+	} catch { Write-Error "Error: Creating Other Files `nMessage:$($_.Exception.message)"; exit }
 	#endregion
 	
 	#region Combine files
@@ -369,12 +360,18 @@ Function Set-PSProjectFile {
 	}
 	$file.add('#region Public Functions')
 	foreach ($PublicItem in $public) {
+		$author = $ModuleManifest.Author
+		try {
+			$scriptinfo = Test-ScriptFileInfo -Path $PublicItem.fullName -ErrorAction Stop
+			$author = $scriptinfo.author
+		} catch {Write-Warning 'Could not read script info, defaul values used.'}
+
 		$file.add("#region $($PublicItem.name)")
 		$file.Add("######## Function $($public.IndexOf($PublicItem) + 1) of $($public.Count) ##################")
 		$file.Add(('{0,-20}{1}' -f '# Function:', $($PublicItem.BaseName)))
 		$file.Add(('{0,-20}{1}' -f '# Module:', $($module.Name)))
 		$file.Add(('{0,-20}{1}' -f '# ModuleVersion:', $($moduleManifest.version)))
-		$file.Add(('{0,-20}{1}' -f '# Author:', $($moduleManifest.author)))
+		$file.Add(('{0,-20}{1}' -f '# Author:', $($author)))
 		$file.Add(('{0,-20}{1}' -f '# Company:', $($moduleManifest.CompanyName)))
 		$file.Add(('{0,-20}{1}' -f '# CreatedOn:', $($PublicItem.CreationTime)))
 		$file.Add(('{0,-20}{1}' -f '# ModifiedOn:', $($PublicItem.LastWriteTime)))
@@ -482,8 +479,7 @@ Function Set-PSProjectFile {
 			git add --all 2>&1 | Write-Host -ForegroundColor DarkCyan
 			git commit --all -m "To Version: $($moduleManifest.version.tostring())" 2>&1 | Write-Host -ForegroundColor DarkGreen
 			git push 2>&1 | Write-Host -ForegroundColor DarkRed
-		}
-		else { Write-Warning 'Git is not installed' }
+		} else { Write-Warning 'Git is not installed' }
 	}
 	#endregion
 
@@ -495,7 +491,7 @@ Function Set-PSProjectFile {
 		Get-ChildItem -Directory "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" | Remove-Item -Recurse -Force
 		Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)\" -Force -Recurse
 
-        Write-Color '[Copying]', ' New Module ', "$($modulefile.basename) ver:($($ModuleManifest.Version.ToString())) ", 'to PowerShell' -Color Yellow, DarkCyan, Green, DarkCyan
+		Write-Color '[Copying]', ' New Module ', "$($modulefile.basename) ver:($($ModuleManifest.Version.ToString())) ", 'to PowerShell' -Color Yellow, DarkCyan, Green, DarkCyan
 		if (-not(Test-Path "C:\Program Files\PowerShell\Modules\$($modulefile.basename)")) { New-Item "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" -ItemType Directory -Force | Out-Null }
 		Get-ChildItem -Directory "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" | Compress-Archive -DestinationPath "C:\Program Files\PowerShell\Modules\$($modulefile.basename)\$($modulefile.basename)-bck.zip" -Update
 		Get-ChildItem -Directory "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" | Remove-Item -Recurse -Force

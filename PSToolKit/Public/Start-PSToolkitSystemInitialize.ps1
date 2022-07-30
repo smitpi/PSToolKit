@@ -94,10 +94,10 @@ Function Start-PSToolkitSystemInitialize {
 
 	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'PSToolKit Module' -ForegroundColor Cyan
 	$web = New-Object System.Net.WebClient
-	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-PSToolKit.ps1', "$($env:TEMP)\Update-PSToolKit.ps1")
-	$full = Get-Item "$($env:TEMP)\Update-PSToolKit.ps1"
+	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-MyModulesFromGitHub.ps1.ps1', "$($env:TEMP)\Update-MyModulesFromGitHub.ps1")
+	$full = Get-Item "$($env:TEMP)\Update-MyModulesFromGitHub.ps1"
 	Import-Module $full.FullName -Force
-	Update-PSToolKit -AllUsers
+	Update-MyModulesFromGitHub -Modules PSToolkit -AllUsers
 	Remove-Item $full.FullName
 
 	Import-Module PSToolKit -Force
@@ -127,7 +127,7 @@ Function Start-PSToolkitSystemInitialize {
 	if ($LabSetup) {
 		New-PSProfile
 		Update-PSToolKitConfigFile -UpdateLocal -UpdateLocalFromModule
-		Reset-PSGallery
+		Reset-PSGallery -Force
 		Set-PSToolKitSystemSetting -RunAll
 		Install-PWSHModule -GitHubUserID smitpi -PublicGist -ListName base -Scope AllUsers
 		Install-ChocolateyClient

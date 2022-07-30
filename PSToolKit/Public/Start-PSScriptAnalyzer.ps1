@@ -75,7 +75,7 @@ Function Start-PSScriptAnalyzer {
 				else {throw 'Not a valid path'}
 				$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {$True}
-				else {Throw 'Must be running an elevated prompt to use ClearARPCache'}})]
+				else {Throw 'Must be running an elevated prompt'}})]
 		[System.IO.DirectoryInfo[]]$Paths,
 
 		[Parameter(ParameterSetName = 'ExCus')]
@@ -171,7 +171,14 @@ Function Start-PSScriptAnalyzer {
 				New-HTMLSection -HeaderText "$($item) [ $($filtered.Count) ]" @SectionSettings -Collapsed { New-HTMLTable -DataTable $filtered @TableSettings	}
 			}
 		}
+		$fragments = [system.collections.generic.list[string]]::new()
+		$fragments.Add((New-MDHeader 'PSScriptAnalyzer Results'))
+		$Fragments.Add("---`n")
+		$fragments.Add((New-MDTable -Object $ScriptAnalyzerIssues))
+		$Fragments.Add("---`n")
+		$fragments.add("*Updated: $(Get-Date -Format U) UTC*")
+		$fragments | Out-File -FilePath $(Join-Path -Path $ReportPath -ChildPath "\PSScriptAnalyzer-$(Get-Date -Format yyyy.MM.dd-HH.mm).md") -Encoding utf8 -Force
 	}
-	if ($Export -eq 'Host') { return $ScriptAnalyzerIssues }
+	if ($Export -eq 'Host') { $ScriptAnalyzerIssues }
 
 } #end Function

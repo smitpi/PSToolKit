@@ -76,8 +76,8 @@ Function Start-PSProfile {
 		$Global:psfolder = Get-Item (Get-Item $profile).DirectoryName
 	} else { $Global:psfolder = Get-Item (Get-Item $profile).DirectoryName }
 
-	#$wc = New-Object System.Net.WebClient
-	#$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
+	$wc = New-Object System.Net.WebClient
+	$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 	try {
@@ -90,7 +90,7 @@ Function Start-PSProfile {
 	} catch { Write-Warning 'Unable to create default folders' }
 
 	try {
-		Set-Location $psfolder
+		Set-Location $psfolder -ErrorAction Stop
 	} catch { Write-Warning 'Unable to set location' }
 
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
@@ -200,7 +200,7 @@ Function Start-PSProfile {
 		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
 		Write-Host (' {0,15} ' -f 'My PSGallery Stats') -ForegroundColor DarkRed
 		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
-		Write-Host "$((Get-MyPSGalleryStat -Display TableView) | Out-String)" -ForegroundColor Green
+		Write-Host "$((Get-MyPSGalleryStat) | Out-String)" -ForegroundColor Green
  }
 
 } #end Function
