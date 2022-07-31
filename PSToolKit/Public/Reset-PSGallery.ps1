@@ -60,30 +60,31 @@ Function Reset-PSGallery {
 	PARAM(
 		[ValidateScript({$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {$True}
-				else {Throw 'Must be running an elevated prompt to use ClearARPCache'}})]
+				else {Throw 'Must be running an elevated prompt'}})]
 		[switch]$Force = $false
 	)
 
 	if (((Get-PSRepository -Name PSGallery).InstallationPolicy -ne 'Trusted') -or ($Force)) {
-
-		
-
 		try {
 			$wc = New-Object System.Net.WebClient
 			$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
 			[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        
+			Install-PackageProvider Nuget -Force -ErrorAction SilentlyContinue | Out-Null
+			Register-PSRepository -Default -ErrorAction SilentlyContinue | Out-Null
+			Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -ErrorAction SilentlyContinue | Out-Null
+			Write-Color '[Installing]', 'PackageProvider: ', 'Complete' -Color Yellow, Cyan, Green
 
-			Install-PackageProvider Nuget -Force | Out-Null
-			Register-PSRepository -Default | Out-Null
-			Set-PSRepository -Name PSGallery -InstallationPolicy Trusted | Out-Null
+			#} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 
+			Write-Color '[Checking]', 'PowerShell PackageManagement' -Color Yellow, Cyan
 			Start-Job -ScriptBlock {
 				$PowerShellGet = Get-Module 'PowerShellGet' -ListAvailable | 
 					Sort-Object Version -Descending | 
 						Select-Object -First 1
 
 						if ($PowerShellGet.Version -lt [version]'2.2.5') {
-							Write-Color '[Updating]', 'PowerShell PackageManagement' -Color Yellow, Cyan
+							Write-Color "`t[Updating]", 'PowerShell PackageManagement' -Color Yellow, Cyan
 
 							$installOptions = @{
 								Repository = 'PSGallery'
@@ -92,14 +93,14 @@ Function Reset-PSGallery {
 							}							
 							try {
 								Install-Module -Name PackageManagement @installOptions
-								Write-Color '[Installing]', 'PackageManagement: ', 'Complete' -Color Yellow, Cyan, Green
+								Write-Color "`t[Installing]", 'PackageManagement: ', 'Complete' -Color Yellow, Cyan, Green
 							} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 							try {
 								Install-Module -Name PowerShellGet @installOptions
-								Write-Color '[Installing]', 'PowerShellGet: ', 'Complete' -Color Yellow, Cyan, Green
+								Write-Color "`t[Installing]", 'PowerShellGet: ', 'Complete' -Color Yellow, Cyan, Green
 							} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 						} else {
-							Write-Color '[Updating]', 'PowerShell PackageManagement ', 'Not Needed' -Color Yellow, Cyan, DarkRed
+							Write-Color "`t[Update]", 'PowerShell PackageManagement ', 'Not Needed' -Color Green, Cyan, DarkRed
 						}
 					
 					} | Wait-Job | Receive-Job

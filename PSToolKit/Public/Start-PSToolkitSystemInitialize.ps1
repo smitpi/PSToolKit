@@ -94,7 +94,7 @@ Function Start-PSToolkitSystemInitialize {
 
 	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'PSToolKit Module' -ForegroundColor Cyan
 	$web = New-Object System.Net.WebClient
-	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-MyModulesFromGitHub.ps1.ps1', "$($env:TEMP)\Update-MyModulesFromGitHub.ps1")
+	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-MyModulesFromGitHub.ps1', "$($env:TEMP)\Update-MyModulesFromGitHub.ps1")
 	$full = Get-Item "$($env:TEMP)\Update-MyModulesFromGitHub.ps1"
 	Import-Module $full.FullName -Force
 	Update-MyModulesFromGitHub -Modules PSToolkit -AllUsers

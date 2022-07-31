@@ -94,6 +94,10 @@ function Find-OnlineModule {
 		[System.IO.DirectoryInfo]$ReportPath = 'C:\Temp'
 
 	)
+			Invoke-WebRequest -Uri 'https://github.com/jdhitsolutions/PSGalleryReport/blob/main/psgallery-filtered.md' -OutFile "$($env:TEMP)\psgallery-filtered.md"
+			Show-Markdown "$($env:TEMP)\psgallery-filtered.md" -UseBrowser
+	https://github.com/jdhitsolutions/PSGalleryReport/blob/main/psgallery-downloads.md
+	https://github.com/jdhitsolutions/PSGalleryReport/blob/main/psgallery-downloads-community.md
 
 	if ($UpdateCache) {
 		Write-Host "[$(Get-Date)] Updating cache $($env:TEMP)\psgallery.xml" -ForegroundColor yellow

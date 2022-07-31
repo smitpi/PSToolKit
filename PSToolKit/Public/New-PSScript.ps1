@@ -122,11 +122,15 @@ Function $properverb-$propernoun {
 		[Cmdletbinding(DefaultParameterSetName='Set1', HelpURI = "https://smitpi.github.io/$modulename/$properverb-$propernoun")]
 	    [OutputType([System.Object[]])]
                 PARAM(
-					[Parameter(Mandatory = `$true)]
+
+					[Parameter(Position = 0,Mandatory = `$true,HelpMessage = "Specify the name of a remote computer. The default is the local host.")]
+        			[alias("CN", "host")]
+        			[ValidateNotNullorEmpty()]
 					[Parameter(ParameterSetName = 'Set1')]
 					[ValidateScript( { (Test-Path `$_) -and ((Get-Item `$_).Extension -eq ".csv") })]
 					[System.IO.FileInfo]`$InputObject,
 
+					[Parameter(HelpMessage = "Specify the name of a user.")]
 					[ValidateNotNullOrEmpty()]
 					[string]`$Username,
 
