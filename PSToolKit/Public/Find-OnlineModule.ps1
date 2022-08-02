@@ -91,13 +91,11 @@ function Find-OnlineModule {
 		[ValidateScript( { if (Test-Path $_) { $true }
 				else { New-Item -Path $_ -ItemType Directory -Force | Out-Null; $true }
 			})]
-		[System.IO.DirectoryInfo]$ReportPath = 'C:\Temp'
+		[System.IO.DirectoryInfo]$ReportPath = 'C:\Temp',
+		[switch]$DownloadJeffReport
 
 	)
-			Invoke-WebRequest -Uri 'https://github.com/jdhitsolutions/PSGalleryReport/blob/main/psgallery-filtered.md' -OutFile "$($env:TEMP)\psgallery-filtered.md"
-			Show-Markdown "$($env:TEMP)\psgallery-filtered.md" -UseBrowser
-	https://github.com/jdhitsolutions/PSGalleryReport/blob/main/psgallery-downloads.md
-	https://github.com/jdhitsolutions/PSGalleryReport/blob/main/psgallery-downloads-community.md
+
 
 	if ($UpdateCache) {
 		Write-Host "[$(Get-Date)] Updating cache $($env:TEMP)\psgallery.xml" -ForegroundColor yellow
@@ -193,4 +191,18 @@ function Find-OnlineModule {
 		$fragments | Out-File "$(Join-Path -Path $ReportPath -ChildPath "\PSGallery-$(Get-Date -Format yyyy.MM.dd-HH.mm).md")" -Encoding utf8 -Force
 	}
 	if ($export -like 'Host') {$FinalReport}
+
+	if ($DownloadJeffReport) {
+		Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/jdhitsolutions/PSGalleryReport/main/psgallery-filtered.md' -OutFile "$($ReportPath)\psgallery-filtered.md"
+		Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/jdhitsolutions/PSGalleryReport/main/psgallery-downloads.md' -OutFile "$($ReportPath)\psgallery-downloads.md"
+		Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/jdhitsolutions/PSGalleryReport/main/psgallery-downloads-community.md' -OutFile "$($ReportPath)\psgallery-downloads-community.md"
+		Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/jdhitsolutions/PSGalleryReport/main/psgallery-authors.md' -OutFile "$($ReportPath)\psgallery-authors.md"
+		
+
+		Show-Markdown "$($ReportPath)\psgallery-filtered.md" -UseBrowser
+		Show-Markdown "$($ReportPath)\psgallery-downloads.md" -UseBrowser
+		Show-Markdown "$($ReportPath)\psgallery-downloads-community.md" -UseBrowser
+		Show-Markdown "$($ReportPath)\psgallery-authors.md" -UseBrowser
+
+	}
 }

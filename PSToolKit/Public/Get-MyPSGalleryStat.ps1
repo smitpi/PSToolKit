@@ -79,20 +79,38 @@ Function Get-MyPSGalleryStat {
                     Sum            = [PSCustomObject]@{
                         Name            = $ResultModule.Name
                         Version         = $ResultModule.Version
-                        Date            = [datetime]$ResultModule.AdditionalMetadata.published
+                        PublishedDate   = [datetime]$ResultModule.AdditionalMetadata.published
                         TotalDownload   = [Int]$ResultModule.AdditionalMetadata.downloadCount
                         VersionDownload = [Int]$ResultModule.AdditionalMetadata.versionDownloadCount
                     }
                     All            = $ResultModule
                     TotalDownloads = $TotalDownloads
+                    DateCollected  = [datetime](Get-Date -Format U)
                 })
         }
         if ($ASObject) {$newObject}
         else {
             Write-Color 'Total Downloads: ', "$(($newObject.TotalDownloads | Sort-Object -Descending)[0])" -Color Cyan, yellow -LinesBefore 1
-            $newObject.Sum | Sort-Object -Property TotalDownload -Descending | Format-Table -AutoSize -Wrap
+            $newObject.Sum | Sort-Object -Property PublishedDate -Descending | Format-Table -AutoSize -Wrap
         }
     }
+
+    [System.Collections.generic.List[PSObject]]$GalStats = @()
+    
+    $tmp = Get-Content -Path (Join-Path -Path $env:USERPROFILE -ChildPath 'MyPSGalleryStats.json') | ConvertFrom-Json
+    $tmp | ForEach-Object {$GalStats.Add($_)}
+
+    $GalStats.Add(
+        [PSCustomObject]@{
+            Date  = $newObject[0].DateCollected
+            Total = ($newObject.TotalDownloads | Sort-Object -Descending)[0]
+            Details   = [PSCustomObject]@{
+                Sum = $newObject.Sum
+                All = $newObject.All
+            }   
+        }
+    )
+    $GalStats | ConvertTo-Json -Depth 10 | Set-Content -Path (Join-Path -Path $env:USERPROFILE -ChildPath 'MyPSGalleryStats.json')
 } #end Function
 
 

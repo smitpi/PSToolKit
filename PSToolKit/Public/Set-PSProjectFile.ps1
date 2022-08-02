@@ -364,7 +364,7 @@ Function Set-PSProjectFile {
 		try {
 			$scriptinfo = Test-ScriptFileInfo -Path $PublicItem.fullName -ErrorAction Stop
 			$author = $scriptinfo.author
-		} catch {Write-Warning 'Could not read script info, defaul values used.'}
+		} catch {Write-Warning "`tCould not read script info [$($PublicItem.BaseName)], default values used."}
 
 		$file.add("#region $($PublicItem.name)")
 		$file.Add("######## Function $($public.IndexOf($PublicItem) + 1) of $($public.Count) ##################")
