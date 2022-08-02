@@ -14,12 +14,12 @@ Redirects PowerShell and WindowsPowerShell profile folder to another path.
 
 ### Current (Default)
 ```
-Set-SharedPSProfile [-CurrentUser] [-PathToSharedProfile <DirectoryInfo>] [<CommonParameters>]
+Set-SharedPSProfile [-CurrentUser] [-SharedProfilePath <DirectoryInfo>] [<CommonParameters>]
 ```
 
 ### Other
 ```
-Set-SharedPSProfile [-OtherUser] [-OtherUserName <String>] [-PathToSharedProfile <DirectoryInfo>]
+Set-SharedPSProfile [-OtherUser] [-ProfilePath <String>] [-SharedProfilePath <DirectoryInfo>]
  [<CommonParameters>]
 ```
 
@@ -30,7 +30,7 @@ Redirects PowerShell and WindowsPowerShell profile folder to another path.
 
 ### EXAMPLE 1
 ```
-Set-SharedPSProfile -CurrentUser -PathToSharedProfile "\\nas01\profile"
+Set-SharedPSProfile -CurrentUser -SharedProfilePath "\\nas01\profile"
 ```
 
 ## PARAMETERS
@@ -65,8 +65,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OtherUserName
-The username of the other user.
+### -ProfilePath
+{{ Fill ProfilePath Description }}
 
 ```yaml
 Type: String
@@ -80,7 +80,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PathToSharedProfile
+### -SharedProfilePath
 Path to new folder.
 Folders PowerShell and WindowsPowerShell will be created if it doesn't exists.
 

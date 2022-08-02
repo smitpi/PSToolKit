@@ -1615,6 +1615,17 @@
           </dev:type>
           <dev:defaultValue>C:\Temp</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>DownloadJeffReport</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill DownloadJeffReport Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -1713,6 +1724,18 @@
           <maml:uri />
         </dev:type>
         <dev:defaultValue>C:\Temp</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>DownloadJeffReport</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill DownloadJeffReport Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
@@ -6715,6 +6738,100 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Set-ObjectOwnerShip</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>ObjectOwnerShip</command:noun>
+      <maml:description>
+        <maml:para>Reset the ownership of a folder, and add the specified user with full control.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Reset the ownership of a folder, and add the specified user with full control.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-ObjectOwnerShip</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="Name">
+          <maml:name>FolderPath</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill FolderPath Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">DirectoryInfo[]</command:parameterValue>
+          <dev:type>
+            <maml:name>DirectoryInfo[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>UserName</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill UserName Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="Name">
+        <maml:name>FolderPath</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill FolderPath Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">DirectoryInfo[]</command:parameterValue>
+        <dev:type>
+          <maml:name>DirectoryInfo[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>UserName</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill UserName Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Set-PSProjectFile</command:name>
       <command:verb>Set</command:verb>
       <command:noun>PSProjectFile</command:noun>
@@ -7277,7 +7394,7 @@
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>PathToSharedProfile</maml:name>
+          <maml:name>SharedProfilePath</maml:name>
           <maml:description>
             <maml:para>Path to new folder. Folders PowerShell and WindowsPowerShell will be created if it doesn't exists.</maml:para>
           </maml:description>
@@ -7303,9 +7420,9 @@
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>OtherUserName</maml:name>
+          <maml:name>ProfilePath</maml:name>
           <maml:description>
-            <maml:para>The username of the other user.</maml:para>
+            <maml:para>{{ Fill ProfilePath Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -7315,7 +7432,7 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>PathToSharedProfile</maml:name>
+          <maml:name>SharedProfilePath</maml:name>
           <maml:description>
             <maml:para>Path to new folder. Folders PowerShell and WindowsPowerShell will be created if it doesn't exists.</maml:para>
           </maml:description>
@@ -7354,9 +7471,9 @@
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>OtherUserName</maml:name>
+        <maml:name>ProfilePath</maml:name>
         <maml:description>
-          <maml:para>The username of the other user.</maml:para>
+          <maml:para>{{ Fill ProfilePath Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -7366,7 +7483,7 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>PathToSharedProfile</maml:name>
+        <maml:name>SharedProfilePath</maml:name>
         <maml:description>
           <maml:para>Path to new folder. Folders PowerShell and WindowsPowerShell will be created if it doesn't exists.</maml:para>
         </maml:description>
@@ -7388,7 +7505,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Set-SharedPSProfile -CurrentUser -PathToSharedProfile "\\nas01\profile"</dev:code>
+        <dev:code>Set-SharedPSProfile -CurrentUser -SharedProfilePath "\\nas01\profile"</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>

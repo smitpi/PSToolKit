@@ -56,11 +56,11 @@ Will change another user's folders.
 .PARAMETER OtherUserName
 The username of the other user.
 
-.PARAMETER PathToSharedProfile
+.PARAMETER SharedProfilePath
 Path to new folder. Folders PowerShell and WindowsPowerShell will be created if it doesn't exists.
 
 .EXAMPLE
-Set-SharedPSProfile -CurrentUser -PathToSharedProfile "\\nas01\profile"
+Set-SharedPSProfile -CurrentUser -SharedProfilePath "\\nas01\profile"
 
 .NOTES
 General notes
@@ -84,7 +84,7 @@ function Set-SharedPSProfile {
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
 				else { Throw 'Must be running an elevated prompt.' } })]
 		[Parameter(ParameterSetName = 'Other')]
-		[string]$OtherUserName,
+		[string]$ProfilePath,
 
 		[ValidateScript( { $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
@@ -96,12 +96,12 @@ function Set-SharedPSProfile {
 			})]
 		[Parameter(ParameterSetName = 'Other')]
 		[Parameter(ParameterSetName = 'Current')]
-		[System.IO.DirectoryInfo]$PathToSharedProfile
+		[System.IO.DirectoryInfo]$SharedProfilePath
 	)
 
 	try {
 		if ($CurrentUser) {	$PersonalDocuments = [Environment]::GetFolderPath('MyDocuments') }
-		if ($OtherUser) { $PersonalDocuments = [IO.Path]::Combine("$($env:HOMEDRIVE)", 'Users', $($OtherUserName), 'Documents') }
+		if ($OtherUser) { $PersonalDocuments = [IO.Path]::Combine("$($ProfilePath)", 'Documents') }
 		if ($null -like $PersonalDocuments) { throw 'No User selected.' }
 
 		$WindowsPowerShell = [IO.Path]::Combine($PersonalDocuments, 'WindowsPowerShell')
@@ -117,12 +117,11 @@ function Set-SharedPSProfile {
 			Write-Warning 'Folder exists, renamig now...'
 			Rename-Item -Path $PowerShell -NewName "WindowsPowerShell-$(Get-Random)" -Force -Verbose
 		}
-	}
- catch { Write-Warning "Error: `nMessage:$($_.Exception.Message)" }
+	} catch { Write-Warning "Error: `nMessage:$($_.Exception.Message)" }
 
 	if (-not(Test-Path $WindowsPowerShell) -and -not(Test-Path $PowerShell)) {
-		$NewWindowsPowerShell = [IO.Path]::Combine($PathToSharedProfile, 'WindowsPowerShell')
-		$NewPowerShell = [IO.Path]::Combine($PathToSharedProfile, 'PowerShell')
+		$NewWindowsPowerShell = [IO.Path]::Combine($SharedProfilePath, 'WindowsPowerShell')
+		$NewPowerShell = [IO.Path]::Combine($SharedProfilePath, 'PowerShell')
 
 		if (-not(Test-Path $NewWindowsPowerShell)) { New-Item $NewWindowsPowerShell -ItemType Directory -Force }
 		if (-not(Test-Path $NewPowerShell)) { New-Item $NewPowerShell -ItemType Directory -Force }
@@ -132,8 +131,7 @@ function Set-SharedPSProfile {
 
 		Write-Host 'Move PS Profile to the shared location: ' -ForegroundColor Cyan -NoNewline
 		Write-Host Completed -ForegroundColor green
-	}
- else {
+	} else {
 		Write-Warning "$($PersonalPSFolder) Already Exists, remove old profile fist"
 	}
 }
@@ -142,6 +140,10 @@ function Set-SharedPSProfile {
 $scriptblock = {
 	param($commandName, $parameterName, $stringMatch)
     
-	Get-ChildItem -Path (Join-Path -Path $($env:HOMEDRIVE) -ChildPath '\Users') | Select-Object -ExpandProperty Name
+	(Get-CimInstance Win32_UserProfile | Select-Object localpath).LocalPath
 }
 Register-ArgumentCompleter -CommandName Set-SharedPSProfile -ParameterName OtherUserName -ScriptBlock $scriptBlock
+
+
+
+
