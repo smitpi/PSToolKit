@@ -13,7 +13,8 @@ Show stats about my published modules.
 ## SYNTAX
 
 ```
-Get-MyPSGalleryStat [-OpenProfilePage] [-ASObject] [<CommonParameters>]
+Get-MyPSGalleryStat [[-GitHubUserID] <String>] [[-GitHubToken] <String>] [-History] [-OpenProfilePage]
+ [-ASObject] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,6 +28,51 @@ Get-MyPSGalleryStats
 ```
 
 ## PARAMETERS
+
+### -GitHubUserID
+The GitHub User ID.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -GitHubToken
+GitHub Token with access to the Users' Gist.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -History
+Downloads and calculates the history.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -OpenProfilePage
 Open my profile page on psgallery

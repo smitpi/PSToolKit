@@ -12,8 +12,7 @@
 | External Help | Set-SharedPSProfile.md        | Set-SharedPSProfile.md - ### -ProfilePath - {{ Fill ProfilePath Description }}             |
 | External Help | Update-MyModulesFromGitHub.md | Update-MyModulesFromGitHub.md - ### -Modules - {{ Fill Modules Description }}              |
 | Not Copied    | Set-PSProjectFile             | =>                                                                                         |
-| Not Copied    | Get-BinRoot                   | <=                                                                                         |
 
 ---
 
-*Updated: Tuesday, 02 August 2022 22:06:48 UTC*
+*Updated: Wednesday, 03 August 2022 18:48:58 UTC*
