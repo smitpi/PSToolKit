@@ -1,23 +1,23 @@
-name: Test PowerShell on Windows
+name: Get my PSGallery Stats
 on:
   pull_request: # Only trigger the workflow if there is a pull request to the main branch
-    branches: [main]
+    branches: [master]
 
   workflow_dispatch: # Enables the possibility to trigger the workflow manually
 
 jobs:
   tests:
-    name: Get Gal stats
+    name: Get my PSGallery Stats
     runs-on: windows-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: Install PSScriptAnalyzer module
+      - name: Set Gallery as Trusted
         if: success()
         shell: pwsh
         run: |
           Set-PSRepository PSGallery -InstallationPolicy Trusted
-      - name: get details
+      - name: Connect process data
         if: success()
         shell: pwsh
         run: |
@@ -25,7 +25,6 @@ jobs:
           [System.Collections.ArrayList]$newObject = @()
           $TotalDownloads = 0
           foreach ($Mod in $ModLists) {
-              Write-Color '[Collecting]', ' data for ', $($mod) -Color yellow, Green, Cyan
               $ResultModule = Find-Module $mod -Repository PSGallery
               $TotalDownloads = $TotalDownloads + [int]$ResultModule.AdditionalMetadata.downloadCount
               [void]$newObject.Add([PSCustomObject]@{
@@ -42,6 +41,8 @@ jobs:
                   })
           }
           $headers = @{}
+          $GitHubUserID =  ${{ secrets.GITHUBUSER }}
+          $GitHubToken = ${{ secrets.GITHUBTOKEN }}
           $auth = '{0}:{1}' -f $GitHubUserID, $GitHubToken
           $bytes = [System.Text.Encoding]::ASCII.GetBytes($auth)
           $base64 = [System.Convert]::ToBase64String($bytes)
