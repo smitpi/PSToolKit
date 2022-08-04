@@ -14,7 +14,8 @@ Creates reports based on PSGallery.
 
 ```
 Find-OnlineModule [[-Keyword] <String>] [-NoAzureAWS] [-MaxCount <Int32>] [-Offline] [-UpdateCache]
- [-SortOrder <String>] [-Export <String>] [-ReportPath <DirectoryInfo>] [<CommonParameters>]
+ [-SortOrder <String>] [-Export <String>] [-ReportPath <DirectoryInfo>] [-DownloadJeffReport]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -148,6 +149,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: C:\Temp
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DownloadJeffReport
+{{ Fill DownloadJeffReport Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

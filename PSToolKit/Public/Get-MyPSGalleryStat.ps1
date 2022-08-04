@@ -138,15 +138,15 @@ Function Get-MyPSGalleryStat {
 
         $GalStats.Add(
             [PSCustomObject]@{
-                Date    = $newObject[0].DateCollected
-                Total   = ($newObject.TotalDownloads | Sort-Object -Descending)[0]
+                Date                   = $newObject[0].DateCollected
+                Total                  = ($newObject.TotalDownloads | Sort-Object -Descending)[0]
                 $newObject.Sum[0].name = $newObject.Sum[0].TotalDownload
                 $newObject.Sum[1].name = $newObject.Sum[1].TotalDownload
                 $newObject.Sum[2].name = $newObject.Sum[2].TotalDownload
                 $newObject.Sum[3].name = $newObject.Sum[3].TotalDownload
                 $newObject.Sum[4].name = $newObject.Sum[4].TotalDownload
                 $newObject.Sum[5].name = $newObject.Sum[5].TotalDownload
-                Details = [PSCustomObject]@{
+                Details                = [PSCustomObject]@{
                     Sum = $newObject.Sum
                     All = $newObject.All
                 }   
@@ -168,8 +168,8 @@ Function Get-MyPSGalleryStat {
 
 
         if ($History) {
-            $start = get-date
-            $end = ((get-date).AddDays(-$daysToReport)).ToUniversalTime()
+            $start = Get-Date
+            $end = ((Get-Date).AddDays(-$daysToReport)).ToUniversalTime()
 
             try {
                 Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Connecting to Gist"

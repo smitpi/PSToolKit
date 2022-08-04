@@ -648,6 +648,27 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#-githubuserid" class="md-nav__link">
+    -GitHubUserID
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-githubtoken" class="md-nav__link">
+    -GitHubToken
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-history" class="md-nav__link">
+    -History
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-openprofilepage" class="md-nav__link">
     -OpenProfilePage
   </a>
@@ -1345,6 +1366,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../Set-ObjectOwnerShip/" class="md-nav__link">
+        Set-ObjectOwnerShip
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Set-PSProjectFile/" class="md-nav__link">
         Set-PSProjectFile
       </a>
@@ -1803,6 +1839,27 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#-githubuserid" class="md-nav__link">
+    -GitHubUserID
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-githubtoken" class="md-nav__link">
+    -GitHubToken
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-history" class="md-nav__link">
+    -History
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-openprofilepage" class="md-nav__link">
     -OpenProfilePage
   </a>
@@ -1891,7 +1948,8 @@
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Show stats about my published modules.</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Get-MyPSGalleryStat [-OpenProfilePage] [-ASObject] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Get-MyPSGalleryStat [[-GitHubUserID] &lt;String&gt;] [[-GitHubToken] &lt;String&gt;] [-History] [-OpenProfilePage]
+ [-ASObject] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Show stats about my published modules.</p>
@@ -1900,6 +1958,42 @@
 <div class="highlight"><pre><span></span><code>Get-MyPSGalleryStats
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
+<h3 id="-githubuserid">-GitHubUserID</h3>
+<p>The GitHub User ID.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-githubtoken">-GitHubToken</h3>
+<p>GitHub Token with access to the Users' Gist.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-history">-History</h3>
+<p>Downloads and calculates the history.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
 <h3 id="-openprofilepage">-OpenProfilePage</h3>
 <p>Open my profile page on psgallery</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
