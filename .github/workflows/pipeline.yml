@@ -1,0 +1,79 @@
+name: Test PowerShell on Windows
+on:
+  pull_request: # Only trigger the workflow if there is a pull request to the main branch
+    branches: [main]
+
+  workflow_dispatch: # Enables the possibility to trigger the workflow manually
+
+jobs:
+  tests:
+    name: Get Gal stats
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Install PSScriptAnalyzer module
+        if: success()
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+      - name: get details
+        if: success()
+        shell: pwsh
+        run: |
+          $ModLists = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule')
+          [System.Collections.ArrayList]$newObject = @()
+          $TotalDownloads = 0
+          foreach ($Mod in $ModLists) {
+              Write-Color '[Collecting]', ' data for ', $($mod) -Color yellow, Green, Cyan
+              $ResultModule = Find-Module $mod -Repository PSGallery
+              $TotalDownloads = $TotalDownloads + [int]$ResultModule.AdditionalMetadata.downloadCount
+              [void]$newObject.Add([PSCustomObject]@{
+                      Sum            = [PSCustomObject]@{
+                          Name            = $ResultModule.Name
+                          Version         = $ResultModule.Version
+                          PublishedDate   = [datetime]$ResultModule.AdditionalMetadata.published
+                          TotalDownload   = [Int]$ResultModule.AdditionalMetadata.downloadCount
+                          VersionDownload = [Int]$ResultModule.AdditionalMetadata.versionDownloadCount
+                      }
+                      All            = $ResultModule
+                      TotalDownloads = $TotalDownloads
+                      DateCollected  = [datetime](Get-Date -Format U)
+                  })
+          }
+          $headers = @{}
+          $auth = '{0}:{1}' -f $GitHubUserID, $GitHubToken
+          $bytes = [System.Text.Encoding]::ASCII.GetBytes($auth)
+          $base64 = [System.Convert]::ToBase64String($bytes)
+          $headers.Authorization = 'Basic {0}' -f $base64
+
+          $url = 'https://api.github.com/users/{0}/gists' -f $GitHubUserID
+          $AllGist = Invoke-RestMethod -Uri $url -Method Get -Headers $headers -ErrorAction Stop
+          $PRGist = $AllGist | Select-Object | Where-Object { $_.description -like 'smitpi-gallery-stats' }
+          $Content = (Invoke-WebRequest -Uri ($PRGist.files.'PSGalleryStats.json').raw_url -Headers $headers).content | ConvertFrom-Json -ErrorAction Stop
+          [System.Collections.generic.List[PSObject]]$GalStats = @()
+          $Content | ForEach-Object {$GalStats.Add($_)}
+          $GalStats.Add(
+          [PSCustomObject]@{
+              Date    = $newObject[0].DateCollected
+              Total   = ($newObject.TotalDownloads | Sort-Object -Descending)[0]
+              $newObject.Sum[0].name = $newObject.Sum[0].TotalDownload
+              $newObject.Sum[1].name = $newObject.Sum[1].TotalDownload
+              $newObject.Sum[2].name = $newObject.Sum[2].TotalDownload
+              $newObject.Sum[3].name = $newObject.Sum[3].TotalDownload
+              $newObject.Sum[4].name = $newObject.Sum[4].TotalDownload
+              $newObject.Sum[5].name = $newObject.Sum[5].TotalDownload
+              Details = [PSCustomObject]@{
+                  Sum = $newObject.Sum
+                  All = $newObject.All
+              }   
+            }
+          )
+          $Body = @{}
+          $files = @{}
+          $Files['PSGalleryStats.json'] = @{content = ( $GalStats | ConvertTo-Json -Depth 10 | Out-String ) }
+          $Body.files = $Files
+          $Uri = 'https://api.github.com/gists/{0}' -f $PRGist.id
+          $json = ConvertTo-Json -InputObject $Body
+          $json = [System.Text.Encoding]::UTF8.GetBytes($json)
+          $null = Invoke-WebRequest -Headers $headers -Uri $Uri -Method Patch -Body $json -ErrorAction Stop
