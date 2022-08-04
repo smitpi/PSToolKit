@@ -76,7 +76,13 @@ Function Move-ModulesToAllUser {
 
 	foreach ($ModPath in @($PersonalPowerShell, $PersonalWindowsPowerShell)) {
 		if (Test-Path $ModPath) {
-			$modules = Get-ChildItem $ModPath -Directory
+			Get-ChildItem $ModPath -Directory | ForEach-Object {
+				[]
+
+			}
+
+
+			$ModuleVer
 			foreach ($mod in $modules) {
 				Write-PSToolKitMessage -Action Copying -Severity Information -Object $mod.Name -Message "from $($ModPath)"
 				Copy-Item -Path "$($mod.FullName)" -Destination C:\Temp\test -Force -Recurse
