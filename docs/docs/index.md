@@ -66,6 +66,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Install-PowerShell7x`](https://smitpi.github.io/PSToolKit/Install-PowerShell7x) -- Install ps7
 - [`Install-RSAT`](https://smitpi.github.io/PSToolKit/Install-RSAT) -- Install Remote Admin Tools
 - [`Install-VMWareTool`](https://smitpi.github.io/PSToolKit/Install-VMWareTool) -- Install vmware tools from chocolatety
+- [`Move-ModulesToAllUser`](https://smitpi.github.io/PSToolKit/Move-ModulesToAllUser) -- Move modules from current user to all users
 - [`New-CitrixSiteConfigFile`](https://smitpi.github.io/PSToolKit/New-CitrixSiteConfigFile) -- A config file with Citrix server details and URLs. To be used in scripts.
 - [`New-ElevatedShortcut`](https://smitpi.github.io/PSToolKit/New-ElevatedShortcut) -- Creates a shortcut to a script or exe that runs as admin, without UNC
 - [`New-GodModeFolder`](https://smitpi.github.io/PSToolKit/New-GodModeFolder) -- Creates a God Mode Folder
@@ -74,7 +75,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`New-PSModule`](https://smitpi.github.io/PSToolKit/New-PSModule) -- Creates a new PowerShell module.
 - [`New-PSProfile`](https://smitpi.github.io/PSToolKit/New-PSProfile) -- Creates new profile files in the documents folder
 - [`New-PSScript`](https://smitpi.github.io/PSToolKit/New-PSScript) -- Creates a new PowerShell script. With PowerShell Script Info
-- [`New-RemoteDesktopFile`](https://smitpi.github.io/PSToolKit/New-RemoteDesktopFile) -- Creates and saves a .rdp file
 - [`New-SuggestedInfraName`](https://smitpi.github.io/PSToolKit/New-SuggestedInfraName) -- Generates a list of usernames and server names, that can be used as test / demo data.
 - [`Publish-ModuleToLocalRepo`](https://smitpi.github.io/PSToolKit/Publish-ModuleToLocalRepo) -- Checks for required modules and upload all to your local repo.
 - [`Remove-CIMUserProfile`](https://smitpi.github.io/PSToolKit/Remove-CIMUserProfile) -- Uses CimInstance to remove a user profile

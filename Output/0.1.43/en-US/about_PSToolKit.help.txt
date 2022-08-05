@@ -50,6 +50,7 @@ Functions in this module:
 	 Install-PowerShell7x -- Install ps7
 	 Install-RSAT -- Install Remote Admin Tools
 	 Install-VMWareTool -- Install vmware tools from chocolatety
+	 Move-ModulesToAllUser -- Move modules from current user to all users
 	 New-CitrixSiteConfigFile -- A config file with Citrix server details and URLs. To be used in scripts.
 	 New-ElevatedShortcut -- Creates a shortcut to a script or exe that runs as admin, without UNC
 	 New-GodModeFolder -- Creates a God Mode Folder
@@ -58,7 +59,6 @@ Functions in this module:
 	 New-PSModule -- Creates a new PowerShell module.
 	 New-PSProfile -- Creates new profile files in the documents folder
 	 New-PSScript -- Creates a new PowerShell script. With PowerShell Script Info
-	 New-RemoteDesktopFile -- Creates and saves a .rdp file
 	 New-SuggestedInfraName -- Generates a list of usernames and server names, that can be used as test / demo data.
 	 Publish-ModuleToLocalRepo -- Checks for required modules and upload all to your local repo.
 	 Remove-CIMUserProfile -- Uses CimInstance to remove a user profile

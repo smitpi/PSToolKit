@@ -77,7 +77,7 @@ Function Move-ModulesToAllUser {
 	foreach ($ModPath in @($PersonalPowerShell, $PersonalWindowsPowerShell)) {
 		if (Test-Path $ModPath) {
 			Get-ChildItem $ModPath -Directory | ForEach-Object {
-				[]
+
 
 			}
 

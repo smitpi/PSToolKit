@@ -13,8 +13,8 @@ Show stats about my published modules.
 ## SYNTAX
 
 ```
-Get-MyPSGalleryStat [[-GitHubUserID] <String>] [[-GitHubToken] <String>] [-History] [-OpenProfilePage]
- [-ASObject] [<CommonParameters>]
+Get-MyPSGalleryStat [[-GitHubUserID] <String>] [[-GitHubToken] <String>] [-History] [[-daysToReport] <Int32>]
+ [-OpenProfilePage] [-ASObject] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -70,6 +70,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -daysToReport
+Report on this amount of days.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: 7
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

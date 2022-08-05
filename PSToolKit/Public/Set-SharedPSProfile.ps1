@@ -138,8 +138,8 @@ function Set-SharedPSProfile {
 
 
 $scriptblock = {
-	param($commandName, $parameterName, $stringMatch)
-    
+	#param($commandName, $parameterName, $stringMatch)
+
 	(Get-CimInstance Win32_UserProfile | Select-Object localpath).LocalPath
 }
 Register-ArgumentCompleter -CommandName Set-SharedPSProfile -ParameterName OtherUserName -ScriptBlock $scriptBlock

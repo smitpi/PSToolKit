@@ -13,8 +13,8 @@ Writes the given into to screen
 ## SYNTAX
 
 ```
-Write-PSToolKitMessage [-Action] <String> [-Severity] <String> [-Object] <String[]> [-Message] <String[]>
- [<CommonParameters>]
+Write-PSToolKitMessage [-Action] <String> [[-Severity] <String>] [-Object] <String[]> [-Message] <String[]>
+ [[-Object2] <String[]>] [[-Message2] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -52,9 +52,9 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 2
-Default value: None
+Default value: Information
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -84,6 +84,36 @@ Aliases:
 
 Required: True
 Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Object2
+The second object to be reported on.
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Message2
+The second message Details.
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

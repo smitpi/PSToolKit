@@ -2777,6 +2777,18 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>daysToReport</maml:name>
+          <maml:description>
+            <maml:para>Report on this amount of days.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>7</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>History</maml:name>
           <maml:description>
@@ -2848,6 +2860,18 @@
           <maml:uri />
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>daysToReport</maml:name>
+        <maml:description>
+          <maml:para>Report on this amount of days.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>7</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>OpenProfilePage</maml:name>
@@ -4612,6 +4636,51 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Move-ModulesToAllUser</command:name>
+      <command:verb>Move</command:verb>
+      <command:noun>ModulesToAllUser</command:noun>
+      <maml:description>
+        <maml:para>Move modules from current user to all users</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Move modules from current user to all users</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Move-ModulesToAllUser</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Move-ModulesToAllUser -Export HTML -ReportPath C:\temp</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>New-CitrixSiteConfigFile</command:name>
       <command:verb>New</command:verb>
       <command:noun>CitrixSiteConfigFile</command:noun>
@@ -5384,178 +5453,6 @@
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>New-PSScript -Path .\PSToolKit\Private\ -Verb get -Noun blah -Description 'blah' -tags PS</dev:code>
-        <dev:remarks>
-          <maml:para></maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks />
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>New-RemoteDesktopFile</command:name>
-      <command:verb>New</command:verb>
-      <command:noun>RemoteDesktopFile</command:noun>
-      <maml:description>
-        <maml:para>Creates and saves a .rdp file</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>Creates and saves a .rdp file</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>New-RemoteDesktopFile</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
-          <maml:name>ComputerName</maml:name>
-          <maml:description>
-            <maml:para>Name or ip of the server to connect to.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-          <dev:type>
-            <maml:name>String[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>Path</maml:name>
-          <maml:description>
-            <maml:para>Where the .rdp file will be saved.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
-          <dev:type>
-            <maml:name>DirectoryInfo</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>C:\Temp</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-          <maml:name>UserName</maml:name>
-          <maml:description>
-            <maml:para>ID to be used to connect.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>DomainName</maml:name>
-          <maml:description>
-            <maml:para>Domain for the userid (Use localhost if the device is not on a domain).</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Force</maml:name>
-          <maml:description>
-            <maml:para>Override an existing .rdp file.</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
-        <maml:name>ComputerName</maml:name>
-        <maml:description>
-          <maml:para>Name or ip of the server to connect to.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-        <dev:type>
-          <maml:name>String[]</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>Path</maml:name>
-        <maml:description>
-          <maml:para>Where the .rdp file will be saved.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
-        <dev:type>
-          <maml:name>DirectoryInfo</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>C:\Temp</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-        <maml:name>UserName</maml:name>
-        <maml:description>
-          <maml:para>ID to be used to connect.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>DomainName</maml:name>
-        <maml:description>
-          <maml:para>Domain for the userid (Use localhost if the device is not on a domain).</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Force</maml:name>
-        <maml:description>
-          <maml:para>Override an existing .rdp file.</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes />
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object[]</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>New-RemoteDesktopFile</dev:code>
-        <dev:remarks>
-          <maml:para></maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>New-RemoteDesktopFile -ComputerName $rr -Path C:\temp -UserName $user -DomainName lab -Force</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -6825,7 +6722,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="Name">
           <maml:name>FolderPath</maml:name>
           <maml:description>
-            <maml:para>{{ Fill FolderPath Description }}</maml:para>
+            <maml:para>The folder to replace the permissions</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">DirectoryInfo[]</command:parameterValue>
           <dev:type>
@@ -6837,7 +6734,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>UserName</maml:name>
           <maml:description>
-            <maml:para>{{ Fill UserName Description }}</maml:para>
+            <maml:para>This user will be granted full control.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -6852,7 +6749,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="Name">
         <maml:name>FolderPath</maml:name>
         <maml:description>
-          <maml:para>{{ Fill FolderPath Description }}</maml:para>
+          <maml:para>The folder to replace the permissions</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">DirectoryInfo[]</command:parameterValue>
         <dev:type>
@@ -6864,7 +6761,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>UserName</maml:name>
         <maml:description>
-          <maml:para>{{ Fill UserName Description }}</maml:para>
+          <maml:para>This user will be granted full control.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -6892,10 +6789,10 @@
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Set-ObjectOwnerShip -FolderPath c:\temp -UserName lab\james</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -10529,7 +10426,7 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>Severity</maml:name>
           <maml:description>
             <maml:para>Severity of the entry.</maml:para>
@@ -10539,7 +10436,7 @@
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>Information</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="3" aliases="none">
           <maml:name>Object</maml:name>
@@ -10565,6 +10462,30 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+          <maml:name>Object2</maml:name>
+          <maml:description>
+            <maml:para>The second object to be reported on.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+          <maml:name>Message2</maml:name>
+          <maml:description>
+            <maml:para>The second message Details.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -10580,7 +10501,7 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>Severity</maml:name>
         <maml:description>
           <maml:para>Severity of the entry.</maml:para>
@@ -10590,7 +10511,7 @@
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>Information</dev:defaultValue>
       </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="3" aliases="none">
         <maml:name>Object</maml:name>
@@ -10608,6 +10529,30 @@
         <maml:name>Message</maml:name>
         <maml:description>
           <maml:para>The Details.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <maml:name>Object2</maml:name>
+        <maml:description>
+          <maml:para>The second object to be reported on.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+        <maml:name>Message2</maml:name>
+        <maml:description>
+          <maml:para>The second message Details.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>

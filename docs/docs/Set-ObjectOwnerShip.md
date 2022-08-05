@@ -21,17 +21,15 @@ Reset the ownership of a folder, and add the specified user with full control.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Set-ObjectOwnerShip -FolderPath c:\temp -UserName lab\james
+```
 
 ## PARAMETERS
 
 ### -FolderPath
-{{ Fill FolderPath Description }}
+The folder to replace the permissions
 
 ```yaml
 Type: DirectoryInfo[]
@@ -46,7 +44,7 @@ Accept wildcard characters: False
 ```
 
 ### -UserName
-{{ Fill UserName Description }}
+This user will be granted full control.
 
 ```yaml
 Type: String[]

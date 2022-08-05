@@ -58,6 +58,12 @@ The object to be reported on.
 .PARAMETER Message
 The Details.
 
+.PARAMETER Object2
+The second object to be reported on.
+
+.PARAMETER Message2
+The second message Details.
+
 .EXAMPLE
 dir | Write-PSToolKitMessage -Action Exists -Severity Information -Message 'its already there'
 
@@ -65,25 +71,56 @@ dir | Write-PSToolKitMessage -Action Exists -Severity Information -Message 'its 
 Function Write-PSToolKitMessage {
 	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Write-PSToolKitMessage')]
 	[OutputType([System.Object[]])]
+	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '')]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
-		[ValidateSet('Starting', 'Getting', 'Copying', 'Moving', 'Complete', 'Deleting', 'Changing', 'Failed', 'Exists')]
 		[string]$Action,
-		[Parameter(Mandatory = $true, Position = 1)]
+		[Parameter(Position = 1)]
 		[ValidateSet('Information', 'Warning', 'Error')]
-		[string]$Severity,
+		[string]$Severity = 'Information',
 		[Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromRemainingArguments = $false, Position = 2)]
 		[string[]]$Object,
 		[Parameter(Mandatory = $true, Position = 3)]
-		[string[]]$Message
+		[string[]]$Message,
+		[Parameter(Position = 4)]
+		[string[]]$Object2,
+		[Parameter(Position = 5)]
+		[string[]]$Message2
 	)
 
 	process {
-		if ($Severity -like 'Warning') {Write-Color "[$($Severity)]", "[$($Action)]", " $Object ", "$Message" -Color Yellow, Yellow, Cyan, DarkGray -ShowTime }
-		elseif ($Severity -like 'Error') {Write-Color "[$($Severity)]", "[$($Action)]", " $Object ", "$Message" -Color Red, Yellow, Cyan, DarkGray -ShowTime }
-		elseif ($Action -like 'Exists') {Write-Color "[$($Severity)]", "[$($Action)]", " $Object ", "$Message" -Color DarkCyan, Yellow, Cyan, DarkRed -ShowTime}
-		elseif ($Action -like 'Failed') {Write-Color "[$($Severity)]", "[$($Action)]", " $Object ", "$Message" -Color Red, Yellow, Cyan, DarkRed -ShowTime}
-		else {Write-Color "[$($Severity)]", "[$($Action)]", " $Object ", "$Message" -Color DarkCyan, Yellow, Cyan, Green -ShowTime }
+		if ($Severity -like 'Warning') {
+			Write-Host 'WARNING - ' -ForegroundColor Yellow -NoNewline
+			Write-Host "[$(Get-Date -Format HH:mm:ss)]" -ForegroundColor Gray -NoNewline
+			Write-Host "[$($Action)] " -ForegroundColor Yellow -NoNewline
+			Write-Host "$($Object) " -ForegroundColor Cyan -NoNewline
+			Write-Host "$($Message) " -ForegroundColor DarkGray -NoNewline
+			Write-Host "$($Object2) " -ForegroundColor Cyan -NoNewline
+			Write-Host "$($Message2) " -ForegroundColor DarkGray
+		} elseif ($Severity -like 'Error') {
+			Write-Host 'ERROR - ' -ForegroundColor Red -NoNewline
+			Write-Host "[$(Get-Date -Format HH:mm:ss)]" -ForegroundColor Gray -NoNewline
+			Write-Host "[$($Action)] " -ForegroundColor Yellow -NoNewline
+			Write-Host "$($Object) " -ForegroundColor Cyan -NoNewline
+			Write-Host "$($Message) " -ForegroundColor DarkGray -NoNewline
+			Write-Host "$($Object2) " -ForegroundColor Cyan -NoNewline
+			Write-Host "$($Message2) " -ForegroundColor DarkGray
+		} else {
+			Write-Host "[$(Get-Date -Format HH:mm:ss)]" -ForegroundColor Gray -NoNewline
+			Write-Host "[$($Action)] " -ForegroundColor Yellow -NoNewline
+			Write-Host "$($Object) " -ForegroundColor Cyan -NoNewline
+			Write-Host "$($Message) " -ForegroundColor DarkGray -NoNewline
+			Write-Host "$($Object2) " -ForegroundColor Cyan -NoNewline
+			Write-Host "$($Message2) " -ForegroundColor DarkGray
 
+		}
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
 	}
 } #end Function
+
+
+$scriptblock = {
+	@('Starting', 'Getting', 'Copying', 'Moving', 'Complete', 'Deleting', 'Changing', 'Failed', 'Exists')
+}
+Register-ArgumentCompleter -CommandName Write-PSToolKitMessage -ParameterName Action -ScriptBlock $scriptBlock
+
