@@ -351,6 +351,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://smitpi.github.io/PSToolKit/Set-VSCodeExplorerSortOrder/</loc>
+         <lastmod>2022-08-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://smitpi.github.io/PSToolKit/Set-WindowsAutoLogin/</loc>
          <lastmod>2022-08-05</lastmod>
          <changefreq>daily</changefreq>
@@ -387,6 +392,11 @@
     </url>
     <url>
          <loc>https://smitpi.github.io/PSToolKit/Start-PSToolkitSystemInitialize/</loc>
+         <lastmod>2022-08-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://smitpi.github.io/PSToolKit/Start-PowerShellAsAdmin/</loc>
          <lastmod>2022-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>

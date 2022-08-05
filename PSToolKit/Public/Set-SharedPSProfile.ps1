@@ -53,8 +53,8 @@ Will change the currently logged on user's folders.
 .PARAMETER OtherUser
 Will change another user's folders.
 
-.PARAMETER OtherUserName
-The username of the other user.
+.PARAMETER ProfilePath
+The Other Users' Profile Path.
 
 .PARAMETER SharedProfilePath
 Path to new folder. Folders PowerShell and WindowsPowerShell will be created if it doesn't exists.

@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -51,8 +51,11 @@ Updates my modules
 .DESCRIPTION
 Updates my modules
 
+.PARAMETER Modules
+Which modules to update.
+
 .PARAMETER AllUsers
-Will update to the AllUsers Scope
+Will update to the AllUsers Scope.
 
 .PARAMETER ForceUpdate
 ForceUpdate the download and install.
@@ -63,7 +66,7 @@ Update-MyModulesFromGitHub -AllUsers
 
 #>
 Function Update-MyModulesFromGitHub {
-	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/$($ModuleName)/Update-MyModulesFromGitHub')]
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/$($ModuleName)/Update-MyModulesFromGitHub')]
 	[OutputType([System.Object[]])]
 	PARAM(
         [ValidateSet('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit')]

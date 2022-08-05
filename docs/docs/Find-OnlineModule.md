@@ -154,7 +154,7 @@ Accept wildcard characters: False
 ```
 
 ### -DownloadJeffReport
-{{ Fill DownloadJeffReport Description }}
+Downloads Jeff Hicks reports from GitHub.
 
 ```yaml
 Type: SwitchParameter

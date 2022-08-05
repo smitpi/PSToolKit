@@ -66,7 +66,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProfilePath
-{{ Fill ProfilePath Description }}
+The Other Users' Profile Path.
 
 ```yaml
 Type: String

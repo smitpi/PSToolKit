@@ -69,6 +69,9 @@ Export the result to a file. (Excel or markdown)
 .PARAMETER ReportPath
 Where to save the report.
 
+.PARAMETER DownloadJeffReport
+Downloads Jeff Hicks reports from GitHub.
+
 .EXAMPLE
 Find-OnlineModule -Keyword Citrix -Offline -SortOrder Downloads -Export Excel -ReportPath C:\temp
 

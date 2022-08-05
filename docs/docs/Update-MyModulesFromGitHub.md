@@ -29,7 +29,7 @@ Update-MyModulesFromGitHub -AllUsers
 ## PARAMETERS
 
 ### -Modules
-{{ Fill Modules Description }}
+Which modules to update.
 
 ```yaml
 Type: String[]
@@ -44,7 +44,7 @@ Accept wildcard characters: False
 ```
 
 ### -AllUsers
-Will update to the AllUsers Scope
+Will update to the AllUsers Scope.
 
 ```yaml
 Type: SwitchParameter

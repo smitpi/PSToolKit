@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -32,16 +32,14 @@ Created [03/08/2022_21:52] Initial Script Creating
 
 #>
 
-#Requires -Module ImportExcel
-#Requires -Module PSWriteHTML
-#Requires -Module PSWriteColor
 
-<# 
 
-.DESCRIPTION 
- Install apps from a json file. 
+<#
 
-#> 
+.DESCRIPTION
+ Install apps from a json file.
+
+#>
 
 
 <#
@@ -61,6 +59,7 @@ Where to save the report.
 Install-WingetApps -Export HTML -ReportPath C:\temp
 
 #>
+
 Function Install-WingetApp {
 		[Cmdletbinding(DefaultParameterSetName='Set1', HelpURI = "https://smitpi.github.io/PSToolKit/Install-WingetApps")]
 	    [OutputType([System.Object[]])]
