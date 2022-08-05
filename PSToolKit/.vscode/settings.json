@@ -12,4 +12,5 @@
 			"parser": "markdown"
 		}
 	}
+		"powershell.scriptAnalysis.settingsPath": "..\..\..\ScriptAnalyzerSettings.psd1"
 }

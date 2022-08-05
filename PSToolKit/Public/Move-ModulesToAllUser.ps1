@@ -51,52 +51,43 @@ Move modules from current user to all users
 .DESCRIPTION
 Move modules from current user to all users
 
-.PARAMETER Export
-Export the result to a report file. (Excel or html). Or select Host to display the object on screen.
-
-.PARAMETER ReportPath
-Where to save the report.
+.PARAMETER AllUsers
+Check if the user is an admin.
 
 .EXAMPLE
-Move-ModulesToAllUser -Export HTML -ReportPath C:\temp
+Move-ModulesToAllUser
 
+.NOTES
+General notes
 #>
 Function Move-ModulesToAllUser {
-	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Move-ModulesToAllUser')]
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Move-ModulesToAllUser')]
 	[OutputType([System.Object[]])]
 	PARAM(
 	)
 
-	$ModulePaths = $env:PSModulePath.split(';')
-
-	$ModulePaths | Where-Object {$_ -notlike '*program*' -and $_ -notlike '*system*'}
+	$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+	if (-not($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))) {Write-Error 'Must be running an elevated prompt run this function'; exit}
 
 	$PersonalPowerShell = [IO.Path]::Combine("$([Environment]::GetFolderPath('MyDocuments'))", 'PowerShell', 'Modules')
 	$PersonalWindowsPowerShell = [IO.Path]::Combine("$([Environment]::GetFolderPath('MyDocuments'))", 'WindowsPowerShell', 'Modules')
 
-	foreach ($ModPath in @($PersonalPowerShell, $PersonalWindowsPowerShell)) {
-		if (Test-Path $ModPath) {
-			Get-ChildItem $ModPath -Directory | ForEach-Object {
-
-
-			}
-
-
-			$ModuleVer
-			foreach ($mod in $modules) {
-				Write-PSToolKitMessage -Action Copying -Severity Information -Object $mod.Name -Message "from $($ModPath)"
-				Copy-Item -Path "$($mod.FullName)" -Destination C:\Temp\test -Force -Recurse
-				Write-PSToolKitMessage -Action Deleting -Severity Information -Object $mod.Name -Message "from $($ModPath)"
-				try {
-					Get-ChildItem -Path "$($mod.FullName)\*" | Remove-Item -Recurse -Force -Confirm:$false -ErrorAction Stop
-					Remove-Item $mod.FullName
-				} catch {
-					Start-Sleep 2
-					Get-ChildItem -Path "$($mod.FullName)\*" | Remove-Item -Recurse -Force -Confirm:$false
-					Remove-Item $mod.FullName
-				}
-			}
+	if (Test-Path $PersonalWindowsPowerShell) {
+		$modules = Get-ChildItem $PersonalWindowsPowerShell -Directory
+		foreach ($mod in $modules) {
+			Write-PSToolKitMessage -Action Moving -Object $mod.name -Message 'From WindowsPowerShell' -Object2 'To AllUsers'
+			try {
+				Move-Item -Path $mod.FullName -Destination 'C:\Program Files\WindowsPowerShell\Modules' -ErrorAction Stop
+			} catch {Write-Error "Error: `n`tMessage:$($_.Exception.Message)"}
 		}
 	}
-
+	if (Test-Path $PersonalPowerShell) {
+		$modules = Get-ChildItem $PersonalPowerShell -Directory
+		foreach ($mod in $modules) {
+			Write-PSToolKitMessage -Action Moving -Object $mod.name -Message 'From PowerShell' -Object2 'To AllUsers'
+			try {
+				Move-Item -Path $mod.FullName -Destination 'C:\Program Files\PowerShell\Modules' -ErrorAction Stop
+			} catch {Write-Error "Error: `n`tMessage:$($_.Exception.Message)"}
+		}
+	}
 } #end Function

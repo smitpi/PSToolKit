@@ -23,7 +23,7 @@ Move modules from current user to all users
 
 ### EXAMPLE 1
 ```
-Move-ModulesToAllUser -Export HTML -ReportPath C:\temp
+Move-ModulesToAllUser
 ```
 
 ## PARAMETERS
@@ -37,5 +37,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Object[]
 ## NOTES
+General notes
 
 ## RELATED LINKS

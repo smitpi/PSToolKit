@@ -4665,13 +4665,13 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>General notes</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Move-ModulesToAllUser -Export HTML -ReportPath C:\temp</dev:code>
+        <dev:code>Move-ModulesToAllUser</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
