@@ -880,6 +880,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../Move-ModulesToAllUser/" class="md-nav__link">
+        Move-ModulesToAllUser
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../New-CitrixSiteConfigFile/" class="md-nav__link">
         New-CitrixSiteConfigFile
       </a>
@@ -987,21 +1002,6 @@
     <li class="md-nav__item">
       <a href="../New-PSScript/" class="md-nav__link">
         New-PSScript
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../New-RemoteDesktopFile/" class="md-nav__link">
-        New-RemoteDesktopFile
       </a>
     </li>
   
@@ -1696,6 +1696,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-object2" class="md-nav__link">
+    -Object2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-message2" class="md-nav__link">
+    -Message2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#commonparameters" class="md-nav__link">
     CommonParameters
   </a>
@@ -1860,6 +1874,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-object2" class="md-nav__link">
+    -Object2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-message2" class="md-nav__link">
+    -Message2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#commonparameters" class="md-nav__link">
     CommonParameters
   </a>
@@ -1934,8 +1962,8 @@
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Writes the given into to screen</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Write-PSToolKitMessage [-Action] &lt;String&gt; [-Severity] &lt;String&gt; [-Object] &lt;String[]&gt; [-Message] &lt;String[]&gt;
- [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Write-PSToolKitMessage [-Action] &lt;String&gt; [[-Severity] &lt;String&gt;] [-Object] &lt;String[]&gt; [-Message] &lt;String[]&gt;
+ [[-Object2] &lt;String[]&gt;] [[-Message2] &lt;String[]&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Writes the given into to screen</p>
@@ -1962,9 +1990,9 @@
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Information</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
@@ -1988,6 +2016,30 @@
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-object2">-Object2</h3>
+<p>The second object to be reported on.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-message2">-Message2</h3>
+<p>The second message Details.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span><span class="w"></span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
