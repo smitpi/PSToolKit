@@ -1,13 +1,13 @@
-#region Public Functions
+﻿#region Public Functions
 #region Add-ChocolateyPrivateRepo.ps1
 ######## Function 1 of 93 ##################
 # Function:         Add-ChocolateyPrivateRepo
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Add a private repository to Chocolatey.
 #############################################
  
@@ -104,11 +104,11 @@ Export-ModuleMember -Function Add-ChocolateyPrivateRepo
 ######## Function 2 of 93 ##################
 # Function:         Backup-ElevatedShortcut
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Exports the RunAss shortcuts, to a zip file
 #############################################
  
@@ -152,11 +152,11 @@ Export-ModuleMember -Function Backup-ElevatedShortcut
 ######## Function 3 of 93 ##################
 # Function:         Backup-PowerShellProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Creates a zip file from the ps profile directories
 #############################################
  
@@ -210,11 +210,11 @@ Export-ModuleMember -Function Backup-PowerShellProfile
 ######## Function 4 of 93 ##################
 # Function:         Compare-ADMembership
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/27 08:34:05
-# ModifiedOn:       2022/05/29 11:35:51
+# CreatedOn:        2022/05/27 09:34:05
+# ModifiedOn:       2022/05/29 12:35:51
 # Synopsis:         Compare two users AD group memberships
 #############################################
  
@@ -462,11 +462,11 @@ Export-ModuleMember -Function Compare-ADMembership
 ######## Function 5 of 93 ##################
 # Function:         Connect-VMWareCluster
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Connect to a vSphere cluster to perform other commands or scripts
 #############################################
  
@@ -517,11 +517,11 @@ Export-ModuleMember -Function Connect-VMWareCluster
 ######## Function 6 of 93 ##################
 # Function:         Edit-ChocolateyAppsList
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/06/11 02:59:04
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/06/11 03:59:04
 # Synopsis:         Add or remove apps from the json file used in Install-ChocolateyApps
 #############################################
  
@@ -656,11 +656,11 @@ Export-ModuleMember -Function Edit-ChocolateyAppsList
 ######## Function 7 of 93 ##################
 # Function:         Edit-HostsFile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Edit the hosts file
 #############################################
  
@@ -791,11 +791,11 @@ Export-ModuleMember -Function Edit-HostsFile
 ######## Function 8 of 93 ##################
 # Function:         Edit-SSHConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Creates and modifies the ssh config file in their profile.
 #############################################
  
@@ -971,11 +971,11 @@ Export-ModuleMember -Function Edit-SSHConfigFile
 ######## Function 9 of 93 ##################
 # Function:         Enable-RemoteHostPSRemoting
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         enable ps remote remotely
 #############################################
  
@@ -1033,11 +1033,11 @@ Export-ModuleMember -Function Enable-RemoteHostPSRemoting
 ######## Function 10 of 93 ##################
 # Function:         Export-ESXTemplate
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Export all VM Templates from vSphere to local disk.
 #############################################
  
@@ -1085,11 +1085,11 @@ Export-ModuleMember -Function Export-ESXTemplate
 ######## Function 11 of 93 ##################
 # Function:         Find-ChocolateyApp
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Search the online repo for software
 #############################################
  
@@ -1170,11 +1170,11 @@ Export-ModuleMember -Function Find-ChocolateyApp
 ######## Function 12 of 93 ##################
 # Function:         Find-OnlineModule
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/08/06 00:28:36
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/08/06 01:28:36
 # Synopsis:         Creates reports based on PSGallery.
 #############################################
  
@@ -1357,11 +1357,11 @@ Export-ModuleMember -Function Find-OnlineModule
 ######## Function 13 of 93 ##################
 # Function:         Find-OnlineScript
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/29 08:48:45
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/29 09:48:45
 # Synopsis:         Creates reports based on PSGallery. Filtered by scripts
 #############################################
  
@@ -1544,11 +1544,11 @@ Export-ModuleMember -Function Find-OnlineScript
 ######## Function 14 of 93 ##################
 # Function:         Format-AllObjectsInAListView
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/07/27 21:28:55
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/07/27 22:28:55
 # Synopsis:         Cast an array or PSObject and display it in list view
 #############################################
  
@@ -1586,11 +1586,11 @@ Export-ModuleMember -Function Format-AllObjectsInAListView
 ######## Function 15 of 93 ##################
 # Function:         Get-CitrixClientVersion
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Report on the CItrix workspace versions the users are using.
 #############################################
  
@@ -1685,11 +1685,11 @@ Export-ModuleMember -Function Get-CitrixClientVersion
 ######## Function 16 of 93 ##################
 # Function:         Get-CitrixPolicies
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/18 01:38:12
-# ModifiedOn:       2022/05/25 04:20:25
+# CreatedOn:        2022/05/18 02:38:12
+# ModifiedOn:       2022/05/25 05:20:25
 # Synopsis:         Export Citrix Policies
 #############################################
  
@@ -1769,11 +1769,11 @@ Export-ModuleMember -Function Get-CitrixPolicies
 ######## Function 17 of 93 ##################
 # Function:         Get-CommandFiltered
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Finds commands on the system and sort it according to module
 #############################################
  
@@ -1832,11 +1832,11 @@ Export-ModuleMember -Function Get-CommandFiltered
 ######## Function 18 of 93 ##################
 # Function:         Get-DeviceUptime
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Calculates the uptime of a system
 #############################################
  
@@ -1899,11 +1899,11 @@ Export-ModuleMember -Function Get-DeviceUptime
 ######## Function 19 of 93 ##################
 # Function:         Get-FolderSize
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Joakim Svendsen
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option
 #############################################
  
@@ -2067,11 +2067,11 @@ Export-ModuleMember -Function Get-FolderSize
 ######## Function 20 of 93 ##################
 # Function:         Get-FQDN
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/11 12:40:46
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/11 13:40:46
 # Synopsis:         Get FQDN for a device, and checks if it is online
 #############################################
  
@@ -2118,11 +2118,11 @@ Export-ModuleMember -Function Get-FQDN
 ######## Function 21 of 93 ##################
 # Function:         Get-FullADUserDetail
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/29 11:37:41
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/29 12:37:41
 # Synopsis:         Extract user details from the domain
 #############################################
  
@@ -2204,11 +2204,11 @@ Export-ModuleMember -Function Get-FullADUserDetail
 ######## Function 22 of 93 ##################
 # Function:         Get-MyPSGalleryStat
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/08/05 15:34:27
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/08/05 16:34:27
 # Synopsis:         Show stats about my published modules.
 #############################################
  
@@ -2375,11 +2375,11 @@ Export-ModuleMember -Function Get-MyPSGalleryStat
 ######## Function 23 of 93 ##################
 # Function:         Get-NestedADGroupMembers
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/06/21 05:27:31
-# ModifiedOn:       2022/06/21 05:29:15
+# CreatedOn:        2022/06/21 06:27:31
+# ModifiedOn:       2022/06/21 06:29:15
 # Synopsis:         Extract users from an AD group recursive, 4 levels deep.
 #############################################
  
@@ -2508,11 +2508,11 @@ Export-ModuleMember -Function Get-NestedADGroupMembers
 ######## Function 24 of 93 ##################
 # Function:         Get-ProcessPerformance
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Gets the top 10 processes by CPU %
 #############################################
  
@@ -2573,11 +2573,11 @@ Export-ModuleMember -Function Get-ProcessPerformance
 ######## Function 25 of 93 ##################
 # Function:         Get-PropertiesToCSV
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Get member data of an object. Use it to create other PSObjects.
 #############################################
  
@@ -2615,11 +2615,11 @@ Export-ModuleMember -Function Get-PropertiesToCSV
 ######## Function 26 of 93 ##################
 # Function:         Get-SoftwareAudit
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/11 12:37:04
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/11 13:37:04
 # Synopsis:         Connects to a remote hosts and collect installed software details
 #############################################
  
@@ -2708,11 +2708,11 @@ Export-ModuleMember -Function Get-SoftwareAudit
 ######## Function 27 of 93 ##################
 # Function:         Get-SystemInfo
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Get system details of a remote device
 #############################################
  
@@ -3019,11 +3019,11 @@ Export-ModuleMember -Function Get-SystemInfo
 ######## Function 28 of 93 ##################
 # Function:         Get-WinEventLogExtract
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/25 01:49:48
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/25 02:49:48
 # Synopsis:         Extract Event logs of a server list, and create html / excel report
 #############################################
  
@@ -3172,11 +3172,11 @@ Export-ModuleMember -Function Get-WinEventLogExtract
 ######## Function 29 of 93 ##################
 # Function:         Import-CitrixSiteConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/25 02:26:42
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/25 03:26:42
 # Synopsis:         Import the Citrix config file, and created a variable with the details
 #############################################
  
@@ -3219,11 +3219,11 @@ Export-ModuleMember -Function Import-CitrixSiteConfigFile
 ######## Function 30 of 93 ##################
 # Function:         Import-XamlConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:57
-# ModifiedOn:       2022/05/04 00:20:57
+# CreatedOn:        2022/05/04 01:20:57
+# ModifiedOn:       2022/05/04 01:20:57
 # Synopsis:         Import the wpf xaml file and create variables from objects
 #############################################
  
@@ -3352,11 +3352,11 @@ Export-ModuleMember -Function Import-XamlConfigFile
 ######## Function 31 of 93 ##################
 # Function:         Install-BGInfo
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Install and auto runs bginfo at startup.
 #############################################
  
@@ -3431,11 +3431,11 @@ Export-ModuleMember -Function Install-BGInfo
 ######## Function 32 of 93 ##################
 # Function:         Install-ChocolateyApp
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Install chocolatey apps from a json list.
 #############################################
  
@@ -3526,11 +3526,11 @@ Export-ModuleMember -Function Install-ChocolateyApp
 ######## Function 33 of 93 ##################
 # Function:         Install-ChocolateyClient
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Downloads and installs the Chocolatey client.
 #############################################
  
@@ -3584,11 +3584,11 @@ Export-ModuleMember -Function Install-ChocolateyClient
 ######## Function 34 of 93 ##################
 # Function:         Install-ChocolateyServer
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         This will download, install and setup a new Chocolatey Repo Server
 #############################################
  
@@ -3709,11 +3709,11 @@ Export-ModuleMember -Function Install-ChocolateyServer
 ######## Function 35 of 93 ##################
 # Function:         Install-LocalPSRepository
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/06/11 23:50:43
-# ModifiedOn:       2022/06/11 23:52:06
+# CreatedOn:        2022/06/12 00:50:43
+# ModifiedOn:       2022/06/12 00:52:06
 # Synopsis:         Short desCreates a repository for offline installations.
 #############################################
  
@@ -3841,11 +3841,11 @@ Export-ModuleMember -Function Install-LocalPSRepository
 ######## Function 36 of 93 ##################
 # Function:         Install-MicrosoftTerminal
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Install MicrosoftTerminal on your device.
 #############################################
  
@@ -3910,11 +3910,11 @@ Export-ModuleMember -Function Install-MicrosoftTerminal
 ######## Function 37 of 93 ##################
 # Function:         Install-MSUpdate
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Perform windows update
 #############################################
  
@@ -3974,11 +3974,11 @@ Export-ModuleMember -Function Install-MSUpdate
 ######## Function 38 of 93 ##################
 # Function:         Install-MSWinget
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Install the package manager winget
 #############################################
  
@@ -4064,11 +4064,11 @@ Export-ModuleMember -Function Install-MSWinget
 ######## Function 39 of 93 ##################
 # Function:         Install-NFSClient
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Install NFS Client for windows
 #############################################
  
@@ -4120,11 +4120,11 @@ Export-ModuleMember -Function Install-NFSClient
 ######## Function 40 of 93 ##################
 # Function:         Install-PowerShell7x
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Install ps7
 #############################################
  
@@ -4172,11 +4172,11 @@ Export-ModuleMember -Function Install-PowerShell7x
 ######## Function 41 of 93 ##################
 # Function:         Install-RSAT
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Install Remote Admin Tools
 #############################################
  
@@ -4234,11 +4234,11 @@ Export-ModuleMember -Function Install-RSAT
 ######## Function 42 of 93 ##################
 # Function:         Install-VMWareTool
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Install vmware tools from chocolatety
 #############################################
  
@@ -4280,11 +4280,11 @@ Export-ModuleMember -Function Install-VMWareTool
 ######## Function 43 of 93 ##################
 # Function:         Install-WingetApps
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/08/03 21:52:14
-# ModifiedOn:       2022/08/06 00:27:22
+# CreatedOn:        2022/08/03 22:52:14
+# ModifiedOn:       2022/08/06 01:27:22
 # Synopsis:         
 #############################################
  
@@ -4333,11 +4333,11 @@ Export-ModuleMember -Function Install-WingetApps
 ######## Function 44 of 93 ##################
 # Function:         Move-ModulesToAllUser
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/08/04 16:37:52
-# ModifiedOn:       2022/08/05 16:42:43
+# CreatedOn:        2022/08/04 17:37:52
+# ModifiedOn:       2022/08/05 17:42:43
 # Synopsis:         Move modules from current user to all users
 #############################################
  
@@ -4396,11 +4396,11 @@ Export-ModuleMember -Function Move-ModulesToAllUser
 ######## Function 45 of 93 ##################
 # Function:         New-CitrixSiteConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/06/20 06:04:36
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/06/20 07:04:36
 # Synopsis:         A config file with Citrix server details and URLs. To be used in scripts.
 #############################################
  
@@ -4583,11 +4583,11 @@ Export-ModuleMember -Function New-CitrixSiteConfigFile
 ######## Function 46 of 93 ##################
 # Function:         New-ElevatedShortcut
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Creates a shortcut to a script or exe that runs as admin, without UNC
 #############################################
  
@@ -4672,11 +4672,11 @@ Export-ModuleMember -Function New-ElevatedShortcut
 ######## Function 47 of 93 ##################
 # Function:         New-GodModeFolder
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Creates a God Mode Folder
 #############################################
  
@@ -4707,11 +4707,11 @@ Export-ModuleMember -Function New-GodModeFolder
 ######## Function 48 of 93 ##################
 # Function:         New-GoogleSearch
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/06/03 23:20:57
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/06/04 00:20:57
 # Synopsis:         Start a new browser tab with search string.
 #############################################
  
@@ -4758,11 +4758,11 @@ Export-ModuleMember -Function New-GoogleSearch
 ######## Function 49 of 93 ##################
 # Function:         New-PSGenericList
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Jeff Hicks
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/07/30 22:51:29
-# ModifiedOn:       2022/07/30 22:56:13
+# CreatedOn:        2022/07/30 23:51:29
+# ModifiedOn:       2022/07/30 23:56:13
 # Synopsis:         Creates a .net list object
 #############################################
  
@@ -4869,11 +4869,11 @@ Export-ModuleMember -Function New-PSGenericList
 ######## Function 50 of 93 ##################
 # Function:         New-PSModule
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Creates a new PowerShell module.
 #############################################
  
@@ -4966,11 +4966,11 @@ Export-ModuleMember -Function New-PSModule
 ######## Function 51 of 93 ##################
 # Function:         New-PSProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/06/21 06:17:57
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/06/21 07:17:57
 # Synopsis:         Creates new profile files in the documents folder
 #############################################
  
@@ -5103,11 +5103,11 @@ Export-ModuleMember -Function New-PSProfile
 ######## Function 52 of 93 ##################
 # Function:         New-PSScript
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/07/31 01:01:21
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/07/31 02:01:21
 # Synopsis:         Creates a new PowerShell script. With PowerShell Script Info
 #############################################
  
@@ -5271,11 +5271,11 @@ Export-ModuleMember -Function New-PSScript
 ######## Function 53 of 93 ##################
 # Function:         New-SuggestedInfraName
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Generates a list of usernames and server names, that can be used as test / demo data.
 #############################################
  
@@ -5363,11 +5363,11 @@ Export-ModuleMember -Function New-SuggestedInfraName
 ######## Function 54 of 93 ##################
 # Function:         Publish-ModuleToLocalRepo
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/06/11 18:22:51
-# ModifiedOn:       2022/06/11 22:04:18
+# CreatedOn:        2022/06/11 19:22:51
+# ModifiedOn:       2022/06/11 23:04:18
 # Synopsis:         Checks for required modules and upload all to your local repo.
 #############################################
  
@@ -5438,11 +5438,11 @@ Export-ModuleMember -Function Publish-ModuleToLocalRepo
 ######## Function 55 of 93 ##################
 # Function:         Remove-CIMUserProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Uses CimInstance to remove a user profile
 #############################################
  
@@ -5485,11 +5485,11 @@ Export-ModuleMember -Function Remove-CIMUserProfile
 ######## Function 56 of 93 ##################
 # Function:         Remove-FaultyProfileList
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Fixes Profilelist in the registry. To fix user logon with temp profile.
 #############################################
  
@@ -5563,11 +5563,11 @@ Export-ModuleMember -Function Remove-FaultyProfileList
 ######## Function 57 of 93 ##################
 # Function:         Remove-HiddenDevice
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Removes ghost devices from your system
 #############################################
  
@@ -5961,11 +5961,11 @@ Export-ModuleMember -Function Remove-HiddenDevice
 ######## Function 58 of 93 ##################
 # Function:         Remove-UserProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Connects to a server and renames a user profile folder, and delete the key from Profilelist in the registry
 #############################################
  
@@ -6040,11 +6040,11 @@ Export-ModuleMember -Function Remove-UserProfile
 ######## Function 59 of 93 ##################
 # Function:         Reset-PSGallery
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/07/31 00:44:01
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/07/31 01:44:01
 # Synopsis:         Reset gallery to default settings
 #############################################
  
@@ -6125,11 +6125,11 @@ Export-ModuleMember -Function Reset-PSGallery
 ######## Function 60 of 93 ##################
 # Function:         Resolve-SID
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Jeff Hicks
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/07/30 21:49:39
-# ModifiedOn:       2022/07/30 21:50:40
+# CreatedOn:        2022/07/30 22:49:39
+# ModifiedOn:       2022/07/30 22:50:40
 # Synopsis:         Resolves the Sid
 #############################################
  
@@ -6223,11 +6223,11 @@ Export-ModuleMember -Function Resolve-SID
 ######## Function 61 of 93 ##################
 # Function:         Restore-ElevatedShortcut
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Restore the RunAss shortcuts, from a zip file
 #############################################
  
@@ -6295,11 +6295,11 @@ Export-ModuleMember -Function Restore-ElevatedShortcut
 ######## Function 62 of 93 ##################
 # Function:         Save-PSModules
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/06/24 07:29:07
-# ModifiedOn:       2022/06/24 07:54:19
+# CreatedOn:        2022/06/24 08:29:07
+# ModifiedOn:       2022/06/24 08:54:19
 # Synopsis:         Saves the modules to a local repo.
 #############################################
  
@@ -6395,11 +6395,11 @@ Export-ModuleMember -Function Save-PSModules
 ######## Function 63 of 93 ##################
 # Function:         Search-Script
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Search for a string in a directory of ps1 scripts.
 #############################################
  
@@ -6457,11 +6457,11 @@ Export-ModuleMember -Function Search-Script
 ######## Function 64 of 93 ##################
 # Function:         Set-FolderCustomIcon
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/25 03:04:18
-# ModifiedOn:       2022/05/25 03:55:57
+# CreatedOn:        2022/05/25 04:04:18
+# ModifiedOn:       2022/05/25 04:55:57
 # Synopsis:         Will change the icon of a folder to a custom selected icon
 #############################################
  
@@ -6532,11 +6532,11 @@ Export-ModuleMember -Function Set-FolderCustomIcon
 ######## Function 65 of 93 ##################
 # Function:         Set-ObjectOwnerShip
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/08/02 23:37:43
-# ModifiedOn:       2022/08/05 15:30:28
+# CreatedOn:        2022/08/03 00:37:43
+# ModifiedOn:       2022/08/05 16:30:28
 # Synopsis:         Reset the ownership of a folder, and add the specified user with full control.
 #############################################
  
@@ -6629,11 +6629,11 @@ Export-ModuleMember -Function Set-ObjectOwnerShip
 ######## Function 66 of 93 ##################
 # Function:         Set-PSProjectFile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/08/02 02:40:33
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/08/02 03:40:33
 # Synopsis:         Creates and modify needed files for a PS project from existing module files.
 #############################################
  
@@ -7112,11 +7112,11 @@ Export-ModuleMember -Function Set-PSProjectFile
 ######## Function 67 of 93 ##################
 # Function:         Set-PSToolKitSystemSetting
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Set multiple settings on desktop or server
 #############################################
  
@@ -7617,11 +7617,11 @@ Export-ModuleMember -Function Set-PSToolKitSystemSetting
 ######## Function 68 of 93 ##################
 # Function:         Set-SharedPSProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/08/06 00:29:36
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/08/06 01:29:36
 # Synopsis:         Redirects PowerShell and WindowsPowerShell profile folder to another path.
 #############################################
  
@@ -7740,11 +7740,11 @@ Export-ModuleMember -Function Set-SharedPSProfile
 ######## Function 69 of 93 ##################
 # Function:         Set-StaticIP
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Set static IP on device
 #############################################
  
@@ -7792,11 +7792,11 @@ Export-ModuleMember -Function Set-StaticIP
 ######## Function 70 of 93 ##################
 # Function:         Set-TempFolder
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Set all the temp environmental variables to c:\temp
 #############################################
  
@@ -7834,11 +7834,11 @@ Export-ModuleMember -Function Set-TempFolder
 ######## Function 71 of 93 ##################
 # Function:         Set-VSCodeExplorerSortOrder
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/08/05 21:34:08
-# ModifiedOn:       2022/08/05 21:49:44
+# CreatedOn:        2022/08/05 22:34:08
+# ModifiedOn:       2022/08/05 22:49:44
 # Synopsis:         Change the sort order in VSCode explorer
 #############################################
  
@@ -7894,11 +7894,11 @@ Export-ModuleMember -Function Set-VSCodeExplorerSortOrder
 ######## Function 72 of 93 ##################
 # Function:         Set-WindowsAutoLogin
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Enable autologin on a device.
 #############################################
  
@@ -8014,11 +8014,11 @@ Export-ModuleMember -Function Set-WindowsAutoLogin
 ######## Function 73 of 93 ##################
 # Function:         Show-ComputerManagement
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Opens the Computer Management of the system or remote system
 #############################################
  
@@ -8053,11 +8053,11 @@ Export-ModuleMember -Function Show-ComputerManagement
 ######## Function 74 of 93 ##################
 # Function:         Show-PSToolKit
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/07/27 21:55:02
-# ModifiedOn:       2022/07/27 21:55:02
+# CreatedOn:        2022/07/27 22:55:02
+# ModifiedOn:       2022/07/27 22:55:02
 # Synopsis:         Show details of the commands in this module
 #############################################
  
@@ -8303,11 +8303,11 @@ Export-ModuleMember -Function Show-PSToolKit
 ######## Function 75 of 93 ##################
 # Function:         Start-PowerShellAsAdmin
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/08/05 23:44:55
-# ModifiedOn:       2022/08/06 00:24:59
+# CreatedOn:        2022/08/06 00:44:55
+# ModifiedOn:       2022/08/06 01:24:59
 # Synopsis:         Starts a porwershell session as an administrator
 #############################################
  
@@ -8373,11 +8373,11 @@ Export-ModuleMember -Function Start-PowerShellAsAdmin
 ######## Function 76 of 93 ##################
 # Function:         Start-PSModuleMaintenance
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Goes through all the installed modules, and allow you to upgrade(If available), or remove old and duplicate versions.
 #############################################
  
@@ -8544,11 +8544,11 @@ Export-ModuleMember -Function Start-PSModuleMaintenance
 ######## Function 77 of 93 ##################
 # Function:         Start-PSProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/07/30 23:13:39
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/07/31 00:13:39
 # Synopsis:         My PS Profile for all sessions.
 #############################################
  
@@ -8725,11 +8725,11 @@ Export-ModuleMember -Function Start-PSProfile
 ######## Function 78 of 93 ##################
 # Function:         Start-PSRoboCopy
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/27 11:28:43
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/27 12:28:43
 # Synopsis:         My wrapper for default robocopy switches
 #############################################
  
@@ -8846,11 +8846,11 @@ Export-ModuleMember -Function Start-PSRoboCopy
 ######## Function 79 of 93 ##################
 # Function:         Start-PSScriptAnalyzer
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/07/29 23:50:20
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/07/30 00:50:20
 # Synopsis:         Run and report ScriptAnalyzer output
 #############################################
  
@@ -9006,11 +9006,11 @@ Export-ModuleMember -Function Start-PSScriptAnalyzer
 ######## Function 80 of 93 ##################
 # Function:         Start-PSToolkitSystemInitialize
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/07/31 19:50:18
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/07/31 20:50:18
 # Synopsis:         Initialize a blank machine.
 #############################################
  
@@ -9133,11 +9133,11 @@ Export-ModuleMember -Function Start-PSToolkitSystemInitialize
 ######## Function 81 of 93 ##################
 # Function:         Test-CitrixCloudConnector
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/06/21 05:38:07
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/06/21 06:38:07
 # Synopsis:         Perform basic connection tests to Citrix cloud.
 #############################################
  
@@ -9240,11 +9240,11 @@ Export-ModuleMember -Function Test-CitrixCloudConnector
 ######## Function 82 of 93 ##################
 # Function:         Test-CitrixVDAPort
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/06/21 05:39:47
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/06/21 06:39:47
 # Synopsis:         Test connection between DDC and VDI
 #############################################
  
@@ -9342,11 +9342,11 @@ Export-ModuleMember -Function Test-CitrixVDAPort
 ######## Function 83 of 93 ##################
 # Function:         Test-IsFileOpen
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/24 01:17:29
-# ModifiedOn:       2022/05/24 06:04:52
+# CreatedOn:        2022/05/24 02:17:29
+# ModifiedOn:       2022/05/24 07:04:52
 # Synopsis:         Checks if a file is open
 #############################################
  
@@ -9412,11 +9412,11 @@ Export-ModuleMember -Function Test-IsFileOpen
 ######## Function 84 of 93 ##################
 # Function:         Test-PendingReboot
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         This script tests various registry values to see if the local computer is pending a reboot.
 #############################################
  
@@ -9596,11 +9596,11 @@ Export-ModuleMember -Function Test-PendingReboot
 ######## Function 85 of 93 ##################
 # Function:         Test-PSRemote
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Test PSb Remote to a device.
 #############################################
  
@@ -9656,11 +9656,11 @@ Export-ModuleMember -Function Test-PSRemote
 ######## Function 86 of 93 ##################
 # Function:         Update-ListOfDDC
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Update list of ListOfDDCs in the registry
 #############################################
  
@@ -9723,11 +9723,11 @@ Export-ModuleMember -Function Update-ListOfDDC
 ######## Function 87 of 93 ##################
 # Function:         Update-LocalHelp
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/07/30 23:06:34
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/07/31 00:06:34
 # Synopsis:         Downloads and saves help files locally
 #############################################
  
@@ -9772,11 +9772,11 @@ Export-ModuleMember -Function Update-LocalHelp
 ######## Function 88 of 93 ##################
 # Function:         Update-MyModulesFromGitHub
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/07/29 07:27:34
-# ModifiedOn:       2022/08/06 00:30:58
+# CreatedOn:        2022/07/29 08:27:34
+# ModifiedOn:       2022/08/06 01:30:58
 # Synopsis:         Updates my modules
 #############################################
  
@@ -9906,11 +9906,11 @@ Export-ModuleMember -Function Update-MyModulesFromGitHub
 ######## Function 89 of 93 ##################
 # Function:         Update-PSModuleInfo
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Update PowerShell module manifest file
 #############################################
  
@@ -10012,11 +10012,11 @@ Export-ModuleMember -Function Update-PSModuleInfo
 ######## Function 90 of 93 ##################
 # Function:         Update-PSToolKitConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/07/13 00:53:16
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/07/13 01:53:16
 # Synopsis:         Manages the config files for the PSToolKit Module.
 #############################################
  
@@ -10161,11 +10161,11 @@ Export-ModuleMember -Function Update-PSToolKitConfigFile
 ######## Function 91 of 93 ##################
 # Function:         Write-Ascii
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Joakim Svendsen
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Create Ascii Art
 #############################################
  
@@ -10559,11 +10559,11 @@ Export-ModuleMember -Function Write-Ascii
 ######## Function 92 of 93 ##################
 # Function:         Write-PSToolKitLog
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/05/04 00:20:58
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/05/04 01:20:58
 # Synopsis:         Create a log for scripts
 #############################################
  
@@ -10677,11 +10677,11 @@ Export-ModuleMember -Function Write-PSToolKitLog
 ######## Function 93 of 93 ##################
 # Function:         Write-PSToolKitMessage
 # Module:           PSToolKit
-# ModuleVersion:    0.1.45
+# ModuleVersion:    0.1.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
-# CreatedOn:        2022/05/04 00:20:58
-# ModifiedOn:       2022/08/05 15:25:41
+# CreatedOn:        2022/05/04 01:20:58
+# ModifiedOn:       2022/08/05 16:25:41
 # Synopsis:         Writes the given into to screen
 #############################################
  
