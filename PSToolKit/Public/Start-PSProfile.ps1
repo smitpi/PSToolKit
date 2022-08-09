@@ -49,9 +49,6 @@ My PS Profile for all sessions.
 .PARAMETER ClearHost
 Clear the screen before loading.
 
-.PARAMETER GalleryStats
-Stats about my published modules..
-
 .PARAMETER ShowModuleList
 Summary of installed modules.
 
@@ -63,7 +60,6 @@ Function Start-PSProfile {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Start-PSProfile')]
 	PARAM(
 		[switch]$ClearHost = $false,
-		[switch]$GalleryStats = $false,
 		[switch]$ShowModuleList = $false
 	)
 	$ErrorActionPreference = 'Stop'
@@ -76,9 +72,12 @@ Function Start-PSProfile {
 		$Global:psfolder = Get-Item (Get-Item $profile).DirectoryName
 	} else { $Global:psfolder = Get-Item (Get-Item $profile).DirectoryName }
 
-	$wc = New-Object System.Net.WebClient
-	$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
-	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+	function proxyconnect {
+		$wc = New-Object System.Net.WebClient
+		$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
+		[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+	}
+	proxyconnect
 
 	try {
 		## Create folders for PowerShell profile
@@ -121,7 +120,7 @@ Function Start-PSProfile {
 			Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 			Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 			Set-PSReadLineKeyHandler -Key 'Ctrl+m' -Function ForwardWord
-			Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
+			Write-Host ('[Alternative]') -ForegroundColor Yellow -NoNewline
 			Write-Host (' {0,-36}: ' -f 'PSReadLineOptions Functions') -ForegroundColor Cyan -NoNewline
 			Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
 		} catch { Write-Warning 'PSReadLineOptions: Could not be loaded' }
@@ -196,11 +195,13 @@ Function Start-PSProfile {
 		Write-Host "$(($ModuleDetails | Sort-Object -Property modules -Descending | Out-String))" -ForegroundColor Green
 	}
 
- if ($GalleryStats) {
+
+	if ($(Get-Date).DayOfWeek -like 'Monday') {
 		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
-		Write-Host (' {0,15} ' -f 'My PSGallery Stats') -ForegroundColor DarkRed
+		Write-Host (' {0,15} ' -f 'Updating Local Help, For details Run:') -ForegroundColor DarkRed
 		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
-		Write-Host "$((Get-MyPSGalleryStat) | Out-String)" -ForegroundColor Green
- }
+		Write-Host "`$Localhelpjob | Wait-Job | Receive-Job" -ForegroundColor Green
+		$Localhelpjob = Update-LocalHelp
+	}
 
 } #end Function

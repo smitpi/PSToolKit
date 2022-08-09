@@ -14,7 +14,7 @@ Show stats about my published modules.
 
 ```
 Get-MyPSGalleryStat [[-GitHubUserID] <String>] [[-GitHubToken] <String>] [-History] [[-daysToReport] <Int32>]
- [-OpenProfilePage] [-ASObject] [<CommonParameters>]
+ [-AddtoProfile] [-OpenProfilePage] [-ASObject] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -85,6 +85,21 @@ Aliases:
 Required: False
 Position: 3
 Default value: 7
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AddtoProfile
+Add defaults to profile.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

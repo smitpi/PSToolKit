@@ -64,6 +64,9 @@ Downloads and calculates the history.
 .PARAMETER daysToReport
 Report on this amount of days.
 
+.PARAMETER AddtoProfile
+Add defaults to profile.
+
 .EXAMPLE
 Get-MyPSGalleryStats
 
@@ -76,6 +79,7 @@ Function Get-MyPSGalleryStat {
         [string]$GitHubToken,
         [switch]$History,
         [int]$daysToReport = 7,
+        [switch]$AddtoProfile,
         [Switch]$OpenProfilePage,
         [switch]$ASObject
     )
@@ -140,7 +144,7 @@ Function Get-MyPSGalleryStat {
         if ($ASObject) {$GalStats}
         else {
             Write-Color 'Total Downloads: ', "$(($GalStats.TotalDownloads | Sort-Object -Descending)[0])" -Color Cyan, yellow -LinesBefore 1
-            $GalStats[-1..-5].Sum | Sort-Object -Property PublishedDate -Descending | Format-Table -AutoSize -Wrap
+            $GalStats[-1..-6].Sum | Sort-Object -Property PublishedDate -Descending | Format-Table -AutoSize -Wrap
         }
     }
 
@@ -190,6 +194,29 @@ Function Get-MyPSGalleryStat {
                 })
         }
         $GalTotals | Format-Table -AutoSize -Wrap
+    }
+    if ($AddtoProfile) {
+    		$ToAppend = @"
+		
+#region MyPSGalleryStat Defaults
+`$PSDefaultParameterValues['*MyPSGalleryStat*:GitHubUserID'] =  "$($GitHubUserID)"
+`$PSDefaultParameterValues['*MyPSGalleryStat*:GitHubToken'] =  "$($GitHubToken)"
+#endregion MyPSGalleryStat
+"@
+
+	$PersonalPowerShell = [IO.Path]::Combine("$([Environment]::GetFolderPath('MyDocuments'))", 'PowerShell')
+	$PersonalWindowsPowerShell = [IO.Path]::Combine("$([Environment]::GetFolderPath('MyDocuments'))", 'WindowsPowerShell')
+	
+	$Files = Get-ChildItem -Path "$($PersonalPowerShell)\*profile*"
+    $files += Get-ChildItem -Path "$($PersonalWindowsPowerShell)\*profile*"
+	foreach ($file in $files) {	
+		$tmp = Get-Content -Path $file.FullName | Where-Object { $_ -notlike '*MyPSGalleryStat*'}
+		$tmp | Set-Content -Path $file.FullName -Force
+		Add-Content -Value $ToAppend -Path $file.FullName -Force -Encoding utf8
+		Write-Host '[Updated]' -NoNewline -ForegroundColor Yellow; Write-Host ' Profile File:' -NoNewline -ForegroundColor Cyan; Write-Host " $($file.FullName)" -ForegroundColor Green
+	}
+
+    
     }
 } #end Function
 
