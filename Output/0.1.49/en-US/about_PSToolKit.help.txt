@@ -50,6 +50,7 @@ Functions in this module:
 	 Install-PowerShell7x -- Install ps7
 	 Install-RSAT -- Install Remote Admin Tools
 	 Install-VMWareTool -- Install vmware tools from chocolatety
+	 Install-WingetApp -- Install apps from a json file.
 	 Move-ModulesToAllUser -- Move modules from current user to all users
 	 New-CitrixSiteConfigFile -- A config file with Citrix server details and URLs. To be used in scripts.
 	 New-ElevatedShortcut -- Creates a shortcut to a script or exe that runs as admin, without UNC

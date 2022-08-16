@@ -13,7 +13,7 @@ Reset gallery to default settings
 ## SYNTAX
 
 ```
-Reset-PSGallery [-Force] [<CommonParameters>]
+Reset-PSGallery [[-Repository] <String>] [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,6 +27,21 @@ Reset-PSGallery
 ```
 
 ## PARAMETERS
+
+### -Repository
+Will Install PowerShellGet from another repository.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: PSGallery
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Force
 Force the reinstall

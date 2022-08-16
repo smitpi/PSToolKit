@@ -66,6 +66,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Install-PowerShell7x`](https://smitpi.github.io/PSToolKit/Install-PowerShell7x) -- Install ps7
 - [`Install-RSAT`](https://smitpi.github.io/PSToolKit/Install-RSAT) -- Install Remote Admin Tools
 - [`Install-VMWareTool`](https://smitpi.github.io/PSToolKit/Install-VMWareTool) -- Install vmware tools from chocolatety
+- [`Install-WingetApp`](https://smitpi.github.io/PSToolKit/Install-WingetApp) -- Install apps from a json file.
 - [`Move-ModulesToAllUser`](https://smitpi.github.io/PSToolKit/Move-ModulesToAllUser) -- Move modules from current user to all users
 - [`New-CitrixSiteConfigFile`](https://smitpi.github.io/PSToolKit/New-CitrixSiteConfigFile) -- A config file with Citrix server details and URLs. To be used in scripts.
 - [`New-ElevatedShortcut`](https://smitpi.github.io/PSToolKit/New-ElevatedShortcut) -- Creates a shortcut to a script or exe that runs as admin, without UNC

@@ -51,6 +51,9 @@ Reset gallery to default settings
 .PARAMETER Force
 Force the reinstall
 
+.PARAMETER Repository
+Will Install PowerShellGet from another repository.
+
 .EXAMPLE
 Reset-PSGallery
 
@@ -61,21 +64,26 @@ Function Reset-PSGallery {
 		[ValidateScript({$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {$True}
 				else {Throw 'Must be running an elevated prompt'}})]
+        [string]$Repository = "PSGallery",
 		[switch]$Force = $false
 	)
 
+    $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+	if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {$scope = "AllUsers"}
+    else {$scope = "CurrentUser"}
+
+    $wc = New-Object System.Net.WebClient
+	$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
+	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        
+
 	if (((Get-PSRepository -Name PSGallery).InstallationPolicy -ne 'Trusted') -or ($Force)) {
 		try {
-			$wc = New-Object System.Net.WebClient
-			$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
-			[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-        
+	
 			Install-PackageProvider Nuget -Force -ErrorAction SilentlyContinue | Out-Null
 			Register-PSRepository -Default -ErrorAction SilentlyContinue | Out-Null
 			Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -ErrorAction SilentlyContinue | Out-Null
 			Write-Color '[Installing]', 'PackageProvider: ', 'Complete' -Color Yellow, Cyan, Green
-
-			#} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 
 			Write-Color '[Checking]', 'PowerShell PackageManagement' -Color Yellow, Cyan
 			Start-Job -ScriptBlock {
@@ -87,9 +95,9 @@ Function Reset-PSGallery {
 							Write-Color "`t[Updating]", 'PowerShell PackageManagement' -Color Yellow, Cyan
 
 							$installOptions = @{
-								Repository = 'PSGallery'
+								Repository = $Using:Repository
 								Force      = $true
-								Scope      = 'AllUsers'
+								Scope      = $using:scope
 							}							
 							try {
 								Install-Module -Name PackageManagement @installOptions
@@ -102,9 +110,7 @@ Function Reset-PSGallery {
 						} else {
 							Write-Color "`t[Update]", 'PowerShell PackageManagement ', 'Not Needed' -Color Green, Cyan, DarkRed
 						}
-					
 					} | Wait-Job | Receive-Job
-
 					Write-Color '[Set]', 'PSGallery: ', 'Complete' -Color Yellow, Cyan, Green
 				} catch { Write-Warning "[Set]PSGallery: Failed:`n $($_.Exception.Message)" }
 			} else {Write-Color '[Set]', 'PSGallery: ', 'Already Set' -Color Yellow, Cyan, DarkRed}

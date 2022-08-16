@@ -111,7 +111,7 @@ Function Get-MyPSGalleryStat {
         } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 
         foreach ($Mod in $ModLists) {
-            Write-PSToolKitMessage -Action "Collecting" -Object $mod -Message 'Online Data'
+            Write-PSToolKitMessage -Action 'Collecting' -Object $mod -Message 'Online Data'
             $ResultModule = Find-Module $mod -Repository PSGallery
             $TotalDownloads = $TotalDownloads + [int]$ResultModule.AdditionalMetadata.downloadCount
             [void]$GalStats.Add([PSCustomObject]@{
@@ -138,7 +138,7 @@ Function Get-MyPSGalleryStat {
             $json = ConvertTo-Json -InputObject $Body
             $json = [System.Text.Encoding]::UTF8.GetBytes($json)
             $null = Invoke-WebRequest -Headers $headers -Uri $Uri -Method Patch -Body $json -ErrorAction Stop
-            Write-PSToolKitMessage -Action "Upload" -Object "PSGallery Stats" -Message "To Github Gist" -Object2 "Complete"
+            Write-PSToolKitMessage -Action 'Upload' -Object 'PSGallery Stats' -Message 'To Github Gist' -Object2 'Complete'
         } catch {Write-Error "Can't connect to gist:`n $($_.Exception.Message)"}
 
         if ($ASObject) {$GalStats}
@@ -150,7 +150,6 @@ Function Get-MyPSGalleryStat {
 
     if ($History) {
         $end = ((Get-Date).AddDays(-$daysToReport)).ToUniversalTime()
-
         try {
             Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Connecting to Gist"
             $headers = @{}
@@ -178,25 +177,21 @@ Function Get-MyPSGalleryStat {
         $allNames = $GalHistory.Sum | Select-Object Name | Sort-Object -Property Name -Unique
 
         foreach ($All in $allNames) {
-            $sum = $GalHistory.Sum | Where-Object {$_.Name -like $all.Name -and $_.date -lt $end}
+            $sum = $GalHistory.Sum | Where-Object {$_.Name -like $all.Name -and $_.DateCollected -gt $end}
             $span = New-TimeSpan -Start $sum[0].DateCollected -End $sum[-1].DateCollected
-            if ($Sum[0].version -eq $Sum[-1].version) {$VerDown = ($Sum[-1].VersionDownload - $Sum[0].VersionDownload) }
-            else {$VerDown = 'Different_Versions'}
             $GalTotals.Add(
                 [PSCustomObject]@{
-                    Days            = [math]::ceiling($span.TotalDays)
-                    Hours           = [math]::ceiling($span.TotalHours)
-                    ModuleName      = $Sum[0].Name
-                    BeginVer        = $Sum[0].version
-                    EndVer          = $Sum[-1].version
-                    TotalDownloads  = [int]($Sum[-1].TotalDownload - $Sum[0].TotalDownload)
-                    VersoinDownload = $VerDown
+                    Days           = [math]::ceiling($span.TotalDays)
+                    Hours          = [math]::ceiling($span.TotalHours)
+                    ModuleName     = $Sum[0].Name
+                    Version        = $Sum[-1].version
+                    TotalDownloads = [int]($Sum[-1].TotalDownload - $Sum[0].TotalDownload)
                 })
         }
         $GalTotals | Format-Table -AutoSize -Wrap
     }
     if ($AddtoProfile) {
-    		$ToAppend = @"
+        $ToAppend = @"
 		
 #region MyPSGalleryStat Defaults
 `$PSDefaultParameterValues['*MyPSGalleryStat*:GitHubUserID'] =  "$($GitHubUserID)"
@@ -204,17 +199,17 @@ Function Get-MyPSGalleryStat {
 #endregion MyPSGalleryStat
 "@
 
-	$PersonalPowerShell = [IO.Path]::Combine("$([Environment]::GetFolderPath('MyDocuments'))", 'PowerShell')
-	$PersonalWindowsPowerShell = [IO.Path]::Combine("$([Environment]::GetFolderPath('MyDocuments'))", 'WindowsPowerShell')
+        $PersonalPowerShell = [IO.Path]::Combine("$([Environment]::GetFolderPath('MyDocuments'))", 'PowerShell')
+        $PersonalWindowsPowerShell = [IO.Path]::Combine("$([Environment]::GetFolderPath('MyDocuments'))", 'WindowsPowerShell')
 	
-	$Files = Get-ChildItem -Path "$($PersonalPowerShell)\*profile*"
-    $files += Get-ChildItem -Path "$($PersonalWindowsPowerShell)\*profile*"
-	foreach ($file in $files) {	
-		$tmp = Get-Content -Path $file.FullName | Where-Object { $_ -notlike '*MyPSGalleryStat*'}
-		$tmp | Set-Content -Path $file.FullName -Force
-		Add-Content -Value $ToAppend -Path $file.FullName -Force -Encoding utf8
-		Write-Host '[Updated]' -NoNewline -ForegroundColor Yellow; Write-Host ' Profile File:' -NoNewline -ForegroundColor Cyan; Write-Host " $($file.FullName)" -ForegroundColor Green
-	}
+        $Files = Get-ChildItem -Path "$($PersonalPowerShell)\*profile*"
+        $files += Get-ChildItem -Path "$($PersonalWindowsPowerShell)\*profile*"
+        foreach ($file in $files) {	
+            $tmp = Get-Content -Path $file.FullName | Where-Object { $_ -notlike '*MyPSGalleryStat*'}
+            $tmp | Set-Content -Path $file.FullName -Force
+            Add-Content -Value $ToAppend -Path $file.FullName -Force -Encoding utf8
+            Write-Host '[Updated]' -NoNewline -ForegroundColor Yellow; Write-Host ' Profile File:' -NoNewline -ForegroundColor Cyan; Write-Host " $($file.FullName)" -ForegroundColor Green
+        }
 
     
     }
