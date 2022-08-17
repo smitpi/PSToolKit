@@ -880,6 +880,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../Install-WingetApp/" class="md-nav__link">
+        Install-WingetApp
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Move-ModulesToAllUser/" class="md-nav__link">
         Move-ModulesToAllUser
       </a>
@@ -1186,6 +1201,13 @@
   
     <nav class="md-nav" aria-label="PARAMETERS">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-repository" class="md-nav__link">
+    -Repository
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#-force" class="md-nav__link">
@@ -1685,6 +1707,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../Update-PSDefaultParameter/" class="md-nav__link">
+        Update-PSDefaultParameter
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Update-PSModuleInfo/" class="md-nav__link">
         Update-PSModuleInfo
       </a>
@@ -1828,6 +1865,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#-repository" class="md-nav__link">
+    -Repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-force" class="md-nav__link">
     -Force
   </a>
@@ -1896,7 +1940,7 @@
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Reset gallery to default settings</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Reset-PSGallery [-Force] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Reset-PSGallery [[-Repository] &lt;String&gt;] [-Force] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Reset gallery to default settings</p>
@@ -1905,6 +1949,18 @@
 <div class="highlight"><pre><span></span><code>Reset-PSGallery
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
+<h3 id="-repository">-Repository</h3>
+<p>Will Install PowerShellGet from another repository.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PSGallery</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
 <h3 id="-force">-Force</h3>
 <p>Force the reinstall</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>

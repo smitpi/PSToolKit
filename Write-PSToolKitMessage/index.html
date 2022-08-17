@@ -880,6 +880,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../Install-WingetApp/" class="md-nav__link">
+        Install-WingetApp
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Move-ModulesToAllUser/" class="md-nav__link">
         Move-ModulesToAllUser
       </a>
@@ -1555,6 +1570,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../Update-PSDefaultParameter/" class="md-nav__link">
+        Update-PSDefaultParameter
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Update-PSModuleInfo/" class="md-nav__link">
         Update-PSModuleInfo
       </a>
@@ -1726,15 +1756,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#-object2" class="md-nav__link">
-    -Object2
+  <a href="#-messagecolor" class="md-nav__link">
+    -MessageColor
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#-message2" class="md-nav__link">
-    -Message2
+  <a href="#-inserttabs" class="md-nav__link">
+    -InsertTabs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-nonewline" class="md-nav__link">
+    -NoNewLine
   </a>
   
 </li>
@@ -1904,15 +1941,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#-object2" class="md-nav__link">
-    -Object2
+  <a href="#-messagecolor" class="md-nav__link">
+    -MessageColor
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#-message2" class="md-nav__link">
-    -Message2
+  <a href="#-inserttabs" class="md-nav__link">
+    -InsertTabs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-nonewline" class="md-nav__link">
+    -NoNewLine
   </a>
   
 </li>
@@ -1992,14 +2036,14 @@
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Writes the given into to screen</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Write-PSToolKitMessage [-Action] &lt;String&gt; [[-Severity] &lt;String&gt;] [-Object] &lt;String[]&gt; [-Message] &lt;String[]&gt;
- [[-Object2] &lt;String[]&gt;] [[-Message2] &lt;String[]&gt;] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Write-PSToolKitMessage [-Action] &lt;String&gt; [[-Severity] &lt;String&gt;] [-Object] &lt;String[]&gt; [[-Message] &lt;String[]&gt;]
+ [[-MessageColor] &lt;String[]&gt;] [[-InsertTabs] &lt;Int32&gt;] [-NoNewLine] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Writes the given into to screen</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>dir | Write-PSToolKitMessage -Action Exists -Severity Information -Message &#39;its already there&#39;
+<div class="highlight"><pre><span></span><code>Write-PSToolKitMessage -Action Getting -Severity Information -Object (get-item .) -Message &quot;This is&quot;,&quot;the directory&quot;,&quot;you are in.&quot; -MessageColor Cyan,DarkGreen,DarkRed
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-action">-Action</h3>
@@ -2039,19 +2083,20 @@
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
 <h3 id="-message">-Message</h3>
-<p>The Details.</p>
+<p>Message to display.
+This can be an array of strings as well, to have different colours in the text.+</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w"></span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
-<h3 id="-object2">-Object2</h3>
-<p>The second object to be reported on.</p>
+<h3 id="-messagecolor">-MessageColor</h3>
+<p>The Colour of the corresponding message in the array.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
@@ -2062,15 +2107,27 @@
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
-<h3 id="-message2">-Message2</h3>
-<p>The second message Details.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span><span class="w"></span>
+<h3 id="-inserttabs">-InsertTabs</h3>
+<p>Insert tabs before writing the text.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Int32</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-nonewline">-NoNewLine</h3>
+<p>Wont add a new line after writing to screen.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
