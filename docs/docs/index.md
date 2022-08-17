@@ -111,6 +111,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Update-ListOfDDC`](https://smitpi.github.io/PSToolKit/Update-ListOfDDC) -- Update list of ListOfDDCs in the registry
 - [`Update-LocalHelp`](https://smitpi.github.io/PSToolKit/Update-LocalHelp) -- Downloads and saves help files locally
 - [`Update-MyModulesFromGitHub`](https://smitpi.github.io/PSToolKit/Update-MyModulesFromGitHub) -- Updates my modules
+- [`Update-PSDefaultParameter`](https://smitpi.github.io/PSToolKit/Update-PSDefaultParameter) -- Updates the $PSDefaultParameterValues variable
 - [`Update-PSModuleInfo`](https://smitpi.github.io/PSToolKit/Update-PSModuleInfo) -- Update PowerShell module manifest file
 - [`Update-PSToolKitConfigFile`](https://smitpi.github.io/PSToolKit/Update-PSToolKitConfigFile) -- Manages the config files for the PSToolKit Module.
 - [`Write-Ascii`](https://smitpi.github.io/PSToolKit/Write-Ascii) -- Create Ascii Art

@@ -13,8 +13,8 @@ Writes the given into to screen
 ## SYNTAX
 
 ```
-Write-PSToolKitMessage [-Action] <String> [[-Severity] <String>] [-Object] <String[]> [-Message] <String[]>
- [[-Object2] <String[]>] [[-Message2] <String[]>] [<CommonParameters>]
+Write-PSToolKitMessage [-Action] <String> [[-Severity] <String>] [-Object] <String[]> [[-Message] <String[]>]
+ [[-MessageColor] <String[]>] [[-InsertTabs] <Int32>] [-NoNewLine] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,7 +24,7 @@ Writes the given into to screen
 
 ### EXAMPLE 1
 ```
-dir | Write-PSToolKitMessage -Action Exists -Severity Information -Message 'its already there'
+Write-PSToolKitMessage -Action Getting -Severity Information -Object (get-item .) -Message "This is","the directory","you are in." -MessageColor Cyan,DarkGreen,DarkRed
 ```
 
 ## PARAMETERS
@@ -75,22 +75,23 @@ Accept wildcard characters: False
 ```
 
 ### -Message
-The Details.
+Message to display.
+This can be an array of strings as well, to have different colours in the text.+
 
 ```yaml
 Type: String[]
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Object2
-The second object to be reported on.
+### -MessageColor
+The Colour of the corresponding message in the array.
 
 ```yaml
 Type: String[]
@@ -104,17 +105,32 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Message2
-The second message Details.
+### -InsertTabs
+Insert tabs before writing the text.
 
 ```yaml
-Type: String[]
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
-Default value: None
+Position: 7
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoNewLine
+Wont add a new line after writing to screen.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -180,7 +180,7 @@ function Find-OnlineModule {
 		$fragments.Add("![PS](https://www.powershellgallery.com/Content/Images/Branding/psgallerylogo.svg)`n")
 		foreach ($item in $FinalReport) {
 			$galleryLink = "https://www.powershellgallery.com/Packages/$($item.name)/$($item.version)"
-			$fragments.Add("## <img src=`"https://e1.pngegg.com/pngimages/64/313/png-clipart-simply-styled-icon-set-731-icons-free-powershell-white-and-blue-logo-illustration-thumbnail.png`" align=`"left`" style=`"height: 32px`"/>")
+			#$fragments.Add("## <img src=`"https://e1.pngegg.com/pngimages/64/313/png-clipart-simply-styled-icon-set-731-icons-free-powershell-white-and-blue-logo-illustration-thumbnail.png`" align=`"left`" style=`"height: 10px`"/>")
 			$fragments.Add(" [$($item.name)]($gallerylink) | $($item.version)`n")
 			$fragments.Add("Published: $($item.PublishedDate) by $($item.Authors)`n")
 			$fragments.Add("<span style='font-weight:Lighter;'>$($item.Description)</span>`n")
@@ -192,20 +192,15 @@ function Find-OnlineModule {
 		}
 		$fragments.add("*Updated: $(Get-Date -Format U) UTC*")
 		$fragments | Out-File "$(Join-Path -Path $ReportPath -ChildPath "\PSGallery-$(Get-Date -Format yyyy.MM.dd-HH.mm).md")" -Encoding utf8 -Force
+		Show-Markdown "$(Join-Path -Path $ReportPath -ChildPath "\PSGallery-$(Get-Date -Format yyyy.MM.dd-HH.mm).md")" -UseBrowser
 	}
 	if ($export -like 'Host') {$FinalReport}
 
 	if ($DownloadJeffReport) {
-		Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/jdhitsolutions/PSGalleryReport/main/psgallery-filtered.md' -OutFile "$($ReportPath)\psgallery-filtered.md"
-		Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/jdhitsolutions/PSGalleryReport/main/psgallery-downloads.md' -OutFile "$($ReportPath)\psgallery-downloads.md"
-		Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/jdhitsolutions/PSGalleryReport/main/psgallery-downloads-community.md' -OutFile "$($ReportPath)\psgallery-downloads-community.md"
-		Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/jdhitsolutions/PSGalleryReport/main/psgallery-authors.md' -OutFile "$($ReportPath)\psgallery-authors.md"
-		
-
-		Show-Markdown "$($ReportPath)\psgallery-filtered.md" -UseBrowser
-		Show-Markdown "$($ReportPath)\psgallery-downloads.md" -UseBrowser
-		Show-Markdown "$($ReportPath)\psgallery-downloads-community.md" -UseBrowser
-		Show-Markdown "$($ReportPath)\psgallery-authors.md" -UseBrowser
+	
+		Start-Process 'https://github.com/jdhitsolutions/PSGalleryReport/blob/main/psgallery-filtered.md'
+		Start-Process 'https://github.com/jdhitsolutions/PSGalleryReport/blob/main/psgallery-downloads.md'
+		Start-Process 'https://github.com/jdhitsolutions/PSGalleryReport/blob/main/psgallery-downloads-community.md'
 
 	}
 }

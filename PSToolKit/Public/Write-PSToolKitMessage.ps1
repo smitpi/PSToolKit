@@ -32,12 +32,6 @@ Created [31/03/2022_15:53] Initial Script Creating
 
 #>
 
-<#
-
-.DESCRIPTION
- Writes the given into to screen
-
-#>
 
 <#
 .SYNOPSIS
@@ -56,16 +50,19 @@ Severity of the entry.
 The object to be reported on.
 
 .PARAMETER Message
-The Details.
+Message to display. This can be an array of strings as well, to have different colours in the text.+
 
-.PARAMETER Object2
-The second object to be reported on.
+.PARAMETER MessageColor
+The Colour of the corresponding message in the array.
 
-.PARAMETER Message2
-The second message Details.
+.PARAMETER InsertTabs
+Insert tabs before writing the text.
+
+.PARAMETER NoNewLine
+Wont add a new line after writing to screen.
 
 .EXAMPLE
-dir | Write-PSToolKitMessage -Action Exists -Severity Information -Message 'its already there'
+Write-PSToolKitMessage -Action Getting -Severity Information -Object (get-item .) -Message "This is","the directory","you are in." -MessageColor Cyan,DarkGreen,DarkRed
 
 #>
 Function Write-PSToolKitMessage {
@@ -80,44 +77,48 @@ Function Write-PSToolKitMessage {
 		[string]$Severity = 'Information',
 		[Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromRemainingArguments = $false, Position = 2)]
 		[string[]]$Object,
-		[Parameter(Mandatory = $true, Position = 3)]
+		[Parameter(Position = 3)]
 		[string[]]$Message,
+		[ValidateSet('Black', 'Blue', 'Cyan', 'DarkBlue', 'DArkCyan', 'DArkGrey', 'DarkGreen', 'DarkMagenta', 'DarkRed', 'DarkYellow', 'Gray', 'Green', 'Magenta', 'Red', 'White', 'Yellow')]
 		[Parameter(Position = 4)]
-		[string[]]$Object2,
-		[Parameter(Position = 5)]
-		[string[]]$Message2
+		[string[]]$MessageColor,
+		[Parameter(Position = 6)]
+		[int]$InsertTabs = 0,
+		[Parameter(Position = 6)]
+		[switch]$NoNewLine = $false
 	)
 
 	process {
+		if ($InsertTabs -ne 0) {
+			0..$InsertTabs | ForEach-Object {Write-Host "`t" -NoNewline}
+		}
+	
 		if ($Severity -like 'Warning') {
 			Write-Host 'WARNING - ' -ForegroundColor Yellow -NoNewline
 			Write-Host "[$(Get-Date -Format HH:mm:ss)]" -ForegroundColor Gray -NoNewline
 			Write-Host "[$($Action)] " -ForegroundColor Yellow -NoNewline
 			Write-Host "$($Object) " -ForegroundColor Cyan -NoNewline
-			Write-Host "$($Message) " -ForegroundColor DarkGray -NoNewline
-			Write-Host "$($Object2) " -ForegroundColor Cyan -NoNewline
-			Write-Host "$($Message2) " -ForegroundColor DarkGray
 		} elseif ($Severity -like 'Error') {
 			Write-Host 'ERROR - ' -ForegroundColor Red -NoNewline
 			Write-Host "[$(Get-Date -Format HH:mm:ss)]" -ForegroundColor Gray -NoNewline
 			Write-Host "[$($Action)] " -ForegroundColor Yellow -NoNewline
 			Write-Host "$($Object) " -ForegroundColor Cyan -NoNewline
-			Write-Host "$($Message) " -ForegroundColor DarkGray -NoNewline
-			Write-Host "$($Object2) " -ForegroundColor Cyan -NoNewline
-			Write-Host "$($Message2) " -ForegroundColor DarkGray
 		} else {
 			Write-Host "[$(Get-Date -Format HH:mm:ss)]" -ForegroundColor Gray -NoNewline
 			Write-Host "[$($Action)] " -ForegroundColor Yellow -NoNewline
 			Write-Host "$($Object) " -ForegroundColor Cyan -NoNewline
-			Write-Host "$($Message) " -ForegroundColor DarkGray -NoNewline
-			Write-Host "$($Object2) " -ForegroundColor Cyan -NoNewline
-			Write-Host "$($Message2) " -ForegroundColor DarkGray
-
 		}
-		Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
+		0..($Message.Count - 1) | ForEach-Object {
+			Write-Host "$($Message[$_]) " -ForegroundColor $MessageColor[$_] -NoNewline
+		}
+		if (-not($NoNewLine)) {
+			Write-Host ''
+		}
+
 	}
 } #end Function
 
+#'Black','Blue','Cyan','DarkBlue','DArkCyan','DArkGrey','DarkGreen','DarkMagenta','DarkRed','DarkYellow','Gray','Green','Magenta','Red','White','Yellow',)
 
 $scriptblock = {
 	@('Starting', 'Getting', 'Copying', 'Moving', 'Complete', 'Deleting', 'Changing', 'Failed', 'Exists')
