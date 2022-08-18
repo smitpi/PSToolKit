@@ -13,8 +13,7 @@ Connect to a vSphere cluster to perform other commands or scripts
 ## SYNTAX
 
 ```
-Connect-VMWareCluster [[-vCenterIp] <String>] [[-vCenterUser] <String>] [[-vCentrePass] <SecureString>]
- [<CommonParameters>]
+Connect-VMWareCluster [[-vCenterIp] <String>] [[-vCenterCredencial] <PSCredential>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,7 +23,7 @@ Connect to a vSphere cluster to perform other commands or scripts
 
 ### EXAMPLE 1
 ```
-Connect-VMWareCluster -vCenterUser $vCenterUser -vCentrePass $vCentrePass
+Connect-VMWareCluster -vCenterIp 192.168.x.x -vCenterCredencial $cred
 ```
 
 ## PARAMETERS
@@ -44,31 +43,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -vCenterUser
-Username to connect with
+### -vCenterCredencial
+{{ Fill vCenterCredencial Description }}
 
 ```yaml
-Type: String
+Type: PSCredential
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -vCentrePass
-Secure string
-
-```yaml
-Type: SecureString
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

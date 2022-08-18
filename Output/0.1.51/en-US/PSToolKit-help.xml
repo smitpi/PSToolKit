@@ -520,25 +520,13 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>vCenterUser</maml:name>
+          <maml:name>vCenterCredencial</maml:name>
           <maml:description>
-            <maml:para>Username to connect with</maml:para>
+            <maml:para>{{ Fill vCenterCredencial Description }}</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
           <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-          <maml:name>vCentrePass</maml:name>
-          <maml:description>
-            <maml:para>Secure string</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
-          <dev:type>
-            <maml:name>SecureString</maml:name>
+            <maml:name>PSCredential</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -559,25 +547,13 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>vCenterUser</maml:name>
+        <maml:name>vCenterCredencial</maml:name>
         <maml:description>
-          <maml:para>Username to connect with</maml:para>
+          <maml:para>{{ Fill vCenterCredencial Description }}</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
         <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-        <maml:name>vCentrePass</maml:name>
-        <maml:description>
-          <maml:para>Secure string</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
-        <dev:type>
-          <maml:name>SecureString</maml:name>
+          <maml:name>PSCredential</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -593,7 +569,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Connect-VMWareCluster -vCenterUser $vCenterUser -vCentrePass $vCentrePass</dev:code>
+        <dev:code>Connect-VMWareCluster -vCenterIp 192.168.x.x -vCenterCredencial $cred</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>

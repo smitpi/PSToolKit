@@ -49,32 +49,26 @@ Connect to a vSphere cluster to perform other commands or scripts
 .PARAMETER vCenterIp
 vCenter IP or name
 
-.PARAMETER vCenterUser
-Username to connect with
+.PARAMETER CenterCredencial
+Credential to connect with.
 
-.PARAMETER vCentrePass
-Secure string
 
 .EXAMPLE
-Connect-VMWareCluster -vCenterUser $vCenterUser -vCentrePass $vCentrePass
+Connect-VMWareCluster -vCenterIp 192.168.x.x -vCenterCredencial $cred
 
 #>
 Function Connect-VMWareCluster {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Connect-VMWareCluster')]
     Param(
         [string]$vCenterIp,
-        [string]$vCenterUser,
-        [securestring]$vCentrePass
+        [pscredential]$vCenterCredencial
     )
-
-    #$vCenterCred = Get-Credential -Message VCSA -UserName $vCenterUser
-    #$vCenterPass = 'qqq' # password
 
     # Ignore unsigned ssl certificates and increase the http timeout value
     Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false | Out-Null
     Set-PowerCLIConfiguration -Scope User -ParticipateInCeip $false -Confirm:$false | Out-Null
 
     # Connect to vCenter server
-    Connect-VIServer -Server $vCenterIp -User $vCenterUser -Password $vCentrePass
+    Connect-VIServer -Server $vCenterIp -Credential $vCenterCredencial
 
 } #end Function
