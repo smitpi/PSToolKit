@@ -400,15 +400,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#-vcenteruser" class="md-nav__link">
-    -vCenterUser
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-vcentrepass" class="md-nav__link">
-    -vCentrePass
+  <a href="#-vcentercredencial" class="md-nav__link">
+    -vCenterCredencial
   </a>
   
 </li>
@@ -1879,15 +1872,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#-vcenteruser" class="md-nav__link">
-    -vCenterUser
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-vcentrepass" class="md-nav__link">
-    -vCentrePass
+  <a href="#-vcentercredencial" class="md-nav__link">
+    -vCenterCredencial
   </a>
   
 </li>
@@ -1954,14 +1940,13 @@
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Connect to a vSphere cluster to perform other commands or scripts</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Connect-VMWareCluster [[-vCenterIp] &lt;String&gt;] [[-vCenterUser] &lt;String&gt;] [[-vCentrePass] &lt;SecureString&gt;]
- [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Connect-VMWareCluster [[-vCenterIp] &lt;String&gt;] [[-vCenterCredencial] &lt;PSCredential&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Connect to a vSphere cluster to perform other commands or scripts</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Connect-VMWareCluster -vCenterUser $vCenterUser -vCentrePass $vCentrePass
+<div class="highlight"><pre><span></span><code>Connect-VMWareCluster -vCenterIp 192.168.x.x -vCenterCredencial $cred
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-vcenterip">-vCenterIp</h3>
@@ -1976,26 +1961,14 @@
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
-<h3 id="-vcenteruser">-vCenterUser</h3>
-<p>Username to connect with</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
+<h3 id="-vcentercredencial">-vCenterCredencial</h3>
+<p>{{ Fill vCenterCredencial Description }}</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PSCredential</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-</code></pre></div>
-<h3 id="-vcentrepass">-vCentrePass</h3>
-<p>Secure string</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SecureString</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
-
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w"></span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
