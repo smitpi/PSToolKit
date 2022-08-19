@@ -111,7 +111,7 @@ Function Get-MyPSGalleryStat {
         } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 
         foreach ($Mod in $ModLists) {
-            Write-PSToolKitMessage -Action 'Collecting' -Object $mod -Message 'Online Data'
+            Write-PSToolKitMessage -Action 'Collecting' -Object $mod -Message 'Online Data' -MessageColor Gray
             $ResultModule = Find-Module $mod -Repository PSGallery
             $TotalDownloads = $TotalDownloads + [int]$ResultModule.AdditionalMetadata.downloadCount
             [void]$GalStats.Add([PSCustomObject]@{
@@ -138,7 +138,7 @@ Function Get-MyPSGalleryStat {
             $json = ConvertTo-Json -InputObject $Body
             $json = [System.Text.Encoding]::UTF8.GetBytes($json)
             $null = Invoke-WebRequest -Headers $headers -Uri $Uri -Method Patch -Body $json -ErrorAction Stop
-            Write-PSToolKitMessage -Action 'Upload' -Object 'PSGallery Stats' -Message 'To Github Gist' -Object2 'Complete'
+            Write-PSToolKitMessage -Action 'Upload' -Object 'PSGallery Stats' -Message 'To Github Gist','Complete' -MessageColor Gray,Green
         } catch {Write-Error "Can't connect to gist:`n $($_.Exception.Message)"}
 
         if ($ASObject) {$GalStats}

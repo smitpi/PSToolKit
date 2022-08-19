@@ -49,7 +49,7 @@ Connect to a vSphere cluster to perform other commands or scripts
 .PARAMETER vCenterIp
 vCenter IP or name
 
-.PARAMETER CenterCredencial
+.PARAMETER vCenterCredencial
 Credential to connect with.
 
 

@@ -44,7 +44,7 @@ Accept wildcard characters: False
 ```
 
 ### -vCenterCredencial
-{{ Fill vCenterCredencial Description }}
+Credential to connect with.
 
 ```yaml
 Type: PSCredential

@@ -79,7 +79,7 @@ Function Write-PSToolKitMessage {
 		[string[]]$Object,
 		[Parameter(Position = 3)]
 		[string[]]$Message,
-		[ValidateSet('Black', 'Blue', 'Cyan', 'DarkBlue', 'DArkCyan', 'DArkGrey', 'DarkGreen', 'DarkMagenta', 'DarkRed', 'DarkYellow', 'Gray', 'Green', 'Magenta', 'Red', 'White', 'Yellow')]
+		[ValidateSet('Black', 'Blue', 'Cyan', 'DarkBlue', 'DarkCyan', 'DarkGrey', 'DarkGreen', 'DarkMagenta', 'DarkRed', 'DarkYellow', 'Gray', 'Green', 'Magenta', 'Red', 'White', 'Yellow')]
 		[Parameter(Position = 4)]
 		[string[]]$MessageColor,
 		[Parameter(Position = 6)]
@@ -117,9 +117,6 @@ Function Write-PSToolKitMessage {
 
 	}
 } #end Function
-
-#'Black','Blue','Cyan','DarkBlue','DArkCyan','DArkGrey','DarkGreen','DarkMagenta','DarkRed','DarkYellow','Gray','Green','Magenta','Red','White','Yellow',)
-
 $scriptblock = {
 	@('Starting', 'Getting', 'Copying', 'Moving', 'Complete', 'Deleting', 'Changing', 'Failed', 'Exists')
 }

@@ -75,7 +75,7 @@ Function Move-ModulesToAllUser {
 	if (Test-Path $PersonalWindowsPowerShell) {
 		$modules = Get-ChildItem $PersonalWindowsPowerShell -Directory
 		foreach ($mod in $modules) {
-			Write-PSToolKitMessage -Action Moving -Object $mod.name -Message 'From WindowsPowerShell' -Object2 'To AllUsers'
+			Write-PSToolKitMessage -Action Moving -Object $mod.name -Message 'From WindowsPowerShell','To AllUsers' -MessageColor Gray,Green
 			try {
 				Move-Item -Path $mod.FullName -Destination 'C:\Program Files\WindowsPowerShell\Modules' -ErrorAction Stop
 			} catch {Write-Error "Error: `n`tMessage:$($_.Exception.Message)"}
@@ -84,7 +84,7 @@ Function Move-ModulesToAllUser {
 	if (Test-Path $PersonalPowerShell) {
 		$modules = Get-ChildItem $PersonalPowerShell -Directory
 		foreach ($mod in $modules) {
-			Write-PSToolKitMessage -Action Moving -Object $mod.name -Message 'From PowerShell' -Object2 'To AllUsers'
+			Write-PSToolKitMessage -Action Moving -Object $mod.name -Message 'From PowerShell','To AllUsers' -MessageColor Gray,Green
 			try {
 				Move-Item -Path $mod.FullName -Destination 'C:\Program Files\PowerShell\Modules' -ErrorAction Stop
 			} catch {Write-Error "Error: `n`tMessage:$($_.Exception.Message)"}
