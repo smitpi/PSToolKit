@@ -71,20 +71,24 @@ Function Set-VSCodeExplorerSortOrder {
 
 	if ($pscmdlet.ShouldProcess('Target', 'Operation')) {
 		try {
-			$CodePath = (Get-Process *code*)[0].CommandLine.split('--')[0].Replace('"', $null) | Get-Item -ErrorAction Stop
-			if ($CodePath.Directory -notin $($env:Path.split(';'))) {$env:path += $CodePath.Directory}
-			$settingsfile = Get-Item (Join-Path -Path $CodePath.DirectoryName -ChildPath '\data\user-data\User\settings.json') -ErrorAction Stop
+            try {
+                $settingsfile = get-item "$($env:APPDATA)\code\User\Settings.json" -ErrorAction Stop
+            } catch {
+			        $CodePath = (Get-Process *code*)[0].CommandLine.split('--')[0].Replace('"', $null) | Get-Item -ErrorAction Stop
+			        if ($CodePath.Directory -notin $($env:Path.split(';'))) {$env:path += $CodePath.Directory}
+			        $settingsfile = Get-Item (Join-Path -Path $CodePath.DirectoryName -ChildPath '\data\user-data\User\settings.json') -ErrorAction Stop
+            }
 		} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 
 		$CurrentSetting = Select-String -Path $settingsfile -Pattern '"explorer.sortOrder"'
-		Write-PSToolKitMessage -Action 'Current' -Object 'Settings Set To:' -Message $CurrentSetting.Line.Trim() -MessageColor Yellow
+		Write-PSToolKitMessage -Action 'Current' -Object 'Settings Set To:' -Message $CurrentSetting.Line.Trim()
 		try {
 			if ($SetToDefault) {(Get-Content -Path $settingsfile -Force -ErrorAction Stop) -replace '"explorer.sortOrder": "modified"', '"explorer.sortOrder": "default"' | Set-Content $settingsfile -Force -ErrorAction Stop}
 			if ($SetToModified) {(Get-Content -Path $settingsfile -Force -ErrorAction Stop) -replace '"explorer.sortOrder": "default"', '"explorer.sortOrder": "modified"' | Set-Content $settingsfile -Force -ErrorAction Stop}
 		} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 
 		$NewSetting = Select-String -Path $settingsfile -Pattern '"explorer.sortOrder"'
-		Write-PSToolKitMessage -Action 'New' -Object 'Settings Set To:' -Message $NewSetting.Line.Trim() -MessageColor Yellow
+		Write-PSToolKitMessage -Action 'New' -Object 'Settings Set To:' -Message $NewSetting.Line.Trim()
 
 	}
 } #end Function
