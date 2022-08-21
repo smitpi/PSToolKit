@@ -895,21 +895,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../Move-ModulesToAllUser/" class="md-nav__link">
-        Move-ModulesToAllUser
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../New-CitrixSiteConfigFile/" class="md-nav__link">
         New-CitrixSiteConfigFile
       </a>
@@ -1263,6 +1248,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#-keyword" class="md-nav__link">
+    -KeyWord
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-path" class="md-nav__link">
     -Path
   </a>
@@ -1272,13 +1264,6 @@
           <li class="md-nav__item">
   <a href="#-include" class="md-nav__link">
     -Include
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-keyword" class="md-nav__link">
-    -KeyWord
   </a>
   
 </li>
@@ -1348,21 +1333,6 @@
     <li class="md-nav__item">
       <a href="../Set-FolderCustomIcon/" class="md-nav__link">
         Set-FolderCustomIcon
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Set-ObjectOwnerShip/" class="md-nav__link">
-        Set-ObjectOwnerShip
       </a>
     </li>
   
@@ -1879,6 +1849,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#-keyword" class="md-nav__link">
+    -KeyWord
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-path" class="md-nav__link">
     -Path
   </a>
@@ -1888,13 +1865,6 @@
           <li class="md-nav__item">
   <a href="#-include" class="md-nav__link">
     -Include
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-keyword" class="md-nav__link">
-    -KeyWord
   </a>
   
 </li>
@@ -1968,7 +1938,7 @@
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Search for a string in a directory of ps1 scripts.</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Search-Script [[-Path] &lt;String[]&gt;] [[-Include] &lt;String[]&gt;] [[-KeyWord] &lt;String[]&gt;] [-ListView]
+<div class="highlight"><pre><span></span><code>Search-Script [[-KeyWord] &lt;String[]&gt;] [[-Path] &lt;DirectoryInfo[]&gt;] [[-Include] &lt;String[]&gt;] [-ListView]
  [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
@@ -1978,16 +1948,28 @@
 <div class="highlight"><pre><span></span><code>Search-Scripts -Path . -KeyWord &quot;contain&quot; -ListView
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
-<h3 id="-path">-Path</h3>
-<p>Path to search.</p>
+<h3 id="-keyword">-KeyWord</h3>
+<p>The string to search for.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$pwd</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(Read-Host &#39;Keyword?&#39;)</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-path">-Path</h3>
+<p>Path to search.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DirectoryInfo[]</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(Get-Item $PSScriptRoot)</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True (ByValue)</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
 <h3 id="-include">-Include</h3>
@@ -1998,20 +1980,8 @@ Default is ps1.</p>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="err">*</span><span class="l l-Scalar l-Scalar-Plain">.ps1</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-</code></pre></div>
-<h3 id="-keyword">-KeyWord</h3>
-<p>The string to search for.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
-
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(Read-Host &#39;Keyword?&#39;)</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="err">@</span><span class="l l-Scalar l-Scalar-Plain">(&#39;*.ps1&#39;, &#39;*.psm1&#39;, &#39;*.psd1&#39;)</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
