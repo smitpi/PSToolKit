@@ -50,10 +50,10 @@ Severity of the entry.
 The object to be reported on.
 
 .PARAMETER Message
-Message to display. This can be an array of strings as well, to have different colours in the text.+
+Message to display. This can be an array of strings as well, to have different colors in the text.
 
 .PARAMETER MessageColor
-The Colour of the corresponding message in the array.
+The Color of the corresponding message in the array.
 
 .PARAMETER InsertTabs
 Insert tabs before writing the text.

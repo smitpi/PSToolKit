@@ -58,17 +58,8 @@ Path to the folder for the repository.
 .PARAMETER ImportPowerShellGet
 Downloads an offline copy of PowerShellGet
 
-.PARAMETER DownloadModules
-Downloads an existing json list of modules to the new repository.
-
-.PARAMETER List
-The base or extended json module list.
-
-.PARAMETER ModuleNamesList
-A string list of module names to download.
-
 .EXAMPLE
-Install-LocalPSRepository -RepoName repo -RepoPath c:\utils\repo -DownloadModules -List BaseModules
+Install-LocalPSRepository -RepoName repo -RepoPath c:\utils\repo
 
 #>
 Function Install-LocalPSRepository {
@@ -90,17 +81,7 @@ Function Install-LocalPSRepository {
 		[ValidateScript( { $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
 				else { Throw 'Must be running an elevated prompt.' } })]
-		[switch]$ImportPowerShellGet,
-
-		[Parameter(ParameterSetName = 'import')]
-		[switch]$DownloadModules,
-
-		[Parameter(ParameterSetName = 'import')]
-		[ValidateSet('BaseModules', 'ExtendedModules')]
-		[string]$List = 'ExtendedModules',
-
-		[Parameter(ParameterSetName = 'import', ValueFromPipeline)]
-		[string[]]$ModuleNamesList
+		[switch]$ImportPowerShellGet
 	)
 
 	try {
@@ -137,24 +118,5 @@ Function Install-LocalPSRepository {
 			Get-ChildItem "$($env:TMP)\OfflinePowerShellGet\*\*\PowerShellGet.psd1" | ForEach-Object { Publish-Module -Path $_.DirectoryName -Repository $RepoName -NuGetApiKey 'AnyStringWillDo' -Force }
 		}
 		catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" }
-	}
-	if ($DownloadModules) {
-		[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-		$ConfigPath = [IO.Path]::Combine($env:ProgramFiles, 'PSToolKit', 'Config')
-		try {
-			$ConPath = Get-Item $ConfigPath
-		}
-		catch { Write-Error 'Config path foes not exist'; exit }
-		if ($List -like 'BaseModules') { $mods = (Get-Content (Join-Path $ConPath.FullName -ChildPath BaseModuleList.json) | ConvertFrom-Json).name }
-		elseif ($List -like 'ExtendedModules') { $mods = (Get-Content (Join-Path $ConPath.FullName -ChildPath ExtendedModuleList.json) | ConvertFrom-Json).name }
-		elseif ($ModuleNamesList) { $mods = $ModuleNamesList }
-
-		if (-not($mods)) { throw 'Couldnt get a valid modules list'; exit }
-		else {
-			$mods | ForEach-Object {
-				Write-Color '[Installing] ', $($_), ' to folder: ', $($RepoPath) -Color Yellow, Cyan, Green, cyan, Green, DarkRed
-				Save-Package -Name $_ -Provider NuGet -Source https://www.powershellgallery.com/api/v2 -Path $RepoPath | Out-Null
-			}
-		}
 	}
 } #end Function

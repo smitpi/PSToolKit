@@ -101,7 +101,7 @@ if (`$PSEdition -eq 'Desktop') {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 }
 
-#Enable concise errorview for PS7 and up
+#Enable concise error view for PS7 and up
 if (`$psversiontable.psversion.major -ge 7) {
     `$ErrorView = 'ConciseView'
 }

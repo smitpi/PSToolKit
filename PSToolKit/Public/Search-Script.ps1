@@ -65,24 +65,26 @@ Search-Scripts -Path . -KeyWord "contain" -ListView
 #>
 FUNCTION Search-Script {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Search-Scripts')]
+    [Alias('searchsc')]
     PARAM(
-        [STRING[]]$Path = $pwd,
-        [STRING[]]$Include = '*.ps1',
         [STRING[]]$KeyWord = (Read-Host 'Keyword?'),
+        [Parameter(ValueFromPipeline = $true)]
+        [System.IO.DirectoryInfo[]]$Path = (Get-Item $PSScriptRoot),
+        [STRING[]]$Include = @('*.ps1', '*.psm1', '*.psd1'),
         [SWITCH]$ListView
     )
     BEGIN {
 
     }
     PROCESS {
-        $Result = Get-ChildItem -Path $Path -Include $Include -Recurse | Sort-Object Directory, CreationTime | Select-String -SimpleMatch $KeyWord -OutVariable Result | Out-Null
+        Get-ChildItem -Path $Path -Include $Include -Recurse | Sort-Object Directory, CreationTime | Select-String -SimpleMatch $KeyWord -OutVariable Result
     }
     END {
         IF ($ListView) {
             $Result | Format-List -Property Path, LineNumber, Line
-        }
-        ELSE {
+        } ELSE {
             $Result | Format-Table -GroupBy Path -Property LineNumber, Line -AutoSize
         }
     }
 }
+New-Alias -Name fcmd -Value Search-Script -Description 'search scripts for text' -Option AllScope -Scope global -Force

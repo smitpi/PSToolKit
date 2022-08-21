@@ -69,8 +69,8 @@ Function Update-MyModulesFromGitHub {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/$($ModuleName)/Update-MyModulesFromGitHub')]
 	[OutputType([System.Object[]])]
 	PARAM(
-        [ValidateSet('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit')]
-        [string[]]$Modules = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit'),
+		[ValidateSet('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit')]
+		[string[]]$Modules = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit'),
 		[ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
 				else { Throw 'Must be running an elevated prompt run this function' } })]
@@ -79,7 +79,7 @@ Function Update-MyModulesFromGitHub {
 	)
 
 	foreach ($ModuleName in $Modules) {
-        Write-Host '[Checking]: ' -ForegroundColor Yellow -NoNewline; Write-Host "$($ModuleName): " -ForegroundColor Cyan
+		Write-Host '[Checking]: ' -ForegroundColor Yellow -NoNewline; Write-Host "$($ModuleName): " -ForegroundColor Cyan
 
 		if ($AllUsers) {
 			$ModulePath = [IO.Path]::Combine($env:ProgramFiles, 'WindowsPowerShell', 'Modules', "$($ModuleName)")
@@ -138,27 +138,29 @@ Function Update-MyModulesFromGitHub {
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Removing temp files"
 			Remove-Item "$env:tmp\$($ModuleName).zip"
 			Remove-Item "$env:tmp\$($ModuleName)-master" -Recurse
+
+			$module = Get-Module -Name $($ModuleName)
+			if (-not($module)) { $module = Get-Module -Name $($ModuleName) -ListAvailable }
+			$latestModule = $module | Sort-Object -Property version -Descending | Select-Object -First 1
+			[string]$version = (Test-ModuleManifest -Path $($latestModule.Path.Replace('psm1', 'psd1'))).Version
+			$Description = (Test-ModuleManifest -Path $($latestModule.Path.Replace('psm1', 'psd1'))).Description
+			[datetime]$CreateDate = (Get-Content -Path $($latestModule.Path.Replace('psm1', 'psd1')) | Where-Object { $_ -like '# Generated on: *' }).replace('# Generated on: ', '')
+			$CreateDate = $CreateDate.ToUniversalTime()
+
+			Write-Host "`t[$($ModuleName)]" -NoNewline -ForegroundColor Cyan; Write-Host ' Details' -ForegroundColor Green
+			[PSCustomObject]@{
+				Name        = $($ModuleName)
+				Description = $Description
+				Version     = $version
+				Date        = (Get-Date($CreateDate) -Format F)
+				Path        = $module.Path
+			}
 		}
 		$ForceUpdate = $false
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Complete]"
-    Remove-Module -Name $($ModuleName) -Force -ErrorAction SilentlyContinue
-    Import-Module $($ModuleName) -Force -ErrorAction SilentlyContinue
-
-    $module = Get-Module -Name $($ModuleName)
-    if (-not($module)) { $module = Get-Module -Name $($ModuleName) -ListAvailable }
-    $latestModule = $module | Sort-Object -Property version -Descending | Select-Object -First 1
-    [string]$version = (Test-ModuleManifest -Path $($latestModule.Path.Replace('psm1', 'psd1'))).Version
-    $Description = (Test-ModuleManifest -Path $($latestModule.Path.Replace('psm1', 'psd1'))).Description
-    [datetime]$CreateDate = (Get-Content -Path $($latestModule.Path.Replace('psm1', 'psd1')) | Where-Object { $_ -like '# Generated on: *' }).replace('# Generated on: ', '')
-    $CreateDate = $CreateDate.ToUniversalTime()
-
-    write-host "`t[$($ModuleName)]" -NoNewline -ForegroundColor Cyan; Write-Host " Details" -ForegroundColor Green
-    [PSCustomObject]@{
-            Name         = $($ModuleName)
-            Description  = $Description
-            Version      = $version
-            Date         = (Get-Date($CreateDate) -Format F)
-            Path         = $module.Path
-        }
+		Remove-Module -Name $($ModuleName) -Force -ErrorAction SilentlyContinue
+		try {
+			Import-Module $($ModuleName) -Force -ErrorAction Stop
+		} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 	}
 } #end Function

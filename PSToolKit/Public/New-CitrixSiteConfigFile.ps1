@@ -154,7 +154,18 @@ Function New-CitrixSiteConfigFile {
 		$StoreFrontURL = Read-Host 'StoreFront URL'
 		$GateWayURL = Read-Host 'Citrix GateWay URL'
 		$DirectorURL = Read-Host 'Citrix Director URL'
+		$DomainFQDN = Read-Host 'Domain FQDN'
+		$DomainNetBios = Read-Host 'Domain NetBios'
+		$RPath = Read-Host 'Default Reports Folder Path'
+		try {
+			$ReportPath = Get-Item $RPath -ErrorAction Stop
+		} catch {
+			Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"
+			Write-Warning 'Trying to create the folder'
+			$ReportPath = New-Item $RPath -ItemType Directory -Force
+		}
 	} catch {Write-Warning "Error: `n`tMessage:$(_.Exception.Message)"}
+
 
 	try {
 		$site = Get-BrokerSite -AdminAddress $DataColectors[0] -ErrorAction Stop
@@ -170,14 +181,7 @@ Function New-CitrixSiteConfigFile {
 		$siteName = Read-Host 'Site Name'
 	}
 
-	$RPath = Read-Host 'Default Reports Folder Path'
-	try {
-		$ReportPath = Get-Item $RPath -ErrorAction Stop
-	} catch {
-		Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"
-		Write-Warning 'Trying to create the folder'
-		$ReportPath = New-Item $RPath -ItemType Directory -Force
-	}
+
 
 	#if ([string]::IsNullOrEmpty($siteName)) {$siteName}
 
@@ -195,6 +199,8 @@ Function New-CitrixSiteConfigFile {
 			CTXLicenseServer = $CTXLicenseServer
 			VDA              = $VDA
 			Other            = $Other
+			DomainFQDN       = $DomainFQDN
+			DomainNetBios    = $DomainNetBios
 			StoreFrontURL    = $StoreFrontURL
 			GateWayURL       = $GateWayURL
 			DirectorURL      = $DirectorURL
