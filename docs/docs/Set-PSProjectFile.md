@@ -24,7 +24,7 @@ Creates and modify needed files for a PS project from existing module files.
 
 ### EXAMPLE 1
 ```
-Set-PSProjectFiles -ModuleScriptFile blah -VersionBump Minor -mkdocs serve
+Set-PSProjectFiles -ModuleScriptFile blah.psm1 -VersionBump Minor -mkdocs serve
 ```
 
 ## PARAMETERS
@@ -60,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -BuildHelpFiles
-{{ Fill BuildHelpFiles Description }}
+Use Platyps to build markdown help files.
 
 ```yaml
 Type: SwitchParameter
@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -mkdocs
-Create and test the mkdocs site
+Create or test the mkdocs site
 
 ```yaml
 Type: String
@@ -90,7 +90,7 @@ Accept wildcard characters: False
 ```
 
 ### -CopyNestedModules
-Will copy the required modules to the folder.
+Will copy the required modules to the nested modules folder.
 
 ```yaml
 Type: SwitchParameter

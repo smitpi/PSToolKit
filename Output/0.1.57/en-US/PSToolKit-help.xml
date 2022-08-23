@@ -6698,7 +6698,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>mkdocs</maml:name>
           <maml:description>
-            <maml:para>Create and test the mkdocs site</maml:para>
+            <maml:para>Create or test the mkdocs site</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -6710,7 +6710,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>BuildHelpFiles</maml:name>
           <maml:description>
-            <maml:para>{{ Fill BuildHelpFiles Description }}</maml:para>
+            <maml:para>Use Platyps to build markdown help files.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -6721,7 +6721,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>CopyNestedModules</maml:name>
           <maml:description>
-            <maml:para>Will copy the required modules to the folder.</maml:para>
+            <maml:para>Will copy the required modules to the nested modules folder.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -6781,7 +6781,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>BuildHelpFiles</maml:name>
         <maml:description>
-          <maml:para>{{ Fill BuildHelpFiles Description }}</maml:para>
+          <maml:para>Use Platyps to build markdown help files.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -6793,7 +6793,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>mkdocs</maml:name>
         <maml:description>
-          <maml:para>Create and test the mkdocs site</maml:para>
+          <maml:para>Create or test the mkdocs site</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -6805,7 +6805,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>CopyNestedModules</maml:name>
         <maml:description>
-          <maml:para>Will copy the required modules to the folder.</maml:para>
+          <maml:para>Will copy the required modules to the nested modules folder.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -6849,7 +6849,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Set-PSProjectFiles -ModuleScriptFile blah -VersionBump Minor -mkdocs serve</dev:code>
+        <dev:code>Set-PSProjectFiles -ModuleScriptFile blah.psm1 -VersionBump Minor -mkdocs serve</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -9591,7 +9591,7 @@
             <maml:name>String[]</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>@('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit')</dev:defaultValue>
+          <dev:defaultValue>@('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit', 'PSWindowsApp')</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AllUsers</maml:name>
@@ -9628,7 +9628,7 @@
           <maml:name>String[]</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>@('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit')</dev:defaultValue>
+        <dev:defaultValue>@('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit', 'PSWindowsApp')</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AllUsers</maml:name>

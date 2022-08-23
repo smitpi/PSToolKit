@@ -32,8 +32,6 @@ Created [29/07/2022_07:27] Initial Script Creating
 
 #>
 
-#Requires -Module ImportExcel
-#Requires -Module PSWriteHTML
 #Requires -Module PSWriteColor
 
 <# 
@@ -69,8 +67,8 @@ Function Update-MyModulesFromGitHub {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/$($ModuleName)/Update-MyModulesFromGitHub')]
 	[OutputType([System.Object[]])]
 	PARAM(
-		[ValidateSet('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit')]
-		[string[]]$Modules = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit'),
+		[ValidateSet('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit','PSWindowsApp')]
+		[string[]]$Modules = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit', 'PSWindowsApp'),
 		[ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
 				else { Throw 'Must be running an elevated prompt run this function' } })]

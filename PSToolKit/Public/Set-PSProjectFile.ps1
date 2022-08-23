@@ -50,14 +50,17 @@ Creates and modify needed files for a PS project from existing module files.
 .PARAMETER ModuleScriptFile
 Path to module .psm1 file.
 
+.PARAMETER BuildHelpFiles
+Use Platyps to build markdown help files.
+
 .PARAMETER CopyNestedModules
-Will copy the required modules to the folder.
+Will copy the required modules to the nested modules folder.
 
 .PARAMETER VersionBump
 This will increase the version of the module.
 
 .PARAMETER mkdocs
-Create and test the mkdocs site
+Create or test the mkdocs site
 
 .PARAMETER GitPush
 Run Git Push when done.
@@ -66,7 +69,7 @@ Run Git Push when done.
 Copies the module to program files.
 
 .EXAMPLE
-Set-PSProjectFiles -ModuleScriptFile blah -VersionBump Minor -mkdocs serve
+Set-PSProjectFiles -ModuleScriptFile blah.psm1 -VersionBump Minor -mkdocs serve
 
 #>
 Function Set-PSProjectFile {
