@@ -6325,7 +6325,7 @@ Export-ModuleMember -Function Save-PSModules
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
-# ModifiedOn:       2022/08/21 10:35:44
+# ModifiedOn:       2022/08/24 09:16:56
 # Synopsis:         Search for a string in a directory of ps1 scripts.
 #############################################
  
@@ -6376,7 +6376,7 @@ FUNCTION Search-Script {
         }
     }
 }
-New-Alias -Name fcmd -Value Search-Script -Description 'search scripts for text' -Option AllScope -Scope global -Force
+New-Alias -Name searchsc -Value Search-Script -Description 'search scripts for text' -Option AllScope -Scope global -Force
  
 Export-ModuleMember -Function Search-Script
 #endregion

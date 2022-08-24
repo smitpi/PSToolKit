@@ -87,4 +87,4 @@ FUNCTION Search-Script {
         }
     }
 }
-New-Alias -Name fcmd -Value Search-Script -Description 'search scripts for text' -Option AllScope -Scope global -Force
+New-Alias -Name searchsc -Value Search-Script -Description 'search scripts for text' -Option AllScope -Scope global -Force
