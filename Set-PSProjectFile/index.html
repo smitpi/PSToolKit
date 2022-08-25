@@ -1306,13 +1306,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#-copynestedmodules" class="md-nav__link">
-    -CopyNestedModules
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#-gitpush" class="md-nav__link">
     -GitPush
   </a>
@@ -1322,6 +1315,13 @@
           <li class="md-nav__item">
   <a href="#-copytomodulesfolder" class="md-nav__link">
     -CopyToModulesFolder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-copynestedmodules" class="md-nav__link">
+    -CopyNestedModules
   </a>
   
 </li>
@@ -1898,13 +1898,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#-copynestedmodules" class="md-nav__link">
-    -CopyNestedModules
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#-gitpush" class="md-nav__link">
     -GitPush
   </a>
@@ -1914,6 +1907,13 @@
           <li class="md-nav__item">
   <a href="#-copytomodulesfolder" class="md-nav__link">
     -CopyToModulesFolder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-copynestedmodules" class="md-nav__link">
+    -CopyNestedModules
   </a>
   
 </li>
@@ -1981,7 +1981,7 @@
 <p>Creates and modify needed files for a PS project from existing module files.</p>
 <h2 id="syntax">SYNTAX</h2>
 <div class="highlight"><pre><span></span><code>Set-PSProjectFile [-ModuleScriptFile] &lt;FileInfo&gt; [[-VersionBump] &lt;String&gt;] [-BuildHelpFiles]
- [[-mkdocs] &lt;String&gt;] [-CopyNestedModules] [-GitPush] [-CopyToModulesFolder] [&lt;CommonParameters&gt;]
+ [[-mkdocs] &lt;String&gt;] [-GitPush] [-CopyToModulesFolder] [-CopyNestedModules] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Creates and modify needed files for a PS project from existing module files.</p>
@@ -2038,18 +2038,6 @@
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
-<h3 id="-copynestedmodules">-CopyNestedModules</h3>
-<p>Will copy the required modules to the nested modules folder.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
-
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-</code></pre></div>
 <h3 id="-gitpush">-GitPush</h3>
 <p>Run Git Push when done.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
@@ -2064,6 +2052,18 @@
 </code></pre></div>
 <h3 id="-copytomodulesfolder">-CopyToModulesFolder</h3>
 <p>Copies the module to program files.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-copynestedmodules">-CopyNestedModules</h3>
+<p>Will copy the required modules to the nested modules folder.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
