@@ -82,12 +82,13 @@ Function Set-PSProjectFile {
 		[switch]$BuildHelpFiles,
 		[ValidateSet('serve', 'deploy')]
 		[string]$mkdocs = 'None',
-		[switch]$CopyNestedModules = $false,
 		[Switch]$GitPush = $false,
 		[ValidateScript( { $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
 				else { Throw 'Must be running an elevated prompt.' } })]
-		[switch]$CopyToModulesFolder = $false
+		[switch]$CopyToModulesFolder = $false,
+		[switch]$CopyNestedModules = $false
+
 	)
 	
 	#region module import
@@ -112,7 +113,7 @@ Function Set-PSProjectFile {
 	[System.Collections.ArrayList]$Issues = @()
 	#endregion
 	#region Remove folders
-	Write-Color '[Starting]', ' Removing Old Folders' -Color Yellow, DarkCyan
+	Write-Color '[Starting]', ' Removing Output Folders' -Color Yellow, DarkCyan
 	try {
 		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop }
 		if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force -ErrorAction Stop }
@@ -146,7 +147,7 @@ Function Set-PSProjectFile {
 	} 
 	#endregion
 	#region add dateline
-	Write-Color '[Starting]', 'Adding verbose date' -Color Yellow, DarkCyan
+	Write-Color '[Starting]', ' Adding verbose date' -Color Yellow, DarkCyan
 	try {
 		$ModuleManifestFile = Get-Item ($module.Path).Replace('.psm1', '.psd1')
 		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object * -ErrorAction Stop
@@ -157,32 +158,34 @@ Function Set-PSProjectFile {
 	} catch { Write-Error "Error: Updating Date in Module Manifest File  `nMessage:$($_.Exception.message)"; return }
 	#endregion
 	#region Create Folders
-	Write-Color '[Starting]', ' Creating New Folder Structure' -Color Yellow, DarkCyan
+	Write-Color '[Starting]', ' Creating Output Folder' -Color Yellow, DarkCyan
 	try {
 		$ModuleOutputFolder = [IO.Path]::Combine($ModuleBase, 'Output', $($ModuleManifest.Version.ToString()))
 		$ModuleOutput = New-Item $ModuleOutputFolder -ItemType Directory -Force | Get-Item -ErrorAction Stop
-	} catch { Write-Error "Error: Creating folders `nMessage:$($_.Exception.message)"; return }
+	} catch { Write-Error "Error:Creating Output Folder `nMessage:$($_.Exception.message)"; return }
 	#endregion
 
 	#region platyps
 	if ($BuildHelpFiles) {
-		Write-Color '[Starting]', ' Creating Markdown help files' -Color Yellow, DarkCyan
+		Write-Color '[Starting]', '  Removing Docs Folders' -Color Yellow, DarkCyan
 		try {
 			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
 			if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }
-			$ModuledocsFolder = [IO.Path]::Combine($ModuleBase, 'docs', 'docs')
-			$Moduledocs = New-Item $ModuledocsFolder -ItemType Directory -Force | Get-Item -ErrorAction Stop
-			$ModuleExternalHelpFolder = [IO.Path]::Combine($ModuleOutput, 'en-US')
-			$ModuleExternalHelp = New-Item $ModuleExternalHelpFolder -ItemType Directory -Force | Get-Item -ErrorAction Stop
 		} catch {
 			try {
 				Write-Warning "Error: Deleting Docs Folders `nMessage:$($_.Exception.message)`nRetrying"
 				Start-Sleep 10
 				if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
-				if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }
 			} catch { throw 'Error Removing Docs folder' ; return }
 		}
 		try {
+			Write-Color '[Starting]', '  Creating Mardown Help Files' -Color Yellow, DarkCyan
+
+			$ModuledocsFolder = [IO.Path]::Combine($ModuleBase, 'docs', 'docs')
+			$Moduledocs = New-Item $ModuledocsFolder -ItemType Directory -Force | Get-Item -ErrorAction Stop
+			$ModuleExternalHelpFolder = [IO.Path]::Combine($ModuleOutput, 'en-US')
+			$ModuleExternalHelp = New-Item $ModuleExternalHelpFolder -ItemType Directory -Force | Get-Item -ErrorAction Stop
+
 			$markdownParams = @{
 				Module         = $module.Name
 				OutputFolder   = $Moduledocs.FullName
@@ -191,7 +194,7 @@ Function Set-PSProjectFile {
 				HelpVersion    = $ModuleManifest.Version.ToString()
 			}
 			New-MarkdownHelp @markdownParams -Force
-		} catch { Write-Error "Error: MarkdownHelp `nMessage:$($_.Exception.message)"; return }
+		} catch { Write-Error "Error: Creating Mardown Help Files `nMessage:$($_.Exception.message)"; return }
 
 		try {
 			Compare-Object -ReferenceObject (Get-ChildItem $ModulePublicFunctions).BaseName -DifferenceObject (Get-ChildItem $Moduledocs).BaseName | Where-Object { $_.SideIndicator -like '<=' } | ForEach-Object {
@@ -219,10 +222,10 @@ Function Set-PSProjectFile {
 		} catch { Write-Error "Error: Docs check `nMessage:$($_.Exception.message)"; return }
 
 		try {
-			Write-Color '[Starting]', ' Creating External help files' -Color Yellow, DarkCyan
+			Write-Color '[Starting]', ' Creating External Help Files' -Color Yellow, DarkCyan
 			New-ExternalHelp -Path $Moduledocs.FullName -OutputPath $ModuleExternalHelp.FullName -Force -ShowProgress
 
-			Write-Color '[Starting]', ' Creating About help files' -Color Yellow, DarkCyan
+			Write-Color '[Starting]', ' Creating About Help Files' -Color Yellow, DarkCyan
 			$aboutfile = [System.Collections.Generic.List[string]]::new()
 			$aboutfile.Add('')
 			$aboutfile.Add("$($module.Name)")
@@ -241,6 +244,7 @@ Function Set-PSProjectFile {
 			$aboutfile | Set-Content -Path (Join-Path $ModuleExternalHelp.FullName -ChildPath "\about_$($module.Name).help.txt") -Force
 
 			if (!(Test-Path $ModulesInstuctions)) {
+				Write-Color '[Starting]', ' Creating Instructions File' -Color Yellow, DarkCyan
 				$instructions = [System.Collections.Generic.List[string]]::new()
 				$instructions.add("# $($module.Name)")
 				$instructions.Add(' ')
@@ -269,6 +273,7 @@ Function Set-PSProjectFile {
 				$instructions | Set-Content -Path $ModulesInstuctions
 			}
 
+			Write-Color '[Starting]', ' Creating Readme File' -Color Yellow, DarkCyan
 			$readme = [System.Collections.Generic.List[string]]::new()
 			Get-Content -Path $ModulesInstuctions | ForEach-Object { $readme.add($_) }
 			$readme.add(' ')
@@ -276,6 +281,7 @@ Function Set-PSProjectFile {
 	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $readme.add("- [``$_``](https://smitpi.github.io/$($module.Name)/$_) -- " + (Get-Help $_).SYNOPSIS) }
 			$readme | Set-Content -Path $ModuleReadme
 
+			Write-Color '[Starting]', ' Creating MkDocs Config File' -Color Yellow, DarkCyan
 			$mkdocsFunc = [System.Collections.Generic.List[string]]::new()
 			$mkdocsFunc.add("site_name: `'$($module.Name)`'")
 			$mkdocsFunc.add("site_description: `'Documentation for PowerShell Module: $($module.Name)`'")
@@ -322,6 +328,7 @@ Function Set-PSProjectFile {
 			$mkdocsFunc.add('        name: Switch to light mode')
 			$mkdocsFunc | Set-Content -Path $Modulemkdocs -Force
 
+			Write-Color '[Starting]', ' Creating MkDocs Index File' -Color Yellow, DarkCyan
 			$indexFile = [System.Collections.Generic.List[string]]::new()
 			Get-Content -Path $ModulesInstuctions | ForEach-Object { $indexFile.add($_) }
 			$indexFile.add(' ')
@@ -329,6 +336,7 @@ Function Set-PSProjectFile {
 	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $indexFile.add("- [``$_``](https://smitpi.github.io/$($module.Name)/$_) -- " + (Get-Help $_).SYNOPSIS) }
 			$indexFile | Set-Content -Path $ModuleIndex -Force
 
+			Write-Color '[Starting]', ' Creating Versioning File' -Color Yellow, DarkCyan
 			$versionfile = [System.Collections.Generic.List[PSObject]]::New()
 			$versionfile.add([pscustomobject]@{
 					version = $($moduleManifest.version).ToString()
@@ -341,7 +349,7 @@ Function Set-PSProjectFile {
 	#endregion
 	
 	#region Combine files
-	Write-Color '[Starting]', ' Creating new module files' -Color Yellow, DarkCyan
+	Write-Color '[Starting]', ' Creating Monolithic Module Files ' -Color Yellow, DarkCyan
 
 	$ModuleOutput = Get-Item $ModuleOutput
 	$rootModule = ([IO.Path]::Combine($ModuleOutput.fullname, "$($module.Name).psm1"))
@@ -368,7 +376,7 @@ Function Set-PSProjectFile {
 			$file.Add(('{0,-20}{1}' -f '# CreatedOn:', $($PrivateItem.CreationTime)))
 			$file.Add(('{0,-20}{1}' -f '# ModifiedOn:', $($PrivateItem.LastWriteTime)))
 			$file.Add('############################################')
-			Write-Color '[Processing]: ', $($PrivateItem.name) -Color Cyan, Yellow
+			Write-Color "`t[Processing]: ", $($PrivateItem.name) -Color Yellow, Gray
 			Get-Content $PrivateItem.fullname | ForEach-Object { $file.add($_) }
 			$file.add('#endregion')
 		}
@@ -395,7 +403,7 @@ Function Set-PSProjectFile {
 		$file.Add(('{0,-20}{1}' -f '# Synopsis:', $((Get-Help $($PublicItem.BaseName)).synopsis)))
 		$file.Add('#############################################')
 		$file.Add(' ')
-		Write-Color '[Processing]: ', $($PublicItem.name) -Color Cyan, Yellow
+		Write-Color "`t[Processing]: ", $($PublicItem.name) -Color yello, Gray
 
 		[int]$StartIndex = (Select-String -InputObject $PublicItem -Pattern '.SYNOPSIS*').LineNumber[0] - 2
 		[int]$EndIndex = (Get-Content $PublicItem.FullName).length
@@ -423,7 +431,7 @@ Function Set-PSProjectFile {
 	
 	#region NestedModules
 	if ($CopyNestedModules) {
-		Write-Color '[Starting]', ' Copying nested modules' -Color Yellow, DarkCyan
+		Write-Color '[Starting]', ' Copying Nested Modules' -Color Yellow, DarkCyan
 
 		if (-not(Test-Path $(Join-Path -Path $ModuleOutput -ChildPath '\NestedModules'))) {
 			New-Item -Path "$(Join-Path -Path $ModuleOutput -ChildPath '\NestedModules')" -ItemType Directory -Force | Out-Null
@@ -477,7 +485,7 @@ Function Set-PSProjectFile {
 	
 	#region mkdocs
 	if ($mkdocs -like 'serve') {
-		Write-Color '[Starting]', ' Creating MKDocs help files' -Color Yellow, DarkCyan
+		Write-Color '[Starting]', ' Creating MkDocs help files' -Color Yellow, DarkCyan
 		Start-Process "http://127.0.0.1:7070/$($module.Name)/"
 		Start-Process -FilePath mkdocs.exe -ArgumentList 'serve -a localhost:7070 --livereload --dirtyreload' -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -NoNewWindow 2>&1 | Write-Host -ForegroundColor Yellow 
 	}

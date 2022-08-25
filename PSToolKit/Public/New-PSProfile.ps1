@@ -150,12 +150,6 @@ function prompt {
     return ' '
 }
 #endregion
-
-#Region vscode addon
-Import-CommandSuite
-#endregion
-
-
 "@
 
 
