@@ -167,7 +167,7 @@ Function Set-PSProjectFile {
 
 	#region platyps
 	if ($BuildHelpFiles) {
-		Write-Color '[Starting]', '  Removing Docs Folders' -Color Yellow, DarkCyan
+		Write-Color '[Starting]', ' Removing Docs Folders' -Color Yellow, DarkCyan
 		try {
 			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
 			if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }
@@ -179,7 +179,7 @@ Function Set-PSProjectFile {
 			} catch { throw 'Error Removing Docs folder' ; return }
 		}
 		try {
-			Write-Color '[Starting]', '  Creating Mardown Help Files' -Color Yellow, DarkCyan
+			Write-Color '[Starting]', ' Creating Mardown Help Files' -Color Yellow, DarkCyan
 
 			$ModuledocsFolder = [IO.Path]::Combine($ModuleBase, 'docs', 'docs')
 			$Moduledocs = New-Item $ModuledocsFolder -ItemType Directory -Force | Get-Item -ErrorAction Stop
