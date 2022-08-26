@@ -84,7 +84,7 @@ Aliases:
 
 Required: False
 Position: 3
-Default value: 7
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -118,13 +118,14 @@ Function Update-MyModulesFromGitHub {
 			Write-Host "`t[Downloading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($ModuleName): " -ForegroundColor DarkRed
 			if (Get-Command Start-BitsTransfer) {
 				try {
-					Start-BitsTransfer -DisplayName "$($ModuleName) Download" -Source "https://codeload.github.com/smitpi/$($ModuleName)/zip/refs/heads/master" -Destination "$env:tmp\$($ModuleName).zip" -TransferType Download -ErrorAction Stop
+					Start-BitsTransfer -DisplayName "$($ModuleName) Download" -Source "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -Destination "$env:tmp\$($ModuleName).zip" -TransferType Download -ErrorAction Stop
+					
 				} catch {
 					Write-Warning 'Bits Transer failed, defaulting to webrequest'
-					Invoke-WebRequest -Uri https://codeload.github.com/smitpi/$($ModuleName)/zip/refs/heads/master -OutFile "$env:tmp\$($ModuleName).zip"
+					Invoke-WebRequest -Uri "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -OutFile "$env:tmp\$($ModuleName).zip"
 				}
 			} else {
-				Invoke-WebRequest -Uri https://codeload.github.com/smitpi/$($ModuleName)/zip/refs/heads/master -OutFile "$env:tmp\$($ModuleName).zip"
+				Invoke-WebRequest -Uri "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -OutFile "$env:tmp\$($ModuleName).zip"
 			}
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] expand into module folder"
 			Expand-Archive "$env:tmp\$($ModuleName).zip" "$env:tmp" -Force

@@ -78,7 +78,7 @@ Function Get-MyPSGalleryStat {
         [string]$GitHubUserID,
         [string]$GitHubToken,
         [switch]$History,
-        [int]$daysToReport = 7,
+        [int]$daysToReport,
         [switch]$AddtoProfile,
         [Switch]$OpenProfilePage,
         [switch]$ASObject
@@ -149,35 +149,11 @@ Function Get-MyPSGalleryStat {
     }
 
     if ($History) {
-        $end = ((Get-Date).AddDays(-$daysToReport)).ToUniversalTime()
-        try {
-            Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Connecting to Gist"
-            $headers = @{}
-            $auth = '{0}:{1}' -f $GitHubUserID, $GitHubToken
-            $bytes = [System.Text.Encoding]::ASCII.GetBytes($auth)
-            $base64 = [System.Convert]::ToBase64String($bytes)
-            $headers.Authorization = 'Basic {0}' -f $base64
-
-            $url = 'https://api.github.com/users/{0}/gists' -f $GitHubUserID
-            $AllGist = Invoke-RestMethod -Uri $url -Method Get -Headers $headers -ErrorAction Stop
-            $PRGist = $AllGist | Select-Object | Where-Object { $_.description -like 'smitpi-gallery-stats' }
-        } catch {Write-Error "Can't connect to gist:`n $($_.Exception.Message)"}
-
-        try {
-            Write-Verbose "[$(Get-Date -Format HH:mm:ss) Checking Config File"
-            $Content = (Invoke-WebRequest -Uri ($PRGist.files.'PSGalleryStats.json').raw_url -Headers $headers).content | ConvertFrom-Json -ErrorAction Stop
-        } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
-
-        [System.Collections.generic.List[PSObject]]$GalHistory = @()
-        try {
-            $Content | ForEach-Object {$GalHistory.Add($_)}
-        } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)`nCreating new file"}
-
         [System.Collections.generic.List[PSObject]]$GalTotals = @()
-        $allNames = $GalHistory.Sum | Select-Object Name | Sort-Object -Property Name -Unique
+        $allNames = $GalStats.Sum | Select-Object Name | Sort-Object -Property Name -Unique
 
         foreach ($All in $allNames) {
-            $sum = $GalHistory.Sum | Where-Object {$_.Name -like $all.Name -and $_.DateCollected -gt $end}
+            $sum = $GalStats.Sum | Where-Object {$_.Name -like $all.Name -and $_.DateCollected -gt $end}
             $span = New-TimeSpan -Start $sum[0].DateCollected -End $sum[-1].DateCollected
             $GalTotals.Add(
                 [PSCustomObject]@{
