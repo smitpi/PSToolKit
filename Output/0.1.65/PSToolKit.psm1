@@ -6434,7 +6434,7 @@ Export-ModuleMember -Function Set-FolderCustomIcon
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
-# ModifiedOn:       2022/08/28 16:11:00
+# ModifiedOn:       2022/08/28 16:27:52
 # Synopsis:         Creates and modify needed files for a PS project from existing module files.
 #############################################
  
@@ -6939,15 +6939,28 @@ Function Set-PSProjectFile {
 	#endregion
 
 	#region Git push
-	if ($GitPush) {
+    if ($GitPush) {
+    try {
 		if (Get-Command git.exe -ErrorAction SilentlyContinue) {
-			Write-Color '[Starting]', ' Git Push' -Color Yellow, DarkCyan
+			Write-Color '[Starting]', ' Git Actions' -Color Yellow, DarkCyan
 			Set-Location $ModuleBase 
-			Start-Sleep 5
-			git add --all 2>&1 | Write-Host -ForegroundColor DarkCyan
-			git commit --all -m "To Version: $($moduleManifest.version.tostring())" 2>&1 | Write-Host -ForegroundColor DarkGreen
-			git push 2>&1 | Write-Host -ForegroundColor DarkYellow
+			
+            Write-Color "`t[Git]", ' Add' -Color Yellow, Gray -NoNewLine
+			        git add --all 2>&1 | Out-Null
+            if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
+            if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
+
+            Write-Color "`t[Git]", ' Commit' -Color Yellow, Gray -NoNewLine
+			         git commit --all -m "To Version: $($moduleManifest.version.tostring())" 2>&1 | Out-Null
+            if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
+            if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
+
+            Write-Color "`t[Git]", ' Push' -Color Yellow, Gray -NoNewLine
+			        git push 2>&1 | Out-Null
+            if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
+            if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
 		} else { Write-Warning 'Git is not installed' }
+    } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 	}
 	#endregion
 }#end Function
