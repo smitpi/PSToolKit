@@ -59,7 +59,7 @@ Will copy the required modules to the nested modules folder.
 .PARAMETER VersionBump
 This will increase the version of the module.
 
-.PARAMETER mkdocs
+.PARAMETER DeployMKDocs
 Create or test the mkdocs site
 
 .PARAMETER GitPush
@@ -67,6 +67,9 @@ Run Git Push when done.
 
 .PARAMETER CopyToModulesFolder
 Copies the module to program files.
+
+.PARAMETER ShowReport
+Will open the issues report in a browser.
 
 .EXAMPLE
 Set-PSProjectFiles -ModuleScriptFile blah.psm1 -VersionBump Minor -mkdocs serve
@@ -80,14 +83,14 @@ Function Set-PSProjectFile {
 		[ValidateSet('Minor', 'Build', 'CombineOnly')]
 		[string]$VersionBump = 'CombineOnly',
 		[switch]$BuildHelpFiles,
-		[ValidateSet('serve', 'deploy')]
-		[string]$mkdocs = 'None',
+		[switch]$DeployMKDocs,
 		[Switch]$GitPush = $false,
 		[ValidateScript( { $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
 				else { Throw 'Must be running an elevated prompt.' } })]
 		[switch]$CopyToModulesFolder = $false,
-		[switch]$CopyNestedModules = $false
+		[switch]$CopyNestedModules = $false,
+        [switch]$ShowReport
 
 	)
 	
@@ -193,7 +196,7 @@ Function Set-PSProjectFile {
 				Locale         = 'en-US'
 				HelpVersion    = $ModuleManifest.Version.ToString()
 			}
-			New-MarkdownHelp @markdownParams -Force
+			New-MarkdownHelp @markdownParams -Force | Out-Null
 		} catch { Write-Error "Error: Creating Mardown Help Files `nMessage:$($_.Exception.message)"; return }
 
 		try {
@@ -223,7 +226,7 @@ Function Set-PSProjectFile {
 
 		try {
 			Write-Color '[Starting]', ' Creating External Help Files' -Color Yellow, DarkCyan
-			New-ExternalHelp -Path $Moduledocs.FullName -OutputPath $ModuleExternalHelp.FullName -Force -ShowProgress
+			New-ExternalHelp -Path $Moduledocs.FullName -OutputPath $ModuleExternalHelp.FullName -Force | Out-Null
 
 			Write-Color '[Starting]', ' Creating About Help Files' -Color Yellow, DarkCyan
 			$aboutfile = [System.Collections.Generic.List[string]]::new()
@@ -389,7 +392,13 @@ Function Set-PSProjectFile {
 		try {
 			$scriptinfo = Test-ScriptFileInfo -Path $PublicItem.fullName -ErrorAction Stop
 			$author = $scriptinfo.author
-		} catch {Write-Warning "`tCould not read script info [$($PublicItem.BaseName)], default values used."}
+		} catch {Write-Warning "`tCould not read script info [$($PublicItem.BaseName)], default values used."
+                [void]$Issues.Add([PSCustomObject]@{
+				            Catagory = 'ScriptFileInfo'
+				            File     = $($PublicItem.BaseName)
+				            details  = $_.Exception.Message
+			            })
+        }
 
 		$file.add("#region $($PublicItem.name)")
 		$file.Add("######## Function $($public.IndexOf($PublicItem) + 1) of $($public.Count) ##################")
@@ -469,20 +478,6 @@ Function Set-PSProjectFile {
 	}
 	#endregion
 
-	#region report issues
-	if ($null -notlike $Issues) { 
-		Write-Color '[Starting]', ' Creating Issues Reports' -Color Yellow, DarkCyan
-		$issues | Export-Excel -Path $ModuleIssuesExcel -WorksheetName Other -AutoSize -AutoFilter -BoldTopRow -FreezeTopRow 
-		$fragments = [system.collections.generic.list[string]]::new()
-		$fragments.Add((New-MDHeader "$($module.Name): Issues"))
-		$Fragments.Add("---`n")
-		$fragments.Add((New-MDTable -Object $Issues))
-		$Fragments.Add("---`n")
-		$fragments.add("*Updated: $(Get-Date -Format U) UTC*")
-		$fragments | Out-File -FilePath $ModuleIssues -Encoding utf8 -Force
-	}
-	#endregion
-
 	#region Copy to Modules Dir
 	if ($CopyToModulesFolder) {
 	    Write-Color '[Starting]', ' Copy to Modules Folder' -Color Yellow, DarkCyan
@@ -530,13 +525,12 @@ Function Set-PSProjectFile {
 	#endregion
 
 	#region mkdocs
-	if ($mkdocs -like 'serve') {
-		Write-Color '[Starting]', ' Creating MkDocs help files' -Color Yellow, DarkCyan
-		Start-Process "http://127.0.0.1:7070/$($module.Name)/"
-		Start-Process -FilePath mkdocs.exe -ArgumentList 'serve -a localhost:7070 --livereload --dirtyreload' -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -NoNewWindow 2>&1 | Write-Host -ForegroundColor Yellow 
-	}
-	if ($mkdocs -like 'deploy') {
-		Start-Process -FilePath mkdocs.exe -ArgumentList gh-deploy -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -NoNewWindow 2>&1 | Write-Host -ForegroundColor Yellow 
+	if ($DeployMKDocs) {
+        Write-Color '[Starting]', ' Creating Online Help Files ' -Color Yellow, DarkCyan
+        Write-Color "`t[MKDocs]", ' Deploy:' -Color Yellow, Gray -NoNewLine
+		Start-Process -FilePath mkdocs.exe -ArgumentList gh-deploy -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -NoNewWindow 2>&1 -Wait | Out-Null
+        if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
+        if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
 	}
 	#endregion
 
@@ -545,26 +539,41 @@ Function Set-PSProjectFile {
     try {
 		if (Get-Command git.exe -ErrorAction SilentlyContinue) {
 			Write-Color '[Starting]', ' Git Actions' -Color Yellow, DarkCyan
-			Set-Location $ModuleBase 
-			
-            Write-Color "`t[Git]", ' Add' -Color Yellow, Gray -NoNewLine
-			        git add --all 2>&1 | Out-Null
+		
+            Write-Color "`t[Git]", ' Add:' -Color Yellow, Gray -NoNewLine
+            Start-Process -FilePath git.exe -ArgumentList 'add --all' -WorkingDirectory $ModuleBase -NoNewWindow -Wait | Out-Null
             if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
             if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
 
-            Write-Color "`t[Git]", ' Commit' -Color Yellow, Gray -NoNewLine
-			         git commit --all -m "To Version: $($moduleManifest.version.tostring())" 2>&1 | Out-Null
+            Write-Color "`t[Git]", ' Commit:' -Color Yellow, Gray -NoNewLine
+            Start-Process -FilePath git.exe -ArgumentList "commit --all -m `"To Version: $($moduleManifest.version.tostring())`"" -WorkingDirectory $ModuleBase -NoNewWindow -Wait | Out-Null
             if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
             if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
 
-            Write-Color "`t[Git]", ' Push' -Color Yellow, Gray -NoNewLine
-			        git push 2>&1 | Out-Null
+            Write-Color "`t[Git]", ' Push:' -Color Yellow, Gray -NoNewLine
+            Start-Process -FilePath git.exe -ArgumentList "push" -WorkingDirectory $ModuleBase -NoNewWindow -Wait | Out-Null
             if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
             if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
 		} else { Write-Warning 'Git is not installed' }
     } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 	}
 	#endregion
+
+	#region report issues
+	if ($null -notlike $Issues) { 
+		Write-Color '[Starting]', ' Creating Issues Reports' -Color Yellow, DarkCyan
+		$issues | Export-Excel -Path $ModuleIssuesExcel -WorksheetName Other -AutoSize -AutoFilter -BoldTopRow -FreezeTopRow 
+		$fragments = [system.collections.generic.list[string]]::new()
+		$fragments.Add((New-MDHeader "$($module.Name): Issues"))
+		$Fragments.Add("---`n")
+		$fragments.Add((New-MDTable -Object $Issues))
+		$Fragments.Add("---`n")
+		$fragments.add("*Updated: $(Get-Date -Format U) UTC*")
+		$fragments | Out-File -FilePath $ModuleIssues -Encoding utf8 -Force
+	if ($ShowReport) { & $ModuleIssues}
+    }
+	#endregion
+
 }#end Function
  
 $scriptblock = {

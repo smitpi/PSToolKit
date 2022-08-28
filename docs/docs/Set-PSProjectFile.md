@@ -13,8 +13,8 @@ Creates and modify needed files for a PS project from existing module files.
 ## SYNTAX
 
 ```
-Set-PSProjectFile [-ModuleScriptFile] <FileInfo> [[-VersionBump] <String>] [-BuildHelpFiles]
- [[-mkdocs] <String>] [-GitPush] [-CopyToModulesFolder] [-CopyNestedModules] [<CommonParameters>]
+Set-PSProjectFile [-ModuleScriptFile] <FileInfo> [[-VersionBump] <String>] [-BuildHelpFiles] [-DeployMKDocs]
+ [-GitPush] [-CopyToModulesFolder] [-CopyNestedModules] [-ShowReport] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -74,17 +74,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -mkdocs
+### -DeployMKDocs
 Create or test the mkdocs site
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
-Default value: None
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -121,6 +121,21 @@ Accept wildcard characters: False
 
 ### -CopyNestedModules
 Will copy the required modules to the nested modules folder.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ShowReport
+Will open the issues report in a browser.
 
 ```yaml
 Type: SwitchParameter
