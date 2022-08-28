@@ -45,7 +45,7 @@ Edit the hosts file
 Edit the hosts file
 
 .PARAMETER ShowCurrent
-Show existing entries
+Edit the hosts file
 
 .PARAMETER Remove
 Remove an entry
@@ -54,16 +54,16 @@ Remove an entry
 What to remove, either ip fqdn or host
 
 .PARAMETER Add
-Add an entry
-
-.PARAMETER AddIP
 Ip to add.
 
-.PARAMETER AddFQDN
+.PARAMETER AddIP
 FQDN to add
 
-.PARAMETER AddHost
+.PARAMETER AddFQDN
 Host to add.
+
+.PARAMETER AddHost
+Parameter description
 
 .PARAMETER OpenInNotepad
 Open the file in notepad.
