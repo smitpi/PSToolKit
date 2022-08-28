@@ -482,7 +482,53 @@ Function Set-PSProjectFile {
 		$fragments | Out-File -FilePath $ModuleIssues -Encoding utf8 -Force
 	}
 	#endregion
-	
+
+	#region Copy to Modules Dir
+	if ($CopyToModulesFolder) {
+	    Write-Color '[Starting]', ' Copy to Modules Folder' -Color Yellow, DarkCyan
+       <#
+        Write-Color '[Deleting]', ' Module ', "$($modulefile.basename) ", 'From AllUsers ','WindowsPowerShell' -Color Yellow, DarkCyan, Green, DarkCyan,DarkYellow
+        $ModuleDestFolder = [IO.Path]::Combine($env:ProgramFiles, 'WindowsPowerShell', 'Modules')
+        (Get-ChildItem $ModuleDestFolder -Directory).FullName | Where-Object {$_ -like "*$($modulefile.basename)*"} | Remove-Item -Force -Recurse
+
+        Write-Color '[Deleting]', ' Module ', "$($modulefile.basename) ", 'From AllUsers ','PowerShell' -Color Yellow, DarkCyan, Green, DarkCyan,DarkYellow
+        $ModuleDestFolder = [IO.Path]::Combine($env:ProgramFiles, 'PowerShell', 'Modules')
+        (Get-ChildItem $ModuleDestFolder -Directory).FullName | Where-Object {$_ -like "*$($modulefile.basename)*"} | Remove-Item -Force -Recurse
+
+        Write-Color '[Deleting]', ' Module ', "$($modulefile.basename) ", 'From CurrentUser ','WindowsPowerShell' -Color Yellow, DarkCyan, Green, DarkCyan,DarkYellow
+        $ModuleDestFolder =  [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'WindowsPowerShell', 'Modules')
+        (Get-ChildItem $ModuleDestFolder -Directory).FullName | Where-Object {$_ -like "*$($modulefile.basename)*"} | Remove-Item -Force -Recurse
+
+        Write-Color '[Deleting]', ' Module ', "$($modulefile.basename) ", 'From CurrentUser ','PowerShell' -Color Yellow, DarkCyan, Green, DarkCyan,DarkYellow
+        $ModuleDestFolder =  [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'PowerShell', 'Modules')
+        (Get-ChildItem $ModuleDestFolder -Directory).FullName | Where-Object {$_ -like "*$($modulefile.basename)*"} | Remove-Item -Force -Recurse
+        #>
+        $ModuleFolders = @([IO.Path]::Combine($env:ProgramFiles, 'WindowsPowerShell', 'Modules'),
+		    [IO.Path]::Combine($env:ProgramFiles, 'PowerShell', 'Modules'),
+		    [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'WindowsPowerShell', 'Modules'),
+		    [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'PowerShell', 'Modules')
+        )
+        $DeleteFolders = (Get-ChildItem $ModuleFolders -Directory).FullName | Where-Object {$_ -like "*$($modulefile.basename)*"}
+        $DeleteFolders | ForEach-Object {Write-Color "`t[Deleting]", ' Module ', "$($modulefile.basename) ", 'Folder ',"$($_)" -Color Yellow, DarkCyan, Green, DarkCyan,DarkYellow}
+        try {
+            $DeleteFolders | Remove-Item -Force -Recurse -ErrorAction Stop
+        } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+
+
+		Write-Color "`t[Copying]", ' New Module ', "$($modulefile.basename) ver:($($ModuleManifest.Version.ToString())) ", "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" -Color Yellow, DarkCyan, Green, DarkCyan
+		if (-not(Test-Path "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)")) { New-Item "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" -ItemType Directory -Force | Out-Null }
+		Get-ChildItem -Directory "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" | Compress-Archive -DestinationPath "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)\$($modulefile.basename)-bck.zip" -Update
+		Get-ChildItem -Directory "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" | Remove-Item -Recurse -Force
+		Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)\" -Force -Recurse
+
+		Write-Color "`t[Copying]", ' New Module ', "$($modulefile.basename) ver:($($ModuleManifest.Version.ToString())) ", "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" -Color Yellow, DarkCyan, Green, DarkCyan
+		if (-not(Test-Path "C:\Program Files\PowerShell\Modules\$($modulefile.basename)")) { New-Item "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" -ItemType Directory -Force | Out-Null }
+		Get-ChildItem -Directory "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" | Compress-Archive -DestinationPath "C:\Program Files\PowerShell\Modules\$($modulefile.basename)\$($modulefile.basename)-bck.zip" -Update
+		Get-ChildItem -Directory "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" | Remove-Item -Recurse -Force
+		Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\PowerShell\Modules\$($modulefile.basename)\" -Force -Recurse
+	}
+	#endregion
+
 	#region mkdocs
 	if ($mkdocs -like 'serve') {
 		Write-Color '[Starting]', ' Creating MkDocs help files' -Color Yellow, DarkCyan
@@ -506,23 +552,6 @@ Function Set-PSProjectFile {
 		} else { Write-Warning 'Git is not installed' }
 	}
 	#endregion
-
-	#region Copy to Dir
-	if ($CopyToModulesFolder) {
-		Write-Color '[Copying]', ' New Module ', "$($modulefile.basename) ver:($($ModuleManifest.Version.ToString())) ", 'to Windows PowerShell' -Color Yellow, DarkCyan, Green, DarkCyan
-		if (-not(Test-Path "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)")) { New-Item "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" -ItemType Directory -Force | Out-Null }
-		Get-ChildItem -Directory "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" | Compress-Archive -DestinationPath "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)\$($modulefile.basename)-bck.zip" -Update
-		Get-ChildItem -Directory "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" | Remove-Item -Recurse -Force
-		Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)\" -Force -Recurse
-
-		Write-Color '[Copying]', ' New Module ', "$($modulefile.basename) ver:($($ModuleManifest.Version.ToString())) ", 'to PowerShell' -Color Yellow, DarkCyan, Green, DarkCyan
-		if (-not(Test-Path "C:\Program Files\PowerShell\Modules\$($modulefile.basename)")) { New-Item "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" -ItemType Directory -Force | Out-Null }
-		Get-ChildItem -Directory "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" | Compress-Archive -DestinationPath "C:\Program Files\PowerShell\Modules\$($modulefile.basename)\$($modulefile.basename)-bck.zip" -Update
-		Get-ChildItem -Directory "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" | Remove-Item -Recurse -Force
-		Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\PowerShell\Modules\$($modulefile.basename)\" -Force -Recurse
-	}
-	#endregion
-
 }#end Function
  
 $scriptblock = {
