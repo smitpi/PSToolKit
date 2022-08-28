@@ -95,7 +95,8 @@ Function Set-PSProjectFile {
 	)
 	
 	#region module import
-	Write-Color '[Starting]', ' Module Import' -Color Yellow, DarkCyan
+    Write-Color "[Creating]"," PowerShell Project:"," $($ModuleScriptFile.fullname.Split("\")[-1].replace(".psm1",$null))" -Color Yellow,Gray,Green -LinesBefore 2 -LinesAfter 2
+	Write-Color '[Starting]', ' Module Import'  -Color Yellow, DarkCyan
 	try {
 		$modulefile = $ModuleScriptFile | Get-Item -ErrorAction Stop
 		Remove-Module $modulefile.BaseName -Force -ErrorAction SilentlyContinue
@@ -481,46 +482,31 @@ Function Set-PSProjectFile {
 	#region Copy to Modules Dir
 	if ($CopyToModulesFolder) {
 	    Write-Color '[Starting]', ' Copy to Modules Folder' -Color Yellow, DarkCyan
-       <#
-        Write-Color '[Deleting]', ' Module ', "$($modulefile.basename) ", 'From AllUsers ','WindowsPowerShell' -Color Yellow, DarkCyan, Green, DarkCyan,DarkYellow
-        $ModuleDestFolder = [IO.Path]::Combine($env:ProgramFiles, 'WindowsPowerShell', 'Modules')
-        (Get-ChildItem $ModuleDestFolder -Directory).FullName | Where-Object {$_ -like "*$($modulefile.basename)*"} | Remove-Item -Force -Recurse
-
-        Write-Color '[Deleting]', ' Module ', "$($modulefile.basename) ", 'From AllUsers ','PowerShell' -Color Yellow, DarkCyan, Green, DarkCyan,DarkYellow
-        $ModuleDestFolder = [IO.Path]::Combine($env:ProgramFiles, 'PowerShell', 'Modules')
-        (Get-ChildItem $ModuleDestFolder -Directory).FullName | Where-Object {$_ -like "*$($modulefile.basename)*"} | Remove-Item -Force -Recurse
-
-        Write-Color '[Deleting]', ' Module ', "$($modulefile.basename) ", 'From CurrentUser ','WindowsPowerShell' -Color Yellow, DarkCyan, Green, DarkCyan,DarkYellow
-        $ModuleDestFolder =  [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'WindowsPowerShell', 'Modules')
-        (Get-ChildItem $ModuleDestFolder -Directory).FullName | Where-Object {$_ -like "*$($modulefile.basename)*"} | Remove-Item -Force -Recurse
-
-        Write-Color '[Deleting]', ' Module ', "$($modulefile.basename) ", 'From CurrentUser ','PowerShell' -Color Yellow, DarkCyan, Green, DarkCyan,DarkYellow
-        $ModuleDestFolder =  [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'PowerShell', 'Modules')
-        (Get-ChildItem $ModuleDestFolder -Directory).FullName | Where-Object {$_ -like "*$($modulefile.basename)*"} | Remove-Item -Force -Recurse
-        #>
         $ModuleFolders = @([IO.Path]::Combine($env:ProgramFiles, 'WindowsPowerShell', 'Modules'),
 		    [IO.Path]::Combine($env:ProgramFiles, 'PowerShell', 'Modules'),
 		    [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'WindowsPowerShell', 'Modules'),
 		    [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'PowerShell', 'Modules')
         )
-        $DeleteFolders = (Get-ChildItem $ModuleFolders -Directory).FullName | Where-Object {$_ -like "*$($modulefile.basename)*"}
-        $DeleteFolders | ForEach-Object {Write-Color "`t[Deleting]", ' Module ', "$($modulefile.basename) ", 'Folder ',"$($_)" -Color Yellow, DarkCyan, Green, DarkCyan,DarkYellow}
         try {
-            $DeleteFolders | Remove-Item -Force -Recurse -ErrorAction Stop
+            $DeleteFolders = (Get-ChildItem $ModuleFolders -Directory).FullName | Where-Object {$_ -like "*$($modulefile.basename)*"}
+            $DeleteFolders | ForEach-Object {
+                Write-Color "`t[Deleting] ","$($_)" -Color Yellow,Gray -NoNewLine
+                Remove-Item $_.fullname -Force -Recurse -ErrorAction Stop
+                Write-Host (' Complete') -ForegroundColor Green
+                }
         } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 
+        try {
+		    Write-Color "`t[Copying]", " C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" -Color Yellow, Gray -NoNewLine
+		    if (-not(Test-Path "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)")) { New-Item "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" -ItemType Directory -Force | Out-Null }
+		    Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)\" -Force -Recurse -ErrorAction Stop
+            Write-Host (' Complete') -ForegroundColor Green
 
-		Write-Color "`t[Copying]", ' New Module ', "$($modulefile.basename) ver:($($ModuleManifest.Version.ToString())) ", "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" -Color Yellow, DarkCyan, Green, DarkCyan
-		if (-not(Test-Path "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)")) { New-Item "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" -ItemType Directory -Force | Out-Null }
-		Get-ChildItem -Directory "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" | Compress-Archive -DestinationPath "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)\$($modulefile.basename)-bck.zip" -Update
-		Get-ChildItem -Directory "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" | Remove-Item -Recurse -Force
-		Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)\" -Force -Recurse
-
-		Write-Color "`t[Copying]", ' New Module ', "$($modulefile.basename) ver:($($ModuleManifest.Version.ToString())) ", "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" -Color Yellow, DarkCyan, Green, DarkCyan
-		if (-not(Test-Path "C:\Program Files\PowerShell\Modules\$($modulefile.basename)")) { New-Item "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" -ItemType Directory -Force | Out-Null }
-		Get-ChildItem -Directory "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" | Compress-Archive -DestinationPath "C:\Program Files\PowerShell\Modules\$($modulefile.basename)\$($modulefile.basename)-bck.zip" -Update
-		Get-ChildItem -Directory "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" | Remove-Item -Recurse -Force
-		Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\PowerShell\Modules\$($modulefile.basename)\" -Force -Recurse
+		    Write-Color "`t[Copying]", " C:\Program Files\PowerShell\Modules\$($modulefile.basename)" -Color Yellow, Gray -NoNewLine
+		    if (-not(Test-Path "C:\Program Files\PowerShell\Modules\$($modulefile.basename)")) { New-Item "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" -ItemType Directory -Force | Out-Null }
+		    Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\PowerShell\Modules\$($modulefile.basename)\" -Force -Recurse -ErrorAction Stop
+            Write-Host (' Complete') -ForegroundColor Green
+        } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 	}
 	#endregion
 

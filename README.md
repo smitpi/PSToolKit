@@ -30,7 +30,15 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Compare-ADMembership`](https://smitpi.github.io/PSToolKit/Compare-ADMembership) -- Compare two users AD group memberships
 - [`Connect-VMWareCluster`](https://smitpi.github.io/PSToolKit/Connect-VMWareCluster) -- Connect to a vSphere cluster to perform other commands or scripts
 - [`Edit-ChocolateyAppsList`](https://smitpi.github.io/PSToolKit/Edit-ChocolateyAppsList) -- Add or remove apps from the json file used in Install-ChocolateyApps
-- [`Edit-HostsFile`](https://smitpi.github.io/PSToolKit/Edit-HostsFile) -- Edit the hosts file
+- [`Edit-HostsFile`](https://smitpi.github.io/PSToolKit/Edit-HostsFile) -- 
+Edit-HostsFile [-ShowCurrent] [<CommonParameters>]
+
+Edit-HostsFile [-Remove] [-RemoveText <string>] [<CommonParameters>]
+
+Edit-HostsFile [-Add] [-AddIP <string>] [-AddFQDN <string>] [-AddHost <string>] [<CommonParameters>]
+
+Edit-HostsFile [-OpenInNotepad] [<CommonParameters>]
+
 - [`Edit-SSHConfigFile`](https://smitpi.github.io/PSToolKit/Edit-SSHConfigFile) -- Creates and modifies the ssh config file in their profile.
 - [`Enable-RemoteHostPSRemoting`](https://smitpi.github.io/PSToolKit/Enable-RemoteHostPSRemoting) -- enable ps remote remotely
 - [`Export-ESXTemplate`](https://smitpi.github.io/PSToolKit/Export-ESXTemplate) -- Export all VM Templates from vSphere to local disk.

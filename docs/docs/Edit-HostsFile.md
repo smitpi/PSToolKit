@@ -1,14 +1,14 @@
 ---
 external help file: PSToolKit-help.xml
 Module Name: PSToolKit
-online version:
+online version: https://smitpi.github.io/PSToolKit/Edit-HostsFile
 schema: 2.0.0
 ---
 
 # Edit-HostsFile
 
 ## SYNOPSIS
-Edit the hosts file
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
@@ -33,82 +33,24 @@ Edit-HostsFile [-OpenInNotepad] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Edit the hosts file
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
-Edit-HostsFile -Remove -RemoveText blah
-```
+
+{{ Add example description here }}
 
 ## PARAMETERS
 
-### -ShowCurrent
-Show existing entries
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Show
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Remove
-Remove an entry
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Remove
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -RemoveText
-What to remove, either ip fqdn or host
-
-```yaml
-Type: String
-Parameter Sets: Remove
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Add
-Add an entry
+{{ Fill Add Description }}
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Add
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AddIP
-Ip to add.
-
-```yaml
-Type: String
 Parameter Sets: Add
 Aliases:
 
@@ -120,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -AddFQDN
-FQDN to add
+{{ Fill AddFQDN Description }}
 
 ```yaml
 Type: String
@@ -135,7 +77,22 @@ Accept wildcard characters: False
 ```
 
 ### -AddHost
-Host to add.
+{{ Fill AddHost Description }}
+
+```yaml
+Type: String
+Parameter Sets: Add
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AddIP
+{{ Fill AddIP Description }}
 
 ```yaml
 Type: String
@@ -150,7 +107,7 @@ Accept wildcard characters: False
 ```
 
 ### -OpenInNotepad
-Open the file in notepad.
+{{ Fill OpenInNotepad Description }}
 
 ```yaml
 Type: SwitchParameter
@@ -159,7 +116,52 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Remove
+{{ Fill Remove Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: Remove
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RemoveText
+{{ Fill RemoveText Description }}
+
+```yaml
+Type: String
+Parameter Sets: Remove
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ShowCurrent
+{{ Fill ShowCurrent Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: Show
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -169,8 +171,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
+### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://smitpi.github.io/PSToolKit/Edit-HostsFile](https://smitpi.github.io/PSToolKit/Edit-HostsFile)
+
