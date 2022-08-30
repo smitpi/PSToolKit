@@ -1749,8 +1749,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../Write-PSToolKitLog/" class="md-nav__link">
-        Write-PSToolKitLog
+      <a href="../Write-Message/" class="md-nav__link">
+        Write-Message
       </a>
     </li>
   
@@ -1764,8 +1764,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../Write-PSToolKitMessage/" class="md-nav__link">
-        Write-PSToolKitMessage
+      <a href="../Write-PSToolKitLog/" class="md-nav__link">
+        Write-PSToolKitLog
       </a>
     </li>
   
@@ -1950,11 +1950,10 @@
 <p>Extract user details from the domain</p>
 <h2 id="syntax">SYNTAX</h2>
 <h3 id="currentdomain-default">CurrentDomain (Default)</h3>
-<div class="highlight"><pre><span></span><code>Get-FullADUserDetail [-UserToQuery &lt;String&gt;] [-DomainFQDN &lt;String&gt;] [-DomainCredential &lt;PSCredential&gt;]
- [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Get-FullADUserDetail [-UserToQuery &lt;String[]&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="otherdomain">OtherDomain</h3>
-<div class="highlight"><pre><span></span><code>Get-FullADUserDetail [-UserToQuery &lt;String&gt;] [-DomainFQDN &lt;String&gt;] [-DomainCredential &lt;PSCredential&gt;]
+<div class="highlight"><pre><span></span><code>Get-FullADUserDetail [-UserToQuery &lt;String[]&gt;] [-DomainFQDN &lt;String&gt;] [-DomainCredential &lt;PSCredential&gt;]
  [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
@@ -1966,9 +1965,9 @@
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-usertoquery">-UserToQuery</h3>
 <p>User id to search for.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name, UserName, Identity</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
@@ -1979,7 +1978,7 @@
 <h3 id="-domainfqdn">-DomainFQDN</h3>
 <p>Domain to search</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OtherDomain</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
@@ -1991,7 +1990,7 @@
 <h3 id="-domaincredential">-DomainCredential</h3>
 <p>Userid to connect to that domain.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PSCredential</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OtherDomain</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
