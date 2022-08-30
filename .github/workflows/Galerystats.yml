@@ -8,7 +8,7 @@ jobs:
   RunPWSH:
     runs-on: ubuntu-latest
     steps:
-     - name: Import Functions
+      - name: Import Functions
         shell: pwsh
         run: ./run.ps1
       - name: Run Gather stats script
