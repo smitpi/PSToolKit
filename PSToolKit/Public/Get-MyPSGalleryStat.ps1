@@ -138,12 +138,12 @@ Function Get-MyPSGalleryStat {
             $json = ConvertTo-Json -InputObject $Body
             $json = [System.Text.Encoding]::UTF8.GetBytes($json)
             $null = Invoke-WebRequest -Headers $headers -Uri $Uri -Method Patch -Body $json -ErrorAction Stop
-            Write-PSToolKitMessage -Action 'Upload' -Object 'PSGallery Stats' -Message 'To Github Gist','Complete' -MessageColor Gray,Green
+            Write-PSToolKitMessage -Action 'Upload' -Object 'PSGallery Stats' -Message 'To Github Gist', 'Complete' -MessageColor Gray, Green
         } catch {Write-Error "Can't connect to gist:`n $($_.Exception.Message)"}
 
         if ($ASObject) {$GalStats}
         else {
-            Write-Color 'Total Downloads: ', "$(($GalStats.TotalDownloads | Sort-Object -Descending)[0])" -Color Cyan, yellow -LinesBefore 1
+            Write-Host 'Total Downloads: ', "$(($GalStats.TotalDownloads | Sort-Object -Descending)[0])" -ForegroundColor Yellow
             $GalStats[-1..-6].Sum | Sort-Object -Property PublishedDate -Descending | Format-Table -AutoSize -Wrap
         }
     }
