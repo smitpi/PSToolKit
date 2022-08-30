@@ -113,15 +113,29 @@ Function Get-MyPSGalleryStat {
         foreach ($Mod in $ModLists) {
             Write-PSToolKitMessage -Action 'Collecting' -Object $mod -Message 'Online Data' -MessageColor Gray
             $ResultModule = Find-Module $mod -Repository PSGallery
+            $YStats = ($GalStats.sum | Where-Object {$_.name -like $mod -and $_.DateCollected -gt ((Get-Date).AddDays(-1).ToUniversalTime())})[-1]
+            $YSpan  = New-TimeSpan -Start $YStats.DateCollected.ToUniversalTime() -End (get-date).ToUniversalTime()
+            $YTotalDownload = [Int]$ResultModule.AdditionalMetadata.downloadCount - $YStats.TotalDownload
+            $YVersionDownload = [Int]$ResultModule.AdditionalMetadata.versionDownloadCount - $YStats.VersionDownload
             $TotalDownloads = $TotalDownloads + [int]$ResultModule.AdditionalMetadata.downloadCount
             [void]$GalStats.Add([PSCustomObject]@{
                     Sum            = [PSCustomObject]@{
-                        DateCollected   = [datetime](Get-Date -Format U)
+                        DateCollected   = ([datetime](Get-Date -Format U)).ToUniversalTime()
                         Name            = $ResultModule.Name
                         Version         = $ResultModule.Version
-                        PublishedDate   = [datetime]$ResultModule.AdditionalMetadata.published
+                        PublishedDate   = ([datetime]$ResultModule.AdditionalMetadata.published).ToUniversalTime()
                         TotalDownload   = [Int]$ResultModule.AdditionalMetadata.downloadCount
                         VersionDownload = [Int]$ResultModule.AdditionalMetadata.versionDownloadCount
+                    }
+                    DailyStats          = [PSCustomObject]@{
+                        DateCollected   = ([datetime](Get-Date -Format U)).ToUniversalTime()
+                        Name            = $ResultModule.Name
+                        Version         = $ResultModule.Version
+                        TotalDays       = [math]::ceiling($YSpan.TotalDays)
+                        TotalHours      = [math]::ceiling($YSpan.TotalHours)
+                        TotalDownloads  = $YTotalDownload
+                        VersionDownload = $YVersionDownload
+                        PublishedDate   = ([datetime]$ResultModule.AdditionalMetadata.published).ToUniversalTime()
                     }
                     All            = $ResultModule
                     TotalDownloads = $TotalDownloads

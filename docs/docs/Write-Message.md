@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Write-PSToolKitMessage
+# Write-Message
 
 ## SYNOPSIS
 Writes the given into to screen
@@ -13,7 +13,7 @@ Writes the given into to screen
 ## SYNTAX
 
 ```
-Write-PSToolKitMessage [-Action] <String> [[-Severity] <String>] [-Object] <String[]> [[-Message] <String[]>]
+Write-Message [-Action] <String> [[-Severity] <String>] [[-Object] <String[]>] [[-Message] <String[]>]
  [[-MessageColor] <String[]>] [[-InsertTabs] <Int32>] [-NoNewLine] [<CommonParameters>]
 ```
 
@@ -67,7 +67,7 @@ Type: String[]
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 3
 Default value: None
 Accept pipeline input: True (ByValue)
@@ -76,7 +76,7 @@ Accept wildcard characters: False
 
 ### -Message
 Message to display.
-This can be an array of strings as well, to have different colors in the text.
+This can be an array of strings as well, to have different colours in the text.
 
 ```yaml
 Type: String[]
@@ -91,7 +91,7 @@ Accept wildcard characters: False
 ```
 
 ### -MessageColor
-The Color of the corresponding message in the array.
+The Colour of the corresponding message in the array.
 
 ```yaml
 Type: String[]
@@ -114,7 +114,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 7
+Position: 6
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -129,7 +129,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 7
+Position: Named
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -142,7 +142,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object[]
+### System.String[]
 ## NOTES
 
 ## RELATED LINKS

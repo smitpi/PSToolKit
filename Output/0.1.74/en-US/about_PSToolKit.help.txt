@@ -96,8 +96,8 @@ Functions in this module:
 	 Update-PSModuleInfo -- Update PowerShell module manifest file
 	 Update-PSToolKitConfigFile -- Manages the config files for the PSToolKit Module.
 	 Write-Ascii -- Create Ascii Art
+	 Write-Message -- Writes the given into to screen
 	 Write-PSToolKitLog -- Create a log for scripts
-	 Write-PSToolKitMessage -- Writes the given into to screen
  
 SEE ALSO
 	 https://github.com/smitpi/PSToolKit

@@ -12,14 +12,14 @@
         <meta name="author" content="Pierre Smit">
       
       
-        <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Write-PSToolKitMessage/">
+        <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Write-Message/">
       
       <link rel="icon" href="..">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
     
     
       
-        <title>Write-PSToolKitMessage - PSToolKit</title>
+        <title>Write-Message - PSToolKit</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#write-pstoolkitmessage" class="md-skip">
+        <a href="#write-message" class="md-skip">
           Skip to content
         </a>
       
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Write-PSToolKitMessage
+              Write-Message
             
           </span>
         </div>
@@ -1583,21 +1583,6 @@
 
   
   
-  
-    <li class="md-nav__item">
-      <a href="../Write-PSToolKitLog/" class="md-nav__link">
-        Write-PSToolKitLog
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
     
   
   
@@ -1610,12 +1595,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Write-PSToolKitMessage
+          Write-Message
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Write-PSToolKitMessage
+        Write-Message
       </a>
       
         
@@ -1759,8 +1744,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#systemobject" class="md-nav__link">
-    System.Object[]
+  <a href="#systemstring" class="md-nav__link">
+    System.String[]
   </a>
   
 </li>
@@ -1788,6 +1773,21 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Write-PSToolKitLog/" class="md-nav__link">
+        Write-PSToolKitLog
+      </a>
     </li>
   
 
@@ -1944,8 +1944,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#systemobject" class="md-nav__link">
-    System.Object[]
+  <a href="#systemstring" class="md-nav__link">
+    System.String[]
   </a>
   
 </li>
@@ -1981,17 +1981,17 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Write-PSToolKitMessage.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Write-Message.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<h1 id="write-pstoolkitmessage">Write-PSToolKitMessage</h1>
+<h1 id="write-message">Write-Message</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Writes the given into to screen</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Write-PSToolKitMessage [-Action] &lt;String&gt; [[-Severity] &lt;String&gt;] [-Object] &lt;String[]&gt; [[-Message] &lt;String[]&gt;]
+<div class="highlight"><pre><span></span><code>Write-Message [-Action] &lt;String&gt; [[-Severity] &lt;String&gt;] [[-Object] &lt;String[]&gt;] [[-Message] &lt;String[]&gt;]
  [[-MessageColor] &lt;String[]&gt;] [[-InsertTabs] &lt;Int32&gt;] [-NoNewLine] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
@@ -2031,7 +2031,7 @@
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w"></span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True (ByValue)</span><span class="w"></span>
@@ -2039,7 +2039,7 @@
 </code></pre></div>
 <h3 id="-message">-Message</h3>
 <p>Message to display.
-This can be an array of strings as well, to have different colors in the text.</p>
+This can be an array of strings as well, to have different colours in the text.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
@@ -2051,7 +2051,7 @@ This can be an array of strings as well, to have different colors in the text.</
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
 <h3 id="-messagecolor">-MessageColor</h3>
-<p>The Color of the corresponding message in the array.</p>
+<p>The Colour of the corresponding message in the array.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
@@ -2069,7 +2069,7 @@ This can be an array of strings as well, to have different colors in the text.</
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span><span class="w"></span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
@@ -2081,7 +2081,7 @@ This can be an array of strings as well, to have different colors in the text.</
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
@@ -2090,7 +2090,7 @@ This can be an array of strings as well, to have different colors in the text.</
 <p>This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see <a href="http://go.microsoft.com/fwlink/?LinkID=113216">about_CommonParameters</a>.</p>
 <h2 id="inputs">INPUTS</h2>
 <h2 id="outputs">OUTPUTS</h2>
-<h3 id="systemobject">System.Object[]</h3>
+<h3 id="systemstring">System.String[]</h3>
 <h2 id="notes">NOTES</h2>
 <h2 id="related-links">RELATED LINKS</h2>
 
@@ -2108,7 +2108,7 @@ This can be an array of strings as well, to have different colors in the text.</
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../Write-PSToolKitLog/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Write-PSToolKitLog" rel="prev">
+        <a href="../Write-Ascii/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Write-Ascii" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -2117,11 +2117,26 @@ This can be an array of strings as well, to have different colors in the text.</
               <span class="md-footer__direction">
                 Previous
               </span>
-              Write-PSToolKitLog
+              Write-Ascii
             </div>
           </div>
         </a>
       
+      
+        
+        <a href="../Write-PSToolKitLog/" class="md-footer__link md-footer__link--next" aria-label="Next: Write-PSToolKitLog" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Write-PSToolKitLog
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
       
     </nav>
   

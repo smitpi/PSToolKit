@@ -14,13 +14,12 @@ Extract user details from the domain
 
 ### CurrentDomain (Default)
 ```
-Get-FullADUserDetail [-UserToQuery <String>] [-DomainFQDN <String>] [-DomainCredential <PSCredential>]
- [<CommonParameters>]
+Get-FullADUserDetail [-UserToQuery <String[]>] [<CommonParameters>]
 ```
 
 ### OtherDomain
 ```
-Get-FullADUserDetail [-UserToQuery <String>] [-DomainFQDN <String>] [-DomainCredential <PSCredential>]
+Get-FullADUserDetail [-UserToQuery <String[]>] [-DomainFQDN <String>] [-DomainCredential <PSCredential>]
  [<CommonParameters>]
 ```
 
@@ -40,9 +39,9 @@ Get-FullADUserDetail -UserToQuery ps
 User id to search for.
 
 ```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
-Aliases:
+Aliases: Name, UserName, Identity
 
 Required: False
 Position: Named
@@ -56,7 +55,7 @@ Domain to search
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: OtherDomain
 Aliases:
 
 Required: False
@@ -71,7 +70,7 @@ Userid to connect to that domain.
 
 ```yaml
 Type: PSCredential
-Parameter Sets: (All)
+Parameter Sets: OtherDomain
 Aliases:
 
 Required: False

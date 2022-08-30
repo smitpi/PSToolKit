@@ -112,5 +112,5 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Update-PSModuleInfo`](https://smitpi.github.io/PSToolKit/Update-PSModuleInfo) -- Update PowerShell module manifest file
 - [`Update-PSToolKitConfigFile`](https://smitpi.github.io/PSToolKit/Update-PSToolKitConfigFile) -- Manages the config files for the PSToolKit Module.
 - [`Write-Ascii`](https://smitpi.github.io/PSToolKit/Write-Ascii) -- Create Ascii Art
+- [`Write-Message`](https://smitpi.github.io/PSToolKit/Write-Message) -- Writes the given into to screen
 - [`Write-PSToolKitLog`](https://smitpi.github.io/PSToolKit/Write-PSToolKitLog) -- Create a log for scripts
-- [`Write-PSToolKitMessage`](https://smitpi.github.io/PSToolKit/Write-PSToolKitMessage) -- Writes the given into to screen
