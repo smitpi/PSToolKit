@@ -95,12 +95,13 @@ Function Set-PSProjectFile {
 	)
 	
 	#region module import
-    Write-Color "[Creating]"," PowerShell Project:"," $($ModuleScriptFile.fullname.Split("\")[-1].replace(".psm1",$null))" -Color Yellow,Gray,Green -LinesBefore 2 -LinesAfter 2
-	Write-Color '[Starting]', ' Module Import'  -Color Yellow, DarkCyan
+	
 	try {
 		$modulefile = $ModuleScriptFile | Get-Item -ErrorAction Stop
 		Remove-Module $modulefile.BaseName -Force -ErrorAction SilentlyContinue
 		$module = Import-Module $modulefile.FullName -Force -PassThru -ErrorAction Stop
+		$OriginalModuleVer = (Import-PowerShellDataFile -Path $modulefile.FullName.Replace('.psm1', '.psd1')).ModuleVersion
+   		Write-Color "[Creating]"," PowerShell Project: ","$($module.Name)"," [ver $($OriginalModuleVer.tostring())]" -Color Yellow,Gray,Green,Yellow -LinesBefore 2 -LinesAfter 2
 	} catch { Write-Error "Error: Importing Module `nMessage:$($_.Exception.message)"; return }
 	#endregion
 
@@ -560,6 +561,7 @@ Function Set-PSProjectFile {
     }
 	#endregion
 
+	Write-Color '[Complete]', ' PowerShell Project: ', "$($module.Name)", " [ver $($ModuleManifest.Version.ToString())]" -Color Green, Gray, Green, Yellow -LinesBefore 2 -LinesAfter 2
 }#end Function
  
 $scriptblock = {

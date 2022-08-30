@@ -66,48 +66,51 @@ Function Get-FullADUserDetail {
 	PARAM(
 		[Parameter(ParameterSetName = 'CurrentDomain')]
 		[Parameter(ParameterSetName = 'OtherDomain')]
-		[Parameter(Mandatory = $true)]
-		[string]$UserToQuery,
+		[Parameter(Mandatory, ValueFromPipeline)]
+		[Alias('Name', 'UserName', 'Identity')]
+		[string[]]$UserToQuery,
 		[Parameter(ParameterSetName = 'OtherDomain')]
-		[Parameter(Mandatory = $false)]
 		[string]$DomainFQDN,
 		[Parameter(ParameterSetName = 'OtherDomain')]
-		[Parameter(Mandatory = $false)]
 		[pscredential]$DomainCredential
 	)
 
-	if ($null -notlike $DomainFQDN) {
-		if (-not($DomainCredential)) {$DomainCredential = Get-Credential -Message "Account to connnect to $($DomainFQDN)"}
-		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Starting] User Details"
-		try {
-			$AllUserDetails = Get-ADUser -Identity $UserToQuery -Server $DomainFQDN -Credential $DomainCredential -Properties *
-			[pscustomobject]@{
-				UserSummary    = $AllUserDetails | Select-Object Name, GivenName, Surname, UserPrincipalName, EmployeeID, EmployeeNumber, HomeDirectory, Enabled, Created, Modified, LastLogonDate, samaccountname
-				AllUserDetails = $AllUserDetails
-				MemberOf       = $AllUserDetails.memberof | ForEach-Object { 
-					$Cname = $_
-					$Split = ($Cname.Split(',') | Where-Object {$_ -like 'DC=*'}).replace('DC=', '')
-					$NewDomain = Join-String -Strings $Split -Separator .
-					Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Connecting] to doamin: $($Domain)"
-					Get-ADGroup -Identity $_ -Server $NewDomain -Credential $DomainCredential
-				}
-			}
-		} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
-	} else {
-		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Starting] User Details"
-		try {
-			$AllUserDetails = Get-ADUser -Identity $UserToQuery -Properties *
-			[pscustomobject]@{
-				UserSummary    = $AllUserDetails | Select-Object Name, GivenName, Surname, UserPrincipalName, EmployeeID, EmployeeNumber, HomeDirectory, Enabled, Created, Modified, LastLogonDate, samaccountname
-				AllUserDetails = $AllUserDetails
-				MemberOf       = $AllUserDetails.memberof | ForEach-Object { 
-					$Cname = $_
-					$Split = ($Cname.Split(',') | Where-Object {$_ -like 'DC=*'}).replace('DC=', '')
-					$NewDomain = Join-String -Strings $Split -Separator .
-					Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Connecting] to doamin: $($Domain)"
-					Get-ADGroup -Identity $_ -Server $NewDomain
-				}
-			}
-		} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+	[System.Collections.generic.List[PSObject]]$UserObject = @()
+	foreach ($quser in $UserToQuery) {
+		if (-not([string]::IsNullOrEmpty($DomainFQDN))) {
+			if (-not($DomainCredential)) {$DomainCredential = Get-Credential -Message "Account to connnect to $($DomainFQDN)"}
+			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Starting] User Details"
+			try {
+				$AllUserDetails = Get-ADUser -Identity $quser -Server $DomainFQDN -Credential $DomainCredential -Properties *
+				$UserObject.Add([pscustomobject]@{
+						UserSummary    = $AllUserDetails | Select-Object Name, GivenName, Surname, UserPrincipalName, EmployeeID, EmployeeNumber, HomeDirectory, Enabled, Created, Modified, LastLogonDate, samaccountname
+						AllUserDetails = $AllUserDetails
+						MemberOf       = $AllUserDetails.memberof | ForEach-Object { 
+							$Cname = $_
+							$NewDomain = ($Cname.Split(',') | Where-Object {$_ -like 'DC=*'}).replace('DC=', $null) | Join-String -Separator '.'
+							Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Connecting] to domain: $($NewDomain)"
+							Get-ADGroup -Identity $_ -Server $NewDomain
+						}
+					})
+			} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+		} else {
+			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Starting] User Details"
+			try {
+				$AllUserDetails = Get-ADUser -Identity $quser -Properties *
+				$UserObject.Add([pscustomobject]@{
+						UserSummary    = $AllUserDetails | Select-Object Name, GivenName, Surname, UserPrincipalName, EmployeeID, EmployeeNumber, HomeDirectory, Enabled, Created, Modified, LastLogonDate, samaccountname
+						AllUserDetails = $AllUserDetails
+						MemberOf       = $AllUserDetails.memberof | ForEach-Object { 
+							$Cname = $_
+							$NewDomain = ($Cname.Split(',') | Where-Object {$_ -like 'DC=*'}).replace('DC=', $null) | Join-String -Separator '.'
+							Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Connecting] to domain: $($NewDomain)"
+							Get-ADGroup -Identity $_ -Server $NewDomain
+						}
+					})
+			} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+		}
 	}
+	write-host ($UserObject.UserSummary | Out-String)
+	return $UserObject
+
 } #end Function

@@ -50,10 +50,10 @@ Severity of the entry.
 The object to be reported on.
 
 .PARAMETER Message
-Message to display. This can be an array of strings as well, to have different colors in the text.
+Message to display. This can be an array of strings as well, to have different colours in the text.
 
 .PARAMETER MessageColor
-The Color of the corresponding message in the array.
+The Colour of the corresponding message in the array.
 
 .PARAMETER InsertTabs
 Insert tabs before writing the text.
@@ -65,26 +65,22 @@ Wont add a new line after writing to screen.
 Write-PSToolKitMessage -Action Getting -Severity Information -Object (get-item .) -Message "This is","the directory","you are in." -MessageColor Cyan,DarkGreen,DarkRed
 
 #>
-Function Write-PSToolKitMessage {
-	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Write-PSToolKitMessage')]
-	[OutputType([System.Object[]])]
+Function Write-Message {
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Write-PSToolKitMessage')]
+	[Alias("Write-PSToolKitMessage")]
+	[OutputType([string[]])]
 	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '')]
 	PARAM(
-		[Parameter(Mandatory = $true, Position = 0)]
+		[Parameter(Mandatory = $true)]
 		[string]$Action,
-		[Parameter(Position = 1)]
 		[ValidateSet('Information', 'Warning', 'Error')]
 		[string]$Severity = 'Information',
-		[Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromRemainingArguments = $false, Position = 2)]
+		[Parameter(ValueFromPipeline = $true, ValueFromRemainingArguments = $false)]
 		[string[]]$Object,
-		[Parameter(Position = 3)]
 		[string[]]$Message,
 		[ValidateSet('Black', 'Blue', 'Cyan', 'DarkBlue', 'DarkCyan', 'DarkGrey', 'DarkGreen', 'DarkMagenta', 'DarkRed', 'DarkYellow', 'Gray', 'Green', 'Magenta', 'Red', 'White', 'Yellow')]
-		[Parameter(Position = 4)]
 		[string[]]$MessageColor,
-		[Parameter(Position = 6)]
 		[int]$InsertTabs = 0,
-		[Parameter(Position = 6)]
 		[switch]$NoNewLine = $false
 	)
 
@@ -95,21 +91,24 @@ Function Write-PSToolKitMessage {
 	
 		if ($Severity -like 'Warning') {
 			Write-Host 'WARNING - ' -ForegroundColor Yellow -NoNewline
-			Write-Host "[$(Get-Date -Format HH:mm:ss)]" -ForegroundColor Gray -NoNewline
+			Write-Host "[$(Get-Date -Format HH:mm:ss)] " -ForegroundColor Gray -NoNewline
 			Write-Host "[$($Action)] " -ForegroundColor Yellow -NoNewline
 			Write-Host "$($Object) " -ForegroundColor Cyan -NoNewline
 		} elseif ($Severity -like 'Error') {
 			Write-Host 'ERROR - ' -ForegroundColor Red -NoNewline
-			Write-Host "[$(Get-Date -Format HH:mm:ss)]" -ForegroundColor Gray -NoNewline
+			Write-Host "[$(Get-Date -Format HH:mm:ss)] " -ForegroundColor Gray -NoNewline
 			Write-Host "[$($Action)] " -ForegroundColor Yellow -NoNewline
 			Write-Host "$($Object) " -ForegroundColor Cyan -NoNewline
 		} else {
-			Write-Host "[$(Get-Date -Format HH:mm:ss)]" -ForegroundColor Gray -NoNewline
+			Write-Host "[$(Get-Date -Format HH:mm:ss)] " -ForegroundColor Gray -NoNewline
 			Write-Host "[$($Action)] " -ForegroundColor Yellow -NoNewline
 			Write-Host "$($Object) " -ForegroundColor Cyan -NoNewline
 		}
 		0..($Message.Count - 1) | ForEach-Object {
-			Write-Host "$($Message[$_]) " -ForegroundColor $MessageColor[$_] -NoNewline
+			if ([string]::IsNullOrEmpty($MessageColor[$_])) {$cl = 'Grey'}
+			else {$cl = $MessageColor[$_]}
+
+			Write-Host "$($Message[$_]) " -ForegroundColor $cl -NoNewline
 		}
 		if (-not($NoNewLine)) {
 			Write-Host ''
