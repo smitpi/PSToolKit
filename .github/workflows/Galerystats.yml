@@ -8,9 +8,10 @@ jobs:
   RunPWSH:
     runs-on: ubuntu-latest
     steps:
-      - name: Import Functions
-        shell: pwsh
-        run: ./run.ps1
+      - uses: actions/checkout@v3
       - name: Run Gather stats script
         shell: pwsh
-        run: Get-MyPSGalleryStat -GitHubUserID ${{secrets.GH_USER}} -GitHubToken ${{secrets.GH_TOKEN}}
+        run: |
+          import-module ./PSToolKit/Public/Get-MyPSGalleryStat.ps1 -Force -Global
+          import-module ./PSToolKit/Public/Write-Message.ps1 -Force -Global
+          Get-MyPSGalleryStat -GitHubUserID ${{secrets.GH_USER}} -GitHubToken ${{secrets.GH_TOKEN}}
