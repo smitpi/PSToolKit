@@ -1,4 +1,4 @@
-name: Run Reports
+name: Run PSGallery Reports
 
 on:
   workflow_dispatch:
