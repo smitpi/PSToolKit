@@ -1,9 +1,9 @@
 
 <#PSScriptInfo
 
-.VERSION 0.1.0
+.VERSION 1.0.0
 
-.GUID 7a5ae56c-542d-4fcf-bdb8-371bb23e1e63
+.GUID ef1101bf-edf0-461e-96f6-89eb17a1bfb7
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,28 +19,30 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [30/03/2022_14:49] Initial Script Creating
+
 
 .PRIVATEDATA
 
 #>
 
-
 #Requires -Module PSWriteColor
 
-<#
+<# 
 
-.DESCRIPTION
- Install Terminal
+.DESCRIPTION 
+ Install MicrosoftTerminal on your device. 
 
-#>
+#> 
+
+
+
 <#
 .SYNOPSIS
 Install MicrosoftTerminal on your device.

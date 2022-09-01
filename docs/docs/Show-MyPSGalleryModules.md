@@ -5,31 +5,33 @@ online version:
 schema: 2.0.0
 ---
 
-# Install-BGInfo
+# Show-MyPSGalleryModules
 
 ## SYNOPSIS
-Install and auto runs bginfo at start up.
+Show version numbers ext.
+about my modules.
 
 ## SYNTAX
 
 ```
-Install-BGInfo [-RunBGInfo] [<CommonParameters>]
+Show-MyPSGalleryModules [-AsTable] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Install and auto runs bginfo at start up.
+Show version numbers ext.
+about my modules.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Install-BGInfo -RunBGInfo
+Show-MyPSGalleryModules
 ```
 
 ## PARAMETERS
 
-### -RunBGInfo
-Execute bginfo at the end of the script
+### -AsTable
+Format output as table.
 
 ```yaml
 Type: SwitchParameter
@@ -50,7 +52,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object[]
+### System.Collections.Generic.List`1[[System.Management.Automation.PSObject, System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]
 ## NOTES
 
 ## RELATED LINKS

@@ -54,7 +54,7 @@ Aliases:
 
 Required: False
 Position: 2
-Default value: CombineOnly
+Default value: Revision
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

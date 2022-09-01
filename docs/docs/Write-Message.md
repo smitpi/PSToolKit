@@ -24,7 +24,7 @@ Writes the given into to screen
 
 ### EXAMPLE 1
 ```
-Write-PSToolKitMessage -Action Getting -Severity Information -Object (get-item .) -Message "This is","the directory","you are in." -MessageColor Cyan,DarkGreen,DarkRed
+Write-Message -Action Getting -Severity Information -Object (get-item .) -Message "This is","the directory","you are in." -MessageColor Cyan,DarkGreen,DarkRed
 ```
 
 ## PARAMETERS
@@ -76,7 +76,7 @@ Accept wildcard characters: False
 
 ### -Message
 Message to display.
-This can be an array of strings as well, to have different colours in the text.
+This can be an array of strings as well, to have different colors in the text.
 
 ```yaml
 Type: String[]

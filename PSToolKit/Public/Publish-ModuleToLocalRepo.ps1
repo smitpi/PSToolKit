@@ -1,6 +1,50 @@
 
 <#PSScriptInfo
 
+.VERSION 1.0.0
+
+.GUID c101d706-d0f2-4384-91bc-cbf7c9c3d85f
+
+.AUTHOR Pierre Smit
+
+.COMPANYNAME HTPCZA Tech
+
+.COPYRIGHT
+
+.TAGS
+
+.LICENSEURI
+
+.PROJECTURI
+
+.ICONURI
+
+.EXTERNALMODULEDEPENDENCIES 
+
+.REQUIREDSCRIPTS
+
+.EXTERNALSCRIPTDEPENDENCIES
+
+.RELEASENOTES
+
+
+.PRIVATEDATA
+
+#>
+
+<# 
+
+.DESCRIPTION 
+ Checks for required modules and upload all to your local repo. 
+
+#> 
+
+
+
+
+
+<#PSScriptInfo
+
 .VERSION 0.1.0
 
 .GUID 15ec255e-6e97-4009-8697-8d15806dce4e
@@ -79,7 +123,9 @@ Function Publish-ModuleToLocalRepo {
 		catch { $NewImport = Import-Module $ManifestPath.Directory.Name -Force -PassThru }
 		if (-not(Find-Module $NewImport.Name -Repository $Repository -ErrorAction SilentlyContinue)) {
 			Write-Color '[Uploading] ', 'Module ', $($NewImport.Name) -Color Yellow, Cyan, DarkRed
-			Publish-Module -Name $NewImport.Name -Repository $Repository -Force
+			try {
+                Publish-Module -Name $NewImport.Name -Repository $Repository -Force -ErrorAction Stop
+            } catch {Publish-Module -Path (Get-Item $NewImport.Path).Directory.FullName -Repository $Repository -Force }
 		}
 		else { Write-Color '[Uploading] ', 'Module ', $($NewImport.Name), '  Already Uploaded' -Color Yellow, Cyan, green, DarkRed }
 	}

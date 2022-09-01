@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 0.1.0
+.VERSION 1.0.0
 
-.GUID bca536cd-a306-4eb6-b014-a9f3a25369db
+.GUID e1fdeb76-78e2-419f-acac-4b9ae8c67ed1
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS powwershell
+.TAGS
 
 .LICENSEURI
 
@@ -19,32 +19,34 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [20/03/2022_19:30] Initial Script Creating
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
 
-<#
+.DESCRIPTION 
+ Install and auto runs bginfo at start up. 
 
-.DESCRIPTION
- Setup BGInfo
+#> 
 
-#>
+
+
 <#
 .SYNOPSIS
-Install and auto runs bginfo at startup.
+Install and auto runs bginfo at start up.
 
 .DESCRIPTION
-Install and auto runs bginfo at startup.
+Install and auto runs bginfo at start up.
 
 .PARAMETER RunBGInfo
 Execute bginfo at the end of the script

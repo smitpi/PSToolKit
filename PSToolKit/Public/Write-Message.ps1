@@ -3,7 +3,7 @@
 
 .VERSION 0.1.0
 
-.GUID e39cae70-8c24-4740-9971-494b0c4cbcb0
+.GUID bd5645e4-e07a-4668-aad8-7d3341bdaca2
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,18 +19,26 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [31/03/2022_15:53] Initial Script Creating
+
 
 .PRIVATEDATA
 
 #>
+
+<# 
+
+.DESCRIPTION 
+ Writes the given into to screen 
+
+#> 
+
 
 
 <#

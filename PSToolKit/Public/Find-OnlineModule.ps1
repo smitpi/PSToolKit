@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 0.1.0
+.VERSION 1.0.0
 
-.GUID 8896cc83-9074-4514-a524-f5b40847adae
+.GUID 214cf62a-3fb2-4645-a4f4-40ebbc114baf
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,25 +19,28 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [26/10/2021_22:32] Initial Script Creating
+
 
 .PRIVATEDATA
 
 #>
 
-<#
+<# 
 
-.DESCRIPTION
-Creates reports based on PSGallery.
+.DESCRIPTION 
+ Creates reports based on PSGallery. 
 
-#>
+#> 
+
+
+
 <#
 .SYNOPSIS
 Creates reports based on PSGallery.

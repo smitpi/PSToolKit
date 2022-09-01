@@ -53,7 +53,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Get-WinEventLogExtract`](https://smitpi.github.io/PSToolKit/Get-WinEventLogExtract) -- Extract Event logs of a server list, and create html / excel report
 - [`Import-CitrixSiteConfigFile`](https://smitpi.github.io/PSToolKit/Import-CitrixSiteConfigFile) -- Import the Citrix config file, and created a variable with the details
 - [`Import-XamlConfigFile`](https://smitpi.github.io/PSToolKit/Import-XamlConfigFile) -- Import the wpf xaml file and create variables from objects
-- [`Install-BGInfo`](https://smitpi.github.io/PSToolKit/Install-BGInfo) -- Install and auto runs bginfo at startup.
+- [`Install-BGInfo`](https://smitpi.github.io/PSToolKit/Install-BGInfo) -- Install and auto runs bginfo at start up.
 - [`Install-ChocolateyApp`](https://smitpi.github.io/PSToolKit/Install-ChocolateyApp) -- Install chocolatey apps from a json list.
 - [`Install-ChocolateyClient`](https://smitpi.github.io/PSToolKit/Install-ChocolateyClient) -- Downloads and installs the Chocolatey client.
 - [`Install-ChocolateyServer`](https://smitpi.github.io/PSToolKit/Install-ChocolateyServer) -- This will download, install and setup a new Chocolatey Repo Server
@@ -86,6 +86,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Save-PSModules`](https://smitpi.github.io/PSToolKit/Save-PSModules) -- Saves the modules to a local repo.
 - [`Search-Script`](https://smitpi.github.io/PSToolKit/Search-Script) -- Search for a string in a directory of ps1 scripts.
 - [`Set-FolderCustomIcon`](https://smitpi.github.io/PSToolKit/Set-FolderCustomIcon) -- Will change the icon of a folder to a custom selected icon
+- [`Set-PSProjectFile`](https://smitpi.github.io/PSToolKit/Set-PSProjectFile) -- Creates and modify needed files for a PS project from existing module files.
 - [`Set-PSToolKitSystemSetting`](https://smitpi.github.io/PSToolKit/Set-PSToolKitSystemSetting) -- Set multiple settings on desktop or server
 - [`Set-SharedPSProfile`](https://smitpi.github.io/PSToolKit/Set-SharedPSProfile) -- Redirects PowerShell and WindowsPowerShell profile folder to another path.
 - [`Set-StaticIP`](https://smitpi.github.io/PSToolKit/Set-StaticIP) -- Set static IP on device
@@ -93,6 +94,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Set-VSCodeExplorerSortOrder`](https://smitpi.github.io/PSToolKit/Set-VSCodeExplorerSortOrder) -- Change the sort order in VSCode explorer
 - [`Set-WindowsAutoLogin`](https://smitpi.github.io/PSToolKit/Set-WindowsAutoLogin) -- Enable autologin on a device.
 - [`Show-ComputerManagement`](https://smitpi.github.io/PSToolKit/Show-ComputerManagement) -- Opens the Computer Management of the system or remote system
+- [`Show-MyPSGalleryModules`](https://smitpi.github.io/PSToolKit/Show-MyPSGalleryModules) -- Show version numbers ext. about my modules.
 - [`Show-PSToolKit`](https://smitpi.github.io/PSToolKit/Show-PSToolKit) -- Show details of the commands in this module
 - [`Start-PowerShellAsAdmin`](https://smitpi.github.io/PSToolKit/Start-PowerShellAsAdmin) -- Starts a porwershell session as an administrator
 - [`Start-PSModuleMaintenance`](https://smitpi.github.io/PSToolKit/Start-PSModuleMaintenance) -- Goes through all the installed modules, and allow you to upgrade(If available), or remove old and duplicate versions.
