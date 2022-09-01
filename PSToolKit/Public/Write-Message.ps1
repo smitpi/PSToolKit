@@ -50,7 +50,7 @@ Severity of the entry.
 The object to be reported on.
 
 .PARAMETER Message
-Message to display. This can be an array of strings as well, to have different colours in the text.
+Message to display. This can be an array of strings as well, to have different colors in the text.
 
 .PARAMETER MessageColor
 The Colour of the corresponding message in the array.
@@ -62,12 +62,12 @@ Insert tabs before writing the text.
 Wont add a new line after writing to screen.
 
 .EXAMPLE
-Write-PSToolKitMessage -Action Getting -Severity Information -Object (get-item .) -Message "This is","the directory","you are in." -MessageColor Cyan,DarkGreen,DarkRed
+Write-Message -Action Getting -Severity Information -Object (get-item .) -Message "This is","the directory","you are in." -MessageColor Cyan,DarkGreen,DarkRed
 
 #>
 Function Write-Message {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Write-PSToolKitMessage')]
-	[Alias("Write-PSToolKitMessage")]
+	[Alias('Write-PSToolKitMessage')]
 	[OutputType([string[]])]
 	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '')]
 	PARAM(
@@ -83,7 +83,6 @@ Function Write-Message {
 		[int]$InsertTabs = 0,
 		[switch]$NoNewLine = $false
 	)
-
 	process {
 		if ($InsertTabs -ne 0) {
 			0..$InsertTabs | ForEach-Object {Write-Host "`t" -NoNewline}
@@ -117,7 +116,8 @@ Function Write-Message {
 	}
 } #end Function
 $scriptblock = {
-	@('Starting', 'Getting', 'Copying', 'Moving', 'Complete', 'Deleting', 'Changing', 'Failed', 'Exists')
+	param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
+	$Action = @('Starting', 'Getting', 'Copying', 'Moving', 'Complete', 'Deleting', 'Changing', 'Failed', 'Exists') 
+	$action | Where-Object {$_ -like "$wordToComplete*"} 
 }
-Register-ArgumentCompleter -CommandName Write-PSToolKitMessage -ParameterName Action -ScriptBlock $scriptBlock
-
+Register-ArgumentCompleter -CommandName Write-Message -ParameterName Action -ScriptBlock $scriptBlock

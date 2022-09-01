@@ -80,8 +80,8 @@ Function Set-PSProjectFile {
 	PARAM(
 		[Parameter(Mandatory = $true)]
 		[System.IO.FileInfo]$ModuleScriptFile,
-		[ValidateSet('Minor', 'Build', 'CombineOnly')]
-		[string]$VersionBump = 'CombineOnly',
+		[ValidateSet('Minor', 'Build', 'CombineOnly', 'Revision')]
+		[string]$VersionBump = 'Revision',
 		[switch]$BuildHelpFiles,
 		[switch]$DeployMKDocs,
 		[Switch]$GitPush = $false,
@@ -133,7 +133,7 @@ Function Set-PSProjectFile {
 	#endregion
     
 	#region version bump
-	if ($VersionBump -like 'Minor' -or $VersionBump -like 'Build' ) {
+	if ($VersionBump -notlike "CombineOnly" ) {
 		try {
 			Write-Color '[Starting]', ' Version increase' -Color Yellow, DarkCyan
 			$ModuleManifestFileTMP = Get-Item ($module.Path).Replace('.psm1', '.psd1')
@@ -141,6 +141,7 @@ Function Set-PSProjectFile {
 
 			if ($VersionBump -like 'Minor') { [version]$ModuleversionTMP = '{0}.{1}.{2}' -f $ModuleversionTMP.Major, ($ModuleversionTMP.Minor + 1), $ModuleversionTMP.Build }
 			if ($VersionBump -like 'Build') { [version]$ModuleversionTMP = '{0}.{1}.{2}' -f $ModuleversionTMP.Major, $ModuleversionTMP.Minor, ($ModuleversionTMP.Build + 1) }
+			if ($VersionBump -like 'Revision') { [version]$ModuleversionTMP = '{0}.{1}.{2}.{3}' -f $ModuleversionTMP.Major, $ModuleversionTMP.Minor, $ModuleversionTMP.Build, ($ModuleversionTMP.Revision +1) }
 
 			$manifestProperties = @{
 				Path              = $ModuleManifestFileTMP.FullName
