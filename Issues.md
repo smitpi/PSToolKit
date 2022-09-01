@@ -11,8 +11,7 @@
 | ScriptFileInfo | Test-CitrixVDAPort        | Script 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\Public\Test-CitrixVDAPort.ps1' is missing required metadata properties. Verify that the script file has Version, Guid, Description and Author properties. You can use the Update-ScriptFileInfo or New-ScriptFileInfo cmdlet to add or update the PSScriptInfo to the script file.        |
 | ScriptFileInfo | Write-Message             | Script 'D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\PowerShell\ProdModules\PSToolKit\PSToolKit\Public\Write-Message.ps1' is missing required metadata properties. Verify that the script file has Version, Guid, Description and Author properties. You can use the Update-ScriptFileInfo or New-ScriptFileInfo cmdlet to add or update the PSScriptInfo to the script file.             |
 | Not Copied     | Set-PSProjectFile         | =>                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Not Copied     | Get-BinRoot               | <=                                                                                                                                                                                                                                                                                                                                                                                                    |
 
 ---
 
-*Updated: Thursday, 01 September 2022 05:27:55 UTC*
+*Updated: Thursday, 01 September 2022 09:52:24 UTC*

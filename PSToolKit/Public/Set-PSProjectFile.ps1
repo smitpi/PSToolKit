@@ -90,7 +90,7 @@ Function Set-PSProjectFile {
 				else { Throw 'Must be running an elevated prompt.' } })]
 		[switch]$CopyToModulesFolder = $false,
 		[switch]$CopyNestedModules = $false,
-        [switch]$ShowReport
+		[switch]$ShowReport
 
 	)
 	
@@ -101,7 +101,7 @@ Function Set-PSProjectFile {
 		Remove-Module $modulefile.BaseName -Force -ErrorAction SilentlyContinue
 		$module = Import-Module $modulefile.FullName -Force -PassThru -ErrorAction Stop
 		$OriginalModuleVer = (Import-PowerShellDataFile -Path $modulefile.FullName.Replace('.psm1', '.psd1')).ModuleVersion
-   		Write-Color "[Creating]"," PowerShell Project: ","$($module.Name)"," [ver $($OriginalModuleVer.tostring())]" -Color Yellow,Gray,Green,Yellow -LinesBefore 2 -LinesAfter 2
+		Write-Color '[Creating]', ' PowerShell Project: ', "$($module.Name)", " [ver $($OriginalModuleVer.tostring())]" -Color Yellow, Gray, Green, Yellow -LinesBefore 2 -LinesAfter 2
 	} catch { Write-Error "Error: Importing Module `nMessage:$($_.Exception.message)"; return }
 	#endregion
 
@@ -133,7 +133,7 @@ Function Set-PSProjectFile {
 	#endregion
     
 	#region version bump
-	if ($VersionBump -notlike "CombineOnly" ) {
+	if ($VersionBump -notlike 'CombineOnly' ) {
 		try {
 			Write-Color '[Starting]', ' Version increase' -Color Yellow, DarkCyan
 			$ModuleManifestFileTMP = Get-Item ($module.Path).Replace('.psm1', '.psd1')
@@ -141,7 +141,7 @@ Function Set-PSProjectFile {
 
 			if ($VersionBump -like 'Minor') { [version]$ModuleversionTMP = '{0}.{1}.{2}' -f $ModuleversionTMP.Major, ($ModuleversionTMP.Minor + 1), $ModuleversionTMP.Build }
 			if ($VersionBump -like 'Build') { [version]$ModuleversionTMP = '{0}.{1}.{2}' -f $ModuleversionTMP.Major, $ModuleversionTMP.Minor, ($ModuleversionTMP.Build + 1) }
-			if ($VersionBump -like 'Revision') { [version]$ModuleversionTMP = '{0}.{1}.{2}.{3}' -f $ModuleversionTMP.Major, $ModuleversionTMP.Minor, $ModuleversionTMP.Build, ($ModuleversionTMP.Revision +1) }
+			if ($VersionBump -like 'Revision') { [version]$ModuleversionTMP = '{0}.{1}.{2}.{3}' -f $ModuleversionTMP.Major, $ModuleversionTMP.Minor, $ModuleversionTMP.Build, ($ModuleversionTMP.Revision + 1) }
 
 			$manifestProperties = @{
 				Path              = $ModuleManifestFileTMP.FullName
@@ -395,13 +395,14 @@ Function Set-PSProjectFile {
 		try {
 			$scriptinfo = Test-ScriptFileInfo -Path $PublicItem.fullName -ErrorAction Stop
 			$author = $scriptinfo.author
-		} catch {Write-Warning "`tCould not read script info [$($PublicItem.BaseName)], default values used."
-                [void]$Issues.Add([PSCustomObject]@{
-				            Catagory = 'ScriptFileInfo'
-				            File     = $($PublicItem.BaseName)
-				            details  = $_.Exception.Message
-			            })
-        }
+		} catch {
+			Write-Warning "`tCould not read script info [$($PublicItem.BaseName)], default values used."
+			[void]$Issues.Add([PSCustomObject]@{
+					Catagory = 'ScriptFileInfo'
+					File     = $($PublicItem.BaseName)
+					details  = $_.Exception.Message
+				})
+		}
 
 		$file.add("#region $($PublicItem.name)")
 		$file.Add("######## Function $($public.IndexOf($PublicItem) + 1) of $($public.Count) ##################")
@@ -483,67 +484,67 @@ Function Set-PSProjectFile {
 
 	#region Copy to Modules Dir
 	if ($CopyToModulesFolder) {
-	    Write-Color '[Starting]', ' Copy to Modules Folder' -Color Yellow, DarkCyan
-        $ModuleFolders = @([IO.Path]::Combine($env:ProgramFiles, 'WindowsPowerShell', 'Modules'),
-		    [IO.Path]::Combine($env:ProgramFiles, 'PowerShell', 'Modules'),
-		    [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'WindowsPowerShell', 'Modules'),
-		    [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'PowerShell', 'Modules')
-        )
-        try {
-            $DeleteFolders = (Get-ChildItem $ModuleFolders -Directory).FullName | Where-Object {$_ -like "*$($modulefile.basename)*"}
-            $DeleteFolders | ForEach-Object {
-                Write-Color "`t[Deleting] ","$($_)" -Color Yellow,Gray -NoNewLine
-                Remove-Item $_.fullname -Force -Recurse -ErrorAction Stop
-                Write-Host (' Complete') -ForegroundColor Green
-                }
-        } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+		Write-Color '[Starting]', ' Copy to Modules Folder' -Color Yellow, DarkCyan
+		$ModuleFolders = @([IO.Path]::Combine($env:ProgramFiles, 'WindowsPowerShell', 'Modules'),
+			[IO.Path]::Combine($env:ProgramFiles, 'PowerShell', 'Modules'),
+			[IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'WindowsPowerShell', 'Modules'),
+			[IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'PowerShell', 'Modules')
+		)
+		try {
+			$DeleteFolders = (Get-ChildItem $ModuleFolders -Directory).FullName | Where-Object {$_ -like "*$($modulefile.basename)*"}
+			$DeleteFolders | ForEach-Object {
+				Write-Color "`t[Deleting] ", "$($_)" -Color Yellow, Gray -NoNewLine
+				Remove-Item $_ -Force -Recurse -ErrorAction Stop
+				Write-Host (' Complete') -ForegroundColor Green
+			}
+		} catch {Write-Warning "`nError: `n`tMessage:$($_.Exception.Message)"}
 
-        try {
-		    Write-Color "`t[Copying]", " C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" -Color Yellow, Gray -NoNewLine
-		    if (-not(Test-Path "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)")) { New-Item "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" -ItemType Directory -Force | Out-Null }
-		    Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)\" -Force -Recurse -ErrorAction Stop
-            Write-Host (' Complete') -ForegroundColor Green
+		try {
+			Write-Color "`t[Copying]", " C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" -Color Yellow, Gray -NoNewLine
+			if (-not(Test-Path "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)")) { New-Item "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)" -ItemType Directory -Force | Out-Null }
+			Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\WindowsPowerShell\Modules\$($modulefile.basename)\" -Force -Recurse -ErrorAction Stop
+			Write-Host (' Complete') -ForegroundColor Green
 
-		    Write-Color "`t[Copying]", " C:\Program Files\PowerShell\Modules\$($modulefile.basename)" -Color Yellow, Gray -NoNewLine
-		    if (-not(Test-Path "C:\Program Files\PowerShell\Modules\$($modulefile.basename)")) { New-Item "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" -ItemType Directory -Force | Out-Null }
-		    Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\PowerShell\Modules\$($modulefile.basename)\" -Force -Recurse -ErrorAction Stop
-            Write-Host (' Complete') -ForegroundColor Green
-        } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+			Write-Color "`t[Copying]", " C:\Program Files\PowerShell\Modules\$($modulefile.basename)" -Color Yellow, Gray -NoNewLine
+			if (-not(Test-Path "C:\Program Files\PowerShell\Modules\$($modulefile.basename)")) { New-Item "C:\Program Files\PowerShell\Modules\$($modulefile.basename)" -ItemType Directory -Force | Out-Null }
+			Copy-Item -Path $ModuleOutput.FullName -Destination "C:\Program Files\PowerShell\Modules\$($modulefile.basename)\" -Force -Recurse -ErrorAction Stop
+			Write-Host (' Complete') -ForegroundColor Green
+		} catch {Write-Warning "`nError: `n`tMessage:$($_.Exception.Message)"}
 	}
 	#endregion
 
 	#region mkdocs
 	if ($DeployMKDocs) {
-        Write-Color '[Starting]', ' Creating Online Help Files ' -Color Yellow, DarkCyan
-        Write-Color "`t[MKDocs]", ' Deploy:' -Color Yellow, Gray -NoNewLine
-		Start-Process -FilePath mkdocs.exe -ArgumentList gh-deploy -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -NoNewWindow 2>&1 -Wait | Out-Null
-        if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
-        if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
+		Write-Color '[Starting]', ' Creating Online Help Files ' -Color Yellow, DarkCyan
+		Write-Color "`t[MKDocs]", ' Deploy:' -Color Yellow, Gray -NoNewLine
+		Start-Process -FilePath mkdocs.exe -ArgumentList gh-deploy -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -NoNewWindow -Wait | Out-Null
+		if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
+		if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
 	}
 	#endregion
 
 	#region Git push
-    if ($GitPush) {
-    try {
-		if (Get-Command git.exe -ErrorAction SilentlyContinue) {
-			Write-Color '[Starting]', ' Git Actions' -Color Yellow, DarkCyan
+	if ($GitPush) {
+		try {
+			if (Get-Command git.exe -ErrorAction SilentlyContinue) {
+				Write-Color '[Starting]', ' Git Actions' -Color Yellow, DarkCyan
 		
-            Write-Color "`t[Git]", ' Add:' -Color Yellow, Gray -NoNewLine
-            Start-Process -FilePath git.exe -ArgumentList 'add --all' -WorkingDirectory $ModuleBase -NoNewWindow -Wait | Out-Null
-            if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
-            if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
+				Write-Color "`t[Git]", ' Add:' -Color Yellow, Gray -NoNewLine
+				Start-Process -FilePath git.exe -ArgumentList 'add --all' -WorkingDirectory $ModuleBase -NoNewWindow -Wait | Out-Null
+				if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
+				if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
 
-            Write-Color "`t[Git]", ' Commit:' -Color Yellow, Gray -NoNewLine
-            Start-Process -FilePath git.exe -ArgumentList "commit --all -m `"To Version: $($moduleManifest.version.tostring())`"" -WorkingDirectory $ModuleBase -NoNewWindow -Wait | Out-Null
-            if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
-            if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
+				Write-Color "`t[Git]", ' Commit:' -Color Yellow, Gray -NoNewLine
+				Start-Process -FilePath git.exe -ArgumentList "commit --all -m `"To Version: $($moduleManifest.version.tostring())`"" -WorkingDirectory $ModuleBase -NoNewWindow -Wait | Out-Null
+				if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
+				if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
 
-            Write-Color "`t[Git]", ' Push:' -Color Yellow, Gray -NoNewLine
-            Start-Process -FilePath git.exe -ArgumentList "push" -WorkingDirectory $ModuleBase -NoNewWindow -Wait | Out-Null
-            if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
-            if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
-		} else { Write-Warning 'Git is not installed' }
-    } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+				Write-Color "`t[Git]", ' Push:' -Color Yellow, Gray -NoNewLine
+				Start-Process -FilePath git.exe -ArgumentList 'push' -WorkingDirectory $ModuleBase -NoNewWindow -Wait | Out-Null
+				if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
+				if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
+			} else { Write-Warning 'Git is not installed' }
+		} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 	}
 	#endregion
 
@@ -558,8 +559,8 @@ Function Set-PSProjectFile {
 		$Fragments.Add("---`n")
 		$fragments.add("*Updated: $(Get-Date -Format U) UTC*")
 		$fragments | Out-File -FilePath $ModuleIssues -Encoding utf8 -Force
-	if ($ShowReport) { & $ModuleIssues}
-    }
+		if ($ShowReport) { & $ModuleIssues}
+	}
 	#endregion
 
 	Write-Color '[Complete]', ' PowerShell Project: ', "$($module.Name)", " [ver $($ModuleManifest.Version.ToString())]" -Color Green, Gray, Green, Yellow -LinesBefore 2 -LinesAfter 2
