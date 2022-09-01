@@ -535,7 +535,7 @@ Function Set-PSProjectFile {
 				if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
 
 				Write-Color "`t[Git]", ' Commit:' -Color Yellow, Gray -NoNewLine
-				Start-Process -FilePath git.exe -ArgumentList "commit --all -m `"To Version: $($moduleManifest.version.tostring())`"" -WorkingDirectory $ModuleBase -NoNewWindow -Wait | Out-Null
+				Start-Process -FilePath git.exe -ArgumentList "commit -m `"To Version: $($moduleManifest.version.tostring())`"" -WorkingDirectory $ModuleBase -NoNewWindow -Wait | Out-Null
 				if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
 				if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
 
