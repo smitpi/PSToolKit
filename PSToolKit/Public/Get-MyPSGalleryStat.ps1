@@ -110,61 +110,63 @@ Function Get-MyPSGalleryStat {
 
         } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 
-        foreach ($Mod in $ModLists) {
-            Write-PSToolKitMessage -Action 'Collecting' -Object $mod -Message 'Online Data' -MessageColor Gray
-            $ResultModule = Find-Module $mod -Repository PSGallery
-            $YStats = ($GalStats.sum | Where-Object {$_.name -like $mod -and $_.DateCollected -gt ((Get-Date).AddDays(-1).ToUniversalTime())})[-1]
-            $YSpan  = New-TimeSpan -Start $YStats.DateCollected.ToUniversalTime() -End (get-date).ToUniversalTime()
-            $YTotalDownload = [Int]$ResultModule.AdditionalMetadata.downloadCount - $YStats.TotalDownload
-            $YVersionDownload = [Int]$ResultModule.AdditionalMetadata.versionDownloadCount - $YStats.VersionDownload
-            $TotalDownloads = $TotalDownloads + [int]$ResultModule.AdditionalMetadata.downloadCount
-            [void]$GalStats.Add([PSCustomObject]@{
-                    Sum            = [PSCustomObject]@{
-                        DateCollected   = ([datetime](Get-Date -Format U)).ToUniversalTime()
-                        Name            = $ResultModule.Name
-                        Version         = $ResultModule.Version
-                        PublishedDate   = ([datetime]$ResultModule.AdditionalMetadata.published).ToUniversalTime()
-                        TotalDownload   = [Int]$ResultModule.AdditionalMetadata.downloadCount
-                        VersionDownload = [Int]$ResultModule.AdditionalMetadata.versionDownloadCount
-                    }
-                    DailyStats          = [PSCustomObject]@{
-                        DateCollected   = ([datetime](Get-Date -Format U)).ToUniversalTime()
-                        Name            = $ResultModule.Name
-                        Version         = $ResultModule.Version
-                        TotalDays       = [math]::ceiling($YSpan.TotalDays)
-                        TotalHours      = [math]::ceiling($YSpan.TotalHours)
-                        TotalDownloads  = $YTotalDownload
-                        VersionDownload = $YVersionDownload
-                        PublishedDate   = ([datetime]$ResultModule.AdditionalMetadata.published).ToUniversalTime()
-                    }
-                    All            = $ResultModule
-                    TotalDownloads = $TotalDownloads
-                    DateCollected  = [datetime](Get-Date -Format U)
-                })
-        }
-        try {
-            Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Uploading to gist"
-            $Body = @{}
-            $files = @{}
-            $Files['PSGalleryStats.json'] = @{content = ( $GalStats | ConvertTo-Json -Depth 10 | Out-String ) }
-            $Body.files = $Files
-            $Uri = 'https://api.github.com/gists/{0}' -f $PRGist.id
-            $json = ConvertTo-Json -InputObject $Body
-            $json = [System.Text.Encoding]::UTF8.GetBytes($json)
-            $null = Invoke-WebRequest -Headers $headers -Uri $Uri -Method Patch -Body $json -ErrorAction Stop
-            Write-PSToolKitMessage -Action 'Upload' -Object 'PSGallery Stats' -Message 'To Github Gist', 'Complete' -MessageColor Gray, Green
-        } catch {Write-Error "Can't connect to gist:`n $($_.Exception.Message)"}
+        if (-not($History)) {
+            foreach ($Mod in $ModLists) {
+                Write-PSToolKitMessage -Action 'Collecting' -Object $mod -Message 'Online Data' -MessageColor Gray
+                $ResultModule = Find-Module $mod -Repository PSGallery
+                $YStats = ($GalStats.sum | Where-Object {$_.name -like $mod -and $_.DateCollected -gt ((Get-Date).AddDays(-1).ToUniversalTime())})[-1]
+                $YSpan = New-TimeSpan -Start $YStats.DateCollected.ToUniversalTime() -End (Get-Date).ToUniversalTime()
+                $YTotalDownload = [Int]$ResultModule.AdditionalMetadata.downloadCount - $YStats.TotalDownload
+                $YVersionDownload = [Int]$ResultModule.AdditionalMetadata.versionDownloadCount - $YStats.VersionDownload
+                $TotalDownloads = $TotalDownloads + [int]$ResultModule.AdditionalMetadata.downloadCount
+                [void]$GalStats.Add([PSCustomObject]@{
+                        Sum            = [PSCustomObject]@{
+                            DateCollected   = ([datetime](Get-Date -Format U)).ToUniversalTime()
+                            Name            = $ResultModule.Name
+                            Version         = $ResultModule.Version
+                            PublishedDate   = ([datetime]$ResultModule.AdditionalMetadata.published).ToUniversalTime()
+                            TotalDownload   = [Int]$ResultModule.AdditionalMetadata.downloadCount
+                            VersionDownload = [Int]$ResultModule.AdditionalMetadata.versionDownloadCount
+                        }
+                        DailyStats     = [PSCustomObject]@{
+                            DateCollected   = ([datetime](Get-Date -Format U)).ToUniversalTime()
+                            Name            = $ResultModule.Name
+                            Version         = $ResultModule.Version
+                            TotalDays       = [math]::ceiling($YSpan.TotalDays)
+                            TotalHours      = [math]::ceiling($YSpan.TotalHours)
+                            TotalDownloads  = $YTotalDownload
+                            VersionDownload = $YVersionDownload
+                            PublishedDate   = ([datetime]$ResultModule.AdditionalMetadata.published).ToUniversalTime()
+                        }
+                        All            = $ResultModule
+                        TotalDownloads = $TotalDownloads
+                        DateCollected  = [datetime](Get-Date -Format U)
+                    })
+            }
+            try {
+                Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Uploading to gist"
+                $Body = @{}
+                $files = @{}
+                $Files['PSGalleryStats.json'] = @{content = ( $GalStats | ConvertTo-Json -Depth 10 | Out-String ) }
+                $Body.files = $Files
+                $Uri = 'https://api.github.com/gists/{0}' -f $PRGist.id
+                $json = ConvertTo-Json -InputObject $Body
+                $json = [System.Text.Encoding]::UTF8.GetBytes($json)
+                $null = Invoke-WebRequest -Headers $headers -Uri $Uri -Method Patch -Body $json -ErrorAction Stop
+                Write-PSToolKitMessage -Action 'Upload' -Object 'PSGallery Stats' -Message 'To Github Gist', 'Complete' -MessageColor Gray, Green
+            } catch {Write-Error "Can't connect to gist:`n $($_.Exception.Message)"}
 
-        if ($ASObject) {$GalStats}
-        else {
-            Write-Host 'Total Downloads: ', "$(($GalStats.TotalDownloads | Sort-Object -Descending)[0])" -ForegroundColor Yellow
-            $GalStats[-1..-6].Sum | Sort-Object -Property PublishedDate -Descending | Format-Table -AutoSize -Wrap
+            if ($ASObject) {$GalStats}
+            else {
+                Write-Host 'Total Downloads: ', "$(($GalStats.TotalDownloads | Sort-Object -Descending)[0])" -ForegroundColor Yellow
+                $GalStats[-1..-6].Sum | Sort-Object -Property PublishedDate -Descending | Format-Table -AutoSize -Wrap
+            }
         }
     }
-
     if ($History) {
         [System.Collections.generic.List[PSObject]]$GalTotals = @()
         $allNames = $GalStats.Sum | Select-Object Name | Sort-Object -Property Name -Unique
+        $end = (get-date).AddDays(-$daysToReport)
 
         foreach ($All in $allNames) {
             $sum = $GalStats.Sum | Where-Object {$_.Name -like $all.Name -and $_.DateCollected -gt $end}

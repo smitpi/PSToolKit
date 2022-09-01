@@ -95,13 +95,13 @@ Function Set-PSProjectFile {
 	)
 	
 	#region module import
-	
 	try {
 		$modulefile = $ModuleScriptFile | Get-Item -ErrorAction Stop
 		Remove-Module $modulefile.BaseName -Force -ErrorAction SilentlyContinue
 		$module = Import-Module $modulefile.FullName -Force -PassThru -ErrorAction Stop
 		$OriginalModuleVer = (Import-PowerShellDataFile -Path $modulefile.FullName.Replace('.psm1', '.psd1')).ModuleVersion
 		Write-Color '[Creating]', ' PowerShell Project: ', "$($module.Name)", " [ver $($OriginalModuleVer.tostring())]" -Color Yellow, Gray, Green, Yellow -LinesBefore 2 -LinesAfter 2
+		Write-Color "`t- ", 'Module Import' -Color Green, Gray
 	} catch { Write-Error "Error: Importing Module `nMessage:$($_.Exception.message)"; return }
 	#endregion
 
@@ -118,8 +118,8 @@ Function Set-PSProjectFile {
 	[System.Collections.ArrayList]$Issues = @()
 	#endregion
 	
-    #region Remove folders
-	Write-Color '[Starting]', ' Removing Output Folders' -Color Yellow, DarkCyan
+	#region Remove folders
+	Write-Color "`t- ", 'Removing Output Folders' -Color Green, Gray
 	try {
 		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop }
 		if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force -ErrorAction Stop }
@@ -154,7 +154,7 @@ Function Set-PSProjectFile {
 	} 
 	#endregion
 	
-    #region add dateline
+	#region add dateline
 	Write-Color '[Starting]', ' Adding verbose date' -Color Yellow, DarkCyan
 	try {
 		$ModuleManifestFile = Get-Item ($module.Path).Replace('.psm1', '.psd1')
@@ -166,7 +166,7 @@ Function Set-PSProjectFile {
 	} catch { Write-Error "Error: Updating Date in Module Manifest File  `nMessage:$($_.Exception.message)"; return }
 	#endregion
 	
-    #region Create Folders
+	#region Create Folders
 	Write-Color '[Starting]', ' Creating Output Folder' -Color Yellow, DarkCyan
 	try {
 		$ModuleOutputFolder = [IO.Path]::Combine($ModuleBase, 'Output', $($ModuleManifest.Version.ToString()))
@@ -405,26 +405,26 @@ Function Set-PSProjectFile {
 					File     = $($PublicItem.BaseName)
 					details  = $_.Exception.Message
 				})
-        try {
-            $PublicItem.fullName | Compress-Archive -DestinationPath "$ModuleBase\Scriptinfo.zip" -Update
-            $begin = Select-String -Path $PublicItem.fullName -Pattern "<#"
-            $end = Select-String -Path $PublicItem.fullName -Pattern "#>"
-            $Requires = Select-String -Path $PublicItem.fullName -Pattern "#Requires" | ForEach-Object {$_.Line.Replace("#Requires -Module ",$null)}
-            $version = ((Select-String -Path $PublicItem.fullName -Pattern ".VERSION" -CaseSensitive).Line.Replace(".VERSION ",$null)).Trim()
-            $Author  = ((Select-String -Path $PublicItem.fullName -Pattern ".AUTHOR" -CaseSensitive).Line.Replace(".AUTHOR ",$null)).Trim()
-            $Company  = ((Select-String -Path $PublicItem.fullName -Pattern ".COMPANYNAME" -CaseSensitive).Line.Replace(".COMPANYNAME ",$null)).Trim()
-            $scriptContent = (Get-Content $PublicItem.fullName)[($begin[2].LineNumber -1)..((Get-Content $PublicItem.fullName).Length)]
+			try {
+				$PublicItem.fullName | Compress-Archive -DestinationPath "$ModuleBase\Scriptinfo.zip" -Update
+				$begin = Select-String -Path $PublicItem.fullName -Pattern '<#'
+				$end = Select-String -Path $PublicItem.fullName -Pattern '#>'
+				$Requires = Select-String -Path $PublicItem.fullName -Pattern '#Requires' | ForEach-Object {$_.Line.Replace('#Requires -Module ', $null)}
+				$version = ((Select-String -Path $PublicItem.fullName -Pattern '.VERSION' -CaseSensitive).Line.Replace('.VERSION ', $null)).Trim()
+				$Author = ((Select-String -Path $PublicItem.fullName -Pattern '.AUTHOR' -CaseSensitive).Line.Replace('.AUTHOR ', $null)).Trim()
+				$Company = ((Select-String -Path $PublicItem.fullName -Pattern '.COMPANYNAME' -CaseSensitive).Line.Replace('.COMPANYNAME ', $null)).Trim()
+				$scriptContent = (Get-Content $PublicItem.fullName)[($begin[2].LineNumber - 1)..((Get-Content $PublicItem.fullName).Length)]
 
-		    Clear-Content -Path $PublicItem.fullName
-            if ($Requires) {update-ScriptFileInfo -Path $PublicItem.fullName -Version $version -Author $author -Guid (New-Guid) -CompanyName $Company -Description (Get-Help $PublicItem.BaseName).SYNOPSIS -RequiredModules $Requires -Force}
-            else {update-ScriptFileInfo -Path $PublicItem.fullName -Version $version -Author $author -Guid (New-Guid) -CompanyName $Company -Description (Get-Help $PublicItem.BaseName).SYNOPSIS -Force}
-            $NewContent = Get-Content $PublicItem.fullName | Where-Object {$_ -notlike "PARAM()"}
-            Set-Content -Value $NewContent -Path $PublicItem.fullName
-            Add-Content -Value $scriptContent -Path $PublicItem.fullName
-            $scriptinfo = Test-ScriptFileInfo -Path $PublicItem.fullName
-	        $author = $scriptinfo.author
-        } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
-}
+				Clear-Content -Path $PublicItem.fullName
+				if ($Requires) {Update-ScriptFileInfo -Path $PublicItem.fullName -Version $version -Author $author -Guid (New-Guid) -CompanyName $Company -Description (Get-Help $PublicItem.BaseName).SYNOPSIS -RequiredModules $Requires -Force}
+				else {Update-ScriptFileInfo -Path $PublicItem.fullName -Version $version -Author $author -Guid (New-Guid) -CompanyName $Company -Description (Get-Help $PublicItem.BaseName).SYNOPSIS -Force}
+				$NewContent = Get-Content $PublicItem.fullName | Where-Object {$_ -notlike 'PARAM()'}
+				Set-Content -Value $NewContent -Path $PublicItem.fullName
+				Add-Content -Value $scriptContent -Path $PublicItem.fullName
+				$scriptinfo = Test-ScriptFileInfo -Path $PublicItem.fullName
+				$author = $scriptinfo.author
+			} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+		}
 
 		$file.add("#region $($PublicItem.name)")
 		$file.Add("######## Function $($public.IndexOf($PublicItem) + 1) of $($public.Count) ##################")
