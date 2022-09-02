@@ -101,7 +101,7 @@ Function Set-PSProjectFile {
 		$module = Import-Module $modulefile.FullName -Force -PassThru -ErrorAction Stop
 		$OriginalModuleVer = (Import-PowerShellDataFile -Path $modulefile.FullName.Replace('.psm1', '.psd1')).ModuleVersion
 		Write-Color '[Creating]', ' PowerShell Project: ', "$($module.Name)", " [ver $($OriginalModuleVer.tostring())]" -Color Yellow, Gray, Green, Yellow -LinesBefore 2 -LinesAfter 2
-		Write-Color "[Starting]", ' Module Changes' -Color Yellow,Cyan
+		Write-Color "[Starting]", ' Module Changes' -Color Yellow,DarkCyan
 		
 	} catch { Write-Error "Error: Importing Module `nMessage:$($_.Exception.message)"; return }
 	#endregion
@@ -177,7 +177,7 @@ Function Set-PSProjectFile {
 
 	#region platyps
 	if ($BuildHelpFiles) {
-		Write-Color '[Starting]', ' Building Help Files' -Color Yellow, Cyan
+		Write-Color '[Starting]', ' Building Help Files' -Color Yellow, DarkCyan
 		Write-Color "`t[Deleting]: ", 'Docs Folder' -Color yello, Gray
 		try {
 			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
