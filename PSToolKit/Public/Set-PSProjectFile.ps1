@@ -101,7 +101,8 @@ Function Set-PSProjectFile {
 		$module = Import-Module $modulefile.FullName -Force -PassThru -ErrorAction Stop
 		$OriginalModuleVer = (Import-PowerShellDataFile -Path $modulefile.FullName.Replace('.psm1', '.psd1')).ModuleVersion
 		Write-Color '[Creating]', ' PowerShell Project: ', "$($module.Name)", " [ver $($OriginalModuleVer.tostring())]" -Color Yellow, Gray, Green, Yellow -LinesBefore 2 -LinesAfter 2
-		Write-Color "`t- ", 'Module Import' -Color Green, Gray
+		Write-Color "[Starting]", ' Module Changes' -Color Yellow,Cyan
+		
 	} catch { Write-Error "Error: Importing Module `nMessage:$($_.Exception.message)"; return }
 	#endregion
 
@@ -119,7 +120,7 @@ Function Set-PSProjectFile {
 	#endregion
 	
 	#region Remove folders
-	Write-Color "`t- ", 'Removing Output Folders' -Color Green, Gray
+	Write-Color "`t[Deleting]: ", "Output Folder" -Color yello, Gray
 	try {
 		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop }
 		if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force -ErrorAction Stop }
@@ -136,7 +137,7 @@ Function Set-PSProjectFile {
 	#region version bump
 	if ($VersionBump -notlike 'CombineOnly' ) {
 		try {
-			Write-Color '[Starting]', ' Version increase' -Color Yellow, DarkCyan
+			Write-Color "`t[Processing]: ", "Module Version Increase" -Color yello, Gray
 			$ModuleManifestFileTMP = Get-Item ($module.Path).Replace('.psm1', '.psd1')
 			[version]$ModuleversionTMP = (Test-ModuleManifest -Path $ModuleManifestFileTMP.FullName -ErrorAction Stop).version 
 
@@ -155,7 +156,7 @@ Function Set-PSProjectFile {
 	#endregion
 	
 	#region add dateline
-	Write-Color '[Starting]', ' Adding verbose date' -Color Yellow, DarkCyan
+	Write-Color "`t[Processing]: ", 'Adding verbose date' -Color yello, Gray
 	try {
 		$ModuleManifestFile = Get-Item ($module.Path).Replace('.psm1', '.psd1')
 		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object * -ErrorAction Stop
@@ -167,7 +168,7 @@ Function Set-PSProjectFile {
 	#endregion
 	
 	#region Create Folders
-	Write-Color '[Starting]', ' Creating Output Folder' -Color Yellow, DarkCyan
+	Write-Color "`t[Processing]: ", 'Creating Output Folder' -Color yello, Gray
 	try {
 		$ModuleOutputFolder = [IO.Path]::Combine($ModuleBase, 'Output', $($ModuleManifest.Version.ToString()))
 		$ModuleOutput = New-Item $ModuleOutputFolder -ItemType Directory -Force | Get-Item -ErrorAction Stop
@@ -176,7 +177,8 @@ Function Set-PSProjectFile {
 
 	#region platyps
 	if ($BuildHelpFiles) {
-		Write-Color '[Starting]', ' Removing Docs Folders' -Color Yellow, DarkCyan
+		Write-Color '[Starting]', ' Building Help Files' -Color Yellow, Cyan
+		Write-Color "`t[Deleting]: ", 'Docs Folder' -Color yello, Gray
 		try {
 			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
 			if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }
@@ -188,8 +190,7 @@ Function Set-PSProjectFile {
 			} catch { throw 'Error Removing Docs folder' ; return }
 		}
 		try {
-			Write-Color '[Starting]', ' Creating Mardown Help Files' -Color Yellow, DarkCyan
-
+			Write-Color "`t[Processing]: ", 'Creating Mardown Help Files' -Color yello, Gray
 			$ModuledocsFolder = [IO.Path]::Combine($ModuleBase, 'docs', 'docs')
 			$Moduledocs = New-Item $ModuledocsFolder -ItemType Directory -Force | Get-Item -ErrorAction Stop
 			$ModuleExternalHelpFolder = [IO.Path]::Combine($ModuleOutput, 'en-US')
@@ -220,7 +221,7 @@ Function Set-PSProjectFile {
 				foreach ($item in $gr.Group) {
 					$object = Get-Item $item.Path
 					$mod = Get-Content -Path $object.FullName
-					Write-Color "$($object.name):", "$($mod[$($item.LineNumber -2)]) - $($mod[$($item.LineNumber -1)])" -Color Cyan, Yellow
+					Write-Color "`t$($object.name):", "$($mod[$($item.LineNumber -2)]) - $($mod[$($item.LineNumber -1)])" -Color Yellow,Gray
 					[void]$Issues.Add([PSCustomObject]@{
 							Catagory = 'External Help'
 							File     = $object.name
@@ -231,10 +232,10 @@ Function Set-PSProjectFile {
 		} catch { Write-Error "Error: Docs check `nMessage:$($_.Exception.message)"; return }
 
 		try {
-			Write-Color '[Starting]', ' Creating External Help Files' -Color Yellow, DarkCyan
+			Write-Color "`t[Processing]: ", 'External Help Files' -Color yello, Gray
 			New-ExternalHelp -Path $Moduledocs.FullName -OutputPath $ModuleExternalHelp.FullName -Force | Out-Null
 
-			Write-Color '[Starting]', ' Creating About Help Files' -Color Yellow, DarkCyan
+			Write-Color "`t[Processing]: ", 'About Help Files' -Color yello, Gray
 			$aboutfile = [System.Collections.Generic.List[string]]::new()
 			$aboutfile.Add('')
 			$aboutfile.Add("$($module.Name)")
@@ -253,7 +254,7 @@ Function Set-PSProjectFile {
 			$aboutfile | Set-Content -Path (Join-Path $ModuleExternalHelp.FullName -ChildPath "\about_$($module.Name).help.txt") -Force
 
 			if (!(Test-Path $ModulesInstuctions)) {
-				Write-Color '[Starting]', ' Creating Instructions File' -Color Yellow, DarkCyan
+				Write-Color "`t[Processing]: ", 'Instructions Files' -Color yello, Gray
 				$instructions = [System.Collections.Generic.List[string]]::new()
 				$instructions.add("# $($module.Name)")
 				$instructions.Add(' ')
@@ -282,7 +283,7 @@ Function Set-PSProjectFile {
 				$instructions | Set-Content -Path $ModulesInstuctions
 			}
 
-			Write-Color '[Starting]', ' Creating Readme File' -Color Yellow, DarkCyan
+			Write-Color "`t[Processing]: ", 'Readme Files' -Color yello, Gray
 			$readme = [System.Collections.Generic.List[string]]::new()
 			Get-Content -Path $ModulesInstuctions | ForEach-Object { $readme.add($_) }
 			$readme.add(' ')
@@ -290,7 +291,7 @@ Function Set-PSProjectFile {
 	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $readme.add("- [``$_``](https://smitpi.github.io/$($module.Name)/$_) -- " + (Get-Help $_).SYNOPSIS) }
 			$readme | Set-Content -Path $ModuleReadme
 
-			Write-Color '[Starting]', ' Creating MkDocs Config File' -Color Yellow, DarkCyan
+			Write-Color "`t[Processing]: ", 'MKDocs Config Files' -Color yello, Gray
 			$mkdocsFunc = [System.Collections.Generic.List[string]]::new()
 			$mkdocsFunc.add("site_name: `'$($module.Name)`'")
 			$mkdocsFunc.add("site_description: `'Documentation for PowerShell Module: $($module.Name)`'")
@@ -337,7 +338,7 @@ Function Set-PSProjectFile {
 			$mkdocsFunc.add('        name: Switch to light mode')
 			$mkdocsFunc | Set-Content -Path $Modulemkdocs -Force
 
-			Write-Color '[Starting]', ' Creating MkDocs Index File' -Color Yellow, DarkCyan
+			Write-Color "`t[Processing]: ", 'MKDocs Index Files' -Color yello, Gray
 			$indexFile = [System.Collections.Generic.List[string]]::new()
 			Get-Content -Path $ModulesInstuctions | ForEach-Object { $indexFile.add($_) }
 			$indexFile.add(' ')
@@ -345,7 +346,7 @@ Function Set-PSProjectFile {
 	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $indexFile.add("- [``$_``](https://smitpi.github.io/$($module.Name)/$_) -- " + (Get-Help $_).SYNOPSIS) }
 			$indexFile | Set-Content -Path $ModuleIndex -Force
 
-			Write-Color '[Starting]', ' Creating Versioning File' -Color Yellow, DarkCyan
+			Write-Color "`t[Processing]: ", 'Versioning Files' -Color yello, Gray
 			$versionfile = [System.Collections.Generic.List[PSObject]]::New()
 			$versionfile.add([pscustomobject]@{
 					version = $($moduleManifest.version).ToString()
@@ -408,7 +409,6 @@ Function Set-PSProjectFile {
 			try {
 				$PublicItem.fullName | Compress-Archive -DestinationPath "$ModuleBase\Scriptinfo.zip" -Update
 				$begin = Select-String -Path $PublicItem.fullName -Pattern '<#'
-				$end = Select-String -Path $PublicItem.fullName -Pattern '#>'
 				$Requires = Select-String -Path $PublicItem.fullName -Pattern '#Requires' | ForEach-Object {$_.Line.Replace('#Requires -Module ', $null)}
 				$version = ((Select-String -Path $PublicItem.fullName -Pattern '.VERSION' -CaseSensitive).Line.Replace('.VERSION ', $null)).Trim()
 				$Author = ((Select-String -Path $PublicItem.fullName -Pattern '.AUTHOR' -CaseSensitive).Line.Replace('.AUTHOR ', $null)).Trim()
@@ -552,17 +552,17 @@ Function Set-PSProjectFile {
 				Write-Color '[Starting]', ' Git Actions' -Color Yellow, DarkCyan
 		
 				Write-Color "`t[Git]", ' Add:' -Color Yellow, Gray -NoNewLine
-				Start-Process -FilePath git.exe -ArgumentList 'add --all' -WorkingDirectory $ModuleBase -NoNewWindow -Wait | Out-Null
+				Start-Process -FilePath git.exe -ArgumentList 'add --all' -WorkingDirectory $ModuleBase -wait | Out-Null
 				if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
 				if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
 
 				Write-Color "`t[Git]", ' Commit:' -Color Yellow, Gray -NoNewLine
-				Start-Process -FilePath git.exe -ArgumentList "commit -m `"To Version: $($moduleManifest.version.tostring())`"" -WorkingDirectory $ModuleBase -NoNewWindow -Wait | Out-Null
+				Start-Process -FilePath git.exe -ArgumentList "commit -m `"To Version: $($moduleManifest.version.tostring())`"" -WorkingDirectory $ModuleBase -Wait | Out-Null
 				if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
 				if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
 
 				Write-Color "`t[Git]", ' Push:' -Color Yellow, Gray -NoNewLine
-				Start-Process -FilePath git.exe -ArgumentList 'push' -WorkingDirectory $ModuleBase -NoNewWindow -Wait | Out-Null
+				Start-Process -FilePath git.exe -ArgumentList 'push' -WorkingDirectory $ModuleBase -Wait | Out-Null
 				if ($LASTEXITCODE -ne 0) {Write-Host (' Failed') -ForegroundColor Red}
 				if ($LASTEXITCODE -eq 0) {Write-Host (' Complete') -ForegroundColor Green}
 			} else { Write-Warning 'Git is not installed' }
@@ -589,8 +589,8 @@ Function Set-PSProjectFile {
 }#end Function
  
 $scriptblock = {
-	param($commandName, $parameterName, $stringMatch)
+	param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
 	$here = (Get-Item .)
-	(Get-ChildItem -Path .\*.psm1 -Recurse).FullName | ForEach-Object { $_.Replace("$($here.FullName)", '.') }
+	(Get-ChildItem -Path .\*.psm1 -Recurse).FullName | ForEach-Object { $_.Replace("$($here.FullName)", '.') | Where-Object {$_ -like "*$wordToComplete*"}}
 }
 Register-ArgumentCompleter -CommandName Set-PSProjectFile -ParameterName ModuleScriptFile -ScriptBlock $scriptBlock
