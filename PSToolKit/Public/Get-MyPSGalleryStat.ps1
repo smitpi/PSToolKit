@@ -86,7 +86,7 @@ Function Get-MyPSGalleryStat {
 
     if ($OpenProfilePage) {Start-Process 'https://www.powershellgallery.com/profiles/smitpi'}
     else {
-        $ModLists = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule')
+        $ModLists = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSPackageMan')
         try {
             Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Connecting to Gist"
             $headers = @{}
@@ -166,7 +166,7 @@ Function Get-MyPSGalleryStat {
     if ($History) {
         [System.Collections.generic.List[PSObject]]$GalTotals = @()
         $allNames = $GalStats.Sum | Select-Object Name | Sort-Object -Property Name -Unique
-        $end = (get-date).AddDays(-$daysToReport)
+        $end = (Get-Date).AddDays(-$daysToReport)
 
         foreach ($All in $allNames) {
             $sum = $GalStats.Sum | Where-Object {$_.Name -like $all.Name -and $_.DateCollected -gt $end}

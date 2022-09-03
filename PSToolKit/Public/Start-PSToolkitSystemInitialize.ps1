@@ -82,7 +82,7 @@ Function Start-PSToolkitSystemInitialize {
 	}
 	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Needed Powershell modules' -ForegroundColor Cyan
 
-	'ImportExcel', 'PSWriteHTML', 'PSWriteColor', 'PSScriptTools', 'PoshRegistry', 'Microsoft.PowerShell.Archive','PWSHModule' | ForEach-Object {
+	'ImportExcel', 'PSWriteHTML', 'PSWriteColor', 'PSScriptTools', 'PoshRegistry', 'Microsoft.PowerShell.Archive','PWSHModule','PSPackageMan' | ForEach-Object {
 		$module = $_
 		if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
 			try {
@@ -103,7 +103,7 @@ Function Start-PSToolkitSystemInitialize {
 	Import-Module PSToolKit -Force
 	if ($InstallMyModules) {
 		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Installing My Modules' -ForegroundColor Cyan
-		'CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray','PWSHModule' | ForEach-Object {
+		'CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSPackageMan' | ForEach-Object {
 			$module = $_
 			Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
 			if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
@@ -126,14 +126,13 @@ Function Start-PSToolkitSystemInitialize {
 
 	if ($LabSetup) {
 		New-PSProfile
-		Update-PSToolKitConfigFile -UpdateLocal -UpdateLocalFromModule
 		Reset-PSGallery -Force
 		Set-PSToolKitSystemSetting -RunAll
 		Install-PWSHModule -GitHubUserID smitpi -PublicGist -ListName base -Scope AllUsers
 		Install-ChocolateyClient
 		Install-VMWareTool
 		Install-PowerShell7x
-		Install-ChocolateyApp -BaseApps
+		Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID smitpi -PublicGist
 		Install-RSAT
 		Install-MSUpdate
 	}

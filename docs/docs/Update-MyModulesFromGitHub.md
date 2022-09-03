@@ -38,7 +38,7 @@ Aliases:
 
 Required: False
 Position: 1
-Default value: @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit', 'PSWindowsApp')
+Default value: @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSToolkit', 'PSPackageMan')
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
