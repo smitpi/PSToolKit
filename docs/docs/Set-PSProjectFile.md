@@ -13,8 +13,9 @@ Creates and modify needed files for a PS project from existing module files.
 ## SYNTAX
 
 ```
-Set-PSProjectFile [-ModuleScriptFile] <FileInfo> [[-VersionBump] <String>] [-BuildHelpFiles] [-DeployMKDocs]
- [-GitPush] [-CopyToModulesFolder] [-CopyNestedModules] [-ShowReport] [<CommonParameters>]
+Set-PSProjectFile [-ModuleScriptFile] <FileInfo> [[-VersionBump] <String>] [[-ReleaseNotes] <String>]
+ [-BuildHelpFiles] [-DeployMKDocs] [-GitPush] [-CopyToModulesFolder] [-CopyNestedModules] [-ShowReport]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -55,6 +56,21 @@ Aliases:
 Required: False
 Position: 2
 Default value: Revision
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReleaseNotes
+Add release notes to the manifest file.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -59,6 +59,9 @@ Will copy the required modules to the nested modules folder.
 .PARAMETER VersionBump
 This will increase the version of the module.
 
+.PARAMETER ReleaseNotes
+Add release notes to the manifest file.
+
 .PARAMETER DeployMKDocs
 Create or test the mkdocs site
 
@@ -82,6 +85,7 @@ Function Set-PSProjectFile {
 		[System.IO.FileInfo]$ModuleScriptFile,
 		[ValidateSet('Minor', 'Build', 'CombineOnly', 'Revision')]
 		[string]$VersionBump = 'Revision',
+		[string]$ReleaseNotes,
 		[switch]$BuildHelpFiles,
 		[switch]$DeployMKDocs,
 		[Switch]$GitPush = $false,
@@ -101,7 +105,7 @@ Function Set-PSProjectFile {
 		$module = Import-Module $modulefile.FullName -Force -PassThru -ErrorAction Stop
 		$OriginalModuleVer = (Import-PowerShellDataFile -Path $modulefile.FullName.Replace('.psm1', '.psd1')).ModuleVersion
 		Write-Color '[Creating]', ' PowerShell Project: ', "$($module.Name)", " [ver $($OriginalModuleVer.tostring())]" -Color Yellow, Gray, Green, Yellow -LinesBefore 2 -LinesAfter 2
-		Write-Color "[Starting]", ' Module Changes' -Color Yellow,DarkCyan
+		Write-Color '[Starting]', ' Module Changes' -Color Yellow, DarkCyan
 		
 	} catch { Write-Error "Error: Importing Module `nMessage:$($_.Exception.message)"; return }
 	#endregion
@@ -120,7 +124,7 @@ Function Set-PSProjectFile {
 	#endregion
 	
 	#region Remove folders
-	Write-Color "`t[Deleting]: ", "Output Folder" -Color yello, Gray
+	Write-Color "`t[Deleting]: ", 'Output Folder' -Color yello, Gray
 	try {
 		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop }
 		if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force -ErrorAction Stop }
@@ -137,8 +141,8 @@ Function Set-PSProjectFile {
 	#region version bump
 	if ($VersionBump -notlike 'CombineOnly' ) {
 		try {
-			Write-Color "`t[Processing]: ", "Module Version Increase" -Color yello, Gray
-			$ModuleManifestFileTMP = Get-Item ($module.Path).Replace('.psm1', '.psd1')
+			Write-Color "`t[Processing]: ", 'Module Version Increase' -Color yello, Gray
+			$ModuleManifestFileTMP = Get-Item $modulefile.FullName.Replace('.psm1', '.psd1')
 			[version]$ModuleversionTMP = (Test-ModuleManifest -Path $ModuleManifestFileTMP.FullName -ErrorAction Stop).version 
 
 			if ($VersionBump -like 'Minor') { [version]$ModuleversionTMP = '{0}.{1}.{2}' -f $ModuleversionTMP.Major, ($ModuleversionTMP.Minor + 1), 0 }
@@ -158,8 +162,11 @@ Function Set-PSProjectFile {
 	#region add dateline
 	Write-Color "`t[Processing]: ", 'Adding verbose date' -Color yello, Gray
 	try {
-		$ModuleManifestFile = Get-Item ($module.Path).Replace('.psm1', '.psd1')
+		$ModuleManifestFile = Get-Item $modulefile.FullName.Replace('.psm1', '.psd1')
 		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object * -ErrorAction Stop
+		if ($ReleaseNotes) {
+			Update-ModuleManifest @ModuleManifest -ReleaseNotes "Updated [$(Get-Date -Format dd/MM/yyyy_HH:mm)] $($ReleaseNotes)"
+		} 
 		$FileContent = Get-Content $ModuleManifestFile -ErrorAction Stop
 		$DateLine = Select-String -InputObject $ModuleManifestFile -Pattern '# Generated on:'
 		$FileContent[($DateLine.LineNumber - 1)] = "# Generated on: $(Get-Date -Format u)"
@@ -221,7 +228,7 @@ Function Set-PSProjectFile {
 				foreach ($item in $gr.Group) {
 					$object = Get-Item $item.Path
 					$mod = Get-Content -Path $object.FullName
-					Write-Color "`t$($object.name):", "$($mod[$($item.LineNumber -2)]) - $($mod[$($item.LineNumber -1)])" -Color Yellow,Red
+					Write-Color "`t$($object.name):", "$($mod[$($item.LineNumber -2)]) - $($mod[$($item.LineNumber -1)])" -Color Yellow, Red
 					[void]$Issues.Add([PSCustomObject]@{
 							Catagory = 'External Help'
 							File     = $object.name
@@ -315,7 +322,7 @@ Function Set-PSProjectFile {
 			$mkdocsFunc.add('  - pymdownx.superfences')
 			$mkdocsFunc.add(' ')
 			$mkdocsFunc.add('theme: windmill')
-            #$mkdocsFunc.add('theme:')
+			#$mkdocsFunc.add('theme:')
 			#$mkdocsFunc.add('  name: material')
 			#$mkdocsFunc.add('  features:')
 			#$mkdocsFunc.add('    - navigation.instant')
@@ -540,22 +547,20 @@ Function Set-PSProjectFile {
 	if ($DeployMKDocs) {
 		Write-Color '[Starting]', ' Creating Online Help Files ' -Color Yellow, DarkCyan
 		Write-Color "`t[MKDocs]", ' Theme Install:' -Color Yellow, Gray -NoNewLine
-        Start-Process -FilePath pip.exe -ArgumentList 'install  mkdocs-windmill' -NoNewWindow -Wait -PassThru | Out-Null
-        if (-not($?)) {
-            $excode = $LASTEXITCODE
-            Write-Host (" Failed") -ForegroundColor Red
-            Write-Host (" [$($excode)]") -ForegroundColor Yellow
-        }
-        else {Write-Host (' Complete') -ForegroundColor Green}
+		Start-Process -FilePath pip.exe -ArgumentList 'install  mkdocs-windmill' -NoNewWindow -Wait -PassThru | Out-Null
+		if (-not($?)) {
+			$excode = $LASTEXITCODE
+			Write-Host (' Failed') -ForegroundColor Red
+			Write-Host (" [$($excode)]") -ForegroundColor Yellow
+		} else {Write-Host (' Complete') -ForegroundColor Green}
 
-        Write-Color "`t[MKDocs]", ' Deploy:' -Color Yellow, Gray -NoNewLine
-        Start-Process -FilePath mkdocs.exe -ArgumentList gh-deploy -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -NoNewWindow -Wait | Out-Null
-		 if (-not($?)) {
-            $excode = $LASTEXITCODE
-            Write-Host (" Failed") -ForegroundColor Red
-            Write-Host (" [$($excode)]") -ForegroundColor Yellow
-        }
-        else {Write-Host (' Complete') -ForegroundColor Green}
+		Write-Color "`t[MKDocs]", ' Deploy:' -Color Yellow, Gray -NoNewLine
+		Start-Process -FilePath mkdocs.exe -ArgumentList gh-deploy -WorkingDirectory (Split-Path -Path $Moduledocs -Parent) -NoNewWindow -Wait | Out-Null
+		if (-not($?)) {
+			$excode = $LASTEXITCODE
+			Write-Host (' Failed') -ForegroundColor Red
+			Write-Host (" [$($excode)]") -ForegroundColor Yellow
+		} else {Write-Host (' Complete') -ForegroundColor Green}
 	}
 	#endregion
 
@@ -566,31 +571,28 @@ Function Set-PSProjectFile {
 				Write-Color '[Starting]', ' Git Actions' -Color Yellow, DarkCyan
 		
 				Write-Color "`t[Git]", ' Add:' -Color Yellow, Gray -NoNewLine
-				Start-Process -FilePath git.exe -ArgumentList 'add --all' -WorkingDirectory $ModuleBase -wait | Out-Null
-				 if (-not($?)) {
-                    $excode = $LASTEXITCODE
-                    Write-Host (" Failed") -ForegroundColor Red
-                    Write-Host (" [$($excode)]") -ForegroundColor Yellow
-                }
-                else {Write-Host (' Complete') -ForegroundColor Green}
+				Start-Process -FilePath git.exe -ArgumentList 'add --all' -WorkingDirectory $ModuleBase -Wait | Out-Null
+				if (-not($?)) {
+					$excode = $LASTEXITCODE
+					Write-Host (' Failed') -ForegroundColor Red
+					Write-Host (" [$($excode)]") -ForegroundColor Yellow
+				} else {Write-Host (' Complete') -ForegroundColor Green}
 
 				Write-Color "`t[Git]", ' Commit:' -Color Yellow, Gray -NoNewLine
 				Start-Process -FilePath git.exe -ArgumentList "commit -m `"To Version: $($moduleManifest.version.tostring())`"" -WorkingDirectory $ModuleBase -Wait | Out-Null
-				 if (-not($?)) {
-                    $excode = $LASTEXITCODE
-                    Write-Host (" Failed") -ForegroundColor Red
-                    Write-Host (" [$($excode)]") -ForegroundColor Yellow
-                }
-                else {Write-Host (' Complete') -ForegroundColor Green}
+				if (-not($?)) {
+					$excode = $LASTEXITCODE
+					Write-Host (' Failed') -ForegroundColor Red
+					Write-Host (" [$($excode)]") -ForegroundColor Yellow
+				} else {Write-Host (' Complete') -ForegroundColor Green}
 				Write-Color "`t[Git]", ' Push:' -Color Yellow, Gray -NoNewLine
 				Start-Process -FilePath git.exe -ArgumentList 'push' -WorkingDirectory $ModuleBase -Wait | Out-Null
-                 if (-not($?)) {
-                    $excode = $LASTEXITCODE
-                    Write-Host (" Failed") -ForegroundColor Red
-                    Write-Host (" [$($excode)]") -ForegroundColor Yellow
-                }
-                else {Write-Host (' Complete') -ForegroundColor Green}			
-          } else { Write-Warning 'Git is not installed' }
+				if (-not($?)) {
+					$excode = $LASTEXITCODE
+					Write-Host (' Failed') -ForegroundColor Red
+					Write-Host (" [$($excode)]") -ForegroundColor Yellow
+				} else {Write-Host (' Complete') -ForegroundColor Green}			
+			} else { Write-Warning 'Git is not installed' }
 		} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 	}
 	#endregion
