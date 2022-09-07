@@ -1,0 +1,74 @@
+[
+  {
+    "Name": "Modern Winver",
+    "id": "9ND14WHFRGSX",
+    "tool": "winget",
+    "store": "msstore"
+  },
+  {
+    "Name": "QuickLook",
+    "id": "9NV4BS3L1H4S",
+    "tool": "winget",
+    "store": "msstore"
+  },
+  {
+    "Name": "Shrestha Files Free - File Explorer App for Windows 11 and Windows 10\"",
+    "id": "9PLL2XRXQ9LF",
+    "tool": "winget",
+    "store": "msstore"
+  },
+  {
+    "Name": "Netflix",
+    "id": "9WZDNCRFJ3TJ",
+    "tool": "winget",
+    "store": "msstore"
+  },
+  {
+    "Name": "Typedown - A WYSIWYG Markdown Editor",
+    "id": "9P8TCW4H2HB4",
+    "tool": "winget",
+    "store": "msstore"
+  },
+  {
+    "Name": "DevToys",
+    "id": "9PGCV4V3BK4W",
+    "tool": "winget",
+    "store": "msstore"
+  },
+  {
+    "Name": "SiYuan",
+    "id": "9P7HPMXP73K4",
+    "tool": "winget",
+    "store": "msstore"
+  },
+  {
+    "Name": "Code Writer",
+    "id": "9WZDNCRFHZDT",
+    "tool": "winget",
+    "store": "msstore"
+  },
+  {
+    "Name": "LastPass for Windows Desktop",
+    "id": "9WZDNCRFJ3QK",
+    "tool": "winget",
+    "store": "msstore"
+  },
+  {
+    "Name": "App Installer",
+    "id": "9NBLGGH4NNS1",
+    "tool": "winget",
+    "store": "msstore"
+  },
+  {
+    "Name": "Microsoft To Do Lists, Tasks & Reminders",
+    "id": "9NBLGGH5R558",
+    "tool": "winget",
+    "store": "msstore"
+  },
+  {
+    "Name": "Windows Terminal Preview",
+    "id": "9N8G5RFZ9XK3",
+    "tool": "winget",
+    "store": "msstore"
+  }
+]

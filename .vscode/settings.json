@@ -9,5 +9,8 @@
 	],
 	"cSpell.words": [
 		"ipdata"
+	],
+	"github-actions.workflows.pinned.workflows": [
+		".github/workflows/Galerystats.yml"
 	]
 }

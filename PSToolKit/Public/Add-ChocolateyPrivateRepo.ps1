@@ -103,24 +103,23 @@ Function Add-ChocolateyPrivateRepo {
           URL      = $($RepoURL)
           Priority = $($Priority)
         })
-      Write-Color '[Installing]', 'Chocolatey Private Repo: ', 'Complete' -Color Yellow, Cyan, Green
-      Write-Output $sources
-      Write-Output '_______________________________________'
+      Write-Message -Action Installing -Object 'Chocolatey Private Repo' -Message Complete -MessageColor Green
+      $sources.Url | Write-Message -Action Getting -Message "Choco Source" -MessageColor Yellow -LinesAfter 2
     } catch { Write-Warning "[Installing] Chocolatey Private Repo Failed:`n $($_.Exception.Message)" }
 
   } else {
-    Write-Color '[Installing]', "Chocolatey Private Repo $($RepoName): ", 'Already Exists' -Color Yellow, Cyan, DarkRed
+    Write-Message -Action Installing -Severity Error -BeforeMessage "Chocolatey Private Repo" -BeforeMessageColor Magenta -Object $RepoName -AfterMessage "Already Installed" -AfterMessageColor Red
   }
 
   if ($null -notlike $RepoApiKey) {
     choco apikey --source="$($RepoURL)" --api-key="$($RepoApiKey)" --limit-output | Out-Null
     if ($LASTEXITCODE -ne 0) {Write-Warning "Error Installing APIKey Code: $($LASTEXITCODE)"}
-    else {Write-Color '[Installing] ', 'RepoAPIKey: ', 'Complete' -Color Yellow, Cyan, Green}
+    else { Write-Message -Action Installing -Object "RepoAPIKey" -AfterMessage Complete -AfterMessageColor Green}
   }
   if ($DisableCommunityRepo) {
     choco source disable --name=chocolatey --limit-output | Out-Null
     if ($LASTEXITCODE -ne 0) {Write-Warning "Error disabling repo Code: $($LASTEXITCODE)"}
-    else {Write-Color '[Disabling] ', 'Chocolatey Repo: ', 'Complete' -Color Yellow, Cyan, Green}
+    else {Write-Message -Action Disabling -Object "Community Repo" -AfterMessage Complete -AfterMessageColor Green}
   }
 
 
