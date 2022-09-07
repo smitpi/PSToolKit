@@ -145,6 +145,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Get-FullADUserDetail/" class="wm-article-link wm-toc-text">Get-FullADUserDetail</a>
 </li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-MyPSGalleryReport/" class="wm-article-link wm-toc-text">Get-MyPSGalleryReport</a>
+</li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Get-MyPSGalleryStat/" class="wm-article-link wm-toc-text">Get-MyPSGalleryStat</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Get-NestedADGroupMembers/" class="wm-article-link wm-toc-text">Get-NestedADGroupMembers</a>
@@ -202,6 +204,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
         <li class="wm-toc-li wm-toc-lev1 "><a href="New-PSModule/" class="wm-article-link wm-toc-text">New-PSModule</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="New-PSProfile/" class="wm-article-link wm-toc-text">New-PSProfile</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="New-PSReportingScript/" class="wm-article-link wm-toc-text">New-PSReportingScript</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="New-PSScript/" class="wm-article-link wm-toc-text">New-PSScript</a>
 </li>
@@ -289,6 +293,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Write-PSToolKitLog/" class="wm-article-link wm-toc-text">Write-PSToolKitLog</a>
 </li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Write-PSToolKitReport/" class="wm-article-link wm-toc-text">Write-PSToolKitReport</a>
+</li>
   </ul>
 </nav>
 
@@ -364,6 +370,7 @@ Documentation can be found at: <a href="https://smitpi.github.io/PSToolKit">Gith
 <li><a href="https://smitpi.github.io/PSToolKit/Get-FolderSize"><code>Get-FolderSize</code></a> -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Get-FQDN"><code>Get-FQDN</code></a> -- Get FQDN for a device, and checks if it is online</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Get-FullADUserDetail"><code>Get-FullADUserDetail</code></a> -- Extract user details from the domain</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-MyPSGalleryReport"><code>Get-MyPSGalleryReport</code></a> -- Gallery report</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Get-MyPSGalleryStat"><code>Get-MyPSGalleryStat</code></a> -- Show stats about my published modules.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Get-NestedADGroupMembers"><code>Get-NestedADGroupMembers</code></a> -- Extract users from an AD group recursive, 4 levels deep.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Get-ProcessPerformance"><code>Get-ProcessPerformance</code></a> -- Gets the top 10 processes by CPU %</li>
@@ -393,6 +400,7 @@ Documentation can be found at: <a href="https://smitpi.github.io/PSToolKit">Gith
 <li><a href="https://smitpi.github.io/PSToolKit/New-PSGenericList"><code>New-PSGenericList</code></a> -- Creates a .net list object</li>
 <li><a href="https://smitpi.github.io/PSToolKit/New-PSModule"><code>New-PSModule</code></a> -- Creates a new PowerShell module.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/New-PSProfile"><code>New-PSProfile</code></a> -- Creates new profile files in the documents folder</li>
+<li><a href="https://smitpi.github.io/PSToolKit/New-PSReportingScript"><code>New-PSReportingScript</code></a> -- Script template for scripts to create reports</li>
 <li><a href="https://smitpi.github.io/PSToolKit/New-PSScript"><code>New-PSScript</code></a> -- Creates a new PowerShell script. With PowerShell Script Info</li>
 <li><a href="https://smitpi.github.io/PSToolKit/New-SuggestedInfraName"><code>New-SuggestedInfraName</code></a> -- Generates a list of usernames and server names, that can be used as test / demo data.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Publish-ModuleToLocalRepo"><code>Publish-ModuleToLocalRepo</code></a> -- Checks for required modules and upload all to your local repo.</li>
@@ -435,6 +443,7 @@ Documentation can be found at: <a href="https://smitpi.github.io/PSToolKit">Gith
 <li><a href="https://smitpi.github.io/PSToolKit/Write-Ascii"><code>Write-Ascii</code></a> -- Create Ascii Art</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Write-Message"><code>Write-Message</code></a> -- Writes the given into to screen</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Write-PSToolKitLog"><code>Write-PSToolKitLog</code></a> -- Create a log for scripts</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Write-PSToolKitReport"><code>Write-PSToolKitReport</code></a> -- Creates a excel or html report</li>
 </ul>
 
   <br>
@@ -473,5 +482,5 @@ Documentation can be found at: <a href="https://smitpi.github.io/PSToolKit">Gith
 </html>
 <!--
 MkDocs version : 1.3.1
-Build Date UTC : 2022-09-03 14:41:03.908180+00:00
+Build Date UTC : 2022-09-07 07:16:36.166657+00:00
 -->
