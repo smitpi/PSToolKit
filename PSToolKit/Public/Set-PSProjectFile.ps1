@@ -164,8 +164,10 @@ Function Set-PSProjectFile {
 	try {
 		$ModuleManifestFile = Get-Item $modulefile.FullName.Replace('.psm1', '.psd1')
 		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object * -ErrorAction Stop
+        $psd = Import-PowerShellDataFile -Path $modulefile.FullName.Replace('.psm1', '.psd1')
 		if ($ReleaseNotes) {
-			Update-ModuleManifest @ModuleManifest -ReleaseNotes "Updated [$(Get-Date -Format dd/MM/yyyy_HH:mm)] $($ReleaseNotes)"
+            $psd.PrivateData.PSData['ReleaseNotes'] = "Updated [$(Get-Date -Format dd/MM/yyyy_HH:mm)] $($ReleaseNotes)"
+			Update-ModuleManifest -Path $modulefile.FullName.Replace('.psm1', '.psd1') @psd
 		} 
 		$FileContent = Get-Content $ModuleManifestFile -ErrorAction Stop
 		$DateLine = Select-String -InputObject $ModuleManifestFile -Pattern '# Generated on:'
