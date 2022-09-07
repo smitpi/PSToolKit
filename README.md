@@ -44,6 +44,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Get-FolderSize`](https://smitpi.github.io/PSToolKit/Get-FolderSize) -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option
 - [`Get-FQDN`](https://smitpi.github.io/PSToolKit/Get-FQDN) -- Get FQDN for a device, and checks if it is online
 - [`Get-FullADUserDetail`](https://smitpi.github.io/PSToolKit/Get-FullADUserDetail) -- Extract user details from the domain
+- [`Get-MyPSGalleryReport`](https://smitpi.github.io/PSToolKit/Get-MyPSGalleryReport) -- Gallery report
 - [`Get-MyPSGalleryStat`](https://smitpi.github.io/PSToolKit/Get-MyPSGalleryStat) -- Show stats about my published modules.
 - [`Get-NestedADGroupMembers`](https://smitpi.github.io/PSToolKit/Get-NestedADGroupMembers) -- Extract users from an AD group recursive, 4 levels deep.
 - [`Get-ProcessPerformance`](https://smitpi.github.io/PSToolKit/Get-ProcessPerformance) -- Gets the top 10 processes by CPU %
@@ -73,6 +74,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`New-PSGenericList`](https://smitpi.github.io/PSToolKit/New-PSGenericList) -- Creates a .net list object
 - [`New-PSModule`](https://smitpi.github.io/PSToolKit/New-PSModule) -- Creates a new PowerShell module.
 - [`New-PSProfile`](https://smitpi.github.io/PSToolKit/New-PSProfile) -- Creates new profile files in the documents folder
+- [`New-PSReportingScript`](https://smitpi.github.io/PSToolKit/New-PSReportingScript) -- Script template for scripts to create reports
 - [`New-PSScript`](https://smitpi.github.io/PSToolKit/New-PSScript) -- Creates a new PowerShell script. With PowerShell Script Info
 - [`New-SuggestedInfraName`](https://smitpi.github.io/PSToolKit/New-SuggestedInfraName) -- Generates a list of usernames and server names, that can be used as test / demo data.
 - [`Publish-ModuleToLocalRepo`](https://smitpi.github.io/PSToolKit/Publish-ModuleToLocalRepo) -- Checks for required modules and upload all to your local repo.
@@ -115,3 +117,4 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Write-Ascii`](https://smitpi.github.io/PSToolKit/Write-Ascii) -- Create Ascii Art
 - [`Write-Message`](https://smitpi.github.io/PSToolKit/Write-Message) -- Writes the given into to screen
 - [`Write-PSToolKitLog`](https://smitpi.github.io/PSToolKit/Write-PSToolKitLog) -- Create a log for scripts
+- [`Write-PSToolKitReport`](https://smitpi.github.io/PSToolKit/Write-PSToolKitReport) -- Creates a excel or html report

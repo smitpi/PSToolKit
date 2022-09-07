@@ -112,7 +112,7 @@ Function Get-MyPSGalleryStat {
 
         if (-not($History)) {
             foreach ($Mod in $ModLists) {
-                Write-PSToolKitMessage -Action 'Collecting' -Object $mod -Message 'Online Data' -MessageColor Gray
+                Write-Message -Action 'Collecting' -Object $mod -Message 'Online Data' -MessageColor Gray
                 $ResultModule = Find-Module $mod -Repository PSGallery
                 $YStats = ($GalStats.sum | Where-Object {$_.name -like $mod -and $_.DateCollected -gt ((Get-Date).AddDays(-1).ToUniversalTime())})[-1]
                 $YSpan = New-TimeSpan -Start $YStats.DateCollected.ToUniversalTime() -End (Get-Date).ToUniversalTime()
@@ -153,13 +153,13 @@ Function Get-MyPSGalleryStat {
                 $json = ConvertTo-Json -InputObject $Body
                 $json = [System.Text.Encoding]::UTF8.GetBytes($json)
                 $null = Invoke-WebRequest -Headers $headers -Uri $Uri -Method Patch -Body $json -ErrorAction Stop
-                Write-PSToolKitMessage -Action 'Upload' -Object 'PSGallery Stats' -Message 'To Github Gist', 'Complete' -MessageColor Gray, Green
+                Write-Message -Action 'Upload' -Object 'PSGallery Stats' -Message 'To Github Gist', 'Complete' -MessageColor Gray, Green
             } catch {Write-Error "Can't connect to gist:`n $($_.Exception.Message)"}
 
             if ($ASObject) {$GalStats}
             else {
                 Write-Host 'Total Downloads: ', "$(($GalStats.TotalDownloads | Sort-Object -Descending)[0])" -ForegroundColor Yellow
-                $GalStats[-1..-6].Sum | Sort-Object -Property PublishedDate -Descending | Format-Table -AutoSize -Wrap
+                $GalStats[-1..-7].Sum | Sort-Object -Property PublishedDate -Descending | Format-Table -AutoSize -Wrap
             }
         }
     }

@@ -1,9 +1,9 @@
 ﻿#region Public Functions
 #region Add-ChocolateyPrivateRepo.ps1
-######## Function 1 of 92 ##################
+######## Function 1 of 95 ##################
 # Function:         Add-ChocolateyPrivateRepo
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -101,10 +101,10 @@ Export-ModuleMember -Function Add-ChocolateyPrivateRepo
 #endregion
  
 #region Backup-ElevatedShortcut.ps1
-######## Function 2 of 92 ##################
+######## Function 2 of 95 ##################
 # Function:         Backup-ElevatedShortcut
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -149,10 +149,10 @@ Export-ModuleMember -Function Backup-ElevatedShortcut
 #endregion
  
 #region Backup-PowerShellProfile.ps1
-######## Function 3 of 92 ##################
+######## Function 3 of 95 ##################
 # Function:         Backup-PowerShellProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -207,10 +207,10 @@ Export-ModuleMember -Function Backup-PowerShellProfile
 #endregion
  
 #region Compare-ADMembership.ps1
-######## Function 4 of 92 ##################
+######## Function 4 of 95 ##################
 # Function:         Compare-ADMembership
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -459,10 +459,10 @@ Export-ModuleMember -Function Compare-ADMembership
 #endregion
  
 #region Connect-VMWareCluster.ps1
-######## Function 5 of 92 ##################
+######## Function 5 of 95 ##################
 # Function:         Connect-VMWareCluster
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -508,10 +508,10 @@ Export-ModuleMember -Function Connect-VMWareCluster
 #endregion
  
 #region Edit-ChocolateyAppsList.ps1
-######## Function 6 of 92 ##################
+######## Function 6 of 95 ##################
 # Function:         Edit-ChocolateyAppsList
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -647,10 +647,10 @@ Export-ModuleMember -Function Edit-ChocolateyAppsList
 #endregion
  
 #region Edit-SSHConfigFile.ps1
-######## Function 7 of 92 ##################
+######## Function 7 of 95 ##################
 # Function:         Edit-SSHConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -827,10 +827,10 @@ Export-ModuleMember -Function Edit-SSHConfigFile
 #endregion
  
 #region Enable-RemoteHostPSRemoting.ps1
-######## Function 8 of 92 ##################
+######## Function 8 of 95 ##################
 # Function:         Enable-RemoteHostPSRemoting
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -889,10 +889,10 @@ Export-ModuleMember -Function Enable-RemoteHostPSRemoting
 #endregion
  
 #region Export-ESXTemplate.ps1
-######## Function 9 of 92 ##################
+######## Function 9 of 95 ##################
 # Function:         Export-ESXTemplate
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -941,10 +941,10 @@ Export-ModuleMember -Function Export-ESXTemplate
 #endregion
  
 #region Find-ChocolateyApp.ps1
-######## Function 10 of 92 ##################
+######## Function 10 of 95 ##################
 # Function:         Find-ChocolateyApp
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1026,10 +1026,10 @@ Export-ModuleMember -Function Find-ChocolateyApp
 #endregion
  
 #region Find-OnlineModule.ps1
-######## Function 11 of 92 ##################
+######## Function 11 of 95 ##################
 # Function:         Find-OnlineModule
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1208,10 +1208,10 @@ Export-ModuleMember -Function Find-OnlineModule
 #endregion
  
 #region Find-OnlineScript.ps1
-######## Function 12 of 92 ##################
+######## Function 12 of 95 ##################
 # Function:         Find-OnlineScript
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1395,10 +1395,10 @@ Export-ModuleMember -Function Find-OnlineScript
 #endregion
  
 #region Format-AllObjectsInAListView.ps1
-######## Function 13 of 92 ##################
+######## Function 13 of 95 ##################
 # Function:         Format-AllObjectsInAListView
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1437,10 +1437,10 @@ Export-ModuleMember -Function Format-AllObjectsInAListView
 #endregion
  
 #region Get-CitrixClientVersion.ps1
-######## Function 14 of 92 ##################
+######## Function 14 of 95 ##################
 # Function:         Get-CitrixClientVersion
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1536,10 +1536,10 @@ Export-ModuleMember -Function Get-CitrixClientVersion
 #endregion
  
 #region Get-CitrixPolicies.ps1
-######## Function 15 of 92 ##################
+######## Function 15 of 95 ##################
 # Function:         Get-CitrixPolicies
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1620,10 +1620,10 @@ Export-ModuleMember -Function Get-CitrixPolicies
 #endregion
  
 #region Get-CommandFiltered.ps1
-######## Function 16 of 92 ##################
+######## Function 16 of 95 ##################
 # Function:         Get-CommandFiltered
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1683,10 +1683,10 @@ Export-ModuleMember -Function Get-CommandFiltered
 #endregion
  
 #region Get-DeviceUptime.ps1
-######## Function 17 of 92 ##################
+######## Function 17 of 95 ##################
 # Function:         Get-DeviceUptime
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1750,10 +1750,10 @@ Export-ModuleMember -Function Get-DeviceUptime
 #endregion
  
 #region Get-FolderSize.ps1
-######## Function 18 of 92 ##################
+######## Function 18 of 95 ##################
 # Function:         Get-FolderSize
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Joakim Svendsen
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1918,10 +1918,10 @@ Export-ModuleMember -Function Get-FolderSize
 #endregion
  
 #region Get-FQDN.ps1
-######## Function 19 of 92 ##################
+######## Function 19 of 95 ##################
 # Function:         Get-FQDN
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1969,10 +1969,10 @@ Export-ModuleMember -Function Get-FQDN
 #endregion
  
 #region Get-FullADUserDetail.ps1
-######## Function 20 of 92 ##################
+######## Function 20 of 95 ##################
 # Function:         Get-FullADUserDetail
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -2057,15 +2057,95 @@ Function Get-FullADUserDetail {
 Export-ModuleMember -Function Get-FullADUserDetail
 #endregion
  
+#region Get-MyPSGalleryReport.ps1
+######## Function 21 of 95 ##################
+# Function:         Get-MyPSGalleryReport
+# Module:           PSToolKit
+# ModuleVersion:    0.1.80
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/09/07 07:22:43
+# ModifiedOn:       2022/09/07 09:09:04
+# Synopsis:         Gallery report
+#############################################
+ 
+<#
+.SYNOPSIS
+Gallery report
+
+.DESCRIPTION
+Gallery report
+
+.PARAMETER GitHubUserID
+The GitHub User ID.
+
+.PARAMETER GitHubToken
+GitHub Token with access to the Users' Gist.
+
+.EXAMPLE
+Get-MyPSGalleryReport 
+
+#>
+Function Get-MyPSGalleryReport {
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-MyPSGalleryReport')]
+	[OutputType([System.Object[]])]
+	PARAM(
+		[string]$GitHubUserID,
+		[string]$GitHubToken
+	)
+ try {
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Connecting to Gist"
+		$headers = @{}
+		$auth = '{0}:{1}' -f $GitHubUserID, $GitHubToken
+		$bytes = [System.Text.Encoding]::ASCII.GetBytes($auth)
+		$base64 = [System.Convert]::ToBase64String($bytes)
+		$headers.Authorization = 'Basic {0}' -f $base64
+
+		$url = 'https://api.github.com/users/{0}/gists' -f $GitHubUserID
+		$AllGist = Invoke-RestMethod -Uri $url -Method Get -Headers $headers -ErrorAction Stop
+		$PRGist = $AllGist | Select-Object | Where-Object { $_.description -like 'smitpi-gallery-statsV2' }
+
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) Checking Config File"
+		$Content = (Invoke-WebRequest -Uri ($PRGist.files.'PSGalleryStatsV2.json').raw_url -Headers $headers).content | ConvertFrom-Json -ErrorAction Stop
+
+		[System.Collections.generic.List[PSObject]]$GalStats = @()
+		try {
+			$Content | ForEach-Object {$GalStats.Add($_)}
+		} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)`nCreating new file"}
+
+	} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+	
+	$dateCollect = Get-Date
+	Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} | ForEach-Object {
+		$_.AdditionalMetadata | Add-Member -MemberType NoteProperty -Name DateCollected -Value $dateCollect
+		$GalStats.add($_.AdditionalMetadata)
+	}
+	try {
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Uploading to gist"
+		$Body = @{}
+		$files = @{}
+		$Files['PSGalleryStatsV2.json'] = @{content = ( $GalStats | ConvertTo-Json -Depth 10 | Out-String ) }
+		$Body.files = $Files
+		$Uri = 'https://api.github.com/gists/{0}' -f $PRGist.id
+		$json = ConvertTo-Json -InputObject $Body
+		$json = [System.Text.Encoding]::UTF8.GetBytes($json)
+		$null = Invoke-WebRequest -Headers $headers -Uri $Uri -Method Patch -Body $json -ErrorAction Stop
+		Write-Message -Action 'Upload' -Object 'PSGallery StatsV2' -Message 'To Github Gist', 'Complete' -MessageColor Gray, Green
+	} catch {Write-Error "Can't connect to gist:`n $($_.Exception.Message)"}
+} #end Function
+ 
+Export-ModuleMember -Function Get-MyPSGalleryReport
+#endregion
+ 
 #region Get-MyPSGalleryStat.ps1
-######## Function 21 of 92 ##################
+######## Function 22 of 95 ##################
 # Function:         Get-MyPSGalleryStat
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
-# ModifiedOn:       2022/09/03 10:18:09
+# ModifiedOn:       2022/09/07 09:02:00
 # Synopsis:         Show stats about my published modules.
 #############################################
  
@@ -2142,7 +2222,7 @@ Function Get-MyPSGalleryStat {
 
         if (-not($History)) {
             foreach ($Mod in $ModLists) {
-                Write-PSToolKitMessage -Action 'Collecting' -Object $mod -Message 'Online Data' -MessageColor Gray
+                Write-Message -Action 'Collecting' -Object $mod -Message 'Online Data' -MessageColor Gray
                 $ResultModule = Find-Module $mod -Repository PSGallery
                 $YStats = ($GalStats.sum | Where-Object {$_.name -like $mod -and $_.DateCollected -gt ((Get-Date).AddDays(-1).ToUniversalTime())})[-1]
                 $YSpan = New-TimeSpan -Start $YStats.DateCollected.ToUniversalTime() -End (Get-Date).ToUniversalTime()
@@ -2183,13 +2263,13 @@ Function Get-MyPSGalleryStat {
                 $json = ConvertTo-Json -InputObject $Body
                 $json = [System.Text.Encoding]::UTF8.GetBytes($json)
                 $null = Invoke-WebRequest -Headers $headers -Uri $Uri -Method Patch -Body $json -ErrorAction Stop
-                Write-PSToolKitMessage -Action 'Upload' -Object 'PSGallery Stats' -Message 'To Github Gist', 'Complete' -MessageColor Gray, Green
+                Write-Message -Action 'Upload' -Object 'PSGallery Stats' -Message 'To Github Gist', 'Complete' -MessageColor Gray, Green
             } catch {Write-Error "Can't connect to gist:`n $($_.Exception.Message)"}
 
             if ($ASObject) {$GalStats}
             else {
                 Write-Host 'Total Downloads: ', "$(($GalStats.TotalDownloads | Sort-Object -Descending)[0])" -ForegroundColor Yellow
-                $GalStats[-1..-6].Sum | Sort-Object -Property PublishedDate -Descending | Format-Table -AutoSize -Wrap
+                $GalStats[-1..-7].Sum | Sort-Object -Property PublishedDate -Descending | Format-Table -AutoSize -Wrap
             }
         }
     }
@@ -2243,10 +2323,10 @@ Export-ModuleMember -Function Get-MyPSGalleryStat
 #endregion
  
 #region Get-NestedADGroupMembers.ps1
-######## Function 22 of 92 ##################
+######## Function 23 of 95 ##################
 # Function:         Get-NestedADGroupMembers
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -2376,10 +2456,10 @@ Export-ModuleMember -Function Get-NestedADGroupMembers
 #endregion
  
 #region Get-ProcessPerformance.ps1
-######## Function 23 of 92 ##################
+######## Function 24 of 95 ##################
 # Function:         Get-ProcessPerformance
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -2441,10 +2521,10 @@ Export-ModuleMember -Function Get-ProcessPerformance
 #endregion
  
 #region Get-PropertiesToCSV.ps1
-######## Function 24 of 92 ##################
+######## Function 25 of 95 ##################
 # Function:         Get-PropertiesToCSV
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -2483,10 +2563,10 @@ Export-ModuleMember -Function Get-PropertiesToCSV
 #endregion
  
 #region Get-SoftwareAudit.ps1
-######## Function 25 of 92 ##################
+######## Function 26 of 95 ##################
 # Function:         Get-SoftwareAudit
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -2576,10 +2656,10 @@ Export-ModuleMember -Function Get-SoftwareAudit
 #endregion
  
 #region Get-SystemInfo.ps1
-######## Function 26 of 92 ##################
+######## Function 27 of 95 ##################
 # Function:         Get-SystemInfo
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -2887,10 +2967,10 @@ Export-ModuleMember -Function Get-SystemInfo
 #endregion
  
 #region Get-WinEventLogExtract.ps1
-######## Function 27 of 92 ##################
+######## Function 28 of 95 ##################
 # Function:         Get-WinEventLogExtract
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3040,10 +3120,10 @@ Export-ModuleMember -Function Get-WinEventLogExtract
 #endregion
  
 #region Import-CitrixSiteConfigFile.ps1
-######## Function 28 of 92 ##################
+######## Function 29 of 95 ##################
 # Function:         Import-CitrixSiteConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3087,10 +3167,10 @@ Export-ModuleMember -Function Import-CitrixSiteConfigFile
 #endregion
  
 #region Import-XamlConfigFile.ps1
-######## Function 29 of 92 ##################
+######## Function 30 of 95 ##################
 # Function:         Import-XamlConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3220,10 +3300,10 @@ Export-ModuleMember -Function Import-XamlConfigFile
 #endregion
  
 #region Install-BGInfo.ps1
-######## Function 30 of 92 ##################
+######## Function 31 of 95 ##################
 # Function:         Install-BGInfo
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3299,10 +3379,10 @@ Export-ModuleMember -Function Install-BGInfo
 #endregion
  
 #region Install-ChocolateyApp.ps1
-######## Function 31 of 92 ##################
+######## Function 32 of 95 ##################
 # Function:         Install-ChocolateyApp
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3394,10 +3474,10 @@ Export-ModuleMember -Function Install-ChocolateyApp
 #endregion
  
 #region Install-ChocolateyClient.ps1
-######## Function 32 of 92 ##################
+######## Function 33 of 95 ##################
 # Function:         Install-ChocolateyClient
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3452,10 +3532,10 @@ Export-ModuleMember -Function Install-ChocolateyClient
 #endregion
  
 #region Install-ChocolateyServer.ps1
-######## Function 33 of 92 ##################
+######## Function 34 of 95 ##################
 # Function:         Install-ChocolateyServer
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3577,10 +3657,10 @@ Export-ModuleMember -Function Install-ChocolateyServer
 #endregion
  
 #region Install-LocalPSRepository.ps1
-######## Function 34 of 92 ##################
+######## Function 35 of 95 ##################
 # Function:         Install-LocalPSRepository
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3671,10 +3751,10 @@ Export-ModuleMember -Function Install-LocalPSRepository
 #endregion
  
 #region Install-MicrosoftTerminal.ps1
-######## Function 35 of 92 ##################
+######## Function 36 of 95 ##################
 # Function:         Install-MicrosoftTerminal
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3740,10 +3820,10 @@ Export-ModuleMember -Function Install-MicrosoftTerminal
 #endregion
  
 #region Install-MSUpdate.ps1
-######## Function 36 of 92 ##################
+######## Function 37 of 95 ##################
 # Function:         Install-MSUpdate
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3804,10 +3884,10 @@ Export-ModuleMember -Function Install-MSUpdate
 #endregion
  
 #region Install-MSWinget.ps1
-######## Function 37 of 92 ##################
+######## Function 38 of 95 ##################
 # Function:         Install-MSWinget
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3894,10 +3974,10 @@ Export-ModuleMember -Function Install-MSWinget
 #endregion
  
 #region Install-NFSClient.ps1
-######## Function 38 of 92 ##################
+######## Function 39 of 95 ##################
 # Function:         Install-NFSClient
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3950,10 +4030,10 @@ Export-ModuleMember -Function Install-NFSClient
 #endregion
  
 #region Install-PowerShell7x.ps1
-######## Function 39 of 92 ##################
+######## Function 40 of 95 ##################
 # Function:         Install-PowerShell7x
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4002,10 +4082,10 @@ Export-ModuleMember -Function Install-PowerShell7x
 #endregion
  
 #region Install-RSAT.ps1
-######## Function 40 of 92 ##################
+######## Function 41 of 95 ##################
 # Function:         Install-RSAT
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4064,10 +4144,10 @@ Export-ModuleMember -Function Install-RSAT
 #endregion
  
 #region Install-VMWareTool.ps1
-######## Function 41 of 92 ##################
+######## Function 42 of 95 ##################
 # Function:         Install-VMWareTool
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4110,10 +4190,10 @@ Export-ModuleMember -Function Install-VMWareTool
 #endregion
  
 #region Install-WingetApp.ps1
-######## Function 42 of 92 ##################
+######## Function 43 of 95 ##################
 # Function:         Install-WingetApp
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:03:39
@@ -4163,10 +4243,10 @@ Export-ModuleMember -Function Install-WingetApp
 #endregion
  
 #region New-CitrixSiteConfigFile.ps1
-######## Function 43 of 92 ##################
+######## Function 44 of 95 ##################
 # Function:         New-CitrixSiteConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4356,10 +4436,10 @@ Export-ModuleMember -Function New-CitrixSiteConfigFile
 #endregion
  
 #region New-ElevatedShortcut.ps1
-######## Function 44 of 92 ##################
+######## Function 45 of 95 ##################
 # Function:         New-ElevatedShortcut
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4445,10 +4525,10 @@ Export-ModuleMember -Function New-ElevatedShortcut
 #endregion
  
 #region New-GodModeFolder.ps1
-######## Function 45 of 92 ##################
+######## Function 46 of 95 ##################
 # Function:         New-GodModeFolder
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4480,10 +4560,10 @@ Export-ModuleMember -Function New-GodModeFolder
 #endregion
  
 #region New-GoogleSearch.ps1
-######## Function 46 of 92 ##################
+######## Function 47 of 95 ##################
 # Function:         New-GoogleSearch
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4531,10 +4611,10 @@ Export-ModuleMember -Function New-GoogleSearch
 #endregion
  
 #region New-PSGenericList.ps1
-######## Function 47 of 92 ##################
+######## Function 48 of 95 ##################
 # Function:         New-PSGenericList
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Jeff Hicks
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4642,10 +4722,10 @@ Export-ModuleMember -Function New-PSGenericList
 #endregion
  
 #region New-PSModule.ps1
-######## Function 48 of 92 ##################
+######## Function 49 of 95 ##################
 # Function:         New-PSModule
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4739,10 +4819,10 @@ Export-ModuleMember -Function New-PSModule
 #endregion
  
 #region New-PSProfile.ps1
-######## Function 49 of 92 ##################
+######## Function 50 of 95 ##################
 # Function:         New-PSProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4873,15 +4953,217 @@ function prompt {
 Export-ModuleMember -Function New-PSProfile
 #endregion
  
+#region New-PSReportingScript.ps1
+######## Function 51 of 95 ##################
+# Function:         New-PSReportingScript
+# Module:           PSToolKit
+# ModuleVersion:    0.1.80
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/09/03 19:42:32
+# ModifiedOn:       2022/09/03 19:43:53
+# Synopsis:         Script template for scripts to create reports
+#############################################
+ 
+<#
+.SYNOPSIS
+Script template for scripts to create reports
+
+.DESCRIPTION
+Script template for scripts to create reports
+
+.PARAMETER Export
+Export the result to a report file. (Excel or html). Or select Host to display the object on screen.
+
+.PARAMETER ReportPath
+Where to save the report.
+
+.EXAMPLE
+New-PSReportingScript -Export HTML -ReportPath C:\temp
+
+#>
+Function New-PSReportingScript {
+	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/New-PSReportingScript')]
+	[OutputType([System.Object[]])]
+	param (
+		[ValidateScript( { Test-Path -Path $_ })]
+		[System.IO.DirectoryInfo]$Path = $pwd,
+		[Parameter(Mandatory = $True)]
+		[ValidateScript( { Get-Verb -Verb $_ })]
+		[ValidateNotNullOrEmpty()]
+		[string]$Verb,
+		[Parameter(Mandatory = $True)]
+		[ValidateNotNullOrEmpty()]
+		[string]$Noun,
+		[Parameter(Mandatory = $false)]
+		[string]$Author = 'Pierre Smit',
+		[Parameter(Mandatory = $true)]
+		[string]$Description,
+		[Parameter(Mandatory = $true)]
+		[string[]]$tags)
+
+	$checkpath = Get-Item $Path
+	$ValidVerb = Get-Verb -Verb $Verb
+	if ([bool]$ValidVerb -ne $true) { Write-Warning 'Script name is not valid, Needs to be in verb-noun format'; break }
+
+	$properverb = (Get-Culture).TextInfo.ToTitleCase($Verb)
+	$propernoun = $Noun.substring(0, 1).toupper() + $Noun.substring(1)
+
+	try {
+		$module = Get-Item (Join-Path $checkpath.Parent -ChildPath "$((Get-Item $checkpath.Parent).BaseName).psm1") -ErrorAction Stop
+		$modulename = $module.BaseName
+	} catch { Write-Warning 'Could not detect module'; $modulename = Read-Host 'Module Name: ' }
+
+
+	$functionText = @"
+<#
+.SYNOPSIS
+$Description
+
+.DESCRIPTION
+$Description
+
+.PARAMETER Export
+Export the result to a report file. (Excel or html). Or select Host to display the object on screen.
+
+.PARAMETER ReportPath
+Where to save the report.
+
+.EXAMPLE
+$properverb-$propernoun -Export HTML -ReportPath C:\temp
+
+#>
+Function $properverb-$propernoun {
+		[Cmdletbinding(DefaultParameterSetName='Set1', HelpURI = "https://smitpi.github.io/$modulename/$properverb-$propernoun")]
+	    [OutputType([System.Object[]])]
+                PARAM(
+					[Parameter(Position = 0,Mandatory = `$true,HelpMessage = "Specify the name of a remote computer. The default is the local host.")]
+        			[alias("CN", "host")]
+        			[ValidateNotNullorEmpty()]
+					[Parameter(ParameterSetName = 'Set1')]
+					[ValidateScript( { (Test-Path `$_) -and ((Get-Item `$_).Extension -eq ".csv") })]
+					[System.IO.FileInfo]`$InputObject,
+
+					[Parameter(HelpMessage = "Specify the name of a user.")]
+					[ValidateNotNullOrEmpty()]
+					[string]`$Username,
+
+					
+					[ValidateScript({`$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+            						if (`$IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {`$True}
+            						else {Throw "Must be running an elevated prompt to use this function"}})]
+        			[switch]`$ClearARPCache,
+					
+        			[ValidateScript({if (Test-Connection -ComputerName `$_ -Count 2 -Quiet) {`$true}
+                            		else {throw "Unable to connect to `$(`$_)"} })]
+        			[string[]]`$ComputerName,
+
+					[ValidateSet('Excel', 'HTML', 'Host')]
+					[string]`$Export = 'Host',
+
+                	[ValidateScript( { if (Test-Path `$_) { `$true }
+                                else { New-Item -Path `$_ -ItemType Directory -Force | Out-Null; `$true }
+                    })]
+                	[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp'
+				)
+
+
+
+	if (`$Export -eq 'Excel') { 
+		`$ExcelOptions = @{
+            Path             = `$(Join-Path -Path `$ReportPath -ChildPath "\$propernoun-`$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx")
+            AutoSize         = `$True
+            AutoFilter       = `$True
+            TitleBold        = `$True
+            TitleSize        = '28'
+            TitleFillPattern = 'LightTrellis'
+            TableStyle       = 'Light20'
+            FreezeTopRow     = `$True
+            FreezePane       = '3'
+        }
+         `$data | Export-Excel -Title $propernoun -WorksheetName $propernoun @ExcelOptions}
+
+	if (`$Export -eq 'HTML') { 
+			`$script:TableSettings = @{
+			Style           = 'cell-border'
+			TextWhenNoData  = 'No Data to display here'
+			Buttons         = 'searchBuilder', 'pdfHtml5', 'excelHtml5'
+			FixedHeader     = `$true
+			HideFooter      = `$true
+			SearchHighlight = `$true
+			PagingStyle     = 'full'
+			PagingLength    = 10
+		}
+		`$script:SectionSettings = @{
+			BackgroundColor       = 'grey'
+			CanCollapse           = `$true
+			HeaderBackGroundColor = '#2b1200'
+			HeaderTextAlignment   = 'center'
+			HeaderTextColor       = '#f37000'
+			HeaderTextSize        = '15'
+			BorderRadius          = '20px'
+		}
+		`$script:TableSectionSettings = @{
+			BackgroundColor       = 'white'
+			CanCollapse           = `$true
+			HeaderBackGroundColor = '#f37000'
+			HeaderTextAlignment   = 'center'
+			HeaderTextColor       = '#2b1200'
+			HeaderTextSize        = '15'
+		}
+		`$script:TabSettings = @{
+			TextTransform = 'uppercase'
+			IconBrands    = 'mix'
+			TextSize      = '16' 
+			TextColor     = '#00203F'
+			IconSize      = '16'
+			IconColor     = '#00203F'
+		}
+
+		`$ReportTitle = "$propernoun"
+		`$HeadingText = "`$(`$ReportTitle) [`$(Get-Date -Format dd) `$(Get-Date -Format MMMM) `$(Get-Date -Format yyyy) `$(Get-Date -Format HH:mm)]"
+		New-HTML -TitleText `$(`$ReportTitle) -FilePath `$(Join-Path -Path `$ReportPath -ChildPath "\$propernoun-`$(Get-Date -Format yyyy.MM.dd-HH.mm).html") {
+			New-HTMLHeader {
+				New-HTMLText -FontSize 20 -FontStyle normal -Color '#00203F' -Alignment left -Text `$HeadingText
+			}
+			if (`$data) { New-HTMLTab -Name 'Winget Installed App list' @TabSettings -HtmlData {New-HTMLSection @TableSectionSettings { New-HTMLTable -DataTable $($data) @TableSettings}}}
+		}
+	}
+	if (`$Export -eq 'Host') { `$data }
+} #end Function
+"@
+	$ScriptFullPath = $checkpath.fullname + "\$properverb-$propernoun.ps1"
+
+	$manifestProperties = @{
+		Path            = $ScriptFullPath
+		Version         = '0.1.0'
+		Author          = $Author
+		Description     = $Description
+		CompanyName     = 'HTPCZA Tech'
+		Tags            = @($Tags)
+		ReleaseNotes    = 'Created [' + (Get-Date -Format dd/MM/yyyy_HH:mm) + '] Initial Script'
+		GUID            = (New-Guid)
+		RequiredModules = 'ImportExcel', 'PSWriteHTML', 'PSWriteColor'
+	}
+
+	New-ScriptFileInfo @manifestProperties -Force
+	$content = Get-Content $ScriptFullPath | Where-Object { $_ -notlike 'Param*' }
+	Set-Content -Value ($content + $functionText) -Path $ScriptFullPath -Force
+
+}
+ 
+Export-ModuleMember -Function New-PSReportingScript
+#endregion
+ 
 #region New-PSScript.ps1
-######## Function 50 of 92 ##################
+######## Function 52 of 95 ##################
 # Function:         New-PSScript
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
-# ModifiedOn:       2022/07/31 01:01:21
+# ModifiedOn:       2022/09/03 19:45:31
 # Synopsis:         Creates a new PowerShell script. With PowerShell Script Info
 #############################################
  
@@ -4954,12 +5236,6 @@ $Description
 .DESCRIPTION
 $Description
 
-.PARAMETER Export
-Export the result to a report file. (Excel or html). Or select Host to display the object on screen.
-
-.PARAMETER ReportPath
-Where to save the report.
-
 .EXAMPLE
 $properverb-$propernoun -Export HTML -ReportPath C:\temp
 
@@ -4968,7 +5244,6 @@ Function $properverb-$propernoun {
 		[Cmdletbinding(DefaultParameterSetName='Set1', HelpURI = "https://smitpi.github.io/$modulename/$properverb-$propernoun")]
 	    [OutputType([System.Object[]])]
                 PARAM(
-
 					[Parameter(Position = 0,Mandatory = `$true,HelpMessage = "Specify the name of a remote computer. The default is the local host.")]
         			[alias("CN", "host")]
         			[ValidateNotNullorEmpty()]
@@ -4980,14 +5255,6 @@ Function $properverb-$propernoun {
 					[ValidateNotNullOrEmpty()]
 					[string]`$Username,
 
-					[ValidateSet('Excel', 'HTML', 'Host')]
-					[string]`$Export = 'Host',
-
-                	[ValidateScript( { if (Test-Path `$_) { `$true }
-                                else { New-Item -Path `$_ -ItemType Directory -Force | Out-Null; `$true }
-                    })]
-                	[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp',
-
 					[ValidateScript({`$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
             						if (`$IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {`$True}
             						else {Throw "Must be running an elevated prompt to use this function"}})]
@@ -4995,41 +5262,31 @@ Function $properverb-$propernoun {
 					
         			[ValidateScript({if (Test-Connection -ComputerName `$_ -Count 2 -Quiet) {`$true}
                             		else {throw "Unable to connect to `$(`$_)"} })]
-        			[string[]]`$ComputerName
-					)
+        			[string[]]`$ComputerName,
+
+					[ValidateSet('Excel', 'HTML', 'Host')]
+					[string]`$Export = 'Host',
+
+                	[ValidateScript( { if (Test-Path `$_) { `$true }
+                                else { New-Item -Path `$_ -ItemType Directory -Force | Out-Null; `$true }
+                    })]
+                	[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp'
+				)
 
 
-
-	if (`$Export -eq 'Excel') { 
-		`$ExcelOptions = @{
-            Path             = `$(Join-Path -Path `$ReportPath -ChildPath "\$propernoun-`$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx")
-            AutoSize         = `$True
-            AutoFilter       = `$True
-            TitleBold        = `$True
-            TitleSize        = '28'
-            TitleFillPattern = 'LightTrellis'
-            TableStyle       = 'Light20'
-            FreezeTopRow     = `$True
-            FreezePane       = '3'
-        }
-         `$data | Export-Excel -Title $propernoun -WorksheetName $propernoun @ExcelOptions}
-
-	if (`$Export -eq 'HTML') { `$data | Out-GridHtml -DisablePaging -Title "$propernoun" -HideFooter -SearchHighlight -FixedHeader -FilePath `$(Join-Path -Path `$ReportPath -ChildPath "\$propernoun-`$(Get-Date -Format yyyy.MM.dd-HH.mm).html") }
-	if (`$Export -eq 'Host') { `$data }
 } #end Function
 "@
 	$ScriptFullPath = $checkpath.fullname + "\$properverb-$propernoun.ps1"
 
 	$manifestProperties = @{
-		Path            = $ScriptFullPath
-		Version         = '0.1.0'
-		Author          = $Author
-		Description     = $Description
-		CompanyName     = 'HTPCZA Tech'
-		Tags            = @($Tags)
-		ReleaseNotes    = 'Created [' + (Get-Date -Format dd/MM/yyyy_HH:mm) + '] Initial Script Creating'
-		GUID            = (New-Guid)
-		RequiredModules = 'ImportExcel', 'PSWriteHTML', 'PSWriteColor'
+		Path         = $ScriptFullPath
+		Version      = '0.1.0'
+		Author       = $Author
+		Description  = $Description
+		CompanyName  = 'HTPCZA Tech'
+		Tags         = @($Tags)
+		ReleaseNotes = 'Created [' + (Get-Date -Format dd/MM/yyyy_HH:mm) + '] Initial Script'
+		GUID         = (New-Guid)
 	}
 
 	New-ScriptFileInfo @manifestProperties -Force
@@ -5042,10 +5299,10 @@ Export-ModuleMember -Function New-PSScript
 #endregion
  
 #region New-SuggestedInfraName.ps1
-######## Function 51 of 92 ##################
+######## Function 53 of 95 ##################
 # Function:         New-SuggestedInfraName
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -5134,10 +5391,10 @@ Export-ModuleMember -Function New-SuggestedInfraName
 #endregion
  
 #region Publish-ModuleToLocalRepo.ps1
-######## Function 52 of 92 ##################
+######## Function 54 of 95 ##################
 # Function:         Publish-ModuleToLocalRepo
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -5211,10 +5468,10 @@ Export-ModuleMember -Function Publish-ModuleToLocalRepo
 #endregion
  
 #region Remove-CIMUserProfile.ps1
-######## Function 53 of 92 ##################
+######## Function 55 of 95 ##################
 # Function:         Remove-CIMUserProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -5258,10 +5515,10 @@ Export-ModuleMember -Function Remove-CIMUserProfile
 #endregion
  
 #region Remove-FaultyProfileList.ps1
-######## Function 54 of 92 ##################
+######## Function 56 of 95 ##################
 # Function:         Remove-FaultyProfileList
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -5336,10 +5593,10 @@ Export-ModuleMember -Function Remove-FaultyProfileList
 #endregion
  
 #region Remove-HiddenDevice.ps1
-######## Function 55 of 92 ##################
+######## Function 57 of 95 ##################
 # Function:         Remove-HiddenDevice
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -5734,10 +5991,10 @@ Export-ModuleMember -Function Remove-HiddenDevice
 #endregion
  
 #region Remove-UserProfile.ps1
-######## Function 56 of 92 ##################
+######## Function 58 of 95 ##################
 # Function:         Remove-UserProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -5813,10 +6070,10 @@ Export-ModuleMember -Function Remove-UserProfile
 #endregion
  
 #region Reset-PSGallery.ps1
-######## Function 57 of 92 ##################
+######## Function 59 of 95 ##################
 # Function:         Reset-PSGallery
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -5904,10 +6161,10 @@ Export-ModuleMember -Function Reset-PSGallery
 #endregion
  
 #region Resolve-SID.ps1
-######## Function 58 of 92 ##################
+######## Function 60 of 95 ##################
 # Function:         Resolve-SID
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Jeff Hicks
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -6002,10 +6259,10 @@ Export-ModuleMember -Function Resolve-SID
 #endregion
  
 #region Restore-ElevatedShortcut.ps1
-######## Function 59 of 92 ##################
+######## Function 61 of 95 ##################
 # Function:         Restore-ElevatedShortcut
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -6074,10 +6331,10 @@ Export-ModuleMember -Function Restore-ElevatedShortcut
 #endregion
  
 #region Save-PSModules.ps1
-######## Function 60 of 92 ##################
+######## Function 62 of 95 ##################
 # Function:         Save-PSModules
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -6174,10 +6431,10 @@ Export-ModuleMember -Function Save-PSModules
 #endregion
  
 #region Search-Script.ps1
-######## Function 61 of 92 ##################
+######## Function 63 of 95 ##################
 # Function:         Search-Script
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -6238,10 +6495,10 @@ Export-ModuleMember -Function Search-Script
 #endregion
  
 #region Set-FolderCustomIcon.ps1
-######## Function 62 of 92 ##################
+######## Function 64 of 95 ##################
 # Function:         Set-FolderCustomIcon
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -6313,10 +6570,10 @@ Export-ModuleMember -Function Set-FolderCustomIcon
 #endregion
  
 #region Set-PSProjectFile.ps1
-######## Function 63 of 92 ##################
+######## Function 65 of 95 ##################
 # Function:         Set-PSProjectFile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -6908,10 +7165,10 @@ Export-ModuleMember -Function Set-PSProjectFile
 #endregion
  
 #region Set-PSToolKitSystemSetting.ps1
-######## Function 64 of 92 ##################
+######## Function 66 of 95 ##################
 # Function:         Set-PSToolKitSystemSetting
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -7413,10 +7670,10 @@ Export-ModuleMember -Function Set-PSToolKitSystemSetting
 #endregion
  
 #region Set-SharedPSProfile.ps1
-######## Function 65 of 92 ##################
+######## Function 67 of 95 ##################
 # Function:         Set-SharedPSProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -7536,10 +7793,10 @@ Export-ModuleMember -Function Set-SharedPSProfile
 #endregion
  
 #region Set-StaticIP.ps1
-######## Function 66 of 92 ##################
+######## Function 68 of 95 ##################
 # Function:         Set-StaticIP
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -7588,10 +7845,10 @@ Export-ModuleMember -Function Set-StaticIP
 #endregion
  
 #region Set-TempFolder.ps1
-######## Function 67 of 92 ##################
+######## Function 69 of 95 ##################
 # Function:         Set-TempFolder
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -7630,10 +7887,10 @@ Export-ModuleMember -Function Set-TempFolder
 #endregion
  
 #region Set-VSCodeExplorerSortOrder.ps1
-######## Function 68 of 92 ##################
+######## Function 70 of 95 ##################
 # Function:         Set-VSCodeExplorerSortOrder
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -7694,10 +7951,10 @@ Export-ModuleMember -Function Set-VSCodeExplorerSortOrder
 #endregion
  
 #region Set-WindowsAutoLogin.ps1
-######## Function 69 of 92 ##################
+######## Function 71 of 95 ##################
 # Function:         Set-WindowsAutoLogin
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -7814,10 +8071,10 @@ Export-ModuleMember -Function Set-WindowsAutoLogin
 #endregion
  
 #region Show-ComputerManagement.ps1
-######## Function 70 of 92 ##################
+######## Function 72 of 95 ##################
 # Function:         Show-ComputerManagement
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -7853,10 +8110,10 @@ Export-ModuleMember -Function Show-ComputerManagement
 #endregion
  
 #region Show-MyPSGalleryModules.ps1
-######## Function 71 of 92 ##################
+######## Function 73 of 95 ##################
 # Function:         Show-MyPSGalleryModules
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/09/01 06:59:58
@@ -7910,10 +8167,10 @@ Export-ModuleMember -Function Show-MyPSGalleryModules
 #endregion
  
 #region Show-PSToolKit.ps1
-######## Function 72 of 92 ##################
+######## Function 74 of 95 ##################
 # Function:         Show-PSToolKit
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -8160,10 +8417,10 @@ Export-ModuleMember -Function Show-PSToolKit
 #endregion
  
 #region Start-PowerShellAsAdmin.ps1
-######## Function 73 of 92 ##################
+######## Function 75 of 95 ##################
 # Function:         Start-PowerShellAsAdmin
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -8230,10 +8487,10 @@ Export-ModuleMember -Function Start-PowerShellAsAdmin
 #endregion
  
 #region Start-PSModuleMaintenance.ps1
-######## Function 74 of 92 ##################
+######## Function 76 of 95 ##################
 # Function:         Start-PSModuleMaintenance
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -8401,10 +8658,10 @@ Export-ModuleMember -Function Start-PSModuleMaintenance
 #endregion
  
 #region Start-PSProfile.ps1
-######## Function 75 of 92 ##################
+######## Function 77 of 95 ##################
 # Function:         Start-PSProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -8583,10 +8840,10 @@ Export-ModuleMember -Function Start-PSProfile
 #endregion
  
 #region Start-PSRoboCopy.ps1
-######## Function 76 of 92 ##################
+######## Function 78 of 95 ##################
 # Function:         Start-PSRoboCopy
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -8704,10 +8961,10 @@ Export-ModuleMember -Function Start-PSRoboCopy
 #endregion
  
 #region Start-PSScriptAnalyzer.ps1
-######## Function 77 of 92 ##################
+######## Function 79 of 95 ##################
 # Function:         Start-PSScriptAnalyzer
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -8864,10 +9121,10 @@ Export-ModuleMember -Function Start-PSScriptAnalyzer
 #endregion
  
 #region Start-PSToolkitSystemInitialize.ps1
-######## Function 78 of 92 ##################
+######## Function 80 of 95 ##################
 # Function:         Start-PSToolkitSystemInitialize
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -8990,10 +9247,10 @@ Export-ModuleMember -Function Start-PSToolkitSystemInitialize
 #endregion
  
 #region Test-CitrixCloudConnector.ps1
-######## Function 79 of 92 ##################
+######## Function 81 of 95 ##################
 # Function:         Test-CitrixCloudConnector
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9097,10 +9354,10 @@ Export-ModuleMember -Function Test-CitrixCloudConnector
 #endregion
  
 #region Test-CitrixVDAPort.ps1
-######## Function 80 of 92 ##################
+######## Function 82 of 95 ##################
 # Function:         Test-CitrixVDAPort
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9199,10 +9456,10 @@ Export-ModuleMember -Function Test-CitrixVDAPort
 #endregion
  
 #region Test-IsFileOpen.ps1
-######## Function 81 of 92 ##################
+######## Function 83 of 95 ##################
 # Function:         Test-IsFileOpen
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9269,10 +9526,10 @@ Export-ModuleMember -Function Test-IsFileOpen
 #endregion
  
 #region Test-PendingReboot.ps1
-######## Function 82 of 92 ##################
+######## Function 84 of 95 ##################
 # Function:         Test-PendingReboot
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9453,10 +9710,10 @@ Export-ModuleMember -Function Test-PendingReboot
 #endregion
  
 #region Test-PSRemote.ps1
-######## Function 83 of 92 ##################
+######## Function 85 of 95 ##################
 # Function:         Test-PSRemote
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9513,10 +9770,10 @@ Export-ModuleMember -Function Test-PSRemote
 #endregion
  
 #region Update-ListOfDDC.ps1
-######## Function 84 of 92 ##################
+######## Function 86 of 95 ##################
 # Function:         Update-ListOfDDC
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9580,10 +9837,10 @@ Export-ModuleMember -Function Update-ListOfDDC
 #endregion
  
 #region Update-LocalHelp.ps1
-######## Function 85 of 92 ##################
+######## Function 87 of 95 ##################
 # Function:         Update-LocalHelp
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9629,10 +9886,10 @@ Export-ModuleMember -Function Update-LocalHelp
 #endregion
  
 #region Update-MyModulesFromGitHub.ps1
-######## Function 86 of 92 ##################
+######## Function 88 of 95 ##################
 # Function:         Update-MyModulesFromGitHub
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9766,10 +10023,10 @@ Export-ModuleMember -Function Update-MyModulesFromGitHub
 #endregion
  
 #region Update-PSDefaultParameter.ps1
-######## Function 87 of 92 ##################
+######## Function 89 of 95 ##################
 # Function:         Update-PSDefaultParameter
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/17 13:39:28
@@ -9841,10 +10098,10 @@ Export-ModuleMember -Function Update-PSDefaultParameter
 #endregion
  
 #region Update-PSModuleInfo.ps1
-######## Function 88 of 92 ##################
+######## Function 90 of 95 ##################
 # Function:         Update-PSModuleInfo
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9947,10 +10204,10 @@ Export-ModuleMember -Function Update-PSModuleInfo
 #endregion
  
 #region Update-PSToolKitConfigFile.ps1
-######## Function 89 of 92 ##################
+######## Function 91 of 95 ##################
 # Function:         Update-PSToolKitConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -10096,10 +10353,10 @@ Export-ModuleMember -Function Update-PSToolKitConfigFile
 #endregion
  
 #region Write-Ascii.ps1
-######## Function 90 of 92 ##################
+######## Function 92 of 95 ##################
 # Function:         Write-Ascii
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Joakim Svendsen
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -10494,10 +10751,10 @@ Export-ModuleMember -Function Write-Ascii
 #endregion
  
 #region Write-Message.ps1
-######## Function 91 of 92 ##################
+######## Function 93 of 95 ##################
 # Function:         Write-Message
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -10598,10 +10855,10 @@ Export-ModuleMember -Function Write-Message
 #endregion
  
 #region Write-PSToolKitLog.ps1
-######## Function 92 of 92 ##################
+######## Function 94 of 95 ##################
 # Function:         Write-PSToolKitLog
 # Module:           PSToolKit
-# ModuleVersion:    0.1.79
+# ModuleVersion:    0.1.80
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -10713,6 +10970,126 @@ Function Write-PSToolKitLog {
 } #end Function
  
 Export-ModuleMember -Function Write-PSToolKitLog
+#endregion
+ 
+#region Write-PSToolKitReport.ps1
+######## Function 95 of 95 ##################
+# Function:         Write-PSToolKitReport
+# Module:           PSToolKit
+# ModuleVersion:    0.1.80
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/09/06 14:10:02
+# ModifiedOn:       2022/09/06 15:22:04
+# Synopsis:         Creates a excel or html report
+#############################################
+ 
+<#
+.SYNOPSIS
+Creates a excel or html report
+
+.DESCRIPTION
+Creates a excel or html report
+
+.PARAMETER Export
+Export the result to a report file. (Excel or html). Or select Host to display the object on screen.
+
+.PARAMETER InputObject
+Data  for the report.
+
+.PARAMETER ReportTitle
+Title of the report.
+
+.PARAMETER ReportPath
+Where to save the report.
+
+.EXAMPLE
+Write-PSToolKitReport -InputObject $data -ReportTitle "Temp Data" -Export HTML -ReportPath C:\temp
+
+#>
+Function Write-PSToolKitReport {
+	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Write-PSToolKitReport')]
+	[OutputType([System.Object[]])]
+	PARAM(
+		[PSCustomObject]$InputObject,
+		[string]$ReportTitle,
+		[ValidateSet('Excel', 'HTML')]
+		[string]$Export,
+
+		[ValidateScript( { if (Test-Path $_) { $true }
+				else { New-Item -Path $_ -ItemType Directory -Force | Out-Null; $true }
+			})]
+		[System.IO.DirectoryInfo]$ReportPath = 'C:\Temp'
+	)
+
+	$members = ($InputObject | Get-Member -MemberType Property, NoteProperty).Name
+
+	if ($Export -eq 'Excel') { 
+		$ExcelOptions = @{
+			Path             = $(Join-Path -Path $ReportPath -ChildPath "\$($ReportTitle.Replace(' ','_'))_$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx")
+			AutoSize         = $True
+			AutoFilter       = $True
+			TitleBold        = $True
+			TitleSize        = '28'
+			TitleFillPattern = 'LightTrellis'
+			TableStyle       = 'Light20'
+			FreezeTopRow     = $True
+			FreezePane       = '3'
+		}
+
+		foreach ($member in $members) {
+			if ($InputObject.$member) {$InputObject.$member | Export-Excel -Title $member -WorksheetName $member @ExcelOptions}
+		}
+	}
+		if ($Export -eq 'HTML') { 
+			$script:TableSettings = @{
+				Style           = 'cell-border'
+				TextWhenNoData  = 'No Data to display here'
+				Buttons         = 'searchBuilder', 'pdfHtml5', 'excelHtml5'
+				FixedHeader     = $true
+				HideFooter      = $true
+				SearchHighlight = $true
+				PagingStyle     = 'full'
+				PagingLength    = 10
+			}
+			$script:SectionSettings = @{
+				BackgroundColor       = 'grey'
+				CanCollapse           = $true
+				HeaderBackGroundColor = '#2b1200'
+				HeaderTextAlignment   = 'center'
+				HeaderTextColor       = '#f37000'
+				HeaderTextSize        = '15'
+				BorderRadius          = '20px'
+			}
+			$script:TableSectionSettings = @{
+				BackgroundColor       = 'white'
+				CanCollapse           = $true
+				HeaderBackGroundColor = '#f37000'
+				HeaderTextAlignment   = 'center'
+				HeaderTextColor       = '#2b1200'
+				HeaderTextSize        = '15'
+			}
+			$script:TabSettings = @{
+				TextTransform = 'uppercase'
+				IconBrands    = 'mix'
+				TextSize      = '16' 
+				TextColor     = '#00203F'
+				IconSize      = '16'
+				IconColor     = '#00203F'
+			}
+			$HeadingText = "$($ReportTitle) [$(Get-Date -Format dd) $(Get-Date -Format MMMM) $(Get-Date -Format yyyy) $(Get-Date -Format HH:mm)]"
+			New-HTML -TitleText $($ReportTitle) -FilePath $(Join-Path -Path $ReportPath -ChildPath "\$($ReportTitle.Replace(' ','_'))_$(Get-Date -Format yyyy.MM.dd-HH.mm).html") {
+				New-HTMLHeader {
+					New-HTMLText -FontSize 20 -FontStyle normal -Color '#00203F' -Alignment left -Text $HeadingText
+				}
+				foreach ($member in $members) {
+					if ($InputObject.$member) {New-HTMLTab -Name $member @TabSettings -HtmlData {New-HTMLSection @TableSectionSettings { New-HTMLTable -DataTable $InputObject.$member @TableSettings}}}
+				}
+			}
+		}
+	} #end Function
+ 
+Export-ModuleMember -Function Write-PSToolKitReport
 #endregion
  
 #endregion

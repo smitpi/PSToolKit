@@ -108,12 +108,6 @@ $Description
 .DESCRIPTION
 $Description
 
-.PARAMETER Export
-Export the result to a report file. (Excel or html). Or select Host to display the object on screen.
-
-.PARAMETER ReportPath
-Where to save the report.
-
 .EXAMPLE
 $properverb-$propernoun -Export HTML -ReportPath C:\temp
 
@@ -122,7 +116,6 @@ Function $properverb-$propernoun {
 		[Cmdletbinding(DefaultParameterSetName='Set1', HelpURI = "https://smitpi.github.io/$modulename/$properverb-$propernoun")]
 	    [OutputType([System.Object[]])]
                 PARAM(
-
 					[Parameter(Position = 0,Mandatory = `$true,HelpMessage = "Specify the name of a remote computer. The default is the local host.")]
         			[alias("CN", "host")]
         			[ValidateNotNullorEmpty()]
@@ -134,14 +127,6 @@ Function $properverb-$propernoun {
 					[ValidateNotNullOrEmpty()]
 					[string]`$Username,
 
-					[ValidateSet('Excel', 'HTML', 'Host')]
-					[string]`$Export = 'Host',
-
-                	[ValidateScript( { if (Test-Path `$_) { `$true }
-                                else { New-Item -Path `$_ -ItemType Directory -Force | Out-Null; `$true }
-                    })]
-                	[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp',
-
 					[ValidateScript({`$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
             						if (`$IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {`$True}
             						else {Throw "Must be running an elevated prompt to use this function"}})]
@@ -149,41 +134,31 @@ Function $properverb-$propernoun {
 					
         			[ValidateScript({if (Test-Connection -ComputerName `$_ -Count 2 -Quiet) {`$true}
                             		else {throw "Unable to connect to `$(`$_)"} })]
-        			[string[]]`$ComputerName
-					)
+        			[string[]]`$ComputerName,
+
+					[ValidateSet('Excel', 'HTML', 'Host')]
+					[string]`$Export = 'Host',
+
+                	[ValidateScript( { if (Test-Path `$_) { `$true }
+                                else { New-Item -Path `$_ -ItemType Directory -Force | Out-Null; `$true }
+                    })]
+                	[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp'
+				)
 
 
-
-	if (`$Export -eq 'Excel') { 
-		`$ExcelOptions = @{
-            Path             = `$(Join-Path -Path `$ReportPath -ChildPath "\$propernoun-`$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx")
-            AutoSize         = `$True
-            AutoFilter       = `$True
-            TitleBold        = `$True
-            TitleSize        = '28'
-            TitleFillPattern = 'LightTrellis'
-            TableStyle       = 'Light20'
-            FreezeTopRow     = `$True
-            FreezePane       = '3'
-        }
-         `$data | Export-Excel -Title $propernoun -WorksheetName $propernoun @ExcelOptions}
-
-	if (`$Export -eq 'HTML') { `$data | Out-GridHtml -DisablePaging -Title "$propernoun" -HideFooter -SearchHighlight -FixedHeader -FilePath `$(Join-Path -Path `$ReportPath -ChildPath "\$propernoun-`$(Get-Date -Format yyyy.MM.dd-HH.mm).html") }
-	if (`$Export -eq 'Host') { `$data }
 } #end Function
 "@
 	$ScriptFullPath = $checkpath.fullname + "\$properverb-$propernoun.ps1"
 
 	$manifestProperties = @{
-		Path            = $ScriptFullPath
-		Version         = '0.1.0'
-		Author          = $Author
-		Description     = $Description
-		CompanyName     = 'HTPCZA Tech'
-		Tags            = @($Tags)
-		ReleaseNotes    = 'Created [' + (Get-Date -Format dd/MM/yyyy_HH:mm) + '] Initial Script Creating'
-		GUID            = (New-Guid)
-		RequiredModules = 'ImportExcel', 'PSWriteHTML', 'PSWriteColor'
+		Path         = $ScriptFullPath
+		Version      = '0.1.0'
+		Author       = $Author
+		Description  = $Description
+		CompanyName  = 'HTPCZA Tech'
+		Tags         = @($Tags)
+		ReleaseNotes = 'Created [' + (Get-Date -Format dd/MM/yyyy_HH:mm) + '] Initial Script'
+		GUID         = (New-Guid)
 	}
 
 	New-ScriptFileInfo @manifestProperties -Force

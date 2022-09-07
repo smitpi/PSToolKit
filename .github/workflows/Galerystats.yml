@@ -3,7 +3,7 @@ name: Run PSGallery Reports
 on:
   workflow_dispatch:
   schedule:
-    - cron: "50 9,17,1 * * *"
+    - cron: "0 6 * * *"
 jobs:
   RunPWSH:
     runs-on: ubuntu-latest
@@ -14,4 +14,6 @@ jobs:
         run: |
           import-module ./PSToolKit/Public/Get-MyPSGalleryStat.ps1 -Force -Global
           import-module ./PSToolKit/Public/Write-Message.ps1 -Force -Global
+          import-module ./PSToolKit/Public/Get-MyPSGalleryReport.ps1 -Force -Global
           Get-MyPSGalleryStat -GitHubUserID ${{secrets.GH_USER}} -GitHubToken ${{secrets.GH_TOKEN}}
+          Get-MyPSGalleryReport -GitHubUserID ${{secrets.GH_USER}} -GitHubToken ${{secrets.GH_TOKEN}}

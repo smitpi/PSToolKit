@@ -28,6 +28,7 @@ Functions in this module:
 	 Get-FolderSize -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option
 	 Get-FQDN -- Get FQDN for a device, and checks if it is online
 	 Get-FullADUserDetail -- Extract user details from the domain
+	 Get-MyPSGalleryReport -- Gallery report
 	 Get-MyPSGalleryStat -- Show stats about my published modules.
 	 Get-NestedADGroupMembers -- Extract users from an AD group recursive, 4 levels deep.
 	 Get-ProcessPerformance -- Gets the top 10 processes by CPU %
@@ -57,6 +58,7 @@ Functions in this module:
 	 New-PSGenericList -- Creates a .net list object
 	 New-PSModule -- Creates a new PowerShell module.
 	 New-PSProfile -- Creates new profile files in the documents folder
+	 New-PSReportingScript -- Script template for scripts to create reports
 	 New-PSScript -- Creates a new PowerShell script. With PowerShell Script Info
 	 New-SuggestedInfraName -- Generates a list of usernames and server names, that can be used as test / demo data.
 	 Publish-ModuleToLocalRepo -- Checks for required modules and upload all to your local repo.
@@ -99,6 +101,7 @@ Functions in this module:
 	 Write-Ascii -- Create Ascii Art
 	 Write-Message -- Writes the given into to screen
 	 Write-PSToolKitLog -- Create a log for scripts
+	 Write-PSToolKitReport -- Creates a excel or html report
  
 SEE ALSO
 	 https://github.com/smitpi/PSToolKit
