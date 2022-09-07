@@ -32,10 +32,6 @@ Created [07/09/2022_07:23] Initial Script Creating
 
 #>
 
-#Requires -Module ImportExcel
-#Requires -Module PSWriteHTML
-#Requires -Module PSWriteColor
-
 <# 
 
 .DESCRIPTION 
