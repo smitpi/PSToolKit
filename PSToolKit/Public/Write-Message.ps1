@@ -87,7 +87,7 @@ Write-Message -Action Getting -Severity Information -Object (get-item .) -Messag
 #>
 Function Write-Message {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Write-Message')]
-	[Alias('Write-Message')]
+	[Alias('Write-PSToolkitMessage')]
 	[OutputType([string[]])]
 	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '')]
 	PARAM(
