@@ -57,10 +57,16 @@ Severity of the entry.
 .PARAMETER Object
 The object to be reported on.
 
-.PARAMETER Message
-Message to display. This can be an array of strings as well, to have different colors in the text.
+.PARAMETER BeforeMessage
+Message to display before object. This can be an array of strings as well, to have different colors in the text.
 
-.PARAMETER MessageColor
+.PARAMETER BeforeMessageColor
+The Colour of the corresponding message in the array.
+
+.PARAMETER AfterMessage
+Message to display after object. This can be an array of strings as well, to have different colors in the text.
+
+.PARAMETER AfterMessageColor
 The Colour of the corresponding message in the array.
 
 .PARAMETER InsertTabs
@@ -80,8 +86,8 @@ Write-Message -Action Getting -Severity Information -Object (get-item .) -Messag
 
 #>
 Function Write-Message {
-	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Write-PSToolKitMessage')]
-	[Alias('Write-PSToolKitMessage')]
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Write-Message')]
+	[Alias('Write-Message')]
 	[OutputType([string[]])]
 	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '')]
 	PARAM(

@@ -51,14 +51,26 @@ Script template for scripts to create reports
 .DESCRIPTION
 Script template for scripts to create reports
 
-.PARAMETER Export
-Export the result to a report file. (Excel or html). Or select Host to display the object on screen.
+.PARAMETER Path
+Where the script will be created.
 
-.PARAMETER ReportPath
-Where to save the report.
+.PARAMETER Verb
+Approved PowerShell verb
+
+.PARAMETER Noun
+Second part of script name.
+
+.PARAMETER Author
+Who wrote it.
+
+.PARAMETER Description
+What it does.
+
+.PARAMETER tags
+Tags for searches.
 
 .EXAMPLE
-New-PSReportingScript -Export HTML -ReportPath C:\temp
+New-PSReportingScript -Path .\PSToolKit\Private\ -Verb get -Noun blah -Description 'blah' -tags PS
 
 #>
 Function New-PSReportingScript {
@@ -205,7 +217,7 @@ Function $properverb-$propernoun {
 			New-HTMLHeader {
 				New-HTMLText -FontSize 20 -FontStyle normal -Color '#00203F' -Alignment left -Text `$HeadingText
 			}
-			if (`$data) { New-HTMLTab -Name 'Winget Installed App list' @TabSettings -HtmlData {New-HTMLSection @TableSectionSettings { New-HTMLTable -DataTable $($data) @TableSettings}}}
+			if (`$data) { New-HTMLTab -Name "$propernoun" @TabSettings -HtmlData {New-HTMLSection @TableSectionSettings { New-HTMLTable -DataTable `$(`$data) @TableSettings}}}
 		}
 	}
 	if (`$Export -eq 'Host') { `$data }

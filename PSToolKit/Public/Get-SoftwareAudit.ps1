@@ -83,7 +83,7 @@ Function Get-SoftwareAudit {
 			$check = Get-FQDN -ComputerName $CompName -ErrorAction Stop
 		} catch { Write-Warning "Error: $($_.Exception.Message)" }
 		if ($check.online -like 'True') {
-			Write-PSToolKitMessage -Action Starting -Severity Information -Object $($check.FQDN) -Message 'Collecting Software' -MessageColor DarkRed
+			Write-Message -Action Starting -Severity Information -Object $($check.FQDN) -Message 'Collecting Software' -MessageColor DarkRed
 			try {
 				$rawdata = Invoke-Command -ComputerName $CompName -ScriptBlock {
 					Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall | Get-ItemProperty

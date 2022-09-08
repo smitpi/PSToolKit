@@ -51,8 +51,8 @@ Show version numbers ext. about my modules.
 .DESCRIPTION
 Show version numbers ext. about my modules.
 
-.PARAMETER AsTable
-Format output as table.
+.PARAMETER AsObject
+Format output as object.
 
 .EXAMPLE
 Show-MyPSGalleryModules
@@ -62,12 +62,12 @@ Function Show-MyPSGalleryModules {
 	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Show-MyPSGalleryModules')]
 	[OutputType([System.Collections.generic.List[PSObject]])]
 	PARAM(
-		[switch]$AsTable
+		[switch]$AsObject
 	)
-	$ModLists = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule')
+	$ModLists = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSPackageMan')
 	[System.Collections.generic.List[PSObject]]$GalStats = @()
 	foreach ($Mod in $ModLists) {
-		Write-PSToolKitMessage -Action 'Collecting' -Object $mod -Message 'Online Data' -MessageColor Gray
+		Write-Message -Action 'Collecting' -Object $mod -Message 'Online Data' -MessageColor Gray
 		$ResultModule = Find-Module $mod -Repository PSGallery
 		$TotalDownloads = $TotalDownloads + [int]$ResultModule.AdditionalMetadata.downloadCount
 		$GithubDetails = Invoke-RestMethod "https://raw.githubusercontent.com/smitpi/$($Mod)/master/Version.json"
@@ -82,6 +82,6 @@ Function Show-MyPSGalleryModules {
 				VersionDownload = [Int]$ResultModule.AdditionalMetadata.versionDownloadCount
 			})
 	}
-If ($AsTable) {$GalStats | Format-Table -AutoSize -Wrap}
-else {$GalStats}
+	If ($AsObject) {$GalStats}
+	else {$GalStats | Format-Table -AutoSize -Wrap}
 } #end Function
