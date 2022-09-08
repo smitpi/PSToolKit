@@ -94,9 +94,9 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>Set multiple settings on desktop or server</p>
 <h2 id="syntax">SYNTAX</h2>
 <div class="highlight"><pre><span></span><code>Set-PSToolKitSystemSetting [-RunAll] [-ExecutionPolicy] [-IntranetZone] [-IntranetZoneIPRange]
- [-PSTrustedHosts] [-FileExplorerSettings] [-SystemDefaults] [-SetPhotoViewer] [-DisableIPV6]
- [-DisableFirewall] [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-PerformReboot]
- [&lt;CommonParameters&gt;]
+ [-PSTrustedHosts] [-FileExplorerSettings] [-SystemDefaults] [-SetPhotoViewer] [-RemoveDefaultApps]
+ [-DisableIPV6] [-DisableFirewall] [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP]
+ [-PerformReboot] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Set multiple settings on desktop or server</p>
@@ -192,6 +192,18 @@ Except windows update and reboot.</p>
 </code></pre></div>
 <h3 id="-setphotoviewer">-SetPhotoViewer</h3>
 <p>Set photo viewer</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-removedefaultapps">-RemoveDefaultApps</h3>
+<p>Remove default apps.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
