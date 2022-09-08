@@ -13,8 +13,8 @@ Show stats about my published modules.
 ## SYNTAX
 
 ```
-Get-MyPSGalleryStat [[-GitHubUserID] <String>] [[-GitHubToken] <String>] [-History] [[-daysToReport] <Int32>]
- [-AddtoProfile] [-OpenProfilePage] [-ASObject] [<CommonParameters>]
+Get-MyPSGalleryStat [[-GitHubUserID] <String>] [[-GitHubToken] <String>] [[-daysToReport] <Int32>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -59,21 +59,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -History
-Downloads and calculates the history.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -daysToReport
 Report on this amount of days.
 
@@ -85,51 +70,6 @@ Aliases:
 Required: False
 Position: 3
 Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AddtoProfile
-Add defaults to profile.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -OpenProfilePage
-Open my profile page on psgallery
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ASObject
-Return output as an object.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

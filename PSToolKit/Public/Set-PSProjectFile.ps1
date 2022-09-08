@@ -85,7 +85,7 @@ Function Set-PSProjectFile {
 		[System.IO.FileInfo]$ModuleScriptFile,
 		[ValidateSet('Minor', 'Build', 'CombineOnly', 'Revision')]
 		[string]$VersionBump = 'Revision',
-		[string]$ReleaseNotes,
+		[string]$ReleaseNotes = 'Updated Module Online Help Files',
 		[switch]$BuildHelpFiles,
 		[switch]$DeployMKDocs,
 		[Switch]$GitPush = $false,
@@ -106,7 +106,6 @@ Function Set-PSProjectFile {
 		$OriginalModuleVer = (Import-PowerShellDataFile -Path $modulefile.FullName.Replace('.psm1', '.psd1')).ModuleVersion
 		Write-Color '[Creating]', ' PowerShell Project: ', "$($module.Name)", " [ver $($OriginalModuleVer.tostring())]" -Color Yellow, Gray, Green, Yellow -LinesBefore 2 -LinesAfter 2
 		Write-Color '[Starting]', ' Module Changes' -Color Yellow, DarkCyan
-		
 	} catch { Write-Error "Error: Importing Module `nMessage:$($_.Exception.message)"; return }
 	#endregion
 
@@ -116,10 +115,12 @@ Function Set-PSProjectFile {
 	$ModuleReadme = [IO.Path]::Combine($ModuleBase, 'README.md')
 	$ModuleIssues = [IO.Path]::Combine($ModuleBase, 'Issues.md')
 	$ModuleIssuesExcel = [IO.Path]::Combine($ModuleBase, 'Issues.xlsx')
+	$VersionFilePath = [IO.Path]::Combine($ModuleBase, 'Version.json')
 	$ModulePublicFunctions = [IO.Path]::Combine($module.ModuleBase, 'Public') | Get-Item
 	$ModulePrivateFunctions = [IO.Path]::Combine($module.ModuleBase, 'Private') | Get-Item
 	$Modulemkdocs = [IO.Path]::Combine($ModuleBase, 'docs', 'mkdocs.yml')
 	$ModuleIndex = [IO.Path]::Combine($ModuleBase, 'docs', 'docs', 'index.md')
+	$ScriptInfoArchive = [IO.Path]::Combine($ModuleBase, 'ScriptInfo.zip')
 	[System.Collections.ArrayList]$Issues = @()
 	#endregion
 	
@@ -128,7 +129,10 @@ Function Set-PSProjectFile {
 	try {
 		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop }
 		if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force -ErrorAction Stop }
-		if (Test-Path $ModuleIssuesExcel) { Remove-Item $ModuleIssuesExcel -Force -ErrorAction Stop }	
+		if (Test-Path $ModuleIssuesExcel) { Remove-Item $ModuleIssuesExcel -Force -ErrorAction Stop }
+		if (Test-Path $ModulesInstuctions) { Remove-Item $ModulesInstuctions -Force -ErrorAction Stop }
+		if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }	
+		if (Test-Path $VersionFilePath) { Remove-Item $VersionFilePath -Force -ErrorAction Stop }	
 	} catch {
 		try {
 			Write-Warning "Error: Deleting Output Folders `nMessage:$($_.Exception.message)`nRetrying"
@@ -152,6 +156,7 @@ Function Set-PSProjectFile {
 			$manifestProperties = @{
 				Path              = $ModuleManifestFileTMP.FullName
 				ModuleVersion     = $ModuleversionTMP
+				ReleaseNotes      = "Updated [$(Get-Date -Format dd/MM/yyyy_HH:mm)] $($ReleaseNotes)"
 				FunctionsToExport = (Get-Command -Module $module.Name -CommandType Function | Select-Object name).name | Sort-Object
 			}
 			Update-ModuleManifest @manifestProperties -ErrorAction Stop
@@ -164,11 +169,6 @@ Function Set-PSProjectFile {
 	try {
 		$ModuleManifestFile = Get-Item $modulefile.FullName.Replace('.psm1', '.psd1')
 		$ModuleManifest = Test-ModuleManifest -Path $ModuleManifestFile.FullName | Select-Object * -ErrorAction Stop
-        $psd = Import-PowerShellDataFile -Path $modulefile.FullName.Replace('.psm1', '.psd1')
-		if ($ReleaseNotes) {
-            $psd.PrivateData.PSData['ReleaseNotes'] = "Updated [$(Get-Date -Format dd/MM/yyyy_HH:mm)] $($ReleaseNotes)"
-			Update-ModuleManifest -Path $modulefile.FullName.Replace('.psm1', '.psd1') @psd
-		} 
 		$FileContent = Get-Content $ModuleManifestFile -ErrorAction Stop
 		$DateLine = Select-String -InputObject $ModuleManifestFile -Pattern '# Generated on:'
 		$FileContent[($DateLine.LineNumber - 1)] = "# Generated on: $(Get-Date -Format u)"
@@ -324,28 +324,6 @@ Function Set-PSProjectFile {
 			$mkdocsFunc.add('  - pymdownx.superfences')
 			$mkdocsFunc.add(' ')
 			$mkdocsFunc.add('theme: windmill')
-			#$mkdocsFunc.add('theme:')
-			#$mkdocsFunc.add('  name: material')
-			#$mkdocsFunc.add('  features:')
-			#$mkdocsFunc.add('    - navigation.instant')
-			#$mkdocsFunc.add('  language: en')
-			#$mkdocsFunc.add("  favicon: `'`'")
-			#$mkdocsFunc.add("  logo: `'`'")
-			#$mkdocsFunc.add('  palette:')
-			#$mkdocsFunc.add('    - media: "(prefers-color-scheme: light)"')
-			#$mkdocsFunc.add('      primary: blue grey')
-			#$mkdocsFunc.add('      accent: indigo')
-			#$mkdocsFunc.add('      scheme: default')
-			#$mkdocsFunc.add('      toggle:')
-			#$mkdocsFunc.add('        icon: material/toggle-switch-off-outline')
-			#$mkdocsFunc.add('        name: Switch to dark mode')
-			#$mkdocsFunc.add('    - media: "(prefers-color-scheme: dark)"')
-			#$mkdocsFunc.add('      primary: blue grey')
-			#$mkdocsFunc.add('      accent: indigo')
-			#$mkdocsFunc.add('      scheme: slate')
-			#$mkdocsFunc.add('      toggle:')
-			#$mkdocsFunc.add('        icon: material/toggle-switch')
-			#$mkdocsFunc.add('        name: Switch to light mode')
 			$mkdocsFunc | Set-Content -Path $Modulemkdocs -Force
 
 			Write-Color "`t[Processing]: ", 'MKDocs Index Files' -Color yello, Gray
@@ -363,7 +341,7 @@ Function Set-PSProjectFile {
 					Author  = $($moduleManifest.author)
 					Date    = (Get-Date -Format u)
 				})
-			$versionfile | ConvertTo-Json | Set-Content (Join-Path $ModuleBase -ChildPath 'Version.json') -Force
+			$versionfile | ConvertTo-Json | Set-Content $VersionFilePath -Force
 		} catch { Write-Error "Error: Creating Other Files `nMessage:$($_.Exception.message)"; return }
 	}
 	#endregion
@@ -407,8 +385,8 @@ Function Set-PSProjectFile {
 	foreach ($PublicItem in $public) {
 		$author = $ModuleManifest.Author
 		try {
-			$scriptinfo = Test-ScriptFileInfo -Path $PublicItem.fullName -ErrorAction Stop
-			$author = $scriptinfo.author
+			$ScriptInfo = Test-ScriptFileInfo -Path $PublicItem.fullName -ErrorAction Stop
+			$author = $ScriptInfo.author
 		} catch {
 			Write-Warning "`tCould not read script info [$($PublicItem.BaseName)], default values used."
 			[void]$Issues.Add([PSCustomObject]@{
@@ -417,22 +395,22 @@ Function Set-PSProjectFile {
 					details  = $_.Exception.Message
 				})
 			try {
-				$PublicItem.fullName | Compress-Archive -DestinationPath "$ModuleBase\Scriptinfo.zip" -Update
-				$begin = Select-String -Path $PublicItem.fullName -Pattern '<#'
-				$Requires = Select-String -Path $PublicItem.fullName -Pattern '#Requires' | ForEach-Object {$_.Line.Replace('#Requires -Module ', $null)}
-				$version = ((Select-String -Path $PublicItem.fullName -Pattern '.VERSION' -CaseSensitive).Line.Replace('.VERSION ', $null)).Trim()
-				$Author = ((Select-String -Path $PublicItem.fullName -Pattern '.AUTHOR' -CaseSensitive).Line.Replace('.AUTHOR ', $null)).Trim()
-				$Company = ((Select-String -Path $PublicItem.fullName -Pattern '.COMPANYNAME' -CaseSensitive).Line.Replace('.COMPANYNAME ', $null)).Trim()
-				$scriptContent = (Get-Content $PublicItem.fullName)[($begin[2].LineNumber - 1)..((Get-Content $PublicItem.fullName).Length)]
+				$PublicItem.fullName | Compress-Archive -DestinationPath $ScriptInfoArchive -Update
+				$PatternBegin = Select-String -Path $PublicItem.fullName -Pattern '<#'
+				$SCInfoRequires = Select-String -Path $PublicItem.fullName -Pattern '#Requires' | ForEach-Object {$_.Line.Replace('#Requires -Module ', $null)}
+				$SCInfoVersion = ((Select-String -Path $PublicItem.fullName -Pattern '.VERSION' -CaseSensitive).Line.Replace('.VERSION ', $null)).Trim()
+				$SCInfoAuthor = ((Select-String -Path $PublicItem.fullName -Pattern '.AUTHOR' -CaseSensitive).Line.Replace('.AUTHOR ', $null)).Trim()
+				$SCInfoCompany = ((Select-String -Path $PublicItem.fullName -Pattern '.COMPANYNAME' -CaseSensitive).Line.Replace('.COMPANYNAME ', $null)).Trim()
+				$ScriptContent = (Get-Content $PublicItem.fullName)[($PatternBegin[2].LineNumber - 1)..((Get-Content $PublicItem.fullName).Length)]
 
 				Clear-Content -Path $PublicItem.fullName
-				if ($Requires) {Update-ScriptFileInfo -Path $PublicItem.fullName -Version $version -Author $author -Guid (New-Guid) -CompanyName $Company -Description (Get-Help $PublicItem.BaseName).SYNOPSIS -RequiredModules $Requires -Force}
-				else {Update-ScriptFileInfo -Path $PublicItem.fullName -Version $version -Author $author -Guid (New-Guid) -CompanyName $Company -Description (Get-Help $PublicItem.BaseName).SYNOPSIS -Force}
+				if ($SCInfoRequires) {Update-ScriptFileInfo -Path $PublicItem.fullName -Version $SCInfoVersion -Author $SCInfoAuthor -Guid (New-Guid) -CompanyName $SCInfoCompany -Description (Get-Help $PublicItem.BaseName).SYNOPSIS -RequiredModules $SCInfoRequires -Force}
+				else {Update-ScriptFileInfo -Path $PublicItem.fullName -Version $SCInfoVersion -Author $SCInfoAuthor -Guid (New-Guid) -CompanyName $SCInfoCompany -Description (Get-Help $PublicItem.BaseName).SYNOPSIS -Force}
 				$NewContent = Get-Content $PublicItem.fullName | Where-Object {$_ -notlike 'PARAM()'}
 				Set-Content -Value $NewContent -Path $PublicItem.fullName
-				Add-Content -Value $scriptContent -Path $PublicItem.fullName
-				$scriptinfo = Test-ScriptFileInfo -Path $PublicItem.fullName
-				$author = $scriptinfo.author
+				Add-Content -Value $ScriptContent -Path $PublicItem.fullName
+				$ScriptInfo = Test-ScriptFileInfo -Path $PublicItem.fullName
+				$author = $ScriptInfo.author
 			} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 		}
 
@@ -448,7 +426,7 @@ Function Set-PSProjectFile {
 		$file.Add(('{0,-20}{1}' -f '# Synopsis:', $((Get-Help $($PublicItem.BaseName)).synopsis)))
 		$file.Add('#############################################')
 		$file.Add(' ')
-		Write-Color "`t[Processing]: ", $($PublicItem.name) -Color yello, Gray
+		Write-Color "`t[Processing]: ", $($PublicItem.name) -Color Yellow, Gray
 
 		[int]$StartIndex = (Select-String -InputObject $PublicItem -Pattern '.SYNOPSIS*').LineNumber[0] - 2
 		[int]$EndIndex = (Get-Content $PublicItem.FullName).length
@@ -610,7 +588,10 @@ Function Set-PSProjectFile {
 		$Fragments.Add("---`n")
 		$fragments.add("*Updated: $(Get-Date -Format U) UTC*")
 		$fragments | Out-File -FilePath $ModuleIssues -Encoding utf8 -Force
-		if ($ShowReport) { & $ModuleIssues}
+		if ($ShowReport) { 
+			Start-Process -FilePath $ModuleIssues
+			Start-Process $ModuleManifest.HelpInfoUri
+		}
 	}
 	#endregion
 

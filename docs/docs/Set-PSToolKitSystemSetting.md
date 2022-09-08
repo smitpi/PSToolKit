@@ -14,9 +14,9 @@ Set multiple settings on desktop or server
 
 ```
 Set-PSToolKitSystemSetting [-RunAll] [-ExecutionPolicy] [-IntranetZone] [-IntranetZoneIPRange]
- [-PSTrustedHosts] [-FileExplorerSettings] [-SystemDefaults] [-SetPhotoViewer] [-DisableIPV6]
- [-DisableFirewall] [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP] [-PerformReboot]
- [<CommonParameters>]
+ [-PSTrustedHosts] [-FileExplorerSettings] [-SystemDefaults] [-SetPhotoViewer] [-RemoveDefaultApps]
+ [-DisableIPV6] [-DisableFirewall] [-DisableInternetExplorerESC] [-DisableServerManager] [-EnableRDP]
+ [-PerformReboot] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -139,6 +139,21 @@ Accept wildcard characters: False
 
 ### -SetPhotoViewer
 Set photo viewer
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RemoveDefaultApps
+Remove default apps.
 
 ```yaml
 Type: SwitchParameter

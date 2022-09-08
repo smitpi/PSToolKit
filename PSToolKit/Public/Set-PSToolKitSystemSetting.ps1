@@ -565,11 +565,11 @@ Function Set-PSToolKitSystemSetting {
             'Microsoft.Advertising.Xaml'
         )
 
-        $appxprovisionedpackage = Get-AppxProvisionedPackage -Online
+        $appxprovisionedpackage = Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
 
         foreach ($app in $apps) {
-            Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -AllUsers
-            ($appxprovisionedpackage).Where( {$_.DisplayName -EQ $app}) | Remove-AppxProvisionedPackage -Online
+            Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+            ($appxprovisionedpackage).Where( {$_.DisplayName -EQ $app}) | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
             Write-Color '[Removing]', "$($app): ", 'Complete' -Color Yellow, Cyan, Green -StartTab 1
         }
     }

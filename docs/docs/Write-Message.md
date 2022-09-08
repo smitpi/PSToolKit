@@ -13,8 +13,10 @@ Writes the given into to screen
 ## SYNTAX
 
 ```
-Write-Message [-Action] <String> [[-Severity] <String>] [[-Object] <String[]>] [[-Message] <String[]>]
- [[-MessageColor] <String[]>] [[-InsertTabs] <Int32>] [-NoNewLine] [<CommonParameters>]
+Write-Message [[-Action] <String>] [[-Severity] <String>] [[-BeforeMessage] <String[]>]
+ [[-BeforeMessageColor] <String[]>] [[-Object] <String[]>] [[-AfterMessage] <String[]>]
+ [[-AfterMessageColor] <String[]>] [[-InsertTabs] <Int32>] [[-LinesBefore] <Int32>] [[-LinesAfter] <Int32>]
+ [-NoNewLine] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,7 +39,7 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 1
 Default value: None
 Accept pipeline input: False
@@ -59,8 +61,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Object
-The object to be reported on.
+### -BeforeMessage
+{{ Fill BeforeMessage Description }}
 
 ```yaml
 Type: String[]
@@ -70,13 +72,12 @@ Aliases:
 Required: False
 Position: 3
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Message
-Message to display.
-This can be an array of strings as well, to have different colors in the text.
+### -BeforeMessageColor
+{{ Fill BeforeMessageColor Description }}
 
 ```yaml
 Type: String[]
@@ -90,8 +91,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MessageColor
-The Colour of the corresponding message in the array.
+### -Object
+The object to be reported on.
 
 ```yaml
 Type: String[]
@@ -100,6 +101,36 @@ Aliases:
 
 Required: False
 Position: 5
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -AfterMessage
+{{ Fill AfterMessage Description }}
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases: Message
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AfterMessageColor
+{{ Fill AfterMessageColor Description }}
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases: MessageColor
+
+Required: False
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -114,7 +145,37 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
+Position: 8
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -LinesBefore
+Insert Blank Lines before Output.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -LinesAfter
+Insert Blank Lines After Output.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 10
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False

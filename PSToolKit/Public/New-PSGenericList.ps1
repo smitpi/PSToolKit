@@ -121,7 +121,7 @@ Function New-PSGenericList {
 			#reset the cursor position
 			Write-Host "`r"
 		}
-		#create an empty generic string list if no type or values are specifed
+		#create an empty generic string list if no type or values are specified
 		if (-Not $list) {
 			Write-Verbose "[$((Get-Date).TimeofDay) END    ] Creating an empty $type generic list"
 			$List = New-Object -TypeName system.collections.generic.list[$($Type.fullName)]
