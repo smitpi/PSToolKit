@@ -1,226 +1,181 @@
 ---
 external help file: PSToolKit-help.xml
 Module Name: PSToolKit
-online version: 
+online version:
 schema: 2.0.0
 ---
 
 # Find-OnlineModule
 
 ## SYNOPSIS
-
 Creates reports based on PSGallery.
 
 ## SYNTAX
 
-### __AllParameterSets
-
 ```
-Find-OnlineModule [[-Keyword <String>]] [-DownloadJeffReport] [-Export <String>] [-MaxCount <Int32>] [-NoAzureAWS] [-Offline] [-ReportPath <DirectoryInfo>] [-SortOrder <String>] [-UpdateCache] [<CommonParameters>]
+Find-OnlineModule [[-Keyword] <String>] [-NoAzureAWS] [-MaxCount <Int32>] [-Offline] [-UpdateCache]
+ [-SortOrder <String>] [-Export <String>] [-ReportPath <DirectoryInfo>] [-DownloadJeffReport]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-
 Creates reports based on PSGallery.
 You can search for a keyword, and also exclude azure and aws modules.
 
-
 ## EXAMPLES
 
-### Example 1: EXAMPLE 1
-
+### EXAMPLE 1
 ```
 Find-OnlineModule -Keyword Citrix -Offline -SortOrder Downloads -Export Excel -ReportPath C:\temp
 ```
 
-
-
-
-
-
-
-
 ## PARAMETERS
 
-### -DownloadJeffReport
-
-Downloads Jeff Hicks reports from GitHub.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-Accepted values: 
-
-Required: True (None) False (All)
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-DontShow: False
-```
-
-### -Export
-
-Export the result to a file.
-(Excel or markdown)
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: 
-Accepted values: 
-
-Required: True (None) False (All)
-Position: Named
-Default value: Host
-Accept pipeline input: False
-Accept wildcard characters: False
-DontShow: False
-```
-
 ### -Keyword
-
 Limit the search to a keyword.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
-Accepted values: 
+Aliases:
 
-Required: True (None) False (All)
-Position: 0
-Default value: 
+Required: False
+Position: 1
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
-DontShow: False
-```
-
-### -MaxCount
-
-Limit the amount of modules to report, default is 250.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: 
-Accepted values: 
-
-Required: True (None) False (All)
-Position: Named
-Default value: 250
-Accept pipeline input: False
-Accept wildcard characters: False
-DontShow: False
 ```
 
 ### -NoAzureAWS
-
 This will exclude modules with AWS and Azure in the name.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
-Accepted values: 
+Aliases:
 
-Required: True (None) False (All)
+Required: False
 Position: Named
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
-DontShow: False
+```
+
+### -MaxCount
+Limit the amount of modules to report, default is 250.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: 250
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
 ### -Offline
-
 Uses a previously downloaded cache for the search.
 If the cache doesn't exists, it will be created.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
-Accepted values: 
+Aliases:
 
-Required: True (None) False (All)
+Required: False
 Position: Named
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
-DontShow: False
-```
-
-### -ReportPath
-
-Where to save the report.
-
-```yaml
-Type: DirectoryInfo
-Parameter Sets: (All)
-Aliases: 
-Accepted values: 
-
-Required: True (None) False (All)
-Position: Named
-Default value: C:\Temp
-Accept pipeline input: False
-Accept wildcard characters: False
-DontShow: False
-```
-
-### -SortOrder
-
-Determines if the report will be sorted on the amount of downloads or the newest modules.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: 
-Accepted values: 
-
-Required: True (None) False (All)
-Position: Named
-Default value: Downloads
-Accept pipeline input: False
-Accept wildcard characters: False
-DontShow: False
 ```
 
 ### -UpdateCache
-
 Update the local cache.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
-Accepted values: 
+Aliases:
 
-Required: True (None) False (All)
+Required: False
 Position: Named
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
-DontShow: False
 ```
 
+### -SortOrder
+Determines if the report will be sorted on the amount of downloads or the newest modules.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: Downloads
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Export
+Export the result to a file.
+(Excel or markdown)
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: Host
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportPath
+Where to save the report.
+
+```yaml
+Type: DirectoryInfo
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: C:\Temp
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DownloadJeffReport
+Downloads Jeff Hicks reports from GitHub.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
-
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+## INPUTS
 
 ## OUTPUTS
 
 ### System.Object[]
-
-
-## NOTES
-
-
+## NOTES
 
 ## RELATED LINKS
-
-Fill Related Links Here
-
