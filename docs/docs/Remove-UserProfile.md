@@ -1,70 +1,92 @@
 ---
 external help file: PSToolKit-help.xml
 Module Name: PSToolKit
-online version:
+online version: 
 schema: 2.0.0
 ---
 
 # Remove-UserProfile
 
 ## SYNOPSIS
+
 Connects to a server and renames a user profile folder, and delete the key from Profilelist in the registry
 
 ## SYNTAX
 
+### __AllParameterSets
+
 ```
-Remove-UserProfile -TargetServer <String> [-UserName] <String> [<CommonParameters>]
+Remove-UserProfile [-UserName] <String> -TargetServer <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 Connects to a server and renames a user profile folder, and delete the key from Profilelist in the registry
+
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1: EXAMPLE 1
+
 ```
 Remove-UserProfile -TargetServer AD01 -UserName ps
 ```
 
+
+
+
+
+
+
+
 ## PARAMETERS
 
 ### -TargetServer
+
 Server to connect to.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
+Accepted values: 
 
-Required: True
+Required: True (All) False (None)
 Position: Named
-Default value: None
+Default value: 
 Accept pipeline input: False
 Accept wildcard characters: False
+DontShow: False
 ```
 
 ### -UserName
+
 Affected Username
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
+Accepted values: 
 
-Required: True
-Position: 2
-Default value: None
+Required: True (All) False (None)
+Position: 1
+Default value: 
 Accept pipeline input: False
 Accept wildcard characters: False
+DontShow: False
 ```
 
+
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
-
-## INPUTS
-
-## OUTPUTS
 
 ## NOTES
 
+
+
 ## RELATED LINKS
+
+Fill Related Links Here
+

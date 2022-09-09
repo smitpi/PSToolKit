@@ -130,8 +130,6 @@ Function Set-PSProjectFile {
 		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop }
 		if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force -ErrorAction Stop }
 		if (Test-Path $ModuleIssuesExcel) { Remove-Item $ModuleIssuesExcel -Force -ErrorAction Stop }
-		if (Test-Path $ModulesInstuctions) { Remove-Item $ModulesInstuctions -Force -ErrorAction Stop }
-		if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }	
 		if (Test-Path $VersionFilePath) { Remove-Item $VersionFilePath -Force -ErrorAction Stop }	
 	} catch {
 		try {
@@ -190,7 +188,8 @@ Function Set-PSProjectFile {
 		Write-Color "`t[Deleting]: ", 'Docs Folder' -Color yello, Gray
 		try {
 			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
-			if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }
+			if (Test-Path $ModulesInstuctions) { Remove-Item $ModulesInstuctions -Force -ErrorAction Stop }
+			if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }	
 		} catch {
 			try {
 				Write-Warning "Error: Deleting Docs Folders `nMessage:$($_.Exception.message)`nRetrying"

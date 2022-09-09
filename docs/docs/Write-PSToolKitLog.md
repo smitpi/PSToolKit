@@ -1,215 +1,248 @@
 ---
 external help file: PSToolKit-help.xml
 Module Name: PSToolKit
-online version:
+online version: 
 schema: 2.0.0
 ---
 
 # Write-PSToolKitLog
 
 ## SYNOPSIS
+
 Create a log for scripts
 
 ## SYNTAX
 
 ### log (Default)
+
 ```
-Write-PSToolKitLog [-Severity <String>] [-Action <String>] [-Object <String[]>] [-Message <String>]
- [-ShowVerbose] [<CommonParameters>]
+Write-PSToolKitLog [-Action <String>] [-Message <String>] [-Object <String[]>] [-Severity <String>] [-ShowVerbose] [<CommonParameters>]
 ```
 
 ### Create
+
 ```
 Write-PSToolKitLog [-Initialize] [-Object <String[]>] [<CommonParameters>]
 ```
 
 ### Export
+
 ```
-Write-PSToolKitLog [-Object <String[]>] [-ExportFinal] [-Export <String>] [-LogName <String>]
- [-ReportPath <DirectoryInfo>] [<CommonParameters>]
+Write-PSToolKitLog [-Export <String>] [-ExportFinal] [-LogName <String>] [-Object <String[]>] [-ReportPath <DirectoryInfo>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 Create a log for scripts
+
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1: EXAMPLE 1
+
 ```
 dir | Write-PSToolKitLog -Severity Error -Action Starting -Message 'file list' -ShowVerbose
 ```
 
+
+
+
+
+
+
+
 ## PARAMETERS
 
-### -Initialize
-Create the initial array.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Create
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Severity
-Severity of the entry.
-
-```yaml
-Type: String
-Parameter Sets: log
-Aliases:
-
-Required: False
-Position: Named
-Default value: Information
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Action
+
 Action for the object.
 
 ```yaml
 Type: String
 Parameter Sets: log
-Aliases:
+Aliases: 
+Accepted values: 
 
-Required: False
+Required: True (None) False (log)
 Position: Named
-Default value: None
+Default value: 
 Accept pipeline input: False
 Accept wildcard characters: False
-```
-
-### -Object
-The object to be reported on.
-
-```yaml
-Type: String[]
-Parameter Sets: log
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-```yaml
-Type: String[]
-Parameter Sets: Create, Export
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Message
-Details.
-
-```yaml
-Type: String
-Parameter Sets: log
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ShowVerbose
-Show every entry as it is logged.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: log
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ExportFinal
-Export the final log file.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Export
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
+DontShow: False
 ```
 
 ### -Export
+
 Export the log,
 
 ```yaml
 Type: String
 Parameter Sets: Export
-Aliases:
+Aliases: 
+Accepted values: 
 
-Required: False
+Required: True (None) False (Export)
 Position: Named
 Default value: Host
 Accept pipeline input: False
 Accept wildcard characters: False
+DontShow: False
+```
+
+### -ExportFinal
+
+Export the final log file.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: Export
+Aliases: 
+Accepted values: 
+
+Required: True (None) False (Export)
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+DontShow: False
+```
+
+### -Initialize
+
+Create the initial array.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: Create
+Aliases: 
+Accepted values: 
+
+Required: True (None) False (Create)
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+DontShow: False
 ```
 
 ### -LogName
+
 Name for the log file.
 
 ```yaml
 Type: String
 Parameter Sets: Export
-Aliases:
+Aliases: 
+Accepted values: 
 
-Required: False
+Required: True (None) False (Export)
 Position: Named
 Default value: PSToolKitLog
 Accept pipeline input: False
 Accept wildcard characters: False
+DontShow: False
+```
+
+### -Message
+
+Details.
+
+```yaml
+Type: String
+Parameter Sets: log
+Aliases: 
+Accepted values: 
+
+Required: True (None) False (log)
+Position: Named
+Default value: 
+Accept pipeline input: False
+Accept wildcard characters: False
+DontShow: False
+```
+
+### -Object
+
+The object to be reported on.
+
+```yaml
+Type: String[]
+Parameter Sets: log, (All)
+Aliases: 
+Accepted values: 
+
+Required: True (None) False (log, All)
+Position: Named
+Default value: 
+Accept pipeline input: True
+Accept wildcard characters: False
+DontShow: False
 ```
 
 ### -ReportPath
+
 Path where it will be saved.
 
 ```yaml
 Type: DirectoryInfo
 Parameter Sets: Export
-Aliases:
+Aliases: 
+Accepted values: 
 
-Required: False
+Required: True (None) False (Export)
 Position: Named
 Default value: C:\Temp
 Accept pipeline input: False
 Accept wildcard characters: False
+DontShow: False
 ```
 
+### -Severity
+
+Severity of the entry.
+
+```yaml
+Type: String
+Parameter Sets: log
+Aliases: 
+Accepted values: 
+
+Required: True (None) False (log)
+Position: Named
+Default value: Information
+Accept pipeline input: False
+Accept wildcard characters: False
+DontShow: False
+```
+
+### -ShowVerbose
+
+Show every entry as it is logged.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: log
+Aliases: 
+Accepted values: 
+
+Required: True (None) False (log)
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+DontShow: False
+```
+
+
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
-
-## INPUTS
-
-## OUTPUTS
 
 ## NOTES
 
+
+
 ## RELATED LINKS
+
+Fill Related Links Here
+

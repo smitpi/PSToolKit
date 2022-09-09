@@ -62,33 +62,31 @@ Set-VSCodeExplorerSortOrder -SetToModified
 
 #>
 Function Set-VSCodeExplorerSortOrder {
-	[Cmdletbinding(SupportsShouldProcess = $true, HelpURI = 'https://smitpi.github.io/PSToolKit/Set-VSCodeExplorerSortOrder')]
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Set-VSCodeExplorerSortOrder')]
 	[Alias('setcode')]
 	PARAM(
 		[switch]$SetToDefault,
 		[switch]$SetToModified
 	)
 
-	if ($pscmdlet.ShouldProcess('Target', 'Operation')) {
+	try {
 		try {
-			try {
-				$settingsfile = Get-Item "$($env:APPDATA)\code\User\Settings.json" -ErrorAction Stop
-			} catch {
-				$CodePath = (Get-Process *code*)[0].CommandLine.split('--')[0].Replace('"', $null) | Get-Item -ErrorAction Stop
-				if ($CodePath.Directory -notin $($env:Path.split(';'))) {$env:path += $CodePath.Directory}
-				$settingsfile = Get-Item (Join-Path -Path $CodePath.DirectoryName -ChildPath '\data\user-data\User\settings.json') -ErrorAction Stop
-			}
-		} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+			$settingsfile = Get-Item "$($env:APPDATA)\code\User\Settings.json" -ErrorAction Stop
+		} catch {
+			$CodePath = (Get-Process *code*)[0].CommandLine.split('--')[0].Replace('"', $null) | Get-Item -ErrorAction Stop
+			if ($CodePath.Directory -notin $($env:Path.split(';'))) {$env:path += $CodePath.Directory}
+			$settingsfile = Get-Item (Join-Path -Path $CodePath.DirectoryName -ChildPath '\data\user-data\User\settings.json') -ErrorAction Stop
+		}
+	} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 
-		$CurrentSetting = Select-String -Path $settingsfile -Pattern '"explorer.sortOrder"'
-		Write-Message -Action 'Current' -Object 'Settings Set To:' -Message $CurrentSetting.Line.Trim() -MessageColor Yellow
-		try {
-			if ($SetToDefault) {(Get-Content -Path $settingsfile -Force -ErrorAction Stop) -replace '"explorer.sortOrder": "modified"', '"explorer.sortOrder": "default"' | Set-Content $settingsfile -Force -ErrorAction Stop}
-			if ($SetToModified) {(Get-Content -Path $settingsfile -Force -ErrorAction Stop) -replace '"explorer.sortOrder": "default"', '"explorer.sortOrder": "modified"' | Set-Content $settingsfile -Force -ErrorAction Stop}
-		} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+	$CurrentSetting = Select-String -Path $settingsfile -Pattern '"explorer.sortOrder"'
+	Write-Message -Action 'Current' -Object 'Settings Set To:' -Message $CurrentSetting.Line.Trim() -MessageColor Yellow
+	try {
+		if ($SetToDefault) {(Get-Content -Path $settingsfile -Force -ErrorAction Stop) -replace '"explorer.sortOrder": "modified"', '"explorer.sortOrder": "default"' | Set-Content $settingsfile -Force -ErrorAction Stop}
+		if ($SetToModified) {(Get-Content -Path $settingsfile -Force -ErrorAction Stop) -replace '"explorer.sortOrder": "default"', '"explorer.sortOrder": "modified"' | Set-Content $settingsfile -Force -ErrorAction Stop}
+	} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 
-		$NewSetting = Select-String -Path $settingsfile -Pattern '"explorer.sortOrder"'
-		Write-Message -Action 'New' -Object 'Settings Set To:' -Message $NewSetting.Line.Trim() -MessageColor Yellow
+	$NewSetting = Select-String -Path $settingsfile -Pattern '"explorer.sortOrder"'
+	Write-Message -Action 'New' -Object 'Settings Set To:' -Message $NewSetting.Line.Trim() -MessageColor Yellow
 
-	}
 } #end Function
