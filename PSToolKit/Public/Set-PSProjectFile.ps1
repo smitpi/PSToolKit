@@ -274,7 +274,7 @@ Function Set-PSProjectFile {
 				$instructions.Add('```')
 				$instructions.Add("Install-Module -Name $($module.Name) -Verbose")
 				$instructions.Add('```')
-				$instructions.Add("- or run this script to install from from GitHub [GitHub Repo](https://github.com/smitpi/$($module.Name))")
+				$instructions.Add("- or run this script to install from GitHub [GitHub Repo](https://github.com/smitpi/$($module.Name))")
 				$instructions.Add('```')
 				$instructions.Add("`$CurrentLocation = Get-Item .")
 				$instructions.Add("`$ModuleDestination = (Join-Path (Get-Item (Join-Path (Get-Item `$profile).Directory 'Modules')).FullName -ChildPath $($Module.Name))")
