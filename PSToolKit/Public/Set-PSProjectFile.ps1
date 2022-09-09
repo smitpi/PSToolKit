@@ -277,7 +277,7 @@ Function Set-PSProjectFile {
 				$instructions.Add("- or run this script to install from from GitHub [GitHub Repo](https://github.com/smitpi/$($module.Name))")
 				$instructions.Add('```')
 				$instructions.Add("`$CurrentLocation = Get-Item .")
-				$instructions.Add("`$ModuleDestination = (Join-Path (Get-Item (Join-Path (Get-Item $profile).Directory 'Modules')).FullName -ChildPath $($Module.Name))")
+				$instructions.Add("`$ModuleDestination = (Join-Path (Get-Item (Join-Path (Get-Item `$profile).Directory 'Modules')).FullName -ChildPath $($Module.Name))")
 				$instructions.Add("git clone --depth 1 https://github.com/smitpi/$($module.Name) `$ModuleDestination 2>&1 | Write-Host -ForegroundColor Yellow")
 				$instructions.Add("Set-Location `$ModuleDestination")
 				$instructions.Add('git filter-branch --prune-empty --subdirectory-filter Output HEAD 2>&1 | Write-Host -ForegroundColor Yellow')

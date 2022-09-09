@@ -11,7 +11,7 @@ Install-Module -Name PSToolKit -Verbose
 - or run this script to install from from GitHub [GitHub Repo](https://github.com/smitpi/PSToolKit)
 ```
 $CurrentLocation = Get-Item .
-$ModuleDestination = (Join-Path (Get-Item (Join-Path (Get-Item D:\SharedProfile\CloudStorage\Dropbox\#Profile\Documents\WindowsPowerShell\Microsoft.PowerShellISE_profile.ps1).Directory 'Modules')).FullName -ChildPath PSToolKit)
+$ModuleDestination = (Join-Path (Get-Item (Join-Path (Get-Item $profile).Directory 'Modules')).FullName -ChildPath PSToolKit)
 git clone --depth 1 https://github.com/smitpi/PSToolKit $ModuleDestination 2>&1 | Write-Host -ForegroundColor Yellow
 Set-Location $ModuleDestination
 git filter-branch --prune-empty --subdirectory-filter Output HEAD 2>&1 | Write-Host -ForegroundColor Yellow
