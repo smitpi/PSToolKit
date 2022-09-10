@@ -62,7 +62,8 @@ Accept wildcard characters: False
 ```
 
 ### -BeforeMessage
-{{ Fill BeforeMessage Description }}
+Message to display before object.
+This can be an array of strings as well, to have different colors in the text.
 
 ```yaml
 Type: String[]
@@ -77,7 +78,7 @@ Accept wildcard characters: False
 ```
 
 ### -BeforeMessageColor
-{{ Fill BeforeMessageColor Description }}
+The Colour of the corresponding message in the array.
 
 ```yaml
 Type: String[]
@@ -107,7 +108,8 @@ Accept wildcard characters: False
 ```
 
 ### -AfterMessage
-{{ Fill AfterMessage Description }}
+Message to display after object.
+This can be an array of strings as well, to have different colors in the text.
 
 ```yaml
 Type: String[]
@@ -122,7 +124,7 @@ Accept wildcard characters: False
 ```
 
 ### -AfterMessageColor
-{{ Fill AfterMessageColor Description }}
+The Colour of the corresponding message in the array.
 
 ```yaml
 Type: String[]

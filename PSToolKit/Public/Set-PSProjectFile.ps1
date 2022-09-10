@@ -130,8 +130,6 @@ Function Set-PSProjectFile {
 		if (Test-Path ([IO.Path]::Combine($ModuleBase, 'Output'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'Output')) -Recurse -Force -ErrorAction Stop }
 		if (Test-Path $ModuleIssues) { Remove-Item $ModuleIssues -Force -ErrorAction Stop }
 		if (Test-Path $ModuleIssuesExcel) { Remove-Item $ModuleIssuesExcel -Force -ErrorAction Stop }
-		if (Test-Path $ModulesInstuctions) { Remove-Item $ModulesInstuctions -Force -ErrorAction Stop }
-		if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }	
 		if (Test-Path $VersionFilePath) { Remove-Item $VersionFilePath -Force -ErrorAction Stop }	
 	} catch {
 		try {
@@ -190,7 +188,8 @@ Function Set-PSProjectFile {
 		Write-Color "`t[Deleting]: ", 'Docs Folder' -Color yello, Gray
 		try {
 			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
-			if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }
+			if (Test-Path $ModulesInstuctions) { Remove-Item $ModulesInstuctions -Force -ErrorAction Stop }
+			if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }	
 		} catch {
 			try {
 				Write-Warning "Error: Deleting Docs Folders `nMessage:$($_.Exception.message)`nRetrying"
@@ -275,9 +274,14 @@ Function Set-PSProjectFile {
 				$instructions.Add('```')
 				$instructions.Add("Install-Module -Name $($module.Name) -Verbose")
 				$instructions.Add('```')
-				$instructions.Add("- or from GitHub [GitHub Repo](https://github.com/smitpi/$($module.Name))")
+				$instructions.Add("- or run this script to install from GitHub [GitHub Repo](https://github.com/smitpi/$($module.Name))")
 				$instructions.Add('```')
-				$instructions.Add("git clone https://github.com/smitpi/$($module.Name) (Join-Path (get-item (Join-Path (Get-Item `$profile).Directory 'Modules')).FullName -ChildPath $($Module.Name))")
+				$instructions.Add("`$CurrentLocation = Get-Item .")
+				$instructions.Add("`$ModuleDestination = (Join-Path (Get-Item (Join-Path (Get-Item `$profile).Directory 'Modules')).FullName -ChildPath $($Module.Name))")
+				$instructions.Add("git clone --depth 1 https://github.com/smitpi/$($module.Name) `$ModuleDestination 2>&1 | Write-Host -ForegroundColor Yellow")
+				$instructions.Add("Set-Location `$ModuleDestination")
+				$instructions.Add('git filter-branch --prune-empty --subdirectory-filter Output HEAD 2>&1 | Write-Host -ForegroundColor Yellow')
+				$instructions.Add("Set-Location `$CurrentLocation")
 				$instructions.Add('```')
 				$instructions.Add('- Then import the module into your session')
 				$instructions.Add('```')

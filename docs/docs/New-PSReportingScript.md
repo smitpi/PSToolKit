@@ -24,13 +24,13 @@ Script template for scripts to create reports
 
 ### EXAMPLE 1
 ```
-New-PSReportingScript -Export HTML -ReportPath C:\temp
+New-PSReportingScript -Path .\PSToolKit\Private\ -Verb get -Noun blah -Description 'blah' -tags PS
 ```
 
 ## PARAMETERS
 
 ### -Path
-{{ Fill Path Description }}
+Where the script will be created.
 
 ```yaml
 Type: DirectoryInfo
@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -Verb
-{{ Fill Verb Description }}
+Approved PowerShell verb
 
 ```yaml
 Type: String
@@ -60,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -Noun
-{{ Fill Noun Description }}
+Second part of script name.
 
 ```yaml
 Type: String
@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -Author
-{{ Fill Author Description }}
+Who wrote it.
 
 ```yaml
 Type: String
@@ -90,7 +90,7 @@ Accept wildcard characters: False
 ```
 
 ### -Description
-{{ Fill Description Description }}
+What it does.
 
 ```yaml
 Type: String
@@ -105,7 +105,7 @@ Accept wildcard characters: False
 ```
 
 ### -tags
-{{ Fill tags Description }}
+Tags for searches.
 
 ```yaml
 Type: String[]

@@ -1,0 +1,222 @@
+[
+  {
+    "Name": "authy-desktop",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "bandizip",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "barrier",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "boxstarter",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "Boxstarter.Azure",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "boxstarter.bootstrapper",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "boxstarter.chocolatey",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "BoxStarter.Common",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "Boxstarter.HyperV",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "Boxstarter.TestRunner",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "BoxStarter.WinConfig",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "Boxstarter.WindowsUpdate",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "cascadia-code-nerd-font",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "cascadiacodepl",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "chocolatey-core.extension",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "chocolatey-dotnetfx.extension",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "chocolatey-font-helpers.extension",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "chocolatey-windowsupdate.extension",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "chocolateygui",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "citrix-workspace",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "dotnet-6.0-runtime",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "dotnet-6.0-sdk",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "dropbox",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "easyconnect",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "fing",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "git",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "github-desktop",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "GoogleChrome",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "hasleobackupsuite",
+    "Source": "chocolatey"
+  },
+  {
+    "Source": "chocolatey",
+    "Name": "internet-download-manager"
+  },
+  {
+    "Source": "chocolatey",
+    "Name": "marktext"
+  },
+  {
+    "Name": "microsoft-edge",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "microsoft-teams",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "microsoft-windows-terminal",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "mkdocs",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "mkdocs-material",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "netfx-4.6.2",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "onedrive",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "openssh",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "openssl",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "PowerShell",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "powershell-core",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "powertoys",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "python3",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "rescuetime",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "rpi-imager",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "rsat",
+    "Source": "chocolatey"
+  },
+  {
+    "Source": "chocolatey",
+    "Name": "salamander"
+  },
+  {
+    "Name": "sumatrapdf",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "vagrant",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "vcredist2017",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "VisualStudioCode",
+    "Source": "chocolatey"
+  },
+  {
+    "Name": "vmrc",
+    "Source": "chocolatey"
+  },
+  {
+    "Source": "chocolatey",
+    "Name": "vmware-horizon-client"
+  },
+  {
+    "Name": "win32-openssh",
+    "Source": "chocolatey"
+  }
+]

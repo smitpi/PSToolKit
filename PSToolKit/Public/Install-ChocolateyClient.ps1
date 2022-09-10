@@ -69,7 +69,7 @@ Function Install-ChocolateyClient {
     [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
     $web = New-Object System.Net.WebClient
     $web.DownloadFile('https://community.chocolatey.org/install.ps1', "$($env:TEMP)\choco-install.ps1")
-    & "$($env:TEMP)\choco-install.ps1" *> $null
+    & "$($env:TEMP)\choco-install.ps1" | Out-Null
 
     if (Get-Command choco -ErrorAction SilentlyContinue) {
       Write-Color '[Installing] ', 'Chocolatey Client: ', 'Complete' -Color Yellow, Cyan, Green

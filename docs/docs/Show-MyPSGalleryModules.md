@@ -14,7 +14,7 @@ about my modules.
 ## SYNTAX
 
 ```
-Show-MyPSGalleryModules [-AsTable] [<CommonParameters>]
+Show-MyPSGalleryModules [-AsObject] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,8 +30,8 @@ Show-MyPSGalleryModules
 
 ## PARAMETERS
 
-### -AsTable
-Format output as table.
+### -AsObject
+Format output as object.
 
 ```yaml
 Type: SwitchParameter

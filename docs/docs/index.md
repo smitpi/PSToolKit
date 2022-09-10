@@ -8,9 +8,14 @@ A Repository of my random scripts and functions writen over the years, there is 
 ```
 Install-Module -Name PSToolKit -Verbose
 ```
-- or from GitHub [GitHub Repo](https://github.com/smitpi/PSToolKit)
+- or run this script to install from from GitHub [GitHub Repo](https://github.com/smitpi/PSToolKit)
 ```
-git clone https://github.com/smitpi/PSToolKit (Join-Path (get-item (Join-Path (Get-Item $profile).Directory 'Modules')).FullName -ChildPath PSToolKit)
+$CurrentLocation = Get-Item .
+$ModuleDestination = (Join-Path (Get-Item (Join-Path (Get-Item $profile).Directory 'Modules')).FullName -ChildPath PSToolKit)
+git clone --depth 1 https://github.com/smitpi/PSToolKit $ModuleDestination 2>&1 | Write-Host -ForegroundColor Yellow
+Set-Location $ModuleDestination
+git filter-branch --prune-empty --subdirectory-filter Output HEAD 2>&1 | Write-Host -ForegroundColor Yellow
+Set-Location $CurrentLocation
 ```
 - Then import the module into your session
 ```

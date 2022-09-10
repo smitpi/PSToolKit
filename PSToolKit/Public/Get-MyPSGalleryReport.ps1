@@ -59,7 +59,6 @@ Get-MyPSGalleryReport
 #>
 Function Get-MyPSGalleryReport {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-MyPSGalleryReport')]
-	[OutputType([System.Object[]])]
 	PARAM(
 		[string]$GitHubUserID,
 		[string]$GitHubToken
@@ -87,6 +86,7 @@ Function Get-MyPSGalleryReport {
 	} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 	
 	$dateCollect = Get-Date
+	Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Collecting my modules"
 	Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} | ForEach-Object {
 		$_.AdditionalMetadata | Add-Member -MemberType NoteProperty -Name DateCollected -Value $dateCollect
 		$GalStats.add($_.AdditionalMetadata)
@@ -101,6 +101,7 @@ Function Get-MyPSGalleryReport {
 		$json = ConvertTo-Json -InputObject $Body
 		$json = [System.Text.Encoding]::UTF8.GetBytes($json)
 		$null = Invoke-WebRequest -Headers $headers -Uri $Uri -Method Patch -Body $json -ErrorAction Stop
-		Write-Message -Action 'Upload' -Object 'PSGallery StatsV2' -Message 'To Github Gist', 'Complete' -MessageColor Gray, Green
+		Write-Host '[Upload] [PSGallery StatsV2] To Github Gist Complete'
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) Done]"
 	} catch {Write-Error "Can't connect to gist:`n $($_.Exception.Message)"}
 } #end Function

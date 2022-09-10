@@ -8,7 +8,11 @@ A Repository of my random scripts and functions writen over the years, there is 
 ```
 Install-Module -Name PSToolKit -Verbose
 ```
+<<<<<<< HEAD
 - or run this script to install from GitHub [GitHub Repo](https://github.com/smitpi/PSToolKit)
+=======
+- or run this script to install from from GitHub [GitHub Repo](https://github.com/smitpi/PSToolKit)
+>>>>>>> 2df06de0764d0010d272f3fe555c4f8121a970af
 ```
 $CurrentLocation = Get-Item .
 $ModuleDestination = (Join-Path (Get-Item (Join-Path (Get-Item $profile).Directory 'Modules')).FullName -ChildPath PSToolKit)
@@ -85,6 +89,10 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Reset-PSGallery`](https://smitpi.github.io/PSToolKit/Reset-PSGallery) -- Reset gallery to default settings
 - [`Resolve-SID`](https://smitpi.github.io/PSToolKit/Resolve-SID) -- Resolves the Sid
 - [`Restore-ElevatedShortcut`](https://smitpi.github.io/PSToolKit/Restore-ElevatedShortcut) -- Restore the RunAss shortcuts, from a zip file
+<<<<<<< HEAD
+=======
+- [`Save-PSModules`](https://smitpi.github.io/PSToolKit/Save-PSModules) -- Saves the modules to a local repo.
+>>>>>>> 2df06de0764d0010d272f3fe555c4f8121a970af
 - [`Search-Script`](https://smitpi.github.io/PSToolKit/Search-Script) -- Search for a string in a directory of ps1 scripts.
 - [`Set-FolderCustomIcon`](https://smitpi.github.io/PSToolKit/Set-FolderCustomIcon) -- Will change the icon of a folder to a custom selected icon
 - [`Set-PSToolKitSystemSetting`](https://smitpi.github.io/PSToolKit/Set-PSToolKitSystemSetting) -- Set multiple settings on desktop or server
