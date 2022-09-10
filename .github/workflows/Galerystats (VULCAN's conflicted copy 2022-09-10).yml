@@ -1,0 +1,16 @@
+name: Run PSGallery Reports
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *"
+jobs:
+  RunPWSH:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run PWSH scripts
+        shell: pwsh
+        run: |
+          import-module ./PSToolKit/Public/Write-Message.ps1 -Force -Global -verbose
+          import-module ./PSToolKit/Public/Get-MyPSGalleryReport.ps1 -Force -Global -verbose
+          Get-MyPSGalleryReport -GitHubUserID ${{secrets.GH_USER}} -GitHubToken ${{secrets.GH_TOKEN}} -verbose

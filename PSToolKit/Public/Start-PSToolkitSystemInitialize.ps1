@@ -80,9 +80,34 @@ Function Start-PSToolkitSystemInitialize {
 		$null = Register-PSRepository -Default -ErrorAction SilentlyContinue
 		$null = Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 	}
+	Start-Job -ScriptBlock {
+		$PowerShellGet = Get-Module 'PowerShellGet' -ListAvailable | 
+			Sort-Object Version -Descending | 
+				Select-Object -First 1
+
+				if ($PowerShellGet.Version -lt [version]'2.2.5') {
+					Write-Host "`t[Updating]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell PackageManagement' -ForegroundColor Cyan
+					$installOptions = @{
+						Repository = 'PSGallery'
+						Force      = $true
+						Scope      = 'AllUsers'
+					}							
+					try {
+						Install-Module -Name PackageManagement @installOptions
+						Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PackageManagement' -ForegroundColor Cyan -NoNewline; Write-Host 'Complete' -ForegroundColor Green
+					} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+					try {
+						Install-Module -Name PowerShellGet @installOptions
+						Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShellGet' -ForegroundColor Cyan -NoNewline; Write-Host 'Complete' -ForegroundColor Green
+					} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+				} else {
+					Write-Host "`t[Update]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell PackageManagement' -ForegroundColor Cyan -NoNewline; Write-Host ' Not Needed' -ForegroundColor Red
+				}
+			} | Wait-Job | Receive-Job
+
 	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Needed Powershell modules' -ForegroundColor Cyan
 
-	'ImportExcel', 'PSWriteHTML', 'PSWriteColor', 'PSScriptTools', 'PoshRegistry', 'Microsoft.PowerShell.Archive','PWSHModule','PSPackageMan' | ForEach-Object {
+	'ImportExcel', 'PSWriteHTML', 'PSWriteColor', 'PSScriptTools', 'PoshRegistry', 'Microsoft.PowerShell.Archive','PWSHModule','PSPackageMan' | ForEach-Object {		
 		$module = $_
 		if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
 			try {
@@ -103,22 +128,22 @@ Function Start-PSToolkitSystemInitialize {
 	Import-Module PSToolKit -Force
 	if ($InstallMyModules) {
 		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Installing My Modules' -ForegroundColor Cyan
-		'CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSPackageMan' | ForEach-Object {
+		Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} | ForEach-Object {
 			$module = $_
-			Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
-			if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
+			Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
+			if (-not(Get-Module $module.name) -and -not(Get-Module $module.name -ListAvailable)) {
 				try {
-					Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
-					Install-Module -Name $module -Scope AllUsers -AllowClobber -ErrorAction stop
-				} catch {Write-Warning "Error installing module $($module): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
+					Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
+					Install-Module -Name $module.name -Scope AllUsers -AllowClobber -ErrorAction stop
+				} catch {Write-Warning "Error installing module $($module.name): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 			} else {
-				$LocalMod = Get-Module $module
-				if (-not($LocalMod)) {$LocalMod = Get-Module $module -ListAvailable}
-				if (($LocalMod[0].Version) -lt (Find-Module $module).Version) {
+				$LocalMod = Get-Module $module.name
+				if (-not($LocalMod)) {$LocalMod = Get-Module $module.name -ListAvailable}
+				if (($LocalMod[0].Version) -lt $module.Version) {
 					try {
-						Write-Host "`t`t[Upgrading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
-						Update-Module -Name $module -Force -Scope AllUsers
-					} catch {Write-Warning "Error installing module $($module): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
+						Write-Host "`t`t[Upgrading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
+						Update-Module -Name $module.name -Scope AllUsers -Force
+					} catch {Write-Warning "Error installing module $($module.name): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 				}
 			}
 		}
@@ -126,7 +151,6 @@ Function Start-PSToolkitSystemInitialize {
 
 	if ($LabSetup) {
 		New-PSProfile
-		Reset-PSGallery -Force
 		Set-PSToolKitSystemSetting -RunAll
 		Install-PWSHModule -GitHubUserID smitpi -PublicGist -ListName base -Scope AllUsers
 		Install-ChocolateyClient
