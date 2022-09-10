@@ -1,0 +1,22 @@
+site_name: 'PSToolKit'
+site_description: 'Documentation for PowerShell Module: PSToolKit'
+site_author: 'Pierre Smit'
+site_url: 'https://smitpi.github.io/PSToolKit'
+ 
+repo_url: 'https://github.com/smitpi/PSToolKit'
+repo_name:  'smitpi/PSToolKit'
+ 
+copyright: '(c) 2022 Pierre Smit. All rights reserved.'
+ 
+extra:
+  manifest: manifest.webmanifest
+  social:
+    - icon: fontawesome/brands/github-square
+      link: 'https://smitpi.github.io/PSToolKit'
+ 
+markdown_extensions:
+  - pymdownx.keys
+  - pymdownx.snippets
+  - pymdownx.superfences
+ 
+theme: windmill
