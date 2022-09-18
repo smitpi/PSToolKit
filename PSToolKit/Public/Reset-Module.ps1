@@ -47,8 +47,11 @@ Removes and force import a module.
 .DESCRIPTION
 Removes and force import a module.
 
+.PARAMETER Name
+Name of the module to reset.
+
 .EXAMPLE
-Reset-Module -Export HTML -ReportPath C:\temp
+Reset-Module PSToolkit
 
 #>
 Function Reset-Module {
@@ -64,7 +67,7 @@ Function Reset-Module {
 	)
 
 	try {
-		$ModuleFullName = Get-Module $name -ListAvailable -ErrorAction Stop
+		$ModuleFullName = (Get-Module $name -ListAvailable -ErrorAction Stop)[0]
 	} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 			
 	Write-Message -Action Removing -Severity Information -BeforeMessage 'Module' -BeforeMessageColor Green -Object $ModuleFullName.Name -AfterMessage 'from', 'Memory' -AfterMessageColor green, Red
@@ -77,3 +80,9 @@ Function Reset-Module {
 	Write-Message -Action Complete -BeforeMessage 'Module Version:' -BeforeMessageColor Green -Object $LatestImport.Version
 	Write-Message -Action Complete -BeforeMessage "Module Path:`t" -BeforeMessageColor Green -Object $LatestImport.Path
 } #end Function
+
+$scriptblock = {
+	param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
+(Get-Module -ListAvailable).name | Where-Object {$_ -like "*$wordToComplete*"}}
+
+Register-ArgumentCompleter -CommandName Reset-Module -ParameterName Name -ScriptBlock $scriptBlock
