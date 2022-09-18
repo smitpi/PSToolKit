@@ -50,14 +50,15 @@ Creates and modifies the ssh config file in their profile.
 ### EXAMPLE 1
 ```
 $rr = [PSCustomObject]@{
-	Host         = 'esx00'
+```
+
+Host         = 'esx00'
 	HostName     = '192.168.10.19'
 	User         = 'root'
 	Port         = '22'
 	IdentityFile = 'C:\Users\xx\.ssh\yyy.id'
 }
 Edit-SSHConfigFile -AddObject $rr
-```
 
 ## PARAMETERS
 
