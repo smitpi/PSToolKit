@@ -3,31 +3,55 @@
 {
 	"name": "PowerShell",
 	"dockerFile": "Dockerfile",
-
 	// Configure tool-specific properties.
 	"customizations": {
 		// Configure properties specific to VS Code.
 		"vscode": {
 			// Set *default* container specific settings.json values on container create.
-			"settings": { 
+			"settings": {
 				"terminal.integrated.defaultProfile.linux": "pwsh"
 			},
-			
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
-				"ms-vscode.powershell"
+				"ban.spellright",
+				"bierner.markdown-preview-github-styles",
+				"christian-kohler.path-intellisense",
+				"cschleiden.vscode-github-actions",
+				"DavidAnson.vscode-markdownlint",
+				"DotJoshJohnson.xml",
+				"esbenp.prettier-vscode",
+				"GitHub.codespaces",
+				"janisdd.vscode-edit-csv",
+				"justin-grote.powershell-extension-pack",
+				"mohsen1.prettify-json",
+				"ms-azuretools.vscode-docker",
+				"ms-dotnettools.dotnet-interactive-vscode",
+				"ms-toolsai.jupyter",
+				"ms-vscode-remote.vscode-remote-extensionpack""ms-vscode.powershell-preview",
+				"Rajeshwaran.developer-theme-dark",
+				"redhat.ansible",
+				"redhat.vscode-yaml",
+				"teabyii.ayu",
+				"vsls-contrib.gistfs",
+				"wwm.better-align",
+				"yzhang.markdown-all-in-one",
 			]
 		}
 	},
-
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
-
 	// Uncomment the next line to run commands after the container is created. This gets run in bash which is why we call `pwsh`.
-	// "postCreateCommand": "pwsh -c '$PSVersionTable'",
-
+	"postCreateCommand": "pwsh -c '$PSVersionTable'",
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
+	"features": {
+		"git": "latest",
+		"git-lfs": "latest",
+		"sshd": "latest",
+		"desktop-lite": "latest",
+		"homebrew": "latest",
+		"powershell": "latest"
+	},
 	"build": {
 		"args": {
 			"UPGRADE_PACKAGES": "true"
