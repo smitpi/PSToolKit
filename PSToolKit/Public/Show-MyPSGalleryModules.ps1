@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -58,7 +58,7 @@ Format output as object.
 Show-MyPSGalleryModules
 
 #>
-Function Show-MyPSGalleryModules {
+Function Show-MyPSGalleryModule {
 	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Show-MyPSGalleryModules')]
 	[OutputType([System.Collections.generic.List[PSObject]])]
 	PARAM(

@@ -223,6 +223,12 @@ Function Set-PSProjectFile {
 					})
 			}
 
+			[void]$Issues.Add([PSCustomObject]@{
+					Catagory = $null
+					File     = $null
+					details  = $null
+				})
+
 			$MissingDocumentation = Select-String -Path (Join-Path $Moduledocs.FullName -ChildPath '\*.md') -Pattern '({{.*}})'
 			$group = $MissingDocumentation | Group-Object -Property Line
 			foreach ($gr in $group) {
@@ -443,6 +449,11 @@ Function Set-PSProjectFile {
 	$file.add('#endregion')
 	$file.Add(' ')
 	$file | Set-Content -Path $rootModule -Encoding utf8 -Force
+	#endregion
+
+	#region Checking Monolithic module
+	Write-Color '[Starting]', ' Running Tests on Monolithic Module' -Color Yellow, DarkCyan
+	Write-Color "`t[Confirming]: ", 'All files are created.' -Color Yellow, Gray
 
 	$newfunction = ((Select-String -Path $rootModule -Pattern '^# Function:').Line).Replace('# Function:', '').Trim()
 	$ModCommands = Get-Command -Module $module | ForEach-Object { $_.name }
@@ -454,6 +465,33 @@ Function Set-PSProjectFile {
 				details  = $_.SideIndicator
 			})
 	}
+	[void]$Issues.Add([PSCustomObject]@{
+			Catagory = $null
+			File     = $null
+			details  = $null
+		})
+	Write-Color "`t[Processing]: ", 'ScriptAnalyzer Tests.' -Color Yellow, Gray
+	
+    
+    [System.Collections.Generic.List[pscustomobject]]$RulesObject = @()
+    Invoke-ScriptAnalyzer -IncludeSuppressed -Settings CodeFormatting -Recurse -Path $ModuleOutput.FullName -Fix | ForEach-Object {$RulesObject.Add($_)}
+    Invoke-ScriptAnalyzer -IncludeSuppressed -Settings PSGallery -Recurse -Path $ModulePublicFunctions.PSParentPath | ForEach-Object {$RulesObject.Add($_)}
+    Invoke-ScriptAnalyzer -IncludeSuppressed -Settings ScriptSecurity -Recurse -Path $ModulePublicFunctions.PSParentPath | ForEach-Object {$RulesObject.Add($_)}
+    Invoke-ScriptAnalyzer -IncludeSuppressed -Settings ScriptFunctions -Recurse -Path $ModulePublicFunctions.PSParentPath | ForEach-Object {$RulesObject.Add($_)}
+    Invoke-ScriptAnalyzer -IncludeSuppressed -Settings ScriptingStyle -Recurse -Path $ModulePublicFunctions.PSParentPath | ForEach-Object {$RulesObject.Add($_)}
+
+    $RulesObject | ForEach-Object {
+		[void]$Issues.Add([PSCustomObject]@{
+				Catagory = 'ScriptAnalyzer'
+				File     = $_.ScriptName
+				details  = "[$($_.Severity)]($($_.rulename))L $($_.Line): $($_.Message)"
+			})
+        }
+		[void]$Issues.Add([PSCustomObject]@{
+				Catagory = $null
+				File     = $null
+				details  = $null
+			})
 	#endregion
 	
 	#region NestedModules
@@ -582,7 +620,7 @@ Function Set-PSProjectFile {
 	#endregion
 
 	#region report issues
-	if ($null -notlike $Issues) { 
+	if (-not([string]::IsNullOrEmpty($Issues))) { 
 		Write-Color '[Starting]', ' Creating Issues Reports' -Color Yellow, DarkCyan
 		$issues | Export-Excel -Path $ModuleIssuesExcel -WorksheetName Other -AutoSize -AutoFilter -BoldTopRow -FreezeTopRow 
 		$fragments = [system.collections.generic.list[string]]::new()
@@ -594,6 +632,7 @@ Function Set-PSProjectFile {
 		$fragments | Out-File -FilePath $ModuleIssues -Encoding utf8 -Force
 		if ($ShowReport) { 
 			Start-Process -FilePath $ModuleIssues
+            Start-Process -FilePath $ModuleIssuesExcel
 			Start-Process $ModuleManifest.HelpInfoUri
 		}
 	}

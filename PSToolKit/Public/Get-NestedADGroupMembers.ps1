@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -63,7 +63,7 @@ Where to save the report.
 Get-NestedADGroupMembers -GroupName "Domain Admins"
  
 #>
-Function Get-NestedADGroupMembers {
+Function Get-NestedADGroupMember {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-NestedADGroupMembers')]
 	[OutputType([System.Object[]])]
 	PARAM(

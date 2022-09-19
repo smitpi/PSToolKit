@@ -64,7 +64,7 @@ Where to save the report.
 Get-CitrixPolicies -Controller $ctxddc
 
 #>
-Function Get-CitrixPolicies {
+Function Get-CitrixPolicy {
 		[Cmdletbinding(HelpURI = "https://smitpi.github.io/PSToolKit/Get-CitrixPolicies")]
 	    [OutputType([System.Object[]])]
                 PARAM(
