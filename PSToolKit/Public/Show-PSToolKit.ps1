@@ -80,9 +80,6 @@ Function Show-PSToolKit {
     [datetime]$CreateDate = (Get-Content -Path $($latestModule.Path.Replace('psm1', 'psd1')) | Where-Object { $_ -like '# Generated on: *' }).replace('# Generated on: ', '')
     $CreateDate = $CreateDate.ToUniversalTime()
 
-
-
-
     if ($ShowCommand) {
         $commands = @()
         $commands = Get-Command -Module PSToolKit | ForEach-Object {
@@ -167,13 +164,23 @@ Function Show-PSToolKit {
         # $out += ("Created on: $(Get-Date($CreateDate) -Format F)" | Out-String)
         # Add-Border -TextBlock $out -Character % -ANSIBorder "$([char]0x1b)[38;5;47m" -ANSIText "$([char]0x1b)[93m"
 
-        $out = (Write-Ascii 'PSToolKit' -ForegroundColor Yellow | Out-String)
-        $out += "`n"
-        $out += (Write-Ascii $($version) -ForegroundColor Yellow)
-        $out += "`n"
-        $out += ("Module Path: $($module.Path)" | Out-String)
-        $out += ("Created on: $(Get-Date($CreateDate) -Format F)" | Out-String)
-        $out
+        Write-Host "`t██████╗░░██████╗████████╗░█████╗░░█████╗░██╗░░░░░██╗░░██╗██╗████████╗" -ForegroundColor Yellow
+        Write-Host "`t██╔══██╗██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██║░░░░░██║░██╔╝██║╚══██╔══╝" -ForegroundColor Yellow
+        Write-Host "`t██████╔╝╚█████╗░░░░██║░░░██║░░██║██║░░██║██║░░░░░█████═╝░██║░░░██║░░░" -ForegroundColor Yellow
+        Write-Host "`t██╔═══╝░░╚═══██╗░░░██║░░░██║░░██║██║░░██║██║░░░░░██╔═██╗░██║░░░██║░░░" -ForegroundColor Yellow
+        Write-Host "`t██║░░░░░██████╔╝░░░██║░░░╚█████╔╝╚█████╔╝███████╗██║░╚██╗██║░░░██║░░░" -ForegroundColor Yellow
+        Write-Host "`t╚═╝░░░░░╚═════╝░░░░╚═╝░░░░╚════╝░░╚════╝░╚══════╝╚═╝░░╚═╝╚═╝░░░╚═╝░░░" -ForegroundColor Yellow
+        Write-Host ' '
+        Write-Host ("Module Path: $($module.Path)" | Out-String) -ForegroundColor Cyan
+        Write-Host ("Created on: $(Get-Date($CreateDate) -Format F)" | Out-String) -ForegroundColor Cyan
+
+        # $out = (Write-Ascii 'PSToolKit' -ForegroundColor Yellow | Out-String)
+        # $out += "`n"
+        # $out += (Write-Ascii $($version) -ForegroundColor Yellow)
+        # $out += "`n"
+        # $out += ("Module Path: $($module.Path)" | Out-String)
+        # $out += ("Created on: $(Get-Date($CreateDate) -Format F)" | Out-String)
+        # $out
         #Add-Border -TextBlock $out -Character % -ANSIBorder "$([char]0x1b)[38;5;47m" -ANSIText "$([char]0x1b)[93m"
 
         $commands = @()
@@ -273,3 +280,6 @@ Function Show-PSToolKit {
         }
     }
 } #end Function
+
+
+

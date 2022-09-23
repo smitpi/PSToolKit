@@ -105,72 +105,72 @@ Function Start-PSToolkitSystemInitialize {
 				}
 			} | Wait-Job | Receive-Job
 
-	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Needed Powershell modules' -ForegroundColor Cyan
+			Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Needed Powershell modules' -ForegroundColor Cyan
 
-	'ImportExcel', 'PSWriteHTML', 'PSWriteColor', 'PSScriptTools', 'PoshRegistry', 'Microsoft.PowerShell.Archive','PWSHModule','PSPackageMan' | ForEach-Object {		
-		$module = $_
-		if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
-			try {
-				Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
-				Install-Module -Name $module -Scope AllUsers -AllowClobber -ErrorAction stop
-			} catch {Write-Warning "Error installing module $($module): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
-		}
-	}
-
-	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'PSToolKit Module' -ForegroundColor Cyan
-	$web = New-Object System.Net.WebClient
-	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-MyModulesFromGitHub.ps1', "$($env:TEMP)\Update-MyModulesFromGitHub.ps1")
-	$full = Get-Item "$($env:TEMP)\Update-MyModulesFromGitHub.ps1"
-	Import-Module $full.FullName -Force
-	Update-MyModulesFromGitHub -Modules PSToolkit -AllUsers
-	Remove-Item $full.FullName
-
-	Import-Module PSToolKit -Force
-	if ($InstallMyModules) {
-		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Installing My Modules' -ForegroundColor Cyan
-		Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} | ForEach-Object {
-			$module = $_
-			Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
-			if (-not(Get-Module $module.name) -and -not(Get-Module $module.name -ListAvailable)) {
-				try {
-					Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
-					Install-Module -Name $module.name -Scope AllUsers -AllowClobber -ErrorAction stop
-				} catch {Write-Warning "Error installing module $($module.name): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
-			} else {
-				$LocalMod = Get-Module $module.name
-				if (-not($LocalMod)) {$LocalMod = Get-Module $module.name -ListAvailable}
-				if (($LocalMod[0].Version) -lt $module.Version) {
+			'ImportExcel', 'PSWriteHTML', 'PSWriteColor', 'PSScriptTools', 'PoshRegistry', 'Microsoft.PowerShell.Archive', 'PWSHModule', 'PSPackageMan' | ForEach-Object {		
+				$module = $_
+				if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
 					try {
-						Write-Host "`t`t[Upgrading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
-						Update-Module -Name $module.name -Scope AllUsers -Force
-					} catch {Write-Warning "Error installing module $($module.name): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
+						Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
+						Install-Module -Name $module -Scope AllUsers -AllowClobber -ErrorAction stop
+					} catch {Write-Warning "Error installing module $($module): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 				}
 			}
-		}
-	}
 
-	if ($LabSetup) {
-		New-PSProfile
-		Set-PSToolKitSystemSetting -RunAll
-		Install-PWSHModule -GitHubUserID smitpi -PublicGist -ListName base -Scope AllUsers
-		Install-ChocolateyClient
-		Install-VMWareTool
-		Install-PowerShell7x
-		Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID smitpi -PublicGist
-		Install-RSAT
-		Install-MSUpdate
-	}
+			Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'PSToolKit Module' -ForegroundColor Cyan
+			$web = New-Object System.Net.WebClient
+			$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-MyModulesFromGitHub.ps1', "$($env:TEMP)\Update-MyModulesFromGitHub.ps1")
+			$full = Get-Item "$($env:TEMP)\Update-MyModulesFromGitHub.ps1"
+			Import-Module $full.FullName -Force
+			Update-MyModulesFromGitHub -Modules PSToolkit -AllUsers
+			Remove-Item $full.FullName
 
-	if ($PendingReboot) {
-		Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Pending Reboot for $($env:COMPUTERNAME)" -ForegroundColor Cyan
-		if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot -like 'True') {
-			Write-Host "`t[Reboot Needed]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Rebooting in 60 sec' -ForegroundColor DarkRed
-			Start-Sleep 60
-			Restart-Computer -Force
-		} else {
-			Write-Host '[Reboot]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Not Necessary, continuing' -ForegroundColor Cyan
-		}
-	}
+			Import-Module PSToolKit -Force
+			if ($InstallMyModules) {
+				Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Installing My Modules' -ForegroundColor Cyan
+				Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} | ForEach-Object {
+					$module = $_
+					Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
+					if (-not(Get-Module $module.name) -and -not(Get-Module $module.name -ListAvailable)) {
+						try {
+							Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
+							Install-Module -Name $module.name -Scope AllUsers -AllowClobber -ErrorAction stop
+						} catch {Write-Warning "Error installing module $($module.name): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
+					} else {
+						$LocalMod = Get-Module $module.name
+						if (-not($LocalMod)) {$LocalMod = Get-Module $module.name -ListAvailable}
+						if (($LocalMod[0].Version) -lt $module.Version) {
+							try {
+								Write-Host "`t`t[Upgrading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
+								Update-Module -Name $module.name -Scope AllUsers -Force
+							} catch {Write-Warning "Error installing module $($module.name): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
+						}
+					}
+				}
+			}
 
-	Write-Host '[Complete] ' -NoNewline -ForegroundColor Yellow; Write-Host 'System Initialization' -ForegroundColor DarkRed
-} #end Function
+			if ($LabSetup) {
+				New-PSProfile
+				Set-PSToolKitSystemSetting -RunAll
+				Install-PWSHModule -GitHubUserID smitpi -PublicGist -ListName BaseModules -Scope AllUsers
+				Install-ChocolateyClient
+				Install-VMWareTool
+				Install-PowerShell7x
+				Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID smitpi -PublicGist
+				Install-RSAT
+				Install-MSUpdate
+			}
+
+			if ($PendingReboot) {
+				Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Pending Reboot for $($env:COMPUTERNAME)" -ForegroundColor Cyan
+				if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot -like 'True') {
+					Write-Host "`t[Reboot Needed]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Rebooting in 60 sec' -ForegroundColor DarkRed
+					Start-Sleep 60
+					Restart-Computer -Force
+				} else {
+					Write-Host '[Reboot]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Not Necessary, continuing' -ForegroundColor Cyan
+				}
+			}
+
+			Write-Host '[Complete] ' -NoNewline -ForegroundColor Yellow; Write-Host 'System Initialization' -ForegroundColor DarkRed
+		} #end Function
