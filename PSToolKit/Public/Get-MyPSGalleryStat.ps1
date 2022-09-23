@@ -96,6 +96,22 @@ Function Get-MyPSGalleryStat {
     $GalGrouped = $GalStats | Where-Object {$_.datecollected -gt $EndDays} | Group-Object -Property DateCollected
     $GalGrouped.Group | Select-Object datecollected, title, NormalizedVersion, updated, versionDownloadCount, downloadCount | Format-Table -AutoSize -GroupBy datecollected
 
+    #$modules = $GalGrouped.group.title | Sort-Object -Unique
+    $dates = $GalGrouped.group.datecollected | Sort-Object -Unique
+
+    [System.Collections.generic.List[PSObject]]$SumObject = @()
+    foreach ($date in $dates) {
+        $perdate = $GalGrouped.Group | Where-Object {$_.datecollected -like $date}
+        foreach ($pd in $perdate) {
+            $SumObject.Add([PSCustomObject]@{
+                    Name      = $pd.title
+                    Date      = $pd.datecollected
+                    Downloads = $pd.versionDownloadCount
+                })
+        }
+    }
+    $SumObject | Format-Table -AutoSize -GroupBy Date
+
     $span = New-TimeSpan -Start $GalGrouped[0].Name -End $GalGrouped[-1].Name
     foreach ($mod in $GalGrouped[0].Group.title) {
         $GalMod = $GalGrouped.Group | Where-Object {$_.title -like $mod}

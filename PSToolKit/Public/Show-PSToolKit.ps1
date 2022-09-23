@@ -214,7 +214,8 @@ Function Show-PSToolKit {
             Write-Color 'Verb:', $item -Color Cyan, Red -StartTab 1 -LinesBefore 1
             $filtered = $commands | Where-Object { $_.Verb -like $item }
             foreach ($filter in $filtered) {
-                Write-Color "$($filter.name)", ' - ', $($filter.Description) -Color Gray, Red, Yellow
+                Write-Host ('{0,-36}:' -f "$($filter.name)") -ForegroundColor Gray -NoNewline
+                Write-Host ('{0,-20}' -f "$($filter.Description)") -ForegroundColor Yellow
 
             }
         }
