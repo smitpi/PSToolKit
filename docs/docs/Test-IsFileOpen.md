@@ -13,7 +13,7 @@ Checks if a file is open
 ## SYNTAX
 
 ```
-Test-IsFileOpen [-Path] <String[]> [-FilterOpen] [<CommonParameters>]
+Test-IsFileOpen [-Path] <String[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,21 +40,6 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
-
-### -FilterOpen
-Only show open files.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

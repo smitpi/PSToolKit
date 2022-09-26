@@ -59,29 +59,33 @@ Show-MyPSGalleryModules
 
 #>
 Function Show-MyPSGalleryModule {
-	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Show-MyPSGalleryModules')]
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Show-MyPSGalleryModules')]
 	[OutputType([System.Collections.generic.List[PSObject]])]
 	PARAM(
 		[switch]$AsObject
 	)
-	$ModLists = @('CTXCloudApi', 'PSConfigFile', 'PSLauncher', 'XDHealthCheck', 'PSSysTray', 'PWSHModule', 'PSPackageMan')
+	Write-Message -Action Collecting -BeforeMessage "PSGallery Modules" -BeforeMessageColor Gray -InsertTabs 1 -LinesAfter 2
+	$ModLists = Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'}
 	[System.Collections.generic.List[PSObject]]$GalStats = @()
 	foreach ($Mod in $ModLists) {
-		Write-Message -Action 'Collecting' -Object $mod -Message 'Online Data' -MessageColor Gray
-		$ResultModule = Find-Module $mod -Repository PSGallery
-		$TotalDownloads = $TotalDownloads + [int]$ResultModule.AdditionalMetadata.downloadCount
-		$GithubDetails = Invoke-RestMethod "https://raw.githubusercontent.com/smitpi/$($Mod)/master/Version.json"
-		[void]$GalStats.Add([PSCustomObject]@{
-				DateCollected   = ([datetime](Get-Date -Format U)).ToUniversalTime()
-				Name            = $ResultModule.Name
-				Version         = $ResultModule.Version
-				GithubVersion   = [version]$GithubDetails.version
-				GithubDate      = [datetime]$GithubDetails.date
-				PublishedDate   = ([datetime]$ResultModule.AdditionalMetadata.published).ToUniversalTime()
-				TotalDownload   = [Int]$ResultModule.AdditionalMetadata.downloadCount
-				VersionDownload = [Int]$ResultModule.AdditionalMetadata.versionDownloadCount
+		$GithubDetails = $null
+		Write-Message -Action 'Collecting' -Object $mod.name -Message 'Online Data' -MessageColor Gray
+		$TotalDownloads = $TotalDownloads + [int]$Mod.AdditionalMetadata.downloadCount
+		$GithubDetails = Invoke-RestMethod -Method Get -Uri "https://raw.githubusercontent.com/smitpi/$($Mod.name)/master/Version.json"
+		$GalStats.Add([PSCustomObject]@{
+				DateCollected    = ([datetime](Get-Date -Format U)).ToUniversalTime()
+				Name             = $Mod.Name
+				GithubVersion    = [version]$GithubDetails.version
+				PublishedVersion = $Mod.Version
+				GithubDate       = [datetime]$GithubDetails.date
+				PublishedDate    = ([datetime]$Mod.AdditionalMetadata.published).ToUniversalTime()
+				TotalDownload    = [Int]$Mod.AdditionalMetadata.downloadCount
+				VersionDownload  = [Int]$Mod.AdditionalMetadata.versionDownloadCount
 			})
 	}
 	If ($AsObject) {$GalStats}
-	else {$GalStats | Format-Table -AutoSize -Wrap}
+	else {
+		Write-Message -Action Complete -BeforeMessage "Total Downloads:" -BeforeMessageColor Gray -Object $TotalDownloads -InsertTabs 1 -LinesBefore 2 -LinesAfter 1
+		$GalStats | Format-Table -AutoSize -Wrap
+	}
 } #end Function

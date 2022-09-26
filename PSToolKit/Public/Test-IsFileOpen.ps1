@@ -63,35 +63,69 @@ Function Test-IsFileOpen {
 	[Cmdletbinding( HelpURI = 'https://smitpi.github.io/PSToolKit/Test-IsFileOpen')]
 	[OutputType([System.Object[]])]
 	PARAM(
-		[parameter(Mandatory = $True, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $True)]
+		[parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName )]
 		[ValidateScript( { $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
 				else { Throw 'Must be running an elevated prompt.' } })]
 		[Alias('FullName')]
-		[string[]]$Path,
-		[switch]$FilterOpen = $False
+		[string[]]$Path
 	)
+	Begin {
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
+
+		# $checkhandle = "$($env:TEMP)\handle.exe"
+		# if (-not(test-path $checkhandle)) {
+		# 	Invoke-WebRequest -Uri 'https://download.sysinternals.com/files/Handle.zip' -OutFile "$($env:TEMP)\handle.zip"
+		# 	Expand-Archive  -Path "$($env:TEMP)\handle.zip" -DestinationPath "$($env:TEMP)"
+		# 	Set-ItemProperty -Path 'HKCU:\Software\Sysinternals' -Name 'EulaAccepted' -Value 1 -Force
+		# }
+
+		# $splitter = '------------------------------------------------------------------------------'
+		# $handleProcess = ((& "$($env:TEMP)\handle.exe") -join "`n") -split $splitter | Where-Object {$_ -match [regex]::Escape($File) }
+
+		
+
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Collecting Processes"
+		$AllProcess = foreach ($proc in (Get-Process)) {
+			foreach ($module in $proc.modules) {
+				[pscustomobject]@{
+					ProcessName = $proc.ProcessName
+					MainModule  = $proc.MainModule
+					Parent      = $proc.Parent
+					ID          = $proc.id
+					FileName    = $module.filename
+				}
+			}
+		}
+	}
 	Process {
 		ForEach ($Item in $Path) {
 			#Ensure this is a full path
 			$Item = Convert-Path $Item
+			Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Checking File: $($Item)"
 			#Verify that this is a file and not a directory
 			If ([System.IO.File]::Exists($Item)) {
 				Try {
 					$FileStream = [System.IO.File]::Open($Item, 'Open', 'Write')
 					$FileStream.Close()
 					$FileStream.Dispose()
-					$IsLocked = $False
-				} Catch [System.UnauthorizedAccessException] {$IsLocked = 'AccessDenied'}
-				Catch { $IsLocked = $True}
-				$result = [pscustomobject]@{
-					File     = $Item
-					IsLocked = $IsLocked
+				} Catch [System.UnauthorizedAccessException] {
+					[pscustomobject]@{
+						File        = $Item
+						Status      = 'AccessDenied'
+						ProcessName = ($AllProcess | Where-Object {$_.FileName -like $item }).ProcessName
+						ID          = ($AllProcess | Where-Object {$_.FileName -eq $item }).id		
+					}		
+				} Catch { 
+					[pscustomobject]@{
+						File        = $Item
+						Status      = 'Locked'
+						ProcessName = ($AllProcess | Where-Object {$_.FileName -like $Item }).ProcessName
+						ID          = ($AllProcess | Where-Object {$_.FileName -eq $item }).id				
+					}
 				}
-				if ($FilterOpen) {
-					if ($result.IsLocked -eq $True) {$result}
-				} else {$result}
 			}
 		}
 	}
 } #end Function
+

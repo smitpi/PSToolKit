@@ -61,6 +61,9 @@ Who wrote it.
 .PARAMETER Description
 What it does.
 
+.PARAMETER RequiredModules
+List of required modules.
+
 .PARAMETER tags
 Tags for searches.
 
@@ -73,18 +76,17 @@ function New-PSScript {
 	param (
 		[ValidateScript( { Test-Path -Path $_ })]
 		[System.IO.DirectoryInfo]$Path = $pwd,
-		[Parameter(Mandatory = $True)]
+		[Parameter(Mandatory)]
 		[ValidateScript( { Get-Verb -Verb $_ })]
-		[ValidateNotNullOrEmpty()]
 		[string]$Verb,
-		[Parameter(Mandatory = $True)]
-		[ValidateNotNullOrEmpty()]
+		[Parameter(Mandatory)]
 		[string]$Noun,
-		[Parameter(Mandatory = $false)]
 		[string]$Author = 'Pierre Smit',
-		[Parameter(Mandatory = $true)]
+		[Parameter(Mandatory)]
 		[string]$Description,
-		[Parameter(Mandatory = $true)]
+		[ValidateScript( { Get-Module -Name $_ -ListAvailable })]
+		[string[]]$RequiredModules,
+		[Parameter(Mandatory)]
 		[string[]]$tags)
 
 	$checkpath = Get-Item $Path
@@ -115,37 +117,51 @@ $properverb-$propernoun -Export HTML -ReportPath C:\temp
 Function $properverb-$propernoun {
 		[Cmdletbinding(DefaultParameterSetName='Set1', HelpURI = "https://smitpi.github.io/$modulename/$properverb-$propernoun")]
 	    [OutputType([System.Object[]])]
+                #region Parameter
                 PARAM(
-					[Parameter(Position = 0,Mandatory = `$true,HelpMessage = "Specify the name of a remote computer. The default is the local host.")]
-        			[alias("CN", "host")]
-        			[ValidateNotNullorEmpty()]
-					[Parameter(ParameterSetName = 'Set1')]
+					[Parameter(Position = 0,
+]								Mandatory,
+								ParameterSetName = 'Set1',
+					HelpMessage = "Specify the name of a remote computer. The default is the local host.")]
+					[alias("CN", "host")]
+					[ValidateNotNullorEmpty()]
 					[ValidateScript( { (Test-Path `$_) -and ((Get-Item `$_).Extension -eq ".csv") })]
 					[System.IO.FileInfo]`$InputObject,
 
-					[Parameter(HelpMessage = "Specify the name of a user.")]
-					[ValidateNotNullOrEmpty()]
-					[string]`$Username,
-
+                    [Parameter(Mandatory,
+								ValueFromPipeline,
+								ValueFromPipelineByPropertyName,
+								ValueFromRemainingArguments)]
 					[ValidateScript({`$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-            						if (`$IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {`$True}
-            						else {Throw "Must be running an elevated prompt to use this function"}})]
-        			[switch]`$ClearARPCache,
+									if (`$IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {`$True}
+									else {Throw "Must be running an elevated prompt to use this function"}})]
+					[switch]`$ForceAdmin,
 					
-        			[ValidateScript({if (Test-Connection -ComputerName `$_ -Count 2 -Quiet) {`$true}
-                            		else {throw "Unable to connect to `$(`$_)"} })]
-        			[string[]]`$ComputerName,
+					[ValidateScript({if (Test-Connection -ComputerName `$_ -Count 2 -Quiet) {`$true}
+									else {throw "Unable to connect to `$(`$_)"} })]
+					[string[]]`$ComputerName,
 
 					[ValidateSet('Excel', 'HTML', 'Host')]
 					[string]`$Export = 'Host',
 
-                	[ValidateScript( { if (Test-Path `$_) { `$true }
-                                else { New-Item -Path `$_ -ItemType Directory -Force | Out-Null; `$true }
+					[ValidateScript( { if (Test-Path `$_) { `$true }
+                                else { Write-Warning "Folder does not exist, creating folder now."
+                                New-Item -Path `$_ -ItemType Directory -Force | Out-Null; `$true }
                     })]
-                	[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp'
+					[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp'
 				)
-
-
+                #endregion
+	Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
+    Begin {
+    
+    } #End Begin
+    Process {
+    
+    } #End Process
+    End {
+    
+    }#End End
+	Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Complete"
 } #end Function
 "@
 	$ScriptFullPath = $checkpath.fullname + "\$properverb-$propernoun.ps1"
@@ -161,8 +177,11 @@ Function $properverb-$propernoun {
 		GUID         = (New-Guid)
 	}
 
+	if ($RequiredModules) {
+		$manifestProperties.RequiredModules = @($RequiredModules)
+	}
+	
 	New-ScriptFileInfo @manifestProperties -Force
 	$content = Get-Content $ScriptFullPath | Where-Object { $_ -notlike 'Param*' }
 	Set-Content -Value ($content + $functionText) -Path $ScriptFullPath -Force
-
 }

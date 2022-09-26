@@ -15,7 +15,7 @@ With PowerShell Script Info
 
 ```
 New-PSScript [[-Path] <DirectoryInfo>] [-Verb] <String> [-Noun] <String> [[-Author] <String>]
- [-Description] <String> [-tags] <String[]> [<CommonParameters>]
+ [-Description] <String> [[-RequiredModules] <String[]>] [-tags] <String[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -106,6 +106,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -RequiredModules
+List of required modules.
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -tags
 Tags for searches.
 
@@ -115,7 +130,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 6
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

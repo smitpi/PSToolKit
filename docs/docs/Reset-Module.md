@@ -23,13 +23,13 @@ Removes and force import a module.
 
 ### EXAMPLE 1
 ```
-Reset-Module -Export HTML -ReportPath C:\temp
+Reset-Module PSToolkit
 ```
 
 ## PARAMETERS
 
 ### -Name
-Specify the name of the module.
+Name of the module to reset.
 
 ```yaml
 Type: String

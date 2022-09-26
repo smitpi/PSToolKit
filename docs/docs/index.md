@@ -42,7 +42,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Find-OnlineScript`](https://smitpi.github.io/PSToolKit/Find-OnlineScript) -- Creates reports based on PSGallery. Filtered by scripts
 - [`Format-AllObjectsInAListView`](https://smitpi.github.io/PSToolKit/Format-AllObjectsInAListView) -- Cast an array or PSObject and display it in list view
 - [`Get-CitrixClientVersion`](https://smitpi.github.io/PSToolKit/Get-CitrixClientVersion) -- Report on the CItrix workspace versions the users are using.
-- [`Get-CitrixPolicies`](https://smitpi.github.io/PSToolKit/Get-CitrixPolicies) -- Export Citrix Policies
 - [`Get-CommandFiltered`](https://smitpi.github.io/PSToolKit/Get-CommandFiltered) -- Finds commands on the system and sort it according to module
 - [`Get-DeviceUptime`](https://smitpi.github.io/PSToolKit/Get-DeviceUptime) -- Calculates the uptime of a system
 - [`Get-FolderSize`](https://smitpi.github.io/PSToolKit/Get-FolderSize) -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option
@@ -50,7 +49,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Get-FullADUserDetail`](https://smitpi.github.io/PSToolKit/Get-FullADUserDetail) -- Extract user details from the domain
 - [`Get-MyPSGalleryReport`](https://smitpi.github.io/PSToolKit/Get-MyPSGalleryReport) -- Gallery report
 - [`Get-MyPSGalleryStat`](https://smitpi.github.io/PSToolKit/Get-MyPSGalleryStat) -- Show stats about my published modules.
-- [`Get-NestedADGroupMembers`](https://smitpi.github.io/PSToolKit/Get-NestedADGroupMembers) -- Extract users from an AD group recursive, 4 levels deep.
 - [`Get-ProcessPerformance`](https://smitpi.github.io/PSToolKit/Get-ProcessPerformance) -- Gets the top 10 processes by CPU %
 - [`Get-PropertiesToCSV`](https://smitpi.github.io/PSToolKit/Get-PropertiesToCSV) -- Get member data of an object. Use it to create other PSObjects.
 - [`Get-SoftwareAudit`](https://smitpi.github.io/PSToolKit/Get-SoftwareAudit) -- Connects to a remote hosts and collect installed software details
@@ -88,7 +86,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Restore-ElevatedShortcut`](https://smitpi.github.io/PSToolKit/Restore-ElevatedShortcut) -- Restore the RunAss shortcuts, from a zip file
 - [`Search-Script`](https://smitpi.github.io/PSToolKit/Search-Script) -- Search for a string in a directory of ps1 scripts.
 - [`Set-FolderCustomIcon`](https://smitpi.github.io/PSToolKit/Set-FolderCustomIcon) -- Will change the icon of a folder to a custom selected icon
-- [`Set-PSProjectFile`](https://smitpi.github.io/PSToolKit/Set-PSProjectFile) -- Creates and modify needed files for a PS project from existing module files.
 - [`Set-PSToolKitSystemSetting`](https://smitpi.github.io/PSToolKit/Set-PSToolKitSystemSetting) -- Set multiple settings on desktop or server
 - [`Set-SharedPSProfile`](https://smitpi.github.io/PSToolKit/Set-SharedPSProfile) -- Redirects PowerShell and WindowsPowerShell profile folder to another path.
 - [`Set-StaticIP`](https://smitpi.github.io/PSToolKit/Set-StaticIP) -- Set static IP on device
@@ -96,7 +93,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Set-VSCodeExplorerSortOrder`](https://smitpi.github.io/PSToolKit/Set-VSCodeExplorerSortOrder) -- Change the sort order in VSCode explorer
 - [`Set-WindowsAutoLogin`](https://smitpi.github.io/PSToolKit/Set-WindowsAutoLogin) -- Enable autologin on a device.
 - [`Show-ComputerManagement`](https://smitpi.github.io/PSToolKit/Show-ComputerManagement) -- Opens the Computer Management of the system or remote system
-- [`Show-MyPSGalleryModules`](https://smitpi.github.io/PSToolKit/Show-MyPSGalleryModules) -- Show version numbers ext. about my modules.
 - [`Show-PSToolKit`](https://smitpi.github.io/PSToolKit/Show-PSToolKit) -- Show details of the commands in this module
 - [`Start-PowerShellAsAdmin`](https://smitpi.github.io/PSToolKit/Start-PowerShellAsAdmin) -- Starts a porwershell session as an administrator
 - [`Start-PSProfile`](https://smitpi.github.io/PSToolKit/Start-PSProfile) -- My PS Profile for all sessions.
