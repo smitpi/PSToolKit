@@ -13,7 +13,8 @@ Show details of the commands in this module
 ## SYNTAX
 
 ```
-Show-PSToolKit [-ShowMetaData] [-ShowModified] [-ShowCommand] [-ExportToHTML] [<CommonParameters>]
+Show-PSToolKit [-ShowMetaData] [-ShowModified] [-ShowCommand] [-ExportToHTML] [-ExportToMarkDown]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -75,6 +76,21 @@ Accept wildcard characters: False
 
 ### -ExportToHTML
 Create a HTML page with the details
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ExportToMarkDown
+Create a Markdown page with the details
 
 ```yaml
 Type: SwitchParameter

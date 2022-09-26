@@ -58,6 +58,9 @@ Use the show-command command
 .PARAMETER ExportToHTML
 Create a HTML page with the details
 
+.PARAMETER ExportToMarkDown
+Create a Markdown page with the details
+
 .EXAMPLE
 Show-PSToolKit
 
@@ -65,10 +68,11 @@ Show-PSToolKit
 Function Show-PSToolKit {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Show-PSToolKit')]
     PARAM(
-        [switch]$ShowMetaData = $false,
-        [switch]$ShowModified = $false,
-        [switch]$ShowCommand = $false,
-        [switch]$ExportToHTML = $false
+        [switch]$ShowMetaData,
+        [switch]$ShowModified,
+        [switch]$ShowCommand,
+        [switch]$ExportToHTML,
+        [Switch]$ExportToMarkDown
     )
 
     Write-Color 'Collecting Command Details:' -Color DarkCyan -LinesBefore 1 -LinesAfter 1 -StartTab 1
@@ -164,15 +168,20 @@ Function Show-PSToolKit {
         # $out += ("Created on: $(Get-Date($CreateDate) -Format F)" | Out-String)
         # Add-Border -TextBlock $out -Character % -ANSIBorder "$([char]0x1b)[38;5;47m" -ANSIText "$([char]0x1b)[93m"
 
-        Write-Host "`t██████╗░░██████╗████████╗░█████╗░░█████╗░██╗░░░░░██╗░░██╗██╗████████╗" -ForegroundColor Yellow
-        Write-Host "`t██╔══██╗██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██║░░░░░██║░██╔╝██║╚══██╔══╝" -ForegroundColor Yellow
-        Write-Host "`t██████╔╝╚█████╗░░░░██║░░░██║░░██║██║░░██║██║░░░░░█████═╝░██║░░░██║░░░" -ForegroundColor Yellow
-        Write-Host "`t██╔═══╝░░╚═══██╗░░░██║░░░██║░░██║██║░░██║██║░░░░░██╔═██╗░██║░░░██║░░░" -ForegroundColor Yellow
-        Write-Host "`t██║░░░░░██████╔╝░░░██║░░░╚█████╔╝╚█████╔╝███████╗██║░╚██╗██║░░░██║░░░" -ForegroundColor Yellow
-        Write-Host "`t╚═╝░░░░░╚═════╝░░░░╚═╝░░░░╚════╝░░╚════╝░╚══════╝╚═╝░░╚═╝╚═╝░░░╚═╝░░░" -ForegroundColor Yellow
-        Write-Host ' '
-        Write-Host ("Module Path: $($module.Path)" | Out-String) -ForegroundColor Cyan
-        Write-Host ("Created on: $(Get-Date($CreateDate) -Format F)" | Out-String) -ForegroundColor Cyan
+        $out = "`t██████╗░░██████╗████████╗░█████╗░░█████╗░██╗░░░░░██╗░░██╗██╗████████╗`n"
+        $out += "`t██╔══██╗██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██║░░░░░██║░██╔╝██║╚══██╔══╝`n"
+        $out += "`t██████╔╝╚█████╗░░░░██║░░░██║░░██║██║░░██║██║░░░░░█████═╝░██║░░░██║░░░`n"
+        $out += "`t██╔═══╝░░╚═══██╗░░░██║░░░██║░░██║██║░░██║██║░░░░░██╔═██╗░██║░░░██║░░░`n"
+        $out += "`t██║░░░░░██████╔╝░░░██║░░░╚█████╔╝╚█████╔╝███████╗██║░╚██╗██║░░░██║░░░`n"
+        $out += "`t╚═╝░░░░░╚═════╝░░░░╚═╝░░░░╚════╝░░╚════╝░╚══════╝╚═╝░░╚═╝╚═╝░░░╚═╝░░░`n"
+        $out += "`n"
+        $out += "Module Path: $($module.Path)`n"
+        $out += "Created on: $(Get-Date($CreateDate) -Format F)"
+
+        Write-Host $out -ForegroundColor Yellow
+
+        #Write-Host ("Module Path: $($module.Path)" | Out-String) -ForegroundColor Cyan
+        #Write-Host ("Created on: $(Get-Date($CreateDate) -Format F)" | Out-String) -ForegroundColor Cyan
 
         # $out = (Write-Ascii 'PSToolKit' -ForegroundColor Yellow | Out-String)
         # $out += "`n"
@@ -209,13 +218,14 @@ Function Show-PSToolKit {
                 HelpUri             = $_.HelpUri
             }
         }
-
+        $MaxNameLength =[int](($commands.name | Measure-Object -Property Length -Maximum).Maximum) +2
+        $MaxDescriptionLength =[int](($commands.Description | Measure-Object -Property Length -Maximum).Maximum) +2
         foreach ($item in ($commands.verb | Sort-Object -Unique)) {
             Write-Color 'Verb:', $item -Color Cyan, Red -StartTab 1 -LinesBefore 1
             $filtered = $commands | Where-Object { $_.Verb -like $item }
             foreach ($filter in $filtered) {
-                Write-Host ('{0,-36}:' -f "$($filter.name)") -ForegroundColor Gray -NoNewline
-                Write-Host ('{0,-20}' -f "$($filter.Description)") -ForegroundColor Yellow
+                Write-Host ("{0,-$($MaxNameLength)}:" -f "$($filter.name)") -ForegroundColor Gray -NoNewline
+                Write-Host ("{0,-$($MaxDescriptionLength)}" -f "$($filter.Description)") -ForegroundColor Yellow
 
             }
         }
@@ -280,6 +290,52 @@ Function Show-PSToolKit {
             }
         }
     }
+    if ($ExportToMarkDown) {
+
+        $commands = @()
+        $commands = Get-Command -Module PSToolKit | ForEach-Object {
+            [pscustomobject]@{
+                CmdletBinding       = $_.CmdletBinding
+                CommandType         = $_.CommandType
+                DefaultParameterSet = $_.DefaultParameterSet
+                #Definition          = $_.Definition
+                Description         = ((Get-Help $_.Name).SYNOPSIS | Out-String).Trim()
+                HelpFile            = $_.HelpFile
+                Module              = $_.Module
+                ModuleName          = $_.ModuleName
+                Name                = $_.Name
+                Noun                = $_.Noun
+                Options             = $_.Options
+                OutputType          = $_.OutputType
+                Parameters          = $_.Parameters
+                ParameterSets       = $_.ParameterSets
+                RemotingCapability  = $_.RemotingCapability
+                #ScriptBlock         = $_.ScriptBlock
+                Source              = $_.Source
+                Verb                = $_.Verb
+                Version             = $_.Version
+                Visibility          = $_.Visibility
+                HelpUri             = $_.HelpUri
+            }
+        }
+        $module = Get-Module PSToolkit -ListAvailable | Sort-Object -Property Version -Descending | Select-Object -First 1
+
+        $fragments = [system.collections.generic.list[string]]::new()
+		$fragments.Add((New-MDHeader "$($module.Name):"))
+        $fragments.Add((New-MDParagraph -Lines $($module.Description)))
+		$Fragments.Add("---`n")
+       foreach ($item in ($commands.verb | Sort-Object -Unique)) {
+         $fragments.Add((New-MDHeader -Level 3 "`t$($item):"))
+            $filtered = $commands | Where-Object { $_.Verb -like $item }
+            foreach ($filter in $filtered) {
+                $fragments.Add("[$($filter.name)]($($filter.HelpUri)) - $($filter.Description)")
+            }
+        }
+		$Fragments.Add("---`n")
+		$fragments.add("*Updated: $(Get-Date -Format U) UTC*")
+		$fragments | Out-File -FilePath "$($env:TEMP)\PSToolKit.md" -Encoding utf8 -Force
+	    & "$($env:TEMP)\PSToolKit.md"
+		}
 } #end Function
 
 
