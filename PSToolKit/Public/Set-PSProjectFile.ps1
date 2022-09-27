@@ -65,6 +65,9 @@ Add release notes to the manifest file.
 .PARAMETER DeployMKDocs
 Create or test the mkdocs site
 
+.PARAMETER RunScriptAnalyzer
+Run RunScriptAnalyzer functions.
+
 .PARAMETER GitPush
 Run Git Push when done.
 
@@ -88,6 +91,7 @@ Function Set-PSProjectFile {
 		[string]$ReleaseNotes = 'Updated Module Online Help Files',
 		[switch]$BuildHelpFiles,
 		[switch]$DeployMKDocs,
+		[switch]$RunScriptAnalyzer,
 		[Switch]$GitPush = $false,
 		[ValidateScript( { $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
@@ -465,33 +469,38 @@ Function Set-PSProjectFile {
 				details  = $_.SideIndicator
 			})
 	}
-	[void]$Issues.Add([PSCustomObject]@{
-			Catagory = $null
-			File     = $null
-			details  = $null
-		})
-	Write-Color "`t[Processing]: ", 'ScriptAnalyzer Tests.' -Color Yellow, Gray
-	
-    
-    [System.Collections.Generic.List[pscustomobject]]$RulesObject = @()
-    Invoke-ScriptAnalyzer -IncludeSuppressed -Settings CodeFormatting -Recurse -Path $ModuleOutput.FullName -Fix | ForEach-Object {$RulesObject.Add($_)}
-    Invoke-ScriptAnalyzer -IncludeSuppressed -Settings PSGallery -Recurse -Path $ModulePublicFunctions.PSParentPath | ForEach-Object {$RulesObject.Add($_)}
-    Invoke-ScriptAnalyzer -IncludeSuppressed -Settings ScriptSecurity -Recurse -Path $ModulePublicFunctions.PSParentPath | ForEach-Object {$RulesObject.Add($_)}
-    Invoke-ScriptAnalyzer -IncludeSuppressed -Settings ScriptFunctions -Recurse -Path $ModulePublicFunctions.PSParentPath | ForEach-Object {$RulesObject.Add($_)}
-    Invoke-ScriptAnalyzer -IncludeSuppressed -Settings ScriptingStyle -Recurse -Path $ModulePublicFunctions.PSParentPath | ForEach-Object {$RulesObject.Add($_)}
+	#endregion
 
-    $RulesObject | ForEach-Object {
-		[void]$Issues.Add([PSCustomObject]@{
-				Catagory = 'ScriptAnalyzer'
-				File     = $_.ScriptName
-				details  = "[$($_.Severity)]($($_.rulename))L $($_.Line): $($_.Message)"
-			})
-        }
+	#region ScriptAnalyzer
+	if ($RunScriptAnalyzer) {
 		[void]$Issues.Add([PSCustomObject]@{
 				Catagory = $null
 				File     = $null
 				details  = $null
 			})
+		Write-Color "`t[Processing]: ", 'ScriptAnalyzer Tests.' -Color Yellow, Gray
+	
+    
+		[System.Collections.Generic.List[pscustomobject]]$RulesObject = @()
+		Invoke-ScriptAnalyzer -IncludeSuppressed -Settings CodeFormatting -Recurse -Path $ModuleOutput.FullName -Fix | ForEach-Object {$RulesObject.Add($_)}
+		Invoke-ScriptAnalyzer -IncludeSuppressed -Settings PSGallery -Recurse -Path $ModulePublicFunctions.PSParentPath | ForEach-Object {$RulesObject.Add($_)}
+		Invoke-ScriptAnalyzer -IncludeSuppressed -Settings ScriptSecurity -Recurse -Path $ModulePublicFunctions.PSParentPath | ForEach-Object {$RulesObject.Add($_)}
+		Invoke-ScriptAnalyzer -IncludeSuppressed -Settings ScriptFunctions -Recurse -Path $ModulePublicFunctions.PSParentPath | ForEach-Object {$RulesObject.Add($_)}
+		Invoke-ScriptAnalyzer -IncludeSuppressed -Settings ScriptingStyle -Recurse -Path $ModulePublicFunctions.PSParentPath | ForEach-Object {$RulesObject.Add($_)}
+
+		$RulesObject | ForEach-Object {
+			[void]$Issues.Add([PSCustomObject]@{
+					Catagory = 'ScriptAnalyzer'
+					File     = $_.ScriptName
+					details  = "[$($_.Severity)]($($_.rulename))L $($_.Line): $($_.Message)"
+				})
+		}
+		[void]$Issues.Add([PSCustomObject]@{
+				Catagory = $null
+				File     = $null
+				details  = $null
+			})
+	}
 	#endregion
 	
 	#region NestedModules
@@ -625,23 +634,23 @@ Function Set-PSProjectFile {
 		$issues | Export-Excel -Path $ModuleIssuesExcel -WorksheetName Other -AutoSize -AutoFilter -BoldTopRow -FreezeTopRow 
 		$fragments = [system.collections.generic.list[string]]::new()
 		$fragments.Add('<style>')
-        $fragments.Add('table {')
-        $fragments.Add('    border-collapse: collapse;')
-        $fragments.Add('}')
-        $fragments.Add('table, th, td {')
-        $fragments.Add('   border: 1px solid black;')
-        $fragments.Add('}')
-        $fragments.Add('blockquote {')
-        $fragments.Add('    border-left: solid blue;')
-        $fragments.Add('    padding-left: 10px;')
-        $fragments.Add('}')
-        $fragments.Add('@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,300);')
-        $fragments.Add('body {')
-        $fragments.Add('  color: #444;')
-        $fragments.Add("  font-family: 'Open Sans', Helvetica, sans-serif;")
-        $fragments.Add('  font-weight: 300;')
-        $fragments.Add('}')
-        $fragments.Add('</style>')
+		$fragments.Add('table {')
+		$fragments.Add('    border-collapse: collapse;')
+		$fragments.Add('}')
+		$fragments.Add('table, th, td {')
+		$fragments.Add('   border: 1px solid black;')
+		$fragments.Add('}')
+		$fragments.Add('blockquote {')
+		$fragments.Add('    border-left: solid blue;')
+		$fragments.Add('    padding-left: 10px;')
+		$fragments.Add('}')
+		$fragments.Add('@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,300);')
+		$fragments.Add('body {')
+		$fragments.Add('  color: #444;')
+		$fragments.Add("  font-family: 'Open Sans', Helvetica, sans-serif;")
+		$fragments.Add('  font-weight: 300;')
+		$fragments.Add('}')
+		$fragments.Add('</style>')
 		$fragments.Add((New-MDHeader "$($module.Name): Issues"))
 		$Fragments.Add("---`n")
 		$fragments.Add((New-MDTable -Object $Issues))
@@ -650,7 +659,7 @@ Function Set-PSProjectFile {
 		$fragments | Out-File -FilePath $ModuleIssues -Encoding utf8 -Force
 		if ($ShowReport) { 
 			Start-Process -FilePath $ModuleIssues
-            Start-Process -FilePath $ModuleIssuesExcel
+			Start-Process -FilePath $ModuleIssuesExcel
 			Start-Process $ModuleManifest.HelpInfoUri
 		}
 	}

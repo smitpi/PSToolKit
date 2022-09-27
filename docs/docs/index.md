@@ -86,6 +86,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Restore-ElevatedShortcut`](https://smitpi.github.io/PSToolKit/Restore-ElevatedShortcut) -- Restore the RunAss shortcuts, from a zip file
 - [`Search-Script`](https://smitpi.github.io/PSToolKit/Search-Script) -- Search for a string in a directory of ps1 scripts.
 - [`Set-FolderCustomIcon`](https://smitpi.github.io/PSToolKit/Set-FolderCustomIcon) -- Will change the icon of a folder to a custom selected icon
+- [`Set-PSProjectFile`](https://smitpi.github.io/PSToolKit/Set-PSProjectFile) -- Creates and modify needed files for a PS project from existing module files.
 - [`Set-PSToolKitSystemSetting`](https://smitpi.github.io/PSToolKit/Set-PSToolKitSystemSetting) -- Set multiple settings on desktop or server
 - [`Set-SharedPSProfile`](https://smitpi.github.io/PSToolKit/Set-SharedPSProfile) -- Redirects PowerShell and WindowsPowerShell profile folder to another path.
 - [`Set-StaticIP`](https://smitpi.github.io/PSToolKit/Set-StaticIP) -- Set static IP on device
@@ -93,7 +94,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Set-VSCodeExplorerSortOrder`](https://smitpi.github.io/PSToolKit/Set-VSCodeExplorerSortOrder) -- Change the sort order in VSCode explorer
 - [`Set-WindowsAutoLogin`](https://smitpi.github.io/PSToolKit/Set-WindowsAutoLogin) -- Enable autologin on a device.
 - [`Show-ComputerManagement`](https://smitpi.github.io/PSToolKit/Show-ComputerManagement) -- Opens the Computer Management of the system or remote system
-- [`Show-PSToolKit`](https://smitpi.github.io/PSToolKit/Show-PSToolKit) -- Show details of the commands in this module
+- [`Show-PSToolKit`](https://smitpi.github.io/PSToolKit/Show-PSToolKit) -- Show details of the commands in this module.
 - [`Start-PowerShellAsAdmin`](https://smitpi.github.io/PSToolKit/Start-PowerShellAsAdmin) -- Starts a porwershell session as an administrator
 - [`Start-PSProfile`](https://smitpi.github.io/PSToolKit/Start-PSProfile) -- My PS Profile for all sessions.
 - [`Start-PSRoboCopy`](https://smitpi.github.io/PSToolKit/Start-PSRoboCopy) -- My wrapper for default robocopy switches

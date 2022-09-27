@@ -41,28 +41,28 @@ Created [26/10/2021_22:32] Initial Script Creating
 
 <#
 .SYNOPSIS
-Show details of the commands in this module
+Show details of the commands in this module.
 
 .DESCRIPTION
-Show details of the commands in this module
+Show details of the commands in this module.
 
 .PARAMETER ShowMetaData
-Show only version, date and path.
+Show the version.
 
 .PARAMETER ShowModified
-Show new and modified functions.
+Show scripts modified recently.
 
 .PARAMETER ShowCommand
-Use the show-command command
+Open GUI for command.
 
 .PARAMETER ExportToHTML
-Create a HTML page with the details
+Export details to HTML.
 
 .PARAMETER ExportToMarkDown
-Create a Markdown page with the details
+Export to Markdown.
 
 .EXAMPLE
-Show-PSToolKit
+Show-PSToolKit -ShowMetaData
 
 #>
 Function Show-PSToolKit {
@@ -134,8 +134,6 @@ Function Show-PSToolKit {
         Select-String -Path $ModulePSM.FullName -Pattern '^# Function:*' | ForEach-Object {
             [void]$FunctionObject.Add([PSCustomObject]@{
                     Function   = ($PSMContent)[$_.LineNumber - 1].Replace('# Function:', '').Trim()
-                    # ModuleVersion = ($PSMContent)[$_.LineNumber + 1].Replace('# ModuleVersion:', '').Trim()
-                    # CreatedOn     = [datetime]($PSMContent)[$_.LineNumber + 4].Replace('# CreatedOn:', '').Trim()
                     ModifiedOn = [datetime]($PSMContent)[$_.LineNumber + 5].Replace('# ModifiedOn:', '').Trim()
                     Synopsis   = ($PSMContent)[$_.LineNumber + 6].Replace('# Synopsis:', '').Trim()
                 })
@@ -160,15 +158,7 @@ Function Show-PSToolKit {
 
     if (-not($ShowCommand) -and (-not($ShowMetaData)) -and (-not($ExportToHTML)) -and (-not($ShowModified))) {
 
-        # $out = ConvertTo-ASCIIArt -Text 'PSToolKit' -Font basic
-        # $out += "`n"
-        # $out += ConvertTo-ASCIIArt -Text $version -Font basic
-        # $out += "`n"
-        # $out += ("Module Path: $($module.Path)" | Out-String)
-        # $out += ("Created on: $(Get-Date($CreateDate) -Format F)" | Out-String)
-        # Add-Border -TextBlock $out -Character % -ANSIBorder "$([char]0x1b)[38;5;47m" -ANSIText "$([char]0x1b)[93m"
-
-        $out =  "`t██████╗░░██████╗████████╗░█████╗░░█████╗░██╗░░░░░██╗░░██╗██╗████████╗`n"
+        $out = "`t██████╗░░██████╗████████╗░█████╗░░█████╗░██╗░░░░░██╗░░██╗██╗████████╗`n"
         $out += "`t██╔══██╗██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██║░░░░░██║░██╔╝██║╚══██╔══╝`n"
         $out += "`t██████╔╝╚█████╗░░░░██║░░░██║░░██║██║░░██║██║░░░░░█████═╝░██║░░░██║░░░`n"
         $out += "`t██╔═══╝░░╚═══██╗░░░██║░░░██║░░██║██║░░██║██║░░░░░██╔═██╗░██║░░░██║░░░`n"
@@ -179,18 +169,6 @@ Function Show-PSToolKit {
         $out += "Created on: $(Get-Date($CreateDate) -Format F)"
 
         Write-Host $out -ForegroundColor Yellow
-
-        #Write-Host ("Module Path: $($module.Path)" | Out-String) -ForegroundColor Cyan
-        #Write-Host ("Created on: $(Get-Date($CreateDate) -Format F)" | Out-String) -ForegroundColor Cyan
-
-        # $out = (Write-Ascii 'PSToolKit' -ForegroundColor Yellow | Out-String)
-        # $out += "`n"
-        # $out += (Write-Ascii $($version) -ForegroundColor Yellow)
-        # $out += "`n"
-        # $out += ("Module Path: $($module.Path)" | Out-String)
-        # $out += ("Created on: $(Get-Date($CreateDate) -Format F)" | Out-String)
-        # $out
-        #Add-Border -TextBlock $out -Character % -ANSIBorder "$([char]0x1b)[38;5;47m" -ANSIText "$([char]0x1b)[93m"
 
         $commands = @()
         $commands = Get-Command -Module PSToolKit | ForEach-Object {
@@ -218,8 +196,8 @@ Function Show-PSToolKit {
                 HelpUri             = $_.HelpUri
             }
         }
-        $MaxNameLength =[int](($commands.name | Measure-Object -Property Length -Maximum).Maximum) +2
-        $MaxDescriptionLength =[int](($commands.Description | Measure-Object -Property Length -Maximum).Maximum) +2
+        $MaxNameLength = [int](($commands.name | Measure-Object -Property Length -Maximum).Maximum) + 2
+        $MaxDescriptionLength = [int](($commands.Description | Measure-Object -Property Length -Maximum).Maximum) + 2
         foreach ($item in ($commands.verb | Sort-Object -Unique)) {
             Write-Color 'Verb:', $item -Color Cyan, Red -StartTab 1 -LinesBefore 1
             $filtered = $commands | Where-Object { $_.Verb -like $item }
@@ -321,21 +299,21 @@ Function Show-PSToolKit {
         $module = Get-Module PSToolkit -ListAvailable | Sort-Object -Property Version -Descending | Select-Object -First 1
 
         $fragments = [system.collections.generic.list[string]]::new()
-		$fragments.Add((New-MDHeader "$($module.Name):"))
+        $fragments.Add((New-MDHeader "$($module.Name):"))
         $fragments.Add((New-MDParagraph -Lines $($module.Description)))
-		$Fragments.Add("---`n")
-       foreach ($item in ($commands.verb | Sort-Object -Unique)) {
-         $fragments.Add((New-MDHeader -Level 3 "`t$($item):"))
+        $Fragments.Add("---`n")
+        foreach ($item in ($commands.verb | Sort-Object -Unique)) {
+            $fragments.Add((New-MDHeader -Level 3 "`t$($item):"))
             $filtered = $commands | Where-Object { $_.Verb -like $item }
             foreach ($filter in $filtered) {
                 $fragments.Add("[$($filter.name)]($($filter.HelpUri)) - $($filter.Description)")
             }
         }
-		$Fragments.Add("---`n")
-		$fragments.add("*Updated: $(Get-Date -Format U) UTC*")
-		$fragments | Out-File -FilePath "$($env:TEMP)\PSToolKit.md" -Encoding utf8 -Force
-	    & "$($env:TEMP)\PSToolKit.md"
-		}
+        $Fragments.Add("---`n")
+        $fragments.add("*Updated: $(Get-Date -Format U) UTC*")
+        $fragments | Out-File -FilePath "$($env:TEMP)\PSToolKit.md" -Encoding utf8 -Force
+        & "$($env:TEMP)\PSToolKit.md"
+    }
 } #end Function
 
 
