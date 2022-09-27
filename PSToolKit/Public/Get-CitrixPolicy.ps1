@@ -61,11 +61,11 @@ Export result to excel, html
 Where to save the report.
 
 .EXAMPLE
-Get-CitrixPolicies -Controller $ctxddc
+Get-CitrixPolicy -Controller $ctxddc
 
 #>
 Function Get-CitrixPolicy {
-		[Cmdletbinding(HelpURI = "https://smitpi.github.io/PSToolKit/Get-CitrixPolicies")]
+		[Cmdletbinding(HelpURI = "https://smitpi.github.io/PSToolKit/Get-CitrixPolicy")]
 	    [OutputType([System.Object[]])]
                 PARAM(
 					[Parameter(Mandatory = $true)]
