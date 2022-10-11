@@ -8,7 +8,7 @@ schema: 2.0.0
 # Show-PSToolKit
 
 ## SYNOPSIS
-Show details of the commands in this module
+Show details of the commands in this module.
 
 ## SYNTAX
 
@@ -18,19 +18,19 @@ Show-PSToolKit [-ShowMetaData] [-ShowModified] [-ShowCommand] [-ExportToHTML] [-
 ```
 
 ## DESCRIPTION
-Show details of the commands in this module
+Show details of the commands in this module.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Show-PSToolKit
+Show-PSToolKit -ShowMetaData
 ```
 
 ## PARAMETERS
 
 ### -ShowMetaData
-Show only version, date and path.
+Show the version.
 
 ```yaml
 Type: SwitchParameter
@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -ShowModified
-Show new and modified functions.
+Show scripts modified recently.
 
 ```yaml
 Type: SwitchParameter
@@ -60,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -ShowCommand
-Use the show-command command
+Open GUI for command.
 
 ```yaml
 Type: SwitchParameter
@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -ExportToHTML
-Create a HTML page with the details
+Export details to HTML.
 
 ```yaml
 Type: SwitchParameter
@@ -90,7 +90,7 @@ Accept wildcard characters: False
 ```
 
 ### -ExportToMarkDown
-Create a Markdown page with the details
+Export to Markdown.
 
 ```yaml
 Type: SwitchParameter

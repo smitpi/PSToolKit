@@ -5,40 +5,71 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-DeviceUptime
+# Get-CitrixPolicy
 
 ## SYNOPSIS
-Calculates the uptime of a system
+Export Citrix Policies
 
 ## SYNTAX
 
 ```
-Get-DeviceUptime [-ComputerName <String[]>] [<CommonParameters>]
+Get-CitrixPolicy [-Controller] <String> [[-Export] <String>] [[-ReportPath] <DirectoryInfo>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Calculates the uptime of a system
+Export Citrix Policies
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-DeviceUptime -ComputerName Neptune
+Get-CitrixPolicy -Controller $ctxddc
 ```
 
 ## PARAMETERS
 
-### -ComputerName
-Computer to query.
+### -Controller
+Name of the DDC
 
 ```yaml
-Type: String[]
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Export
+Export result to excel, html
+
+```yaml
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: $env:computername
+Position: 2
+Default value: Host
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportPath
+Where to save the report.
+
+```yaml
+Type: DirectoryInfo
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: C:\Temp
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

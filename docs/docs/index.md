@@ -44,7 +44,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Get-CitrixClientVersion`](https://smitpi.github.io/PSToolKit/Get-CitrixClientVersion) -- Report on the CItrix workspace versions the users are using.
 - [`Get-CitrixPolicy`](https://smitpi.github.io/PSToolKit/Get-CitrixPolicy) -- Export Citrix Policies
 - [`Get-CommandFiltered`](https://smitpi.github.io/PSToolKit/Get-CommandFiltered) -- Finds commands on the system and sort it according to module
-- [`Get-DeviceUptime`](https://smitpi.github.io/PSToolKit/Get-DeviceUptime) -- Calculates the uptime of a system
 - [`Get-FolderSize`](https://smitpi.github.io/PSToolKit/Get-FolderSize) -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option
 - [`Get-FQDN`](https://smitpi.github.io/PSToolKit/Get-FQDN) -- Get FQDN for a device, and checks if it is online
 - [`Get-FullADUserDetail`](https://smitpi.github.io/PSToolKit/Get-FullADUserDetail) -- Extract user details from the domain
@@ -55,6 +54,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Get-PropertiesToCSV`](https://smitpi.github.io/PSToolKit/Get-PropertiesToCSV) -- Get member data of an object. Use it to create other PSObjects.
 - [`Get-SoftwareAudit`](https://smitpi.github.io/PSToolKit/Get-SoftwareAudit) -- Connects to a remote hosts and collect installed software details
 - [`Get-SystemInfo`](https://smitpi.github.io/PSToolKit/Get-SystemInfo) -- Get system details of a remote device
+- [`Get-SystemUptime`](https://smitpi.github.io/PSToolKit/Get-SystemUptime) -- Calculates the uptime of a system
 - [`Get-WinEventLogExtract`](https://smitpi.github.io/PSToolKit/Get-WinEventLogExtract) -- Extract Event logs of a server list, and create html / excel report
 - [`Import-CitrixSiteConfigFile`](https://smitpi.github.io/PSToolKit/Import-CitrixSiteConfigFile) -- Import the Citrix config file, and created a variable with the details
 - [`Import-XamlConfigFile`](https://smitpi.github.io/PSToolKit/Import-XamlConfigFile) -- Import the wpf xaml file and create variables from objects
@@ -88,7 +88,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Restore-ElevatedShortcut`](https://smitpi.github.io/PSToolKit/Restore-ElevatedShortcut) -- Restore the RunAss shortcuts, from a zip file
 - [`Search-Script`](https://smitpi.github.io/PSToolKit/Search-Script) -- Search for a string in a directory of ps1 scripts.
 - [`Set-FolderCustomIcon`](https://smitpi.github.io/PSToolKit/Set-FolderCustomIcon) -- Will change the icon of a folder to a custom selected icon
-- [`Set-PSProjectFile`](https://smitpi.github.io/PSToolKit/Set-PSProjectFile) -- Creates and modify needed files for a PS project from existing module files.
 - [`Set-PSToolKitSystemSetting`](https://smitpi.github.io/PSToolKit/Set-PSToolKitSystemSetting) -- Set multiple settings on desktop or server
 - [`Set-SharedPSProfile`](https://smitpi.github.io/PSToolKit/Set-SharedPSProfile) -- Redirects PowerShell and WindowsPowerShell profile folder to another path.
 - [`Set-StaticIP`](https://smitpi.github.io/PSToolKit/Set-StaticIP) -- Set static IP on device

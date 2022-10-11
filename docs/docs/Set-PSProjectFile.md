@@ -14,8 +14,8 @@ Creates and modify needed files for a PS project from existing module files.
 
 ```
 Set-PSProjectFile [-ModuleScriptFile] <FileInfo> [[-VersionBump] <String>] [[-ReleaseNotes] <String>]
- [-BuildHelpFiles] [-DeployMKDocs] [-GitPush] [-CopyToModulesFolder] [-CopyNestedModules] [-ShowReport]
- [<CommonParameters>]
+ [-BuildHelpFiles] [-DeployMKDocs] [-RunScriptAnalyzer] [-GitPush] [-CopyToModulesFolder] [-CopyNestedModules]
+ [-ShowReport] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -92,6 +92,21 @@ Accept wildcard characters: False
 
 ### -DeployMKDocs
 Create or test the mkdocs site
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RunScriptAnalyzer
+Run RunScriptAnalyzer functions.
 
 ```yaml
 Type: SwitchParameter
