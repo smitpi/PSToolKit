@@ -53,6 +53,9 @@ Name of the shortcut
 .PARAMETER FilePath
 Path to the executable or ps1 file
 
+.PARAMETER Credential
+Use another userid to launch the task.
+
 .PARAMETER OpenPath
 Open explorer to the .lnk file.
 
@@ -65,13 +68,11 @@ Function New-ElevatedShortcut {
 
 	PARAM(
 		[Parameter(Mandatory = $true)]
-		[ValidateScript({ $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
-				else { Throw 'Must be running an elevated prompt to use function' } })]
 		[string]$ShortcutName,
 		[Parameter(Mandatory = $true)]
 		[ValidateScript( { (Test-Path $_) -and ((Get-Item $_).Extension -eq '.ps1') -or ((Get-Item $_).Extension -eq '.exe') })]
 		[string]$FilePath,
+		[pscredential]$Credential,
 		[switch]$OpenPath = $false
 	)
 
@@ -92,7 +93,12 @@ Function New-ElevatedShortcut {
 
 	$taskaction = New-ScheduledTaskAction @taskActionSettings
 	Register-ScheduledTask -TaskName "RunAs\$ShortcutName" -Action $taskAction
-	$taskPrincipal = New-ScheduledTaskPrincipal -UserId $([System.Security.Principal.WindowsIdentity]::GetCurrent().Name) -RunLevel Highest
+	if ($PSBoundParameters.ContainsKey("Get-Credential")) {
+		$taskPrincipal = New-ScheduledTaskPrincipal -UserId $Credential.UserName -RunLevel Highest 
+	}
+	else {
+		$taskPrincipal = New-ScheduledTaskPrincipal -UserId $([System.Security.Principal.WindowsIdentity]::GetCurrent().Name) -RunLevel Highest
+	}
 	Set-ScheduledTask -TaskName "RunAs\$ShortcutName" -Principal $taskPrincipal
 
 	## Create icon

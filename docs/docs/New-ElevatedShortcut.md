@@ -13,7 +13,8 @@ Creates a shortcut to a script or exe that runs as admin, without UNC
 ## SYNTAX
 
 ```
-New-ElevatedShortcut [-ShortcutName] <String> [-FilePath] <String> [-OpenPath] [<CommonParameters>]
+New-ElevatedShortcut [-ShortcutName] <String> [-FilePath] <String> [[-Credential] <PSCredential>] [-OpenPath]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -53,6 +54,21 @@ Aliases:
 
 Required: True
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Credential
+Use another userid to launch the task.
+
+```yaml
+Type: PSCredential
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
