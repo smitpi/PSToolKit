@@ -32,10 +32,6 @@ Created [07/01/2022_13:35] Initial Script Creating
 
 #>
 
-#Requires -Module ImportExcel
-#Requires -Module PSWriteHTML
-#Requires -Module PSWriteColor
-
 <#
 
 .DESCRIPTION
@@ -52,7 +48,10 @@ Connects to a remote hosts and collect installed software details
 Connects to a remote hosts and collect installed software details
 
 .PARAMETER ComputerName
-Name of the computers that will be audited
+Name of the computers that will be audited.
+
+.PARAMETER Credential
+Use another userid to collect date.
 
 .PARAMETER Export
 Export the results to excel or html
@@ -67,57 +66,83 @@ Get-SoftwareAudit -ComputerName Neptune -Export Excel
 Function Get-SoftwareAudit {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-SoftwareAudit')]
 	PARAM(
-		[Parameter(Mandatory = $true)]
+		[Parameter(Mandatory, Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+		[Alias('Name', 'DNSHostName')]
 		[string[]]$ComputerName,
-		[ValidateNotNullOrEmpty()]
-		[Parameter(Mandatory = $false)]
-		[ValidateSet('Excel', 'HTML')]
-		[string]$Export = 'Host',
-		[ValidateScript( { (Test-Path $_) })]
-		[string]$ReportPath = "$env:TEMP"
+
+		[pscredential]$Credential,
+
+		[ValidateSet('All', 'Excel', 'HTML', 'HTML5', 'Host')]
+		[string[]]$Export = 'Host',
+		
+		[ValidateScript( { if (Test-Path $_) { $true }
+				else { New-Item -Path $_ -ItemType Directory -Force | Out-Null; $true }
+			})]
+		[System.IO.DirectoryInfo]$ReportPath = 'C:\Temp'
 	)
-	[System.Collections.ArrayList]$Software = @()
-	foreach ($CompName in $ComputerName) {
-		try {
-			$check = $null
-			$check = Get-FQDN -ComputerName $CompName -ErrorAction Stop
-		} catch { Write-Warning "Error: $($_.Exception.Message)" }
-		if ($check.online -like 'True') {
-			Write-Message -Action Starting -Severity Information -Object $($check.FQDN) -Message 'Collecting Software' -MessageColor DarkRed
+	Begin {
+		[System.Collections.generic.List[PSObject]]$AppsObject = @()
+	}#begin
+	Process {
+		foreach ($Computer in $ComputerName) { 
+			Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] $($ComputerName.IndexOf($($Computer)) + 1) of $($ComputerName.Count)"
+			Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Starting $($Computer)"
 			try {
-				$rawdata = Invoke-Command -ComputerName $CompName -ScriptBlock {
-					Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall | Get-ItemProperty
-					Get-ChildItem HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall | Get-ItemProperty
+				if ($PSBoundParameters.ContainsKey('Credential')) {
+					$rawdata = Invoke-Command -ComputerName $Computer -ScriptBlock {
+						Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall | Get-ItemProperty
+						Get-ChildItem HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall | Get-ItemProperty
+					} -Credential $Credential -ErrorAction Stop
+				} else {
+					$rawdata = Invoke-Command -ComputerName $Computer -ScriptBlock {
+						Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall | Get-ItemProperty
+						Get-ChildItem HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall | Get-ItemProperty
+					} -ErrorAction Stop
 				}
 				foreach ($item in $rawdata) {
-					if (-not($null -eq $item.DisplayName)) {
-						[void]$Software.Add([pscustomobject]@{
-								CompName        = $($check.FQDN)
+					if (-not([string]::IsNullOrEmpty($item.DisplayName))) {
+						$AppsObject.Add([pscustomobject]@{
+								HostName        = ([System.Net.Dns]::GetHostEntry(($($Computer)))).HostName
+								Connection      = 'Successful'
 								DisplayName     = $item.DisplayName
-								DisplayVersion  = $item.DisplayVersion
 								Publisher       = $item.Publisher
+								DisplayVersion  = $item.DisplayVersion
 								EstimatedSize   = [Decimal]::Round([int]$item.EstimatedSize / 1024, 2)
 								UninstallString = $item.UninstallString
 							})
 					}
 				}
-			} catch { Write-Warning "Error: $($_.Exception.Message)" }
-		} else {Write-Warning "$($CompName) is offline"}
-	}
-	if ($Export -eq 'Excel') {
-		$ExcelOptions = @{
-			Path             = $(Join-Path -Path $ReportPath -ChildPath "\SoftwareAudit-$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx")
-			AutoSize         = $True
-			AutoFilter       = $True
-			TitleBold        = $True
-			TitleSize        = '28'
-			TitleFillPattern = 'LightTrellis'
-			TableStyle       = 'Light20'
-			FreezeTopRow     = $True
-			FreezePane       = '3'
+			} catch {
+				Write-Warning "Error $($Computer): Message:$($Error[0])"
+				$AppsObject.Add([pscustomobject]@{
+						HostName        = $Computer
+						Connection      = 'Failed'
+						DisplayName     = $Null
+						Publisher       = $Null
+						DisplayVersion  = $Null
+						EstimatedSize   = $Null
+						UninstallString = $Null
+					})
+			}
+			Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Done $($Computer)"
+		} #Foreach
+	} #Process
+	End {
+		if ($Export -contains 'Host') {$AppsObject}
+		else {
+			$ToReport = [PSCustomObject]@{
+				'Applications' = $AppsObject
+			}# PSObject
+
+			$DefParameter = $PSBoundParameters
+			$DefParameter.Remove('ComputerName') | Out-Null
+			$DefParameter.Remove('Credential') | Out-Null
+			$DefParameter.InputObject = $ToReport
+			$DefParameter.ReportTitle = 'Installed Software'
+			$DefParameter.OpenReportsFolder = $true
+
+			Write-PSReports @DefParameter
 		}
-		$Software | Export-Excel -Title SoftwareAudit -WorksheetName SoftwareAudit @ExcelOptions
-	}
-	if ($Export -eq 'HTML') { $Software | Out-HtmlView -DisablePaging -Title 'SoftwareAudit' -HideFooter -SearchHighlight -FixedHeader }
-	if ($Export -eq 'Host') { $Software }
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] DONE"
+	} #End
 } #end Function

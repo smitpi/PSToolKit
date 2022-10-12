@@ -13,7 +13,8 @@ Connects to a remote hosts and collect installed software details
 ## SYNTAX
 
 ```
-Get-SoftwareAudit [-ComputerName] <String[]> [[-Export] <String>] [[-ReportPath] <String>] [<CommonParameters>]
+Get-SoftwareAudit [-ComputerName] <String[]> [-Credential <PSCredential>] [-Export <String[]>]
+ [-ReportPath <DirectoryInfo>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,15 +30,30 @@ Get-SoftwareAudit -ComputerName Neptune -Export Excel
 ## PARAMETERS
 
 ### -ComputerName
-Name of the computers that will be audited
+Name of the computers that will be audited.
 
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases:
+Aliases: Name, DNSHostName
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -Credential
+Use another userid to collect date.
+
+```yaml
+Type: PSCredential
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -47,12 +63,12 @@ Accept wildcard characters: False
 Export the results to excel or html
 
 ```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: Named
 Default value: Host
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -62,13 +78,13 @@ Accept wildcard characters: False
 Path to save the report.
 
 ```yaml
-Type: String
+Type: DirectoryInfo
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
-Default value: "$env:TEMP"
+Position: Named
+Default value: C:\Temp
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

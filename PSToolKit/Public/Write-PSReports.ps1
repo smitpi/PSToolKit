@@ -81,7 +81,7 @@ Function Write-PSReports {
 		[string]$ReportTitle,
 
 		[ValidateSet('All', 'Excel', 'HTML', 'HTML5')]
-		[string[]]$Export = 'All',
+		[string[]]$Export,
 
 		[ValidateScript( { if (Test-Path $_) { $true }
 				else { New-Item -Path $_ -ItemType Directory -Force | Out-Null; $true }
@@ -98,7 +98,7 @@ Function Write-PSReports {
 
 	$members = ($InputObject | Get-Member -MemberType Property, NoteProperty).Name
 
-	if ($Excel) { 
+	if ($Excel) {  
 		$ExcelOptions = @{
 			Path             = $(Join-Path -Path $ReportPath -ChildPath "\$($ReportTitle.Replace(' ','_'))_$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx")
 			AutoSize         = $True
