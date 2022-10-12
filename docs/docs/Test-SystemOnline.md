@@ -5,31 +5,31 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-FQDN
+# Test-SystemOnline
 
 ## SYNOPSIS
-Get FQDN for a device, and checks if it is online
+Does basic checks for connecting to a remote device
 
 ## SYNTAX
 
 ```
-Get-FQDN [[-ComputerName] <String[]>] [<CommonParameters>]
+Test-SystemOnline [[-ComputerName] <String[]>] [[-Credential] <PSCredential>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Get FQDN for a device, and checks if it is online
+Does basic checks for connecting to a remote device
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-get-FQDN -ComputerName Neptune
+Test-SystemOnline -ComputerName $ListOfBoxes -Credential $User
 ```
 
 ## PARAMETERS
 
 ### -ComputerName
-Name or IP to use.
+The Device to query.
 
 ```yaml
 Type: String[]
@@ -38,8 +38,23 @@ Aliases: Name, DNSHostName
 
 Required: False
 Position: 1
-Default value: None
+Default value: $env:COMPUTERNAME
 Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -Credential
+Use another account to do the checks.
+
+```yaml
+Type: PSCredential
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

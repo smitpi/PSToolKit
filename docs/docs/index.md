@@ -107,6 +107,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Test-IsFileOpen`](https://smitpi.github.io/PSToolKit/Test-IsFileOpen) -- Checks if a file is open
 - [`Test-PendingReboot`](https://smitpi.github.io/PSToolKit/Test-PendingReboot) -- This script tests various registry values to see if the local computer is pending a reboot.
 - [`Test-PSRemote`](https://smitpi.github.io/PSToolKit/Test-PSRemote) -- Test PSb Remote to a device.
+- [`Test-SystemOnline`](https://smitpi.github.io/PSToolKit/Test-SystemOnline) -- Does basic checks for connecting to a remote device
 - [`Update-ListOfDDC`](https://smitpi.github.io/PSToolKit/Update-ListOfDDC) -- Update list of ListOfDDCs in the registry
 - [`Update-LocalHelp`](https://smitpi.github.io/PSToolKit/Update-LocalHelp) -- Downloads and saves help files locally
 - [`Update-MyModulesFromGitHub`](https://smitpi.github.io/PSToolKit/Update-MyModulesFromGitHub) -- Updates my modules
@@ -114,5 +115,5 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Update-PSModuleInfo`](https://smitpi.github.io/PSToolKit/Update-PSModuleInfo) -- Update PowerShell module manifest file
 - [`Write-Ascii`](https://smitpi.github.io/PSToolKit/Write-Ascii) -- Create Ascii Art
 - [`Write-Message`](https://smitpi.github.io/PSToolKit/Write-Message) -- Writes the given into to screen
+- [`Write-PSReports`](https://smitpi.github.io/PSToolKit/Write-PSReports) -- Creates a excel or html report
 - [`Write-PSToolKitLog`](https://smitpi.github.io/PSToolKit/Write-PSToolKitLog) -- Create a log for scripts
-- [`Write-PSToolKitReport`](https://smitpi.github.io/PSToolKit/Write-PSToolKitReport) -- Creates a excel or html report

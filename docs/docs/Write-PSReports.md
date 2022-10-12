@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Write-PSToolKitReport
+# Write-PSReports
 
 ## SYNOPSIS
 Creates a excel or html report
@@ -13,8 +13,8 @@ Creates a excel or html report
 ## SYNTAX
 
 ```
-Write-PSToolKitReport [[-InputObject] <PSObject>] [[-ReportTitle] <String>] [[-Export] <String>]
- [[-ReportPath] <DirectoryInfo>] [<CommonParameters>]
+Write-PSReports [-InputObject] <PSObject> [-ReportTitle] <String> [-Export <String[]>]
+ [-ReportPath <DirectoryInfo>] [-OpenReportsFolder] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,20 +24,20 @@ Creates a excel or html report
 
 ### EXAMPLE 1
 ```
-Write-PSToolKitReport -InputObject $data -ReportTitle "Temp Data" -Export HTML -ReportPath C:\temp
+Write-PSReports -InputObject $data -ReportTitle "Temp Data" -Export HTML -ReportPath C:\temp
 ```
 
 ## PARAMETERS
 
 ### -InputObject
-Data  for the report.
+Data for the report.
 
 ```yaml
 Type: PSObject
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 1
 Default value: None
 Accept pipeline input: False
@@ -52,7 +52,7 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 2
 Default value: None
 Accept pipeline input: False
@@ -61,17 +61,16 @@ Accept wildcard characters: False
 
 ### -Export
 Export the result to a report file.
-(Excel or html).
-Or select Host to display the object on screen.
+(Excel or html5 or normal html).
 
 ```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
-Default value: None
+Position: Named
+Default value: All
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -85,8 +84,23 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: Named
 Default value: C:\Temp
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -OpenReportsFolder
+Open the directory of creating the reports.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

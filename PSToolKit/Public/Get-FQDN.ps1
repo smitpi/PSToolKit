@@ -59,20 +59,26 @@ Function Get-FQDN {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-FQDN')]
 	[OutputType([System.Object[]])]
 	PARAM(
-		[Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
-		[string[]]$ComputerName
+		[Parameter(ValueFromPipeline, ValueFromPipelineByPropertyName)]
+		[Alias ('Name', 'DNSHostName')]
+		[string[]]$ComputerName	
 	)
+	begin {
+		[System.Collections.generic.List[PSObject]]$FQDNObject = @()
+	}#Begin
+
 	process {
-		[System.Collections.ArrayList]$outobject = @()
-		$ComputerName | ForEach-Object {
+		foreach ($Computer in $ComputerName) {
+			Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] $($ComputerName.IndexOf($($Computer)) + 1) of $($ComputerName.Count)"
+			Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Connecting to $($Computer)"
 			try {
-				[void]$outobject.add([pscustomobject]@{
-						Host   = $($_)
-						FQDN   = ([System.Net.Dns]::GetHostEntry(($($_)))).HostName
-						Online = Test-Connection -ComputerName $(([System.Net.Dns]::GetHostEntry(($($_)))).HostName) -Quiet -Count 2
-					})
-			} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+				$FQDNObject.Add([PSCustomObject]@{
+						ComputerName = $Computer
+						FQDN         = ([System.Net.Dns]::GetHostEntry(($($Computer)))).HostName
+					}) #PSList
+			} catch {Write-Warning "Error $($Computer): Message:$($Error[0])"}
 		}
-	}
-	end {return $outobject}
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Done: $($Computer)"
+	} #Process
+	end {$FQDNObject}
 } #end Function

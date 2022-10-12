@@ -76,7 +76,10 @@ Function New-ElevatedShortcut {
 		[switch]$OpenPath = $false
 	)
 
-	$ScriptInfo = Get-Item $FilePath
+	try {
+		$CommandInfo = Get-Command $FilePath -ErrorAction Stop
+		$ScriptInfo = Get-Item $CommandInfo.Source -ErrorAction Stop
+	} catch {Write-Error "Error fetching file details: Message:$($Error[0])"}
 
 	if ($ScriptInfo.Extension -eq '.ps1') {
 		$taskActionSettings = @{
@@ -92,11 +95,10 @@ Function New-ElevatedShortcut {
 	}
 
 	$taskaction = New-ScheduledTaskAction @taskActionSettings
-	Register-ScheduledTask -TaskName "RunAs\$ShortcutName" -Action $taskAction
-	if ($PSBoundParameters.ContainsKey("Get-Credential")) {
-		$taskPrincipal = New-ScheduledTaskPrincipal -UserId $Credential.UserName -RunLevel Highest 
-	}
-	else {
+	Register-ScheduledTask -TaskName "RunAs\$ShortcutName" -Action $taskAction -Description "Run $($ScriptInfo.Name) Elivated"
+	if ($PSBoundParameters.ContainsKey('Credential')) {
+		$taskPrincipal = New-ScheduledTaskPrincipal -UserId $Credential.UserName -RunLevel Highest -LogonType Interactive
+	} else {
 		$taskPrincipal = New-ScheduledTaskPrincipal -UserId $([System.Security.Principal.WindowsIdentity]::GetCurrent().Name) -RunLevel Highest
 	}
 	Set-ScheduledTask -TaskName "RunAs\$ShortcutName" -Principal $taskPrincipal
