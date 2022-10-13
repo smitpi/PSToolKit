@@ -101,32 +101,39 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
 <div class="highlight"><pre><span></span><code>Lists all devices
-. Remove-HiddenDevices -listDevicesOnly
 </code></pre></div>
+<p>.
+Remove-HiddenDevices -listDevicesOnly</p>
 <h3 id="example-2">EXAMPLE 2</h3>
 <div class="highlight"><pre><span></span><code>Save the list of devices as an object
-$Devices = . Remove-HiddenDevices -listDevicesOnly
 </code></pre></div>
+<p>$Devices = .
+Remove-HiddenDevices -listDevicesOnly</p>
 <h3 id="example-3">EXAMPLE 3</h3>
 <div class="highlight"><pre><span></span><code>Lists all &#39;ghost&#39; devices
-. Remove-HiddenDevices -listGhostDevicesOnly
 </code></pre></div>
+<p>.
+Remove-HiddenDevices -listGhostDevicesOnly</p>
 <h3 id="example-4">EXAMPLE 4</h3>
 <div class="highlight"><pre><span></span><code>Save the list of &#39;ghost&#39; devices as an object
-$ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly
 </code></pre></div>
+<p>$ghostDevices = .
+Remove-HiddenDevices -listGhostDevicesOnly</p>
 <h3 id="example-5">EXAMPLE 5</h3>
 <div class="highlight"><pre><span></span><code>Remove all ghost devices EXCEPT any devices that have &quot;Intel&quot; or &quot;Citrix&quot; in their friendly name
-. Remove-HiddenDevices -filterByFriendlyName @(&quot;Intel&quot;,&quot;Citrix&quot;)
 </code></pre></div>
+<p>.
+Remove-HiddenDevices -filterByFriendlyName @("Intel","Citrix")</p>
 <h3 id="example-6">EXAMPLE 6</h3>
 <div class="highlight"><pre><span></span><code>Remove all ghost devices EXCEPT any devices that are apart of the classes &quot;LegacyDriver&quot; or &quot;Processor&quot;
-. Remove-HiddenDevices -filterByClass @(&quot;LegacyDriver&quot;,&quot;Processor&quot;)
 </code></pre></div>
+<p>.
+Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor")</p>
 <h3 id="example-7">EXAMPLE 7</h3>
 <div class="highlight"><pre><span></span><code>Remove all ghost devices EXCEPT for devices with a friendly name of &quot;Intel&quot; or &quot;Citrix&quot; or with a class of &quot;LegacyDriver&quot; or &quot;Processor&quot;
-. Remove-HiddenDevices -filterByClass @(&quot;LegacyDriver&quot;,&quot;Processor&quot;) -filterByFriendlyName @(&quot;Intel&quot;,&quot;Citrix&quot;)
 </code></pre></div>
+<p>.
+Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor") -filterByFriendlyName @("Intel","Citrix")</p>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-filterbyclass">-FilterByClass</h3>
 <p>This parameter will exclude devices that match the class name provided.
