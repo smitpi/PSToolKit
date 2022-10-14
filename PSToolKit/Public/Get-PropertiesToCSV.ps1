@@ -62,7 +62,7 @@ Function Get-PropertiesToCSV {
         [object[]]$Data)
 
     process {
-    $data | Get-Member -MemberType NoteProperty | Sort-Object | ForEach-Object { $_.name } | Join-String -Separator ','
+    $data | Get-Member -MemberType NoteProperty,Property | Sort-Object | ForEach-Object { $_.name } | Join-String -Separator ','
     }
 } #end Function
 

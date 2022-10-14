@@ -192,7 +192,6 @@ Function Set-PSProjectFile {
 		Write-Color "`t[Deleting]: ", 'Docs Folder' -Color yello, Gray
 		try {
 			if (Test-Path ([IO.Path]::Combine($ModuleBase, 'docs'))) { Remove-Item ([IO.Path]::Combine($ModuleBase, 'docs')) -Recurse -Force -ErrorAction Stop }
-			if (Test-Path $ModulesInstuctions) { Remove-Item $ModulesInstuctions -Force -ErrorAction Stop }
 			if (Test-Path $ModuleReadme) { Remove-Item $ModuleReadme -Force -ErrorAction Stop }	
 		} catch {
 			try {

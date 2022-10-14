@@ -96,7 +96,7 @@ Function Write-PSReports {
 	if ($Export -contains 'All') {$Excel = $HTML = $HTML5 = $True  }
 
 
-	$members = ($InputObject | Get-Member -MemberType Property, NoteProperty).Name
+	$members = ($InputObject.psobject.members | Where-Object {$_.MemberType -like '*Property*'}).Name
 
 	if ($Excel) {  
 		$ExcelOptions = @{
