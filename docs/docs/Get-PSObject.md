@@ -5,31 +5,31 @@ online version:
 schema: 2.0.0
 ---
 
-# Format-AllObjectsInAListView
+# Get-PSObject
 
 ## SYNOPSIS
-Cast an array or PSObject and display it in list view
+Show all Object Methods
 
 ## SYNTAX
 
 ```
-Format-AllObjectsInAListView [[-Data] <Object[]>] [<CommonParameters>]
+Get-PSObject [[-Data] <Object[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Cast an array or PSObject and display it in list view
+Show all Object Methods
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Format-AllObjectsInAListView -data $data
+Get-PSObject -Export HTML -ReportPath C:\temp
 ```
 
 ## PARAMETERS
 
 ### -Data
-The PSObject to transform
+{{ Fill Data Description }}
 
 ```yaml
 Type: Object[]
@@ -50,6 +50,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.Object[]
 ## NOTES
 
 ## RELATED LINKS

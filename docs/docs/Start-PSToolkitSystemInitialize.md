@@ -13,7 +13,8 @@ Initialize a blank machine.
 ## SYNTAX
 
 ```
-Start-PSToolkitSystemInitialize [-LabSetup] [-InstallMyModules] [-PendingReboot] [<CommonParameters>]
+Start-PSToolkitSystemInitialize [-GitHubToken] <String> [-LabSetup] [-InstallMyModules] [-PendingReboot]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,6 +28,21 @@ Start-PSToolkitSystemInitialize -InstallMyModules
 ```
 
 ## PARAMETERS
+
+### -GitHubToken
+{{ Fill GitHubToken Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -LabSetup
 Commands only for my HomeLab

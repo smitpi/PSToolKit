@@ -40,7 +40,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Find-ChocolateyApp`](https://smitpi.github.io/PSToolKit/Find-ChocolateyApp) -- Search the online repo for software
 - [`Find-OnlineModule`](https://smitpi.github.io/PSToolKit/Find-OnlineModule) -- Creates reports based on PSGallery.
 - [`Find-OnlineScript`](https://smitpi.github.io/PSToolKit/Find-OnlineScript) -- Creates reports based on PSGallery. Filtered by scripts
-- [`Format-AllObjectsInAListView`](https://smitpi.github.io/PSToolKit/Format-AllObjectsInAListView) -- Cast an array or PSObject and display it in list view
 - [`Get-CitrixClientVersion`](https://smitpi.github.io/PSToolKit/Get-CitrixClientVersion) -- Report on the CItrix workspace versions the users are using.
 - [`Get-CitrixPolicy`](https://smitpi.github.io/PSToolKit/Get-CitrixPolicy) -- Export Citrix Policies
 - [`Get-CommandFiltered`](https://smitpi.github.io/PSToolKit/Get-CommandFiltered) -- Finds commands on the system and sort it according to module
@@ -50,8 +49,10 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Get-MyPSGalleryReport`](https://smitpi.github.io/PSToolKit/Get-MyPSGalleryReport) -- Gallery report
 - [`Get-MyPSGalleryStat`](https://smitpi.github.io/PSToolKit/Get-MyPSGalleryStat) -- Show stats about my published modules.
 - [`Get-NestedADGroupMember`](https://smitpi.github.io/PSToolKit/Get-NestedADGroupMember) -- Extract users from an AD group recursive, 4 levels deep.
+- [`Get-ObjectProperties`](https://smitpi.github.io/PSToolKit/Get-ObjectProperties) -- Cast an array or PSObject and display it in list view
 - [`Get-ProcessPerformance`](https://smitpi.github.io/PSToolKit/Get-ProcessPerformance) -- Gets the top 10 processes by CPU %
 - [`Get-PropertiesToCSV`](https://smitpi.github.io/PSToolKit/Get-PropertiesToCSV) -- Get member data of an object. Use it to create other PSObjects.
+- [`Get-PSObject`](https://smitpi.github.io/PSToolKit/Get-PSObject) -- Show all Object Methods
 - [`Get-SoftwareAudit`](https://smitpi.github.io/PSToolKit/Get-SoftwareAudit) -- Connects to a remote hosts and collect installed software details
 - [`Get-SystemInfo`](https://smitpi.github.io/PSToolKit/Get-SystemInfo) -- Get system details of a remote device
 - [`Get-SystemUptime`](https://smitpi.github.io/PSToolKit/Get-SystemUptime) -- Calculates the uptime of a system

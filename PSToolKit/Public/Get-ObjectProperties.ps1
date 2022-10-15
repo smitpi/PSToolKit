@@ -51,11 +51,11 @@ Cast an array or PSObject and display it in list view
 The PSObject to transform
 
 .EXAMPLE
-Format-AllObjectsInAListView -data $data
+Get-ObjectProperties -data $data
 
 #>
-Function Format-AllObjectsInAListView {
-    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Format-AllObjectsInAListView')]
+Function Get-ObjectProperties {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-ObjectProperties')]
     Param (
         [parameter( ValueFromPipeline = $True )]
         [object[]]$Data)

@@ -114,7 +114,6 @@ if (`$psversiontable.psversion.major -ge 7) {
 `$PRModule = Get-ChildItem `"$((Join-Path ((Get-Item $ModModules.ModuleBase).Parent).FullName "\*\$($ModModules.name).psm1"))`" | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1
 Import-Module `$PRModule.FullName -Force
 Start-PSProfile
-
 #endregion
 
 ################################

@@ -66,18 +66,15 @@ Function Backup-PowerShellProfile {
         [System.IO.DirectoryInfo]$DestinationPath = $([Environment]::GetFolderPath('MyDocuments'))
     )
     try {
-        $ps = [IO.Path]::Combine($([Environment]::GetFolderPath('MyDocuments')), 'PowerShell')
-        $wps = [IO.Path]::Combine($([Environment]::GetFolderPath('MyDocuments')), 'WindowsPowerShell')
         $SourceDir = @()
-        if (Test-Path $ps) { $SourceDir += (Get-Item $ps).FullName }
-        if (Test-Path $wps) { $SourceDir += (Get-Item $wps).FullName }
+        $SourceDir = (Get-Item (Get-Item $PROFILE).Directory).FullName
         if ([bool]$ExtraDir) { $SourceDir += (Get-Item $ExtraDir).fullname }
-        $Destination = [IO.Path]::Combine((Get-Item $DestinationPath).FullName, "$($env:COMPUTERNAME)_Powershell_Profile_Backup_$(Get-Date -Format ddMMMyyyy_HHmm).zip")
+        $Destination = [IO.Path]::Combine((Get-Item $DestinationPath).FullName, "Powershell_$($PSVersionTable.PSEdition)_$($env:COMPUTERNAME.ToLower())_Profile_Backup_$(Get-Date -Format ddMMMyyyy_HHmm).zip")
     }
     catch { Write-Error 'Unable to get directories' }
 
     try {
-        Compress-Archive -Path $SourceDir -DestinationPath $Destination -CompressionLevel Fastest
+        Compress-Archive -Path $SourceDir -DestinationPath $Destination -CompressionLevel Fastest -Update
     }
     catch { Write-Error 'Unable to create zip file' }
 } #end Function

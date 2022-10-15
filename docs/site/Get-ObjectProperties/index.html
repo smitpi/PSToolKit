@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="author" content="Pierre Smit">
-    <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Get-ProcessPerformance/">
+    <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Get-ObjectProperties/">
     <link rel="shortcut icon" href="../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Get-ProcessPerformance - PSToolKit</title>
+    <title>Get-ObjectProperties - PSToolKit</title>
     <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
@@ -32,7 +32,7 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Get-ProcessPerformance", url: "#_top", children: [
+          {title: "Get-ObjectProperties", url: "#_top", children: [
               {title: "SYNOPSIS", url: "#synopsis" },
               {title: "SYNTAX", url: "#syntax" },
               {title: "DESCRIPTION", url: "#description" },
@@ -68,20 +68,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Get-PropertiesToCSV/" class="btn btn-xs btn-default pull-right">
+      <a href="../Get-PSObject/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Get-PropertiesToCSV/" class="btn btn-xs btn-link">
-        Get-PropertiesToCSV
+      <a href="../Get-PSObject/" class="btn btn-xs btn-link">
+        Get-PSObject
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../Get-PSObject/" class="btn btn-xs btn-default pull-left">
+      <a href="../Get-NestedADGroupMember/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Get-PSObject/" class="btn btn-xs btn-link">
-        Get-PSObject
+        Previous</a><a href="../Get-NestedADGroupMember/" class="btn btn-xs btn-link">
+        Get-NestedADGroupMember
       </a>
     </div>
     
@@ -89,54 +89,29 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="get-processperformance">Get-ProcessPerformance</h1>
+    <h1 id="get-objectproperties">Get-ObjectProperties</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Gets the top 10 processes by CPU %</p>
+<p>Cast an array or PSObject and display it in list view</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Get-ProcessPerformance [[-ComputerName] &lt;String[]&gt;] [[-LimitProcCount] &lt;Int32&gt;] [[-Sortby] &lt;String&gt;]
- [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Get-ObjectProperties [[-Data] &lt;Object[]&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
-<p>Gets the top 10 processes by CPU %</p>
+<p>Cast an array or PSObject and display it in list view</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Get-ProcessPerformance -ComputerName Apollo -LimitProcCount 10 -Sortby &#39;% CPU&#39;
+<div class="highlight"><pre><span></span><code>Get-ObjectProperties -data $data
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
-<h3 id="-computername">-ComputerName</h3>
-<p>Device to be queried.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span><span class="w"></span>
+<h3 id="-data">-Data</h3>
+<p>The PSObject to transform</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Object[]</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-</code></pre></div>
-<h3 id="-limitproccount">-LimitProcCount</h3>
-<p>List the top x of processes.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Int32</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
-
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-</code></pre></div>
-<h3 id="-sortby">-Sortby</h3>
-<p>Sort by CPU or Memory descending.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
-
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="err">%</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CPU</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True (ByValue)</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
 <h3 id="commonparameters">CommonParameters</h3>
@@ -157,20 +132,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Get-PropertiesToCSV/" class="btn btn-xs btn-default pull-right">
+      <a href="../Get-PSObject/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Get-PropertiesToCSV/" class="btn btn-xs btn-link">
-        Get-PropertiesToCSV
+      <a href="../Get-PSObject/" class="btn btn-xs btn-link">
+        Get-PSObject
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../Get-PSObject/" class="btn btn-xs btn-default pull-left">
+      <a href="../Get-NestedADGroupMember/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Get-PSObject/" class="btn btn-xs btn-link">
-        Get-PSObject
+        Previous</a><a href="../Get-NestedADGroupMember/" class="btn btn-xs btn-link">
+        Get-NestedADGroupMember
       </a>
     </div>
     
@@ -181,7 +156,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 <footer class="container-fluid wm-page-content">
       <p>
-        <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Get-ProcessPerformance.md">Edit on smitpi/PSToolKit</a>
+        <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Get-ObjectProperties.md">Edit on smitpi/PSToolKit</a>
       </p><p>(c) 2022 Pierre Smit. All rights reserved.</p>
   <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
 </footer>

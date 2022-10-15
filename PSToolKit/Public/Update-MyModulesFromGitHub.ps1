@@ -80,14 +80,31 @@ Function Update-MyModulesFromGitHub {
 		Write-Host '[Checking]: ' -ForegroundColor Yellow -NoNewline; Write-Host "$($ModuleName): " -ForegroundColor Cyan
 
 		if ($AllUsers) {
-			$ModulePath = [IO.Path]::Combine($env:ProgramFiles, 'WindowsPowerShell', 'Modules', "$($ModuleName)")
+			if (($PSVersionTable).PSEdition -eq 'Core') {
+				$ModulePath = [IO.Path]::Combine($env:ProgramFiles, 'PowerShell', 'Modules', "$($ModuleName)")
+			}
+			else {
+				$ModulePath = [IO.Path]::Combine($env:ProgramFiles, 'WindowsPowerShell', 'Modules', "$($ModuleName)")
+			}
 		} else {
-			$ModulePath = [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'WindowsPowerShell', 'Modules', "$($ModuleName)")
+			if (($PSVersionTable).PSEdition -eq 'Core') {
+				$ModulePath = [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'PowerShell', 'Modules', "$($ModuleName)")
+		}
+			else {
+				$ModulePath = [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'WindowsPowerShell', 'Modules', "$($ModuleName)")
+			}
 		}
 
 
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Checking] Temp folder $($env:tmp) "
 		if ((Test-Path "$env:tmp\$($ModuleName).zip") -eq $true ) { Remove-Item "$env:tmp\$($ModuleName).zip" -Force }
+
+		$ModInstFolder = Get-Module $ModuleName -ListAvailable | Where-Object {$_.path -notlike "$($ModulePath)*"}
+		foreach ($UnInstMod in $ModInstFolder) {
+			try {
+			Join-Path -Path $UnInstMod.Path -ChildPath ..\.. -Resolve | Remove-Item -Force -Recurse -ErrorAction Stop
+			} catch {Write-Warning "Error removing $($UnInstMod.Path): Message:$($Error[0])"}
+		}
 
 		if ((Test-Path $ModulePath)) {
 			$ModChild = $InstalledVer = $OnlineVer = $null
@@ -118,7 +135,7 @@ Function Update-MyModulesFromGitHub {
 			Write-Host "`t[Downloading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($ModuleName): " -ForegroundColor DarkRed
 			if (Get-Command Start-BitsTransfer) {
 				try {
-					Start-BitsTransfer -DisplayName "$($ModuleName) Download" -Source "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -Destination "$env:tmp\$($ModuleName).zip" -TransferType Download -ErrorAction Stop
+					Start-BitsTransfer -DisplayName "$($ModuleName) Download" -Source "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -Destination "$env:tmp\$($ModuleName).zip" -TransferType Download -ProxyAuthentication Basic -RetryInterval 60 -RetryTimeout 60 -ErrorAction Stop
 					
 				} catch {
 					Write-Warning 'Bits Transer failed, defaulting to webrequest'

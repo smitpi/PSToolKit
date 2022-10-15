@@ -63,6 +63,8 @@ Start-PSToolkitSystemInitialize -InstallMyModules
 Function Start-PSToolkitSystemInitialize {
 	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Start-PSToolkitSystemInitialize')]
 	PARAM(
+		[Parameter(Mandatory,Position=0)]
+		[string]$GitHubToken,
 		[switch]$LabSetup = $false,
 		[switch]$InstallMyModules = $false,
 		[switch]$PendingReboot = $false
@@ -152,11 +154,11 @@ Function Start-PSToolkitSystemInitialize {
 			if ($LabSetup) {
 				New-PSProfile
 				Set-PSToolKitSystemSetting -RunAll
-				Install-PWSHModule -GitHubUserID smitpi -PublicGist -ListName BaseModules -Scope AllUsers
+				Install-PWSHModule -GitHubUserID smitpi -GitHubToken $GitHubToken -ListName BaseModules -Scope AllUsers
 				Install-ChocolateyClient
 				Install-VMWareTool
 				Install-PowerShell7x
-				Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID smitpi -PublicGist
+				Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID smitpi -GitHubToken $GitHubToken
 				Install-RSAT
 				Install-MSUpdate
 			}
