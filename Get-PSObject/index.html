@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="author" content="Pierre Smit">
-    <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Format-AllObjectsInAListView/">
+    <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Get-PSObject/">
     <link rel="shortcut icon" href="../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Format-AllObjectsInAListView - PSToolKit</title>
+    <title>Get-PSObject - PSToolKit</title>
     <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
@@ -32,7 +32,7 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Format-AllObjectsInAListView", url: "#_top", children: [
+          {title: "Get-PSObject", url: "#_top", children: [
               {title: "SYNOPSIS", url: "#synopsis" },
               {title: "SYNTAX", url: "#syntax" },
               {title: "DESCRIPTION", url: "#description" },
@@ -68,20 +68,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Get-CitrixClientVersion/" class="btn btn-xs btn-default pull-right">
+      <a href="../Get-ProcessPerformance/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Get-CitrixClientVersion/" class="btn btn-xs btn-link">
-        Get-CitrixClientVersion
+      <a href="../Get-ProcessPerformance/" class="btn btn-xs btn-link">
+        Get-ProcessPerformance
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../Find-OnlineScript/" class="btn btn-xs btn-default pull-left">
+      <a href="../Get-ObjectProperties/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Find-OnlineScript/" class="btn btn-xs btn-link">
-        Find-OnlineScript
+        Previous</a><a href="../Get-ObjectProperties/" class="btn btn-xs btn-link">
+        Get-ObjectProperties
       </a>
     </div>
     
@@ -89,21 +89,21 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="format-allobjectsinalistview">Format-AllObjectsInAListView</h1>
+    <h1 id="get-psobject">Get-PSObject</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Cast an array or PSObject and display it in list view</p>
+<p>Show all Object Methods</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Format-AllObjectsInAListView [[-Data] &lt;Object[]&gt;] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Get-PSObject [[-Data] &lt;Object[]&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
-<p>Cast an array or PSObject and display it in list view</p>
+<p>Show all Object Methods</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Format-AllObjectsInAListView -data $data
+<div class="highlight"><pre><span></span><code>Get-PSObject -Export HTML -ReportPath C:\temp
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-data">-Data</h3>
-<p>The PSObject to transform</p>
+<p>{{ Fill Data Description }}</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Object[]</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
@@ -118,6 +118,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see <a href="http://go.microsoft.com/fwlink/?LinkID=113216">about_CommonParameters</a>.</p>
 <h2 id="inputs">INPUTS</h2>
 <h2 id="outputs">OUTPUTS</h2>
+<h3 id="systemobject">System.Object[]</h3>
 <h2 id="notes">NOTES</h2>
 <h2 id="related-links">RELATED LINKS</h2>
 
@@ -132,20 +133,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Get-CitrixClientVersion/" class="btn btn-xs btn-default pull-right">
+      <a href="../Get-ProcessPerformance/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Get-CitrixClientVersion/" class="btn btn-xs btn-link">
-        Get-CitrixClientVersion
+      <a href="../Get-ProcessPerformance/" class="btn btn-xs btn-link">
+        Get-ProcessPerformance
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../Find-OnlineScript/" class="btn btn-xs btn-default pull-left">
+      <a href="../Get-ObjectProperties/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Find-OnlineScript/" class="btn btn-xs btn-link">
-        Find-OnlineScript
+        Previous</a><a href="../Get-ObjectProperties/" class="btn btn-xs btn-link">
+        Get-ObjectProperties
       </a>
     </div>
     
@@ -156,7 +157,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 <footer class="container-fluid wm-page-content">
       <p>
-        <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Format-AllObjectsInAListView.md">Edit on smitpi/PSToolKit</a>
+        <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Get-PSObject.md">Edit on smitpi/PSToolKit</a>
       </p><p>(c) 2022 Pierre Smit. All rights reserved.</p>
   <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
 </footer>
