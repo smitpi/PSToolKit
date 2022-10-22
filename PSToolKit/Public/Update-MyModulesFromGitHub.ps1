@@ -136,7 +136,7 @@ Function Update-MyModulesFromGitHub {
 					Start-BitsTransfer -DisplayName "$($ModuleName)-Download" -Source "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -Destination "$env:tmp\$($ModuleName).zip" -TransferType Download -ProxyAuthentication Basic -ErrorAction Stop
 				} catch {
 					Write-Warning 'Bits Transer failed, defaulting to webrequest'
-					Get-BitsTransfer -Name "$($ModuleName)-Download" | Remove-BitsTransfer
+					Get-BitsTransfer | Remove-BitsTransfer
 					Invoke-WebRequest -Uri "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -OutFile "$env:tmp\$($ModuleName).zip"
 				}
 			} else {
