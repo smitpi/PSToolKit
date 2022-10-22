@@ -3,7 +3,7 @@
 ######## Function 1 of 89 ##################
 # Function:         Add-ChocolateyPrivateRepo
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -103,7 +103,7 @@ Export-ModuleMember -Function Add-ChocolateyPrivateRepo
 ######## Function 2 of 89 ##################
 # Function:         Backup-ElevatedShortcut
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -151,7 +151,7 @@ Export-ModuleMember -Function Backup-ElevatedShortcut
 ######## Function 3 of 89 ##################
 # Function:         Backup-PowerShellProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -208,7 +208,7 @@ Export-ModuleMember -Function Backup-PowerShellProfile
 ######## Function 4 of 89 ##################
 # Function:         Compare-ADMembership
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -460,7 +460,7 @@ Export-ModuleMember -Function Compare-ADMembership
 ######## Function 5 of 89 ##################
 # Function:         Connect-VMWareCluster
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -509,7 +509,7 @@ Export-ModuleMember -Function Connect-VMWareCluster
 ######## Function 6 of 89 ##################
 # Function:         Edit-SSHConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -689,7 +689,7 @@ Export-ModuleMember -Function Edit-SSHConfigFile
 ######## Function 7 of 89 ##################
 # Function:         Enable-RemoteHostPSRemoting
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -751,7 +751,7 @@ Export-ModuleMember -Function Enable-RemoteHostPSRemoting
 ######## Function 8 of 89 ##################
 # Function:         Export-ESXTemplate
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -803,7 +803,7 @@ Export-ModuleMember -Function Export-ESXTemplate
 ######## Function 9 of 89 ##################
 # Function:         Find-ChocolateyApp
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -888,7 +888,7 @@ Export-ModuleMember -Function Find-ChocolateyApp
 ######## Function 10 of 89 ##################
 # Function:         Find-OnlineModule
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1070,7 +1070,7 @@ Export-ModuleMember -Function Find-OnlineModule
 ######## Function 11 of 89 ##################
 # Function:         Find-OnlineScript
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1257,7 +1257,7 @@ Export-ModuleMember -Function Find-OnlineScript
 ######## Function 12 of 89 ##################
 # Function:         Get-CitrixClientVersion
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1356,7 +1356,7 @@ Export-ModuleMember -Function Get-CitrixClientVersion
 ######## Function 13 of 89 ##################
 # Function:         Get-CitrixPolicy
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1440,7 +1440,7 @@ Export-ModuleMember -Function Get-CitrixPolicy
 ######## Function 14 of 89 ##################
 # Function:         Get-CommandFiltered
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1503,7 +1503,7 @@ Export-ModuleMember -Function Get-CommandFiltered
 ######## Function 15 of 89 ##################
 # Function:         Get-FolderSize
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Joakim Svendsen
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1671,7 +1671,7 @@ Export-ModuleMember -Function Get-FolderSize
 ######## Function 16 of 89 ##################
 # Function:         Get-FQDN
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1728,7 +1728,7 @@ Export-ModuleMember -Function Get-FQDN
 ######## Function 17 of 89 ##################
 # Function:         Get-FullADUserDetail
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -1817,7 +1817,7 @@ Export-ModuleMember -Function Get-FullADUserDetail
 ######## Function 18 of 89 ##################
 # Function:         Get-MyPSGalleryReport
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/09/07 07:22:43
@@ -1898,11 +1898,11 @@ Export-ModuleMember -Function Get-MyPSGalleryReport
 ######## Function 19 of 89 ##################
 # Function:         Get-MyPSGalleryStat
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
-# ModifiedOn:       2022/09/23 09:01:23
+# ModifiedOn:       2022/10/22 15:57:01
 # Synopsis:         Show stats about my published modules.
 #############################################
  
@@ -1928,12 +1928,20 @@ Get-MyPSGalleryStats
 
 #>
 Function Get-MyPSGalleryStat {
-    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-MyPSGalleryStats')]
+    [Cmdletbinding(DefaultParameterSetName='InLastDays',HelpURI = 'https://smitpi.github.io/PSToolKit/Get-MyPSGalleryStats')]
     [OutputType([System.Object[]])]
     PARAM(
         [string]$GitHubUserID,
         [string]$GitHubToken,
-        [int]$daysToReport
+
+        [Parameter(ParameterSetName='InLastDays')]
+        [int]$daysToReport,
+
+        [Parameter(ParameterSetName='DateRange')]
+        [datetime]$Startdate,
+
+        [Parameter(ParameterSetName='DateRange')]
+        [datetime]$EndDate
     )
 
     try {
@@ -1958,12 +1966,33 @@ Function Get-MyPSGalleryStat {
 
     } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 
-    $EndDays = (Get-Date).AddDays(-$daysToReport)
-   
-    $GalGrouped = $GalStats | Where-Object {$_.datecollected -gt $EndDays} | Group-Object -Property DateCollected
+    if ($daysToReport) {
+        $EndDays = (Get-Date).AddDays(-$daysToReport)
+        $filter = $GalStats | Where-Object {[datetime]$_.datecollected -gt $EndDays} | Group-Object -Property title
+    } else {
+        $filter = $GalStats | Where-Object {[datetime]$_.datecollected -lt $EndDate -and [datetime]$_.datecollected -gt $Startdate} | Group-Object -Property title
+    }
+    
+    $span = New-TimeSpan -Start $filter[0].Group[0].DateCollected -End $filter[0].Group[-1].DateCollected
+
+    [System.Collections.generic.List[PSObject]]$SumObject = @()
+    foreach ($mod in $filter) {
+        $SumObject.Add([PSCustomObject]@{
+         Name      = $mod.name
+         Span      = [math]::Round($span.TotalDays)
+         Start     = (get-date([datetime]$mod.Group[0].DateCollected) -Format 'dd/MMM/yyyy')
+         End       = (get-date([datetime]$mod.Group[-1].DateCollected) -Format 'dd/MMM/yyyy')
+         NewDownloads = ([int]$mod.group[-1].downloadCount - [int]$mod.group[0].downloadCount)
+         TotalDownloads = [int]$mod.group[-1].downloadCount
+    })
+    }
+    $SumObject
+
+    <#
+    $GalGrouped = $GalStats | Where-Object {[datetime]$_.datecollected -gt $EndDays} | Group-Object -Property DateCollected
     $GalGrouped.Group | Select-Object datecollected, title, NormalizedVersion, updated, versionDownloadCount, downloadCount | Format-Table -AutoSize -GroupBy datecollected
 
-    #$modules = $GalGrouped.group.title | Sort-Object -Unique
+    $modules = $GalGrouped.group.title | Sort-Object -Unique
     $dates = $GalGrouped.group.datecollected | Sort-Object -Unique
 
     [System.Collections.generic.List[PSObject]]$SumObject = @()
@@ -1988,6 +2017,7 @@ Function Get-MyPSGalleryStat {
             Download = ($GalMod[-1].downloadCount - $GalMod[0].downloadCount)
         } 
     } 
+    #>
 } #end Function
 
 
@@ -1999,7 +2029,7 @@ Export-ModuleMember -Function Get-MyPSGalleryStat
 ######## Function 20 of 89 ##################
 # Function:         Get-NestedADGroupMember
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -2132,7 +2162,7 @@ Export-ModuleMember -Function Get-NestedADGroupMember
 ######## Function 21 of 89 ##################
 # Function:         Get-ProcessPerformance
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -2197,7 +2227,7 @@ Export-ModuleMember -Function Get-ProcessPerformance
 ######## Function 22 of 89 ##################
 # Function:         Get-PropertiesToCSV
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -2239,7 +2269,7 @@ Export-ModuleMember -Function Get-PropertiesToCSV
 ######## Function 23 of 89 ##################
 # Function:         Get-PSObject
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/10/15 09:55:14
@@ -2290,7 +2320,7 @@ Export-ModuleMember -Function Get-PSObject
 ######## Function 24 of 89 ##################
 # Function:         Get-SoftwareAudit
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -2412,7 +2442,7 @@ Export-ModuleMember -Function Get-SoftwareAudit
 ######## Function 25 of 89 ##################
 # Function:         Get-SystemInfo
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -2723,7 +2753,7 @@ Export-ModuleMember -Function Get-SystemInfo
 ######## Function 26 of 89 ##################
 # Function:         Get-SystemUptime
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -2816,7 +2846,7 @@ Export-ModuleMember -Function Get-SystemUptime
 ######## Function 27 of 89 ##################
 # Function:         Get-WinEventLogExtract
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -2935,7 +2965,7 @@ Export-ModuleMember -Function Get-WinEventLogExtract
 ######## Function 28 of 89 ##################
 # Function:         Import-CitrixSiteConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -2982,7 +3012,7 @@ Export-ModuleMember -Function Import-CitrixSiteConfigFile
 ######## Function 29 of 89 ##################
 # Function:         Import-XamlConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3115,7 +3145,7 @@ Export-ModuleMember -Function Import-XamlConfigFile
 ######## Function 30 of 89 ##################
 # Function:         Install-BGInfo
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3194,7 +3224,7 @@ Export-ModuleMember -Function Install-BGInfo
 ######## Function 31 of 89 ##################
 # Function:         Install-ChocolateyClient
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3252,7 +3282,7 @@ Export-ModuleMember -Function Install-ChocolateyClient
 ######## Function 32 of 89 ##################
 # Function:         Install-ChocolateyServer
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3377,7 +3407,7 @@ Export-ModuleMember -Function Install-ChocolateyServer
 ######## Function 33 of 89 ##################
 # Function:         Install-LocalPSRepository
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3471,7 +3501,7 @@ Export-ModuleMember -Function Install-LocalPSRepository
 ######## Function 34 of 89 ##################
 # Function:         Install-MSUpdate
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3535,7 +3565,7 @@ Export-ModuleMember -Function Install-MSUpdate
 ######## Function 35 of 89 ##################
 # Function:         Install-NFSClient
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3591,7 +3621,7 @@ Export-ModuleMember -Function Install-NFSClient
 ######## Function 36 of 89 ##################
 # Function:         Install-PowerShell7x
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3643,7 +3673,7 @@ Export-ModuleMember -Function Install-PowerShell7x
 ######## Function 37 of 89 ##################
 # Function:         Install-RSAT
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3705,7 +3735,7 @@ Export-ModuleMember -Function Install-RSAT
 ######## Function 38 of 89 ##################
 # Function:         Install-VMWareTool
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3751,7 +3781,7 @@ Export-ModuleMember -Function Install-VMWareTool
 ######## Function 39 of 89 ##################
 # Function:         New-CitrixSiteConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -3944,7 +3974,7 @@ Export-ModuleMember -Function New-CitrixSiteConfigFile
 ######## Function 40 of 89 ##################
 # Function:         New-ElevatedShortcut
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4041,7 +4071,7 @@ Export-ModuleMember -Function New-ElevatedShortcut
 ######## Function 41 of 89 ##################
 # Function:         New-GodModeFolder
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4076,7 +4106,7 @@ Export-ModuleMember -Function New-GodModeFolder
 ######## Function 42 of 89 ##################
 # Function:         New-GoogleSearch
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4127,7 +4157,7 @@ Export-ModuleMember -Function New-GoogleSearch
 ######## Function 43 of 89 ##################
 # Function:         New-PSGenericList
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Jeff Hicks
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4238,7 +4268,7 @@ Export-ModuleMember -Function New-PSGenericList
 ######## Function 44 of 89 ##################
 # Function:         New-PSModule
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4336,7 +4366,7 @@ Export-ModuleMember -Function New-PSModule
 ######## Function 45 of 89 ##################
 # Function:         New-PSProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4470,7 +4500,7 @@ Export-ModuleMember -Function New-PSProfile
 ######## Function 46 of 89 ##################
 # Function:         New-PSReportingScript
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/09/03 19:42:32
@@ -4684,7 +4714,7 @@ Export-ModuleMember -Function New-PSReportingScript
 ######## Function 47 of 89 ##################
 # Function:         New-PSScript
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4846,7 +4876,7 @@ Export-ModuleMember -Function New-PSScript
 ######## Function 48 of 89 ##################
 # Function:         New-SuggestedInfraName
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -4938,7 +4968,7 @@ Export-ModuleMember -Function New-SuggestedInfraName
 ######## Function 49 of 89 ##################
 # Function:         Publish-ModuleToLocalRepo
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -5015,7 +5045,7 @@ Export-ModuleMember -Function Publish-ModuleToLocalRepo
 ######## Function 50 of 89 ##################
 # Function:         Remove-CIMUserProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -5062,7 +5092,7 @@ Export-ModuleMember -Function Remove-CIMUserProfile
 ######## Function 51 of 89 ##################
 # Function:         Remove-FaultyProfileList
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -5140,7 +5170,7 @@ Export-ModuleMember -Function Remove-FaultyProfileList
 ######## Function 52 of 89 ##################
 # Function:         Remove-HiddenDevice
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -5538,7 +5568,7 @@ Export-ModuleMember -Function Remove-HiddenDevice
 ######## Function 53 of 89 ##################
 # Function:         Remove-UserProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -5617,7 +5647,7 @@ Export-ModuleMember -Function Remove-UserProfile
 ######## Function 54 of 89 ##################
 # Function:         Reset-Module
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/09/18 17:37:57
@@ -5679,7 +5709,7 @@ Export-ModuleMember -Function Reset-Module
 ######## Function 55 of 89 ##################
 # Function:         Reset-PSGallery
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -5770,7 +5800,7 @@ Export-ModuleMember -Function Reset-PSGallery
 ######## Function 56 of 89 ##################
 # Function:         Resolve-SID
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Jeff Hicks
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -5868,7 +5898,7 @@ Export-ModuleMember -Function Resolve-SID
 ######## Function 57 of 89 ##################
 # Function:         Restore-ElevatedShortcut
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -5940,7 +5970,7 @@ Export-ModuleMember -Function Restore-ElevatedShortcut
 ######## Function 58 of 89 ##################
 # Function:         Search-Script
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -6004,7 +6034,7 @@ Export-ModuleMember -Function Search-Script
 ######## Function 59 of 89 ##################
 # Function:         Set-FolderCustomIcon
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -6079,7 +6109,7 @@ Export-ModuleMember -Function Set-FolderCustomIcon
 ######## Function 60 of 89 ##################
 # Function:         Set-PSProjectFile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -6730,7 +6760,7 @@ Export-ModuleMember -Function Set-PSProjectFile
 ######## Function 61 of 89 ##################
 # Function:         Set-PSToolKitSystemSetting
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -7373,7 +7403,7 @@ Export-ModuleMember -Function Set-PSToolKitSystemSetting
 ######## Function 62 of 89 ##################
 # Function:         Set-SharedPSProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -7496,7 +7526,7 @@ Export-ModuleMember -Function Set-SharedPSProfile
 ######## Function 63 of 89 ##################
 # Function:         Set-StaticIP
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -7548,7 +7578,7 @@ Export-ModuleMember -Function Set-StaticIP
 ######## Function 64 of 89 ##################
 # Function:         Set-TempFolder
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -7590,7 +7620,7 @@ Export-ModuleMember -Function Set-TempFolder
 ######## Function 65 of 89 ##################
 # Function:         Set-VSCodeExplorerSortOrder
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -7652,7 +7682,7 @@ Export-ModuleMember -Function Set-VSCodeExplorerSortOrder
 ######## Function 66 of 89 ##################
 # Function:         Set-WindowsAutoLogin
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -7772,7 +7802,7 @@ Export-ModuleMember -Function Set-WindowsAutoLogin
 ######## Function 67 of 89 ##################
 # Function:         Show-ComputerManagement
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -7811,7 +7841,7 @@ Export-ModuleMember -Function Show-ComputerManagement
 ######## Function 68 of 89 ##################
 # Function:         Show-MyPSGalleryModule
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/09/01 06:59:58
@@ -7872,7 +7902,7 @@ Export-ModuleMember -Function Show-MyPSGalleryModule
 ######## Function 69 of 89 ##################
 # Function:         Show-PSToolKit
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -8167,7 +8197,7 @@ Export-ModuleMember -Function Show-PSToolKit
 ######## Function 70 of 89 ##################
 # Function:         Start-PowerShellAsAdmin
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -8237,7 +8267,7 @@ Export-ModuleMember -Function Start-PowerShellAsAdmin
 ######## Function 71 of 89 ##################
 # Function:         Start-PSProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -8419,7 +8449,7 @@ Export-ModuleMember -Function Start-PSProfile
 ######## Function 72 of 89 ##################
 # Function:         Start-PSRoboCopy
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -8540,7 +8570,7 @@ Export-ModuleMember -Function Start-PSRoboCopy
 ######## Function 73 of 89 ##################
 # Function:         Start-PSScriptAnalyzer
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -8700,11 +8730,11 @@ Export-ModuleMember -Function Start-PSScriptAnalyzer
 ######## Function 74 of 89 ##################
 # Function:         Start-PSToolkitSystemInitialize
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
-# ModifiedOn:       2022/10/22 13:54:59
+# ModifiedOn:       2022/10/22 23:38:11
 # Synopsis:         Initialize a blank machine.
 #############################################
  
@@ -8732,9 +8762,9 @@ Start-PSToolkitSystemInitialize -InstallMyModules
 
 #>
 Function Start-PSToolkitSystemInitialize {
-	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Start-PSToolkitSystemInitialize')]
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Start-PSToolkitSystemInitialize')]
 	PARAM(
-		[Parameter(Mandatory,Position=0)]
+		[Parameter(Mandatory, Position = 0)]
 		[string]$GitHubToken,
 		[switch]$LabSetup = $false,
 		[switch]$InstallMyModules = $false,
@@ -8743,110 +8773,137 @@ Function Start-PSToolkitSystemInitialize {
 
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-	Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Powershell Script Execution' -ForegroundColor Cyan
-	Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope Process
-	Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope CurrentUser
+	#region ExecutionPolicy
+	if ((Get-ExecutionPolicy) -notlike 'Unrestricted') {
+		try {
+			Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Powershell Script Execution:' -ForegroundColor Cyan -NoNewline
+			Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope Process -ErrorAction Stop
+			Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope CurrentUser -ErrorAction Stop
+			Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope LocalMachine -ErrorAction Stop
+			Write-Host ' Complete' -ForegroundColor Green
+		} catch {Write-Warning "Error Setting ExecutionPolicy: Message:$($Error[0])"}
+	} else {Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Powershell Script Execution:' -ForegroundColor Cyan -NoNewline; Write-Host ' Already Set' -ForegroundColor Red}
+	#endregion
 
-	Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Powershell Gallery' -ForegroundColor Cyan
+	#region PSRepo
 	if ((Get-PSRepository -Name PSGallery).InstallationPolicy -notlike 'Trusted' ) {
-		$null = Install-PackageProvider Nuget -Force
-		$null = Register-PSRepository -Default -ErrorAction SilentlyContinue
-		$null = Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-	}
+		try {
+			Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell Gallery:' -ForegroundColor Cyan -NoNewline
+			$null = Install-PackageProvider Nuget -Force -ErrorAction Stop
+			$null = Register-PSRepository -Default -ErrorAction Stop
+			$null = Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+			Write-Host ' Complete' -ForegroundColor Green
+		} catch {Write-Warning "Error Setting PSRepository: Message:$($Error[0])"}
+	} else {Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell Gallery:' -ForegroundColor Cyan -NoNewline; Write-Host ' Already Set' -ForegroundColor Red}
+	#endregion
+
+	#region PackageManager
 	Start-Job -ScriptBlock {
-		$PowerShellGet = Get-Module 'PowerShellGet' -ListAvailable | 
-			Sort-Object Version -Descending | 
-				Select-Object -First 1
+		$PowerShellGet = Get-Module 'PowerShellGet' -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1
 
-				if ($PowerShellGet.Version -lt [version]'2.2.5') {
-					Write-Host "`t[Updating]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell PackageManagement' -ForegroundColor Cyan
-					$installOptions = @{
-						Repository = 'PSGallery'
-						Force      = $true
-						Scope      = 'AllUsers'
-					}							
+		if ($PowerShellGet.Version -lt [version]'2.2.5') {
+			Write-Host "`t[Updating]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell PackageManagement' -ForegroundColor Cyan
+			$installOptions = @{
+				Repository = 'PSGallery'
+				Force      = $true
+				Scope      = 'AllUsers'
+			}							
+			try {
+				Install-Module -Name PackageManagement @installOptions
+				Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PackageManagement' -ForegroundColor Cyan -NoNewline; Write-Host 'Complete' -ForegroundColor Green
+			} catch {Write-Warning "Error installing PackageManagement: Message:$($Error[0])"}
+			try {
+				Install-Module -Name PowerShellGet @installOptions
+				Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShellGet' -ForegroundColor Cyan -NoNewline; Write-Host 'Complete' -ForegroundColor Green
+			} catch {Write-Warning "Error installing PowerShellGet: Message:$($Error[0])"}
+		} else {
+			Write-Host "`t[Update]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell PackageManagement' -ForegroundColor Cyan -NoNewline; Write-Host ' Not Needed' -ForegroundColor Red
+		}
+	} | Wait-Job | Receive-Job		
+	#endregion
+
+	#region Needed Modules
+	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Needed Powershell modules' -ForegroundColor Cyan
+	'ImportExcel', 'PSWriteHTML', 'PSWriteColor', 'PSScriptTools', 'PoshRegistry', 'Microsoft.PowerShell.Archive', 'PWSHModule', 'PSPackageMan' | ForEach-Object {		
+		$module = $_
+		if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
+			try {
+				Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module):" -ForegroundColor Cyan -NoNewline
+				Install-Module -Name $module -Scope AllUsers -AllowClobber -ErrorAction stop
+				Write-Host ' Complete' -ForegroundColor Green
+			} catch {Write-Warning "Error installing module $($module): Message:$($Error[0])"}
+		} else {
+			Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module):" -ForegroundColor Cyan -NoNewline; Write-Host ' Already Installed' -ForegroundColor Red
+		}
+	}
+	#endregion
+
+	#region PStoolkit
+	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'PSToolKit Module:' -ForegroundColor Cyan -NoNewline
+	$web = New-Object System.Net.WebClient
+	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-MyModulesFromGitHub.ps1', "$($env:TEMP)\Update-MyModulesFromGitHub.ps1")
+	$full = Get-Item "$($env:TEMP)\Update-MyModulesFromGitHub.ps1"
+	Import-Module $full.FullName -Force
+	Update-MyModulesFromGitHub -Modules PSToolkit -AllUsers
+	Remove-Item $full.FullName
+	Import-Module PSToolKit -Force
+	Write-Host ' Complete' -ForegroundColor Green
+	#endregion
+
+	#region MyModules
+	if ($InstallMyModules) {
+		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Installing My Modules' -ForegroundColor Cyan
+		Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} | ForEach-Object {
+			$module = $_
+			Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
+			if (-not(Get-Module $module.name) -and -not(Get-Module $module.name -ListAvailable)) {
+				try {
+					Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name):" -ForegroundColor Cyan -NoNewline
+					Install-Module -Name $module.name -Scope AllUsers -AllowClobber -ErrorAction stop
+					Write-Host ' Complete' -ForegroundColor Green
+				} catch {Write-Warning "Error installing module $($module.name):  Message:$($Error[0])"}
+			} else {
+				$LocalMod = Get-Module $module.name -ListAvailable | Sort-Object -Property Version | Select-Object -First 1
+				if (($LocalMod[0].Version) -lt $module.Version) {
 					try {
-						Install-Module -Name PackageManagement @installOptions
-						Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PackageManagement' -ForegroundColor Cyan -NoNewline; Write-Host 'Complete' -ForegroundColor Green
-					} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
-					try {
-						Install-Module -Name PowerShellGet @installOptions
-						Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShellGet' -ForegroundColor Cyan -NoNewline; Write-Host 'Complete' -ForegroundColor Green
-					} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
-				} else {
-					Write-Host "`t[Update]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell PackageManagement' -ForegroundColor Cyan -NoNewline; Write-Host ' Not Needed' -ForegroundColor Red
-				}
-			} | Wait-Job | Receive-Job
-
-			Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Needed Powershell modules' -ForegroundColor Cyan
-
-			'ImportExcel', 'PSWriteHTML', 'PSWriteColor', 'PSScriptTools', 'PoshRegistry', 'Microsoft.PowerShell.Archive', 'PWSHModule', 'PSPackageMan' | ForEach-Object {		
-				$module = $_
-				if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
-					try {
-						Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module)" -ForegroundColor Cyan
-						Install-Module -Name $module -Scope AllUsers -AllowClobber -ErrorAction stop
-					} catch {Write-Warning "Error installing module $($module): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
-				}
+						Write-Host "`t[Upgrading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name):" -ForegroundColor Cyan -NoNewline
+						Update-Module -Name $module.name -Scope AllUsers -Force
+						Write-Host ' Complete' -ForegroundColor Green
+					} catch {Write-Warning "Error installing module $($module.name):  Message:$($Error[0])"}
+				} else {Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name):" -ForegroundColor Cyan -NoNewline; Write-Host ' Already Installed' -ForegroundColor Red}
 			}
+		}
+	}
+	#endregion
 
-			Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'PSToolKit Module' -ForegroundColor Cyan
-			$web = New-Object System.Net.WebClient
-			$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-MyModulesFromGitHub.ps1', "$($env:TEMP)\Update-MyModulesFromGitHub.ps1")
-			$full = Get-Item "$($env:TEMP)\Update-MyModulesFromGitHub.ps1"
-			Import-Module $full.FullName -Force
-			Update-MyModulesFromGitHub -Modules PSToolkit -AllUsers
-			Remove-Item $full.FullName
+	#region Lab Setup
+	if ($LabSetup) {
+		New-PSProfile
+		Set-PSToolKitSystemSetting -RunAll
+		Install-PWSHModule -GitHubUserID smitpi -GitHubToken $GitHubToken -ListName BaseModules -Scope AllUsers
+		Install-ChocolateyClient
+		Install-VMWareTool
+		#Install-PowerShell7x
+		Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID smitpi -GitHubToken $GitHubToken
+		Install-RSAT
+	}
+	#endregion
 
-			Import-Module PSToolKit -Force
-			if ($InstallMyModules) {
-				Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Installing My Modules' -ForegroundColor Cyan
-				Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} | ForEach-Object {
-					$module = $_
-					Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
-					if (-not(Get-Module $module.name) -and -not(Get-Module $module.name -ListAvailable)) {
-						try {
-							Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
-							Install-Module -Name $module.name -Scope AllUsers -AllowClobber -ErrorAction stop
-						} catch {Write-Warning "Error installing module $($module.name): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
-					} else {
-						$LocalMod = Get-Module $module.name
-						if (-not($LocalMod)) {$LocalMod = Get-Module $module.name -ListAvailable}
-						if (($LocalMod[0].Version) -lt $module.Version) {
-							try {
-								Write-Host "`t`t[Upgrading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
-								Update-Module -Name $module.name -Scope AllUsers -Force
-							} catch {Write-Warning "Error installing module $($module.name): `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
-						}
-					}
-				}
-			}
+	#region Pending Reboot
+	if ($PendingReboot) {
+		Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Pending Reboot for $($env:COMPUTERNAME)" -ForegroundColor Cyan
+		if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot -like 'True') {
+			Write-Host "`t[Reboot Needed]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Rebooting in 60 sec' -ForegroundColor DarkRed
+			Start-Sleep 60
+			Restart-Computer -Force
+		} else {
+			Write-Host '[Reboot]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Not Necessary, continuing' -ForegroundColor Cyan
+		}
+	}
+	#endregion
 
-			if ($LabSetup) {
-				New-PSProfile
-				Set-PSToolKitSystemSetting -RunAll
-				Install-PWSHModule -GitHubUserID smitpi -GitHubToken $GitHubToken -ListName BaseModules -Scope AllUsers
-				Install-ChocolateyClient
-				Install-VMWareTool
-				Install-PowerShell7x
-				Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID smitpi -GitHubToken $GitHubToken
-				Install-RSAT
-				Install-MSUpdate
-			}
-
-			if ($PendingReboot) {
-				Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Pending Reboot for $($env:COMPUTERNAME)" -ForegroundColor Cyan
-				if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot -like 'True') {
-					Write-Host "`t[Reboot Needed]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Rebooting in 60 sec' -ForegroundColor DarkRed
-					Start-Sleep 60
-					Restart-Computer -Force
-				} else {
-					Write-Host '[Reboot]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Not Necessary, continuing' -ForegroundColor Cyan
-				}
-			}
-
-			Write-Host '[Complete] ' -NoNewline -ForegroundColor Yellow; Write-Host 'System Initialization' -ForegroundColor DarkRed
-		} #end Function
+	Write-Host '[Complete] ' -NoNewline -ForegroundColor Yellow; Write-Host 'System Initialization' -ForegroundColor DarkRed
+} #end Function
  
 Export-ModuleMember -Function Start-PSToolkitSystemInitialize
 #endregion
@@ -8855,7 +8912,7 @@ Export-ModuleMember -Function Start-PSToolkitSystemInitialize
 ######## Function 75 of 89 ##################
 # Function:         Test-CitrixCloudConnector
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -8962,7 +9019,7 @@ Export-ModuleMember -Function Test-CitrixCloudConnector
 ######## Function 76 of 89 ##################
 # Function:         Test-CitrixVDAPort
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9064,7 +9121,7 @@ Export-ModuleMember -Function Test-CitrixVDAPort
 ######## Function 77 of 89 ##################
 # Function:         Test-IsFileOpen
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9168,7 +9225,7 @@ Export-ModuleMember -Function Test-IsFileOpen
 ######## Function 78 of 89 ##################
 # Function:         Test-PendingReboot
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9352,7 +9409,7 @@ Export-ModuleMember -Function Test-PendingReboot
 ######## Function 79 of 89 ##################
 # Function:         Test-PSRemote
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9412,7 +9469,7 @@ Export-ModuleMember -Function Test-PSRemote
 ######## Function 80 of 89 ##################
 # Function:         Test-SystemOnline
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/10/12 00:43:56
@@ -9498,7 +9555,7 @@ Export-ModuleMember -Function Test-SystemOnline
 ######## Function 81 of 89 ##################
 # Function:         Update-ListOfDDC
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9565,7 +9622,7 @@ Export-ModuleMember -Function Update-ListOfDDC
 ######## Function 82 of 89 ##################
 # Function:         Update-LocalHelp
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9614,11 +9671,11 @@ Export-ModuleMember -Function Update-LocalHelp
 ######## Function 83 of 89 ##################
 # Function:         Update-MyModulesFromGitHub
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
-# ModifiedOn:       2022/10/15 09:39:55
+# ModifiedOn:       2022/10/22 23:39:25
 # Synopsis:         Updates my modules
 #############################################
  
@@ -9715,7 +9772,7 @@ Function Update-MyModulesFromGitHub {
 			Write-Host "`t[Downloading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($ModuleName): " -ForegroundColor DarkRed
 			if (Get-Command Start-BitsTransfer) {
 				try {
-					Start-BitsTransfer -DisplayName "$($ModuleName) Download" -Source "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -Destination "$env:tmp\$($ModuleName).zip" -TransferType Download -ProxyAuthentication Basic -RetryInterval 60 -RetryTimeout 60 -ErrorAction Stop
+					Start-BitsTransfer -DisplayName "$($ModuleName) Download" -Source "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -Destination "$env:tmp\$($ModuleName).zip" -TransferType Download -ProxyAuthentication Basic
 					
 				} catch {
 					Write-Warning 'Bits Transer failed, defaulting to webrequest'
@@ -9768,7 +9825,7 @@ Export-ModuleMember -Function Update-MyModulesFromGitHub
 ######## Function 84 of 89 ##################
 # Function:         Update-PSDefaultParameter
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/17 13:39:28
@@ -9843,7 +9900,7 @@ Export-ModuleMember -Function Update-PSDefaultParameter
 ######## Function 85 of 89 ##################
 # Function:         Update-PSModuleInfo
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -9949,7 +10006,7 @@ Export-ModuleMember -Function Update-PSModuleInfo
 ######## Function 86 of 89 ##################
 # Function:         Write-Ascii
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Joakim Svendsen
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -10347,7 +10404,7 @@ Export-ModuleMember -Function Write-Ascii
 ######## Function 87 of 89 ##################
 # Function:         Write-Message
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35
@@ -10504,7 +10561,7 @@ Export-ModuleMember -Function Write-Message
 ######## Function 88 of 89 ##################
 # Function:         Write-PSReports
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/09/06 14:10:02
@@ -10679,7 +10736,7 @@ Export-ModuleMember -Function Write-PSReports
 ######## Function 89 of 89 ##################
 # Function:         Write-PSToolKitLog
 # Module:           PSToolKit
-# ModuleVersion:    0.2.2
+# ModuleVersion:    0.2.3
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/08/16 10:02:35

@@ -12,9 +12,16 @@ Show stats about my published modules.
 
 ## SYNTAX
 
+### InLastDays (Default)
 ```
-Get-MyPSGalleryStat [[-GitHubUserID] <String>] [[-GitHubToken] <String>] [[-daysToReport] <Int32>]
+Get-MyPSGalleryStat [-GitHubUserID <String>] [-GitHubToken <String>] [-daysToReport <Int32>]
  [<CommonParameters>]
+```
+
+### DateRange
+```
+Get-MyPSGalleryStat [-GitHubUserID <String>] [-GitHubToken <String>] [-Startdate <DateTime>]
+ [-EndDate <DateTime>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,7 +45,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -53,7 +60,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -64,12 +71,42 @@ Report on this amount of days.
 
 ```yaml
 Type: Int32
-Parameter Sets: (All)
+Parameter Sets: InLastDays
 Aliases:
 
 Required: False
-Position: 3
+Position: Named
 Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Startdate
+{{ Fill Startdate Description }}
+
+```yaml
+Type: DateTime
+Parameter Sets: DateRange
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -EndDate
+{{ Fill EndDate Description }}
+
+```yaml
+Type: DateTime
+Parameter Sets: DateRange
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
