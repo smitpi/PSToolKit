@@ -82,15 +82,13 @@ Function Update-MyModulesFromGitHub {
 		if ($AllUsers) {
 			if (($PSVersionTable).PSEdition -eq 'Core') {
 				$ModulePath = [IO.Path]::Combine($env:ProgramFiles, 'PowerShell', 'Modules', "$($ModuleName)")
-			}
-			else {
+			} else {
 				$ModulePath = [IO.Path]::Combine($env:ProgramFiles, 'WindowsPowerShell', 'Modules', "$($ModuleName)")
 			}
 		} else {
 			if (($PSVersionTable).PSEdition -eq 'Core') {
 				$ModulePath = [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'PowerShell', 'Modules', "$($ModuleName)")
-		}
-			else {
+			} else {
 				$ModulePath = [IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'WindowsPowerShell', 'Modules', "$($ModuleName)")
 			}
 		}
@@ -102,7 +100,7 @@ Function Update-MyModulesFromGitHub {
 		$ModInstFolder = Get-Module $ModuleName -ListAvailable | Where-Object {$_.path -notlike "$($ModulePath)*"}
 		foreach ($UnInstMod in $ModInstFolder) {
 			try {
-			Join-Path -Path $UnInstMod.Path -ChildPath ..\.. -Resolve | Remove-Item -Force -Recurse -ErrorAction Stop
+				Join-Path -Path $UnInstMod.Path -ChildPath ..\.. -Resolve | Remove-Item -Force -Recurse -ErrorAction Stop
 			} catch {Write-Warning "Error removing $($UnInstMod.Path): Message:$($Error[0])"}
 		}
 
@@ -135,10 +133,10 @@ Function Update-MyModulesFromGitHub {
 			Write-Host "`t[Downloading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($ModuleName): " -ForegroundColor DarkRed
 			if (Get-Command Start-BitsTransfer) {
 				try {
-					Start-BitsTransfer -DisplayName "$($ModuleName) Download" -Source "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -Destination "$env:tmp\$($ModuleName).zip" -TransferType Download -ProxyAuthentication Basic
-					
+					Start-BitsTransfer -DisplayName "$($ModuleName)-Download" -Source "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -Destination "$env:tmp\$($ModuleName).zip" -TransferType Download -ProxyAuthentication Basic -ErrorAction Stop
 				} catch {
 					Write-Warning 'Bits Transer failed, defaulting to webrequest'
+					Get-BitsTransfer -Name "$($ModuleName)-Download" | Remove-BitsTransfer
 					Invoke-WebRequest -Uri "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -OutFile "$env:tmp\$($ModuleName).zip"
 				}
 			} else {
