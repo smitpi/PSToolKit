@@ -61,12 +61,20 @@ Get-MyPSGalleryStats
 
 #>
 Function Get-MyPSGalleryStat {
-    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Get-MyPSGalleryStats')]
+    [Cmdletbinding(DefaultParameterSetName='InLastDays',HelpURI = 'https://smitpi.github.io/PSToolKit/Get-MyPSGalleryStats')]
     [OutputType([System.Object[]])]
     PARAM(
         [string]$GitHubUserID,
         [string]$GitHubToken,
-        [int]$daysToReport
+
+        [Parameter(ParameterSetName='InLastDays')]
+        [int]$daysToReport,
+
+        [Parameter(ParameterSetName='DateRange')]
+        [datetime]$Startdate,
+
+        [Parameter(ParameterSetName='DateRange')]
+        [datetime]$EndDate
     )
 
     try {
@@ -91,12 +99,33 @@ Function Get-MyPSGalleryStat {
 
     } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 
-    $EndDays = (Get-Date).AddDays(-$daysToReport)
-   
-    $GalGrouped = $GalStats | Where-Object {$_.datecollected -gt $EndDays} | Group-Object -Property DateCollected
+    if ($daysToReport) {
+        $EndDays = (Get-Date).AddDays(-$daysToReport)
+        $filter = $GalStats | Where-Object {[datetime]$_.datecollected -gt $EndDays} | Group-Object -Property title
+    } else {
+        $filter = $GalStats | Where-Object {[datetime]$_.datecollected -lt $EndDate -and [datetime]$_.datecollected -gt $Startdate} | Group-Object -Property title
+    }
+    
+    $span = New-TimeSpan -Start $filter[0].Group[0].DateCollected -End $filter[0].Group[-1].DateCollected
+
+    [System.Collections.generic.List[PSObject]]$SumObject = @()
+    foreach ($mod in $filter) {
+        $SumObject.Add([PSCustomObject]@{
+         Name      = $mod.name
+         Span      = [math]::Round($span.TotalDays)
+         Start     = (get-date([datetime]$mod.Group[0].DateCollected) -Format 'dd/MMM/yyyy')
+         End       = (get-date([datetime]$mod.Group[-1].DateCollected) -Format 'dd/MMM/yyyy')
+         NewDownloads = ([int]$mod.group[-1].downloadCount - [int]$mod.group[0].downloadCount)
+         TotalDownloads = [int]$mod.group[-1].downloadCount
+    })
+    }
+    $SumObject
+
+    <#
+    $GalGrouped = $GalStats | Where-Object {[datetime]$_.datecollected -gt $EndDays} | Group-Object -Property DateCollected
     $GalGrouped.Group | Select-Object datecollected, title, NormalizedVersion, updated, versionDownloadCount, downloadCount | Format-Table -AutoSize -GroupBy datecollected
 
-    #$modules = $GalGrouped.group.title | Sort-Object -Unique
+    $modules = $GalGrouped.group.title | Sort-Object -Unique
     $dates = $GalGrouped.group.datecollected | Sort-Object -Unique
 
     [System.Collections.generic.List[PSObject]]$SumObject = @()
@@ -121,6 +150,7 @@ Function Get-MyPSGalleryStat {
             Download = ($GalMod[-1].downloadCount - $GalMod[0].downloadCount)
         } 
     } 
+    #>
 } #end Function
 
 
