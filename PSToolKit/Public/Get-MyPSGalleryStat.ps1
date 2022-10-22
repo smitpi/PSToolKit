@@ -55,6 +55,11 @@ GitHub Token with access to the Users' Gist.
 .PARAMETER daysToReport
 Report on this amount of days.
 
+.PARAMETER Startdate
+A custom start date for the report.
+
+.PARAMETER EndDate
+A custom end date for the report.
 
 .EXAMPLE
 Get-MyPSGalleryStats

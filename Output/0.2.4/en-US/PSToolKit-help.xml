@@ -2330,7 +2330,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Startdate</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Startdate Description }}</maml:para>
+            <maml:para>A custom start date for the report.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
           <dev:type>
@@ -2342,7 +2342,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>EndDate</maml:name>
           <maml:description>
-            <maml:para>{{ Fill EndDate Description }}</maml:para>
+            <maml:para>A custom end date for the report.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
           <dev:type>
@@ -2393,7 +2393,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Startdate</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Startdate Description }}</maml:para>
+          <maml:para>A custom start date for the report.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
         <dev:type>
@@ -2405,7 +2405,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>EndDate</maml:name>
         <maml:description>
-          <maml:para>{{ Fill EndDate Description }}</maml:para>
+          <maml:para>A custom end date for the report.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
         <dev:type>

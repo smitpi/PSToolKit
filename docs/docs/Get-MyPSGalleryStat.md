@@ -82,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -Startdate
-{{ Fill Startdate Description }}
+A custom start date for the report.
 
 ```yaml
 Type: DateTime
@@ -97,7 +97,7 @@ Accept wildcard characters: False
 ```
 
 ### -EndDate
-{{ Fill EndDate Description }}
+A custom end date for the report.
 
 ```yaml
 Type: DateTime
