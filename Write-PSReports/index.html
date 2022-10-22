@@ -100,10 +100,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>Creates a excel or html report</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>$condition = New-ConditionalText -Text &#39;Warning&#39; -ConditionalTextColor black -BackgroundColor orange -Range &#39;E:E&#39; -PatternType Gray125
+<div class="highlight"><pre><span></span><code>[System.Collections.generic.List[PSObject]]$Conditions = @()
 </code></pre></div>
-<p>$condition += New-ConditionalText -Text 'Error' -ConditionalTextColor white -BackgroundColor red -Range 'E:E' -PatternType Gray125 </p>
-<p>Write-PSReports -InputObject $data -ReportTitle "Temp Data" -Export HTML -ReportPath C:\temp</p>
+<p>$Conditions.Add((New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor Yellow -Range 'E:E' ))
+$Conditions.Add((New-ConditionalText -Text 'Error' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' ))
+$Conditions.Add((New-ConditionalText -Text 'Critical' -ConditionalTextColor white -BackgroundColor Red -Range 'E:E' ))</p>
+<p>Write-PSReports -InputObject $report -ReportTitle 'Windows Events' -Export All -ReportPath C:\temp -ExcelConditionalText $Conditions</p>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-inputobject">-InputObject</h3>
 <p>Data for the report.</p>
