@@ -153,7 +153,7 @@ Function Start-PSToolkitSystemInitialize {
 
 	#region MyModules
 	if ($InstallMyModules) {
-		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Installing My Modules`n`n" -ForegroundColor Cyan
+		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "My Modules`n`n" -ForegroundColor Cyan
 		Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} | ForEach-Object {
 			$module = $_
 			Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
@@ -179,13 +179,25 @@ Function Start-PSToolkitSystemInitialize {
 
 	#region Lab Setup
 	if ($LabSetup) {
-		New-PSProfile
+		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "System Settings`n`n" -ForegroundColor Cyan
 		Set-PSToolKitSystemSetting -RunAll
+
+		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "New PS Profile`n`n" -ForegroundColor Cyan
+		New-PSProfile
+
+		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Modules`n`n" -ForegroundColor Cyan
 		Install-PWSHModule -GitHubUserID smitpi -GitHubToken $GitHubToken -ListName BaseModules -Scope AllUsers
+
+		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Chocolatey Client`n`n" -ForegroundColor Cyan
 		Install-ChocolateyClient
+
+		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "VMWare Tools`n`n" -ForegroundColor Cyan
 		Install-VMWareTool
-		#Install-PowerShell7x
+
+		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Apps`n`n" -ForegroundColor Cyan
 		Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID smitpi -GitHubToken $GitHubToken
+		
+		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "RSAT`n`n" -ForegroundColor Cyan
 		Install-RSAT
 	}
 	#endregion
