@@ -86,6 +86,7 @@ function New-PSModule {
 		New-Item -Path $ModuleFullPath -ItemType Directory
 		New-Item -Path $ModuleFullPath\Private -ItemType Directory
 		New-Item -Path $ModuleFullPath\Public -ItemType Directory
+		New-Item -Path $ModuleFullPath\Control_Scripts -ItemType Directory
 		New-Item -Path $ModuleFullPath\en-US -ItemType Directory
 		New-Item -Path $ModuleFullPath\docs -ItemType Directory
 		#Create the module and related files

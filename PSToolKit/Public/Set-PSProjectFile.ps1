@@ -122,6 +122,7 @@ Function Set-PSProjectFile {
 	$VersionFilePath = [IO.Path]::Combine($ModuleBase, 'Version.json')
 	$ModulePublicFunctions = [IO.Path]::Combine($module.ModuleBase, 'Public') | Get-Item
 	$ModulePrivateFunctions = [IO.Path]::Combine($module.ModuleBase, 'Private') | Get-Item
+	$ModuleControlScripts = [IO.Path]::Combine($module.ModuleBase, 'Control_Scripts') | Get-Item -ErrorAction SilentlyContinue
 	$Modulemkdocs = [IO.Path]::Combine($ModuleBase, 'docs', 'mkdocs.yml')
 	$ModuleIndex = [IO.Path]::Combine($ModuleBase, 'docs', 'docs', 'index.md')
 	$ScriptInfoArchive = [IO.Path]::Combine($ModuleBase, 'ScriptInfo.zip')
@@ -370,6 +371,7 @@ Function Set-PSProjectFile {
 	if ($null -notlike $PrivateFiles) {
 		Copy-Item -Path $ModulePrivateFunctions.FullName -Destination $ModuleOutput.fullname -Recurse -Exclude *.ps1 -Force
 	}
+	Copy-Item -Path $ModuleControlScripts.FullName -Destination $ModuleOutput.fullname -Recurse -Force -ErrorAction SilentlyContinue
 
 	$private = @(Get-ChildItem -Path "$($ModulePrivateFunctions.FullName)\*.ps1" -ErrorAction Stop | Sort-Object -Property Name)
 	$public = @(Get-ChildItem -Path "$($ModulePublicFunctions.FullName)\*.ps1" -Recurse -ErrorAction Stop | Sort-Object -Property Name)
