@@ -79,16 +79,13 @@ Function New-PSProfile {
 
     foreach ($folder in $folders) {
         $configfolder = [IO.Path]::Combine($folder.FullName, 'Config')
-        $BCKFolder = [IO.Path]::Combine($folder.FullName, 'Config', "$(Get-Date -Format yyyy.MM.dd_HH.mm)")
 
         $Profilefiles = Get-ChildItem -File "$($folder.FullName)\*profile*.ps1"
         if ($Profilefiles) {
-            if (-not(Test-Path $configfolder)) {New-Item $configfolder -ItemType directory -Force}
-            $BCKDest = New-Item $BCKFolder -ItemType directory -Force
-            $Profilefiles | Move-Item -Destination $BCKDest.FullName
+            if (-not(Test-Path $configfolder)) {New-Item $configfolder -ItemType directory -Force | Out-Null}
 
-            $BCKDest.FullName | Compress-Archive -DestinationPath (Join-Path -Path $configfolder -ChildPath 'NewPSProfile-BCK.zip') -Update
-            $BCKDest.FullName | Remove-Item -Recurse -Force
+            $Profilefiles | Compress-Archive -DestinationPath (Join-Path -Path $configfolder -ChildPath "NewPSProfile-BCK-$(Get-Date -Format 'dd.MMM.yyyy_HH\hmm').zip")
+            $Profilefiles | Remove-Item -Force
         }
 
         $NewFile = @"
@@ -156,8 +153,6 @@ function prompt {
         Write-Color '[Created]', 'Profile :', ([IO.Path]::Combine($folder.FullName, $ise)) -Color Cyan, Gray, Green
         Write-Color '[Created]', 'Profile :', ([IO.Path]::Combine($folder.FullName, $ps)) -Color Cyan, Gray, Green
         Write-Color '[Created]', 'Profile :', ([IO.Path]::Combine($folder.FullName, $vscode)) -Color Cyan, Gray, Green
-
-
     }
 
 } #end Function

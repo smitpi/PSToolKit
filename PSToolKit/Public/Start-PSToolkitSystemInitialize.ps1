@@ -141,7 +141,7 @@ Function Start-PSToolkitSystemInitialize {
 	#endregion
 
 	#region PStoolkit
-	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'PSToolKit Module:' -ForegroundColor Cyan -NoNewline
+	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "PSToolKit Module`n`n" -ForegroundColor Cyan
 	$web = New-Object System.Net.WebClient
 	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-MyModulesFromGitHub.ps1', "$($env:TEMP)\Update-MyModulesFromGitHub.ps1")
 	$full = Get-Item "$($env:TEMP)\Update-MyModulesFromGitHub.ps1"
@@ -149,12 +149,11 @@ Function Start-PSToolkitSystemInitialize {
 	Update-MyModulesFromGitHub -Modules PSToolkit -AllUsers
 	Remove-Item $full.FullName
 	Import-Module PSToolKit -Force
-	Write-Host ' Complete' -ForegroundColor Green
 	#endregion
 
 	#region MyModules
 	if ($InstallMyModules) {
-		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Installing My Modules' -ForegroundColor Cyan
+		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Installing My Modules`n`n" -ForegroundColor Cyan
 		Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} | ForEach-Object {
 			$module = $_
 			Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
