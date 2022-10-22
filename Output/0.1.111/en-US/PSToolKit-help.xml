@@ -770,16 +770,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>$rr = [PSCustomObject]@{
-	Host         = 'esx00'
-	HostName     = '192.168.10.19'
-	User         = 'root'
-	Port         = '22'
-	IdentityFile = 'C:\Users\xx\.ssh\yyy.id'
-}
-Edit-SSHConfigFile -AddObject $rr</dev:code>
+        <dev:code>$rr = [PSCustomObject]@{</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Host         = 'esx00' 	HostName     = '192.168.10.19' 	User         = 'root' 	Port         = '22' 	IdentityFile = 'C:\Users\xx\.ssh\yyy.id' } Edit-SSHConfigFile -AddObject $rr</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1970,10 +1963,9 @@ Edit-SSHConfigFile -AddObject $rr</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>. .\Get-FolderSize.ps1
-PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
+        <dev:code>. .\Get-FolderSize.ps1</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
@@ -2669,11 +2661,11 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>PSObject</command:noun>
       <maml:description>
-        <maml:para>Show all Object Methods</maml:para>
+        <maml:para>Show all Object Methods and Properties.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Show all Object Methods</maml:para>
+      <maml:para>Show all Object Methods and Properties.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2681,7 +2673,7 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
           <maml:name>Data</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Data Description }}</maml:para>
+            <maml:para>The Object to Report on.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Object[]</command:parameterValue>
           <dev:type>
@@ -2696,7 +2688,7 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
         <maml:name>Data</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Data Description }}</maml:para>
+          <maml:para>The Object to Report on.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Object[]</command:parameterValue>
         <dev:type>
@@ -2725,7 +2717,7 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-PSObject -Export HTML -ReportPath C:\temp</dev:code>
+        <dev:code>Get-PSObject (get-item .)</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -3134,12 +3126,12 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
           <maml:description>
             <maml:para>Export results</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
-            <maml:name>String</maml:name>
+            <maml:name>String[]</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>Host</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ReportPath</maml:name>
@@ -3197,12 +3189,12 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
         <maml:description>
           <maml:para>Export results</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
-          <maml:name>String</maml:name>
+          <maml:name>String[]</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>Host</dev:defaultValue>
+        <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ReportPath</maml:name>
@@ -5472,58 +5464,51 @@ PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Lists all devices
-. Remove-HiddenDevices -listDevicesOnly</dev:code>
+        <dev:code>Lists all devices</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>. Remove-HiddenDevices -listDevicesOnly</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Save the list of devices as an object
-$Devices = . Remove-HiddenDevices -listDevicesOnly</dev:code>
+        <dev:code>Save the list of devices as an object</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>$Devices = . Remove-HiddenDevices -listDevicesOnly</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Lists all 'ghost' devices
-. Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
+        <dev:code>Lists all 'ghost' devices</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>. Remove-HiddenDevices -listGhostDevicesOnly</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-        <dev:code>Save the list of 'ghost' devices as an object
-$ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
+        <dev:code>Save the list of 'ghost' devices as an object</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>$ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-        <dev:code>Remove all ghost devices EXCEPT any devices that have "Intel" or "Citrix" in their friendly name
-. Remove-HiddenDevices -filterByFriendlyName @("Intel","Citrix")</dev:code>
+        <dev:code>Remove all ghost devices EXCEPT any devices that have "Intel" or "Citrix" in their friendly name</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>. Remove-HiddenDevices -filterByFriendlyName @("Intel","Citrix")</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
-        <dev:code>Remove all ghost devices EXCEPT any devices that are apart of the classes "LegacyDriver" or "Processor"
-. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor")</dev:code>
+        <dev:code>Remove all ghost devices EXCEPT any devices that are apart of the classes "LegacyDriver" or "Processor"</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor")</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
-        <dev:code>Remove all ghost devices EXCEPT for devices with a friendly name of "Intel" or "Citrix" or with a class of "LegacyDriver" or "Processor"
-. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor") -filterByFriendlyName @("Intel","Citrix")</dev:code>
+        <dev:code>Remove all ghost devices EXCEPT for devices with a friendly name of "Intel" or "Citrix" or with a class of "LegacyDriver" or "Processor"</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor") -filterByFriendlyName @("Intel","Citrix")</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -7468,7 +7453,7 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Collections.Generic.List`1[[System.Management.Automation.PSObject, System.Management.Automation, Version=7.2.7.500, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]</maml:name>
+          <maml:name>System.Collections.Generic.List`1[[System.Management.Automation.PSObject, System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -8338,7 +8323,7 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>GitHubToken</maml:name>
           <maml:description>
-            <maml:para>{{ Fill GitHubToken Description }}</maml:para>
+            <maml:para>Token used to install modules and apps.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -8386,7 +8371,7 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>GitHubToken</maml:name>
         <maml:description>
-          <maml:para>{{ Fill GitHubToken Description }}</maml:para>
+          <maml:para>Token used to install modules and apps.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -10129,6 +10114,18 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ExcelConditionalText</maml:name>
+          <maml:description>
+            <maml:para>Add Conditional text color to the cells.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
+          <dev:type>
+            <maml:name>PSObject</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Export</maml:name>
           <maml:description>
             <maml:para>Export the result to a report file. (Excel or html5 or normal html).</maml:para>
@@ -10191,6 +10188,18 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>ExcelConditionalText</maml:name>
+        <maml:description>
+          <maml:para>Add Conditional text color to the cells.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
+        <dev:type>
+          <maml:name>PSObject</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Export</maml:name>
         <maml:description>
           <maml:para>Export the result to a report file. (Excel or html5 or normal html).</maml:para>
@@ -10246,9 +10255,10 @@ $ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Write-PSReports -InputObject $data -ReportTitle "Temp Data" -Export HTML -ReportPath C:\temp</dev:code>
+        <dev:code>$condition = New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' -PatternType Gray125</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>$condition += New-ConditionalText -Text 'Error' -ConditionalTextColor white -BackgroundColor red -Range 'E:E' -PatternType Gray125 </maml:para>
+          <maml:para>Write-PSReports -InputObject $data -ReportTitle "Temp Data" -Export HTML -ReportPath C:\temp</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

@@ -42,13 +42,16 @@ Created [15/10/2022_09:55] Initial Script
 
 <#
 .SYNOPSIS
-Show all Object Methods
+Show all Object Methods and Properties.
 
 .DESCRIPTION
-Show all Object Methods
+Show all Object Methods and Properties.
+
+.PARAMETER Data
+The Object to Report on.
 
 .EXAMPLE
-Get-PSObject -Export HTML -ReportPath C:\temp
+Get-PSObject (get-item .)
 
 #>
 Function Get-PSObject {

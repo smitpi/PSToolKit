@@ -51,7 +51,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Get-NestedADGroupMember`](https://smitpi.github.io/PSToolKit/Get-NestedADGroupMember) -- Extract users from an AD group recursive, 4 levels deep.
 - [`Get-ProcessPerformance`](https://smitpi.github.io/PSToolKit/Get-ProcessPerformance) -- Gets the top 10 processes by CPU %
 - [`Get-PropertiesToCSV`](https://smitpi.github.io/PSToolKit/Get-PropertiesToCSV) -- Get member data of an object. Use it to create other PSObjects.
-- [`Get-PSObject`](https://smitpi.github.io/PSToolKit/Get-PSObject) -- Show all Object Methods
+- [`Get-PSObject`](https://smitpi.github.io/PSToolKit/Get-PSObject) -- Show all Object Methods and Properties.
 - [`Get-SoftwareAudit`](https://smitpi.github.io/PSToolKit/Get-SoftwareAudit) -- Connects to a remote hosts and collect installed software details
 - [`Get-SystemInfo`](https://smitpi.github.io/PSToolKit/Get-SystemInfo) -- Get system details of a remote device
 - [`Get-SystemUptime`](https://smitpi.github.io/PSToolKit/Get-SystemUptime) -- Calculates the uptime of a system

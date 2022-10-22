@@ -13,8 +13,8 @@ Creates a excel or html report
 ## SYNTAX
 
 ```
-Write-PSReports [-InputObject] <PSObject> [-ReportTitle] <String> [-Export <String[]>]
- [-ReportPath <DirectoryInfo>] [-OpenReportsFolder] [<CommonParameters>]
+Write-PSReports [-InputObject] <PSObject> [-ReportTitle] <String> [-ExcelConditionalText <PSObject>]
+ [-Export <String[]>] [-ReportPath <DirectoryInfo>] [-OpenReportsFolder] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,8 +24,12 @@ Creates a excel or html report
 
 ### EXAMPLE 1
 ```
-Write-PSReports -InputObject $data -ReportTitle "Temp Data" -Export HTML -ReportPath C:\temp
+$condition = New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' -PatternType Gray125
 ```
+
+$condition += New-ConditionalText -Text 'Error' -ConditionalTextColor white -BackgroundColor red -Range 'E:E' -PatternType Gray125 
+
+Write-PSReports -InputObject $data -ReportTitle "Temp Data" -Export HTML -ReportPath C:\temp
 
 ## PARAMETERS
 
@@ -54,6 +58,21 @@ Aliases:
 
 Required: True
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ExcelConditionalText
+Add Conditional text color to the cells.
+
+```yaml
+Type: PSObject
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -56,6 +56,9 @@ Will reboot the device if it is needed.
 .PARAMETER InstallMyModules
 Install my other published modules.
 
+.PARAMETER GitHubToken
+Token used to install modules and apps.
+
 .EXAMPLE
 Start-PSToolkitSystemInitialize -InstallMyModules
 

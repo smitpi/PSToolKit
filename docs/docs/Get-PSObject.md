@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-PSObject
 
 ## SYNOPSIS
-Show all Object Methods
+Show all Object Methods and Properties.
 
 ## SYNTAX
 
@@ -17,19 +17,19 @@ Get-PSObject [[-Data] <Object[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Show all Object Methods
+Show all Object Methods and Properties.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-PSObject -Export HTML -ReportPath C:\temp
+Get-PSObject (get-item .)
 ```
 
 ## PARAMETERS
 
 ### -Data
-{{ Fill Data Description }}
+The Object to Report on.
 
 ```yaml
 Type: Object[]

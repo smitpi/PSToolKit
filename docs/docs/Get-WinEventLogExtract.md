@@ -13,7 +13,7 @@ Extract Event logs of a server list, and create html / excel report
 ## SYNTAX
 
 ```
-Get-WinEventLogExtract [-ComputerName] <String[]> [-Days] <Int32> [-ErrorLevel] <String> [-Export <String>]
+Get-WinEventLogExtract [-ComputerName] <String[]> [-Days] <Int32> [-ErrorLevel] <String> [-Export <String[]>]
  [-ReportPath <DirectoryInfo>] [<CommonParameters>]
 ```
 
@@ -78,13 +78,13 @@ Accept wildcard characters: False
 Export results
 
 ```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: Host
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

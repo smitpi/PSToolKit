@@ -30,7 +30,7 @@ Start-PSToolkitSystemInitialize -InstallMyModules
 ## PARAMETERS
 
 ### -GitHubToken
-{{ Fill GitHubToken Description }}
+Token used to install modules and apps.
 
 ```yaml
 Type: String

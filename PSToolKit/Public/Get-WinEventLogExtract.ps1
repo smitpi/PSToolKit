@@ -89,10 +89,13 @@ Function Get-WinEventLogExtract {
         [int]$Days,
         [Parameter(Mandatory = $true,
             Position = 2)]
+
         [validateset('Critical', 'Error', 'Warning', 'Informational')]
         [string]$ErrorLevel,
-        [ValidateSet('Excel', 'HTML')]
-        [string]$Export = 'Host',
+
+        [ValidateSet('All', 'Excel', 'HTML', 'HTML5')]
+        [string[]]$Export,
+
         [ValidateScript( { if (Test-Path $_) { $true }
                 else { New-Item -Path $_ -ItemType Directory -Force | Out-Null; $true }
             })]
@@ -102,8 +105,7 @@ Function Get-WinEventLogExtract {
     }
     Process {
         [System.Collections.ArrayList]$AllEvents = @()
-        $ComputerName | ForEach-Object {
-            $comp = $_
+        foreach ($comp in $ComputerName) {
             Write-Color '[Collecting] ', 'Windows Events: ', $((Get-FQDN -ComputerName $comp).fqdn) -Color Yellow, green, Cyan
             if (-not(Test-Connection $comp -Count 2 -Quiet)) { Write-Warning "Unable to connect to $($comp)" }
             else {
@@ -127,51 +129,18 @@ Function Get-WinEventLogExtract {
             }
         }
 
-        if ($Export -eq 'Excel') {
-            $path = Get-Item $ReportPath
-            $ExcelPath = Join-Path $Path.FullName -ChildPath "WinEvents-$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx"
-            $AllEvents.Events | Export-Excel -Path $ExcelPath -WorksheetName EventsRawData -AutoSize -AutoFilter -Title "All Events" -TitleBold -TitleSize 20 -FreezePane 3 -IncludePivotTable -TitleFillPattern DarkGrid -PivotTableName 'Events Summery' -PivotRows MachineName, LevelDisplayName, ProviderName -PivotData @{'Message' = 'count' } -NoTotalsInPivot -FreezeTopRow -TableStyle Dark8 -BoldTopRow -ConditionalText $(
-                New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' -PatternType Gray125
-                New-ConditionalText -Text 'Error' -ConditionalTextColor white -BackgroundColor red -Range 'E:E' -PatternType Gray125
-            ) -Show
-            }
+    }
+    end {
+        $report = [PSCustomObject]@{
+            WinEvents = $AllEvents
+        }# PSObject
 
-        if ($Export -eq 'HTML') {
-            $TableSettings = @{
-                SearchHighlight = $True
-                Style           = 'cell-border'
-                ScrollX         = $true
-                HideButtons     = $true
-                HideFooter      = $true
-                FixedHeader     = $true
-                TextWhenNoData  = 'No Data to display here'
-                ScrollCollapse  = $true
-                ScrollY         = $true
-                DisablePaging   = $true
-            }
-            $path = Get-Item $ReportPath
-            $HTMLPath = Join-Path $Path.FullName -ChildPath "WinEvents-$(Get-Date -Format yyyy.MM.dd-HH.mm).html"
-
-            New-HTML -TitleText "WinEvents-$(Get-Date -Format yyyy.MM.dd-HH.mm)" -FilePath $HTMLPath {
-                    New-HTMLHeader {
-                        New-HTMLText -FontSize 20 -FontStyle oblique -Color '#00203F' -Alignment center -Text "Date Collected: $(Get-Date)"
-                    }
-                   $AllEvents | ForEach-Object {
-                   New-HTMLTab -name "$($_.host)" -TextTransform uppercase -IconSolid cloud-sun-rain -TextSize 16 -TextColor '#00203F' -IconSize 16 -IconColor '#ADEFD1' -HtmlData {
-                    New-HTMLText -FontSize 28 -FontStyle normal -Color '#00203F' -Alignment center -Text "$(($_.host).ToUpper())"
-                    New-HTMLText -FontSize 28 -FontStyle normal -Color '#00203F' -Alignment center -Text "Events [$($_.events.count)]"
-                    New-HTMLPanel -Content { New-HTMLTable -DataTable ($($_.events) | Sort-Object -Property TimeCreated -Descending) @TableSettings {
-                            New-TableCondition -Name LevelDisplayName -ComparisonType string -Operator eq -Value 'Error' -Color GhostWhite -Row -BackgroundColor FaluRed
-                            New-TableCondition -Name LevelDisplayName -ComparisonType string -Operator eq -Value 'warning' -Color GhostWhite -Row -BackgroundColor InternationalOrange } }
-
-                }
-                    }
-                } -Online -Encoding UTF8 -ShowHTML
+        $condition = New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' -PatternType Gray125
+        $condition += New-ConditionalText -Text 'Error' -ConditionalTextColor white -BackgroundColor red -Range 'E:E' -PatternType Gray125 
 
 
-            }
+        Write-PSReports -InputObject $AllEvents -ReportTitle "Windows Events" -Export $Export -ReportPath $ReportPath -ExcelConditionalText $condition
 
-        if ($Export -eq 'Host') { $AllEvents }
     }
 } #end Function
 

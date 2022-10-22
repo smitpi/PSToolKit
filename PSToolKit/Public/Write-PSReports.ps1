@@ -57,6 +57,9 @@ Export the result to a report file. (Excel or html5 or normal html).
 .PARAMETER InputObject
 Data for the report.
 
+.PARAMETER ExcelConditionalText
+Add Conditional text color to the cells.
+
 .PARAMETER ReportTitle
 Title of the report.
 
@@ -67,6 +70,9 @@ Where to save the report.
 Open the directory of creating the reports.
 
 .EXAMPLE
+$condition = New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' -PatternType Gray125
+$condition += New-ConditionalText -Text 'Error' -ConditionalTextColor white -BackgroundColor red -Range 'E:E' -PatternType Gray125 
+
 Write-PSReports -InputObject $data -ReportTitle "Temp Data" -Export HTML -ReportPath C:\temp
 
 #>
@@ -79,6 +85,8 @@ Function Write-PSReports {
 		
 		[Parameter(Position = 1, Mandatory)]
 		[string]$ReportTitle,
+
+		[PSCustomObject]$ExcelConditionalText,
 
 		[ValidateSet('All', 'Excel', 'HTML', 'HTML5')]
 		[string[]]$Export,
@@ -100,19 +108,25 @@ Function Write-PSReports {
 
 	if ($Excel) {  
 		$ExcelOptions = @{
-			Path             = $(Join-Path -Path $ReportPath -ChildPath "\$($ReportTitle.Replace(' ','_'))_$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx")
-			AutoSize         = $True
-			AutoFilter       = $True
-			TitleBold        = $True
-			TitleSize        = '28'
-			TitleFillPattern = 'LightTrellis'
-			TableStyle       = 'Light20'
-			FreezeTopRow     = $True
-			FreezePane       = '3'
+			Path              = $(Join-Path -Path $ReportPath -ChildPath "\$($ReportTitle.Replace(' ','_'))_$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx")
+			AutoSize          = $True
+			AutoFilter        = $True
+			TitleBold         = $True
+			TitleSize         = '28'
+			TitleFillPattern  = 'LightTrellis'
+			TableStyle        = 'Light20'
+			FreezeTopRow      = $True
+			FreezePane        = '3'
+			FreezeFirstColumn = $True
+			MaxAutoSizeRows   = 50
+		}
+
+		if ($ExcelConditionalText) {
+			$ExcelOptions.Add('ConditionalText', $ExcelConditionalText)
 		}
 
 		foreach ($member in $members) {
-			if ($InputObject.$member) {$InputObject.$member | Export-Excel -Title $member -WorksheetName $member @ExcelOptions}
+			if ($InputObject.$member) {$InputObject.$member | Export-Excel -Title $member -WorksheetName $member @ExcelOptions -MaxAutoSizeRows 50 }
 		}
 	}
 	if ($HTML) { 
