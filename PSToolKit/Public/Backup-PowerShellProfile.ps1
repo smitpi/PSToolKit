@@ -68,7 +68,9 @@ Function Backup-PowerShellProfile {
     try {
         $SourceDir = @()
         $SourceDir = (Get-Item (Get-Item $PROFILE).Directory).FullName
-        if ([bool]$ExtraDir) { $SourceDir += (Get-Item $ExtraDir).fullname }
+        if ([bool]$ExtraDir) { 
+            $SourceDir += (Get-Item $ExtraDir).fullname 
+        }
         $Destination = [IO.Path]::Combine((Get-Item $DestinationPath).FullName, "Powershell_$($PSVersionTable.PSEdition)_$($env:COMPUTERNAME.ToLower())_Profile_Backup_$(Get-Date -Format ddMMMyyyy_HHmm).zip")
     }
     catch { Write-Error 'Unable to get directories' }

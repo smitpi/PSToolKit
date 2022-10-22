@@ -28,7 +28,6 @@ Functions in this module:
 	 Get-MyPSGalleryReport -- Gallery report
 	 Get-MyPSGalleryStat -- Show stats about my published modules.
 	 Get-NestedADGroupMember -- Extract users from an AD group recursive, 4 levels deep.
-	 Get-ObjectProperties -- Cast an array or PSObject and display it in list view
 	 Get-ProcessPerformance -- Gets the top 10 processes by CPU %
 	 Get-PropertiesToCSV -- Get member data of an object. Use it to create other PSObjects.
 	 Get-PSObject -- Show all Object Methods
@@ -68,7 +67,6 @@ Functions in this module:
 	 Restore-ElevatedShortcut -- Restore the RunAss shortcuts, from a zip file
 	 Search-Script -- Search for a string in a directory of ps1 scripts.
 	 Set-FolderCustomIcon -- Will change the icon of a folder to a custom selected icon
-	 Set-PSProjectFile -- Creates and modify needed files for a PS project from existing module files.
 	 Set-PSToolKitSystemSetting -- Set multiple settings on desktop or server
 	 Set-SharedPSProfile -- Redirects PowerShell and WindowsPowerShell profile folder to another path.
 	 Set-StaticIP -- Set static IP on device
