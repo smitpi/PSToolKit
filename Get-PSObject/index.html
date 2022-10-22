@@ -91,19 +91,19 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     <h1 id="get-psobject">Get-PSObject</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Show all Object Methods</p>
+<p>Show all Object Methods and Properties.</p>
 <h2 id="syntax">SYNTAX</h2>
 <div class="highlight"><pre><span></span><code>Get-PSObject [[-Data] &lt;Object[]&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
-<p>Show all Object Methods</p>
+<p>Show all Object Methods and Properties.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Get-PSObject -Export HTML -ReportPath C:\temp
+<div class="highlight"><pre><span></span><code>Get-PSObject (get-item .)
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-data">-Data</h3>
-<p>{{ Fill Data Description }}</p>
+<p>The Object to Report on.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Object[]</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
