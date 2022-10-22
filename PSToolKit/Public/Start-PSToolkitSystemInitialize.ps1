@@ -125,7 +125,7 @@ Function Start-PSToolkitSystemInitialize {
 	#endregion
 
 	#region Needed Modules
-	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Needed Powershell modules' -ForegroundColor Cyan
+	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Needed Powershell Modules`n" -ForegroundColor Cyan
 	'ImportExcel', 'PSWriteHTML', 'PSWriteColor', 'PSScriptTools', 'PoshRegistry', 'Microsoft.PowerShell.Archive', 'PWSHModule', 'PSPackageMan' | ForEach-Object {		
 		$module = $_
 		if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
@@ -141,7 +141,7 @@ Function Start-PSToolkitSystemInitialize {
 	#endregion
 
 	#region PStoolkit
-	Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "PSToolKit Module`n`n" -ForegroundColor Cyan
+	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "PSToolKit Module`n" -ForegroundColor Cyan
 	$web = New-Object System.Net.WebClient
 	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-MyModulesFromGitHub.ps1', "$($env:TEMP)\Update-MyModulesFromGitHub.ps1")
 	$full = Get-Item "$($env:TEMP)\Update-MyModulesFromGitHub.ps1"
@@ -153,7 +153,8 @@ Function Start-PSToolkitSystemInitialize {
 
 	#region MyModules
 	if ($InstallMyModules) {
-		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "My Modules`n`n" -ForegroundColor Cyan
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "My Modules`n" -ForegroundColor Cyan
+		Write-Host "`t[Collecting] " -NoNewline -ForegroundColor Yellow; Write-Host "Module Details from PS Gallery`n" -ForegroundColor Gray 
 		Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} | ForEach-Object {
 			$module = $_
 			Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
@@ -179,25 +180,25 @@ Function Start-PSToolkitSystemInitialize {
 
 	#region Lab Setup
 	if ($LabSetup) {
-		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "System Settings`n`n" -ForegroundColor Cyan
+		Write-Host "`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "System Settings`n" -ForegroundColor Cyan
 		Set-PSToolKitSystemSetting -RunAll
 
-		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "New PS Profile`n`n" -ForegroundColor Cyan
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "New PS Profile`n" -ForegroundColor Cyan
 		New-PSProfile
 
-		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Modules`n`n" -ForegroundColor Cyan
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Modules`n" -ForegroundColor Cyan
 		Install-PWSHModule -GitHubUserID smitpi -GitHubToken $GitHubToken -ListName BaseModules -Scope AllUsers
 
-		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Chocolatey Client`n`n" -ForegroundColor Cyan
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Chocolatey Client`n" -ForegroundColor Cyan
 		Install-ChocolateyClient
 
-		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "VMWare Tools`n`n" -ForegroundColor Cyan
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "VMWare Tools`n" -ForegroundColor Cyan
 		Install-VMWareTool
 
-		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Apps`n`n" -ForegroundColor Cyan
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Apps`n" -ForegroundColor Cyan
 		Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID smitpi -GitHubToken $GitHubToken
 		
-		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "RSAT`n`n" -ForegroundColor Cyan
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "RSAT`n" -ForegroundColor Cyan
 		Install-RSAT
 	}
 	#endregion
