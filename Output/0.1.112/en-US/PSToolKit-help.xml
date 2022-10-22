@@ -10255,10 +10255,10 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>$condition = New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' -PatternType Gray125</dev:code>
+        <dev:code>[System.Collections.generic.List[PSObject]]$Conditions = @()</dev:code>
         <dev:remarks>
-          <maml:para>$condition += New-ConditionalText -Text 'Error' -ConditionalTextColor white -BackgroundColor red -Range 'E:E' -PatternType Gray125 </maml:para>
-          <maml:para>Write-PSReports -InputObject $data -ReportTitle "Temp Data" -Export HTML -ReportPath C:\temp</maml:para>
+          <maml:para>$Conditions.Add((New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor Yellow -Range 'E:E' )) $Conditions.Add((New-ConditionalText -Text 'Error' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' )) $Conditions.Add((New-ConditionalText -Text 'Critical' -ConditionalTextColor white -BackgroundColor Red -Range 'E:E' ))</maml:para>
+          <maml:para>Write-PSReports -InputObject $report -ReportTitle 'Windows Events' -Export All -ReportPath C:\temp -ExcelConditionalText $Conditions</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

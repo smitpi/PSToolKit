@@ -26,7 +26,7 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [05/03/2022_06:34] Initital Script Creating
+Created [05/03/2022_06:34] Initial Script Creating
 
 .PRIVATEDATA
 
@@ -102,9 +102,9 @@ Function Get-WinEventLogExtract {
         [System.IO.DirectoryInfo]$ReportPath = 'C:\Temp'
     )
     Begin {
+        [System.Collections.generic.List[PSObject]]$EventObject = @()       
     }
     Process {
-        [System.Collections.ArrayList]$AllEvents = @()
         foreach ($comp in $ComputerName) {
             Write-Color '[Collecting] ', 'Windows Events: ', $((Get-FQDN -ComputerName $comp).fqdn) -Color Yellow, green, Cyan
             if (-not(Test-Connection $comp -Count 2 -Quiet)) { Write-Warning "Unable to connect to $($comp)" }
@@ -119,27 +119,24 @@ Function Get-WinEventLogExtract {
                     if ($ErrorLevel -like 'Informational') { $filter.Add('Level', @(1, 2, 3, 4)) }
 
                     $filter.Add('LogName', @('Application', 'System', 'Security', 'Setup') )
-                    $tmpEvents = Get-WinEvent -ComputerName $comp -FilterHashtable $filter | Select-Object MachineName, TimeCreated, UserId, Id, LevelDisplayName, LogName, ProviderName, Message
-
-                    [void]$AllEvents.Add([pscustomobject]@{
-                            Host   = ((Get-FQDN -ComputerName $comp).fqdn)
-                            Events = $tmpEvents
-                        })
+                    $EventObject.Add((Get-WinEvent -ComputerName $comp -FilterHashtable $filter | Select-Object MachineName, TimeCreated, UserId, Id, LevelDisplayName, LogName, ProviderName, Message))
                 } catch {Write-Warning "Error: `nMessage:$($_.Exception)"}
             }
         }
 
     }
     end {
+
         $report = [PSCustomObject]@{
-            WinEvents = $AllEvents
+            WinEvents = $EventObject
         }# PSObject
 
-        $condition = New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' -PatternType Gray125
-        $condition += New-ConditionalText -Text 'Error' -ConditionalTextColor white -BackgroundColor red -Range 'E:E' -PatternType Gray125 
+        [System.Collections.generic.List[PSObject]]$Conditions = @()    
+        $Conditions.Add((New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor Yellow -Range 'E:E' ))
+        $Conditions.Add((New-ConditionalText -Text 'Error' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' ))
+        $Conditions.Add((New-ConditionalText -Text 'Critical' -ConditionalTextColor white -BackgroundColor Red -Range 'E:E' ))
 
-
-        Write-PSReports -InputObject $AllEvents -ReportTitle "Windows Events" -Export $Export -ReportPath $ReportPath -ExcelConditionalText $condition
+        Write-PSReports -InputObject $report -ReportTitle 'Windows Events' -Export $Export -ReportPath $ReportPath -ExcelConditionalText $conditions
 
     }
 } #end Function

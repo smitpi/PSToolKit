@@ -70,10 +70,12 @@ Where to save the report.
 Open the directory of creating the reports.
 
 .EXAMPLE
-$condition = New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' -PatternType Gray125
-$condition += New-ConditionalText -Text 'Error' -ConditionalTextColor white -BackgroundColor red -Range 'E:E' -PatternType Gray125 
+[System.Collections.generic.List[PSObject]]$Conditions = @()    
+$Conditions.Add((New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor Yellow -Range 'E:E' ))
+$Conditions.Add((New-ConditionalText -Text 'Error' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' ))
+$Conditions.Add((New-ConditionalText -Text 'Critical' -ConditionalTextColor white -BackgroundColor Red -Range 'E:E' ))
 
-Write-PSReports -InputObject $data -ReportTitle "Temp Data" -Export HTML -ReportPath C:\temp
+Write-PSReports -InputObject $report -ReportTitle 'Windows Events' -Export All -ReportPath C:\temp -ExcelConditionalText $Conditions
 
 #>
 Function Write-PSReports {
@@ -126,7 +128,7 @@ Function Write-PSReports {
 		}
 
 		foreach ($member in $members) {
-			if ($InputObject.$member) {$InputObject.$member | Export-Excel -Title $member -WorksheetName $member @ExcelOptions -MaxAutoSizeRows 50 }
+			if ($InputObject.$member) {$InputObject.$member | Export-Excel -Title $member -WorksheetName $member @ExcelOptions }
 		}
 	}
 	if ($HTML) { 
