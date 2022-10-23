@@ -93,13 +93,10 @@ Function Update-MyModulesFromGitHub {
 			}
 		}
 
-
-		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Checking] Temp folder $($env:tmp) "
-		if ((Test-Path $ModuleTMPDest) -eq $true ) { Remove-Item $ModuleTMPDest -Force }
-
 		$ModInstFolder = Get-Module $ModuleName -ListAvailable | Where-Object {$_.path -notlike "$($ModulePath)*"}
 		foreach ($UnInstMod in $ModInstFolder) {
 			try {
+                Write-Host "[Removing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($ModuleName) Path: " -ForegroundColor Cyan -NoNewline; Write-Host " $($UnInstMod.Path)"    
 				Join-Path -Path $UnInstMod.Path -ChildPath ..\.. -Resolve | Remove-Item -Force -Recurse -ErrorAction Stop
 			} catch {Write-Warning "Error removing $($UnInstMod.Path): Message:$($Error[0])"}
 		}
@@ -154,11 +151,15 @@ Function Update-MyModulesFromGitHub {
 
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Copying to $($PathFullName.FullName)"
 			$NewModule = Get-ChildItem -Directory "$($PSDownload.FullName)\$($ModuleName)-master\Output"
-			Copy-Item -Path $NewModule.FullName -Destination $PathFullName.FullName -Recurse
+			Copy-Item -Path $NewModule.FullName -Destination $PathFullName.FullName -Recurse -Force
 
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Removing temp files"
 			Remove-Item $PSDownload -Force -Recurse
 
+            Remove-Module -Name $($ModuleName) -Force -ErrorAction SilentlyContinue
+		    try {
+			    Import-Module $($ModuleName) -Force -ErrorAction Stop -Global
+		    } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 			$module = Get-Module -Name $($ModuleName)
 			if (-not($module)) { $module = Get-Module -Name $($ModuleName) -ListAvailable }
 			$latestModule = $module | Sort-Object -Property version -Descending | Select-Object -First 1
@@ -167,20 +168,17 @@ Function Update-MyModulesFromGitHub {
 			[datetime]$CreateDate = (Get-Content -Path $($latestModule.Path.Replace('psm1', 'psd1')) | Where-Object { $_ -like '# Generated on: *' }).replace('# Generated on: ', '')
 			$CreateDate = $CreateDate.ToUniversalTime()
 
-			Write-Host "`t[$($ModuleName)]" -NoNewline -ForegroundColor Cyan; Write-Host ' Details' -ForegroundColor Green
-			[PSCustomObject]@{
+			Write-Host "`n---------------------------" -ForegroundColor Cyan; Write-Host "`tNew Module Details" -ForegroundColor Green
+			$DWNOBject = [PSCustomObject]@{
 				Name        = $($ModuleName)
 				Description = $Description
 				Version     = $version
 				Date        = (Get-Date($CreateDate) -Format F)
 				Path        = $module.Path
 			}
+          Write-Host "$($DWNOBject | Out-String)" -ForegroundColor Yellow
 		}
-		$ForceUpdate = $false
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Complete]"
-		Remove-Module -Name $($ModuleName) -Force -ErrorAction SilentlyContinue
-		try {
-			Import-Module $($ModuleName) -Force -ErrorAction Stop
-		} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+		
 	}
 } #end Function
