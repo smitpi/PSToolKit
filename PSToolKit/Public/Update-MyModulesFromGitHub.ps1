@@ -95,7 +95,7 @@ Function Update-MyModulesFromGitHub {
 
 
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Checking] Temp folder $($env:tmp) "
-		if ((Test-Path "$env:tmp\$($ModuleName).zip") -eq $true ) { Remove-Item "$env:tmp\$($ModuleName).zip" -Force }
+		if ((Test-Path $ModuleTMPDest) -eq $true ) { Remove-Item $ModuleTMPDest -Force }
 
 		$ModInstFolder = Get-Module $ModuleName -ListAvailable | Where-Object {$_.path -notlike "$($ModulePath)*"}
 		foreach ($UnInstMod in $ModInstFolder) {
@@ -129,29 +129,35 @@ Function Update-MyModulesFromGitHub {
 
 		if ($ForceUpdate) {
 			$PathFullName = Get-Item $ModulePath
+			$PSTemp = "$env:tmp\PSModules"
+			if (Test-Path $PSTemp) {Remove-Item $PSTemp -Force -Recurse}
+			$PSDownload = New-Item $PSTemp -ItemType Directory -Force
+			$ModuleTMPDest = Join-Path $PSDownload.FullName -ChildPath "$($ModuleName).zip"
+
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] download from github"
 			Write-Host "`t[Downloading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($ModuleName): " -ForegroundColor DarkRed
 			if (Get-Command Start-BitsTransfer) {
 				try {
-					Start-BitsTransfer -DisplayName "$($ModuleName)-Download" -Source "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -Destination "$env:tmp\$($ModuleName).zip" -TransferType Download -ProxyAuthentication Basic -ErrorAction Stop
+					Start-BitsTransfer -Source "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -Destination $ModuleTMPDest -ErrorAction Stop
 				} catch {
 					Write-Warning 'Bits Transer failed, defaulting to webrequest'
 					Get-BitsTransfer | Remove-BitsTransfer -ErrorAction SilentlyContinue
-					Invoke-WebRequest -Uri "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -OutFile "$env:tmp\$($ModuleName).zip"
+					$wc = New-Object System.Net.WebClient
+					$wc.DownloadFile("https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip", $ModuleTMPDest)
 				}
 			} else {
-				Invoke-WebRequest -Uri "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -OutFile "$env:tmp\$($ModuleName).zip"
+				$wc = New-Object System.Net.WebClient
+				$wc.DownloadFile("https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip", $ModuleTMPDest)
 			}
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] expand into module folder"
-			Expand-Archive "$env:tmp\$($ModuleName).zip" "$env:tmp" -Force
+			Expand-Archive -Path $ModuleTMPDest -DestinationPath $PSDownload.FullName -Force
 
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Copying to $($PathFullName.FullName)"
-			$NewModule = Get-ChildItem -Directory "$env:tmp\$($ModuleName)-master\Output"
+			$NewModule = Get-ChildItem -Directory "$($PSDownload.FullName)\$($ModuleName)-master\Output"
 			Copy-Item -Path $NewModule.FullName -Destination $PathFullName.FullName -Recurse
 
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Removing temp files"
-			Remove-Item "$env:tmp\$($ModuleName).zip"
-			Remove-Item "$env:tmp\$($ModuleName)-master" -Recurse
+			Remove-Item $PSDownload -Force -Recurse
 
 			$module = Get-Module -Name $($ModuleName)
 			if (-not($module)) { $module = Get-Module -Name $($ModuleName) -ListAvailable }

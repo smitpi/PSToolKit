@@ -92,7 +92,7 @@ Function Start-PSToolkitSystemInitialize {
 		try {
 			Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell Gallery:' -ForegroundColor Cyan -NoNewline
 			$null = Install-PackageProvider Nuget -Force
-			$null = Register-PSRepository -Default
+			$null = Register-PSRepository -Default -ErrorAction SilentlyContinue
 			$null = Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 			Write-Host ' Complete' -ForegroundColor Green
 		} catch {Write-Warning "Error Setting PSRepository: Message:$($Error[0])"}
