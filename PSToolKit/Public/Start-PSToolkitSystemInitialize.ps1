@@ -91,8 +91,8 @@ Function Start-PSToolkitSystemInitialize {
 	if ((Get-PSRepository -Name PSGallery).InstallationPolicy -notlike 'Trusted' ) {
 		try {
 			Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell Gallery:' -ForegroundColor Cyan -NoNewline
-			$null = Install-PackageProvider Nuget -Force -ErrorAction Stop
-			$null = Register-PSRepository -Default -ErrorAction Stop
+			$null = Install-PackageProvider Nuget -Force
+			$null = Register-PSRepository -Default
 			$null = Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 			Write-Host ' Complete' -ForegroundColor Green
 		} catch {Write-Warning "Error Setting PSRepository: Message:$($Error[0])"}
@@ -125,7 +125,7 @@ Function Start-PSToolkitSystemInitialize {
 	#endregion
 
 	#region Needed Modules
-	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Needed Powershell Modules`n" -ForegroundColor Cyan
+	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Needed PowerShell Modules`n" -ForegroundColor Cyan
 	'ImportExcel', 'PSWriteHTML', 'PSWriteColor', 'PSScriptTools', 'PoshRegistry', 'Microsoft.PowerShell.Archive', 'PWSHModule', 'PSPackageMan' | ForEach-Object {		
 		$module = $_
 		if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
@@ -154,7 +154,7 @@ Function Start-PSToolkitSystemInitialize {
 	#region MyModules
 	if ($InstallMyModules) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "My Modules`n" -ForegroundColor Cyan
-		Write-Host "`t[Collecting] " -NoNewline -ForegroundColor Yellow; Write-Host "Module Details from PS Gallery`n" -ForegroundColor Gray 
+		Write-Host "`t[Collecting] " -NoNewline -ForegroundColor Cyan; Write-Host "Module Details from PS Gallery`n" -ForegroundColor Cyan 
 		Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} | ForEach-Object {
 			$module = $_
 			Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
@@ -189,10 +189,10 @@ Function Start-PSToolkitSystemInitialize {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Modules`n" -ForegroundColor Cyan
 		Install-PWSHModule -GitHubUserID smitpi -GitHubToken $GitHubToken -ListName BaseModules -Scope AllUsers
 
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Chocolatey Client`n" -ForegroundColor Cyan
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan
 		Install-ChocolateyClient
 
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "VMWare Tools`n" -ForegroundColor Cyan
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan
 		Install-VMWareTool
 
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Apps`n" -ForegroundColor Cyan
