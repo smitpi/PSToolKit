@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="author" content="Pierre Smit">
-    <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Write-Message/">
+    <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Write-PSMessage/">
     <link rel="shortcut icon" href="../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Write-Message - PSToolKit</title>
+    <title>Write-PSMessage - PSToolKit</title>
     <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
@@ -32,7 +32,7 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Write-Message", url: "#_top", children: [
+          {title: "Write-PSMessage", url: "#_top", children: [
               {title: "SYNOPSIS", url: "#synopsis" },
               {title: "SYNTAX", url: "#syntax" },
               {title: "DESCRIPTION", url: "#description" },
@@ -89,11 +89,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="write-message">Write-Message</h1>
+    <h1 id="write-psmessage">Write-PSMessage</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Writes the given into to screen</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Write-Message [[-Action] &lt;String&gt;] [[-Severity] &lt;String&gt;] [[-BeforeMessage] &lt;String[]&gt;]
+<div class="highlight"><pre><span></span><code>Write-PSMessage [[-Action] &lt;String&gt;] [[-Severity] &lt;String&gt;] [[-BeforeMessage] &lt;String[]&gt;]
  [[-BeforeMessageColor] &lt;String[]&gt;] [[-Object] &lt;String[]&gt;] [[-AfterMessage] &lt;String[]&gt;]
  [[-AfterMessageColor] &lt;String[]&gt;] [[-InsertTabs] &lt;Int32&gt;] [[-LinesBefore] &lt;Int32&gt;] [[-LinesAfter] &lt;Int32&gt;]
  [-NoNewLine] [&lt;CommonParameters&gt;]
@@ -102,7 +102,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>Writes the given into to screen</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Write-Message -Action Getting -Severity Information -Object (get-item .) -Message &quot;This is&quot;,&quot;the directory&quot;,&quot;you are in.&quot; -MessageColor Cyan,DarkGreen,DarkRed
+<div class="highlight"><pre><span></span><code>Write-PSMessage -Action Getting -Severity Information -Object (get-item .) -Message &quot;This is&quot;,&quot;the directory&quot;,&quot;you are in.&quot; -MessageColor Cyan,DarkGreen,DarkRed
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-action">-Action</h3>
@@ -282,7 +282,7 @@ This can be an array of strings as well, to have different colors in the text.</
 
 <footer class="container-fluid wm-page-content">
       <p>
-        <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Write-Message.md">Edit on smitpi/PSToolKit</a>
+        <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Write-PSMessage.md">Edit on smitpi/PSToolKit</a>
       </p><p>(c) 2022 Pierre Smit. All rights reserved.</p>
   <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
 </footer>
