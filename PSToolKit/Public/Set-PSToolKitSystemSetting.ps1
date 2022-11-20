@@ -564,13 +564,15 @@ Function Set-PSToolKitSystemSetting {
             # apps which other apps depend on
             'Microsoft.Advertising.Xaml'
         )
-
-        $appxprovisionedpackage = Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
-
+        try {
+            $appxprovisionedpackage = Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+        } catch {Write-Warning "Error: Message:$($Error[0])"}
         foreach ($app in $apps) {
-            Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+            try {
+                Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
             ($appxprovisionedpackage).Where( {$_.DisplayName -EQ $app}) | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
-            Write-Color '[Removing]', "$($app): ", 'Complete' -Color Yellow, Cyan, Green -StartTab 1
+                Write-Color '[Removing]', "$($app): ", 'Complete' -Color Yellow, Cyan, Green -StartTab 1
+            } catch {Write-Warning "Error $($app): Message:$($Error[0])"}
         }
     }
 

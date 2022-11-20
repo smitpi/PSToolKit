@@ -151,17 +151,17 @@ Function $properverb-$propernoun {
 					[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp'
 				)
                 #endregion
-	Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
-    Begin {
+	Begin {
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
     
-    } #End Begin
+    }#Begin
     Process {
     
-    } #End Process
+    }#Process
     End {
     
-    }#End End
-	Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Complete"
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Complete"
+    }#End
 } #end Function
 "@
 	$ScriptFullPath = $checkpath.fullname + "\$properverb-$propernoun.ps1"
