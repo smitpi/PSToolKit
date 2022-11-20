@@ -70,15 +70,15 @@ Function Reset-Module {
 		$ModuleFullName = (Get-Module $name -ListAvailable -ErrorAction Stop)[0]
 	} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 			
-	Write-Message -Action Removing -Severity Information -BeforeMessage 'Module' -BeforeMessageColor Green -Object $ModuleFullName.Name -AfterMessage 'from', 'Memory' -AfterMessageColor green, Red
+	Write-PSMessage -Action Removing -Severity Information -BeforeMessage 'Module' -BeforeMessageColor Green -Object $ModuleFullName.Name -AfterMessage 'from', 'Memory' -AfterMessageColor green, Red
 	Remove-Module -Name $ModuleFullName.Name -Force -ErrorAction SilentlyContinue
-	Write-Message -Action Importing -Severity Information -BeforeMessage 'Module' -BeforeMessageColor Green -Object $ModuleFullName.Name
+	Write-PSMessage -Action Importing -Severity Information -BeforeMessage 'Module' -BeforeMessageColor Green -Object $ModuleFullName.Name
 	$NewImport = Import-Module -Name $ModuleFullName.Name -Force -PassThru
 	$LatestImport = $NewImport | Sort-Object -Property Version -Descending | Select-Object -First 1
-	Write-Message -Action Complete -BeforeMessage "Module Count:`t" -BeforeMessageColor Green -Object $NewImport.Count -LinesBefore 2
-	Write-Message -Action Complete -BeforeMessage "Module Name:`t" -BeforeMessageColor Green -Object $LatestImport.Name
-	Write-Message -Action Complete -BeforeMessage 'Module Version:' -BeforeMessageColor Green -Object $LatestImport.Version
-	Write-Message -Action Complete -BeforeMessage "Module Path:`t" -BeforeMessageColor Green -Object $LatestImport.Path
+	Write-PSMessage -Action Complete -BeforeMessage "Module Count:`t" -BeforeMessageColor Green -Object $NewImport.Count -LinesBefore 2
+	Write-PSMessage -Action Complete -BeforeMessage "Module Name:`t" -BeforeMessageColor Green -Object $LatestImport.Name
+	Write-PSMessage -Action Complete -BeforeMessage 'Module Version:' -BeforeMessageColor Green -Object $LatestImport.Version
+	Write-PSMessage -Action Complete -BeforeMessage "Module Path:`t" -BeforeMessageColor Green -Object $LatestImport.Path
 } #end Function
 
 $scriptblock = {

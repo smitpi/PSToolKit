@@ -82,11 +82,11 @@ Insert Blank Lines After Output.
 Wont add a new line after writing to screen.
 
 .EXAMPLE
-Write-Message -Action Getting -Severity Information -Object (get-item .) -Message "This is","the directory","you are in." -MessageColor Cyan,DarkGreen,DarkRed
+Write-PSMessage -Action Getting -Severity Information -Object (get-item .) -Message "This is","the directory","you are in." -MessageColor Cyan,DarkGreen,DarkRed
 
 #>
-Function Write-Message {
-	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Write-Message')]
+Function Write-PSMessage {
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Write-PSMessage')]
 	[Alias('Write-PSToolkitMessage')]
 	[OutputType([string[]])]
 	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '')]
@@ -181,4 +181,4 @@ $scriptblock = {
 	$Action = @('Starting', 'Getting', 'Installing', 'Copying', 'Moving', 'Complete', 'Deleting', 'Removing', 'Uninstalling', 'Changing', 'Failed', 'Exists', 'Disabling') 
 	$action | Where-Object {$_ -like "$wordToComplete*"} 
 }
-Register-ArgumentCompleter -CommandName Write-Message -ParameterName Action -ScriptBlock $scriptBlock
+Register-ArgumentCompleter -CommandName Write-PSMessage -ParameterName Action -ScriptBlock $scriptBlock

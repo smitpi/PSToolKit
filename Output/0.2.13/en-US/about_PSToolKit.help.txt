@@ -93,7 +93,7 @@ Functions in this module:
 	 Update-PSDefaultParameter -- Updates the $PSDefaultParameterValues variable
 	 Update-PSModuleInfo -- Update PowerShell module manifest file
 	 Write-Ascii -- Create Ascii Art
-	 Write-Message -- Writes the given into to screen
+	 Write-PSMessage -- Writes the given into to screen
 	 Write-PSReports -- Creates a excel or html report
 	 Write-PSToolKitLog -- Create a log for scripts
  

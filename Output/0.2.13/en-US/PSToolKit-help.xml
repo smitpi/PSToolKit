@@ -9842,9 +9842,9 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Write-Message</command:name>
+      <command:name>Write-PSMessage</command:name>
       <command:verb>Write</command:verb>
-      <command:noun>Message</command:noun>
+      <command:noun>PSMessage</command:noun>
       <maml:description>
         <maml:para>Writes the given into to screen</maml:para>
       </maml:description>
@@ -9854,7 +9854,7 @@
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Write-Message</maml:name>
+        <maml:name>Write-PSMessage</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Action</maml:name>
           <maml:description>
@@ -10141,7 +10141,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Write-Message -Action Getting -Severity Information -Object (get-item .) -Message "This is","the directory","you are in." -MessageColor Cyan,DarkGreen,DarkRed</dev:code>
+        <dev:code>Write-PSMessage -Action Getting -Severity Information -Object (get-item .) -Message "This is","the directory","you are in." -MessageColor Cyan,DarkGreen,DarkRed</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>

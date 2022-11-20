@@ -64,12 +64,12 @@ Function Show-MyPSGalleryModule {
 	PARAM(
 		[switch]$AsObject
 	)
-	Write-Message -Action Collecting -BeforeMessage "PSGallery Modules" -BeforeMessageColor Gray -InsertTabs 1 -LinesAfter 2
+	Write-PSMessage -Action Collecting -BeforeMessage "PSGallery Modules" -BeforeMessageColor Gray -InsertTabs 1 -LinesAfter 2
 	$ModLists = Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'}
 	[System.Collections.generic.List[PSObject]]$GalStats = @()
 	foreach ($Mod in $ModLists) {
 		$GithubDetails = $null
-		Write-Message -Action 'Collecting' -Object $mod.name -Message 'Online Data' -MessageColor Gray
+		Write-PSMessage -Action 'Collecting' -Object $mod.name -Message 'Online Data' -MessageColor Gray
 		$TotalDownloads = $TotalDownloads + [int]$Mod.AdditionalMetadata.downloadCount
 		$GithubDetails = Invoke-RestMethod -Method Get -Uri "https://raw.githubusercontent.com/smitpi/$($Mod.name)/master/Version.json"
 		$GalStats.Add([PSCustomObject]@{
@@ -85,7 +85,7 @@ Function Show-MyPSGalleryModule {
 	}
 	If ($AsObject) {$GalStats}
 	else {
-		Write-Message -Action Complete -BeforeMessage "Total Downloads:" -BeforeMessageColor Gray -Object $TotalDownloads -InsertTabs 1 -LinesBefore 2 -LinesAfter 1
+		Write-PSMessage -Action Complete -BeforeMessage "Total Downloads:" -BeforeMessageColor Gray -Object $TotalDownloads -InsertTabs 1 -LinesBefore 2 -LinesAfter 1
 		$GalStats | Format-Table -AutoSize -Wrap
 	}
 } #end Function

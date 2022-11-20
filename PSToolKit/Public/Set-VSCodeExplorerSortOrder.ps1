@@ -80,13 +80,13 @@ Function Set-VSCodeExplorerSortOrder {
 	} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 
 	$CurrentSetting = Select-String -Path $settingsfile -Pattern '"explorer.sortOrder"'
-	Write-Message -Action 'Current' -Object 'Settings Set To:' -Message $CurrentSetting.Line.Trim() -MessageColor Yellow
+	Write-PSMessage -Action 'Current' -Object 'Settings Set To:' -Message $CurrentSetting.Line.Trim() -MessageColor Yellow
 	try {
 		if ($SetToDefault) {(Get-Content -Path $settingsfile -Force -ErrorAction Stop) -replace '"explorer.sortOrder": "modified"', '"explorer.sortOrder": "default"' | Set-Content $settingsfile -Force -ErrorAction Stop}
 		if ($SetToModified) {(Get-Content -Path $settingsfile -Force -ErrorAction Stop) -replace '"explorer.sortOrder": "default"', '"explorer.sortOrder": "modified"' | Set-Content $settingsfile -Force -ErrorAction Stop}
 	} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 
 	$NewSetting = Select-String -Path $settingsfile -Pattern '"explorer.sortOrder"'
-	Write-Message -Action 'New' -Object 'Settings Set To:' -Message $NewSetting.Line.Trim() -MessageColor Yellow
+	Write-PSMessage -Action 'New' -Object 'Settings Set To:' -Message $NewSetting.Line.Trim() -MessageColor Yellow
 
 } #end Function

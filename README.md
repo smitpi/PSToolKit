@@ -114,6 +114,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Update-PSDefaultParameter`](https://smitpi.github.io/PSToolKit/Update-PSDefaultParameter) -- Updates the $PSDefaultParameterValues variable
 - [`Update-PSModuleInfo`](https://smitpi.github.io/PSToolKit/Update-PSModuleInfo) -- Update PowerShell module manifest file
 - [`Write-Ascii`](https://smitpi.github.io/PSToolKit/Write-Ascii) -- Create Ascii Art
-- [`Write-Message`](https://smitpi.github.io/PSToolKit/Write-Message) -- Writes the given into to screen
+- [`Write-PSMessage`](https://smitpi.github.io/PSToolKit/Write-PSMessage) -- Writes the given into to screen
 - [`Write-PSReports`](https://smitpi.github.io/PSToolKit/Write-PSReports) -- Creates a excel or html report
 - [`Write-PSToolKitLog`](https://smitpi.github.io/PSToolKit/Write-PSToolKitLog) -- Create a log for scripts

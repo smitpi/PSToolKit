@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Write-Message
+# Write-PSMessage
 
 ## SYNOPSIS
 Writes the given into to screen
@@ -13,7 +13,7 @@ Writes the given into to screen
 ## SYNTAX
 
 ```
-Write-Message [[-Action] <String>] [[-Severity] <String>] [[-BeforeMessage] <String[]>]
+Write-PSMessage [[-Action] <String>] [[-Severity] <String>] [[-BeforeMessage] <String[]>]
  [[-BeforeMessageColor] <String[]>] [[-Object] <String[]>] [[-AfterMessage] <String[]>]
  [[-AfterMessageColor] <String[]>] [[-InsertTabs] <Int32>] [[-LinesBefore] <Int32>] [[-LinesAfter] <Int32>]
  [-NoNewLine] [<CommonParameters>]
@@ -26,7 +26,7 @@ Writes the given into to screen
 
 ### EXAMPLE 1
 ```
-Write-Message -Action Getting -Severity Information -Object (get-item .) -Message "This is","the directory","you are in." -MessageColor Cyan,DarkGreen,DarkRed
+Write-PSMessage -Action Getting -Severity Information -Object (get-item .) -Message "This is","the directory","you are in." -MessageColor Cyan,DarkGreen,DarkRed
 ```
 
 ## PARAMETERS
