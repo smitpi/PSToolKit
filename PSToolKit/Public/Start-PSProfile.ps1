@@ -69,8 +69,8 @@ Function Start-PSProfile {
 	if ((Test-Path $profile) -eq $false ) {
 		Write-Warning 'Profile does not exist, creating file.'
 		New-Item -ItemType File -Path $Profile -Force
-		$Global:PSFolder = Get-Item (Get-Item $profile).DirectoryName
-	} else { $Global:PSFolder = Get-Item (Get-Item $profile).DirectoryName }
+		$Global:psfolder = Get-Item (Get-Item $profile).DirectoryName
+	} else { $Global:psfolder = Get-Item (Get-Item $profile).DirectoryName }
 
 	function proxyconnect {
 		$wc = New-Object System.Net.WebClient
@@ -81,15 +81,15 @@ Function Start-PSProfile {
 
 	try {
 		## Create folders for PowerShell profile
-		if ((Test-Path -Path $PSFolder\Scripts) -eq $false) { New-Item -Path "$PSFolder\Scripts" -ItemType Directory | Out-Null }
-		if ((Test-Path -Path $PSFolder\Modules) -eq $false) { New-Item -Path "$PSFolder\Modules" -ItemType Directory | Out-Null }
-		if ((Test-Path -Path $PSFolder\Reports) -eq $false) { New-Item -Path "$PSFolder\Reports" -ItemType Directory | Out-Null }
-		if ((Test-Path -Path $PSFolder\Config) -eq $false) { New-Item -Path "$PSFolder\Config" -ItemType Directory | Out-Null }
-		if ((Test-Path -Path $PSFolder\Help) -eq $false) { New-Item -Path "$PSFolder\Help" -ItemType Directory | Out-Null }
+		if ((Test-Path -Path $psfolder\Scripts) -eq $false) { New-Item -Path "$psfolder\Scripts" -ItemType Directory | Out-Null }
+		if ((Test-Path -Path $psfolder\Modules) -eq $false) { New-Item -Path "$psfolder\Modules" -ItemType Directory | Out-Null }
+		if ((Test-Path -Path $psfolder\Reports) -eq $false) { New-Item -Path "$psfolder\Reports" -ItemType Directory | Out-Null }
+		if ((Test-Path -Path $psfolder\Config) -eq $false) { New-Item -Path "$psfolder\Config" -ItemType Directory | Out-Null }
+		if ((Test-Path -Path $psfolder\Help) -eq $false) { New-Item -Path "$psfolder\Help" -ItemType Directory | Out-Null }
 	} catch { Write-Warning 'Unable to create default folders' }
 
 	try {
-		Set-Location $PSFolder -ErrorAction Stop
+		Set-Location $psfolder -ErrorAction Stop
 	} catch { Write-Warning 'Unable to set location' }
 
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
@@ -164,7 +164,7 @@ Function Start-PSProfile {
 
 	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
 	Write-Host (' {0,-35}: ' -f 'PowerShell Profile Folder') -ForegroundColor Cyan -NoNewline
-	Write-Host ('{0,-20}' -f "$($PSFolder)") -ForegroundColor Green
+	Write-Host ('{0,-20}' -f "$($psfolder)") -ForegroundColor Green
 
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
 	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline

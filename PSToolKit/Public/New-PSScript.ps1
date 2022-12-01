@@ -119,14 +119,11 @@ Function $properverb-$propernoun {
 	    [OutputType([System.Object[]])]
                 #region Parameter
                 PARAM(
-					[Parameter(Position = 0,
-]								Mandatory,
-								ParameterSetName = 'Set1',
-					HelpMessage = "Specify the name of a remote computer. The default is the local host.")]
+					[Parameter(Position = 0,Mandatory,ParameterSetName = 'Set1',HelpMessage = "Specify the name of a remote computer. The default is the local host.")]
 					[alias("CN", "host")]
 					[ValidateNotNullorEmpty()]
 					[ValidateScript( { (Test-Path `$_) -and ((Get-Item `$_).Extension -eq ".csv") })]
-					[System.IO.FileInfo]`$InputObject,
+					[System.IO.FileInfo]`$File,
 
                     [Parameter(Mandatory,
 								ValueFromPipeline,
@@ -151,17 +148,16 @@ Function $properverb-$propernoun {
 					[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp'
 				)
                 #endregion
-	Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
     Begin {
-    
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
+
     } #End Begin
     Process {
     
     } #End Process
     End {
-    
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Complete"
     }#End End
-	Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Complete"
 } #end Function
 "@
 	$ScriptFullPath = $checkpath.fullname + "\$properverb-$propernoun.ps1"
