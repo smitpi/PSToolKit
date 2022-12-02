@@ -13,8 +13,10 @@ Functions in this module:
 	 Backup-PowerShellProfile -- Creates a zip file from the ps profile directories
 	 Compare-ADMembership -- Compare two users AD group memberships
 	 Connect-VMWareCluster -- Connect to a vSphere cluster to perform other commands or scripts
+	 Disable-WebEncoding -- decode a url
 	 Edit-SSHConfigFile -- Creates and modifies the ssh config file in their profile.
 	 Enable-RemoteHostPSRemoting -- enable ps remote remotely
+	 Enable-WebEncoding -- encode a url
 	 Export-ESXTemplate -- Export all VM Templates from vSphere to local disk.
 	 Find-ChocolateyApp -- Search the online repo for software
 	 Find-OnlineModule -- Creates reports based on PSGallery.
