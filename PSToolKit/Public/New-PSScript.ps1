@@ -154,7 +154,7 @@ Function $properverb-$propernoun {
     } #End Begin
     Process {
     
-    } #End Process
+    }#Process
     End {
 		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Complete"
     }#End End
