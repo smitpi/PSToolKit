@@ -192,26 +192,29 @@ Function Set-PSToolKitSystemSetting {
     }
 
     if ($IntranetZone) {
+        $domainCheck = $null
         $domainCheck = [System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain()
 
-        $LocalIntranetSite = $domainCheck.Name
+        if (-not([string]::IsNullOrEmpty($domainCheck))) {
+            $LocalIntranetSite = $domainCheck.Name
 
-        $parent = 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap'
-        $key = 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\Domains'
-        $CompRegPath = Join-Path $key -ChildPath $LocalIntranetSite
-        $DWord = 1
+            $parent = 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap'
+            $key = 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\Domains'
+            $CompRegPath = Join-Path $key -ChildPath $LocalIntranetSite
+            $DWord = 1
 
-        try {
-            Write-Verbose "Creating a new key '$LocalIntranetSite' under $UserRegPath."
+            try {
+                Write-Verbose "Creating a new key '$LocalIntranetSite' under $UserRegPath."
 
-            if ((Test-Path -Path $CompRegPath) -eq $false ) {
-                if ((Test-Path -Path $key) -eq $false ) { New-Item -Path $parent -ItemType File -Name 'Domains' | Out-Null }
-                New-Item -Path $key -ItemType File -Name "$LocalIntranetSite" | Out-Null
-                Set-ItemProperty -Path $CompRegPath -Name 'file' -Value $DWord | Out-Null
-                Write-Color '[Set]', "IntranetZone $($LocalIntranetSite): ", 'Complete' -Color Yellow, Cyan, Green
-            } else { Write-Color '[Set]', "IntranetZone $($LocalIntranetSite): ", 'Already Set' -Color Yellow, Cyan, DarkRed }
+                if ((Test-Path -Path $CompRegPath) -eq $false ) {
+                    if ((Test-Path -Path $key) -eq $false ) { New-Item -Path $parent -ItemType File -Name 'Domains' | Out-Null }
+                    New-Item -Path $key -ItemType File -Name "$LocalIntranetSite" | Out-Null
+                    Set-ItemProperty -Path $CompRegPath -Name 'file' -Value $DWord | Out-Null
+                    Write-Color '[Set]', "IntranetZone $($LocalIntranetSite): ", 'Complete' -Color Yellow, Cyan, Green
+                } else { Write-Color '[Set]', "IntranetZone $($LocalIntranetSite): ", 'Already Set' -Color Yellow, Cyan, DarkRed }
 
-        } Catch { Write-Warning "[Set]IntranetZone: Failed:`n $($_.Exception.Message)" }
+            } Catch { Write-Warning "[Set]IntranetZone: Failed:`n $($_.Exception.Message)" }
+        } else { Write-Warning "[Set]IntranetZone: Failed:`n Unable to determine domain"}
 
     } #end if
 
@@ -311,23 +314,27 @@ Function Set-PSToolKitSystemSetting {
     if ($PSTrustedHosts) {
         try {
             Enable-PSRemoting -Force | Out-Null
+            $domainCheck = $null
             $domainCheck = [System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain()
-            $currentlist = @()
-            [array]$currentlist += (Get-Item WSMan:\localhost\Client\TrustedHosts).value.split(',')
-            if (-not($currentlist -contains "*.$domainCheck")) {
-                if ($false -eq [bool]$currentlist) {
-                    $DomainList = "*.$domainCheck"
-                    Set-Item WSMan:\localhost\Client\TrustedHosts -Value "$DomainList" -Force
-                    Write-Color '[Set]', 'TrustedHosts: ', 'Complete' -Color Yellow, Cyan, Green
+            if (-not([string]::IsNullOrEmpty($domainCheck))) {
+                $currentlist = @()
+                [array]$currentlist += (Get-Item WSMan:\localhost\Client\TrustedHosts).value.split(',')
+                if (-not($currentlist -contains "*.$domainCheck")) {
+                    if ($false -eq [bool]$currentlist) {
+                        $DomainList = "*.$domainCheck"
+                        Set-Item WSMan:\localhost\Client\TrustedHosts -Value "$DomainList" -Force
+                        Write-Color '[Set]', 'TrustedHosts: ', 'Complete' -Color Yellow, Cyan, Green
 
-                } else {
-                    $currentlist += "*.$domainCheck"
-                    $newlist = Join-String -Strings $currentlist -Separator ','
-                    Set-Item WSMan:\localhost\Client\TrustedHosts -Value "$newlist" -Force
-                    Write-Color '[Set]', 'TrustedHosts: ', 'Complete' -Color Yellow, Cyan, Green
+                    } else {
+                        $currentlist += "*.$domainCheck"
+                        $newlist = Join-String -Strings $currentlist -Separator ','
+                        Set-Item WSMan:\localhost\Client\TrustedHosts -Value "$newlist" -Force
+                        Write-Color '[Set]', 'TrustedHosts: ', 'Complete' -Color Yellow, Cyan, Green
 
-                }
-            } else {Write-Color '[Set]', 'TrustedHosts: ', 'Already Set' -Color Yellow, Cyan, DarkRed}
+                    }
+                } else {Write-Color '[Set]', 'TrustedHosts: ', 'Already Set' -Color Yellow, Cyan, DarkRed}
+            } else { Write-Warning "[Set]TrustedHosts: Failed:`n Unable to determine domain" }
+            
         } catch { Write-Warning "[Set]TrustedHosts: Failed:`n $($_.Exception.Message)" }
     } #end if
 
