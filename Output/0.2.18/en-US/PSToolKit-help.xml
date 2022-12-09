@@ -583,11 +583,11 @@
       <command:verb>Disable</command:verb>
       <command:noun>WebEncoding</command:noun>
       <maml:description>
-        <maml:para>decode a url</maml:para>
+        <maml:para>decode a URL</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>decode a url</maml:para>
+      <maml:para>decode a URL</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -595,7 +595,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
           <maml:name>URL</maml:name>
           <maml:description>
-            <maml:para>{{ Fill URL Description }}</maml:para>
+            <maml:para>The URL to decode.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -610,7 +610,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
         <maml:name>URL</maml:name>
         <maml:description>
-          <maml:para>{{ Fill URL Description }}</maml:para>
+          <maml:para>The URL to decode.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -939,11 +939,11 @@
       <command:verb>Enable</command:verb>
       <command:noun>WebEncoding</command:noun>
       <maml:description>
-        <maml:para>encode a url</maml:para>
+        <maml:para>encode a URL</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>encode a url</maml:para>
+      <maml:para>encode a URL</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -951,7 +951,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
           <maml:name>URL</maml:name>
           <maml:description>
-            <maml:para>{{ Fill URL Description }}</maml:para>
+            <maml:para>The URL to encode</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -966,7 +966,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
         <maml:name>URL</maml:name>
         <maml:description>
-          <maml:para>{{ Fill URL Description }}</maml:para>
+          <maml:para>The URL to encode</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Enable-WebEncoding
 
 ## SYNOPSIS
-encode a url
+encode a URL
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Enable-WebEncoding [-URL] <String[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-encode a url
+encode a URL
 
 ## EXAMPLES
 
@@ -29,7 +29,7 @@ Enable-WebEncoding -Export HTML -ReportPath C:\temp
 ## PARAMETERS
 
 ### -URL
-{{ Fill URL Description }}
+The URL to encode
 
 ```yaml
 Type: String[]

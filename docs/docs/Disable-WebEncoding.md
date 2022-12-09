@@ -8,7 +8,7 @@ schema: 2.0.0
 # Disable-WebEncoding
 
 ## SYNOPSIS
-decode a url
+decode a URL
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Disable-WebEncoding [-URL] <String[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-decode a url
+decode a URL
 
 ## EXAMPLES
 
@@ -29,7 +29,7 @@ Disable-WebEncoding -Export HTML -ReportPath C:\temp
 ## PARAMETERS
 
 ### -URL
-{{ Fill URL Description }}
+The URL to decode.
 
 ```yaml
 Type: String[]

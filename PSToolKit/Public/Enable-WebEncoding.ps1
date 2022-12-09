@@ -42,10 +42,13 @@ Created [29/11/2022_07:26] Initial Script
 
 <#
 .SYNOPSIS
-encode a url
+encode a URL
 
 .DESCRIPTION
-encode a url
+encode a URL
+
+.PARAMETER URL
+The URL to encode
 
 .EXAMPLE
 Enable-WebEncoding -Export HTML -ReportPath C:\temp

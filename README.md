@@ -34,10 +34,10 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Backup-PowerShellProfile`](https://smitpi.github.io/PSToolKit/Backup-PowerShellProfile) -- Creates a zip file from the ps profile directories
 - [`Compare-ADMembership`](https://smitpi.github.io/PSToolKit/Compare-ADMembership) -- Compare two users AD group memberships
 - [`Connect-VMWareCluster`](https://smitpi.github.io/PSToolKit/Connect-VMWareCluster) -- Connect to a vSphere cluster to perform other commands or scripts
-- [`Disable-WebEncoding`](https://smitpi.github.io/PSToolKit/Disable-WebEncoding) -- decode a url
+- [`Disable-WebEncoding`](https://smitpi.github.io/PSToolKit/Disable-WebEncoding) -- decode a URL
 - [`Edit-SSHConfigFile`](https://smitpi.github.io/PSToolKit/Edit-SSHConfigFile) -- Creates and modifies the ssh config file in their profile.
 - [`Enable-RemoteHostPSRemoting`](https://smitpi.github.io/PSToolKit/Enable-RemoteHostPSRemoting) -- enable ps remote remotely
-- [`Enable-WebEncoding`](https://smitpi.github.io/PSToolKit/Enable-WebEncoding) -- encode a url
+- [`Enable-WebEncoding`](https://smitpi.github.io/PSToolKit/Enable-WebEncoding) -- encode a URL
 - [`Export-ESXTemplate`](https://smitpi.github.io/PSToolKit/Export-ESXTemplate) -- Export all VM Templates from vSphere to local disk.
 - [`Find-ChocolateyApp`](https://smitpi.github.io/PSToolKit/Find-ChocolateyApp) -- Search the online repo for software
 - [`Find-OnlineModule`](https://smitpi.github.io/PSToolKit/Find-OnlineModule) -- Creates reports based on PSGallery.

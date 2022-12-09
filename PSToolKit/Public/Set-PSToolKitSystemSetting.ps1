@@ -193,8 +193,9 @@ Function Set-PSToolKitSystemSetting {
 
     if ($IntranetZone) {
         $domainCheck = $null
-        $domainCheck = [System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain()
-
+        try {
+            $domainCheck = [System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain()
+        } catch { Write-Warning "[Set]IntranetZone: Failed to get domain name:`n $($_.Exception.Message)" }
         if (-not([string]::IsNullOrEmpty($domainCheck))) {
             $LocalIntranetSite = $domainCheck.Name
 
@@ -315,7 +316,10 @@ Function Set-PSToolKitSystemSetting {
         try {
             Enable-PSRemoting -Force | Out-Null
             $domainCheck = $null
-            $domainCheck = [System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain()
+            try {
+                $domainCheck = [System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain()
+            } catch { Write-Warning "[Set]IntranetZone: Failed to get domain name:`n $($_.Exception.Message)" }
+
             if (-not([string]::IsNullOrEmpty($domainCheck))) {
                 $currentlist = @()
                 [array]$currentlist += (Get-Item WSMan:\localhost\Client\TrustedHosts).value.split(',')

@@ -35,17 +35,20 @@ Created [29/11/2022_07:26] Initial Script
 <# 
 
 .DESCRIPTION 
- decode a url 
+ decode a URL 
 
 #> 
 
 
 <#
 .SYNOPSIS
-decode a url
+decode a URL
 
 .DESCRIPTION
-decode a url
+decode a URL
+
+.PARAMETER URL
+The URL to decode.
 
 .EXAMPLE
 Disable-WebEncoding -Export HTML -ReportPath C:\temp
