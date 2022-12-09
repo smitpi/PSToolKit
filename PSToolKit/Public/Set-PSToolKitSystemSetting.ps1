@@ -195,7 +195,8 @@ Function Set-PSToolKitSystemSetting {
         $domainCheck = $null
         try {
             $domainCheck = [System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain()
-        } catch { Write-Warning "[Set]IntranetZone: Failed to get domain name:`n $($_.Exception.Message)" }
+        } catch { Write-Warning "[Set]IntranetZone: Failed to get domain name: Message:$($Error[0])" }
+        
         if (-not([string]::IsNullOrEmpty($domainCheck))) {
             $LocalIntranetSite = $domainCheck.Name
 
@@ -215,8 +216,7 @@ Function Set-PSToolKitSystemSetting {
                 } else { Write-Color '[Set]', "IntranetZone $($LocalIntranetSite): ", 'Already Set' -Color Yellow, Cyan, DarkRed }
 
             } Catch { Write-Warning "[Set]IntranetZone: Failed:`n $($_.Exception.Message)" }
-        } else { Write-Warning "[Set]IntranetZone: Failed:`n Unable to determine domain"}
-
+        } 
     } #end if
 
     if ($IntranetZoneIPRange) {
@@ -318,7 +318,7 @@ Function Set-PSToolKitSystemSetting {
             $domainCheck = $null
             try {
                 $domainCheck = [System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain()
-            } catch { Write-Warning "[Set]IntranetZone: Failed to get domain name:`n $($_.Exception.Message)" }
+            } catch { Write-Warning "[Set]TrustedHosts: Failed to get domain name: Message:$($Error[0])" }
 
             if (-not([string]::IsNullOrEmpty($domainCheck))) {
                 $currentlist = @()
@@ -337,8 +337,7 @@ Function Set-PSToolKitSystemSetting {
 
                     }
                 } else {Write-Color '[Set]', 'TrustedHosts: ', 'Already Set' -Color Yellow, Cyan, DarkRed}
-            } else { Write-Warning "[Set]TrustedHosts: Failed:`n Unable to determine domain" }
-            
+            }            
         } catch { Write-Warning "[Set]TrustedHosts: Failed:`n $($_.Exception.Message)" }
     } #end if
 
