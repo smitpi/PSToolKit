@@ -4027,7 +4027,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Install-MSUpdates -PerformReboot</dev:code>
+        <dev:code>Install-MSUpdate -PerformReboot</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>

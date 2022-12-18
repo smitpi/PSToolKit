@@ -23,7 +23,7 @@ Perform windows update
 
 ### EXAMPLE 1
 ```
-Install-MSUpdates -PerformReboot
+Install-MSUpdate -PerformReboot
 ```
 
 ## PARAMETERS
