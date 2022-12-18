@@ -59,6 +59,9 @@ Install my other published modules.
 .PARAMETER GitHubToken
 Token used to install modules and apps.
 
+.PARAMETER GitHubUserID
+UserID used to install modules and apps.
+
 .EXAMPLE
 Start-PSToolkitSystemInitialize -InstallMyModules
 
@@ -124,6 +127,15 @@ Function Start-PSToolkitSystemInitialize {
 			Write-Host "`t[Update]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell PackageManagement' -ForegroundColor Cyan -NoNewline; Write-Host ' Not Needed' -ForegroundColor Red
 		}
 	} | Wait-Job | Receive-Job		
+	#endregion
+
+	#region Boxstarter Install
+	if (-not(Get-Command BoxstarterShell.ps1)) {
+		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Boxstarter:' -ForegroundColor Cyan
+		[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+		Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://boxstarter.org/bootstrapper.ps1')) 
+		Get-Boxstarter -Force
+	}
 	#endregion
 
 	#region Needed Modules
@@ -198,6 +210,9 @@ Function Start-PSToolkitSystemInitialize {
 		Install-VMWareTool
 
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Apps`n" -ForegroundColor Cyan
+		Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
+		if (Test-PendingReboot -ComputerName $env:COMPUTERNAME) {Invoke-Reboot}
+		else {Write-Host 'Not Required' -ForegroundColor Green}
 		Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
 		
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "RSAT`n" -ForegroundColor Cyan
