@@ -23,7 +23,7 @@ try {
 
 Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Starting]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Bootstrap Script`n" -ForegroundColor Cyan
 
-$PSTemp = "C:\Temp\PSTemp"
+$PSTemp = 'C:\Temp\PSTemp'
 if (Test-Path $PSTemp) {$PSDownload = Get-Item $PSTemp}
 else {$PSDownload = New-Item $PSTemp -ItemType Directory -Force}
 
@@ -77,11 +77,9 @@ if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp")) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Apps`n" -ForegroundColor Cyan
 		Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
 		if (Test-PendingReboot -ComputerName $env:COMPUTERNAME) {
-			if (-not(Test-Path "$($PSDownload.fullname)\1stReboot.tmp")) {
-				New-Item "$($PSDownload.fullname)\1stReboot.tmp" -ItemType file -Force | Out-Null
-				Invoke-Reboot
-			}		
+			Invoke-Reboot -ComputerName $env:COMPUTERNAME -Verbose
 		} else {Write-Host 'Not Required' -ForegroundColor Green}
+		
 		Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
 		New-Item "$($PSDownload.fullname)\LabSetup.tmp" -ItemType file -Force | Out-Null
 	} catch {Write-Warning "Error: Message:$($Error[0])"}
@@ -96,11 +94,11 @@ if ($InstallAllModules) {
 if ($InstallAllApps) {
 	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Extended Apps`n" -ForegroundColor Cyan
 	if (Test-PendingReboot -ComputerName $env:COMPUTERNAME) {
-	if (-not(Test-Path "$($PSDownload.fullname)\2ndReboot.tmp")) {
-		New-Item "$($PSDownload.fullname)\2ndReboot.tmp" -ItemType file -Force | Out-Null
-		Invoke-Reboot
-	}		
-} else {Write-Host 'Not Required' -ForegroundColor Green}
+		if (-not(Test-Path "$($PSDownload.fullname)\2ndReboot.tmp")) {
+			New-Item "$($PSDownload.fullname)\2ndReboot.tmp" -ItemType file -Force | Out-Null
+			Invoke-Reboot
+		}		
+	} else {Write-Host 'Not Required' -ForegroundColor Green}
 	Install-PSPackageManAppFromList -ListName BaseApps, ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
 }
 
