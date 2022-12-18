@@ -1,8 +1,10 @@
+
+
+
 PARAM(
 	[string]$DomainName,
 	[string]$DomainUser,
 	[securestring]$DomainPassword,
-	[Parameter(Mandatory = $true)]
 	[string]$GitHubToken
 )
 
@@ -29,3 +31,6 @@ Remove-Item $full.FullName
 
 # Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://boxstarter.org/bootstrapper.ps1')); Get-Boxstarter -Force
 # iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JMTr4'gist.githubusercontent.com/smitpi/87099e6b6c60b76e8fd09c70b73bdd8a/raw/b889b1a92b3cf3ed19db76d8e1a9c6ac1ca4faba/Lab-Initialize-Setup.ps1'))
+# iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Initial-Setup.ps1')); Initial-Setup.ps1 -GitHubToken 
+
+
