@@ -23,7 +23,7 @@ try {
 
 Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Starting]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Bootstrap Script`n" -ForegroundColor Cyan
 
-$PSTemp = "$env:TEMP\PSTemp"
+$PSTemp = "C:\Temp\PSTemp"
 if (Test-Path $PSTemp) {$PSDownload = Get-Item $PSTemp}
 else {$PSDownload = New-Item $PSTemp -ItemType Directory -Force}
 

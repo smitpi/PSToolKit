@@ -78,7 +78,7 @@ Function Start-PSToolkitSystemInitialize {
 		[switch]$PendingReboot = $false
 	)
 
-	$PSTemp = "$env:TEMP\PSTemp"
+	$PSTemp = 'C:\Temp\PSTemp'
 	if (Test-Path $PSTemp) {$PSDownload = Get-Item $PSTemp}
 	else {$PSDownload = New-Item $PSTemp -ItemType Directory -Force}
 
@@ -142,7 +142,7 @@ Function Start-PSToolkitSystemInitialize {
 
 	#region Boxstarter Install
 	if (-not(Test-Path "$($PSDownload.fullname)\BoxstarterShell.tmp")) {
-		if (-not(Get-Command BoxstarterShell.ps1)) {
+		if (-not(Get-Command BoxstarterShell.ps1 -ErrorAction SilentlyContinue)) {
 			Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Boxstarter:' -ForegroundColor Cyan
 			[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
 			Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://boxstarter.org/bootstrapper.ps1')) 
