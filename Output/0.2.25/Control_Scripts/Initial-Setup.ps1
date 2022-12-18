@@ -21,10 +21,13 @@ try {
 	$VerbosePreference = 'SilentlyContinue'
 } catch {Write-Warning "Error: Message:$($Error[0])"}
 
+Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Starting]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Bootstrap Script`n" -ForegroundColor Cyan
+
 $PSTemp = "$env:TEMP\PSTemp"
 if (Test-Path $PSTemp) {$PSDownload = Get-Item $PSTemp}
 else {$PSDownload = New-Item $PSTemp -ItemType Directory -Force}
 
+Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Configuring]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Answer File`n" -ForegroundColor Cyan
 
 $AnswerFile = "$($PSDownload.FullName)\AnswerFile.json"
 if (-not(Test-Path $AnswerFile)) {
@@ -50,6 +53,7 @@ foreach ($item in ($AnswerFileImport | Get-Member -MemberType noteProperty)) {
 
 
 If (!(Get-CimInstance -Class Win32_ComputerSystem).PartOfDomain) {
+	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Adding]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($NewHostName) to Domain`n" -ForegroundColor Cyan
 	Write-Host -ForegroundColor Red 'This machine is not part of a domain. Adding now.'
 	$encSecret = $DomainPassword | ConvertTo-SecureString -Force -AsPlainText
 	$labcred = New-Object System.Management.Automation.PSCredential ($DomainUser, $encSecret)
@@ -68,12 +72,17 @@ Start-PSToolkitSystemInitialize -GitHubUserID $GitHubUserID -GitHubToken $GitHub
 Remove-Item $full.FullName
 
 if ($InstallAllModules) {
+	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Extended Modules`n" -ForegroundColor Cyan
 	Install-PWSHModule -ListName BaseModules, ExtendedModules, MyModules -Scope AllUsers -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
 }
 
 if ($InstallAllApps) {
+	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Extended Apps`n" -ForegroundColor Cyan
 	Install-PSPackageManAppFromList -ListName BaseApps, ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
 }
+
+Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Windows Updates`n" -ForegroundColor Cyan
+
 Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
 if (Test-PendingReboot -ComputerName $env:COMPUTERNAME) {Invoke-Reboot}
 else {Write-Host 'Not Required' -ForegroundColor Green}

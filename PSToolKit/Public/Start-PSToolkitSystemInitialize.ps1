@@ -82,6 +82,7 @@ Function Start-PSToolkitSystemInitialize {
 	if (Test-Path $PSTemp) {$PSDownload = Get-Item $PSTemp}
 	else {$PSDownload = New-Item $PSTemp -ItemType Directory -Force}
 
+	Write-Host "`n`n[Utilizing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Powershell Temp Directory:' -ForegroundColor Cyan -NoNewline; Write-Host " $($PSDownload.FullName)" -ForegroundColor Green
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 	#region ExecutionPolicy
@@ -228,17 +229,20 @@ Function Start-PSToolkitSystemInitialize {
 
 			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan
 			Install-VMWareTool
-
-			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Apps`n" -ForegroundColor Cyan
-			Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-			if (Test-PendingReboot -ComputerName $env:COMPUTERNAME) {Invoke-Reboot}
-			else {Write-Host 'Not Required' -ForegroundColor Green}
-			Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
 		
 			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "RSAT`n" -ForegroundColor Cyan
 			Install-RSAT
 			New-Item "$($PSDownload.fullname)\LabSetup.tmp" -ItemType file -Force | Out-Null
 		}
+		if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp")) {
+			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Apps`n" -ForegroundColor Cyan
+			Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
+			if (Test-PendingReboot -ComputerName $env:COMPUTERNAME) {Invoke-Reboot}
+			else {Write-Host 'Not Required' -ForegroundColor Green}
+			Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
+			New-Item "$($PSDownload.fullname)\LabSetup.tmp" -ItemType file -Force | Out-Null
+		}
+
 	}
 	#endregion
 
