@@ -30,7 +30,7 @@ Start-PSToolkitSystemInitialize -InstallMyModules
 ## PARAMETERS
 
 ### -GitHubUserID
-{{ Fill GitHubUserID Description }}
+UserID used to install modules and apps.
 
 ```yaml
 Type: String

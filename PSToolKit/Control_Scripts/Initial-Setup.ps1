@@ -22,12 +22,11 @@ try {
 } catch {Write-Warning "Error: Message:$($Error[0])"}
 
 $PSTemp = "$env:TEMP\PSTemp"
-if (Test-Path $PSTemp) {Remove-Item $PSTemp -Force -Recurse}
-$PSDownload = New-Item $PSTemp -ItemType Directory -Force
+if (Test-Path $PSTemp) {$PSDownload = Get-Item $PSTemp}
+else {$PSDownload = New-Item $PSTemp -ItemType Directory -Force}
 
 
 $AnswerFile = "$($PSDownload.FullName)\AnswerFile.json"
-
 if (-not(Test-Path $AnswerFile)) {
 
 	$output = [PSCustomObject]@{
@@ -40,12 +39,9 @@ if (-not(Test-Path $AnswerFile)) {
 		InstallAllModules = $false
 		InstallAllApps    = $false
 	}
-
 	$output | ConvertTo-Json | Out-File -FilePath $AnswerFile -Force
-
-	Start-Process -FilePath notepad.exe -ArgumentList $AnswerFile -Wait
 }
-
+Start-Process -FilePath notepad.exe -ArgumentList $AnswerFile -Wait
 $AnswerFileImport = (Get-Content $AnswerFile | ConvertFrom-Json) 
 
 foreach ($item in ($AnswerFileImport | Get-Member -MemberType noteProperty)) {
@@ -63,6 +59,7 @@ If (!(Get-CimInstance -Class Win32_ComputerSystem).PartOfDomain) {
 	Add-Computer -DomainName $DomainName -Credential $labcred -Options JoinWithNewName, AccountCreate -Force -Restart
 }
 
+if (Test-Path "$($PSDownload.FullName)\Start-PSToolkitSystemInitialize.ps1") {Remove-Item "$($PSDownload.FullName)\Start-PSToolkitSystemInitialize.ps1" -Force}
 $web = New-Object System.Net.WebClient
 $web.DownloadFile('https://bit.ly/35sEu2b', "$($PSDownload.FullName)\Start-PSToolkitSystemInitialize.ps1")
 $full = Get-Item "$($PSDownload.FullName)\Start-PSToolkitSystemInitialize.ps1"
@@ -77,11 +74,10 @@ if ($InstallAllModules) {
 if ($InstallAllApps) {
 	Install-PSPackageManAppFromList -ListName BaseApps, ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
 }
+Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
+if (Test-PendingReboot -ComputerName $env:COMPUTERNAME) {Invoke-Reboot}
+else {Write-Host 'Not Required' -ForegroundColor Green}
+Install-MSUpdate
 
-
-# Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://boxstarter.org/bootstrapper.ps1')); Get-Boxstarter -Force
-# iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JMTr4'gist.githubusercontent.com/smitpi/87099e6b6c60b76e8fd09c70b73bdd8a/raw/b889b1a92b3cf3ed19db76d8e1a9c6ac1ca4faba/Lab-Initialize-Setup.ps1'))
-# iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Initial-Setup.ps1')); Initial-Setup.ps1 -GitHubToken 
-# start http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Initial-Setup.ps1
 
 

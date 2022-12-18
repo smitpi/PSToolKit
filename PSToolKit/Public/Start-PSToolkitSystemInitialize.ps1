@@ -78,79 +78,95 @@ Function Start-PSToolkitSystemInitialize {
 		[switch]$PendingReboot = $false
 	)
 
+	$PSTemp = "$env:TEMP\PSTemp"
+	if (Test-Path $PSTemp) {$PSDownload = Get-Item $PSTemp}
+	else {$PSDownload = New-Item $PSTemp -ItemType Directory -Force}
+
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 	#region ExecutionPolicy
-	if ((Get-ExecutionPolicy) -notlike 'Unrestricted') {
-		try {
-			Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Powershell Script Execution:' -ForegroundColor Cyan -NoNewline
-			Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope Process -ErrorAction Stop
-			Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope CurrentUser -ErrorAction Stop
-			Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope LocalMachine -ErrorAction Stop
-			Write-Host ' Complete' -ForegroundColor Green
-		} catch {Write-Warning "Error Setting ExecutionPolicy: Message:$($Error[0])"}
-	} else {Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Powershell Script Execution:' -ForegroundColor Cyan -NoNewline; Write-Host ' Already Set' -ForegroundColor Red}
+	if (-not(Test-Path "$($PSDownload.fullname)\ExecutionPolicy.tmp")) {
+		if ((Get-ExecutionPolicy) -notlike 'Unrestricted') {
+			try {
+				Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Powershell Script Execution:' -ForegroundColor Cyan -NoNewline
+				Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope Process -ErrorAction Stop
+				Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope CurrentUser -ErrorAction Stop
+				Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope LocalMachine -ErrorAction Stop
+				Write-Host ' Complete' -ForegroundColor Green
+			} catch {Write-Warning "Error Setting ExecutionPolicy: Message:$($Error[0])"}
+		} else {Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Powershell Script Execution:' -ForegroundColor Cyan -NoNewline; Write-Host ' Already Set' -ForegroundColor Red}
+		New-Item "$($PSDownload.fullname)\ExecutionPolicy.tmp" -ItemType file -Force | Out-Null
+	}
 	#endregion
 
 	#region PSRepo
-	if ((Get-PSRepository -Name PSGallery).InstallationPolicy -notlike 'Trusted' ) {
-		try {
-			Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell Gallery:' -ForegroundColor Cyan -NoNewline
-			$null = Install-PackageProvider Nuget -Force
-			$null = Register-PSRepository -Default -ErrorAction SilentlyContinue
-			$null = Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-			Write-Host ' Complete' -ForegroundColor Green
-		} catch {Write-Warning "Error Setting PSRepository: Message:$($Error[0])"}
-	} else {Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell Gallery:' -ForegroundColor Cyan -NoNewline; Write-Host ' Already Set' -ForegroundColor Red}
-	#endregion
-
-	#region PackageManager
-	Start-Job -ScriptBlock {
-		$PowerShellGet = Get-Module 'PowerShellGet' -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1
-
-		if ($PowerShellGet.Version -lt [version]'2.2.5') {
-			Write-Host "`t[Updating]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell PackageManagement' -ForegroundColor Cyan
-			$installOptions = @{
-				Repository = 'PSGallery'
-				Force      = $true
-				Scope      = 'AllUsers'
-			}							
+	if (-not(Test-Path "$($PSDownload.fullname)\PSRepo.tmp")) {
+		if ((Get-PSRepository -Name PSGallery).InstallationPolicy -notlike 'Trusted' ) {
 			try {
-				Install-Module -Name PackageManagement @installOptions
-				Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PackageManagement' -ForegroundColor Cyan -NoNewline; Write-Host ' Complete' -ForegroundColor Green
-			} catch {Write-Warning "Error installing PackageManagement: Message:$($Error[0])"}
-			try {
-				Install-Module -Name PowerShellGet @installOptions
-				Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShellGet' -ForegroundColor Cyan -NoNewline; Write-Host ' Complete' -ForegroundColor Green
-			} catch {Write-Warning "Error installing PowerShellGet: Message:$($Error[0])"}
-		} else {
-			Write-Host "`t[Update]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell PackageManagement' -ForegroundColor Cyan -NoNewline; Write-Host ' Not Needed' -ForegroundColor Red
-		}
-	} | Wait-Job | Receive-Job		
+				Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell Gallery:' -ForegroundColor Cyan -NoNewline
+				$null = Install-PackageProvider Nuget -Force
+				$null = Register-PSRepository -Default -ErrorAction SilentlyContinue
+				$null = Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+				Write-Host ' Complete' -ForegroundColor Green
+			} catch {Write-Warning "Error Setting PSRepository: Message:$($Error[0])"}
+		} else {Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell Gallery:' -ForegroundColor Cyan -NoNewline; Write-Host ' Already Set' -ForegroundColor Red}
+		#endregion
+
+		#region PackageManager
+		Start-Job -ScriptBlock {
+			$PowerShellGet = Get-Module 'PowerShellGet' -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1
+
+			if ($PowerShellGet.Version -lt [version]'2.2.5') {
+				Write-Host "`t[Updating]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell PackageManagement' -ForegroundColor Cyan
+				$installOptions = @{
+					Repository = 'PSGallery'
+					Force      = $true
+					Scope      = 'AllUsers'
+				}							
+				try {
+					Install-Module -Name PackageManagement @installOptions
+					Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PackageManagement' -ForegroundColor Cyan -NoNewline; Write-Host ' Complete' -ForegroundColor Green
+				} catch {Write-Warning "Error installing PackageManagement: Message:$($Error[0])"}
+				try {
+					Install-Module -Name PowerShellGet @installOptions
+					Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShellGet' -ForegroundColor Cyan -NoNewline; Write-Host ' Complete' -ForegroundColor Green
+				} catch {Write-Warning "Error installing PowerShellGet: Message:$($Error[0])"}
+			} else {
+				Write-Host "`t[Update]: " -NoNewline -ForegroundColor Yellow; Write-Host 'PowerShell PackageManagement' -ForegroundColor Cyan -NoNewline; Write-Host ' Not Needed' -ForegroundColor Red
+			}
+		} | Wait-Job | Receive-Job		
+		New-Item "$($PSDownload.fullname)\PSRepo.tmp" -ItemType file -Force | Out-Null
+	}
 	#endregion
 
 	#region Boxstarter Install
-	if (-not(Get-Command BoxstarterShell.ps1)) {
-		Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Boxstarter:' -ForegroundColor Cyan
-		[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-		Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://boxstarter.org/bootstrapper.ps1')) 
-		Get-Boxstarter -Force
+	if (-not(Test-Path "$($PSDownload.fullname)\BoxstarterShell.tmp")) {
+		if (-not(Get-Command BoxstarterShell.ps1)) {
+			Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Boxstarter:' -ForegroundColor Cyan
+			[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+			Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://boxstarter.org/bootstrapper.ps1')) 
+			Get-Boxstarter -Force
+		}
+		New-Item "$($PSDownload.fullname)\BoxstarterShell.tmp" -ItemType file -Force | Out-Null
 	}
 	#endregion
 
 	#region Needed Modules
-	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Needed PowerShell Modules`n" -ForegroundColor Cyan
-	'ImportExcel', 'PSWriteHTML', 'PSWriteColor', 'PSScriptTools', 'PoshRegistry', 'Microsoft.PowerShell.Archive', 'PWSHModule', 'PSPackageMan' | ForEach-Object {		
-		$module = $_
-		if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
-			try {
-				Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module):" -ForegroundColor Cyan -NoNewline
-				Install-Module -Name $module -Scope AllUsers -AllowClobber -ErrorAction stop
-				Write-Host ' Complete' -ForegroundColor Green
-			} catch {Write-Warning "Error installing module $($module): Message:$($Error[0])"}
-		} else {
-			Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module):" -ForegroundColor Cyan -NoNewline; Write-Host ' Already Installed' -ForegroundColor Red
+	if (-not(Test-Path "$($PSDownload.fullname)\NeededModules.tmp")) {
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Needed PowerShell Modules`n" -ForegroundColor Cyan
+		'ImportExcel', 'PSWriteHTML', 'PSWriteColor', 'PSScriptTools', 'PoshRegistry', 'Microsoft.PowerShell.Archive', 'PWSHModule', 'PSPackageMan' | ForEach-Object {		
+			$module = $_
+			if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
+				try {
+					Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module):" -ForegroundColor Cyan -NoNewline
+					Install-Module -Name $module -Scope AllUsers -AllowClobber -ErrorAction stop
+					Write-Host ' Complete' -ForegroundColor Green
+				} catch {Write-Warning "Error installing module $($module): Message:$($Error[0])"}
+			} else {
+				Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module):" -ForegroundColor Cyan -NoNewline; Write-Host ' Already Installed' -ForegroundColor Red
+			}
 		}
+		New-Item "$($PSDownload.fullname)\NeededModules.tmp" -ItemType file -Force | Out-Null
 	}
 	#endregion
 
@@ -167,56 +183,62 @@ Function Start-PSToolkitSystemInitialize {
 
 	#region MyModules
 	if ($InstallMyModules) {
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "My Modules`n" -ForegroundColor Cyan
-		Write-Host "`t[Collecting] " -NoNewline -ForegroundColor Cyan; Write-Host "Module Details from PS Gallery`n" -ForegroundColor Cyan 
-		Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} | ForEach-Object {
-			$module = $_
-			Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
-			if (-not(Get-Module $module.name) -and -not(Get-Module $module.name -ListAvailable)) {
-				try {
-					Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name):" -ForegroundColor Cyan -NoNewline
-					Install-Module -Name $module.name -Scope AllUsers -AllowClobber -ErrorAction stop
-					Write-Host ' Complete' -ForegroundColor Green
-				} catch {Write-Warning "Error installing module $($module.name):  Message:$($Error[0])"}
-			} else {
-				$LocalMod = Get-Module $module.name -ListAvailable | Sort-Object -Property Version | Select-Object -First 1
-				if (($LocalMod[0].Version) -lt $module.Version) {
+		if (-not(Test-Path "$($PSDownload.fullname)\InstallMyModules.tmp")) {
+			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "My Modules`n" -ForegroundColor Cyan
+			Write-Host "`t[Collecting] " -NoNewline -ForegroundColor Cyan; Write-Host "Module Details from PS Gallery`n" -ForegroundColor Cyan 
+			Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} | ForEach-Object {
+				$module = $_
+				Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
+				if (-not(Get-Module $module.name) -and -not(Get-Module $module.name -ListAvailable)) {
 					try {
-						Write-Host "`t[Upgrading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name):" -ForegroundColor Cyan -NoNewline
-						Update-Module -Name $module.name -Scope AllUsers -Force
+						Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name):" -ForegroundColor Cyan -NoNewline
+						Install-Module -Name $module.name -Scope AllUsers -AllowClobber -ErrorAction stop
 						Write-Host ' Complete' -ForegroundColor Green
 					} catch {Write-Warning "Error installing module $($module.name):  Message:$($Error[0])"}
-				} else {Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name):" -ForegroundColor Cyan -NoNewline; Write-Host ' Already Installed' -ForegroundColor Red}
+				} else {
+					$LocalMod = Get-Module $module.name -ListAvailable | Sort-Object -Property Version | Select-Object -First 1
+					if (($LocalMod[0].Version) -lt $module.Version) {
+						try {
+							Write-Host "`t[Upgrading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name):" -ForegroundColor Cyan -NoNewline
+							Update-Module -Name $module.name -Scope AllUsers -Force
+							Write-Host ' Complete' -ForegroundColor Green
+						} catch {Write-Warning "Error installing module $($module.name):  Message:$($Error[0])"}
+					} else {Write-Host "`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name):" -ForegroundColor Cyan -NoNewline; Write-Host ' Already Installed' -ForegroundColor Red}
+				}
 			}
 		}
+		New-Item "$($PSDownload.fullname)\InstallMyModules.tmp" -ItemType file -Force | Out-Null
 	}
 	#endregion
 
 	#region Lab Setup
 	if ($LabSetup) {
-		Write-Host "`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "System Settings`n" -ForegroundColor Cyan
-		Set-PSToolKitSystemSetting -RunAll
+		if (-not(Test-Path "$($PSDownload.fullname)\LabSetup.tmp")) {
+			Write-Host "`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "System Settings`n" -ForegroundColor Cyan
+			Set-PSToolKitSystemSetting -RunAll
 
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "New PS Profile`n" -ForegroundColor Cyan
-		New-PSProfile
+			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "New PS Profile`n" -ForegroundColor Cyan
+			New-PSProfile
 
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Modules`n" -ForegroundColor Cyan
-		Install-PWSHModule -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken -ListName BaseModules -Scope AllUsers
+			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Modules`n" -ForegroundColor Cyan
+			Install-PWSHModule -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken -ListName BaseModules -Scope AllUsers
 
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan
-		Install-ChocolateyClient
+			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan
+			Install-ChocolateyClient
 
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan
-		Install-VMWareTool
+			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan
+			Install-VMWareTool
 
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Apps`n" -ForegroundColor Cyan
-		Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-		if (Test-PendingReboot -ComputerName $env:COMPUTERNAME) {Invoke-Reboot}
-		else {Write-Host 'Not Required' -ForegroundColor Green}
-		Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
+			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Apps`n" -ForegroundColor Cyan
+			Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
+			if (Test-PendingReboot -ComputerName $env:COMPUTERNAME) {Invoke-Reboot}
+			else {Write-Host 'Not Required' -ForegroundColor Green}
+			Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
 		
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "RSAT`n" -ForegroundColor Cyan
-		Install-RSAT
+			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "RSAT`n" -ForegroundColor Cyan
+			Install-RSAT
+			New-Item "$($PSDownload.fullname)\LabSetup.tmp" -ItemType file -Force | Out-Null
+		}
 	}
 	#endregion
 
