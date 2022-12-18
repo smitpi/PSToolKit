@@ -1,5 +1,5 @@
 # Boxstarter options
-$Boxstarter.RebootOk = $true # Allow reboots?
+$Boxstarter.RebootOk = $false # Allow reboots?
 $Boxstarter.NoPassword = $false # Is this a machine with no login password?
 $Boxstarter.AutoLogin = $true # Save my password securely and auto-login after a reboot
 
@@ -95,6 +95,12 @@ if ($InstallAllModules) {
 
 if ($InstallAllApps) {
 	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Extended Apps`n" -ForegroundColor Cyan
+	if (Test-PendingReboot -ComputerName $env:COMPUTERNAME) {
+	if (-not(Test-Path "$($PSDownload.fullname)\2ndReboot.tmp")) {
+		New-Item "$($PSDownload.fullname)\2ndReboot.tmp" -ItemType file -Force | Out-Null
+		Invoke-Reboot
+	}		
+} else {Write-Host 'Not Required' -ForegroundColor Green}
 	Install-PSPackageManAppFromList -ListName BaseApps, ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
 }
 

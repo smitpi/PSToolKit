@@ -173,12 +173,12 @@ Function Start-PSToolkitSystemInitialize {
 
 	#region PStoolkit
 	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "PSToolKit Module`n" -ForegroundColor Cyan
+	if (Test-Path "$($PSDownload.fullname)\Update-MyModulesFromGitHub.ps1") {Remove-Item "$($PSDownload.fullname)\Update-MyModulesFromGitHub.ps1" -Force | Out-Null}
 	$web = New-Object System.Net.WebClient
-	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-MyModulesFromGitHub.ps1', "$($env:TEMP)\Update-MyModulesFromGitHub.ps1")
-	$full = Get-Item "$($env:TEMP)\Update-MyModulesFromGitHub.ps1"
+	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Update-MyModulesFromGitHub.ps1', "$($PSDownload.fullname)\Update-MyModulesFromGitHub.ps1")
+	$full = Get-Item "$($PSDownload.fullname)\Update-MyModulesFromGitHub.ps1"
 	Import-Module $full.FullName -Force
 	Update-MyModulesFromGitHub -Modules PSToolkit -AllUsers
-	Remove-Item $full.FullName
 	Import-Module PSToolKit -Force
 	#endregion
 

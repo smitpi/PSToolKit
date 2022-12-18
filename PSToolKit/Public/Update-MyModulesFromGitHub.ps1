@@ -133,21 +133,16 @@ Function Update-MyModulesFromGitHub {
 
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] download from github"
 			Write-Host "`t[Downloading]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($ModuleName): " -ForegroundColor DarkRed
-			if (Get-Command Start-BitsTransfer) {
-				try {
-					Start-BitsTransfer -Source "https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip" -Destination $ModuleTMPDest -ErrorAction Stop
-				} catch {
-					Write-Warning 'Bits Transer failed, defaulting to webrequest'
-					Get-BitsTransfer | Remove-BitsTransfer -ErrorAction SilentlyContinue
-					$wc = New-Object System.Net.WebClient
-					$wc.DownloadFile("https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip", $ModuleTMPDest)
-				}
-			} else {
-				$wc = New-Object System.Net.WebClient
-				$wc.DownloadFile("https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip", $ModuleTMPDest)
-			}
+			
+			$wc = New-Object System.Net.WebClient
+			$wc.DownloadFile("https://github.com/smitpi/$($ModuleName)/archive/refs/heads/master.zip", $ModuleTMPDest)
+			
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] expand into module folder"
-			Expand-Archive -Path $ModuleTMPDest -DestinationPath $PSDownload.FullName -Force
+			if (-not(Get-Module Microsoft.PowerShell.Archive) -or (Get-Module -ListAvailable Microsoft.PowerShell.Archive)) {
+				Install-Module -Name Microsoft.PowerShell.Archive -Force -Repository PSGallery -AllowClobber
+				Import-Module Microsoft.PowerShell.Archive
+			}
+			Microsoft.PowerShell.Archive\Expand-Archive -Path $ModuleTMPDest -DestinationPath $PSDownload.FullName -Force
 
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Copying to $($PathFullName.FullName)"
 			$NewModule = Get-ChildItem -Directory "$($PSDownload.FullName)\$($ModuleName)-master\Output"
