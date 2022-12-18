@@ -13,8 +13,8 @@ Initialize a blank machine.
 ## SYNTAX
 
 ```
-Start-PSToolkitSystemInitialize [-GitHubToken] <String> [-LabSetup] [-InstallMyModules] [-PendingReboot]
- [<CommonParameters>]
+Start-PSToolkitSystemInitialize [-GitHubUserID] <String> [-GitHubToken] <String> [-LabSetup]
+ [-InstallMyModules] [-PendingReboot] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,6 +29,21 @@ Start-PSToolkitSystemInitialize -InstallMyModules
 
 ## PARAMETERS
 
+### -GitHubUserID
+{{ Fill GitHubUserID Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -GitHubToken
 Token used to install modules and apps.
 
@@ -38,7 +53,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

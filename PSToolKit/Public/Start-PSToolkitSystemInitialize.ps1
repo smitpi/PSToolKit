@@ -67,6 +67,8 @@ Function Start-PSToolkitSystemInitialize {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Start-PSToolkitSystemInitialize')]
 	PARAM(
 		[Parameter(Mandatory, Position = 0)]
+		[string]$GitHubUserID,
+		[Parameter(Mandatory, Position = 1)]
 		[string]$GitHubToken,
 		[switch]$LabSetup = $false,
 		[switch]$InstallMyModules = $false,
@@ -187,7 +189,7 @@ Function Start-PSToolkitSystemInitialize {
 		New-PSProfile
 
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Modules`n" -ForegroundColor Cyan
-		Install-PWSHModule -GitHubUserID smitpi -GitHubToken $GitHubToken -ListName BaseModules -Scope AllUsers
+		Install-PWSHModule -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken -ListName BaseModules -Scope AllUsers
 
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan
 		Install-ChocolateyClient
@@ -196,7 +198,7 @@ Function Start-PSToolkitSystemInitialize {
 		Install-VMWareTool
 
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Apps`n" -ForegroundColor Cyan
-		Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID smitpi -GitHubToken $GitHubToken
+		Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
 		
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "RSAT`n" -ForegroundColor Cyan
 		Install-RSAT

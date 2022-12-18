@@ -8536,6 +8536,18 @@
       <command:syntaxItem>
         <maml:name>Start-PSToolkitSystemInitialize</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>GitHubUserID</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill GitHubUserID Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>GitHubToken</maml:name>
           <maml:description>
             <maml:para>Token used to install modules and apps.</maml:para>
@@ -8584,6 +8596,18 @@
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>GitHubUserID</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill GitHubUserID Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>GitHubToken</maml:name>
         <maml:description>
           <maml:para>Token used to install modules and apps.</maml:para>
