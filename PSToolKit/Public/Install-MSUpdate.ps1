@@ -53,7 +53,7 @@ Perform windows update
 Check and perform a reboot if required.
 
 .EXAMPLE
-Install-MSUpdates -PerformReboot
+Install-MSUpdate -PerformReboot
 
 #>
 Function Install-MSUpdate {
