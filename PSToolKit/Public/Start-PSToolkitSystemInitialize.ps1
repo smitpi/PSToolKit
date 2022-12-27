@@ -69,9 +69,9 @@ Start-PSToolkitSystemInitialize -InstallMyModules
 Function Start-PSToolkitSystemInitialize {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Start-PSToolkitSystemInitialize')]
 	PARAM(
-		[Parameter(Mandatory, Position = 0)]
+		[Parameter(Position = 0)]
 		[string]$GitHubUserID,
-		[Parameter(Mandatory, Position = 1)]
+		[Parameter(Position = 1)]
 		[string]$GitHubToken,
 		[switch]$LabSetup = $false,
 		[switch]$InstallMyModules = $false,
@@ -187,7 +187,8 @@ Function Start-PSToolkitSystemInitialize {
 		if (-not(Test-Path "$($PSDownload.fullname)\InstallMyModules.tmp")) {
 			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "My Modules`n" -ForegroundColor Cyan
 			Write-Host "`t[Collecting] " -NoNewline -ForegroundColor Cyan; Write-Host "Module Details from PS Gallery`n" -ForegroundColor Cyan 
-			Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} | ForEach-Object {
+			#Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} 
+			"CTXCloudApi" ,"PSLauncher","PSConfigFile","XDHealthCheck","PSSysTray","PWSHModule","PSPackageMan" | ForEach-Object {
 				$module = $_
 				Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
 				if (-not(Get-Module $module.name) -and -not(Get-Module $module.name -ListAvailable)) {
@@ -216,14 +217,16 @@ Function Start-PSToolkitSystemInitialize {
 	if ($LabSetup) {
 		if (-not(Test-Path "$($PSDownload.fullname)\LabSetup.tmp")) {
 			Write-Host "`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "System Settings`n" -ForegroundColor Cyan 
-			Set-PSToolKitSystemSetting -IntranetZone -IntranetZoneIPRange -SetPhotoViewer -DisableIPV6 -DisableInternetExplorerESC -DisableServerManager -EnableRDP -FileExplorerSettings -RemoveDefaultApps -SystemDefaults
+			Set-PSToolKitSystemSetting -RunAll
+			#Set-PSToolKitSystemSetting -IntranetZone -IntranetZoneIPRange -SetPhotoViewer -DisableIPV6 -DisableInternetExplorerESC -DisableServerManager -EnableRDP -FileExplorerSettings -RemoveDefaultApps -SystemDefaults
 
 			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "New PS Profile`n" -ForegroundColor Cyan
 			New-PSProfile
 
-			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Modules`n" -ForegroundColor Cyan
-			Install-PWSHModule -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken -ListName BaseModules -Scope AllUsers
-
+			if (-not([string]::IsNullOrEmpty($GitHubUserID))) {
+				Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Modules`n" -ForegroundColor Cyan
+				Install-PWSHModule -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken -ListName BaseModules -Scope AllUsers
+			}
 			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan
 			Install-ChocolateyClient
 
