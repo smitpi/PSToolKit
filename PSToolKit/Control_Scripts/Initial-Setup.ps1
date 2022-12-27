@@ -80,21 +80,25 @@ if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp")) {
 		if ((Test-PendingReboot -ComputerName localhost).IsPendingReboot) {Invoke-Reboot} 
 		else {Write-Host 'Not Required' -ForegroundColor Green}
 		
-		### HACK Workaround choco / boxstarter path too long error
-		## https://github.com/chocolatey/boxstarter/issues/241
-		$ChocoCachePath = "$($PSDownload.fullname)\chocolatey"
-		New-Item -Path $ChocoCachePath -ItemType Directory -Force
+<#
+        [scriptblock]$scriptblock = {
+            $PSDownload = Get-Item 'C:\Temp\PSTemp'
+		    $ChocoCachePath = "$($PSDownload.fullname)\chocolatey"
+		    New-Item -Path $ChocoCachePath -ItemType Directory -Force
 
-		$cup = 'choco upgrade -y --limit-output --cacheLocation="$ChocoCachePath"'
-		refreshenv
+		    $cup = 'choco upgrade -y --limit-output --cacheLocation="$ChocoCachePath"'
+		    refreshenv
 
-		Invoke-Expression "$cup bandizip"
-		Invoke-Expression "$cup cascadia-code-nerd-font"
-		Invoke-Expression "$cup cascadiacodepl"
-		Invoke-Expression "$cup GoogleChrome"
-		Invoke-Expression "$cup microsoft-edge"
-		Invoke-Expression "$cup microsoft-windows-terminal"
-		Invoke-Expression "$cup pwsh"
+		    Invoke-Expression "$cup bandizip"
+		    Invoke-Expression "$cup cascadia-code-nerd-font"
+		    Invoke-Expression "$cup cascadiacodepl"
+		    Invoke-Expression "$cup GoogleChrome"
+		    Invoke-Expression "$cup microsoft-edge"
+		    Invoke-Expression "$cup microsoft-windows-terminal"
+		    Invoke-Expression "$cup pwsh"
+        }
+        #>
+        Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken})" -Wait -WorkingDirectory C:\Temp\PSTemp 
 
 		#Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
 		New-Item "$($PSDownload.fullname)\BaseApps.tmp" -ItemType file -Force | Out-Null
