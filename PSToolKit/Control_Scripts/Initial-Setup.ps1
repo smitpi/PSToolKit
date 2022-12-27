@@ -135,5 +135,5 @@ Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending
 if ((Test-PendingReboot -ComputerName localhost).IsPendingReboot) {Invoke-Reboot} 
 else {Write-Host 'Not Required' -ForegroundColor Green}
 
-
+Remove-Item "$($PSDownload.FullName)\*.tmp"
 
