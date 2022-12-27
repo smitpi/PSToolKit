@@ -73,6 +73,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`New-ElevatedShortcut`](https://smitpi.github.io/PSToolKit/New-ElevatedShortcut) -- Creates a shortcut to a script or exe that runs as admin, without UNC
 - [`New-GodModeFolder`](https://smitpi.github.io/PSToolKit/New-GodModeFolder) -- Creates a God Mode Folder
 - [`New-GoogleSearch`](https://smitpi.github.io/PSToolKit/New-GoogleSearch) -- Start a new browser tab with search string.
+- [`New-MSEdgeWebApp`](https://smitpi.github.io/PSToolKit/New-MSEdgeWebApp) -- Creates a new webapp to a URL, and save the shortcut on your system.
 - [`New-PSGenericList`](https://smitpi.github.io/PSToolKit/New-PSGenericList) -- Creates a .net list object
 - [`New-PSModule`](https://smitpi.github.io/PSToolKit/New-PSModule) -- Creates a new PowerShell module.
 - [`New-PSProfile`](https://smitpi.github.io/PSToolKit/New-PSProfile) -- Creates new profile files in the documents folder
