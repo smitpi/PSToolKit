@@ -74,8 +74,6 @@ Remove-Item $full.FullName
 if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp")) {
 	try {
 		refreshenv
-		Set-Item WSMan:\localhost\Client\TrustedHosts -Value (Join-String -Strings (Get-Item WSMan:\localhost\Client\TrustedHosts).value, localhost -Separator ',')
-		refreshenv
 		Get-Service WinRM | Start-Service -Verbose
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Apps`n" -ForegroundColor Cyan
 		Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline

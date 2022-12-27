@@ -215,8 +215,8 @@ Function Start-PSToolkitSystemInitialize {
 	#region Lab Setup
 	if ($LabSetup) {
 		if (-not(Test-Path "$($PSDownload.fullname)\LabSetup.tmp")) {
-			Write-Host "`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "System Settings`n" -ForegroundColor Cyan
-			Set-PSToolKitSystemSetting -RunAll
+			Write-Host "`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "System Settings`n" -ForegroundColor Cyan 
+			Set-PSToolKitSystemSetting -IntranetZone -IntranetZoneIPRange -SetPhotoViewer -DisableIPV6 -DisableInternetExplorerESC -DisableServerManager -EnableRDP -FileExplorerSettings -RemoveDefaultApps -SystemDefaults
 
 			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "New PS Profile`n" -ForegroundColor Cyan
 			New-PSProfile
