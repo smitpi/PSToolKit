@@ -91,7 +91,7 @@ if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp")) {
 	try {
 		refreshenv
 		Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-		if ((Test-PendingReboot -ComputerName localhost).IsPendingReboot) {Invoke-Reboot} 
+		if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot) {Invoke-Reboot} 
 		else {Write-Host 'Not Required' -ForegroundColor Green}
 		
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Base Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow
@@ -114,7 +114,7 @@ if ($InstallAllApps) {
 	if (-not(Test-Path "$($PSDownload.fullname)\ExtendedApps.tmp")) {
 		refreshenv
 		Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-		if ((Test-PendingReboot -ComputerName localhost).IsPendingReboot) {Invoke-Reboot} 
+		if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot) {Invoke-Reboot} 
 		else {Write-Host 'Not Required' -ForegroundColor Green}
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Extended Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-PSPackageManAppFromList -ListName BaseApps, ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken})" -Wait -WorkingDirectory C:\Temp\PSTemp 
@@ -126,7 +126,7 @@ if ($InstallLicensedApps) {
 	if (-not(Test-Path "$($PSDownload.fullname)\LicensedApps.tmp")) {
 		refreshenv
 		Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-		if ((Test-PendingReboot -ComputerName localhost).IsPendingReboot) {Invoke-Reboot} 
+		if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot) {Invoke-Reboot} 
 		else {Write-Host 'Not Required' -ForegroundColor Green}
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Licensed Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-PSPackageManAppFromList -ListName LicensedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken})" -Wait -WorkingDirectory C:\Temp\PSTemp 
@@ -140,7 +140,7 @@ Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximize
 
 refreshenv
 Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-if ((Test-PendingReboot -ComputerName localhost).IsPendingReboot) {Invoke-Reboot} 
+if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot) {Invoke-Reboot} 
 else {Write-Host 'Not Required' -ForegroundColor Green}
 
 Remove-Item "$($PSDownload.FullName)\*.tmp"
