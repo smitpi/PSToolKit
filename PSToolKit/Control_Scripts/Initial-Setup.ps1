@@ -76,7 +76,7 @@ if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp")) {
 		Get-Service WinRM | Start-Service -Verbose
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Apps`n" -ForegroundColor Cyan
 		Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-		if (Test-PendingReboot -ComputerName $env:COMPUTERNAME) {
+		if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot) {
 			Invoke-Reboot -ComputerName $env:COMPUTERNAME -Verbose
 		} else {Write-Host 'Not Required' -ForegroundColor Green}
 		
@@ -85,7 +85,7 @@ if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp")) {
 		$ChocoCachePath = "$($PSDownload.fullname)\chocolatey"
 		New-Item -Path $ChocoCachePath -ItemType Directory -Force
 
-		$cup = 'choco upgrade --cacheLocation="$ChocoCachePath"'
+		$cup = 'choco upgrade -y --limit-output --cacheLocation="$ChocoCachePath"'
 
 		Invoke-Expression "$cup bandizip"
 		Invoke-Expression "$cup cascadia-code-nerd-font"
@@ -109,7 +109,7 @@ if ($InstallAllModules) {
 if ($InstallAllApps) {
 	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Extended Apps`n" -ForegroundColor Cyan
 	Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-	if (Test-PendingReboot -ComputerName $env:COMPUTERNAME) {
+	if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot) {
 		Invoke-Reboot -ComputerName $env:COMPUTERNAME -Verbose
 	} else {Write-Host 'Not Required' -ForegroundColor Green}
 	Install-PSPackageManAppFromList -ListName BaseApps, ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
@@ -119,8 +119,10 @@ Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; 
 
 Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
 Install-MSUpdate
-if (Test-PendingReboot -ComputerName $env:COMPUTERNAME) {Invoke-Reboot}
-else {Write-Host 'Not Required' -ForegroundColor Green}
+Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
+if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot) {
+	Invoke-Reboot -ComputerName $env:COMPUTERNAME -Verbose
+} else {Write-Host 'Not Required' -ForegroundColor Green}
 
 
 
