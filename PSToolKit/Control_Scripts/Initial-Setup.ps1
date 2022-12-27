@@ -73,12 +73,14 @@ Remove-Item $full.FullName
 
 if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp")) {
 	try {
+		refreshenv
+		Set-Item WSMan:\localhost\Client\TrustedHosts -Value (Join-String -Strings (Get-Item WSMan:\localhost\Client\TrustedHosts).value, localhost -Separator ',')
+		refreshenv
 		Get-Service WinRM | Start-Service -Verbose
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Base Apps`n" -ForegroundColor Cyan
 		Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-		if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot) {
-			Invoke-Reboot -ComputerName $env:COMPUTERNAME -Verbose
-		} else {Write-Host 'Not Required' -ForegroundColor Green}
+		if ((Test-PendingReboot -ComputerName localhost).IsPendingReboot) {Invoke-Reboot} 
+		else {Write-Host 'Not Required' -ForegroundColor Green}
 		
 		### HACK Workaround choco / boxstarter path too long error
 		## https://github.com/chocolatey/boxstarter/issues/241
@@ -86,6 +88,7 @@ if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp")) {
 		New-Item -Path $ChocoCachePath -ItemType Directory -Force
 
 		$cup = 'choco upgrade -y --limit-output --cacheLocation="$ChocoCachePath"'
+		refreshenv
 
 		Invoke-Expression "$cup bandizip"
 		Invoke-Expression "$cup cascadia-code-nerd-font"
@@ -108,10 +111,11 @@ if ($InstallAllModules) {
 
 if ($InstallAllApps) {
 	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Extended Apps`n" -ForegroundColor Cyan
+	refreshenv
 	Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-	if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot) {
-		Invoke-Reboot -ComputerName $env:COMPUTERNAME -Verbose
-	} else {Write-Host 'Not Required' -ForegroundColor Green}
+	if ((Test-PendingReboot -ComputerName localhost).IsPendingReboot) {Invoke-Reboot} 
+	else {Write-Host 'Not Required' -ForegroundColor Green}
+
 	Install-PSPackageManAppFromList -ListName BaseApps, ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
 }
 
@@ -119,10 +123,6 @@ Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; 
 
 Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
 Install-MSUpdate
-Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot) {
-	Invoke-Reboot -ComputerName $env:COMPUTERNAME -Verbose
-} else {Write-Host 'Not Required' -ForegroundColor Green}
 
 
 
