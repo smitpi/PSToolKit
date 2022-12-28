@@ -51,8 +51,8 @@ if (-not(Test-Path $AnswerFile)) {
 		InstallLicensedApps = $false
 	}
 	$output | ConvertTo-Json | Out-File -FilePath $AnswerFile -Force
-}
 Start-Process -FilePath notepad.exe -ArgumentList $AnswerFile -Wait
+}
 $AnswerFileImport = (Get-Content $AnswerFile | ConvertFrom-Json) 
 
 foreach ($item in ($AnswerFileImport | Get-Member -MemberType noteProperty)) {
@@ -122,7 +122,11 @@ if ($InstallAllApps  -and ($GitHubUserID -notlike "None")) {
 		else {Write-Host 'Not Required' -ForegroundColor Green}
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Extended Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-PSPackageManAppFromList -ListName BaseApps, ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken})" -Wait -WorkingDirectory C:\Temp\PSTemp 
-		New-Item "$($PSDownload.fullname)\ExtendedApps.tmp" -ItemType file -Force | Out-Null
+		
+        Remove-Item -Path "$([Environment]::GetFolderPath('Desktop'))\*.lnk" -ErrorAction SilentlyContinue
+        Remove-Item -Path "$($env:PUBLIC)\Desktop\*.lnk" -ErrorAction SilentlyContinue
+
+New-Item "$($PSDownload.fullname)\ExtendedApps.tmp" -ItemType file -Force | Out-Null
 	}
 }
 
