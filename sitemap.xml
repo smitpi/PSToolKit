@@ -416,11 +416,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://smitpi.github.io/PSToolKit/Test-PendingReboot/</loc>
-         <lastmod>2022-12-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://smitpi.github.io/PSToolKit/Test-SystemOnline/</loc>
          <lastmod>2022-12-28</lastmod>
          <changefreq>daily</changefreq>
