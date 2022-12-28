@@ -96,6 +96,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Set-SharedPSProfile`](https://smitpi.github.io/PSToolKit/Set-SharedPSProfile) -- Redirects PowerShell and WindowsPowerShell profile folder to another path.
 - [`Set-StaticIP`](https://smitpi.github.io/PSToolKit/Set-StaticIP) -- Set static IP on device
 - [`Set-TempFolder`](https://smitpi.github.io/PSToolKit/Set-TempFolder) -- Set all the temp environmental variables to c:\temp
+- [`Set-UserDesktopWallpaper`](https://smitpi.github.io/PSToolKit/Set-UserDesktopWallpaper) -- Change the wallpaper for the user.
 - [`Set-VSCodeExplorerSortOrder`](https://smitpi.github.io/PSToolKit/Set-VSCodeExplorerSortOrder) -- Change the sort order in VSCode explorer
 - [`Set-WindowsAutoLogin`](https://smitpi.github.io/PSToolKit/Set-WindowsAutoLogin) -- Enable autologin on a device.
 - [`Show-ComputerManagement`](https://smitpi.github.io/PSToolKit/Show-ComputerManagement) -- Opens the Computer Management of the system or remote system
@@ -109,7 +110,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Test-CitrixCloudConnector`](https://smitpi.github.io/PSToolKit/Test-CitrixCloudConnector) -- Perform basic connection tests to Citrix cloud.
 - [`Test-CitrixVDAPort`](https://smitpi.github.io/PSToolKit/Test-CitrixVDAPort) -- Test connection between DDC and VDI
 - [`Test-IsFileOpen`](https://smitpi.github.io/PSToolKit/Test-IsFileOpen) -- Checks if a file is open
-- [`Test-PendingReboot`](https://smitpi.github.io/PSToolKit/Test-PendingReboot) -- This script tests various registry values to see if the local computer is pending a reboot.
 - [`Test-PSPendingReboot`](https://smitpi.github.io/PSToolKit/Test-PSPendingReboot) -- This script tests various registry values to see if the local computer is pending a reboot.
 - [`Test-PSRemote`](https://smitpi.github.io/PSToolKit/Test-PSRemote) -- Test PSb Remote to a device.
 - [`Test-SystemOnline`](https://smitpi.github.io/PSToolKit/Test-SystemOnline) -- Does basic checks for connecting to a remote device

@@ -51,8 +51,8 @@ if (-not(Test-Path $AnswerFile)) {
 		InstallLicensedApps = $false
 	}
 	$output | ConvertTo-Json | Out-File -FilePath $AnswerFile -Force
-}
 Start-Process -FilePath notepad.exe -ArgumentList $AnswerFile -Wait
+}
 $AnswerFileImport = (Get-Content $AnswerFile | ConvertFrom-Json) 
 
 foreach ($item in ($AnswerFileImport | Get-Member -MemberType noteProperty)) {
@@ -122,7 +122,11 @@ if ($InstallAllApps  -and ($GitHubUserID -notlike "None")) {
 		else {Write-Host 'Not Required' -ForegroundColor Green}
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Extended Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-PSPackageManAppFromList -ListName BaseApps, ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken})" -Wait -WorkingDirectory C:\Temp\PSTemp 
-		New-Item "$($PSDownload.fullname)\ExtendedApps.tmp" -ItemType file -Force | Out-Null
+		
+        Remove-Item -Path "$([Environment]::GetFolderPath('Desktop'))\*.lnk" -ErrorAction SilentlyContinue
+        Remove-Item -Path "$($env:PUBLIC)\Desktop\*.lnk" -ErrorAction SilentlyContinue
+
+New-Item "$($PSDownload.fullname)\ExtendedApps.tmp" -ItemType file -Force | Out-Null
 	}
 }
 
@@ -137,6 +141,11 @@ if ($InstallLicensedApps -and ($GitHubUserID -notlike "None")) {
 		New-Item "$($PSDownload.fullname)\LicensedApps.tmp" -ItemType file -Force | Out-Null
 	}
 }
+Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host "User Wallpaper`n" -ForegroundColor Cyan
+# https://u.pcloud.link/publink/show?code=kZ4mFeVZGleWW7tIpASwap1qbic4Yy4mhL6y
+$web = New-Object System.Net.WebClient
+$web.DownloadFile('https://p-lux2.pcloud.com/D4ZswOSe2ZWMr5XGZZZ4A4Ec7Z2ZZQCzZkZu070ZDzZx7ZCzZiQFeVZsOQXEcIC9ty1s8tQMLylFp0oATlk/WIP-6th-anniversary-wallpaper-dark.jpg', "$env:USERPROFILE\New-Wallpaper.jpg")
+Set-UserDesktopWallpaper -PicturePath "$env:USERPROFILE\New-Wallpaper.jpg" -Style Fill
 
 
 Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Microsoft Update' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
@@ -146,4 +155,6 @@ refreshenv
 Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
 if (Test-PendingReboot) {Invoke-Reboot} 
 else {Write-Host 'Not Required' -ForegroundColor Green}
+
+
 

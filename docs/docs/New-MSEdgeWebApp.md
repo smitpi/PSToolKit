@@ -24,7 +24,7 @@ Creates a new webapp to a URL, and save the shortcut on your system.
 
 ### EXAMPLE 1
 ```
-New-MSEdgeWebApp -Export HTML -ReportPath C:\temp
+New-MSEdgeWebApp -AppName vcsa -URL https://linktovmware.com -Path c:\temp
 ```
 
 ## PARAMETERS
@@ -60,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -IconPath
-{{ Fill IconPath Description }}
+Path to the icon to be used.
 
 ```yaml
 Type: FileInfo

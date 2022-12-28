@@ -141,6 +141,11 @@ if ($InstallLicensedApps -and ($GitHubUserID -notlike "None")) {
 		New-Item "$($PSDownload.fullname)\LicensedApps.tmp" -ItemType file -Force | Out-Null
 	}
 }
+Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host "User Wallpaper`n" -ForegroundColor Cyan
+# https://u.pcloud.link/publink/show?code=kZ4mFeVZGleWW7tIpASwap1qbic4Yy4mhL6y
+$web = New-Object System.Net.WebClient
+$web.DownloadFile('https://p-lux2.pcloud.com/D4ZswOSe2ZWMr5XGZZZ4A4Ec7Z2ZZQCzZkZu070ZDzZx7ZCzZiQFeVZsOQXEcIC9ty1s8tQMLylFp0oATlk/WIP-6th-anniversary-wallpaper-dark.jpg', "$env:USERPROFILE\New-Wallpaper.jpg")
+Set-UserDesktopWallpaper -PicturePath "$env:USERPROFILE\New-Wallpaper.jpg" -Style Fill
 
 
 Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Microsoft Update' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
@@ -150,4 +155,6 @@ refreshenv
 Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
 if (Test-PendingReboot) {Invoke-Reboot} 
 else {Write-Host 'Not Required' -ForegroundColor Green}
+
+
 
