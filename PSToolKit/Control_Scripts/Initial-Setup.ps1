@@ -83,11 +83,15 @@ $web.DownloadFile('https://bit.ly/35sEu2b', "$($PSDownload.FullName)\Start-PSToo
 $full = Get-Item "$($PSDownload.FullName)\Start-PSToolkitSystemInitialize.ps1"
 try {
 	Import-Module $full.FullName -Force
-	Start-PSToolkitSystemInitialize -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken -LabSetup -InstallMyModules
+
+    if ($GitHubUserID -like "None") {Start-PSToolkitSystemInitialize -LabSetup -InstallMyModules}
+    else {Start-PSToolkitSystemInitialize -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken -LabSetup -InstallMyModules}
+
 	Remove-Item $full.FullName
 } catch {Write-Warning "Error: Message:$($Error[0])"}
 
-if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp")) {
+
+if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp") -and ($GitHubUserID -notlike "None")) {
 	try {
 		refreshenv
 		Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
@@ -102,7 +106,7 @@ if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp")) {
 }
 
 
-if ($InstallAllModules) {
+if ($InstallAllModules  -and ($GitHubUserID -notlike "None")) {
 	if (-not(Test-Path "$($PSDownload.fullname)\ExtendedModules.tmp")) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Extended Modules' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-PWSHModule -ListName BaseModules, ExtendedModules, MyModules -Scope AllUsers -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken})" -Wait -WorkingDirectory C:\Temp\PSTemp 
@@ -110,7 +114,7 @@ if ($InstallAllModules) {
 	}
 }
 
-if ($InstallAllApps) {
+if ($InstallAllApps  -and ($GitHubUserID -notlike "None")) {
 	if (-not(Test-Path "$($PSDownload.fullname)\ExtendedApps.tmp")) {
 		refreshenv
 		Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
@@ -122,7 +126,7 @@ if ($InstallAllApps) {
 	}
 }
 
-if ($InstallLicensedApps) {
+if ($InstallLicensedApps -and ($GitHubUserID -notlike "None")) {
 	if (-not(Test-Path "$($PSDownload.fullname)\LicensedApps.tmp")) {
 		refreshenv
 		Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
@@ -142,6 +146,4 @@ refreshenv
 Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
 if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot) {Invoke-Reboot} 
 else {Write-Host 'Not Required' -ForegroundColor Green}
-
-Remove-Item "$($PSDownload.FullName)\*.tmp"
 

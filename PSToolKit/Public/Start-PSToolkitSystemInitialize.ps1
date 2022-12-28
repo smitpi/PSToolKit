@@ -78,6 +78,25 @@ Function Start-PSToolkitSystemInitialize {
 		[switch]$PendingReboot = $false
 	)
 
+	#Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} 
+    $MyModules = @( "CTXCloudApi",
+                    "PSLauncher",
+                    "PSConfigFile",
+                    "XDHealthCheck",
+                    "PSSysTray",
+                    "PWSHModule",
+                    "PSPackageMan")
+
+    $RequiredModules = @('ImportExcel', 
+                         'PSWriteHTML', 
+                         'PSWriteColor', 
+                         'PSScriptTools', 
+                         'PoshRegistry', 
+                         'Microsoft.PowerShell.Archive', 
+                         'PWSHModule', 
+                         'PSPackageMan')
+
+
 	$PSTemp = 'C:\Temp\PSTemp'
 	if (Test-Path $PSTemp) {$PSDownload = Get-Item $PSTemp}
 	else {$PSDownload = New-Item $PSTemp -ItemType Directory -Force}
@@ -155,7 +174,7 @@ Function Start-PSToolkitSystemInitialize {
 	#region Needed Modules
 	if (-not(Test-Path "$($PSDownload.fullname)\NeededModules.tmp")) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Needed PowerShell Modules`n" -ForegroundColor Cyan
-		'ImportExcel', 'PSWriteHTML', 'PSWriteColor', 'PSScriptTools', 'PoshRegistry', 'Microsoft.PowerShell.Archive', 'PWSHModule', 'PSPackageMan' | ForEach-Object {		
+		$RequiredModules | ForEach-Object {		
 			$module = $_
 			if (-not(Get-Module $module) -and -not(Get-Module $module -ListAvailable)) {
 				try {
@@ -187,9 +206,8 @@ Function Start-PSToolkitSystemInitialize {
 		if (-not(Test-Path "$($PSDownload.fullname)\InstallMyModules.tmp")) {
 			Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "My Modules`n" -ForegroundColor Cyan
 			Write-Host "`t[Collecting] " -NoNewline -ForegroundColor Cyan; Write-Host "Module Details from PS Gallery`n" -ForegroundColor Cyan 
-			#Find-Module -Repository PSGallery | Where-Object {$_.author -like 'Pierre Smit'} 
-			"CTXCloudApi" ,"PSLauncher","PSConfigFile","XDHealthCheck","PSSysTray","PWSHModule","PSPackageMan" | ForEach-Object {
-				$module = $_
+			 $MyModules | ForEach-Object {
+				$module = Find-Module -Repository PSGallery -Name $_
 				Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($module.name)" -ForegroundColor Cyan
 				if (-not(Get-Module $module.name) -and -not(Get-Module $module.name -ListAvailable)) {
 					try {
