@@ -91,6 +91,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Restore-ElevatedShortcut`](https://smitpi.github.io/PSToolKit/Restore-ElevatedShortcut) -- Restore the RunAss shortcuts, from a zip file
 - [`Search-Script`](https://smitpi.github.io/PSToolKit/Search-Script) -- Search for a string in a directory of ps1 scripts.
 - [`Set-FolderCustomIcon`](https://smitpi.github.io/PSToolKit/Set-FolderCustomIcon) -- Will change the icon of a folder to a custom selected icon
+- [`Set-PSProjectFile`](https://smitpi.github.io/PSToolKit/Set-PSProjectFile) -- Creates and modify needed files for a PS project from existing module files.
 - [`Set-PSToolKitSystemSetting`](https://smitpi.github.io/PSToolKit/Set-PSToolKitSystemSetting) -- Set multiple settings on desktop or server
 - [`Set-SharedPSProfile`](https://smitpi.github.io/PSToolKit/Set-SharedPSProfile) -- Redirects PowerShell and WindowsPowerShell profile folder to another path.
 - [`Set-StaticIP`](https://smitpi.github.io/PSToolKit/Set-StaticIP) -- Set static IP on device
@@ -108,6 +109,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Test-CitrixCloudConnector`](https://smitpi.github.io/PSToolKit/Test-CitrixCloudConnector) -- Perform basic connection tests to Citrix cloud.
 - [`Test-CitrixVDAPort`](https://smitpi.github.io/PSToolKit/Test-CitrixVDAPort) -- Test connection between DDC and VDI
 - [`Test-IsFileOpen`](https://smitpi.github.io/PSToolKit/Test-IsFileOpen) -- Checks if a file is open
+- [`Test-PendingReboot`](https://smitpi.github.io/PSToolKit/Test-PendingReboot) -- This script tests various registry values to see if the local computer is pending a reboot.
 - [`Test-PSPendingReboot`](https://smitpi.github.io/PSToolKit/Test-PSPendingReboot) -- This script tests various registry values to see if the local computer is pending a reboot.
 - [`Test-PSRemote`](https://smitpi.github.io/PSToolKit/Test-PSRemote) -- Test PSb Remote to a device.
 - [`Test-SystemOnline`](https://smitpi.github.io/PSToolKit/Test-SystemOnline) -- Does basic checks for connecting to a remote device
