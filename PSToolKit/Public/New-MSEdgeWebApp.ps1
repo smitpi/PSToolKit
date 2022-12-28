@@ -53,11 +53,14 @@ The name of the webapp
 .parameter URL
 The URL of the webapp.
 
+.parameter IconPath
+Path to the icon to be used.
+
 .parameter Path
 The path to save the shortcut to.
 
 .EXAMPLE
-New-MSEdgeWebApp -Export HTML -ReportPath C:\temp
+New-MSEdgeWebApp -AppName vcsa -URL https://linktovmware.com -Path c:\temp
 
 #>
 Function New-MSEdgeWebApp {
