@@ -13,7 +13,7 @@ Initialize a blank machine.
 ## SYNTAX
 
 ```
-Start-PSToolkitSystemInitialize [-GitHubUserID] <String> [-GitHubToken] <String> [-LabSetup]
+Start-PSToolkitSystemInitialize [[-GitHubUserID] <String>] [[-GitHubToken] <String>] [-LabSetup]
  [-InstallMyModules] [-PendingReboot] [<CommonParameters>]
 ```
 
@@ -37,7 +37,7 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 1
 Default value: None
 Accept pipeline input: False
@@ -52,7 +52,7 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 2
 Default value: None
 Accept pipeline input: False

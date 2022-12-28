@@ -8677,7 +8677,7 @@
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Start-PSToolkitSystemInitialize</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>GitHubUserID</maml:name>
           <maml:description>
             <maml:para>UserID used to install modules and apps.</maml:para>
@@ -8689,7 +8689,7 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>GitHubToken</maml:name>
           <maml:description>
             <maml:para>Token used to install modules and apps.</maml:para>
@@ -8737,7 +8737,7 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>GitHubUserID</maml:name>
         <maml:description>
           <maml:para>UserID used to install modules and apps.</maml:para>
@@ -8749,7 +8749,7 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>GitHubToken</maml:name>
         <maml:description>
           <maml:para>Token used to install modules and apps.</maml:para>
