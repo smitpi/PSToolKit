@@ -668,7 +668,7 @@ Function Set-PSToolKitSystemSetting {
     if ($PerformReboot) {
         try {
             Write-Color '[Checking] ', 'Pending Reboot' -Color Yellow, Cyan
-            $checkreboot = Test-PendingReboot -ComputerName $env:computername
+            $checkreboot = Test-PSPendingReboot -ComputerName $env:computername
             if ($checkreboot.IsPendingReboot -like 'True') {
                 Write-Color '[Checking] ', 'Reboot Required', ' (Reboot in 15 sec)' -Color Yellow, DarkRed, Cyan
                 Start-Sleep -Seconds 15

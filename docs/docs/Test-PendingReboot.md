@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Test-PendingReboot
+# Test-PSPendingReboot
 
 ## SYNOPSIS
 This script tests various registry values to see if the local computer is pending a reboot.
@@ -13,7 +13,7 @@ This script tests various registry values to see if the local computer is pendin
 ## SYNTAX
 
 ```
-Test-PendingReboot [-ComputerName] <String[]> [[-Credential] <PSCredential>] [<CommonParameters>]
+Test-PSPendingReboot [-ComputerName] <String[]> [[-Credential] <PSCredential>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,7 +23,7 @@ This script tests various registry values to see if the local computer is pendin
 
 ### EXAMPLE 1
 ```
-Test-PendingReboot -ComputerName localhost
+Test-PSPendingReboot -ComputerName localhost
 ```
 
 ## PARAMETERS

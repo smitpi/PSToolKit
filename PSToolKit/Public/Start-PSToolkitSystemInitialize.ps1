@@ -261,7 +261,7 @@ Function Start-PSToolkitSystemInitialize {
 	#region Pending Reboot
 	if ($PendingReboot) {
 		Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Pending Reboot for $($env:COMPUTERNAME)" -ForegroundColor Cyan
-		if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot -like 'True') {
+		if ((Test-PSPendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot -like 'True') {
 			Write-Host "`t[Reboot Needed]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Rebooting in 60 sec' -ForegroundColor DarkRed
 			Start-Sleep 60
 			Restart-Computer -Force

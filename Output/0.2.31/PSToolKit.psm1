@@ -3654,7 +3654,7 @@ Function Install-MSUpdate {
 	if ($PerformReboot) {
 		try {
 			Write-Color '[Checking] ', 'Pending Reboot' -Color Yellow, Cyan
-			$checkreboot = Test-PendingReboot -ComputerName $env:computername
+			$checkreboot = Test-PSPendingReboot -ComputerName $env:computername
 			if ($checkreboot.IsPendingReboot -like 'True') {
 				Write-Color '[Checking] ', 'Reboot Required', ' (Reboot in 15 sec)' -Color Yellow, DarkRed, Cyan
 				Start-Sleep -Seconds 15
@@ -7581,7 +7581,7 @@ Function Set-PSToolKitSystemSetting {
     if ($PerformReboot) {
         try {
             Write-Color '[Checking] ', 'Pending Reboot' -Color Yellow, Cyan
-            $checkreboot = Test-PendingReboot -ComputerName $env:computername
+            $checkreboot = Test-PSPendingReboot -ComputerName $env:computername
             if ($checkreboot.IsPendingReboot -like 'True') {
                 Write-Color '[Checking] ', 'Reboot Required', ' (Reboot in 15 sec)' -Color Yellow, DarkRed, Cyan
                 Start-Sleep -Seconds 15
@@ -9157,7 +9157,7 @@ Function Start-PSToolkitSystemInitialize {
 	#region Pending Reboot
 	if ($PendingReboot) {
 		Write-Host '[Checking]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Pending Reboot for $($env:COMPUTERNAME)" -ForegroundColor Cyan
-		if ((Test-PendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot -like 'True') {
+		if ((Test-PSPendingReboot -ComputerName $env:COMPUTERNAME).IsPendingReboot -like 'True') {
 			Write-Host "`t[Reboot Needed]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Rebooting in 60 sec' -ForegroundColor DarkRed
 			Start-Sleep 60
 			Restart-Computer -Force
@@ -9486,9 +9486,9 @@ Function Test-IsFileOpen {
 Export-ModuleMember -Function Test-IsFileOpen
 #endregion
  
-#region Test-PendingReboot.ps1
+#region Test-PSPendingReboot.ps1
 ######## Function 81 of 92 ##################
-# Function:         Test-PendingReboot
+# Function:         Test-PSPendingReboot
 # Module:           PSToolKit
 # ModuleVersion:    0.2.31
 # Author:           Pierre Smit
@@ -9512,13 +9512,13 @@ Computer to check.
 User with admin access.
 
 .EXAMPLE
-Test-PendingReboot -ComputerName localhost
+Test-PSPendingReboot -ComputerName localhost
 
 .NOTES
 General notes
 #>
-function Test-PendingReboot {
-	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Test-PendingReboot')]
+function Test-PSPendingReboot {
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Test-PSPendingReboot')]
 	param(
 		[Parameter(Mandatory)]
 		[ValidateNotNullOrEmpty()]
@@ -9667,7 +9667,7 @@ function Test-PendingReboot {
 	}
 }
  
-Export-ModuleMember -Function Test-PendingReboot
+Export-ModuleMember -Function Test-PSPendingReboot
 #endregion
  
 #region Test-PSRemote.ps1

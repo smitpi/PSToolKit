@@ -53,13 +53,13 @@ Computer to check.
 User with admin access.
 
 .EXAMPLE
-Test-PendingReboot -ComputerName localhost
+Test-PSPendingReboot -ComputerName localhost
 
 .NOTES
 General notes
 #>
-function Test-PendingReboot {
-	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Test-PendingReboot')]
+function Test-PSPendingReboot {
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Test-PSPendingReboot')]
 	param(
 		[Parameter(Mandatory)]
 		[ValidateNotNullOrEmpty()]

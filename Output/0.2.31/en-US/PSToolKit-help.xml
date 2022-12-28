@@ -9139,7 +9139,7 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Test-PendingReboot</command:name>
+      <command:name>Test-PSPendingReboot</command:name>
       <command:verb>Test</command:verb>
       <command:noun>PendingReboot</command:noun>
       <maml:description>
@@ -9151,7 +9151,7 @@
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Test-PendingReboot</maml:name>
+        <maml:name>Test-PSPendingReboot</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>ComputerName</maml:name>
           <maml:description>
@@ -9214,7 +9214,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Test-PendingReboot -ComputerName localhost</dev:code>
+        <dev:code>Test-PSPendingReboot -ComputerName localhost</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>

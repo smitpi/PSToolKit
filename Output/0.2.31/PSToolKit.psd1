@@ -103,7 +103,7 @@ FunctionsToExport = 'Add-ChocolateyPrivateRepo', 'Backup-ElevatedShortcut',
                'Start-PowerShellAsAdmin', 'Start-PSProfile', 'Start-PSRoboCopy', 
                'Start-PSScriptAnalyzer', 'Start-PSToolkitSystemInitialize', 
                'Test-CitrixCloudConnector', 'Test-CitrixVDAPort', 'Test-IsFileOpen', 
-               'Test-PendingReboot', 'Test-PSRemote', 'Test-SystemOnline', 
+               'Test-PSPendingReboot', 'Test-PSRemote', 'Test-SystemOnline', 
                'Update-ListOfDDC', 'Update-LocalHelp', 'Update-MyModulesFromGitHub', 
                'Update-PSDefaultParameter', 'Update-PSModuleInfo', 'Write-Ascii', 
                'Write-PSMessage', 'Write-PSReports', 'Write-PSToolKitLog'
