@@ -1,16 +1,26 @@
 
+#region boxstarter setup
 if (-not(Get-Command BoxstarterShell.ps1 -ErrorAction SilentlyContinue)) {
 	Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Set-ExecutionPolicy Bypass -Scope Process -Force;[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072 ;iex ((New-Object System.Net.WebClient).DownloadString('https://boxstarter.org/bootstrapper.ps1'));Get-Boxstarter -Force})" -Wait -WorkingDirectory C:\Temp\PSTemp 
 }
-
 
 # Boxstarter options
 $Boxstarter.RebootOk = $true # Allow reboots?
 $Boxstarter.NoPassword = $false # Is this a machine with no login password?
 $Boxstarter.AutoLogin = $true # Save my password securely and auto-login after a reboot
+Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
+
+function check-reboot {
+	refreshenv
+	Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
+	if (Test-PendingReboot) {Invoke-Reboot} 
+	else {Write-Host 'Not Required' -ForegroundColor Green}
+}
 
 #. { Invoke-WebRequest https://boxstarter.org/bootstrapper.ps1 } | Invoke-Expression; Get-Boxstarter -Force
+#endregion
 
+#region Set Variables
 try {
 	$message = @"
   _    _ _______ _____   _____ ______           ____              _       _                   
@@ -49,16 +59,20 @@ if (-not(Test-Path $AnswerFile)) {
 		InstallAllModules   = $false
 		InstallAllApps      = $false
 		InstallLicensedApps = $false
+		EnableHyperV        = $false
+		EnableWSL           = $false
 	}
 	$output | ConvertTo-Json | Out-File -FilePath $AnswerFile -Force
-Start-Process -FilePath notepad.exe -ArgumentList $AnswerFile -Wait
+	Start-Process -FilePath notepad.exe -ArgumentList $AnswerFile -Wait
 }
 $AnswerFileImport = (Get-Content $AnswerFile | ConvertFrom-Json) 
 
 foreach ($item in ($AnswerFileImport | Get-Member -MemberType noteProperty)) {
 	New-Variable -Name $item.Name -Value $AnswerFileImport.$($item.Name) -Force -Scope Global
 }
+#endregion 
 
+#region Add to domain
 if ($AddToDomain) {
 	If (!(Get-CimInstance -Class Win32_ComputerSystem).PartOfDomain) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Adding]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($NewHostName) to Domain`n" -ForegroundColor Cyan
@@ -76,7 +90,9 @@ if ($AddToDomain) {
 		Add-Computer -DomainName $DomainName -Credential $labcred -Options JoinWithNewName, AccountCreate -Force -Restart
 	}
 }
+#endregion
 
+#region pstoolkit setup
 if (Test-Path "$($PSDownload.FullName)\Start-PSToolkitSystemInitialize.ps1") {Remove-Item "$($PSDownload.FullName)\Start-PSToolkitSystemInitialize.ps1" -Force}
 $web = New-Object System.Net.WebClient
 $web.DownloadFile('https://bit.ly/35sEu2b', "$($PSDownload.FullName)\Start-PSToolkitSystemInitialize.ps1")
@@ -84,19 +100,18 @@ $full = Get-Item "$($PSDownload.FullName)\Start-PSToolkitSystemInitialize.ps1"
 try {
 	Import-Module $full.FullName -Force
 
-    if ($GitHubUserID -like "None") {Start-PSToolkitSystemInitialize -LabSetup -InstallMyModules}
-    else {Start-PSToolkitSystemInitialize -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken -LabSetup -InstallMyModules}
+	if ($GitHubUserID -like 'None') {Start-PSToolkitSystemInitialize -LabSetup -InstallMyModules}
+	else {Start-PSToolkitSystemInitialize -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken -LabSetup -InstallMyModules}
 
 	Remove-Item $full.FullName
 } catch {Write-Warning "Error: Message:$($Error[0])"}
+#endregion
 
-
-if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp") -and ($GitHubUserID -notlike "None")) {
+#region baseapps
+if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp") -and ($GitHubUserID -notlike 'None')) {
 	try {
-		refreshenv
-		Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-		if (Test-PendingReboot) {Invoke-Reboot} 
-		else {Write-Host 'Not Required' -ForegroundColor Green}
+		
+		check-reboot
 		
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Base Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken})" -Wait -WorkingDirectory C:\Temp\PSTemp 
@@ -104,57 +119,83 @@ if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp") -and ($GitHubUserID -
 		New-Item "$($PSDownload.fullname)\BaseApps.tmp" -ItemType file -Force | Out-Null
 	} catch {Write-Warning "Error: Message:$($Error[0])"}
 }
+#endregion
 
-
-if ($InstallAllModules  -and ($GitHubUserID -notlike "None")) {
+#region all modules
+if ($InstallAllModules -and ($GitHubUserID -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\ExtendedModules.tmp")) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Extended Modules' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-PWSHModule -ListName BaseModules, ExtendedModules, MyModules -Scope AllUsers -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken})" -Wait -WorkingDirectory C:\Temp\PSTemp 
 		New-Item "$($PSDownload.fullname)\ExtendedModules.tmp" -ItemType file -Force | Out-Null
 	}
 }
+#endregion
 
-if ($InstallAllApps  -and ($GitHubUserID -notlike "None")) {
+#region extended apps
+if ($InstallAllApps -and ($GitHubUserID -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\ExtendedApps.tmp")) {
-		refreshenv
-		Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-		if (Test-PendingReboot) {Invoke-Reboot} 
-		else {Write-Host 'Not Required' -ForegroundColor Green}
+		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Extended Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-PSPackageManAppFromList -ListName BaseApps, ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken})" -Wait -WorkingDirectory C:\Temp\PSTemp 
 		
-        Remove-Item -Path "$([Environment]::GetFolderPath('Desktop'))\*.lnk" -ErrorAction SilentlyContinue
-        Remove-Item -Path "$($env:PUBLIC)\Desktop\*.lnk" -ErrorAction SilentlyContinue
+		Remove-Item -Path "$([Environment]::GetFolderPath('Desktop'))\*.lnk" -ErrorAction SilentlyContinue
+		Remove-Item -Path "$($env:PUBLIC)\Desktop\*.lnk" -ErrorAction SilentlyContinue
 
-New-Item "$($PSDownload.fullname)\ExtendedApps.tmp" -ItemType file -Force | Out-Null
+		New-Item "$($PSDownload.fullname)\ExtendedApps.tmp" -ItemType file -Force | Out-Null
 	}
 }
+#endregion
 
-if ($InstallLicensedApps -and ($GitHubUserID -notlike "None")) {
+#region licensed apps
+if ($InstallLicensedApps -and ($GitHubUserID -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\LicensedApps.tmp")) {
-		refreshenv
-		Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-		if (Test-PendingReboot) {Invoke-Reboot} 
-		else {Write-Host 'Not Required' -ForegroundColor Green}
+		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Licensed Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-PSPackageManAppFromList -ListName LicensedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken})" -Wait -WorkingDirectory C:\Temp\PSTemp 
 		New-Item "$($PSDownload.fullname)\LicensedApps.tmp" -ItemType file -Force | Out-Null
 	}
 }
+#endregion
+
+#region HyperV
+if ($EnableHyperV) {
+	if (-not(Test-Path "$($PSDownload.fullname)\EnableHyperV.tmp")) {
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Hyper-V' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
+		Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {choco install -y Microsoft-Hyper-V-All --source=windowsFeatures})' -Wait -WorkingDirectory C:\Temp\PSTemp 
+		check-reboot
+		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {if (-not(Test-Path C:\Hyper-V)) { New-Item C:\Hyper-V -ItemType Directory -Force | Out-Null };if (-not(Test-Path C:\Hyper-V\VHD)) { New-Item C:\Hyper-V\VHD -ItemType Directory -Force | Out-Null};if (-not(Test-Path C:\Hyper-V\Config)) { New-Item C:\Hyper-V\Config -ItemType Directory -Force | Out-Null};Hyper-V\Set-VMHost -VirtualHardDiskPath 'C:\Hyper-V\VHD' -VirtualMachinePath 'C:\Hyper-V\Config'})" -Wait -WorkingDirectory C:\Temp\PSTemp 
+		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$NetworkCard = Get-NetAdapter -Physical | Where-Object {$_.status -like 'up'}; Hyper-V\New-VMSwitch -Name 'External' -NetAdapterName $NetworkCard.Name -AllowManagementOS $true})" -Wait -WorkingDirectory C:\Temp\PSTemp 
+
+		New-Item "$($PSDownload.fullname)\EnableHyperV.tmp" -ItemType file -Force | Out-Null
+	}
+}
+#endregion
+
+#region WSL
+if ($EnableWSL) {
+	if (-not(Test-Path "$($PSDownload.fullname)\WSL.tmp")) {
+		check-reboot
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
+		Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {wsl --install})' -Wait -WorkingDirectory C:\Temp\PSTemp 
+		check-reboot
+		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
+	}
+}
+#endregion
+
+#region wallpaper
 Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host "User Wallpaper`n" -ForegroundColor Cyan
 # https://u.pcloud.link/publink/show?code=kZ4mFeVZGleWW7tIpASwap1qbic4Yy4mhL6y
 $web = New-Object System.Net.WebClient
-$web.DownloadFile('https://p-lux2.pcloud.com/D4ZswOSe2ZWMr5XGZZZ4A4Ec7Z2ZZQCzZkZu070ZDzZx7ZCzZiQFeVZsOQXEcIC9ty1s8tQMLylFp0oATlk/WIP-6th-anniversary-wallpaper-dark.jpg', "$env:USERPROFILE\New-Wallpaper.jpg")
+$web.DownloadFile('https://github.com/smitpi/PSToolKit/raw/master/PSToolKit/Private/Wallpapers/Chicago-Architecture-Wallpaper.jpg', "$env:USERPROFILE\New-Wallpaper.jpg")
 Set-UserDesktopWallpaper -PicturePath "$env:USERPROFILE\New-Wallpaper.jpg" -Style Fill
+#endregion
 
-
+#region win updates
 Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Microsoft Update' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-MSUpdate})' -Wait -WorkingDirectory C:\Temp\PSTemp 
+check-reboot
 
-refreshenv
-Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-if (Test-PendingReboot) {Invoke-Reboot} 
-else {Write-Host 'Not Required' -ForegroundColor Green}
-
+#endregion
 
 

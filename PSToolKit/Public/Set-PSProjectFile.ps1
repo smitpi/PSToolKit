@@ -310,6 +310,9 @@ Function Set-PSProjectFile {
 			$readme = [System.Collections.Generic.List[string]]::new()
 			Get-Content -Path $ModulesInstuctions | ForEach-Object { $readme.add($_) }
 			$readme.add(' ')
+			$readme.add('## PS Controller Scripts')
+			Get-ChildItem $ModuleControlScripts.FullName | ForEach-Object {$readme.add("- $($_.name)")}
+			$readme.add(' ')
 			$readme.add('## Functions')
 	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $readme.add("- [``$_``](https://smitpi.github.io/$($module.Name)/$_) -- " + (Get-Help $_).SYNOPSIS) }
 			$readme | Set-Content -Path $ModuleReadme
@@ -343,6 +346,9 @@ Function Set-PSProjectFile {
 			Write-Color "`t[Processing]: ", 'MKDocs Index Files' -Color yello, Gray
 			$indexFile = [System.Collections.Generic.List[string]]::new()
 			Get-Content -Path $ModulesInstuctions | ForEach-Object { $indexFile.add($_) }
+			$indexFile.add(' ')
+			$indexFile.add('## PS Controller Scripts')
+			Get-ChildItem $ModuleControlScripts.FullName | ForEach-Object {$indexFile.add("- $($_.name)")}
 			$indexFile.add(' ')
 			$indexFile.add('## Functions')
 	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $indexFile.add("- [``$_``](https://smitpi.github.io/$($module.Name)/$_) -- " + (Get-Help $_).SYNOPSIS) }
