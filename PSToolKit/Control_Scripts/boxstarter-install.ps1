@@ -1,5 +1,16 @@
-Set-ExecutionPolicy Bypass -Scope CurrentUser -Force
-Set-ExecutionPolicy Bypass -Scope LocalMachine -Force
-[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://boxstarter.org/bootstrapper.ps1'))
-Get-Boxstarter -Force
+[scriptblock]$block = {
+	Set-ExecutionPolicy Bypass -Scope CurrentUser -Force
+	Set-ExecutionPolicy Bypass -Scope LocalMachine -Force
+	[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+	Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://boxstarter.org/bootstrapper.ps1'))
+	Get-Boxstarter -Force
+}		
+
+Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait
+
+
+[scriptblock]$block2 = {
+	Get-Module boxstarter* -ListAvailable | Import-Module -Force
+	Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Initial-Setup.ps1 -KeepWindowOpen
+}
+Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block2)} )" -Wait
