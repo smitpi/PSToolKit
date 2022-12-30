@@ -10,7 +10,11 @@ Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximize
 
 
 [scriptblock]$block2 = {
-	Get-Module boxstarter* -ListAvailable | Import-Module -Force
-	Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Initial-Setup.ps1 -KeepWindowOpen
+	https://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Initial-Setup.ps1
+
 }
 Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block2)} )" -Wait
+
+
+#https://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Initial-Setup.ps1
+#Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Initial-Setup.ps1
