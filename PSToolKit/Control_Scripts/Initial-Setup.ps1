@@ -164,7 +164,7 @@ if ($EnableHyperV) {
 		Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {choco install -y Microsoft-Hyper-V-All --source=windowsFeatures})' -Wait -WorkingDirectory C:\Temp\PSTemp 
 		check-reboot
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {if (-not(Test-Path C:\Hyper-V)) { New-Item C:\Hyper-V -ItemType Directory -Force | Out-Null };if (-not(Test-Path C:\Hyper-V\VHD)) { New-Item C:\Hyper-V\VHD -ItemType Directory -Force | Out-Null};if (-not(Test-Path C:\Hyper-V\Config)) { New-Item C:\Hyper-V\Config -ItemType Directory -Force | Out-Null};Hyper-V\Set-VMHost -VirtualHardDiskPath 'C:\Hyper-V\VHD' -VirtualMachinePath 'C:\Hyper-V\Config'})" -Wait -WorkingDirectory C:\Temp\PSTemp 
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$NetworkCard = Get-NetAdapter -Physical | Where-Object {$_.status -like 'up'}; Hyper-V\New-VMSwitch -Name 'External' -NetAdapterName $NetworkCard.Name -AllowManagementOS $true})" -Wait -WorkingDirectory C:\Temp\PSTemp 
+		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Hyper-V\New-VMSwitch -Name 'External' -NetAdapterName (Get-NetAdapter -Physical | Where-Object {$_.status -like 'up'}).Name -AllowManagementOS $true})" -Wait -WorkingDirectory C:\Temp\PSTemp 
 
 		New-Item "$($PSDownload.fullname)\EnableHyperV.tmp" -ItemType file -Force | Out-Null
 	}
@@ -178,6 +178,24 @@ if ($EnableWSL) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {wsl --install})' -Wait -WorkingDirectory C:\Temp\PSTemp 
 		check-reboot
+		
+		[scriptblock]$block = {
+			wsl -d Ubuntu -u root apt update
+			wsl -d Ubuntu -u root apt install make git -y
+			wsl -d Ubuntu -u root git clone "https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap" /tmp/ansible/ansible-bootstrap
+			wsl -d Ubuntu -u root cp /tmp/ansible/ansible-bootstrap/inventory-src /tmp/ansible/inventory
+			wsl -d Ubuntu -u root mkdir /tmp/ansible/host_vars
+
+			wsl -d Ubuntu -u root apt install git python3-pip python3-dev -y
+			wsl -d Ubuntu -u root pip3 install ansible
+			wsl -d Ubuntu -u root ansible-galaxy install -r /tmp/ansible/ansible-bootstrap/requirements.yml --force
+
+			wsl -d Ubuntu -u root ansible-playbook -i /tmp/ansible/inventory /tmp/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial
+			wsl -d Ubuntu -u root ansible-playbook -i /tmp/ansible/inventory /tmp/ansible/ansible-bootstrap/local.yml
+		}		
+
+		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
+
 		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
 	}
 }
