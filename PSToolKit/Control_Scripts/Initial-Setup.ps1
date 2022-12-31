@@ -1,14 +1,34 @@
 
 #region boxstarter setup
-if (-not(Get-Command BoxstarterShell.ps1 -ErrorAction SilentlyContinue)) {
-	Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Set-ExecutionPolicy Bypass -Scope Process -Force;[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072 ;iex ((New-Object System.Net.WebClient).DownloadString('https://boxstarter.org/bootstrapper.ps1'));Get-Boxstarter -Force})" -Wait -WorkingDirectory C:\Temp\PSTemp 
-}
 
 # Boxstarter options
 $Boxstarter.RebootOk = $true # Allow reboots?
 $Boxstarter.NoPassword = $false # Is this a machine with no login password?
 $Boxstarter.AutoLogin = $true # Save my password securely and auto-login after a reboot
+
+# Development Mode
 Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
+
+# Create Run_Win-Bootstrap Shortcuts
+$WScriptShell = New-Object -ComObject WScript.Shell
+$lnkfile = "$([Environment]::GetFolderPath('Desktop'))\Run_Win-Bootstrap.lnk"
+$Shortcut = $WScriptShell.CreateShortcut($($lnkfile))
+$MSEdgePath = Get-Item 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
+$Shortcut.TargetPath = $MSEdgePath.FullName
+$Shortcut.Arguments = "--app=`"https://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Initial-Setup.ps1`""
+$IconLocation = 'C:\windows\System32\SHELL32.dll'
+$IconArrayIndex = 27
+$Shortcut.IconLocation = "$IconLocation, $IconArrayIndex"
+$Shortcut.Save()
+# Create GitHub_Win-Bootstrap Shortcuts
+$WScriptShell = New-Object -ComObject WScript.Shell
+$lnkfile = "$([Environment]::GetFolderPath('Desktop'))\Github_Win-Bootstrap.lnk"
+$Shortcut = $WScriptShell.CreateShortcut($($lnkfile))
+$MSEdgePath = Get-Item 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
+$Shortcut.TargetPath = $MSEdgePath.FullName
+$Shortcut.Arguments = "--app=`"https://github.com/smitpi/win-bootstrap`""
+$Shortcut.IconLocation = $MSEdgePath.fullname
+$Shortcut.Save()
 
 function check-reboot {
 	refreshenv
@@ -16,8 +36,6 @@ function check-reboot {
 	if (Test-PendingReboot) {Invoke-Reboot} 
 	else {Write-Host 'Not Required' -ForegroundColor Green}
 }
-
-#. { Invoke-WebRequest https://boxstarter.org/bootstrapper.ps1 } | Invoke-Expression; Get-Boxstarter -Force
 #endregion
 
 #region Set Variables
