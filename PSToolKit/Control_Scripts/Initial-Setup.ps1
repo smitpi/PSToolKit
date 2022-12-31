@@ -197,22 +197,30 @@ if ($EnableWSL) {
 		Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {wsl --install})' -Wait -WorkingDirectory C:\Temp\PSTemp 
 		check-reboot
 		
+		$wsluser = 'theboss'
+		$wslpass = 'aazz'
+		
+		cmd.exe /c "ubuntu run -u root useradd -m -G sudo -s /bin/bash $($wsluser)"
+		cmd.exe /c "ubuntu run -u root (echo $($wslpass); echo $($wslpass)) | ubuntu run -u root passwd $($wsluser)"
+		cmd.exe /c "ubuntu config --default-user $($wsluser)"
+		cmd.exe /c "ubuntu run -u root echo '$($wsluser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($wsluser)"
+
 		[scriptblock]$block = {
-			wsl -d Ubuntu -u root apt update
-			wsl -d Ubuntu -u root apt install make git -y
-			wsl -d Ubuntu -u root git clone "https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap" /tmp/ansible/ansible-bootstrap
-			wsl -d Ubuntu -u root cp /tmp/ansible/ansible-bootstrap/inventory-src /tmp/ansible/inventory
-			wsl -d Ubuntu -u root mkdir /tmp/ansible/host_vars
+			wsl -d Ubuntu sudo apt update
+			wsl -d Ubuntu sudo apt install make git -y
+			wsl -d Ubuntu git clone "https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap" ~/ansible/ansible-bootstrap
+			wsl -d Ubuntu sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory
+			wsl -d Ubuntu sudo mkdir ~/ansible/host_vars
 
-			wsl -d Ubuntu -u root apt install git python3-pip python3-dev -y
-			wsl -d Ubuntu -u root pip3 install ansible
-			wsl -d Ubuntu -u root ansible-galaxy install -r /tmp/ansible/ansible-bootstrap/requirements.yml --force
+			wsl -d Ubuntu sudo apt install git python3-pip python3-dev -y
+			wsl -d Ubuntu sudo pip3 install ansible
+			wsl -d Ubuntu ansible-galaxy install -r ~/ansible/ansible-bootstrap/requirements.yml --force
 
-			wsl -d Ubuntu -u root ansible-playbook -i /tmp/ansible/inventory /tmp/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial
-			wsl -d Ubuntu -u root ansible-playbook -i /tmp/ansible/inventory /tmp/ansible/ansible-bootstrap/local.yml
+			wsl -d Ubuntu ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial
+			wsl -d Ubuntu ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml
 		}		
 
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
+		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -noexit -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
 
 		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
 	}
