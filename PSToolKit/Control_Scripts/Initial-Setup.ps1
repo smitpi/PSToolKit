@@ -30,15 +30,16 @@ $Shortcut.Arguments = "--app=`"https://github.com/smitpi/win-bootstrap`""
 $Shortcut.IconLocation = $MSEdgePath.fullname
 $Shortcut.Save()
 
+#endregion
+
+#region Set Variables
 function check-reboot {
 	refreshenv
 	Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
 	if (Test-PendingReboot) {Invoke-Reboot} 
 	else {Write-Host 'Not Required' -ForegroundColor Green}
 }
-#endregion
 
-#region Set Variables
 try {
 	$message = @"
   _    _ _______ _____   _____ ______           ____              _       _                   
@@ -237,13 +238,13 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		}
 
 		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "WSL2`n" -ForegroundColor Cyan
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
+		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp -RedirectStandardError C:\Temp\PSTemp\wsl-error.log -RedirectStandardOutput C:\Temp\PSTemp\wsl.log
 		check-reboot
 		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "Linux Sudo Account`n" -ForegroundColor Cyan
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block1)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
+		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block1)} )" -Wait -WorkingDirectory C:\Temp\PSTemp -RedirectStandardError C:\Temp\PSTemp\user-error.log -RedirectStandardOutput C:\Temp\PSTemp\user.log
 		check-reboot
 		Write-Host "`t`t[Executing]: " -NoNewline -ForegroundColor Yellow; Write-Host "Ansible Config`n" -ForegroundColor Cyan
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block2)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
+		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block2)} )" -Wait -WorkingDirectory C:\Temp\PSTemp -RedirectStandardError C:\Temp\PSTemp\ansible-error.log -RedirectStandardOutput C:\Temp\PSTemp\ansible.log
 		check-reboot
 		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
 	}
