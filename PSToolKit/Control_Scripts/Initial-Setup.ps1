@@ -200,15 +200,16 @@ if ($EnableWSL) {
 		$wsluser = 'theboss'
 		$wslpass = 'aazz'
 		
+		[scriptblock]$block = {
+
 		cmd.exe /c "ubuntu run -u root useradd -m -G sudo -s /bin/bash $($wsluser)"
 		cmd.exe /c "ubuntu run -u root (echo $($wslpass); echo $($wslpass)) | ubuntu run -u root passwd $($wsluser)"
 		cmd.exe /c "ubuntu config --default-user $($wsluser)"
 		cmd.exe /c "ubuntu run -u root echo '$($wsluser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($wsluser)"
 
-		[scriptblock]$block = {
 			wsl -d Ubuntu sudo apt update
 			wsl -d Ubuntu sudo apt install make git -y
-			wsl -d Ubuntu git clone "https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap" ~/ansible/ansible-bootstrap
+			wsl -d Ubuntu git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap
 			wsl -d Ubuntu sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory
 			wsl -d Ubuntu sudo mkdir ~/ansible/host_vars
 
