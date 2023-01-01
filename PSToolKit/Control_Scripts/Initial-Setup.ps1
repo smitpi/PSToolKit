@@ -118,7 +118,7 @@ $full = Get-Item "$($PSDownload.FullName)\Start-PSToolkitSystemInitialize.ps1"
 try {
 	Import-Module $full.FullName -Force
 
-	if ($GitHubUserID -like 'None') {Start-PSToolkitSystemInitialize -LabSetup -InstallMyModules}
+	if ($GitHubUserID -like "None') {Start-PSToolkitSystemInitialize -LabSetup -InstallMyModules}
 	else {Start-PSToolkitSystemInitialize -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken -LabSetup -InstallMyModules}
 
 	Remove-Item $full.FullName
@@ -126,7 +126,7 @@ try {
 #endregion
 
 #region baseapps
-if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp") -and ($GitHubUserID -notlike 'None')) {
+if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp") -and ($GitHubUserID -notlike "None')) {
 	try {
 		
 		check-reboot
@@ -140,7 +140,7 @@ if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp") -and ($GitHubUserID -
 #endregion
 
 #region all modules
-if ($InstallAllModules -and ($GitHubUserID -notlike 'None')) {
+if ($InstallAllModules -and ($GitHubUserID -notlike "None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\ExtendedModules.tmp")) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Extended Modules' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-PWSHModule -ListName BaseModules, ExtendedModules, MyModules -Scope AllUsers -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken})" -Wait -WorkingDirectory C:\Temp\PSTemp 
@@ -150,13 +150,13 @@ if ($InstallAllModules -and ($GitHubUserID -notlike 'None')) {
 #endregion
 
 #region extended apps
-if ($InstallAllApps -and ($GitHubUserID -notlike 'None')) {
+if ($InstallAllApps -and ($GitHubUserID -notlike "None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\ExtendedApps.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Extended Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-PSPackageManAppFromList -ListName BaseApps, ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken})" -Wait -WorkingDirectory C:\Temp\PSTemp 
+		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-PSPackageManAppFromList -ListName BaseApps, ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken})' -Wait -WorkingDirectory C:\Temp\PSTemp 
 		
-		Remove-Item -Path "$([Environment]::GetFolderPath('Desktop'))\*.lnk" -ErrorAction SilentlyContinue
+		Remove-Item -Path '$([Environment]::GetFolderPath('Desktop'))\*.lnk" -ErrorAction SilentlyContinue
 		Remove-Item -Path "$($env:PUBLIC)\Desktop\*.lnk" -ErrorAction SilentlyContinue
 
 		New-Item "$($PSDownload.fullname)\ExtendedApps.tmp" -ItemType file -Force | Out-Null
@@ -165,7 +165,7 @@ if ($InstallAllApps -and ($GitHubUserID -notlike 'None')) {
 #endregion
 
 #region licensed apps
-if ($InstallLicensedApps -and ($GitHubUserID -notlike 'None')) {
+if ($InstallLicensedApps -and ($GitHubUserID -notlike "None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\LicensedApps.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Licensed Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
@@ -182,65 +182,106 @@ if ($EnableHyperV) {
 		Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {choco install -y Microsoft-Hyper-V-All --source=windowsFeatures})' -Wait -WorkingDirectory C:\Temp\PSTemp 
 		check-reboot
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {if (-not(Test-Path C:\Hyper-V)) { New-Item C:\Hyper-V -ItemType Directory -Force | Out-Null };if (-not(Test-Path C:\Hyper-V\VHD)) { New-Item C:\Hyper-V\VHD -ItemType Directory -Force | Out-Null};if (-not(Test-Path C:\Hyper-V\Config)) { New-Item C:\Hyper-V\Config -ItemType Directory -Force | Out-Null};Hyper-V\Set-VMHost -VirtualHardDiskPath 'C:\Hyper-V\VHD' -VirtualMachinePath 'C:\Hyper-V\Config'})" -Wait -WorkingDirectory C:\Temp\PSTemp 
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Hyper-V\New-VMSwitch -Name 'External' -NetAdapterName (Get-NetAdapter -Physical | Where-Object {$_.status -like 'up'}).Name -AllowManagementOS $true})" -Wait -WorkingDirectory C:\Temp\PSTemp 
+		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -noexit -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Hyper-V\New-VMSwitch -Name "External' -NetAdapterName (Get-NetAdapter -Physical | Where-Object {$_.status -like "up'}).Name -AllowManagementOS $true})" -Wait -WorkingDirectory C:\Temp\PSTemp 
 
-		New-Item "$($PSDownload.fullname)\EnableHyperV.tmp" -ItemType file -Force | Out-Null
-	}
-}
-#endregion
+				New-Item "$($PSDownload.fullname)\EnableHyperV.tmp" -ItemType file -Force | Out-Null
+			}
+		}
+		#endregion
 
-#region WSL
-if ($EnableWSL) {
-	if (-not(Test-Path "$($PSDownload.fullname)\WSL.tmp")) {
-		check-reboot
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {wsl --install})' -Wait -WorkingDirectory C:\Temp\PSTemp 
-		check-reboot
+		#region WSL
+		if ($EnableWSL) {
+			if (-not(Test-Path "$($PSDownload.fullname)\WSL.tmp")) {
+				check-reboot
+				Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
+				Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {wsl --install})' -Wait -WorkingDirectory C:\Temp\PSTemp 
+				check-reboot
 		
-		$wsluser = 'master'
-		$wslpass = 'aazz'
+				$wsluser = 'master'
+				$wslpass = 'aazz'
 		
-		[scriptblock]$block = {
+				[scriptblock]$block = {
 
-			cmd.exe /c "ubuntu run -u root useradd -m -G sudo -s /bin/bash $($wsluser)"
-			cmd.exe /c "ubuntu run -u root (echo $($wslpass); echo $($wslpass)) | ubuntu run -u root passwd $($wsluser)"
-			cmd.exe /c "ubuntu config --default-user $($wsluser)"
-			cmd.exe /c "ubuntu run -u root echo '$($wsluser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($wsluser)"
+					cmd.exe /c "ubuntu run -u root useradd -m -G sudo -s /bin/bash $($wsluser)"
+					cmd.exe /c "ubuntu run -u root (echo $($wslpass); echo $($wslpass)) | ubuntu run -u root passwd $($wsluser)"
+					cmd.exe /c "ubuntu config --default-user $($wsluser)"
+					cmd.exe /c "ubuntu run -u root echo '$($wsluser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($wsluser)"
 
-			wsl -d Ubuntu sudo apt update
-			wsl -d Ubuntu sudo apt install make git -y
-			wsl -d Ubuntu git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap
-			wsl -d Ubuntu sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory
-			wsl -d Ubuntu sudo mkdir ~/ansible/host_vars
+					cmd.exe /c 'ubuntu sudo apt update'
+					cmd.exe /c 'ubuntu sudo apt install make git -y'
+					cmd.exe /c "ubuntu git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap"
+					cmd.exe /c 'ubuntu sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory'
+					cmd.exe /c 'ubuntu sudo mkdir ~/ansible/host_vars'
 
-			wsl -d Ubuntu sudo apt install git python3-pip python3-dev -y
-			wsl -d Ubuntu sudo pip3 install ansible
-			wsl -d Ubuntu ansible-galaxy install -r ~/ansible/ansible-bootstrap/requirements.yml --force
+					cmd.exe /c 'ubuntu sudo apt install git python3-pip python3-dev -y'
+					cmd.exe /c 'ubuntu sudo pip3 install ansible'
+					cmd.exe /c 'ubuntu ansible-galaxy install -r ~/ansible/ansible-bootstrap/requirements.yml --force'
 
-			wsl -d Ubuntu ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial
-			wsl -d Ubuntu ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml
-		}		
+					cmd.exe /c 'ubuntu ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial'
+					cmd.exe /c 'ubuntu ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml'
+				}
 
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -noexit -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
+				curl -H "Authorization: token $($GitHubToken)" \
+				-H 'Accept: application/vnd.github.v3.raw' \
+				-o /etc/wsl.conf \
+				-L https://raw.githubusercontent.com/smitpi/HTPCZA-Ansible/main/Other/config/rclone/rclone.conf
 
-		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
+
+				cmd.exe /c 'ubuntu run echo -e '\[automount\]"" | Set-Content -Path /etc/wsl.conf
+				cmd.exe /c 'ubuntu run echo -e 'enabled = true""
+				cmd.exe /c "ubuntu run echo -e `"metadata,uid=1000,gid=1000,umask=077,fmask=11,case=off`""
+				cmd.exe /c 'ubuntu run echo -e 'mountFsTab = true""
+
+				cmd.exe /c 'ubuntu run echo -e '[network]""
+				cmd.exe /c 'ubuntu run echo -e 'hostname = ubuntu-wsl""
+				cmd.exe /c 'ubuntu run echo -e 'generateHosts = false""
+				cmd.exe /c 'ubuntu run echo -e 'generateResolvConf = false""
+
+				cmd.exe /c 'ubuntu run echo -e '[interop]""
+				cmd.exe /c 'ubuntu run echo -e 'enabled = false""
+				cmd.exe /c 'ubuntu run echo -e 'appendWindowsPath = false""
+
+				cmd.exe /c 'ubuntu run echo -e '[user]""
+				cmd.exe /c 'ubuntu run echo -e 'default = master""
+
+				cmd.exe /c 'ubuntu run echo -e '[boot]""
+				cmd.exe /c 'ubuntu run echo -e 'Get-command = service docker start""
+			}		
+			cmd.exe /c 'ubuntu sudo apt update'
+
+			cmd.exe /c 'ubuntu sudo apt install make git -y'
+			cmd.exe /c "ubuntu git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap"
+			cmd.exe /c 'ubuntu sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory'
+			cmd.exe /c 'ubuntu sudo mkdir ~/ansible/host_vars'
+
+			cmd.exe /c 'ubuntu sudo apt install git python3-pip python3-dev -y'
+			cmd.exe /c 'ubuntu sudo pip3 install ansible'
+			cmd.exe /c 'ubuntu ansible-galaxy install -r ~/ansible/ansible-bootstrap/requirements.yml --force'
+
+			cmd.exe /c 'ubuntu ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial'
+			cmd.exe /c 'ubuntu ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml'
+
+
+			Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -noexit -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
+
+			New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
+		}
 	}
-}
-#endregion
+	#endregion
 
-#region wallpaper
-Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host "User Wallpaper`n" -ForegroundColor Cyan
-# https://u.pcloud.link/publink/show?code=kZ4mFeVZGleWW7tIpASwap1qbic4Yy4mhL6y
-$web = New-Object System.Net.WebClient
-$web.DownloadFile('https://github.com/smitpi/PSToolKit/raw/master/PSToolKit/Private/Wallpapers/Chicago-Architecture-Wallpaper.jpg', "$env:USERPROFILE\New-Wallpaper.jpg")
-Set-UserDesktopWallpaper -PicturePath "$env:USERPROFILE\New-Wallpaper.jpg" -Style Fill
-#endregion
+	#region wallpaper
+	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host "User Wallpaper`n" -ForegroundColor Cyan
+	# https://u.pcloud.link/publink/show?code=kZ4mFeVZGleWW7tIpASwap1qbic4Yy4mhL6y
+	$web = New-Object System.Net.WebClient
+	$web.DownloadFile('https://github.com/smitpi/PSToolKit/raw/master/PSToolKit/Private/Wallpapers/Chicago-Architecture-Wallpaper.jpg', "$env:USERPROFILE\New-Wallpaper.jpg")
+	Set-UserDesktopWallpaper -PicturePath "$env:USERPROFILE\New-Wallpaper.jpg" -Style Fill
+	#endregion
 
-#region win updates
-Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Microsoft Update' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-MSUpdate})' -Wait -WorkingDirectory C:\Temp\PSTemp 
-check-reboot
+	#region win updates
+	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Microsoft Update' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
+	Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-MSUpdate})' -Wait -WorkingDirectory C:\Temp\PSTemp 
+	check-reboot
 
-#endregion
+	#endregion
 
 
