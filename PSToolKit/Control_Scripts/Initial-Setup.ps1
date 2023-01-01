@@ -180,6 +180,7 @@ if ($InstallLicensedApps -and ($GitHubUserID -notlike 'None')) {
 if ($EnableHyperV) {
 	if (-not(Test-Path "$($PSDownload.fullname)\EnableHyperV.tmp")) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Hyper-V' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Windows Feature`n" -ForegroundColor Cyan
 		Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {choco install -y Microsoft-Hyper-V-All --source=windowsFeatures})' -Wait -WorkingDirectory C:\Temp\PSTemp 
 		check-reboot
 
@@ -192,7 +193,8 @@ if ($EnableHyperV) {
 			$NetAdap = (Get-NetAdapter -Physical | Where-Object {$_.status -like 'up'})[0]
 			Hyper-V\New-VMSwitch -Name 'External2' -NetAdapterName $NetAdap.Name
 		}
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -noexit -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Setup]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Hyper-V Settings`n" -ForegroundColor Cyan
+		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
 
 		New-Item "$($PSDownload.fullname)\EnableHyperV.tmp" -ItemType file -Force | Out-Null
 	}
@@ -202,44 +204,7 @@ if ($EnableHyperV) {
 #region WSL
 if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\WSL.tmp")) {
-		check-reboot
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {wsl --install})' -Wait -WorkingDirectory C:\Temp\PSTemp 
-		check-reboot
-				
-		[scriptblock]$block = {
-			cmd.exe /c 'ubuntu run sudo curl  -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf'
-			cmd.exe /c 'wsl --terminate Ubuntu'
-		}
-
-		[scriptblock]$block1 = {
-			cmd.exe /c "ubuntu run -u root useradd -m -G sudo -s /bin/bash $($WSLUser)"
-			cmd.exe /c "ubuntu run -u root (echo $($WSLPassword); echo $($WSLPassword)) | ubuntu run -u root passwd $($WSLUser)"
-			cmd.exe /c "ubuntu config --default-user $($WSLUser)"
-			cmd.exe /c "ubuntu run -u root echo '$($WSLUser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)"
-		}
-
-		[scriptblock]$block2 = {
-			cmd.exe /c 'ubuntu run sudo apt update'
-
-			cmd.exe /c 'ubuntu run sudo apt install make git -y'
-			cmd.exe /c "ubuntu run git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap"
-			cmd.exe /c 'ubuntu run sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory'
-			cmd.exe /c 'ubuntu run sudo mkdir ~/ansible/host_vars'
-
-			cmd.exe /c 'ubuntu run sudo apt install git python3-pip python3-dev -y'
-			cmd.exe /c 'ubuntu run sudo pip3 install ansible'
-			cmd.exe /c 'ubuntu run ansible-galaxy install -r ~/ansible/ansible-bootstrap/requirements.yml --force'
-
-			cmd.exe /c 'ubuntu run ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial'
-			cmd.exe /c 'ubuntu run ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml'
-		}
-
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block1)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block2)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
-
-		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
+		0
 	}
 }
 #endregion
