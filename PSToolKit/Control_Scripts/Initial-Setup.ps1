@@ -241,7 +241,8 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 				
 		$WSLInstall = {
-			cmd.exe /c 'wsl --install'
+			cmd.exe /c 'wsl --install --web-download --no-launch --distribution Ubuntu'
+			#cmd.exe /c 'wsl --install --distribution Ubuntu'
 			cmd.exe /c 'wsl --distribution Ubuntu --shell-type standard --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf'
 			cmd.exe /c 'wsl --terminate Ubuntu'
 		}
