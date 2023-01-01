@@ -221,67 +221,49 @@ if ($EnableHyperV) {
 					cmd.exe /c 'ubuntu ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml'
 				}
 
-				curl -H "Authorization: token $($GitHubToken)" \
-				-H 'Accept: application/vnd.github.v3.raw' \
-				-o /etc/wsl.conf \
-				-L https://raw.githubusercontent.com/smitpi/HTPCZA-Ansible/main/Other/config/rclone/rclone.conf
+				[scriptblock]$block1 = {
+					cmd.exe /c 'ubuntu run sudo curl  -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf'
+					cmd.exe /c 'wsl --terminate Ubuntu'
+				}
 
+				[scriptblock]$block2 = {
+					cmd.exe /c 'ubuntu run sudo apt update'
 
-				cmd.exe /c 'ubuntu run echo -e '\[automount\]"" | Set-Content -Path /etc/wsl.conf
-				cmd.exe /c 'ubuntu run echo -e 'enabled = true""
-				cmd.exe /c "ubuntu run echo -e `"metadata,uid=1000,gid=1000,umask=077,fmask=11,case=off`""
-				cmd.exe /c 'ubuntu run echo -e 'mountFsTab = true""
+					cmd.exe /c 'ubuntu run sudo apt install make git -y'
+					cmd.exe /c "ubuntu run git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap"
+					cmd.exe /c 'ubuntu run sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory'
+					cmd.exe /c 'ubuntu run sudo mkdir ~/ansible/host_vars'
 
-				cmd.exe /c 'ubuntu run echo -e '[network]""
-				cmd.exe /c 'ubuntu run echo -e 'hostname = ubuntu-wsl""
-				cmd.exe /c 'ubuntu run echo -e 'generateHosts = false""
-				cmd.exe /c 'ubuntu run echo -e 'generateResolvConf = false""
+					cmd.exe /c 'ubuntu run sudo apt install git python3-pip python3-dev -y'
+					cmd.exe /c 'ubuntu run sudo pip3 install ansible'
+					cmd.exe /c 'ubuntu run ansible-galaxy install -r ~/ansible/ansible-bootstrap/requirements.yml --force'
 
-				cmd.exe /c 'ubuntu run echo -e '[interop]""
-				cmd.exe /c 'ubuntu run echo -e 'enabled = false""
-				cmd.exe /c 'ubuntu run echo -e 'appendWindowsPath = false""
+					cmd.exe /c 'ubuntu run ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial'
+					cmd.exe /c 'ubuntu run ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml'
+				}
 
-				cmd.exe /c 'ubuntu run echo -e '[user]""
-				cmd.exe /c 'ubuntu run echo -e 'default = master""
+				Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -noexit -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
+				Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -noexit -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block1)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
+				Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -noexit -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block2)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
 
-				cmd.exe /c 'ubuntu run echo -e '[boot]""
-				cmd.exe /c 'ubuntu run echo -e 'Get-command = service docker start""
-			}		
-			cmd.exe /c 'ubuntu sudo apt update'
-
-			cmd.exe /c 'ubuntu sudo apt install make git -y'
-			cmd.exe /c "ubuntu git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap"
-			cmd.exe /c 'ubuntu sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory'
-			cmd.exe /c 'ubuntu sudo mkdir ~/ansible/host_vars'
-
-			cmd.exe /c 'ubuntu sudo apt install git python3-pip python3-dev -y'
-			cmd.exe /c 'ubuntu sudo pip3 install ansible'
-			cmd.exe /c 'ubuntu ansible-galaxy install -r ~/ansible/ansible-bootstrap/requirements.yml --force'
-
-			cmd.exe /c 'ubuntu ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial'
-			cmd.exe /c 'ubuntu ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml'
-
-
-			Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -noexit -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
-
-			New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
+				New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
+			}
 		}
-	}
-	#endregion
+		#endregion
 
-	#region wallpaper
-	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host "User Wallpaper`n" -ForegroundColor Cyan
-	# https://u.pcloud.link/publink/show?code=kZ4mFeVZGleWW7tIpASwap1qbic4Yy4mhL6y
-	$web = New-Object System.Net.WebClient
-	$web.DownloadFile('https://github.com/smitpi/PSToolKit/raw/master/PSToolKit/Private/Wallpapers/Chicago-Architecture-Wallpaper.jpg', "$env:USERPROFILE\New-Wallpaper.jpg")
-	Set-UserDesktopWallpaper -PicturePath "$env:USERPROFILE\New-Wallpaper.jpg" -Style Fill
-	#endregion
+		#region wallpaper
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Setting]: ' -NoNewline -ForegroundColor Yellow; Write-Host "User Wallpaper`n" -ForegroundColor Cyan
+		# https://u.pcloud.link/publink/show?code=kZ4mFeVZGleWW7tIpASwap1qbic4Yy4mhL6y
+		$web = New-Object System.Net.WebClient
+		$web.DownloadFile('https://github.com/smitpi/PSToolKit/raw/master/PSToolKit/Private/Wallpapers/Chicago-Architecture-Wallpaper.jpg', "$env:USERPROFILE\New-Wallpaper.jpg")
+		Set-UserDesktopWallpaper -PicturePath "$env:USERPROFILE\New-Wallpaper.jpg" -Style Fill
+		#endregion
 
-	#region win updates
-	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Microsoft Update' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-	Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-MSUpdate})' -Wait -WorkingDirectory C:\Temp\PSTemp 
-	check-reboot
+		#region win updates
+		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Microsoft Update' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
+		Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-MSUpdate})' -Wait -WorkingDirectory C:\Temp\PSTemp 
+		check-reboot
 
-	#endregion
+		#endregion
 
 
