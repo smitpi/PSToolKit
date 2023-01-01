@@ -197,15 +197,15 @@ if ($EnableWSL) {
 		Start-Process PowerShell -ArgumentList '-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {wsl --install})' -Wait -WorkingDirectory C:\Temp\PSTemp 
 		check-reboot
 		
-		$wsluser = 'theboss'
+		$wsluser = 'master'
 		$wslpass = 'aazz'
 		
 		[scriptblock]$block = {
 
-		cmd.exe /c "ubuntu run -u root useradd -m -G sudo -s /bin/bash $($wsluser)"
-		cmd.exe /c "ubuntu run -u root (echo $($wslpass); echo $($wslpass)) | ubuntu run -u root passwd $($wsluser)"
-		cmd.exe /c "ubuntu config --default-user $($wsluser)"
-		cmd.exe /c "ubuntu run -u root echo '$($wsluser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($wsluser)"
+			cmd.exe /c "ubuntu run -u root useradd -m -G sudo -s /bin/bash $($wsluser)"
+			cmd.exe /c "ubuntu run -u root (echo $($wslpass); echo $($wslpass)) | ubuntu run -u root passwd $($wsluser)"
+			cmd.exe /c "ubuntu config --default-user $($wsluser)"
+			cmd.exe /c "ubuntu run -u root echo '$($wsluser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($wsluser)"
 
 			wsl -d Ubuntu sudo apt update
 			wsl -d Ubuntu sudo apt install make git -y
