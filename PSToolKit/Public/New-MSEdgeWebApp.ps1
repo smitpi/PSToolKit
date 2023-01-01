@@ -110,6 +110,7 @@ Function New-MSEdgeWebApp {
 		#Save the Shortcut to the TargetPath
 		$Shortcut.Save()
 	}#Process
+
 	End {
 		Write-Verbose '[16:08:48 END] Complete'
 	}#End End
