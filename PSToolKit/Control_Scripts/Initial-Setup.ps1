@@ -235,9 +235,9 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 			cmd.exe /c 'ubuntu run ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml'
 		}
 
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -noexit -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -noexit -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block1)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -noexit -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block2)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
+		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
+		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block1)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
+		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block2)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
 
 		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
 	}
