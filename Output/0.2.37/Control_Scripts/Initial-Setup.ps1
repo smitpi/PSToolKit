@@ -120,7 +120,7 @@ $full = Get-Item "$($PSDownload.FullName)\Start-PSToolkitSystemInitialize.ps1"
 try {
 	Import-Module $full.FullName -Force
 
-	if ($GitHubUserID -like "None") {Start-PSToolkitSystemInitialize -LabSetup -InstallMyModules}
+	if ($GitHubUserID -like 'None') {Start-PSToolkitSystemInitialize -LabSetup -InstallMyModules}
 	else {Start-PSToolkitSystemInitialize -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken -LabSetup -InstallMyModules}
 
 	Remove-Item $full.FullName
@@ -128,7 +128,7 @@ try {
 #endregion
 
 #region baseapps
-if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp") -and ($GitHubUserID -notlike "None")) {
+if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp") -and ($GitHubUserID -notlike 'None')) {
 	try {
 		check-reboot
 		
@@ -141,7 +141,7 @@ if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp") -and ($GitHubUserID -
 #endregion
 
 #region all modules
-if ($InstallAllModules -and ($GitHubUserID -notlike "None")) {
+if ($InstallAllModules -and ($GitHubUserID -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\ExtendedModules.tmp")) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Extended Modules' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {Install-PWSHModule -ListName BaseModules, ExtendedModules, MyModules -Scope AllUsers -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken})" -Wait -WorkingDirectory C:\Temp\PSTemp 
@@ -200,7 +200,7 @@ if ($EnableHyperV) {
 #endregion
 
 #region WSL
-if ($EnableWSL  -and ($WSLUser -notlike "None")) {
+if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\WSL.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
@@ -208,29 +208,15 @@ if ($EnableWSL  -and ($WSLUser -notlike "None")) {
 		check-reboot
 				
 		[scriptblock]$block = {
+			cmd.exe /c 'ubuntu run sudo curl  -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf'
+			cmd.exe /c 'wsl --terminate Ubuntu'
+		}
 
+		[scriptblock]$block1 = {
 			cmd.exe /c "ubuntu run -u root useradd -m -G sudo -s /bin/bash $($WSLUser)"
 			cmd.exe /c "ubuntu run -u root (echo $($WSLPassword); echo $($WSLPassword)) | ubuntu run -u root passwd $($WSLUser)"
 			cmd.exe /c "ubuntu config --default-user $($WSLUser)"
 			cmd.exe /c "ubuntu run -u root echo '$($WSLUser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)"
-
-			cmd.exe /c 'ubuntu sudo apt update'
-			cmd.exe /c 'ubuntu sudo apt install make git -y'
-			cmd.exe /c "ubuntu git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap"
-			cmd.exe /c 'ubuntu sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory'
-			cmd.exe /c 'ubuntu sudo mkdir ~/ansible/host_vars'
-
-			cmd.exe /c 'ubuntu sudo apt install git python3-pip python3-dev -y'
-			cmd.exe /c 'ubuntu sudo pip3 install ansible'
-			cmd.exe /c 'ubuntu ansible-galaxy install -r ~/ansible/ansible-bootstrap/requirements.yml --force'
-
-			cmd.exe /c 'ubuntu ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial'
-			cmd.exe /c 'ubuntu ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml'
-		}
-
-		[scriptblock]$block1 = {
-			cmd.exe /c 'ubuntu run sudo curl  -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf'
-			cmd.exe /c 'wsl --terminate Ubuntu'
 		}
 
 		[scriptblock]$block2 = {
