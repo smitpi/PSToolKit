@@ -33,6 +33,7 @@ $Shortcut.Save()
 #endregion
 
 #region Set Variables
+
 #region set folders
 $PSTemp = 'C:\Temp\PSTemp'
 if (Test-Path $PSTemp) {$PSDownload = Get-Item $PSTemp}
@@ -41,6 +42,7 @@ else {$PSDownload = New-Item $PSTemp -ItemType Directory -Force}
 if (Test-Path 'C:\Temp\PSTemp\Logs') {$PSLogsPath = Get-Item 'C:\Temp\PSTemp\Logs'}
 else {$PSLogsPath = New-Item 'C:\Temp\PSTemp\Logs' -ItemType Directory -Force}
 #endregion
+
 #region check reboot
 function check-reboot {
 	refreshenv | Out-Null
@@ -49,6 +51,7 @@ function check-reboot {
 	else {Write-Host 'Not Required' -ForegroundColor Green}
 }
 #endregion
+
 #region Run Block Code
 function Run-Block {
 	PARAM(
@@ -58,19 +61,21 @@ function Run-Block {
 
 	$PSPath = Get-Item (Get-Command powershell).Source
 	$InstallerArgs = @{
-		FilePath               = $pspath.fullname
-		Wait                   = $true
-		WorkingDirectory       = $PSDownload.fullname
-		RedirectStandardError  = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)-Error.log"
-		RedirectStandardOutput = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)Output.log"
+		FilePath              = $pspath.fullname
+		Wait                  = $true
+		NoNewWindow           = $true
+		WorkingDirectory      = $PSDownload.fullname
+		RedirectStandardError = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)-Error.log"
+		#RedirectStandardOutput = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)Output.log"
 	}
 	try {
 		Write-Host '[Executing] ' -NoNewline -ForegroundColor Yellow; Write-Host "CodeBlock: $($Name)" -ForegroundColor Cyan
-		Start-Process @InstallerArgs -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($Block)})"
+		Start-Process @InstallerArgs -ArgumentList "-NoLogo -NoProfile -ExecutionPolicy Bypass -Command (& {$($Block)})"
 		Write-Host '----------------------------------- ' -ForegroundColor DarkCyan -NoNewline; Write-Host '[Completed]: ' -ForegroundColor Yellow -NoNewline; Write-Host "CodeBlock: $($Name)`n" -ForegroundColor Cyan
 	} catch {Write-Warning "Error: Message:$($Error[0])"}
 }
 #endregion
+
 #region Answer File
 try {
 	$message = @"
