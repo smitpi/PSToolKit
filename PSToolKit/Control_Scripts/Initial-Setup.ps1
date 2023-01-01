@@ -33,40 +33,45 @@ $Shortcut.Save()
 #endregion
 
 #region Set Variables
-function check-reboot {
-	refreshenv | Out-Null
-	Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-	if (Test-PendingReboot) {Invoke-Reboot} 
-	else {Write-Host 'Not Required' -ForegroundColor Green}
-}
-
-#region Default Settings
-function Run-Block {
-	PARAM(
-		[string]$Name,
-		[string]$Block
-	)
-	$InstallerArgs = @{
-		path                   = 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'
-		Wait                   = $true
-		WorkingDirectory       = 'C:\Temp\PSTemp'
-		RedirectStandardError  = "C:\Temp\PSTemp\Logs\$($Name)-Error.log"
-		RedirectStandardOutput = "C:\Temp\PSTemp\Logs\$($Name)-Output.log"
-	}
-	try {
-		Write-Host '[Executing] ' -NoNewline -ForegroundColor Yellow; Write-Host "CodeBlock: $($Name)" -ForegroundColor Cyan
-		Start-Process @InstallerArgs -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($Block)})"
-	} catch {Write-Warning "Error: Message:$($Error[0])"}
-}
-#endregion
-
+#region set folders
 $PSTemp = 'C:\Temp\PSTemp'
 if (Test-Path $PSTemp) {$PSDownload = Get-Item $PSTemp}
 else {$PSDownload = New-Item $PSTemp -ItemType Directory -Force}
 
 if (Test-Path 'C:\Temp\PSTemp\Logs') {$PSLogsPath = Get-Item 'C:\Temp\PSTemp\Logs'}
 else {$PSLogsPath = New-Item 'C:\Temp\PSTemp\Logs' -ItemType Directory -Force}
+#endregion
+#region check reboot
+function check-reboot {
+	refreshenv | Out-Null
+	Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
+	if (Test-PendingReboot) {Invoke-Reboot} 
+	else {Write-Host 'Not Required' -ForegroundColor Green}
+}
+#endregion
+#region Run Block Code
+function Run-Block {
+	PARAM(
+		[string]$Name,
+		[string]$Block
+	)
 
+	$PSPath = Get-Item (Get-Command powershell).Source
+	$InstallerArgs = @{
+		FilePath               = $pspath.fullname
+		Wait                   = $true
+		WorkingDirectory       = $PSDownload.fullname
+		RedirectStandardError  = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)-Error.log"
+		RedirectStandardOutput = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)Output.log"
+	}
+	try {
+		Write-Host '[Executing] ' -NoNewline -ForegroundColor Yellow; Write-Host "CodeBlock: $($Name)" -ForegroundColor Cyan
+		Start-Process @InstallerArgs -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($Block)})"
+		Write-Host '----------------------------------- ' -ForegroundColor DarkCyan -NoNewline; Write-Host '[Completed]: ' -ForegroundColor Yellow -NoNewline; Write-Host "CodeBlock: $($Name)`n" -ForegroundColor Cyan
+	} catch {Write-Warning "Error: Message:$($Error[0])"}
+}
+#endregion
+#region Answer File
 try {
 	$message = @"
   _    _ _______ _____   _____ ______           ____              _       _                   
@@ -222,58 +227,6 @@ if ($EnableHyperV) {
 	}
 }
 #endregion
-
-
-<#
-#region WSL
-if ($EnableWSL -and ($WSLUser -notlike 'None')) {
-	if (-not(Test-Path "$($PSDownload.fullname)\WSL.tmp")) {
-		check-reboot
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-				
-		[scriptblock]$block = {
-			cmd.exe /c 'wsl --install'
-			cmd.exe /c 'ubuntu run sudo curl  -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf'
-			cmd.exe /c 'wsl --terminate Ubuntu'
-		}
-
-		[scriptblock]$block1 = {
-			cmd.exe /c "ubuntu run -u root useradd -m -G sudo -s /bin/bash $($WSLUser)"
-			cmd.exe /c "ubuntu run -u root (echo $($WSLPassword); echo $($WSLPassword)) | ubuntu run -u root passwd $($WSLUser)"
-			cmd.exe /c "ubuntu config --default-user $($WSLUser)"
-			cmd.exe /c "ubuntu run -u root echo '$($WSLUser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)"
-		}
-
-		[scriptblock]$block2 = {
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt update"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt dist-upgrade"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt install make git -y"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo mkdir ~/ansible/host_vars"
-
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt install git python3-pip python3-dev -y"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo pip3 install ansible"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo ansible-galaxy install -r ~/ansible/ansible-bootstrap/requirements.yml --force"
-
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml"
-		}
-
-		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "WSL2`n" -ForegroundColor Cyan
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp -RedirectStandardError C:\Temp\PSTemp\wsl-error.log -RedirectStandardOutput C:\Temp\PSTemp\wsl.log
-		check-reboot
-		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "Linux Sudo Account`n" -ForegroundColor Cyan
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block1)} )" -Wait -WorkingDirectory C:\Temp\PSTemp -RedirectStandardError C:\Temp\PSTemp\user-error.log -RedirectStandardOutput C:\Temp\PSTemp\user.log
-		check-reboot
-		Write-Host "`t`t[Executing]: " -NoNewline -ForegroundColor Yellow; Write-Host "Ansible Config`n" -ForegroundColor Cyan
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block2)} )" -Wait -WorkingDirectory C:\Temp\PSTemp -RedirectStandardError C:\Temp\PSTemp\ansible-error.log -RedirectStandardOutput C:\Temp\PSTemp\ansible.log
-		check-reboot
-		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
-	}
-}
-#endregion
-#>
 
 #region WSL
 if ($EnableWSL -and ($WSLUser -notlike 'None')) {
