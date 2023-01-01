@@ -44,7 +44,7 @@ function check-reboot {
 function Run-Block {
 	PARAM(
 		[string]$Name,
-		[scriptblock]$Block
+		[string]$Block
 	)
 	$InstallerArgs = @{
 		path                   = 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'
@@ -66,7 +66,7 @@ else {$PSDownload = New-Item $PSTemp -ItemType Directory -Force}
 
 if (Test-Path 'C:\Temp\PSTemp\Logs') {$PSLogsPath = Get-Item 'C:\Temp\PSTemp\Logs'}
 else {$PSLogsPath = New-Item 'C:\Temp\PSTemp\Logs' -ItemType Directory -Force}
-#endregion
+
 try {
 	$message = @"
   _    _ _______ _____   _____ ______           ____              _       _                   
@@ -156,8 +156,7 @@ if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp") -and ($GitHubUserID -
 	try {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Base Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow
-		[scriptblock]$baseapps = {Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken}
-		Run-Block -Name baseapps -Block $baseapps	
+		Run-Block -Name baseapps -Block "Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken"	
 		New-Item "$($PSDownload.fullname)\BaseApps.tmp" -ItemType file -Force | Out-Null
 	} catch {Write-Warning "Error: Message:$($Error[0])"}
 }
@@ -167,8 +166,7 @@ if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp") -and ($GitHubUserID -
 if ($InstallAllModules -and ($GitHubUserID -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\ExtendedModules.tmp")) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Extended Modules' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		[scriptblock]$ExtendedModules = {Install-PWSHModule -ListName BaseModules, ExtendedModules, MyModules -Scope AllUsers -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken}
-		Run-Block -Name ExtendedModules -Block $ExtendedModules	
+		Run-Block -Name ExtendedModules -Block "Install-PWSHModule -ListName BaseModules, ExtendedModules, MyModules -Scope AllUsers -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken"
 		New-Item "$($PSDownload.fullname)\ExtendedModules.tmp" -ItemType file -Force | Out-Null
 	}
 }
@@ -179,7 +177,7 @@ if ($InstallAllApps -and ($GitHubUserID -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\ExtendedApps.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Extended Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		[scriptblock]$ExtendedApps = {
+		$ExtendedApps = {
 			Install-PSPackageManAppFromList -ListName BaseApps, ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
 			Remove-Item -Path "$([Environment]::GetFolderPath('Desktop'))\*.lnk" -ErrorAction SilentlyContinue
 			Remove-Item -Path "$($env:PUBLIC)\Desktop\*.lnk" -ErrorAction SilentlyContinue
@@ -195,8 +193,7 @@ if ($InstallLicensedApps -and ($GitHubUserID -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\LicensedApps.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Licensed Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		[scriptblock]$LicensedApps = {Install-PSPackageManAppFromList -ListName LicensedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken}
-		Run-Block -Name LicensedApps -Block $LicensedApps	
+		Run-Block -Name LicensedApps -Block "Install-PSPackageManAppFromList -ListName LicensedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken"	
 		New-Item "$($PSDownload.fullname)\LicensedApps.tmp" -ItemType file -Force | Out-Null
 	}
 }
@@ -207,11 +204,10 @@ if ($EnableHyperV) {
 	if (-not(Test-Path "$($PSDownload.fullname)\EnableHyperV.tmp")) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Hyper-V' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Windows Feature`n" -ForegroundColor Cyan
-		[scriptblock]$EnableHyperV = {choco install -y Microsoft-Hyper-V-All --source=windowsFeatures}
-		Run-Block -Name EnableHyperV -Block $EnableHyperV	
+		Run-Block -Name EnableHyperV -Block 'choco install -y Microsoft-Hyper-V-All --source=windowsFeatures'	
 		check-reboot
 
-		[scriptblock]$HyperVSettings = {
+		$HyperVSettings = {
 			if (-not(Test-Path C:\Hyper-V)) { New-Item C:\Hyper-V -ItemType Directory -Force | Out-Null }
 			if (-not(Test-Path C:\Hyper-V\VHD)) { New-Item C:\Hyper-V\VHD -ItemType Directory -Force | Out-Null}
 			if (-not(Test-Path C:\Hyper-V\Config)) { New-Item C:\Hyper-V\Config -ItemType Directory -Force | Out-Null}
@@ -226,6 +222,8 @@ if ($EnableHyperV) {
 	}
 }
 #endregion
+
+
 <#
 #region WSL
 if ($EnableWSL -and ($WSLUser -notlike 'None')) {
@@ -283,20 +281,20 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 				
-		[scriptblock]$WSLInstall = {
+		$WSLInstall = {
 			cmd.exe /c 'wsl --install'
 			cmd.exe /c 'wsl --distribution Ubuntu --shell-type standard --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf'
 			cmd.exe /c 'wsl --terminate Ubuntu'
 		}
 
-		[scriptblock]$LinuxUserSetup = {
+		$LinuxUserSetup = {
 			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root sudo useradd -m -G sudo -s /bin/bash $($WSLUser)"
 			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root (echo $($WSLPassword); echo $($WSLPassword)) |wsl --distribution Ubuntu --shell-type standard --user root passwd $($WSLUser)"
 			cmd.exe /c "ubuntu config --default-user $($WSLUser)"
 			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root echo '$($WSLUser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)"
 		}
 
-		[scriptblock]$DeployAnsible = {
+		$DeployAnsible = {
 			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt update"
 			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt dist-upgrade"
 			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt install make git -y"
@@ -336,7 +334,7 @@ Set-UserDesktopWallpaper -PicturePath "$env:USERPROFILE\New-Wallpaper.jpg" -Styl
 
 #region win updates
 Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Microsoft Update' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-Run-Block -Name WinUpdate -Block ([scriptblock]$LicensedApps = {Install-PSPackageManAppFromList -ListName LicensedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken})
+Run-Block -Name WinUpdate -Block 'Install-MSUpdate'
 check-reboot
 #endregion
 
