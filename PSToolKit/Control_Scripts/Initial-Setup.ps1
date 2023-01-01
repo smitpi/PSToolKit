@@ -206,7 +206,6 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\WSL.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		check-reboot
 				
 		[scriptblock]$block = {
 			cmd.exe /c 'wsl --install'
@@ -222,28 +221,28 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		}
 
 		[scriptblock]$block2 = {
-			cmd.exe /c 'ubuntu run sudo apt update'
+			cmd.exe /c "ubuntu run -u $($WSLUser) sudo apt update"
+			cmd.exe /c "ubuntu run -u $($WSLUser) sudo apt dist-upgrade"
+			cmd.exe /c "ubuntu run -u $($WSLUser) sudo apt install make git -y"
+			cmd.exe /c "ubuntu run -u $($WSLUser) git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap"
+			cmd.exe /c "ubuntu run -u $($WSLUser) sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory"
+			cmd.exe /c "ubuntu run -u $($WSLUser) sudo mkdir ~/ansible/host_vars"
 
-			cmd.exe /c 'ubuntu run sudo apt install make git -y'
-			cmd.exe /c "ubuntu run git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap"
-			cmd.exe /c 'ubuntu run sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory'
-			cmd.exe /c 'ubuntu run sudo mkdir ~/ansible/host_vars'
+			cmd.exe /c "ubuntu run -u $($WSLUser) sudo apt install git python3-pip python3-dev -y"
+			cmd.exe /c "ubuntu run -u $($WSLUser) sudo pip3 install ansible"
+			cmd.exe /c "ubuntu run -u $($WSLUser) ansible-galaxy install -r ~/ansible/ansible-bootstrap/requirements.yml --force"
 
-			cmd.exe /c 'ubuntu run sudo apt install git python3-pip python3-dev -y'
-			cmd.exe /c 'ubuntu run sudo pip3 install ansible'
-			cmd.exe /c 'ubuntu run ansible-galaxy install -r ~/ansible/ansible-bootstrap/requirements.yml --force'
-
-			cmd.exe /c 'ubuntu run ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial'
-			cmd.exe /c 'ubuntu run ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml'
+			cmd.exe /c "ubuntu run -u $($WSLUser) ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial"
+			cmd.exe /c "ubuntu run -u $($WSLUser) ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml"
 		}
 
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "WSL2`n" -ForegroundColor Cyan
+		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "WSL2`n" -ForegroundColor Cyan
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
 		check-reboot
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "New Linux User`n" -ForegroundColor Cyan
+		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "Linux Sudo Account`n" -ForegroundColor Cyan
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block1)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
 		check-reboot
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Ansible`n" -ForegroundColor Cyan
+		Write-Host "`t`t[Executing]: " -NoNewline -ForegroundColor Yellow; Write-Host "Ansible Config`n" -ForegroundColor Cyan
 		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block2)} )" -Wait -WorkingDirectory C:\Temp\PSTemp 
 		check-reboot
 		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
