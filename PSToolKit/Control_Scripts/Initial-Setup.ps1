@@ -71,7 +71,8 @@ function Run-Block {
 	try {
 		Write-Host '[Executing] ' -NoNewline -ForegroundColor Yellow; Write-Host "CodeBlock: $($Name)" -ForegroundColor Cyan
 		Start-Process @InstallerArgs -ArgumentList "-NoLogo -NoProfile -ExecutionPolicy Bypass -Command (& {$($Block)})"
-		Write-Host '----------------------------------- ' -ForegroundColor DarkCyan -NoNewline; Write-Host '[Completed]: ' -ForegroundColor Yellow -NoNewline; Write-Host "CodeBlock: $($Name)`n" -ForegroundColor Cyan
+		Write-Host '[Completed]: ' -ForegroundColor Yellow -NoNewline; Write-Host "CodeBlock: $($Name)" -ForegroundColor DarkRed
+		Write-Host "-----------------------------------`n" -ForegroundColor DarkCyan
 	} catch {Write-Warning "Error: Message:$($Error[0])"}
 }
 #endregion
