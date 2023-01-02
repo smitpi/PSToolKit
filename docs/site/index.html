@@ -36,6 +36,7 @@
         var pageToc = [
           {title: "PSToolKit", url: "#_top", children: [
               {title: "Description", url: "#description" },
+              {title: "Win-Bootstrap", url: "#win-bootstrap" },
               {title: "Getting Started", url: "#getting-started" },
               {title: "PS Controller Scripts", url: "#ps-controller-scripts" },
               {title: "Functions", url: "#functions" },
@@ -328,28 +329,64 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     <h1 id="pstoolkit">PSToolKit</h1>
 <h2 id="description">Description</h2>
 <p>A Repository of my random scripts and functions writen over the years, there is a wyde range of tools in this module, used by a SysAdmin and EUC Administrator.</p>
+<hr />
+<h2 id="win-bootstrap">Win-Bootstrap</h2>
+<p>Boxstarter scripts to setup a new windows machine.</p>
+<ul>
+<li>Run the following commands to install Boxstarter:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">Set-ExecutionPolicy</span> <span class="n">Bypass</span> <span class="n">-Scope</span> <span class="k">Process</span> <span class="n">-Force</span>
+<span class="no">[System.Net.ServicePointManager]</span><span class="p">::</span><span class="n">SecurityProtocol</span> <span class="p">=</span> <span class="no">[System.Net.ServicePointManager]</span><span class="p">::</span><span class="n">SecurityProtocol</span> <span class="o">-bor</span> <span class="n">3072</span> 
+<span class="nb">iex </span><span class="p">((</span><span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebClient</span><span class="p">).</span><span class="n">DownloadString</span><span class="p">(</span><span class="s1">&#39;https://boxstarter.org/bootstrapper.ps1&#39;</span><span class="p">))</span>
+<span class="nb">Get-Boxstarter</span> <span class="n">-Force</span>
+</code></pre></div>
+<ul>
+<li>Then click on one of the below links to start.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Click link to run</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Initial-Setup.ps1'">System Setup</a></td>
+<td>Use <a href="https://github.com/smitpi/PSToolKit">PSToolKit</a> to Install a new System.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Warning</strong></p>
+<blockquote>
+<p>You will need a valid <strong>github userid</strong> and <strong>token</strong> to continue</p>
+</blockquote>
+</blockquote>
+<hr />
 <h2 id="getting-started">Getting Started</h2>
 <ul>
-<li>Install from PowerShell Gallery <a href="https://www.powershellgallery.com/packages/PSToolKit">PS Gallery</a>
-<div class="highlight"><pre><span></span><code>Install-Module -Name PSToolKit -Verbose
-</code></pre></div></li>
-<li>or run this script to install from GitHub <a href="https://github.com/smitpi/PSToolKit">GitHub Repo</a>
-<div class="highlight"><pre><span></span><code>$CurrentLocation = Get-Item .
-$ModuleDestination = (Join-Path (Get-Item (Join-Path (Get-Item $profile).Directory &#39;Modules&#39;)).FullName -ChildPath PSToolKit)
-git clone --depth 1 https://github.com/smitpi/PSToolKit $ModuleDestination 2&gt;&amp;1 | Write-Host -ForegroundColor Yellow
-Set-Location $ModuleDestination
-git filter-branch --prune-empty --subdirectory-filter Output HEAD 2&gt;&amp;1 | Write-Host -ForegroundColor Yellow
-Set-Location $CurrentLocation
-</code></pre></div></li>
-<li>Then import the module into your session
-<div class="highlight"><pre><span></span><code>Import-Module PSToolKit -Verbose -Force
-</code></pre></div></li>
-<li>or run these commands for more help and details.
-<div class="highlight"><pre><span></span><code>Get-Command -Module PSToolKit
-Get-Help about_PSToolKit
-</code></pre></div>
-Documentation can be found at: <a href="https://smitpi.github.io/PSToolKit">Github_Pages</a></li>
+<li>Run this script to install from GitHub <a href="https://github.com/smitpi/PSToolKit">GitHub Repo</a></li>
 </ul>
+<div class="highlight"><pre><span></span><code><span class="nv">$CurrentLocation</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="p">.</span>
+<span class="nv">$ModuleDestination</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="p">(</span><span class="nb">Get-Item</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="p">(</span><span class="nb">Get-Item</span> <span class="nv">$profile</span><span class="p">).</span><span class="n">Directory</span> <span class="s1">&#39;Modules&#39;</span><span class="p">)).</span><span class="n">FullName</span> <span class="n">-ChildPath</span> <span class="n">PSToolKit</span><span class="p">)</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="p">-</span><span class="n">-depth</span> <span class="n">1</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">smitpi</span><span class="p">/</span><span class="n">PSToolKit</span> <span class="nv">$ModuleDestination</span> <span class="n">2</span><span class="p">&gt;&amp;</span><span class="n">1</span> <span class="p">|</span> <span class="nb">Write-Host</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
+<span class="nb">Set-Location</span> <span class="nv">$ModuleDestination</span>
+<span class="n">git</span> <span class="k">filter</span><span class="n">-branch</span> <span class="p">-</span><span class="n">-prune-empty</span> <span class="p">-</span><span class="n">-subdirectory-filter</span> <span class="n">Output</span> <span class="n">HEAD</span> <span class="n">2</span><span class="p">&gt;&amp;</span><span class="n">1</span> <span class="p">|</span> <span class="nb">Write-Host</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
+<span class="nb">Set-Location</span> <span class="nv">$CurrentLocation</span>
+</code></pre></div>
+<ul>
+<li>Then import the module into your session</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">Import-Module</span> <span class="n">PSToolKit</span> <span class="n">-Verbose</span> <span class="n">-Force</span>
+</code></pre></div>
+<ul>
+<li>or run these commands for more help and details.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-Command</span> <span class="n">-Module</span> <span class="n">PSToolKit</span>
+<span class="nb">Get-Help</span> <span class="n">about_PSToolKit</span>
+</code></pre></div>
+<p>Documentation can be found at: <a href="https://smitpi.github.io/PSToolKit">Github_Pages</a></p>
 <h2 id="ps-controller-scripts">PS Controller Scripts</h2>
 <ul>
 <li>boxstarter-install.ps1</li>
@@ -488,5 +525,5 @@ Documentation can be found at: <a href="https://smitpi.github.io/PSToolKit">Gith
 </html>
 <!--
 MkDocs version : 1.4.2
-Build Date UTC : 2023-01-01 15:32:41.488342+00:00
+Build Date UTC : 2023-01-02 12:48:49.148804+00:00
 -->

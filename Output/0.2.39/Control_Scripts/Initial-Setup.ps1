@@ -8,10 +8,37 @@ $Boxstarter.AutoLogin = $true # Save my password securely and auto-login after a
 
 # Development Mode
 Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
+#endregion
+# Create Icons
+if (-not(Test-Path "$($env:PUBLIC)\Desktop\Win-Bootstrap")) {$BootstrapFolder = New-Item "$($env:PUBLIC)\Desktop\Win-Bootstrap" -ItemType Directory -Force | Out-Null}
+else {
+	Remove-Item "$($env:PUBLIC)\Desktop\Win-Bootstrap\Run_Win-Bootstrap.lnk" -Force -ErrorAction SilentlyContinue | out-null
+	Remove-Item "$($env:PUBLIC)\Desktop\Win-Bootstrap\Github_PSToolKit.lnk" -Force -ErrorAction SilentlyContinue | out-null
+	Remove-Item "$($env:PUBLIC)\Desktop\Win-Bootstrap\desktop.ini" -Force -ErrorAction SilentlyContinue | Out-Null
+	$BootstrapFolder = get-item "$($env:PUBLIC)\Desktop\Win-Bootstrap"
+}
+
+$web = New-Object System.Net.WebClient
+$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/ICO/Utilities_Icon.ico', "$($env:PUBLIC)\Pictures\Utilities.ico")
+
+$DesktopIni = @"
+[.ShellClassInfo]
+IconResource=$($env:PUBLIC)\Pictures\Utilities.ico,0
+"@
+
+#Create/Add content to the desktop.ini file
+$newini = New-Item -Path "$($env:PUBLIC)\Desktop\Win-Bootstrap\desktop.ini" -ItemType File -Value $DesktopIni
+  
+#Set the attributes for $Desktop.ini
+$newini.Attributes = 'Hidden, System, Archive'
+ 
+#Finally, set the folder's attributes
+$BootstrapFolder.Attributes = 'ReadOnly, Directory'
+#endregion
 
 # Create Run_Win-Bootstrap Shortcuts
 $WScriptShell = New-Object -ComObject WScript.Shell
-$lnkfile = "$([Environment]::GetFolderPath('Desktop'))\Run_Win-Bootstrap.lnk"
+$lnkfile = "$($env:PUBLIC)\Desktop\Win-Bootstrap\Run_Win-Bootstrap.lnk"
 $Shortcut = $WScriptShell.CreateShortcut($($lnkfile))
 $MSEdgePath = Get-Item 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 $Shortcut.TargetPath = $MSEdgePath.FullName
@@ -22,51 +49,63 @@ $Shortcut.IconLocation = "$IconLocation, $IconArrayIndex"
 $Shortcut.Save()
 # Create GitHub_Win-Bootstrap Shortcuts
 $WScriptShell = New-Object -ComObject WScript.Shell
-$lnkfile = "$([Environment]::GetFolderPath('Desktop'))\Github_Win-Bootstrap.lnk"
+$lnkfile = "$($env:PUBLIC)\Desktop\Win-Bootstrap\Github_PSToolKit.lnk"
 $Shortcut = $WScriptShell.CreateShortcut($($lnkfile))
 $MSEdgePath = Get-Item 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 $Shortcut.TargetPath = $MSEdgePath.FullName
-$Shortcut.Arguments = "--app=`"https://github.com/smitpi/win-bootstrap`""
-$Shortcut.IconLocation = $MSEdgePath.fullname
+$Shortcut.Arguments = "--app=`"https://github.com/smitpi/pstoolkit`""
+$IconLocation = 'C:\windows\System32\mstsc.exe'
+$IconArrayIndex = 19
+$Shortcut.IconLocation = "$IconLocation, $IconArrayIndex"
 $Shortcut.Save()
-
 #endregion
 
 #region Set Variables
-function check-reboot {
-	refreshenv | Out-Null
-	Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
-	if (Test-PendingReboot) {Invoke-Reboot} 
-	else {Write-Host 'Not Required' -ForegroundColor Green}
-}
 
-#region Default Settings
-function Run-Block {
-	PARAM(
-		[string]$Name,
-		[string]$Block
-	)
-	$InstallerArgs = @{
-		path                   = 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'
-		Wait                   = $true
-		WorkingDirectory       = 'C:\Temp\PSTemp'
-		RedirectStandardError  = "C:\Temp\PSTemp\Logs\$($Name)-Error.log"
-		RedirectStandardOutput = "C:\Temp\PSTemp\Logs\$($Name)-Output.log"
-	}
-	try {
-		Write-Host '[Executing] ' -NoNewline -ForegroundColor Yellow; Write-Host "CodeBlock: $($Name)" -ForegroundColor Cyan
-		Start-Process @InstallerArgs -ArgumentList "-NoLogo -NoProfile -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($Block)})"
-	} catch {Write-Warning "Error: Message:$($Error[0])"}
-}
-#endregion
-
+#region set folders
 $PSTemp = 'C:\Temp\PSTemp'
 if (Test-Path $PSTemp) {$PSDownload = Get-Item $PSTemp}
 else {$PSDownload = New-Item $PSTemp -ItemType Directory -Force}
 
 if (Test-Path 'C:\Temp\PSTemp\Logs') {$PSLogsPath = Get-Item 'C:\Temp\PSTemp\Logs'}
 else {$PSLogsPath = New-Item 'C:\Temp\PSTemp\Logs' -ItemType Directory -Force}
+#endregion
 
+#region check reboot
+function check-reboot {
+	refreshenv | Out-Null
+	Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
+	if (Test-PendingReboot) {Invoke-Reboot} 
+	else {Write-Host 'Not Required' -ForegroundColor Green}
+}
+#endregion
+
+#region Run Block Code
+function Run-Block {
+	PARAM(
+		[string]$Name,
+		[string]$Block
+	)
+
+	$PSPath = Get-Item (Get-Command powershell).Source
+	$InstallerArgs = @{
+		FilePath              = $pspath.fullname
+		Wait                  = $true
+		NoNewWindow           = $true
+		WorkingDirectory      = $PSDownload.fullname
+		RedirectStandardError = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)-Error.log"
+		#RedirectStandardOutput = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)Output.log"
+	}
+	try {
+		Write-Host '[Executing] ' -NoNewline -ForegroundColor Yellow; Write-Host "CodeBlock: $($Name)" -ForegroundColor Cyan
+		Start-Process @InstallerArgs -ArgumentList "-NoLogo -NoProfile -ExecutionPolicy Bypass -Command (& {$($Block)})"
+		Write-Host '[Completed]: ' -ForegroundColor Yellow -NoNewline; Write-Host "CodeBlock: $($Name)" -ForegroundColor DarkRed
+		Write-Host "-----------------------------------`n" -ForegroundColor DarkCyan
+	} catch {Write-Warning "Error: Message:$($Error[0])"}
+}
+#endregion
+
+#region Answer File
 try {
 	$message = @"
   _    _ _______ _____   _____ ______           ____              _       _                   
@@ -223,91 +262,47 @@ if ($EnableHyperV) {
 }
 #endregion
 
-
-<#
 #region WSL
 if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\WSL.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-				
-		[scriptblock]$block = {
-			cmd.exe /c 'wsl --install'
-			cmd.exe /c 'ubuntu run sudo curl  -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf'
-			cmd.exe /c 'wsl --terminate Ubuntu'
-		}
-
-		[scriptblock]$block1 = {
-			cmd.exe /c "ubuntu run -u root useradd -m -G sudo -s /bin/bash $($WSLUser)"
-			cmd.exe /c "ubuntu run -u root (echo $($WSLPassword); echo $($WSLPassword)) | ubuntu run -u root passwd $($WSLUser)"
-			cmd.exe /c "ubuntu config --default-user $($WSLUser)"
-			cmd.exe /c "ubuntu run -u root echo '$($WSLUser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)"
-		}
-
-		[scriptblock]$block2 = {
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt update"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt dist-upgrade"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt install make git -y"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo mkdir ~/ansible/host_vars"
-
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt install git python3-pip python3-dev -y"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo pip3 install ansible"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo ansible-galaxy install -r ~/ansible/ansible-bootstrap/requirements.yml --force"
-
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml"
-		}
-
-		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "WSL2`n" -ForegroundColor Cyan
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block)} )" -Wait -WorkingDirectory C:\Temp\PSTemp -RedirectStandardError C:\Temp\PSTemp\wsl-error.log -RedirectStandardOutput C:\Temp\PSTemp\wsl.log
-		check-reboot
-		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host "Linux Sudo Account`n" -ForegroundColor Cyan
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block1)} )" -Wait -WorkingDirectory C:\Temp\PSTemp -RedirectStandardError C:\Temp\PSTemp\user-error.log -RedirectStandardOutput C:\Temp\PSTemp\user.log
-		check-reboot
-		Write-Host "`t`t[Executing]: " -NoNewline -ForegroundColor Yellow; Write-Host "Ansible Config`n" -ForegroundColor Cyan
-		Start-Process PowerShell -ArgumentList "-NoLogo -NoProfile  -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($block2)} )" -Wait -WorkingDirectory C:\Temp\PSTemp -RedirectStandardError C:\Temp\PSTemp\ansible-error.log -RedirectStandardOutput C:\Temp\PSTemp\ansible.log
-		check-reboot
-		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
-	}
-}
-#endregion
-#>
-
-#region WSL
-if ($EnableWSL -and ($WSLUser -notlike 'None')) {
-	if (-not(Test-Path "$($PSDownload.fullname)\WSL.tmp")) {
-		check-reboot
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-				
 		$WSLInstall = {
-			cmd.exe /c 'wsl --install'
-			cmd.exe /c 'wsl --distribution Ubuntu --shell-type standard --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf'
-			cmd.exe /c 'wsl --terminate Ubuntu'
+			#New-NetFirewallRule -DisplayName 'WSL allow in' -Direction Inbound -InterfaceAlias 'vEthernet (WSL)' -Action Allow
+			# --distribution Ubuntu --shell-type standard --user root
+
+			cmd.exe /c 'wsl --install --web-download --no-launch --distribution Ubuntu'
+			cmd.exe /c 'Ubuntu run --user root rm -rf /etc/wsl.conf'
+			cmd.exe /c 'Ubuntu run --user root touch /etc/wsl.conf'
+			cmd.exe /c 'Ubuntu run --user root echo [network] |  ubuntu run -u root tee -a /etc/wsl.conf'
+			cmd.exe /c 'Ubuntu run --user root echo generateResolvConf = false |  ubuntu run -u root tee -a /etc/wsl.conf'
+			cmd.exe /c 'wsl --shutdown Ubuntu'
+			cmd.exe /c 'Ubuntu run --user root rm -rf /etc/resolv.conf'
+			cmd.exe /c 'Ubuntu run --user root touch /etc/resolv.conf'		
+			cmd.exe /c 'Ubuntu run --user root echo nameserver 1.1.1.1 |  ubuntu run -u root tee -a /etc/resolv.conf'
+			cmd.exe /c 'Ubuntu run --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf'
+			cmd.exe /c 'wsl --shutdown Ubuntu'
 		}
 
 		$LinuxUserSetup = {
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root sudo useradd -m -G sudo -s /bin/bash $($WSLUser)"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root (echo $($WSLPassword); echo $($WSLPassword)) |wsl --distribution Ubuntu --shell-type standard --user root passwd $($WSLUser)"
-			cmd.exe /c "ubuntu config --default-user $($WSLUser)"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root echo '$($WSLUser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)"
+			cmd.exe /c "Ubuntu run --user root useradd -m -p $(cmd.exe /c "Ubuntu run --user root openssl passwd $($WSLPassword)") -G sudo -s /bin/bash $($WSLUser)"
+			cmd.exe /c 'Ubuntu run --user root echo [user] |  ubuntu run -u root tee -a /etc/wsl.conf'
+			cmd.exe /c "Ubuntu run --user root echo 'default = $($WSLUser)' |  ubuntu run -u root tee -a /etc/wsl.conf"
+			cmd.exe /c "Ubuntu run --user root echo '$($WSLUser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)"
+			cmd.exe /c 'Ubuntu run --user root cat /etc/wsl.conf'
+			cmd.exe /c 'Ubuntu run --user root ls -la /home'
+			cmd.exe /c "Ubuntu run --user root ls -la /home/$($WSLUser)"
+			cmd.exe /c 'wsl --shutdown Ubuntu'
 		}
 
 		$DeployAnsible = {
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt update"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt dist-upgrade"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt install make git -y"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo mkdir ~/ansible/host_vars"
-
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt install git python3-pip python3-dev -y"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo pip3 install ansible"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo ansible-galaxy install -r ~/ansible/ansible-bootstrap/requirements.yml --force"
-
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml"
+			cmd.exe /c 'Ubuntu run --user root apt update'
+			cmd.exe /c 'Ubuntu run --user root apt dist-upgrade -y'
+			cmd.exe /c 'Ubuntu run --user root apt install make git python3-pip python3-dev -y'
+			cmd.exe /c "Ubuntu run --user root git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap /home/$($WSLUser)/ansible/ansible-bootstrap"
+			cmd.exe /c "Ubuntu run --user root cp /home/$($WSLUser)/ansible/ansible-bootstrap/inventory-src /home/$($WSLUser)/ansible/inventory"
+			cmd.exe /c "Ubuntu run --user root mkdir /home/$($WSLUser)/ansible/host_vars"
+			cmd.exe /c 'Ubuntu run --user root pip3 install ansible'
 		}
 
 		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'WSL2' -ForegroundColor Cyan
