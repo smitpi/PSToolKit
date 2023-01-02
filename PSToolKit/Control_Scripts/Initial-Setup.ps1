@@ -162,30 +162,26 @@ Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; 
 
 $AnswerFile = "$($PSDownload.FullName)\AnswerFile.json"
 if (-not(Test-Path $AnswerFile)) {
-	$NewAnswerFile = {
-		$AnswerFile = "$($PSDownload.FullName)\AnswerFile.json"
-		$domaincreds = Get-Credential -Message 'Account to add device to domain'
-		$wslcred = Get-Credential -Message 'Account for WSL Setup'
-		$output = [PSCustomObject]@{
-			AddToDomain         = $false
-			DomainName          = 'None'
-			DomainUser          = $domaincreds.UserName
-			DomainPassword      = ($domaincreds.Password | ConvertFrom-SecureString)
-			NewHostName         = 'None'
-			GitHubToken         = 'None'
-			GitHubUserID        = 'None'
-			InstallAllModules   = $false
-			InstallAllApps      = $false
-			InstallLicensedApps = $false
-			EnableHyperV        = $false
-			EnableWSL           = $false
-			WSLUser             = $wslcred.UserName
-			WSLPassword         = ($wslcred.Password | ConvertFrom-SecureString)
-		}
-		$output | ConvertTo-Json | Out-File -FilePath $AnswerFile -Force
+	$domaincreds = Get-Credential -Message 'Account to add device to domain'
+	$wslcred = Get-Credential -Message 'Account for WSL Setup'
+	$output = [PSCustomObject]@{
+		AddToDomain         = $false
+		DomainName          = 'None'
+		DomainUser          = $domaincreds.UserName
+		DomainPassword      = ($domaincreds.Password | ConvertFrom-SecureString)
+		NewHostName         = 'None'
+		GitHubToken         = 'None'
+		GitHubUserID        = 'None'
+		InstallAllModules   = $false
+		InstallAllApps      = $false
+		InstallLicensedApps = $false
+		EnableHyperV        = $false
+		EnableWSL           = $false
+		WSLUser             = $wslcred.UserName
+		WSLPassword         = ($wslcred.Password | ConvertFrom-SecureString)
 	}
-	Run-Block -Name 'NewAnswerFile' -Block $NewAnswerFile
-	Start-Sleep 5
+	$output | ConvertTo-Json | Out-File -FilePath $AnswerFile -Force
+	
 	Start-Process -FilePath notepad.exe -ArgumentList $AnswerFile -Wait
 }
 $AnswerFileImport = (Get-Content $AnswerFile | ConvertFrom-Json) 
@@ -201,6 +197,7 @@ if ($AddToDomain) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Adding]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($NewHostName) to Domain`n" -ForegroundColor Cyan
 		Write-Host -ForegroundColor Red 'This machine is not part of a domain. Adding now.'
 		Write-Host -ForegroundColor Red 'Your AnswerFile will be deleted after this process is complete.'
+		Rename-Item "$($PSDownload.FullName)\AnswerFile.json" -NewName "$(Get-Date -Format ddMMMyyyy_HHmm)-AnswerFile.json"
 		$labcred = New-Object System.Management.Automation.PSCredential ($DomainUser, ($DomainPassword | ConvertTo-SecureString))
 
 		# Boxstarter options
