@@ -9,6 +9,15 @@ $Boxstarter.AutoLogin = $true # Save my password securely and auto-login after a
 # Development Mode
 Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
 
+#region set folders
+$PSTemp = 'C:\Temp\PSTemp'
+if (Test-Path $PSTemp) {$PSDownload = Get-Item $PSTemp}
+else {$PSDownload = New-Item $PSTemp -ItemType Directory -Force}
+
+if (Test-Path 'C:\Temp\PSTemp\Logs') {$PSLogsPath = Get-Item 'C:\Temp\PSTemp\Logs'}
+else {$PSLogsPath = New-Item 'C:\Temp\PSTemp\Logs' -ItemType Directory -Force}
+#endregion
+
 #region Create Icon Folder
 if (Test-Path "$($env:PUBLIC)\Desktop\Win-Bootstrap") { Get-Item "$($env:PUBLIC)\Desktop\Win-Bootstrap" | Remove-Item -Recurse -Force}
 $BootstrapFolder = New-Item "$($env:PUBLIC)\Desktop\Win-Bootstrap" -ItemType Directory -Force
@@ -16,6 +25,11 @@ $BootstrapFolder = New-Item "$($env:PUBLIC)\Desktop\Win-Bootstrap" -ItemType Dir
 if (-not(Test-Path "$($env:PUBLIC)\Pictures\Utilities.ico")) {
 	$web = New-Object System.Net.WebClient
 	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/ICO/Utilities_Icon.ico', "$($env:PUBLIC)\Pictures\Utilities.ico")
+}
+
+if (-not(Test-Path "$($env:PUBLIC)\Pictures\Notes-icon.ico")) {
+	$web = New-Object System.Net.WebClient
+	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/ICO/Notes-icon.ico', "$($env:PUBLIC)\Pictures\Notes-icon.ico")
 }
 
 $DesktopIni = @"
@@ -57,18 +71,21 @@ $IconLocation = 'C:\windows\System32\mstsc.exe'
 $IconArrayIndex = 19
 $Shortcut.IconLocation = "$IconLocation, $IconArrayIndex"
 $Shortcut.Save()
+
+# AnswerFile
+$WScriptShell = New-Object -ComObject WScript.Shell
+$lnkfile = "$($env:PUBLIC)\Desktop\Win-Bootstrap\AnswerFile.lnk"
+$Shortcut = $WScriptShell.CreateShortcut($($lnkfile))
+$NotepadPath = Get-Item 'C:\Windows\system32\notepad.exe'
+$Shortcut.TargetPath = $NotepadPath.FullName
+$Shortcut.Arguments = "$($PSDownload.FullName)\AnswerFile.json"
+$IconLocation = "$($env:PUBLIC)\Pictures\Notes-icon.ico"
+$IconArrayIndex = 0
+$Shortcut.IconLocation = "$IconLocation, $IconArrayIndex"
+$Shortcut.Save()
 #endregion
 
 #region Set Variables
-
-#region set folders
-$PSTemp = 'C:\Temp\PSTemp'
-if (Test-Path $PSTemp) {$PSDownload = Get-Item $PSTemp}
-else {$PSDownload = New-Item $PSTemp -ItemType Directory -Force}
-
-if (Test-Path 'C:\Temp\PSTemp\Logs') {$PSLogsPath = Get-Item 'C:\Temp\PSTemp\Logs'}
-else {$PSLogsPath = New-Item 'C:\Temp\PSTemp\Logs' -ItemType Directory -Force}
-#endregion
 
 #region check reboot
 function check-reboot {
@@ -128,11 +145,14 @@ Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; 
 $AnswerFile = "$($PSDownload.FullName)\AnswerFile.json"
 if (-not(Test-Path $AnswerFile)) {
 
+	$domaincreds = Get-Credential -Message 'Account to add device to domain'
+	$wslcred = Get-Credential -Message 'Account for WSL Setup'
+
 	$output = [PSCustomObject]@{
 		AddToDomain         = $false
 		DomainName          = 'None'
-		DomainUser          = 'None'
-		DomainPassword      = 'None'
+		DomainUser          = $domaincreds.UserName
+		DomainPassword      = ($domaincreds.Password | ConvertFrom-SecureString)
 		NewHostName         = 'None'
 		GitHubToken         = 'None'
 		GitHubUserID        = 'None'
@@ -141,8 +161,8 @@ if (-not(Test-Path $AnswerFile)) {
 		InstallLicensedApps = $false
 		EnableHyperV        = $false
 		EnableWSL           = $false
-		WSLUser             = 'None'
-		WSLPassword         = 'None'
+		WSLUser             = $wslcred.UserName
+		WSLPassword         = ($wslcred.Password | ConvertFrom-SecureString)
 	}
 	$output | ConvertTo-Json | Out-File -FilePath $AnswerFile -Force
 	Start-Process -FilePath notepad.exe -ArgumentList $AnswerFile -Wait
@@ -159,9 +179,8 @@ if ($AddToDomain) {
 	If (!(Get-CimInstance -Class Win32_ComputerSystem).PartOfDomain) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Adding]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($NewHostName) to Domain`n" -ForegroundColor Cyan
 		Write-Host -ForegroundColor Red 'This machine is not part of a domain. Adding now.'
-		$encSecret = $DomainPassword | ConvertTo-SecureString -Force -AsPlainText
-		$labcred = New-Object System.Management.Automation.PSCredential ($DomainUser, $encSecret)
-    
+		$labcred = New-Object System.Management.Automation.PSCredential ($DomainUser, ($DomainPassword | ConvertTo-SecureString))
+
 		# Boxstarter options
 		$Boxstarter.RebootOk = $false # Allow reboots?
 		$Boxstarter.NoPassword = $false # Is this a machine with no login password?
@@ -266,10 +285,11 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\WSL.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
+		$WSLPass = (New-Object System.Management.Automation.PSCredential ($WSLUser, ($WSLPassword | ConvertTo-SecureString))).GetNetworkCredential().Password
+		
 		$WSLInstall = {
 			#New-NetFirewallRule -DisplayName 'WSL allow in' -Direction Inbound -InterfaceAlias 'vEthernet (WSL)' -Action Allow
 			# --distribution Ubuntu --shell-type standard --user root
-
 			cmd.exe /c 'wsl --install --web-download --no-launch --distribution Ubuntu'
 			cmd.exe /c 'Ubuntu run --user root rm -rf /etc/wsl.conf'
 			cmd.exe /c 'Ubuntu run --user root touch /etc/wsl.conf'
@@ -284,7 +304,7 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		}
 
 		$LinuxUserSetup = {
-			cmd.exe /c "Ubuntu run --user root useradd -m -p $(cmd.exe /c "Ubuntu run --user root openssl passwd $($WSLPassword)") -G sudo -s /bin/bash $($WSLUser)"
+			cmd.exe /c "Ubuntu run --user root useradd -m -p $(cmd.exe /c "Ubuntu run --user root openssl passwd $($WSLPass)") -G sudo -s /bin/bash $($WSLUser)"
 			cmd.exe /c 'Ubuntu run --user root echo [user] |  ubuntu run -u root tee -a /etc/wsl.conf'
 			cmd.exe /c "Ubuntu run --user root echo 'default = $($WSLUser)' |  ubuntu run -u root tee -a /etc/wsl.conf"
 			cmd.exe /c "Ubuntu run --user root echo '$($WSLUser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)"
