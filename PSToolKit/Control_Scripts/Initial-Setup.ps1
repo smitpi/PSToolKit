@@ -11,7 +11,7 @@ Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelU
 
 # Create Run_Win-Bootstrap Shortcuts
 $WScriptShell = New-Object -ComObject WScript.Shell
-$lnkfile = "$([Environment]::GetFolderPath('Desktop'))\Run_Win-Bootstrap.lnk"
+$lnkfile = "$($env:PUBLIC)\Desktop\Run_Win-Bootstrap.lnk"
 $Shortcut = $WScriptShell.CreateShortcut($($lnkfile))
 $MSEdgePath = Get-Item 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 $Shortcut.TargetPath = $MSEdgePath.FullName
@@ -22,7 +22,7 @@ $Shortcut.IconLocation = "$IconLocation, $IconArrayIndex"
 $Shortcut.Save()
 # Create GitHub_Win-Bootstrap Shortcuts
 $WScriptShell = New-Object -ComObject WScript.Shell
-$lnkfile = "$([Environment]::GetFolderPath('Desktop'))\Github_Win-Bootstrap.lnk"
+$lnkfile = "$($env:PUBLIC)\Desktop\Github_Win-Bootstrap.lnk"
 $Shortcut = $WScriptShell.CreateShortcut($($lnkfile))
 $MSEdgePath = Get-Item 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 $Shortcut.TargetPath = $MSEdgePath.FullName
@@ -244,37 +244,37 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 			# --distribution Ubuntu --shell-type standard --user root
 
 			cmd.exe /c 'wsl --install --web-download --no-launch --distribution Ubuntu'
-			cmd.exe /c "Ubuntu run --user root rm -rf /etc/wsl.conf"
-			cmd.exe /c "Ubuntu run --user root touch /etc/wsl.conf"
-			cmd.exe /c "Ubuntu run --user root echo [network] |  ubuntu run -u root tee -a /etc/wsl.conf"
-			cmd.exe /c "Ubuntu run --user root echo generateResolvConf = false |  ubuntu run -u root tee -a /etc/wsl.conf"
-			cmd.exe /c "wsl --shutdown Ubuntu"
-			cmd.exe /c "Ubuntu run --user root rm -rf /etc/resolv.conf"
-			cmd.exe /c "Ubuntu run --user root touch /etc/resolv.conf"		
-			cmd.exe /c "Ubuntu run --user root echo nameserver 1.1.1.1 |  ubuntu run -u root tee -a /etc/resolv.conf"
-			cmd.exe /c "Ubuntu run --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf"
-			cmd.exe /c "wsl --shutdown Ubuntu"
+			cmd.exe /c 'Ubuntu run --user root rm -rf /etc/wsl.conf'
+			cmd.exe /c 'Ubuntu run --user root touch /etc/wsl.conf'
+			cmd.exe /c 'Ubuntu run --user root echo [network] |  ubuntu run -u root tee -a /etc/wsl.conf'
+			cmd.exe /c 'Ubuntu run --user root echo generateResolvConf = false |  ubuntu run -u root tee -a /etc/wsl.conf'
+			cmd.exe /c 'wsl --shutdown Ubuntu'
+			cmd.exe /c 'Ubuntu run --user root rm -rf /etc/resolv.conf'
+			cmd.exe /c 'Ubuntu run --user root touch /etc/resolv.conf'		
+			cmd.exe /c 'Ubuntu run --user root echo nameserver 1.1.1.1 |  ubuntu run -u root tee -a /etc/resolv.conf'
+			cmd.exe /c 'Ubuntu run --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf'
+			cmd.exe /c 'wsl --shutdown Ubuntu'
 		}
 
 		$LinuxUserSetup = {
 			cmd.exe /c "Ubuntu run --user root useradd -m -p $(cmd.exe /c "Ubuntu run --user root openssl passwd $($WSLPassword)") -G sudo -s /bin/bash $($WSLUser)"
-			cmd.exe /c "Ubuntu run --user root echo [user] |  ubuntu run -u root tee -a /etc/wsl.conf"
+			cmd.exe /c 'Ubuntu run --user root echo [user] |  ubuntu run -u root tee -a /etc/wsl.conf'
 			cmd.exe /c "Ubuntu run --user root echo 'default = $($WSLUser)' |  ubuntu run -u root tee -a /etc/wsl.conf"
 			cmd.exe /c "Ubuntu run --user root echo '$($WSLUser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)"
-			cmd.exe /c "Ubuntu run --user root cat /etc/wsl.conf"
-			cmd.exe /c "Ubuntu run --user root ls -la /home"
-            cmd.exe /c "Ubuntu run --user root ls -la /home/$($WSLUser)"
-            cmd.exe /c "wsl --shutdown Ubuntu"
+			cmd.exe /c 'Ubuntu run --user root cat /etc/wsl.conf'
+			cmd.exe /c 'Ubuntu run --user root ls -la /home'
+			cmd.exe /c "Ubuntu run --user root ls -la /home/$($WSLUser)"
+			cmd.exe /c 'wsl --shutdown Ubuntu'
 		}
 
 		$DeployAnsible = {
-			cmd.exe /c "Ubuntu run --user root apt update"
-            cmd.exe /c "Ubuntu run --user root apt dist-upgrade -y"
-			cmd.exe /c "Ubuntu run --user root apt install make git python3-pip python3-dev -y"
+			cmd.exe /c 'Ubuntu run --user root apt update'
+			cmd.exe /c 'Ubuntu run --user root apt dist-upgrade -y'
+			cmd.exe /c 'Ubuntu run --user root apt install make git python3-pip python3-dev -y'
 			cmd.exe /c "Ubuntu run --user root git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap /home/$($WSLUser)/ansible/ansible-bootstrap"
 			cmd.exe /c "Ubuntu run --user root cp /home/$($WSLUser)/ansible/ansible-bootstrap/inventory-src /home/$($WSLUser)/ansible/inventory"
 			cmd.exe /c "Ubuntu run --user root mkdir /home/$($WSLUser)/ansible/host_vars"
-			cmd.exe /c "Ubuntu run --user root pip3 install ansible"
+			cmd.exe /c 'Ubuntu run --user root pip3 install ansible'
 		}
 
 		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'WSL2' -ForegroundColor Cyan
