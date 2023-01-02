@@ -240,23 +240,34 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 				
+
+
+
 		$WSLInstall = {
+			#New-NetFirewallRule -DisplayName 'WSL allow in' -Direction Inbound -InterfaceAlias 'vEthernet (WSL)' -Action Allow
+
 			cmd.exe /c 'wsl --install --web-download --no-launch --distribution Ubuntu'
-			#cmd.exe /c 'wsl --install --distribution Ubuntu'
+			cmd.exe /c 'wsl --distribution Ubuntu --shell-type standard --user root touch /etc/wsl.conf'
+			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root echo '[network]' |  ubuntu run -u root tee -a /etc/wsl.conf"
+			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root echo 'generateResolvConf = false' |  ubuntu run -u root tee -a /etc/wsl.conf"
+			cmd.exe /c 'wsl --distribution Ubuntu --shell-type standard --user root rm -rf /etc/resolv.conf'
+			cmd.exe /c 'wsl --distribution Ubuntu --shell-type standard --user root touch /etc/resolv.conf'
+			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root echo 'nameserver 1.1.1.1' |  ubuntu run -u root tee -a /etc/resolv.conf"
 			cmd.exe /c 'wsl --distribution Ubuntu --shell-type standard --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf'
-			cmd.exe /c 'wsl --terminate Ubuntu'
+			cmd.exe /c 'wsl --shutdown Ubuntu'
 		}
 
 		$LinuxUserSetup = {
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root sudo useradd -m -G sudo -s /bin/bash $($WSLUser)"
+			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root useradd -m -G -s /bin/bash $($WSLUser)"
 			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root (echo $($WSLPassword); echo $($WSLPassword)) |wsl --distribution Ubuntu --shell-type standard --user root passwd $($WSLUser)"
-			cmd.exe /c "ubuntu config --default-user $($WSLUser)"
+			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root echo '[user]' |  ubuntu run -u root tee -a /etc/wsl.conf"
+			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root echo 'default = $($WSLUser)' |  ubuntu run -u root tee -a /etc/wsl.conf"
 			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root echo '$($WSLUser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)"
 		}
 
 		$DeployAnsible = {
 			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt update"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt dist-upgrade"
+			#cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt dist-upgrade"
 			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt install make git -y"
 			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap"
 			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory"
