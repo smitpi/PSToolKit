@@ -8,18 +8,15 @@ $Boxstarter.AutoLogin = $true # Save my password securely and auto-login after a
 
 # Development Mode
 Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
-#endregion
-# Create Icons
-if (-not(Test-Path "$($env:PUBLIC)\Desktop\Win-Bootstrap")) {$BootstrapFolder = New-Item "$($env:PUBLIC)\Desktop\Win-Bootstrap" -ItemType Directory -Force | Out-Null}
-else {
-	Remove-Item "$($env:PUBLIC)\Desktop\Win-Bootstrap\Run_Win-Bootstrap.lnk" -Force -ErrorAction SilentlyContinue | out-null
-	Remove-Item "$($env:PUBLIC)\Desktop\Win-Bootstrap\Github_PSToolKit.lnk" -Force -ErrorAction SilentlyContinue | out-null
-	Remove-Item "$($env:PUBLIC)\Desktop\Win-Bootstrap\desktop.ini" -Force -ErrorAction SilentlyContinue | Out-Null
-	$BootstrapFolder = get-item "$($env:PUBLIC)\Desktop\Win-Bootstrap"
-}
 
-$web = New-Object System.Net.WebClient
-$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/ICO/Utilities_Icon.ico', "$($env:PUBLIC)\Pictures\Utilities.ico")
+#region Create Icon Folder
+if (Test-Path "$($env:PUBLIC)\Desktop\Win-Bootstrap") { Get-Item "$($env:PUBLIC)\Desktop\Win-Bootstrap" | Remove-Item -Recurse -Force}
+$BootstrapFolder = New-Item "$($env:PUBLIC)\Desktop\Win-Bootstrap" -ItemType Directory -Force
+
+if (-not(Test-Path "$($env:PUBLIC)\Pictures\Utilities.ico")) {
+	$web = New-Object System.Net.WebClient
+	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/ICO/Utilities_Icon.ico', "$($env:PUBLIC)\Pictures\Utilities.ico")
+}
 
 $DesktopIni = @"
 [.ShellClassInfo]
@@ -36,6 +33,7 @@ $newini.Attributes = 'Hidden, System, Archive'
 $BootstrapFolder.Attributes = 'ReadOnly, Directory'
 #endregion
 
+#region Create Icons
 # Create Run_Win-Bootstrap Shortcuts
 $WScriptShell = New-Object -ComObject WScript.Shell
 $lnkfile = "$($env:PUBLIC)\Desktop\Win-Bootstrap\Run_Win-Bootstrap.lnk"
@@ -47,9 +45,10 @@ $IconLocation = 'C:\windows\System32\SHELL32.dll'
 $IconArrayIndex = 27
 $Shortcut.IconLocation = "$IconLocation, $IconArrayIndex"
 $Shortcut.Save()
-# Create GitHub_Win-Bootstrap Shortcuts
+
+# Create GitHub_PSToolKit Shortcuts
 $WScriptShell = New-Object -ComObject WScript.Shell
-$lnkfile = "$($env:PUBLIC)\Desktop\Win-Bootstrap\Github_PSToolKit.lnk"
+$lnkfile = "$($env:PUBLIC)\Desktop\Win-Bootstrap\GitHub_PSToolKit.lnk"
 $Shortcut = $WScriptShell.CreateShortcut($($lnkfile))
 $MSEdgePath = Get-Item 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 $Shortcut.TargetPath = $MSEdgePath.FullName
