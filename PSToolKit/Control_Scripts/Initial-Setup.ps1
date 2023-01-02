@@ -32,6 +32,10 @@ if (-not(Test-Path "$($env:PUBLIC)\Pictures\Notes-icon.ico")) {
 	$web = New-Object System.Net.WebClient
 	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/ICO/Notes-icon.ico', "$($env:PUBLIC)\Pictures\Notes-icon.ico")
 }
+if (-not(Test-Path "$($env:PUBLIC)\Pictures\archive-icon.ico")) {
+	$web = New-Object System.Net.WebClient
+	$web.DownloadFile('https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/ICO/archive-icon.ico', "$($env:PUBLIC)\Pictures\archive-icon.ico")
+}
 
 $DesktopIni = @"
 [.ShellClassInfo]
@@ -84,6 +88,18 @@ $IconLocation = "$($env:PUBLIC)\Pictures\Notes-icon.ico"
 $IconArrayIndex = 0
 $Shortcut.IconLocation = "$IconLocation, $IconArrayIndex"
 $Shortcut.Save()
+
+# Bootstrap Temp Folder
+$WScriptShell = New-Object -ComObject WScript.Shell
+$lnkfile = "$($env:PUBLIC)\Desktop\Win-Bootstrap\Bootstrap_Temp_Directory.lnk"
+$Shortcut = $WScriptShell.CreateShortcut($($lnkfile))
+$ExeFolder = Get-Item 'C:\Windows\explorer.exe'
+$Shortcut.TargetPath = $ExeFolder.FullName
+$Shortcut.Arguments = "$($PSDownload.FullName)"
+$IconLocation = "$($env:PUBLIC)\Pictures\archive-icon.ico"
+$IconArrayIndex = 0
+$Shortcut.IconLocation = "$IconLocation, $IconArrayIndex"
+$Shortcut.Save()
 #endregion
 
 #region Function:check reboot
@@ -99,21 +115,24 @@ function check-reboot {
 function Run-Block {
 	PARAM(
 		[string]$Name,
-		[string]$Block
+		[string]$Block,
+		[System.IO.DirectoryInfo]$LogsPath = $PSLogsPath	
 	)
-
-	$PSPath = Get-Item (Get-Command powershell).Source
+	try {
+		$PSPath = Get-Item (Get-Command powershell).Source
+		$PSLogsPath = Get-Item $LogsPath
+	} catch {Write-Warning "Error: Message:$($Error[0])"}
 	$InstallerArgs = @{
 		FilePath              = $pspath.fullname
 		Wait                  = $true
-		NoNewWindow           = $true
+		#NoNewWindow           = $true
 		WorkingDirectory      = $PSDownload.fullname
 		RedirectStandardError = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)-Error.log"
 		#RedirectStandardOutput = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)Output.log"
 	}
 	try {
 		Write-Host '[Executing] ' -NoNewline -ForegroundColor Yellow; Write-Host "CodeBlock: $($Name)" -ForegroundColor Cyan
-		Start-Process @InstallerArgs -ArgumentList "-NoLogo -NoProfile -ExecutionPolicy Bypass -Command (& {$($Block)})"
+		Start-Process @InstallerArgs -ArgumentList "-NoLogo -NoProfile -Mta -NonInteractive -WindowStyle Minimized -ExecutionPolicy Bypass -Command (& {$($Block)})"
 		Write-Host '[Completed]: ' -ForegroundColor Yellow -NoNewline; Write-Host "CodeBlock: $($Name)" -ForegroundColor DarkRed
 		Write-Host "-----------------------------------`n" -ForegroundColor DarkCyan
 	} catch {Write-Warning "Error: Message:$($Error[0])"}
@@ -144,7 +163,7 @@ Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; 
 $AnswerFile = "$($PSDownload.FullName)\AnswerFile.json"
 if (-not(Test-Path $AnswerFile)) {
 	$NewAnswerFile = {
-        $AnswerFile = "$($PSDownload.FullName)\AnswerFile.json"
+		$AnswerFile = "$($PSDownload.FullName)\AnswerFile.json"
 		$domaincreds = Get-Credential -Message 'Account to add device to domain'
 		$wslcred = Get-Credential -Message 'Account for WSL Setup'
 		$output = [PSCustomObject]@{
@@ -166,8 +185,8 @@ if (-not(Test-Path $AnswerFile)) {
 		$output | ConvertTo-Json | Out-File -FilePath $AnswerFile -Force
 	}
 	Run-Block -Name 'NewAnswerFile' -Block $NewAnswerFile
-    Start-Sleep 5
-    Start-Process -FilePath notepad.exe -ArgumentList $AnswerFile -Wait
+	Start-Sleep 5
+	Start-Process -FilePath notepad.exe -ArgumentList $AnswerFile -Wait
 }
 $AnswerFileImport = (Get-Content $AnswerFile | ConvertFrom-Json) 
 
@@ -237,12 +256,9 @@ if ($InstallAllApps -and ($GitHubUserID -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\ExtendedApps.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Extended Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		$ExtendedApps = {
-			Install-PSPackageManAppFromList -ListName BaseApps, ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
-			Remove-Item -Path "$([Environment]::GetFolderPath('Desktop'))\*.lnk" -ErrorAction SilentlyContinue
-			Remove-Item -Path "$($env:PUBLIC)\Desktop\*.lnk" -ErrorAction SilentlyContinue
-		}
-		Run-Block -Name ExtendedApps -Block $ExtendedApps	
+		Run-Block -Name ExtendedApps -Block "Install-PSPackageManAppFromList -ListName BaseApps,ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken"
+		Run-Block -Name RemovePrivateIcons -Block "Remove-Item -Path `"$([Environment]::GetFolderPath('Desktop'))\*.lnk`""
+		Run-Block -Name RemovePublicIcons -Block "Remove-Item -Path $($env:PUBLIC)\Desktop\*.lnk"
 		New-Item "$($PSDownload.fullname)\ExtendedApps.tmp" -ItemType file -Force | Out-Null
 	}
 }
@@ -291,8 +307,8 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		try {
 			$WSLPass = (New-Object System.Management.Automation.PSCredential ($WSLUser, ($WSLPassword | ConvertTo-SecureString))).GetNetworkCredential().Password
 		} catch {Write-Warning "Error: Message:$($Error[0])"}
-
-		$WSLInstall = {
+		<#
+		[string]$WSLInstall = {
 			#New-NetFirewallRule -DisplayName 'WSL allow in' -Direction Inbound -InterfaceAlias 'vEthernet (WSL)' -Action Allow
 			# --distribution Ubuntu --shell-type standard --user root
 			cmd.exe /c 'wsl --install --web-download --no-launch --distribution Ubuntu'
@@ -308,7 +324,7 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 			cmd.exe /c 'wsl --shutdown Ubuntu'
 		}
 
-		$LinuxUserSetup = {
+		[string]$LinuxUserSetup = {
 			cmd.exe /c "Ubuntu run --user root useradd -m -p $(cmd.exe /c "Ubuntu run --user root openssl passwd $($WSLPass)") -G sudo -s /bin/bash $($WSLUser)"
 			cmd.exe /c 'Ubuntu run --user root echo [user] |  ubuntu run -u root tee -a /etc/wsl.conf'
 			cmd.exe /c "Ubuntu run --user root echo 'default = $($WSLUser)' |  ubuntu run -u root tee -a /etc/wsl.conf"
@@ -319,7 +335,7 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 			cmd.exe /c 'wsl --shutdown Ubuntu'
 		}
 
-		$DeployAnsible = {
+		[string]$DeployAnsible = {
 			cmd.exe /c 'Ubuntu run --user root apt update'
 			cmd.exe /c 'Ubuntu run --user root apt dist-upgrade -y'
 			cmd.exe /c 'Ubuntu run --user root apt install make git python3-pip python3-dev -y'
@@ -339,6 +355,37 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		Run-Block -Name DeployAnsible -Block $DeployAnsible
 		check-reboot
 		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
+#>
+		#New-NetFirewallRule -DisplayName 'WSL allow in' -Direction Inbound -InterfaceAlias 'vEthernet (WSL)' -Action Allow
+		# --distribution Ubuntu --shell-type standard --user root
+		cmd.exe /c 'wsl --install --web-download --no-launch --distribution Ubuntu'
+		cmd.exe /c 'Ubuntu run --user root rm -rf /etc/wsl.conf'
+		cmd.exe /c 'Ubuntu run --user root touch /etc/wsl.conf'
+		cmd.exe /c 'Ubuntu run --user root echo [network] |  ubuntu run -u root tee -a /etc/wsl.conf'
+		cmd.exe /c 'Ubuntu run --user root echo generateResolvConf = false |  ubuntu run -u root tee -a /etc/wsl.conf'
+		cmd.exe /c 'wsl --shutdown Ubuntu'
+		cmd.exe /c 'Ubuntu run --user root rm -rf /etc/resolv.conf'
+		cmd.exe /c 'Ubuntu run --user root touch /etc/resolv.conf'		
+		cmd.exe /c 'Ubuntu run --user root echo nameserver 1.1.1.1 |  ubuntu run -u root tee -a /etc/resolv.conf'
+		cmd.exe /c 'Ubuntu run --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf'
+		cmd.exe /c 'wsl --shutdown Ubuntu'
+
+		cmd.exe /c "Ubuntu run --user root useradd -m -p $(cmd.exe /c "Ubuntu run --user root openssl passwd $($WSLPass)") -G sudo -s /bin/bash $($WSLUser)"
+		cmd.exe /c 'Ubuntu run --user root echo [user] |  ubuntu run -u root tee -a /etc/wsl.conf'
+		cmd.exe /c "Ubuntu run --user root echo 'default = $($WSLUser)' |  ubuntu run -u root tee -a /etc/wsl.conf"
+		cmd.exe /c "Ubuntu run --user root echo '$($WSLUser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)"
+		cmd.exe /c 'Ubuntu run --user root cat /etc/wsl.conf'
+		cmd.exe /c 'Ubuntu run --user root ls -la /home'
+		cmd.exe /c "Ubuntu run --user root ls -la /home/$($WSLUser)"
+		cmd.exe /c 'wsl --shutdown Ubuntu'
+
+		cmd.exe /c 'Ubuntu run --user root apt update'
+		cmd.exe /c 'Ubuntu run --user root apt dist-upgrade -y'
+		cmd.exe /c 'Ubuntu run --user root apt install make git python3-pip python3-dev -y'
+		cmd.exe /c "Ubuntu run --user root git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap /home/$($WSLUser)/ansible/ansible-bootstrap"
+		cmd.exe /c "Ubuntu run --user root cp /home/$($WSLUser)/ansible/ansible-bootstrap/inventory-src /home/$($WSLUser)/ansible/inventory"
+		cmd.exe /c "Ubuntu run --user root mkdir /home/$($WSLUser)/ansible/host_vars"
+		cmd.exe /c 'Ubuntu run --user root pip3 install ansible'	
 	}
 }
 #endregion
