@@ -239,10 +239,6 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\WSL.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-				
-
-
-
 		$WSLInstall = {
 			#New-NetFirewallRule -DisplayName 'WSL allow in' -Direction Inbound -InterfaceAlias 'vEthernet (WSL)' -Action Allow
 
@@ -258,29 +254,29 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		}
 
 		$LinuxUserSetup = {
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root useradd -m -G -s /bin/bash $($WSLUser)"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root (echo $($WSLPassword); echo $($WSLPassword)) |wsl --distribution Ubuntu --shell-type standard --user root passwd $($WSLUser)"
+			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root useradd -m -G sudo -s /bin/bash $($WSLUser)"
+			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root (echo -e 'Blah'; echo -e 'Blah') |wsl --distribution Ubuntu --shell-type standard --user root passwd $($WSLUser)"
 			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root echo '[user]' |  ubuntu run -u root tee -a /etc/wsl.conf"
 			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root echo 'default = $($WSLUser)' |  ubuntu run -u root tee -a /etc/wsl.conf"
 			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user root echo '$($WSLUser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)"
+			cmd.exe /c 'wsl --shutdown Ubuntu'
 		}
 
 		$DeployAnsible = {
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt update"
-			#cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt dist-upgrade"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt install make git -y"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo cp ~/ansible/ansible-bootstrap/inventory-src ~/ansible/inventory"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo mkdir ~/ansible/host_vars"
+			cmd.exe /c 'wsl --exec sudo apt update'
+			cmd.exe /c 'wsl --exec sudo apt install make git -y'
+			cmd.exe /c "wsl --exec sudo git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap ~/ansible/ansible-bootstrap"
+			cmd.exe /c "wsl --exec sudo cp /home/$($WSLUser)/ansible/ansible-bootstrap/inventory-src /home/$($WSLUser)/ansible/inventory"
+			cmd.exe /c "wsl --exec sudo mkdir /home/$($WSLUser)/ansible/host_vars"
 
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo apt install git python3-pip python3-dev -y"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo pip3 install ansible"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo ansible-galaxy install -r ~/ansible/ansible-bootstrap/requirements.yml --force"
+			cmd.exe /c 'wsl --exec sudo apt install git python3-pip python3-dev -y'
+			cmd.exe /c 'wsl --exec sudo pip3 install ansible'
+			cmd.exe /c "wsl --exec sudo ansible-galaxy install -r /home/$($WSLUser)/ansible/ansible-bootstrap/requirements.yml --force"
 
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial"
-			cmd.exe /c "wsl --distribution Ubuntu --shell-type standard --user $($WSLUser) sudo ansible-playbook -i ~/ansible/inventory ~/ansible/ansible-bootstrap/local.yml"
+			cmd.exe /c "wsl --exec sudo ansible-playbook -i /home/$($WSLUser)/ansible/inventory /home/$($WSLUser)/ansible/ansible-bootstrap/local.yml --limit localhost --tags initial"
+			cmd.exe /c "wsl --exec sudo ansible-playbook -i /home/$($WSLUser)/ansible/inventory /home/$($WSLUser)/ansible/ansible-bootstrap/local.yml"
 		}
-
+		
 		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'WSL2' -ForegroundColor Cyan
 		Run-Block -Name WSLInstall -Block $WSLInstall
 		check-reboot
