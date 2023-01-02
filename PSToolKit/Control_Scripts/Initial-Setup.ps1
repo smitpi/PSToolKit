@@ -8,6 +8,7 @@ $Boxstarter.AutoLogin = $true # Save my password securely and auto-login after a
 
 # Development Mode
 Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
+#endregion
 
 #region set folders
 $PSTemp = 'C:\Temp\PSTemp'
@@ -85,9 +86,7 @@ $Shortcut.IconLocation = "$IconLocation, $IconArrayIndex"
 $Shortcut.Save()
 #endregion
 
-#region Set Variables
-
-#region check reboot
+#region Function:check reboot
 function check-reboot {
 	refreshenv | Out-Null
 	Write-Host '[Checking] ' -NoNewline -ForegroundColor Yellow; Write-Host 'Pending Reboot: ' -ForegroundColor Cyan -NoNewline
@@ -96,7 +95,7 @@ function check-reboot {
 }
 #endregion
 
-#region Run Block Code
+#region Function:Run-Block
 function Run-Block {
 	PARAM(
 		[string]$Name,
@@ -144,28 +143,31 @@ Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; 
 
 $AnswerFile = "$($PSDownload.FullName)\AnswerFile.json"
 if (-not(Test-Path $AnswerFile)) {
-
-	$domaincreds = Get-Credential -Message 'Account to add device to domain'
-	$wslcred = Get-Credential -Message 'Account for WSL Setup'
-
-	$output = [PSCustomObject]@{
-		AddToDomain         = $false
-		DomainName          = 'None'
-		DomainUser          = $domaincreds.UserName
-		DomainPassword      = ($domaincreds.Password | ConvertFrom-SecureString)
-		NewHostName         = 'None'
-		GitHubToken         = 'None'
-		GitHubUserID        = 'None'
-		InstallAllModules   = $false
-		InstallAllApps      = $false
-		InstallLicensedApps = $false
-		EnableHyperV        = $false
-		EnableWSL           = $false
-		WSLUser             = $wslcred.UserName
-		WSLPassword         = ($wslcred.Password | ConvertFrom-SecureString)
+	$NewAnswerFile = {
+        $AnswerFile = "$($PSDownload.FullName)\AnswerFile.json"
+		$domaincreds = Get-Credential -Message 'Account to add device to domain'
+		$wslcred = Get-Credential -Message 'Account for WSL Setup'
+		$output = [PSCustomObject]@{
+			AddToDomain         = $false
+			DomainName          = 'None'
+			DomainUser          = $domaincreds.UserName
+			DomainPassword      = ($domaincreds.Password | ConvertFrom-SecureString)
+			NewHostName         = 'None'
+			GitHubToken         = 'None'
+			GitHubUserID        = 'None'
+			InstallAllModules   = $false
+			InstallAllApps      = $false
+			InstallLicensedApps = $false
+			EnableHyperV        = $false
+			EnableWSL           = $false
+			WSLUser             = $wslcred.UserName
+			WSLPassword         = ($wslcred.Password | ConvertFrom-SecureString)
+		}
+		$output | ConvertTo-Json | Out-File -FilePath $AnswerFile -Force
 	}
-	$output | ConvertTo-Json | Out-File -FilePath $AnswerFile -Force
-	Start-Process -FilePath notepad.exe -ArgumentList $AnswerFile -Wait
+	Run-Block -Name 'NewAnswerFile' -Block $NewAnswerFile
+    Start-Sleep 5
+    Start-Process -FilePath notepad.exe -ArgumentList $AnswerFile -Wait
 }
 $AnswerFileImport = (Get-Content $AnswerFile | ConvertFrom-Json) 
 
@@ -179,6 +181,7 @@ if ($AddToDomain) {
 	If (!(Get-CimInstance -Class Win32_ComputerSystem).PartOfDomain) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Adding]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($NewHostName) to Domain`n" -ForegroundColor Cyan
 		Write-Host -ForegroundColor Red 'This machine is not part of a domain. Adding now.'
+		Write-Host -ForegroundColor Red 'Your AnswerFile will be deleted after this process is complete.'
 		$labcred = New-Object System.Management.Automation.PSCredential ($DomainUser, ($DomainPassword | ConvertTo-SecureString))
 
 		# Boxstarter options
@@ -285,8 +288,10 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\WSL.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		$WSLPass = (New-Object System.Management.Automation.PSCredential ($WSLUser, ($WSLPassword | ConvertTo-SecureString))).GetNetworkCredential().Password
-		
+		try {
+			$WSLPass = (New-Object System.Management.Automation.PSCredential ($WSLUser, ($WSLPassword | ConvertTo-SecureString))).GetNetworkCredential().Password
+		} catch {Write-Warning "Error: Message:$($Error[0])"}
+
 		$WSLInstall = {
 			#New-NetFirewallRule -DisplayName 'WSL allow in' -Direction Inbound -InterfaceAlias 'vEthernet (WSL)' -Action Allow
 			# --distribution Ubuntu --shell-type standard --user root
