@@ -120,7 +120,7 @@ function check-reboot {
 function Run-Block {
 	PARAM(
 		[string]$Name,
-		[scriptblock]$Block,
+		[string]$Block,
 		[System.IO.DirectoryInfo]$LogsPath = $PSLogsPath	
 	)
 	try {
