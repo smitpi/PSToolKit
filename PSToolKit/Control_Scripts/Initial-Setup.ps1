@@ -309,7 +309,7 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		Invoke-Command -ScriptBlock {
 			PARAM($GitHubUserID, $GitHubToken, $WSLUser)
 			Write-Host "`t`tInstalling Ubuntu" -ForegroundColor DarkYellow	
-			'wsl --install --web-download --no-launch --distribution Ubuntu' | cmd
+			'wsl --install --distribution Ubuntu --no-launch' | cmd
 			Write-Host "`t`tSetting wsl.conf" -ForegroundColor DarkYellow	
 			'Ubuntu run --user root echo [network] | ubuntu run -u root tee -a /etc/wsl.conf' | cmd
 			'Ubuntu run --user root echo generateResolvConf = false | ubuntu run -u root tee -a /etc/wsl.conf' | cmd
@@ -347,7 +347,7 @@ Set-UserDesktopWallpaper -PicturePath "$env:USERPROFILE\New-Wallpaper.jpg" -Styl
 
 #region win updates
 Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Microsoft Update' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-Install-MSUpdate
+Run-Block -Name MSUpdates -Block 'Install-MSUpdate'
 check-reboot
 #endregion
 Stop-Transcript
