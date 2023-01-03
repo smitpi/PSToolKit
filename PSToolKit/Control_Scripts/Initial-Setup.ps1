@@ -135,7 +135,6 @@ Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; 
 $AnswerFile = "$($PSDownload.FullName)\AnswerFile.json"
 if (-not(Test-Path $AnswerFile)) {
 	$domaincreds = Get-Credential -Message 'Account to add device to domain'
-	$wslcred = Get-Credential -Message 'Account for WSL Setup'
 	$output = [PSCustomObject]@{
 		AddToDomain         = $false
 		DomainName          = 'None'
@@ -149,11 +148,9 @@ if (-not(Test-Path $AnswerFile)) {
 		InstallLicensedApps = $false
 		EnableHyperV        = $false
 		EnableWSL           = $false
-		WSLUser             = $wslcred.UserName
-		WSLPassword         = ($wslcred.Password | ConvertFrom-SecureString)
+		WSLUser             = 'None'
 	}
 	$output | ConvertTo-Json | Out-File -FilePath $AnswerFile -Force
-	
 	Start-Process -FilePath notepad.exe -ArgumentList $AnswerFile -Wait
 }
 $AnswerFileImport = (Get-Content $AnswerFile | ConvertFrom-Json) 
@@ -261,16 +258,21 @@ if ($EnableHyperV) {
 	if (-not(Test-Path "$($PSDownload.fullname)\EnableHyperV.tmp")) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Hyper-V' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Windows Feature`n" -ForegroundColor Cyan
-		Invoke-Command -ScriptBlock {choco install -y Microsoft-Hyper-V-All --source=windowsFeatures}
+		Invoke-Command -ScriptBlock {
+			Write-Host "`t`tInstalling Feature" -ForegroundColor DarkYellow	
+			choco install -y Microsoft-Hyper-V-All --source=windowsFeatures
+		}
 		check-reboot
 		Invoke-Command -ScriptBlock {
 			try {
 				if (-not(Test-Path C:\Hyper-V)) { New-Item C:\Hyper-V -ItemType Directory -Force | Out-Null }
 				if (-not(Test-Path C:\Hyper-V\VHD)) { New-Item C:\Hyper-V\VHD -ItemType Directory -Force | Out-Null}
 				if (-not(Test-Path C:\Hyper-V\Config)) { New-Item C:\Hyper-V\Config -ItemType Directory -Force | Out-Null}
+				Write-Host "`t`tSetting Hyper-V Paths" -ForegroundColor DarkYellow	
 				Hyper-V\Set-VMHost -VirtualHardDiskPath 'C:\Hyper-V\VHD' -VirtualMachinePath 'C:\Hyper-V\Config'
 		
 				$NetAdap = (Get-NetAdapter -Physical | Where-Object {$_.status -like 'up'})[0]
+				Write-Host "`t`tCreate External Switch" -ForegroundColor DarkYellow	
 				Hyper-V\New-VMSwitch -Name 'External' -NetAdapterName $NetAdap.Name
 			} catch {Write-Warning "Error: Message:$($Error[0])"}
 		}
@@ -287,17 +289,22 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Invoke-Command -ScriptBlock {
 			PARAM($GitHubUserID, $GitHubToken)
+			Write-Host "`t`tInstalling Ubuntu" -ForegroundColor DarkYellow	
 			wsl --install --web-download --no-launch --distribution Ubuntu
+			Write-Host "`t`tSetting wsl.conf" -ForegroundColor DarkYellow	
 			Ubuntu run --user root echo [network] | ubuntu run -u root tee -a /etc/wsl.conf
 			Ubuntu run --user root echo generateResolvConf = false | ubuntu run -u root tee -a /etc/wsl.conf
 			wsl --shutdown Ubuntu
+			Write-Host "`t`tSetting resolv.conf" -ForegroundColor DarkYellow	
 			Ubuntu run --user root echo nameserver 1.1.1.1 | ubuntu run -u root tee -a /etc/resolv.conf
 			Ubuntu run --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf
 			wsl --shutdown Ubuntu
+			Write-Host "`t`tGit Clone Ansible Repo" -ForegroundColor DarkYellow	
 			ubuntu run --user root rm /opt/ansible -R
 			Ubuntu run --user root git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap /opt/ansible/ansible-bootstrap
 			ubuntu run --user root cp /opt/ansible/ansible-bootstrap/inventory-src /opt/ansible/inventory
 			Ubuntu run --user root mkdir /opt/ansible/host_vars
+			Write-Host "`t`tRunning Updates" -ForegroundColor DarkYellow	
 			Ubuntu run --user root apt update
 			Ubuntu run --user root apt install make git python3-pip python3-dev -y
 			Ubuntu run --user root pip3 install ansible
@@ -319,6 +326,6 @@ Set-UserDesktopWallpaper -PicturePath "$env:USERPROFILE\New-Wallpaper.jpg" -Styl
 
 #region win updates
 Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Microsoft Update' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-Invoke-Command -ScriptBlock { Install-MSUpdate}
+Install-MSUpdate
 check-reboot
 #endregion
