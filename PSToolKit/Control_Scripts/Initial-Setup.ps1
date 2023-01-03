@@ -320,33 +320,31 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 			wsl --shutdown Ubuntu
 		}
 
-		[string]$LinuxUserSetup = {
-			Ubuntu run --user root useradd -m -p $(Ubuntu run --user root openssl passwd $($WSLPass)) -G sudo -s /bin/bash $($WSLUser)
-			Ubuntu run --user root echo [user] | ubuntu run -u root tee -a /etc/wsl.conf
-			Ubuntu run --user root echo "default = $($WSLUser)" | ubuntu run -u root tee -a /etc/wsl.conf
-			Ubuntu run --user root echo "$($WSLUser) ALL=(ALL) NOPASSWD:ALL" | ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)
-			Ubuntu run --user root cat /etc/wsl.conf
-			Ubuntu run --user root ls -la /home
-			Ubuntu run --user root ls -la /home/$($WSLUser)
-			wsl --shutdown Ubuntu
-		}
+		# [string]$LinuxUserSetup = {
+		# 	Ubuntu run --user root useradd -m -p $(Ubuntu run --user root openssl passwd $($WSLPass)) -G sudo -s /bin/bash $($WSLUser)
+		# 	Ubuntu run --user root echo [user] | ubuntu run -u root tee -a /etc/wsl.conf
+		# 	Ubuntu run --user root echo "default = $($WSLUser)" | ubuntu run -u root tee -a /etc/wsl.conf
+		# 	Ubuntu run --user root echo "$($WSLUser) ALL=(ALL) NOPASSWD:ALL" | ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)
+		# 	Ubuntu run --user root cat /etc/wsl.conf
+		# 	wsl --shutdown Ubuntu
+		# }
 
 		[string]$DeployAnsible = {
 			Ubuntu run --user root apt update
 			Ubuntu run --user root apt dist-upgrade -y
 			Ubuntu run --user root apt install make git python3-pip python3-dev -y
-			Ubuntu run --user root git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap /home/$($WSLUser)/ansible/ansible-bootstrap
-			Ubuntu run --user root cp /home/$($WSLUser)/ansible/ansible-bootstrap/inventory-src /home/$($WSLUser)/ansible/inventory
-			Ubuntu run --user root mkdir /home/$($WSLUser)/ansible/host_vars
+			Ubuntu run --user root git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap /opt/ansible/ansible-bootstrap
+			Ubuntu run --user root cp opt/ansible/ansible-bootstrap/inventory-src opt/ansible/inventory
+			Ubuntu run --user root mkdir opt/ansible/host_vars
 			Ubuntu run --user root pip3 install ansible
 		}
 
 		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'WSL2' -ForegroundColor Cyan
 		Run-Block -Name WSLInstall -Block $WSLInstall
 		check-reboot
-		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Linux Sudo Account' -ForegroundColor Cyan
-		Run-Block -Name LinuxUserSetup -Block $LinuxUserSetup
-		check-reboot
+		# Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Linux Sudo Account' -ForegroundColor Cyan
+		# Run-Block -Name LinuxUserSetup -Block $LinuxUserSetup
+		# check-reboot
 		Write-Host "`t`t[Executing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Ansible Config' -ForegroundColor Cyan
 		Run-Block -Name DeployAnsible -Block $DeployAnsible
 		check-reboot
