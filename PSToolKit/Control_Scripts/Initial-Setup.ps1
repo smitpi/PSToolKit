@@ -19,6 +19,10 @@ if (Test-Path 'C:\Temp\PSTemp\Logs') {$PSLogsPath = Get-Item 'C:\Temp\PSTemp\Log
 else {$PSLogsPath = New-Item 'C:\Temp\PSTemp\Logs' -ItemType Directory -Force}
 #endregion
 
+#region start transcript
+Start-Transcript -Path "$($PSLogsPath.FullName)\Initial-Setup-Transcript.log" -Append -Force -NoClobber -IncludeInvocationHeader -UseMinimalHeader
+#endregion
+
 #region Create Icon Folder
 if (Test-Path "$($env:PUBLIC)\Desktop\Win-Bootstrap") { Get-Item "$($env:PUBLIC)\Desktop\Win-Bootstrap" | Remove-Item -Recurse -Force}
 $BootstrapFolder = New-Item "$($env:PUBLIC)\Desktop\Win-Bootstrap" -ItemType Directory -Force
@@ -329,3 +333,4 @@ Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; 
 Install-MSUpdate
 check-reboot
 #endregion
+Stop-Transcript
