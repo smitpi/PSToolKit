@@ -330,9 +330,12 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		# }
 
 		[string]$DeployAnsible = {
-			Ubuntu run --user root git clone https://$GitHubToken:x-oauth-basic@github.com/smitpi/ansible-bootstrap /opt/ansible/ansible-bootstrap
+			ubuntu run --user root rm /opt/ansible
+            "Ubuntu run --user root git clone https://$GitHubToken:x-oauth-basic@github.com/smitpi/ansible-bootstrap /opt/ansible/ansible-bootstrap"
             ubuntu run --user root cp /opt/ansible/ansible-bootstrap/inventory-src /opt/ansible/inventory
 			Ubuntu run --user root mkdir /opt/ansible/host_vars
+        }
+        [string]$DeployUpdates = {
 			Ubuntu run --user root apt update
 			#Ubuntu run --user root apt dist-upgrade -y
 			Ubuntu run --user root apt install make git python3-pip python3-dev -y
@@ -342,11 +345,11 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'WSL2' -ForegroundColor Cyan
 		Run-Block -Name WSLInstall -Block $WSLInstall
 		check-reboot
-		# Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Linux Sudo Account' -ForegroundColor Cyan
-		# Run-Block -Name LinuxUserSetup -Block $LinuxUserSetup
-		# check-reboot
-		Write-Host "`t`t[Executing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Ansible Config' -ForegroundColor Cyan
+		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Deploy Ansible' -ForegroundColor Cyan
 		Run-Block -Name DeployAnsible -Block $DeployAnsible
+		check-reboot
+		Write-Host "`t`t[Executing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Deploy Updates' -ForegroundColor Cyan
+		Run-Block -Name DeployUpdates -Block $DeployUpdates
 		check-reboot
 		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
 	}
