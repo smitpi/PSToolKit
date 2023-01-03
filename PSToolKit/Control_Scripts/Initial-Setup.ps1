@@ -307,19 +307,20 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Run-Block -Name InstallWSL -Block "'wsl --install -d Ubuntu -n' | cmd"
-        Invoke-Command -ScriptBlock { 
-            Write-Host "`t`tInstalling Ubuntu" -ForegroundColor DarkYellow	
-            'wsl --install -d Ubuntu' | cmd
-        }
-        check-reboot
+		Invoke-Command -ScriptBlock { 
+			Write-Host "`t`tInstalling Ubuntu" -ForegroundColor DarkYellow	
+			'wsl --install -d Ubuntu' | cmd
+		}
+		check-reboot
         
-        Invoke-Command -ScriptBlock {
+		Invoke-Command -ScriptBlock {
 			PARAM($GitHubUserID, $GitHubToken, $WSLUser)
 			Write-Host "`t`tSetting wsl.conf" -ForegroundColor DarkYellow	
 			'Ubuntu run --user root echo [network] | ubuntu run -u root tee -a /etc/wsl.conf' | cmd
 			'Ubuntu run --user root echo generateResolvConf = false | ubuntu run -u root tee -a /etc/wsl.conf' | cmd
 			'wsl --shutdown Ubuntu' | cmd
 			Write-Host "`t`tSetting resolv.conf" -ForegroundColor DarkYellow	
+			'Ubuntu run --user root touch /etc/resolv.conf' | cmd
 			'Ubuntu run --user root echo nameserver 1.1.1.1 | ubuntu run -u root tee -a /etc/resolv.conf' | cmd
 			'Ubuntu run --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf' | cmd
 			'wsl --shutdown Ubuntu' | cmd
