@@ -306,12 +306,15 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\WSL.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		Invoke-Command -ScriptBlock { 
-			Write-Host "`t`tInstalling Ubuntu" -ForegroundColor DarkYellow	
-			cmd /c 'wsl --install -d Ubuntu' 2>&1 | Write-Host -ForegroundColor Yellow
-            
-		}
-		check-reboot
+		Run-Block -Name Install_WSL -Block "choco install wsl2 -y --params `"/Version:2 /Retry:true`""
+        check-reboot 
+        Run-Block -Name Install_Ubuntu -Block "choco install wsl-ubuntu-2204 -y --params `"/AutomaticInstall:true`""
+        check-reboot
+        #Invoke-Command -ScriptBlock { 
+		#	Write-Host "`t`tInstalling Ubuntu" -ForegroundColor DarkYellow	
+		#	cmd /c 'wsl --install -d Ubuntu' 2>&1 | Write-Host -ForegroundColor Yellow    
+		#}
+		#check-reboot
         
 		Invoke-Command -ScriptBlock {
 			PARAM($GitHubUserID, $GitHubToken, $WSLUser)
