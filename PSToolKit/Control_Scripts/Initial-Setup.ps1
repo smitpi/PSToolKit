@@ -304,7 +304,7 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		try {
 			$WSLPass = (New-Object System.Management.Automation.PSCredential ($WSLUser, ($WSLPassword | ConvertTo-SecureString))).GetNetworkCredential().Password
 		} catch {Write-Warning "Error: Message:$($Error[0])"}
-		[string]$WSLInstall = {
+		[scriptblock]$WSLInstall = {
 			#New-NetFirewallRule -DisplayName 'WSL allow in' -Direction Inbound -InterfaceAlias 'vEthernet (WSL)' -Action Allow
 			# --distribution Ubuntu --shell-type standard --user root
 			wsl --install --web-download --no-launch --distribution Ubuntu
@@ -329,13 +329,14 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		# 	wsl --shutdown Ubuntu
 		# }
 
-		[string]$DeployAnsible = {
-			ubuntu run --user root rm /opt/ansible
-            "Ubuntu run --user root git clone https://$GitHubToken:x-oauth-basic@github.com/smitpi/ansible-bootstrap /opt/ansible/ansible-bootstrap"
+		[scriptblock]$DeployAnsible = {
+			ubuntu run --user root rm /opt/ansible -R
+            Ubuntu run --user root git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap /opt/ansible/ansible-bootstrap
             ubuntu run --user root cp /opt/ansible/ansible-bootstrap/inventory-src /opt/ansible/inventory
 			Ubuntu run --user root mkdir /opt/ansible/host_vars
         }
-        [string]$DeployUpdates = {
+
+        [scriptblock]$DeployUpdates = {
 			Ubuntu run --user root apt update
 			#Ubuntu run --user root apt dist-upgrade -y
 			Ubuntu run --user root apt install make git python3-pip python3-dev -y
@@ -343,13 +344,16 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		}
 
 		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'WSL2' -ForegroundColor Cyan
-		Run-Block -Name WSLInstall -Block $WSLInstall
+		Invoke-Command -ScriptBlock $WSLInstall
+        #Run-Block -Name WSLInstall -Block $WSLInstall
 		check-reboot
 		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Deploy Ansible' -ForegroundColor Cyan
-		Run-Block -Name DeployAnsible -Block $DeployAnsible
+        Invoke-Command -ScriptBlock $DeployAnsible -ArgumentList $GitHubToken	 	
+        #Run-Block -Name DeployAnsible -Block $DeployAnsible
 		check-reboot
 		Write-Host "`t`t[Executing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'Deploy Updates' -ForegroundColor Cyan
-		Run-Block -Name DeployUpdates -Block $DeployUpdates
+        Invoke-Command -ScriptBlock $DeployUpdates				
+        #Run-Block -Name DeployUpdates -Block $DeployUpdates
 		check-reboot
 		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
 	}
