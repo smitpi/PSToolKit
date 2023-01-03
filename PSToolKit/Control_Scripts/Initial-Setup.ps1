@@ -304,42 +304,41 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		try {
 			$WSLPass = (New-Object System.Management.Automation.PSCredential ($WSLUser, ($WSLPassword | ConvertTo-SecureString))).GetNetworkCredential().Password
 		} catch {Write-Warning "Error: Message:$($Error[0])"}
-		<#
 		[string]$WSLInstall = {
 			#New-NetFirewallRule -DisplayName 'WSL allow in' -Direction Inbound -InterfaceAlias 'vEthernet (WSL)' -Action Allow
 			# --distribution Ubuntu --shell-type standard --user root
-			cmd.exe /c 'wsl --install --web-download --no-launch --distribution Ubuntu'
-			cmd.exe /c 'Ubuntu run --user root rm -rf /etc/wsl.conf'
-			cmd.exe /c 'Ubuntu run --user root touch /etc/wsl.conf'
-			cmd.exe /c 'Ubuntu run --user root echo [network] |  ubuntu run -u root tee -a /etc/wsl.conf'
-			cmd.exe /c 'Ubuntu run --user root echo generateResolvConf = false |  ubuntu run -u root tee -a /etc/wsl.conf'
-			cmd.exe /c 'wsl --shutdown Ubuntu'
-			cmd.exe /c 'Ubuntu run --user root rm -rf /etc/resolv.conf'
-			cmd.exe /c 'Ubuntu run --user root touch /etc/resolv.conf'		
-			cmd.exe /c 'Ubuntu run --user root echo nameserver 1.1.1.1 |  ubuntu run -u root tee -a /etc/resolv.conf'
-			cmd.exe /c 'Ubuntu run --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf'
-			cmd.exe /c 'wsl --shutdown Ubuntu'
+			wsl --install --web-download --no-launch --distribution Ubuntu
+			Ubuntu run --user root rm -rf /etc/wsl.conf
+			Ubuntu run --user root touch /etc/wsl.conf
+			Ubuntu run --user root echo [network] | ubuntu run -u root tee -a /etc/wsl.conf
+			Ubuntu run --user root echo generateResolvConf = false | ubuntu run -u root tee -a /etc/wsl.conf
+			wsl --shutdown Ubuntu
+			Ubuntu run --user root rm -rf /etc/resolv.conf
+			Ubuntu run --user root touch /etc/resolv.conf
+			Ubuntu run --user root echo nameserver 1.1.1.1 | ubuntu run -u root tee -a /etc/resolv.conf
+			Ubuntu run --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf
+			wsl --shutdown Ubuntu
 		}
 
 		[string]$LinuxUserSetup = {
-			cmd.exe /c "Ubuntu run --user root useradd -m -p $(cmd.exe /c "Ubuntu run --user root openssl passwd $($WSLPass)") -G sudo -s /bin/bash $($WSLUser)"
-			cmd.exe /c 'Ubuntu run --user root echo [user] |  ubuntu run -u root tee -a /etc/wsl.conf'
-			cmd.exe /c "Ubuntu run --user root echo 'default = $($WSLUser)' |  ubuntu run -u root tee -a /etc/wsl.conf"
-			cmd.exe /c "Ubuntu run --user root echo '$($WSLUser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)"
-			cmd.exe /c 'Ubuntu run --user root cat /etc/wsl.conf'
-			cmd.exe /c 'Ubuntu run --user root ls -la /home'
-			cmd.exe /c "Ubuntu run --user root ls -la /home/$($WSLUser)"
-			cmd.exe /c 'wsl --shutdown Ubuntu'
+			Ubuntu run --user root useradd -m -p $(Ubuntu run --user root openssl passwd $($WSLPass)) -G sudo -s /bin/bash $($WSLUser)
+			Ubuntu run --user root echo [user] | ubuntu run -u root tee -a /etc/wsl.conf
+			Ubuntu run --user root echo "default = $($WSLUser)" | ubuntu run -u root tee -a /etc/wsl.conf
+			Ubuntu run --user root echo "$($WSLUser) ALL=(ALL) NOPASSWD:ALL" | ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)
+			Ubuntu run --user root cat /etc/wsl.conf
+			Ubuntu run --user root ls -la /home
+			Ubuntu run --user root ls -la /home/$($WSLUser)
+			wsl --shutdown Ubuntu
 		}
 
 		[string]$DeployAnsible = {
-			cmd.exe /c 'Ubuntu run --user root apt update'
-			cmd.exe /c 'Ubuntu run --user root apt dist-upgrade -y'
-			cmd.exe /c 'Ubuntu run --user root apt install make git python3-pip python3-dev -y'
-			cmd.exe /c "Ubuntu run --user root git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap /home/$($WSLUser)/ansible/ansible-bootstrap"
-			cmd.exe /c "Ubuntu run --user root cp /home/$($WSLUser)/ansible/ansible-bootstrap/inventory-src /home/$($WSLUser)/ansible/inventory"
-			cmd.exe /c "Ubuntu run --user root mkdir /home/$($WSLUser)/ansible/host_vars"
-			cmd.exe /c 'Ubuntu run --user root pip3 install ansible'
+			Ubuntu run --user root apt update
+			Ubuntu run --user root apt dist-upgrade -y
+			Ubuntu run --user root apt install make git python3-pip python3-dev -y
+			Ubuntu run --user root git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap /home/$($WSLUser)/ansible/ansible-bootstrap
+			Ubuntu run --user root cp /home/$($WSLUser)/ansible/ansible-bootstrap/inventory-src /home/$($WSLUser)/ansible/inventory
+			Ubuntu run --user root mkdir /home/$($WSLUser)/ansible/host_vars
+			Ubuntu run --user root pip3 install ansible
 		}
 
 		Write-Host "`t`t[Installing]: " -NoNewline -ForegroundColor Yellow; Write-Host 'WSL2' -ForegroundColor Cyan
@@ -352,37 +351,6 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		Run-Block -Name DeployAnsible -Block $DeployAnsible
 		check-reboot
 		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
-#>
-		#New-NetFirewallRule -DisplayName 'WSL allow in' -Direction Inbound -InterfaceAlias 'vEthernet (WSL)' -Action Allow
-		# --distribution Ubuntu --shell-type standard --user root
-		cmd.exe /c 'wsl --install --web-download --no-launch --distribution Ubuntu'
-		cmd.exe /c 'Ubuntu run --user root rm -rf /etc/wsl.conf'
-		cmd.exe /c 'Ubuntu run --user root touch /etc/wsl.conf'
-		cmd.exe /c 'Ubuntu run --user root echo [network] |  ubuntu run -u root tee -a /etc/wsl.conf'
-		cmd.exe /c 'Ubuntu run --user root echo generateResolvConf = false |  ubuntu run -u root tee -a /etc/wsl.conf'
-		cmd.exe /c 'wsl --shutdown Ubuntu'
-		cmd.exe /c 'Ubuntu run --user root rm -rf /etc/resolv.conf'
-		cmd.exe /c 'Ubuntu run --user root touch /etc/resolv.conf'		
-		cmd.exe /c 'Ubuntu run --user root echo nameserver 1.1.1.1 |  ubuntu run -u root tee -a /etc/resolv.conf'
-		cmd.exe /c 'Ubuntu run --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf'
-		cmd.exe /c 'wsl --shutdown Ubuntu'
-
-		cmd.exe /c "Ubuntu run --user root useradd -m -p $(cmd.exe /c "Ubuntu run --user root openssl passwd $($WSLPass)") -G sudo -s /bin/bash $($WSLUser)"
-		cmd.exe /c 'Ubuntu run --user root echo [user] |  ubuntu run -u root tee -a /etc/wsl.conf'
-		cmd.exe /c "Ubuntu run --user root echo 'default = $($WSLUser)' |  ubuntu run -u root tee -a /etc/wsl.conf"
-		cmd.exe /c "Ubuntu run --user root echo '$($WSLUser) ALL=(ALL) NOPASSWD:ALL' |  ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)"
-		cmd.exe /c 'Ubuntu run --user root cat /etc/wsl.conf'
-		cmd.exe /c 'Ubuntu run --user root ls -la /home'
-		cmd.exe /c "Ubuntu run --user root ls -la /home/$($WSLUser)"
-		cmd.exe /c 'wsl --shutdown Ubuntu'
-
-		cmd.exe /c 'Ubuntu run --user root apt update'
-		cmd.exe /c 'Ubuntu run --user root apt dist-upgrade -y'
-		cmd.exe /c 'Ubuntu run --user root apt install make git python3-pip python3-dev -y'
-		cmd.exe /c "Ubuntu run --user root git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap /home/$($WSLUser)/ansible/ansible-bootstrap"
-		cmd.exe /c "Ubuntu run --user root cp /home/$($WSLUser)/ansible/ansible-bootstrap/inventory-src /home/$($WSLUser)/ansible/inventory"
-		cmd.exe /c "Ubuntu run --user root mkdir /home/$($WSLUser)/ansible/host_vars"
-		cmd.exe /c 'Ubuntu run --user root pip3 install ansible'	
 	}
 }
 #endregion
