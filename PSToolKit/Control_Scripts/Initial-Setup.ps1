@@ -278,7 +278,6 @@ if ($InstallLicensedApps -and ($GitHubUserID -notlike 'None')) {
 if ($EnableHyperV) {
 	if (-not(Test-Path "$($PSDownload.fullname)\EnableHyperV.tmp")) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Hyper-V' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Windows Feature`n" -ForegroundColor Cyan
 		Invoke-Command -ScriptBlock {
 			Write-Host "`t`tInstalling Feature" -ForegroundColor DarkYellow	
 			choco install -y Microsoft-Hyper-V-All --source=windowsFeatures
@@ -297,7 +296,6 @@ if ($EnableHyperV) {
 				Hyper-V\New-VMSwitch -Name 'External' -NetAdapterName $NetAdap.Name
 			} catch {Write-Warning "Error: Message:$($Error[0])"}
 		}
-		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Setup]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Hyper-V Settings`n" -ForegroundColor Cyan
 		New-Item "$($PSDownload.fullname)\EnableHyperV.tmp" -ItemType file -Force | Out-Null
 	}
 }
@@ -309,7 +307,7 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
 		Invoke-Command -ScriptBlock {
-			PARAM($GitHubUserID, $GitHubToken)
+			PARAM($GitHubUserID, $GitHubToken, $WSLUser)
 			Write-Host "`t`tInstalling Ubuntu" -ForegroundColor DarkYellow	
 			wsl --install --web-download --no-launch --distribution Ubuntu
 			Write-Host "`t`tSetting wsl.conf" -ForegroundColor DarkYellow	
@@ -329,7 +327,9 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 			Ubuntu run --user root apt update
 			Ubuntu run --user root apt install make git python3-pip python3-dev -y
 			Ubuntu run --user root pip3 install ansible
-		} -ArgumentList $GitHubUserID, $GitHubToken
+			Write-Host "`t`tAdding Default User" -ForegroundColor DarkYellow	
+			ubuntu --config --default-user $WSLUser
+		} -ArgumentList $GitHubUserID, $GitHubToken, $WSLUser
 		
 		check-reboot
 		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
