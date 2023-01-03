@@ -306,7 +306,6 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\WSL.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		Run-Block -Name InstallWSL -Block "'wsl --install -d Ubuntu -n' | cmd"
 		Invoke-Command -ScriptBlock { 
 			Write-Host "`t`tInstalling Ubuntu" -ForegroundColor DarkYellow	
 			'wsl --install -d Ubuntu' | cmd
