@@ -308,13 +308,13 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 			#New-NetFirewallRule -DisplayName 'WSL allow in' -Direction Inbound -InterfaceAlias 'vEthernet (WSL)' -Action Allow
 			# --distribution Ubuntu --shell-type standard --user root
 			wsl --install --web-download --no-launch --distribution Ubuntu
-			Ubuntu run --user root rm -rf /etc/wsl.conf
-			Ubuntu run --user root touch /etc/wsl.conf
+			#Ubuntu run --user root rm -rf /etc/wsl.conf
+			#Ubuntu run --user root touch /etc/wsl.conf
 			Ubuntu run --user root echo [network] | ubuntu run -u root tee -a /etc/wsl.conf
 			Ubuntu run --user root echo generateResolvConf = false | ubuntu run -u root tee -a /etc/wsl.conf
 			wsl --shutdown Ubuntu
-			Ubuntu run --user root rm -rf /etc/resolv.conf
-			Ubuntu run --user root touch /etc/resolv.conf
+			#Ubuntu run --user root rm -rf /etc/resolv.conf
+			#Ubuntu run --user root touch /etc/resolv.conf
 			Ubuntu run --user root echo nameserver 1.1.1.1 | ubuntu run -u root tee -a /etc/resolv.conf
 			Ubuntu run --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf
 			wsl --shutdown Ubuntu
