@@ -116,6 +116,34 @@ function check-reboot {
 }
 #endregion
 
+#region Function:Run-Block
+function Run-Block {
+	PARAM(
+		[string]$Name,
+		[scriptblock]$Block,
+		[System.IO.DirectoryInfo]$LogsPath = $PSLogsPath	
+	)
+	try {
+		$PSPath = Get-Item (Get-Command powershell).Source
+		$PSLogsPath = Get-Item $LogsPath
+	} catch {Write-Warning "Error: Message:$($Error[0])"}
+	$InstallerArgs = @{
+		FilePath              = $pspath.fullname
+		Wait                  = $true
+		NoNewWindow           = $true
+		WorkingDirectory      = $PSDownload.fullname
+		RedirectStandardError = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)-Error.log"
+		#RedirectStandardOutput = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)Output.log"
+	}
+	try {
+		Write-Host '[Executing] ' -NoNewline -ForegroundColor Yellow; Write-Host "CodeBlock: $($Name)" -ForegroundColor Cyan
+		Start-Process @InstallerArgs -ArgumentList "-NoLogo -NoProfile -Mta -NonInteractive -ExecutionPolicy Bypass -Command (& {$($Block)})"
+		Write-Host '[Completed]: ' -ForegroundColor Yellow -NoNewline; Write-Host "CodeBlock: $($Name)" -ForegroundColor DarkRed
+		Write-Host "-----------------------------------`n" -ForegroundColor DarkCyan
+	} catch {Write-Warning "Error: Message:$($Error[0])"}
+}
+#endregion
+
 #region Answer File
 try {
 	$message = @"
@@ -206,10 +234,7 @@ if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp") -and ($GitHubUserID -
 	try {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Base Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow
-		Invoke-Command -ScriptBlock {
-			PARAM($GitHubUserID, $GitHubToken)
-			Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
-		} -ArgumentList $GitHubUserID, $GitHubToken
+		Run-Block -Name baseapps -Block "Install-PSPackageManAppFromList -ListName BaseApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken"	
 		New-Item "$($PSDownload.fullname)\BaseApps.tmp" -ItemType file -Force | Out-Null
 	} catch {Write-Warning "Error: Message:$($Error[0])"}
 }
@@ -219,10 +244,7 @@ if (-not(Test-Path "$($PSDownload.fullname)\BaseApps.tmp") -and ($GitHubUserID -
 if ($InstallAllModules -and ($GitHubUserID -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\ExtendedModules.tmp")) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Extended Modules' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		Invoke-Command -ScriptBlock {
-			PARAM($GitHubUserID, $GitHubToken)
-			Install-PWSHModule -ListName BaseModules, ExtendedModules, MyModules -Scope AllUsers -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
-		} -ArgumentList $GitHubUserID, $GitHubToken
+		Run-Block -Name ExtendedModules -Block "Install-PWSHModule -ListName BaseModules, ExtendedModules, MyModules -Scope AllUsers -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken"
 		New-Item "$($PSDownload.fullname)\ExtendedModules.tmp" -ItemType file -Force | Out-Null
 	}
 }
@@ -233,12 +255,9 @@ if ($InstallAllApps -and ($GitHubUserID -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\ExtendedApps.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Extended Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		Invoke-Command -ScriptBlock {
-			PARAM($GitHubUserID, $GitHubToken)
-			Install-PSPackageManAppFromList -ListName BaseApps, ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
-			Remove-Item -Path $([Environment]::GetFolderPath('Desktop'))\*.lnk
-			Remove-Item -Path $($env:PUBLIC)\Desktop\*.lnk
-		} -ArgumentList $GitHubUserID, $GitHubToken
+		Run-Block -Name ExtendedApps -Block "Install-PSPackageManAppFromList -ListName BaseApps,ExtendedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken"
+		Run-Block -Name RemovePrivateIcons -Block "Remove-Item -Path `"$([Environment]::GetFolderPath('Desktop'))\*.lnk`""
+		Run-Block -Name RemovePublicIcons -Block "Remove-Item -Path $($env:PUBLIC)\Desktop\*.lnk"
 		New-Item "$($PSDownload.fullname)\ExtendedApps.tmp" -ItemType file -Force | Out-Null
 	}
 }
@@ -249,11 +268,8 @@ if ($InstallLicensedApps -and ($GitHubUserID -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\LicensedApps.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Licensed Apps' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		Invoke-Command -ScriptBlock {
-			PARAM($GitHubUserID, $GitHubToken)
-			Install-PSPackageManAppFromList -ListName LicensedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
-		} -ArgumentList $GitHubUserID, $GitHubToken
-		New-Item"$($PSDownload.fullname)\LicensedApps.tmp" -ItemType file -Force | Out-Null
+		Run-Block -Name LicensedApps -Block "Install-PSPackageManAppFromList -ListName LicensedApps -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken"	
+		New-Item "$($PSDownload.fullname)\LicensedApps.tmp" -ItemType file -Force | Out-Null
 	}
 }
 #endregion
