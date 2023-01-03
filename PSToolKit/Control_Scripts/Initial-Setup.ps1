@@ -125,14 +125,14 @@ function Run-Block {
 	$InstallerArgs = @{
 		FilePath              = $pspath.fullname
 		Wait                  = $true
-		#NoNewWindow           = $true
+		NoNewWindow           = $true
 		WorkingDirectory      = $PSDownload.fullname
 		RedirectStandardError = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)-Error.log"
 		#RedirectStandardOutput = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)Output.log"
 	}
 	try {
 		Write-Host '[Executing] ' -NoNewline -ForegroundColor Yellow; Write-Host "CodeBlock: $($Name)" -ForegroundColor Cyan
-		Start-Process @InstallerArgs -ArgumentList "-NoLogo -NoProfile -Mta -NonInteractive -WindowStyle Minimized -ExecutionPolicy Bypass -Command (& {$($Block)})"
+		Start-Process @InstallerArgs -ArgumentList "-NoLogo -NoProfile -Mta -NonInteractive -ExecutionPolicy Bypass -Command (& {$($Block)})"
 		Write-Host '[Completed]: ' -ForegroundColor Yellow -NoNewline; Write-Host "CodeBlock: $($Name)" -ForegroundColor DarkRed
 		Write-Host "-----------------------------------`n" -ForegroundColor DarkCyan
 	} catch {Write-Warning "Error: Message:$($Error[0])"}
