@@ -264,16 +264,17 @@ if ($EnableHyperV) {
 		Invoke-Command -ScriptBlock {choco install -y Microsoft-Hyper-V-All --source=windowsFeatures}
 		check-reboot
 		Invoke-Command -ScriptBlock {
-			if (-not(Test-Path C:\Hyper-V)) { New-Item C:\Hyper-V -ItemType Directory -Force | Out-Null }
-			if (-not(Test-Path C:\Hyper-V\VHD)) { New-Item C:\Hyper-V\VHD -ItemType Directory -Force | Out-Null}
-			if (-not(Test-Path C:\Hyper-V\Config)) { New-Item C:\Hyper-V\Config -ItemType Directory -Force | Out-Null}
-			Hyper-V\Set-VMHost -VirtualHardDiskPath 'C:\Hyper-V\VHD' -VirtualMachinePath 'C:\Hyper-V\Config'
+			try {
+				if (-not(Test-Path C:\Hyper-V)) { New-Item C:\Hyper-V -ItemType Directory -Force | Out-Null }
+				if (-not(Test-Path C:\Hyper-V\VHD)) { New-Item C:\Hyper-V\VHD -ItemType Directory -Force | Out-Null}
+				if (-not(Test-Path C:\Hyper-V\Config)) { New-Item C:\Hyper-V\Config -ItemType Directory -Force | Out-Null}
+				Hyper-V\Set-VMHost -VirtualHardDiskPath 'C:\Hyper-V\VHD' -VirtualMachinePath 'C:\Hyper-V\Config'
 		
-			$NetAdap = (Get-NetAdapter -Physical | Where-Object {$_.status -like 'up'})[0]
-			Hyper-V\New-VMSwitch -Name 'External' -NetAdapterName $NetAdap.Name
+				$NetAdap = (Get-NetAdapter -Physical | Where-Object {$_.status -like 'up'})[0]
+				Hyper-V\New-VMSwitch -Name 'External' -NetAdapterName $NetAdap.Name
+			} catch {Write-Warning "Error: Message:$($Error[0])"}
 		}
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Setup]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Hyper-V Settings`n" -ForegroundColor Cyan
-		Run-Block -Name HyperVSettings -Block $HyperVSettings
 		New-Item "$($PSDownload.fullname)\EnableHyperV.tmp" -ItemType file -Force | Out-Null
 	}
 }
