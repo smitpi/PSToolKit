@@ -330,12 +330,12 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		# }
 
 		[string]$DeployAnsible = {
-			Ubuntu run --user root apt update
-			Ubuntu run --user root apt dist-upgrade -y
-			Ubuntu run --user root apt install make git python3-pip python3-dev -y
 			Ubuntu run --user root git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap /opt/ansible/ansible-bootstrap
 			Ubuntu run --user root cp opt/ansible/ansible-bootstrap/inventory-src opt/ansible/inventory
 			Ubuntu run --user root mkdir opt/ansible/host_vars
+			Ubuntu run --user root apt update
+			#Ubuntu run --user root apt dist-upgrade -y
+			Ubuntu run --user root apt install make git python3-pip python3-dev -y
 			Ubuntu run --user root pip3 install ansible
 		}
 
