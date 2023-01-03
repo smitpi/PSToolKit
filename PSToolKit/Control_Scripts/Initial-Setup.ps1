@@ -20,7 +20,8 @@ else {$PSLogsPath = New-Item 'C:\Temp\PSTemp\Logs' -ItemType Directory -Force}
 #endregion
 
 #region start transcript
-Start-Transcript -Path "$($PSLogsPath.FullName)\Initial-Setup-Transcript.log" -Append -Force -NoClobber -IncludeInvocationHeader -UseMinimalHeader
+Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Starting]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Transcript ($($PSLogsPath.FullName)\Initial-Setup-Transcript.log)`n" -ForegroundColor Cyan
+Start-Transcript -Path "$($PSLogsPath.FullName)\Initial-Setup-Transcript.log" -Append -Force -NoClobber -IncludeInvocationHeader
 #endregion
 
 #region Create Icon Folder
