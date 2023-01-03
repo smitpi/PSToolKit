@@ -309,26 +309,26 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 		Invoke-Command -ScriptBlock {
 			PARAM($GitHubUserID, $GitHubToken, $WSLUser)
 			Write-Host "`t`tInstalling Ubuntu" -ForegroundColor DarkYellow	
-			wsl --install --web-download --no-launch --distribution Ubuntu
+			'wsl --install --web-download --no-launch --distribution Ubuntu' | cmd
 			Write-Host "`t`tSetting wsl.conf" -ForegroundColor DarkYellow	
-			Ubuntu run --user root echo [network] | ubuntu run -u root tee -a /etc/wsl.conf
-			Ubuntu run --user root echo generateResolvConf = false | ubuntu run -u root tee -a /etc/wsl.conf
-			wsl --shutdown Ubuntu
+			'Ubuntu run --user root echo [network] | ubuntu run -u root tee -a /etc/wsl.conf' | cmd
+			'Ubuntu run --user root echo generateResolvConf = false | ubuntu run -u root tee -a /etc/wsl.conf' | cmd
+			'wsl --shutdown Ubuntu' | cmd
 			Write-Host "`t`tSetting resolv.conf" -ForegroundColor DarkYellow	
-			Ubuntu run --user root echo nameserver 1.1.1.1 | ubuntu run -u root tee -a /etc/resolv.conf
-			Ubuntu run --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf
-			wsl --shutdown Ubuntu
+			'Ubuntu run --user root echo nameserver 1.1.1.1 | ubuntu run -u root tee -a /etc/resolv.conf' | cmd
+			'Ubuntu run --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf' | cmd
+			'wsl --shutdown Ubuntu' | cmd
 			Write-Host "`t`tGit Clone Ansible Repo" -ForegroundColor DarkYellow	
-			ubuntu run --user root rm /opt/ansible -R
-			Ubuntu run --user root git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap /opt/ansible/ansible-bootstrap
-			ubuntu run --user root cp /opt/ansible/ansible-bootstrap/inventory-src /opt/ansible/inventory
-			Ubuntu run --user root mkdir /opt/ansible/host_vars
+			'ubuntu run --user root rm /opt/ansible -R' | cmd
+			"Ubuntu run --user root git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap /opt/ansible/ansible-bootstrap" | cmd
+			'ubuntu run --user root cp /opt/ansible/ansible-bootstrap/inventory-src /opt/ansible/inventory' | cmd
+			'Ubuntu run --user root mkdir /opt/ansible/host_vars' | cmd
 			Write-Host "`t`tRunning Updates" -ForegroundColor DarkYellow	
-			Ubuntu run --user root apt update
-			Ubuntu run --user root apt install make git python3-pip python3-dev -y
-			Ubuntu run --user root pip3 install ansible
+			'Ubuntu run --user root apt update' | cmd
+			'Ubuntu run --user root apt install make git python3-pip python3-dev -y' | cmd
+			'Ubuntu run --user root pip3 install ansible' | cmd
 			Write-Host "`t`tAdding Default User" -ForegroundColor DarkYellow	
-			ubuntu --config --default-user $WSLUser
+			"ubuntu --config --default-user $WSLUser" | cmd
 		} -ArgumentList $GitHubUserID, $GitHubToken, $WSLUser
 		
 		check-reboot
