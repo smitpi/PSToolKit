@@ -130,14 +130,14 @@ function Run-Block {
 	$InstallerArgs = @{
 		FilePath              = $pspath.fullname
 		Wait                  = $true
-		NoNewWindow           = $true
+		#NoNewWindow           = $true
 		WorkingDirectory      = $PSDownload.fullname
 		RedirectStandardError = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)-Error.log"
 		#RedirectStandardOutput = Join-Path $PSLogsPath.fullname -ChildPath "$($Name)Output.log"
 	}
 	try {
 		Write-Host '[Executing] ' -NoNewline -ForegroundColor Yellow; Write-Host "CodeBlock: $($Name)" -ForegroundColor Cyan
-		Start-Process @InstallerArgs -ArgumentList "-NoLogo -NoProfile -Mta -NonInteractive -ExecutionPolicy Bypass -Command (& {$($Block)})"
+		Start-Process @InstallerArgs -ArgumentList "-NoLogo -NoProfile -Mta -WindowStyle Maximized -ExecutionPolicy Bypass -Command (& {$($Block)})"
 		Write-Host '[Completed]: ' -ForegroundColor Yellow -NoNewline; Write-Host "CodeBlock: $($Name)" -ForegroundColor DarkRed
 		Write-Host "-----------------------------------`n" -ForegroundColor DarkCyan
 	} catch {Write-Warning "Error: Message:$($Error[0])"}
@@ -306,54 +306,41 @@ if ($EnableWSL -and ($WSLUser -notlike 'None')) {
 	if (-not(Test-Path "$($PSDownload.fullname)\WSL.tmp")) {
 		check-reboot
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'WSL' -ForegroundColor Cyan -NoNewline; Write-Host " (New Window)`n" -ForegroundColor darkYellow   
-		Run-Block -Name Install_WSL -Block "choco install wsl2 --yes --limit-output --params `"/Version:2 /Retry:true`""
+		& choco install wsl2 --yes --limit-output --params "/Version:2 /Retry:true" 2>&1 | Write-Host -ForegroundColor Yellow
 		check-reboot 
-		Run-Block -Name Install_Ubuntu -Block "choco install wsl-ubuntu-2204 --yes --limit-output --ignore-checksums --params `"/AutomaticInstall:true`""
+		& choco install wsl-ubuntu-2204 --yes --limit-output --ignore-checksums --params "/AutomaticInstall:true"  2>&1 | Write-Host -ForegroundColor Yellow
 		check-reboot
 
-        
-		Run-Block -Name wsl.conf -Block {
 			Write-Host "`n`t`tSetting wsl.conf`n`n" -ForegroundColor Cyan	
-			cmd /c 'Ubuntu run --user root echo [network] | ubuntu run -u root tee -a /etc/wsl.conf' 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c 'Ubuntu run --user root echo generateResolvConf = false | ubuntu run -u root tee -a /etc/wsl.conf' 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c 'wsl --shutdown Ubuntu' 2>&1 | Write-Host -ForegroundColor Yellow
-		}
-		Run-Block -Name resolv.conf -Block {
+			& cmd /c 'Ubuntu run --user root echo [network] | ubuntu run -u root tee -a /etc/wsl.conf' 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c 'Ubuntu run --user root echo generateResolvConf = false | ubuntu run -u root tee -a /etc/wsl.conf' 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c 'wsl --shutdown Ubuntu' 2>&1 | Write-Host -ForegroundColor Yellow
 			Write-Host "`n`t`tSetting resolv.conf`n`n" -ForegroundColor Cyan	
-			cmd /c 'Ubuntu run --user root rm /etc/resolv.conf' 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c 'Ubuntu run --user root touch /etc/resolv.conf' 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c 'Ubuntu run --user root echo nameserver 1.1.1.1 | ubuntu run -u root tee -a /etc/resolv.conf' 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c 'Ubuntu run --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf' 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c 'wsl --shutdown Ubuntu' 2>&1 | Write-Host -ForegroundColor Yellow
-		}
-		Run-Block -Name Ansible -Block {
+			& cmd /c 'Ubuntu run --user root rm /etc/resolv.conf' 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c 'Ubuntu run --user root touch /etc/resolv.conf' 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c 'Ubuntu run --user root echo nameserver 1.1.1.1 | ubuntu run -u root tee -a /etc/resolv.conf' 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c 'Ubuntu run --user root sudo curl -o /etc/wsl.conf -L https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Private/Config/wsl.conf' 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c 'wsl --shutdown Ubuntu' 2>&1 | Write-Host -ForegroundColor Yellow
 			Write-Host "`n`t`tGit Clone Ansible Repo`n`n" -ForegroundColor Cyan	
-			cmd /c 'ubuntu run --user root rm /opt/ansible -R' 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c "Ubuntu run --user root git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap /opt/ansible/ansible-bootstrap" 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c 'ubuntu run --user root cp /opt/ansible/ansible-bootstrap/inventory-src /opt/ansible/inventory' 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c 'Ubuntu run --user root mkdir /opt/ansible/host_vars' 2>&1 | Write-Host -ForegroundColor Yellow
-		}
-		Run-Block -Name Updates -Block {	
+			& cmd /c 'ubuntu run --user root rm /opt/ansible -R' 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c "Ubuntu run --user root git clone https://$($GitHubToken):x-oauth-basic@github.com/smitpi/ansible-bootstrap /opt/ansible/ansible-bootstrap" 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c 'ubuntu run --user root cp /opt/ansible/ansible-bootstrap/inventory-src /opt/ansible/inventory' 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c 'Ubuntu run --user root mkdir /opt/ansible/host_vars' 2>&1 | Write-Host -ForegroundColor Yellow
 			Write-Host "`n`t`tRunning Updates`n`n" -ForegroundColor Cyan	
-			cmd /c 'Ubuntu run --user root apt update' 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c 'Ubuntu run --user root apt install make git python3-pip python3-dev -y' 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c 'Ubuntu run --user root pip3 install ansible' 2>&1 | Write-Host -ForegroundColor Yellow
-		}
-		Run-Block -Name Default_user -Block {
+			& cmd /c 'Ubuntu run --user root apt update' 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c 'Ubuntu run --user root apt install make git python3-pip python3-dev -y' 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c 'Ubuntu run --user root pip3 install ansible' 2>&1 | Write-Host -ForegroundColor Yellow
 			Write-Host "`n`t`tAdding Default User`n`n" -ForegroundColor Cyan
-			cmd /c "Ubuntu run --user root useradd -m -G sudo -s /bin/bash $($WSLUser)"	2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c 'Ubuntu run --user root echo " " | ubuntu run -u root tee -a /etc/wsl.conf' 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c 'Ubuntu run --user root echo [user] | ubuntu run -u root tee -a /etc/wsl.conf' 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c "Ubuntu run --user root echo `"default = $($WSLUser)`" | ubuntu run -u root tee -a /etc/wsl.conf" 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c "Ubuntu run --user root echo `'$($WSLUser) ALL=(ALL) NOPASSWD:ALL`' | ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)" 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c "ubuntu config --default-user $WSLUser" 2>&1 | Write-Host -ForegroundColor Yellow
-			cmd /c 'wsl --update' 2>&1 | Write-Host -ForegroundColor Yellow
-		}
-		Run-Block -Name Details -Block {
+			& cmd /c "Ubuntu run --user root useradd -m -G sudo -s /bin/bash $($WSLUser)"	2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c 'Ubuntu run --user root echo " " | ubuntu run -u root tee -a /etc/wsl.conf' 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c 'Ubuntu run --user root echo [user] | ubuntu run -u root tee -a /etc/wsl.conf' 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c "Ubuntu run --user root echo `"default = $($WSLUser)`" | ubuntu run -u root tee -a /etc/wsl.conf" 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c "Ubuntu run --user root echo `'$($WSLUser) ALL=(ALL) NOPASSWD:ALL`' | ubuntu run -u root tee /etc/sudoers.d/$($WSLUser)" 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c "ubuntu config --default-user $WSLUser" 2>&1 | Write-Host -ForegroundColor Yellow
+			& cmd /c 'wsl --update' 2>&1 | Write-Host -ForegroundColor Yellow
 			Write-Host "`n`t`tInstall Details`n`n" -ForegroundColor Cyan
-			cmd /c 'wsl -l -v' 2>&1 | Write-Host -ForegroundColor Green
-			cmd /c 'Ubuntu run --user root cat /etc/wsl.conf' 2>&1 | Write-Host -ForegroundColor Green
-		}
+			& cmd /c 'wsl -l -v' 2>&1 | Write-Host -ForegroundColor Green
+			& cmd /c 'Ubuntu run --user root cat /etc/wsl.conf' 2>&1 | Write-Host -ForegroundColor Green
 		check-reboot
 		New-Item "$($PSDownload.fullname)\WSL.tmp" -ItemType file -Force | Out-Null
 	}
