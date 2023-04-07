@@ -100,15 +100,31 @@ Function Write-PSReports {
 		[switch]$OpenReportsFolder
 	)
 
+	Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
+	$Excel = $HTML = $HTML5 = $false
+
 	if ($Export -contains 'Excel') { $Excel = $True }
-	if ($Export -contains 'HTML') {$HTML = $True }
-	if ($Export -contains 'HTML5') {$HTML5 = $True }
-	if ($Export -contains 'All') {$Excel = $HTML = $HTML5 = $True  }
+	if ($Export -contains 'HTML') { $HTML = $True }
+	if ($Export -contains 'HTML5') { $HTML5 = $True }
+	if ($Export -contains 'All') { $Excel = $HTML = $HTML5 = $True }
 
+	Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Checking Members"
+	$MemberCheck = ($InputObject.psobject.members | Where-Object { $_.MemberType -like 'NoteProperty' }).Name
+	if (-not($MemberCheck)) {
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Creating custom object"
+		$ToReport = [PSCustomObject]@{
+			$($ReportTitle) = $InputObject
+		}# PSObject
+	} else {
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Using InputObject as is"
+		$ToReport = $InputObject
+	}
 
-	$members = ($InputObject.psobject.members | Where-Object {$_.MemberType -like '*Property*'}).Name
+	Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Rechecking Members"
+	$Members = ($ToReport.psobject.members | Where-Object { $_.MemberType -like 'NoteProperty' }).Name
 
-	if ($Excel) {  
+	if ($Excel) {
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Creating Excel Report "
 		$ExcelOptions = @{
 			Path              = $(Join-Path -Path $ReportPath -ChildPath "\$($ReportTitle.Replace(' ','_'))_$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx")
 			AutoSize          = $True
@@ -127,11 +143,13 @@ Function Write-PSReports {
 			$ExcelOptions.Add('ConditionalText', $ExcelConditionalText)
 		}
 
-		foreach ($member in $members) {
-			if ($InputObject.$member) {$InputObject.$member | Export-Excel -Title $member -WorksheetName $member @ExcelOptions }
+		foreach ($Member in $Members) {
+			if ($ToReport.$member) { $ToReport.$Member | Export-Excel -Title $Member -WorksheetName $Member @ExcelOptions }
 		}
 	}
-	if ($HTML) { 
+
+	if ($HTML) {
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Creating HTML Report "
 		$TableSettings = @{
 			Style           = 'cell-border'
 			TextWhenNoData  = 'No Data to display here'
@@ -140,7 +158,7 @@ Function Write-PSReports {
 			HideFooter      = $true
 			SearchHighlight = $true
 			PagingStyle     = 'full'
-			PagingLength    = 50
+			PagingLength    = 100
 			AutoSize        = $true
 			ScrollX         = $true
 			ScrollCollapse  = $true
@@ -177,22 +195,23 @@ Function Write-PSReports {
 			New-HTMLHeader {
 				New-HTMLText -FontSize 20 -FontStyle normal -Color '#00203F' -Alignment left -Text $HeadingText
 			}
-			foreach ($member in $members) {
-				if ($InputObject.$member) {New-HTMLTab -Name $member @TabSettings -HtmlData {New-HTMLSection @TableSectionSettings { New-HTMLTable -DataTable $InputObject.$member @TableSettings}}}
+			foreach ($Member in $Members) {
+				if ($ToReport.$member) { New-HTMLTab -Name $Member @TabSettings -HtmlData { New-HTMLSection @TableSectionSettings { New-HTMLTable -DataTable $ToReport.$Member @TableSettings } } }
 			}
 		}
 	}
 	if ($HTML5) {
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Creating HTML5 Report "
 		New-PWFPage -Title $($ReportTitle) -Content {
-			New-PWFCardHeader -BackgroundColor '#fff' -Center -Content {New-PWFTitles -TitleText "$($ReportTitle)" -Size 1}
+			New-PWFCardHeader -BackgroundColor '#fff' -Center -Content { New-PWFTitles -TitleText "$($ReportTitle)" -Size 1 }
 			New-PWFTabContainer -Tabs {
-				foreach ($member in $members) {
-					New-PWFTab -Name $member -Content {
+				foreach ($Member in $Members) {
+					New-PWFTab -Name $Member -Content {
 						New-PWFRow -Content {
 							New-PWFColumn -Content {
 								New-PWFCard -BackgroundColor '#fff' -Content {
-									New-PWFTitles -Size 3 -TitleText $member -Center
-									New-PWFTable -ToTable ($InputObject.$member) -Pagination -DetailsOnClick -SortByColumn -ShowTooltip -EnableSearch -Exportbuttons -ContextualColor dark -Striped
+									New-PWFTitles -Size 3 -TitleText $Member -Center
+									New-PWFTable -ToTable ($ToReport.$member) -Pagination -DetailsOnClick -SortByColumn -ShowTooltip -EnableSearch -Exportbuttons -ContextualColor dark -Striped
 								}
 							}
 						}
@@ -201,5 +220,9 @@ Function Write-PSReports {
 			}
 		} | Out-File -Encoding utf8 -FilePath $(Join-Path -Path $ReportPath -ChildPath "\$($ReportTitle.Replace(' ','_'))_HTML5_$(Get-Date -Format yyyy.MM.dd-HH.mm).html")
 	}
-	if ($OpenReportsFolder) {Start-Process -FilePath explorer.exe -ArgumentList $($ReportPath)}
+	if ($OpenReportsFolder) { 
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Opening Folder"
+		Start-Process -FilePath explorer.exe -ArgumentList $($ReportPath) 
+	}
+	Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Done"
 } #end Function
