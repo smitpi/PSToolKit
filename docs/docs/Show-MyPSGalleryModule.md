@@ -52,7 +52,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Collections.Generic.List`1[[System.Management.Automation.PSObject, System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]
+### System.Collections.Generic.List`1[[System.Management.Automation.PSObject, System.Management.Automation, Version=7.3.3.500, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]
 ## NOTES
 
 ## RELATED LINKS

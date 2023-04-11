@@ -33,6 +33,7 @@ Functions in this module:
 	 Get-ProcessPerformance -- Gets the top 10 processes by CPU %
 	 Get-PropertiesToCSV -- Get member data of an object. Use it to create other PSObjects.
 	 Get-PSObject -- Show all Object Methods and Properties.
+	 Get-RDSSessionReport -- Reports on Connects and Disconnects on a RDS Farm.
 	 Get-SoftwareAudit -- Connects to a remote hosts and collect installed software details
 	 Get-SystemInfo -- Get system details of a remote device
 	 Get-SystemUptime -- Calculates the uptime of a system
@@ -70,6 +71,7 @@ Functions in this module:
 	 Restore-ElevatedShortcut -- Restore the RunAss shortcuts, from a zip file
 	 Search-Script -- Search for a string in a directory of ps1 scripts.
 	 Set-FolderCustomIcon -- Will change the icon of a folder to a custom selected icon
+	 Set-PSProjectFile -- Creates and modify needed files for a PS project from existing module files.
 	 Set-PSToolKitSystemSetting -- Set multiple settings on desktop or server
 	 Set-SharedPSProfile -- Redirects PowerShell and WindowsPowerShell profile folder to another path.
 	 Set-StaticIP -- Set static IP on device
@@ -80,6 +82,7 @@ Functions in this module:
 	 Show-ComputerManagement -- Opens the Computer Management of the system or remote system
 	 Show-MyPSGalleryModule -- Show version numbers ext. about my modules.
 	 Show-PSToolKit -- Show details of the commands in this module.
+	 Start-DomainControllerReplication -- Start replication between Domain Controllers.
 	 Start-PowerShellAsAdmin -- Starts a porwershell session as an administrator
 	 Start-PSProfile -- My PS Profile for all sessions.
 	 Start-PSRoboCopy -- My wrapper for default robocopy switches

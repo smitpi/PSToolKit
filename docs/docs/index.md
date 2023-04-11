@@ -89,6 +89,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Get-ProcessPerformance`](https://smitpi.github.io/PSToolKit/Get-ProcessPerformance) -- Gets the top 10 processes by CPU %
 - [`Get-PropertiesToCSV`](https://smitpi.github.io/PSToolKit/Get-PropertiesToCSV) -- Get member data of an object. Use it to create other PSObjects.
 - [`Get-PSObject`](https://smitpi.github.io/PSToolKit/Get-PSObject) -- Show all Object Methods and Properties.
+- [`Get-RDSSessionReport`](https://smitpi.github.io/PSToolKit/Get-RDSSessionReport) -- Reports on Connects and Disconnects on a RDS Farm.
 - [`Get-SoftwareAudit`](https://smitpi.github.io/PSToolKit/Get-SoftwareAudit) -- Connects to a remote hosts and collect installed software details
 - [`Get-SystemInfo`](https://smitpi.github.io/PSToolKit/Get-SystemInfo) -- Get system details of a remote device
 - [`Get-SystemUptime`](https://smitpi.github.io/PSToolKit/Get-SystemUptime) -- Calculates the uptime of a system
@@ -126,6 +127,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Restore-ElevatedShortcut`](https://smitpi.github.io/PSToolKit/Restore-ElevatedShortcut) -- Restore the RunAss shortcuts, from a zip file
 - [`Search-Script`](https://smitpi.github.io/PSToolKit/Search-Script) -- Search for a string in a directory of ps1 scripts.
 - [`Set-FolderCustomIcon`](https://smitpi.github.io/PSToolKit/Set-FolderCustomIcon) -- Will change the icon of a folder to a custom selected icon
+- [`Set-PSProjectFile`](https://smitpi.github.io/PSToolKit/Set-PSProjectFile) -- Creates and modify needed files for a PS project from existing module files.
 - [`Set-PSToolKitSystemSetting`](https://smitpi.github.io/PSToolKit/Set-PSToolKitSystemSetting) -- Set multiple settings on desktop or server
 - [`Set-SharedPSProfile`](https://smitpi.github.io/PSToolKit/Set-SharedPSProfile) -- Redirects PowerShell and WindowsPowerShell profile folder to another path.
 - [`Set-StaticIP`](https://smitpi.github.io/PSToolKit/Set-StaticIP) -- Set static IP on device
@@ -136,6 +138,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Show-ComputerManagement`](https://smitpi.github.io/PSToolKit/Show-ComputerManagement) -- Opens the Computer Management of the system or remote system
 - [`Show-MyPSGalleryModule`](https://smitpi.github.io/PSToolKit/Show-MyPSGalleryModule) -- Show version numbers ext. about my modules.
 - [`Show-PSToolKit`](https://smitpi.github.io/PSToolKit/Show-PSToolKit) -- Show details of the commands in this module.
+- [`Start-DomainControllerReplication`](https://smitpi.github.io/PSToolKit/Start-DomainControllerReplication) -- Start replication between Domain Controllers.
 - [`Start-PowerShellAsAdmin`](https://smitpi.github.io/PSToolKit/Start-PowerShellAsAdmin) -- Starts a porwershell session as an administrator
 - [`Start-PSProfile`](https://smitpi.github.io/PSToolKit/Start-PSProfile) -- My PS Profile for all sessions.
 - [`Start-PSRoboCopy`](https://smitpi.github.io/PSToolKit/Start-PSRoboCopy) -- My wrapper for default robocopy switches
