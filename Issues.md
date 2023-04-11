@@ -1,4 +1,4 @@
-﻿<style>
+<style>
 table {
     border-collapse: collapse;
 }
@@ -20,12 +20,12 @@ body {
 
 ---
 
-| Catagory   | File              | details |
-| ---------- | ----------------- | ------- |
-|            |                   |         |
-| Not Copied | Set-PSProjectFile | =>      |
-| Not Copied | Get-BinRoot       | <=      |
+| Catagory      | File                              | details                     |
+| ------------- | --------------------------------- | --------------------------- |
+| External Help | Get-RDSSessionReport              | Did not create the .md file |
+| External Help | Start-DomainControllerReplication | Did not create the .md file |
+|               |                                   |                             |
 
 ---
 
-*Updated: Tuesday, 03 January 2023 10:08:31 UTC*
+*Updated: Tuesday, 11 April 2023 06:41:07 UTC*
