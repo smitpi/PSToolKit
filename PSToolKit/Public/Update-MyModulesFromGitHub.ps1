@@ -32,8 +32,6 @@ Created [29/07/2022_07:27] Initial Script Creating
 
 #>
 
-#Requires -Module PSWriteColor
-
 <# 
 
 .DESCRIPTION 
@@ -96,7 +94,7 @@ Function Update-MyModulesFromGitHub {
 		$ModInstFolder = Get-Module $ModuleName -ListAvailable | Where-Object {$_.path -notlike "$($ModulePath)*"}
 		foreach ($UnInstMod in $ModInstFolder) {
 			try {
-                Write-Host "[Removing]: " -NoNewline -ForegroundColor Yellow; Write-Host "$($ModuleName) Path: " -ForegroundColor Cyan -NoNewline; Write-Host " $($UnInstMod.Path)"    
+				Write-Host '[Removing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "$($ModuleName) Path: " -ForegroundColor Cyan -NoNewline; Write-Host " $($UnInstMod.Path)"    
 				Join-Path -Path $UnInstMod.Path -ChildPath ..\.. -Resolve | Remove-Item -Force -Recurse -ErrorAction Stop
 			} catch {Write-Warning "Error removing $($UnInstMod.Path): Message:$($Error[0])"}
 		}
@@ -151,10 +149,10 @@ Function Update-MyModulesFromGitHub {
 			Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Removing temp files"
 			Remove-Item $PSDownload -Force -Recurse
 
-            Remove-Module -Name $($ModuleName) -Force -ErrorAction SilentlyContinue
-		    try {
-			    Import-Module $($ModuleName) -Force -ErrorAction Stop -Global
-		    } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+			Remove-Module -Name $($ModuleName) -Force -ErrorAction SilentlyContinue
+			try {
+				Import-Module $($ModuleName) -Force -ErrorAction Stop -Global
+			} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
 			$module = Get-Module -Name $($ModuleName)
 			if (-not($module)) { $module = Get-Module -Name $($ModuleName) -ListAvailable }
 			$latestModule = $module | Sort-Object -Property version -Descending | Select-Object -First 1
@@ -171,7 +169,7 @@ Function Update-MyModulesFromGitHub {
 				Date        = (Get-Date($CreateDate) -Format F)
 				Path        = $module.Path
 			}
-          Write-Host "$($DWNOBject | Out-String)" -ForegroundColor Yellow
+			Write-Host "$($DWNOBject | Out-String)" -ForegroundColor Yellow
 		}
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Complete]"
 		

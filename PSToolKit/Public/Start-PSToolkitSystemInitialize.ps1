@@ -159,18 +159,6 @@ Function Start-PSToolkitSystemInitialize {
 	}
 	#endregion
 
-	#region Boxstarter Install
-	if (-not(Test-Path "$($PSDownload.fullname)\BoxstarterShell.tmp")) {
-		if (-not(Get-Command BoxstarterShell.ps1 -ErrorAction SilentlyContinue)) {
-			Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Boxstarter:' -ForegroundColor Cyan
-			[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-			Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://boxstarter.org/bootstrapper.ps1')) 
-			Get-Boxstarter -Force
-		}
-		New-Item "$($PSDownload.fullname)\BoxstarterShell.tmp" -ItemType file -Force | Out-Null
-	}
-	#endregion
-
 	#region Needed Modules
 	if (-not(Test-Path "$($PSDownload.fullname)\NeededModules.tmp")) {
 		Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "Needed PowerShell Modules`n" -ForegroundColor Cyan
@@ -233,6 +221,17 @@ Function Start-PSToolkitSystemInitialize {
 
 	#region Lab Setup
 	if ($LabSetup) {
+		#region Boxstarter Install
+		if (-not(Test-Path "$($PSDownload.fullname)\BoxstarterShell.tmp")) {
+			if (-not(Get-Command BoxstarterShell.ps1 -ErrorAction SilentlyContinue)) {
+				Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host 'Boxstarter:' -ForegroundColor Cyan
+				[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+				Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://boxstarter.org/bootstrapper.ps1')) 
+				Get-Boxstarter -Force
+			}
+			New-Item "$($PSDownload.fullname)\BoxstarterShell.tmp" -ItemType file -Force | Out-Null
+		}
+		#endregion
 		if (-not(Test-Path "$($PSDownload.fullname)\LabSetup.tmp")) {
 			Write-Host "`n-----------------------------------" -ForegroundColor DarkCyan; Write-Host '[Installing]: ' -NoNewline -ForegroundColor Yellow; Write-Host "System Settings`n" -ForegroundColor Cyan 
 			Set-PSToolKitSystemSetting -RunAll

@@ -372,13 +372,18 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <ul>
 <li>Run this script to install from GitHub <a href="https://github.com/smitpi/PSToolKit">GitHub Repo</a></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="nv">$CurrentLocation</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="p">.</span>
+<p><div class="highlight"><pre><span></span><code><span class="nv">$CurrentLocation</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="p">.</span>
 <span class="nv">$ModuleDestination</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="p">(</span><span class="nb">Get-Item</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="p">(</span><span class="nb">Get-Item</span> <span class="nv">$profile</span><span class="p">).</span><span class="n">Directory</span> <span class="s1">&#39;Modules&#39;</span><span class="p">)).</span><span class="n">FullName</span> <span class="n">-ChildPath</span> <span class="n">PSToolKit</span><span class="p">)</span>
 <span class="n">git</span> <span class="n">clone</span> <span class="p">-</span><span class="n">-depth</span> <span class="n">1</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">smitpi</span><span class="p">/</span><span class="n">PSToolKit</span> <span class="nv">$ModuleDestination</span> <span class="n">2</span><span class="p">&gt;&amp;</span><span class="n">1</span> <span class="p">|</span> <span class="nb">Write-Host</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
 <span class="nb">Set-Location</span> <span class="nv">$ModuleDestination</span>
 <span class="n">git</span> <span class="k">filter</span><span class="n">-branch</span> <span class="p">-</span><span class="n">-prune-empty</span> <span class="p">-</span><span class="n">-subdirectory-filter</span> <span class="n">Output</span> <span class="n">HEAD</span> <span class="n">2</span><span class="p">&gt;&amp;</span><span class="n">1</span> <span class="p">|</span> <span class="nb">Write-Host</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
 <span class="nb">Set-Location</span> <span class="nv">$CurrentLocation</span>
 </code></pre></div>
+- Or from the created Powershell Script:
+<div class="highlight"><pre><span></span><code><span class="nb">Set-ExecutionPolicy</span> <span class="n">Bypass</span> <span class="n">-Scope</span> <span class="k">Process</span> <span class="n">-Force</span>
+<span class="p">(</span><span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebClient</span><span class="p">).</span><span class="n">DownloadFile</span><span class="p">(</span><span class="s1">&#39;https://bit.ly/35sEu2b&#39;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="p">$(</span><span class="nv">$env:tmp</span><span class="p">)</span><span class="s2">\Start-PSToolkitSystemInitialize.ps1&quot;</span><span class="p">)</span>
+<span class="nb">Import-Module</span> <span class="p">(</span><span class="nb">Get-Item</span> <span class="s2">&quot;</span><span class="p">$(</span><span class="nv">$env:tmp</span><span class="p">)</span><span class="s2">\Start-PSToolkitSystemInitialize.ps1&quot;</span><span class="p">)</span> <span class="n">-Force</span><span class="p">;</span> <span class="nb">Start-PSToolkitSystemInitialize</span>
+</code></pre></div></p>
 <ul>
 <li>Then import the module into your session</li>
 </ul>
@@ -532,5 +537,5 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </html>
 <!--
 MkDocs version : 1.4.2
-Build Date UTC : 2023-04-18 11:26:05.873731+00:00
+Build Date UTC : 2023-04-18 12:05:31.041671+00:00
 -->

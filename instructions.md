@@ -42,6 +42,12 @@ Set-Location $ModuleDestination
 git filter-branch --prune-empty --subdirectory-filter Output HEAD 2>&1 | Write-Host -ForegroundColor Yellow
 Set-Location $CurrentLocation
 ```
+- Or from the created Powershell Script:
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force
+(New-Object System.Net.WebClient).DownloadFile('https://bit.ly/35sEu2b', "$($env:tmp)\Start-PSToolkitSystemInitialize.ps1")
+Import-Module (Get-Item "$($env:tmp)\Start-PSToolkitSystemInitialize.ps1") -Force; Start-PSToolkitSystemInitialize
+```
 
 - Then import the module into your session
 
