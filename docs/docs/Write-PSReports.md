@@ -24,11 +24,12 @@ Creates a excel or html report
 
 ### EXAMPLE 1
 ```
-[System.Collections.generic.List[PSObject]]$Conditions = @()    
+[System.Collections.generic.List[PSObject]]$Conditions = @()
+```
+
 $Conditions.Add((New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor Yellow -Range 'E:E' ))
 $Conditions.Add((New-ConditionalText -Text 'Error' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' ))
 $Conditions.Add((New-ConditionalText -Text 'Critical' -ConditionalTextColor white -BackgroundColor Red -Range 'E:E' ))
-```
 
 Write-PSReports -InputObject $report -ReportTitle 'Windows Events' -Export All -ReportPath C:\temp -ExcelConditionalText $Conditions
 
