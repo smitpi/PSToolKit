@@ -81,7 +81,7 @@ Function Start-PSRoboCopy {
         PARAM(
                 [Parameter(Mandatory = $true)]
                 [ValidateScript( { if (Test-Path $_) { $true }
-                                else { trow "Source: $($_) does not exist." }
+                                else { throw "Source: $($_) does not exist." }
                         })]
                 [System.IO.DirectoryInfo]$Source,
                 [Parameter(Mandatory = $true)]
