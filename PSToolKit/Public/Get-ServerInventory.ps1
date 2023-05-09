@@ -39,7 +39,6 @@ Created [09/05/2023_08:08] Initial Script
 
 #> 
 
-
 <#
 .SYNOPSIS
 Connect to remote host and collect server details.
@@ -47,9 +46,20 @@ Connect to remote host and collect server details.
 .DESCRIPTION
 Connect to remote host and collect server details.
 
-.EXAMPLE
-Get-ServerInventory -Export HTML -ReportPath C:\temp
+.PARAMETER ComputerName
+Computer to scan.
 
+.PARAMETER Credentials
+Credentials used for the connection.
+
+.PARAMETER Export
+Export the report to html or excel.
+
+.PARAMETER ReportPath
+Where to save the report.
+
+.EXAMPLE
+Get-ServerInventory -ComputerName '172.16.72.198', '172.16.72.200' -Export Excel,HTML -ReportPath C:\temp\reports 
 #>
 Function Get-ServerInventory {
 	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Get-ServerInventory')]

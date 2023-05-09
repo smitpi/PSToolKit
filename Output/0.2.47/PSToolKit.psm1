@@ -3,7 +3,7 @@
 ######## Function 1 of 96 ##################
 # Function:         Add-ChocolateyPrivateRepo
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -103,7 +103,7 @@ Export-ModuleMember -Function Add-ChocolateyPrivateRepo
 ######## Function 2 of 96 ##################
 # Function:         Backup-ElevatedShortcut
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -151,7 +151,7 @@ Export-ModuleMember -Function Backup-ElevatedShortcut
 ######## Function 3 of 96 ##################
 # Function:         Backup-PowerShellProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -208,7 +208,7 @@ Export-ModuleMember -Function Backup-PowerShellProfile
 ######## Function 4 of 96 ##################
 # Function:         Compare-ADMembership
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -460,7 +460,7 @@ Export-ModuleMember -Function Compare-ADMembership
 ######## Function 5 of 96 ##################
 # Function:         Connect-VMWareCluster
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -509,7 +509,7 @@ Export-ModuleMember -Function Connect-VMWareCluster
 ######## Function 6 of 96 ##################
 # Function:         Disable-WebEncoding
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -561,7 +561,7 @@ Export-ModuleMember -Function Disable-WebEncoding
 ######## Function 7 of 96 ##################
 # Function:         Edit-SSHConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -741,7 +741,7 @@ Export-ModuleMember -Function Edit-SSHConfigFile
 ######## Function 8 of 96 ##################
 # Function:         Enable-RemoteHostPSRemoting
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -803,7 +803,7 @@ Export-ModuleMember -Function Enable-RemoteHostPSRemoting
 ######## Function 9 of 96 ##################
 # Function:         Enable-WebEncoding
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -854,7 +854,7 @@ Export-ModuleMember -Function Enable-WebEncoding
 ######## Function 10 of 96 ##################
 # Function:         Export-ESXTemplate
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -906,7 +906,7 @@ Export-ModuleMember -Function Export-ESXTemplate
 ######## Function 11 of 96 ##################
 # Function:         Find-ChocolateyApp
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -991,7 +991,7 @@ Export-ModuleMember -Function Find-ChocolateyApp
 ######## Function 12 of 96 ##################
 # Function:         Find-OnlineModule
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -1173,7 +1173,7 @@ Export-ModuleMember -Function Find-OnlineModule
 ######## Function 13 of 96 ##################
 # Function:         Find-OnlineScript
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -1360,7 +1360,7 @@ Export-ModuleMember -Function Find-OnlineScript
 ######## Function 14 of 96 ##################
 # Function:         Get-CitrixClientVersion
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -1459,7 +1459,7 @@ Export-ModuleMember -Function Get-CitrixClientVersion
 ######## Function 15 of 96 ##################
 # Function:         Get-CitrixPolicy
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -1543,7 +1543,7 @@ Export-ModuleMember -Function Get-CitrixPolicy
 ######## Function 16 of 96 ##################
 # Function:         Get-CommandFiltered
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -1606,7 +1606,7 @@ Export-ModuleMember -Function Get-CommandFiltered
 ######## Function 17 of 96 ##################
 # Function:         Get-FolderSize
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Joakim Svendsen
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -1774,7 +1774,7 @@ Export-ModuleMember -Function Get-FolderSize
 ######## Function 18 of 96 ##################
 # Function:         Get-FQDN
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -1831,7 +1831,7 @@ Export-ModuleMember -Function Get-FQDN
 ######## Function 19 of 96 ##################
 # Function:         Get-FullADUserDetail
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -1920,7 +1920,7 @@ Export-ModuleMember -Function Get-FullADUserDetail
 ######## Function 20 of 96 ##################
 # Function:         Get-MyPSGalleryReport
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -2001,7 +2001,7 @@ Export-ModuleMember -Function Get-MyPSGalleryReport
 ######## Function 21 of 96 ##################
 # Function:         Get-MyPSGalleryStat
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -2137,7 +2137,7 @@ Export-ModuleMember -Function Get-MyPSGalleryStat
 ######## Function 22 of 96 ##################
 # Function:         Get-NestedADGroupMember
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -2270,7 +2270,7 @@ Export-ModuleMember -Function Get-NestedADGroupMember
 ######## Function 23 of 96 ##################
 # Function:         Get-ProcessPerformance
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -2335,7 +2335,7 @@ Export-ModuleMember -Function Get-ProcessPerformance
 ######## Function 24 of 96 ##################
 # Function:         Get-PropertiesToCSV
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -2377,7 +2377,7 @@ Export-ModuleMember -Function Get-PropertiesToCSV
 ######## Function 25 of 96 ##################
 # Function:         Get-PSObject
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -2428,7 +2428,7 @@ Export-ModuleMember -Function Get-PSObject
 ######## Function 26 of 96 ##################
 # Function:         Get-RDSSessionReport
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -2566,11 +2566,11 @@ Export-ModuleMember -Function Get-RDSSessionReport
 ######## Function 27 of 96 ##################
 # Function:         Get-ServerInventory
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/9/2023 8:08:30 AM
-# ModifiedOn:       5/9/2023 7:01:39 PM
+# ModifiedOn:       5/9/2023 7:16:17 PM
 # Synopsis:         Connect to remote host and collect server details.
 #############################################
  
@@ -2581,9 +2581,20 @@ Connect to remote host and collect server details.
 .DESCRIPTION
 Connect to remote host and collect server details.
 
-.EXAMPLE
-Get-ServerInventory -Export HTML -ReportPath C:\temp
+.PARAMETER ComputerName
+Computer to scan.
 
+.PARAMETER Credentials
+Credentials used for the connection.
+
+.PARAMETER Export
+Export the report to html or excel.
+
+.PARAMETER ReportPath
+Where to save the report.
+
+.EXAMPLE
+Get-ServerInventory -ComputerName '172.16.72.198', '172.16.72.200' -Export Excel,HTML -ReportPath C:\temp\reports 
 #>
 Function Get-ServerInventory {
 	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Get-ServerInventory')]
@@ -2684,7 +2695,7 @@ Export-ModuleMember -Function Get-ServerInventory
 ######## Function 28 of 96 ##################
 # Function:         Get-SoftwareAudit
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -2806,7 +2817,7 @@ Export-ModuleMember -Function Get-SoftwareAudit
 ######## Function 29 of 96 ##################
 # Function:         Get-SystemInfo
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -3117,7 +3128,7 @@ Export-ModuleMember -Function Get-SystemInfo
 ######## Function 30 of 96 ##################
 # Function:         Get-SystemUptime
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -3210,7 +3221,7 @@ Export-ModuleMember -Function Get-SystemUptime
 ######## Function 31 of 96 ##################
 # Function:         Get-WinEventLogExtract
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -3329,7 +3340,7 @@ Export-ModuleMember -Function Get-WinEventLogExtract
 ######## Function 32 of 96 ##################
 # Function:         Import-CitrixSiteConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -3376,7 +3387,7 @@ Export-ModuleMember -Function Import-CitrixSiteConfigFile
 ######## Function 33 of 96 ##################
 # Function:         Import-XamlConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -3509,7 +3520,7 @@ Export-ModuleMember -Function Import-XamlConfigFile
 ######## Function 34 of 96 ##################
 # Function:         Install-BGInfo
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -3588,7 +3599,7 @@ Export-ModuleMember -Function Install-BGInfo
 ######## Function 35 of 96 ##################
 # Function:         Install-ChocolateyClient
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -3646,7 +3657,7 @@ Export-ModuleMember -Function Install-ChocolateyClient
 ######## Function 36 of 96 ##################
 # Function:         Install-ChocolateyServer
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -3771,7 +3782,7 @@ Export-ModuleMember -Function Install-ChocolateyServer
 ######## Function 37 of 96 ##################
 # Function:         Install-LocalPSRepository
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -3865,7 +3876,7 @@ Export-ModuleMember -Function Install-LocalPSRepository
 ######## Function 38 of 96 ##################
 # Function:         Install-MSUpdate
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -3929,7 +3940,7 @@ Export-ModuleMember -Function Install-MSUpdate
 ######## Function 39 of 96 ##################
 # Function:         Install-NFSClient
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -3985,7 +3996,7 @@ Export-ModuleMember -Function Install-NFSClient
 ######## Function 40 of 96 ##################
 # Function:         Install-PowerShell7x
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -4037,7 +4048,7 @@ Export-ModuleMember -Function Install-PowerShell7x
 ######## Function 41 of 96 ##################
 # Function:         Install-RSAT
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -4099,7 +4110,7 @@ Export-ModuleMember -Function Install-RSAT
 ######## Function 42 of 96 ##################
 # Function:         Install-VMWareTool
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -4145,7 +4156,7 @@ Export-ModuleMember -Function Install-VMWareTool
 ######## Function 43 of 96 ##################
 # Function:         New-CitrixSiteConfigFile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -4338,7 +4349,7 @@ Export-ModuleMember -Function New-CitrixSiteConfigFile
 ######## Function 44 of 96 ##################
 # Function:         New-ElevatedShortcut
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -4435,7 +4446,7 @@ Export-ModuleMember -Function New-ElevatedShortcut
 ######## Function 45 of 96 ##################
 # Function:         New-GodModeFolder
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -4470,7 +4481,7 @@ Export-ModuleMember -Function New-GodModeFolder
 ######## Function 46 of 96 ##################
 # Function:         New-GoogleSearch
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -4521,7 +4532,7 @@ Export-ModuleMember -Function New-GoogleSearch
 ######## Function 47 of 96 ##################
 # Function:         New-MSEdgeWebApp
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -4612,7 +4623,7 @@ Export-ModuleMember -Function New-MSEdgeWebApp
 ######## Function 48 of 96 ##################
 # Function:         New-PSGenericList
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Jeff Hicks
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -4723,7 +4734,7 @@ Export-ModuleMember -Function New-PSGenericList
 ######## Function 49 of 96 ##################
 # Function:         New-PSModule
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -4821,7 +4832,7 @@ Export-ModuleMember -Function New-PSModule
 ######## Function 50 of 96 ##################
 # Function:         New-PSProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -4950,7 +4961,7 @@ Export-ModuleMember -Function New-PSProfile
 ######## Function 51 of 96 ##################
 # Function:         New-PSReportingScript
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -5164,7 +5175,7 @@ Export-ModuleMember -Function New-PSReportingScript
 ######## Function 52 of 96 ##################
 # Function:         New-PSScript
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -5322,7 +5333,7 @@ Export-ModuleMember -Function New-PSScript
 ######## Function 53 of 96 ##################
 # Function:         New-SuggestedInfraName
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -5414,7 +5425,7 @@ Export-ModuleMember -Function New-SuggestedInfraName
 ######## Function 54 of 96 ##################
 # Function:         Publish-ModuleToLocalRepo
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -5491,7 +5502,7 @@ Export-ModuleMember -Function Publish-ModuleToLocalRepo
 ######## Function 55 of 96 ##################
 # Function:         Remove-CIMUserProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -5538,7 +5549,7 @@ Export-ModuleMember -Function Remove-CIMUserProfile
 ######## Function 56 of 96 ##################
 # Function:         Remove-FaultyProfileList
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -5616,7 +5627,7 @@ Export-ModuleMember -Function Remove-FaultyProfileList
 ######## Function 57 of 96 ##################
 # Function:         Remove-HiddenDevice
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -6014,7 +6025,7 @@ Export-ModuleMember -Function Remove-HiddenDevice
 ######## Function 58 of 96 ##################
 # Function:         Remove-UserProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -6093,7 +6104,7 @@ Export-ModuleMember -Function Remove-UserProfile
 ######## Function 59 of 96 ##################
 # Function:         Reset-Module
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -6155,7 +6166,7 @@ Export-ModuleMember -Function Reset-Module
 ######## Function 60 of 96 ##################
 # Function:         Reset-PSGallery
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -6246,7 +6257,7 @@ Export-ModuleMember -Function Reset-PSGallery
 ######## Function 61 of 96 ##################
 # Function:         Resolve-SID
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Jeff Hicks
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -6344,7 +6355,7 @@ Export-ModuleMember -Function Resolve-SID
 ######## Function 62 of 96 ##################
 # Function:         Restore-ElevatedShortcut
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -6416,7 +6427,7 @@ Export-ModuleMember -Function Restore-ElevatedShortcut
 ######## Function 63 of 96 ##################
 # Function:         Search-Script
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -6480,7 +6491,7 @@ Export-ModuleMember -Function Search-Script
 ######## Function 64 of 96 ##################
 # Function:         Set-FolderCustomIcon
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -6555,7 +6566,7 @@ Export-ModuleMember -Function Set-FolderCustomIcon
 ######## Function 65 of 96 ##################
 # Function:         Set-PSProjectFile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -7212,7 +7223,7 @@ Export-ModuleMember -Function Set-PSProjectFile
 ######## Function 66 of 96 ##################
 # Function:         Set-PSToolKitSystemSetting
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -7867,7 +7878,7 @@ Export-ModuleMember -Function Set-PSToolKitSystemSetting
 ######## Function 67 of 96 ##################
 # Function:         Set-SharedPSProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -7990,7 +8001,7 @@ Export-ModuleMember -Function Set-SharedPSProfile
 ######## Function 68 of 96 ##################
 # Function:         Set-StaticIP
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -8042,7 +8053,7 @@ Export-ModuleMember -Function Set-StaticIP
 ######## Function 69 of 96 ##################
 # Function:         Set-TempFolder
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -8084,7 +8095,7 @@ Export-ModuleMember -Function Set-TempFolder
 ######## Function 70 of 96 ##################
 # Function:         Set-UserDesktopWallpaper
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -8165,7 +8176,7 @@ Export-ModuleMember -Function Set-UserDesktopWallpaper
 ######## Function 71 of 96 ##################
 # Function:         Set-VSCodeExplorerSortOrder
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -8227,7 +8238,7 @@ Export-ModuleMember -Function Set-VSCodeExplorerSortOrder
 ######## Function 72 of 96 ##################
 # Function:         Set-WindowsAutoLogin
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -8347,7 +8358,7 @@ Export-ModuleMember -Function Set-WindowsAutoLogin
 ######## Function 73 of 96 ##################
 # Function:         Show-ComputerManagement
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -8386,7 +8397,7 @@ Export-ModuleMember -Function Show-ComputerManagement
 ######## Function 74 of 96 ##################
 # Function:         Show-MyPSGalleryModule
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -8447,7 +8458,7 @@ Export-ModuleMember -Function Show-MyPSGalleryModule
 ######## Function 75 of 96 ##################
 # Function:         Show-PSToolKit
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -8742,7 +8753,7 @@ Export-ModuleMember -Function Show-PSToolKit
 ######## Function 76 of 96 ##################
 # Function:         Start-DomainControllerReplication
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -8805,7 +8816,7 @@ Export-ModuleMember -Function Start-DomainControllerReplication
 ######## Function 77 of 96 ##################
 # Function:         Start-PowerShellAsAdmin
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -8875,7 +8886,7 @@ Export-ModuleMember -Function Start-PowerShellAsAdmin
 ######## Function 78 of 96 ##################
 # Function:         Start-PSProfile
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -9057,7 +9068,7 @@ Export-ModuleMember -Function Start-PSProfile
 ######## Function 79 of 96 ##################
 # Function:         Start-PSRoboCopy
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -9178,7 +9189,7 @@ Export-ModuleMember -Function Start-PSRoboCopy
 ######## Function 80 of 96 ##################
 # Function:         Start-PSScriptAnalyzer
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -9338,7 +9349,7 @@ Export-ModuleMember -Function Start-PSScriptAnalyzer
 ######## Function 81 of 96 ##################
 # Function:         Start-PSToolkitSystemInitialize
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -9586,7 +9597,7 @@ Export-ModuleMember -Function Start-PSToolkitSystemInitialize
 ######## Function 82 of 96 ##################
 # Function:         Test-CitrixCloudConnector
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -9693,7 +9704,7 @@ Export-ModuleMember -Function Test-CitrixCloudConnector
 ######## Function 83 of 96 ##################
 # Function:         Test-CitrixVDAPort
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -9795,7 +9806,7 @@ Export-ModuleMember -Function Test-CitrixVDAPort
 ######## Function 84 of 96 ##################
 # Function:         Test-IsFileOpen
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -9899,7 +9910,7 @@ Export-ModuleMember -Function Test-IsFileOpen
 ######## Function 85 of 96 ##################
 # Function:         Test-PSPendingReboot
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -10083,7 +10094,7 @@ Export-ModuleMember -Function Test-PSPendingReboot
 ######## Function 86 of 96 ##################
 # Function:         Test-PSRemote
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -10143,7 +10154,7 @@ Export-ModuleMember -Function Test-PSRemote
 ######## Function 87 of 96 ##################
 # Function:         Test-SystemOnline
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -10229,7 +10240,7 @@ Export-ModuleMember -Function Test-SystemOnline
 ######## Function 88 of 96 ##################
 # Function:         Update-ListOfDDC
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -10296,7 +10307,7 @@ Export-ModuleMember -Function Update-ListOfDDC
 ######## Function 89 of 96 ##################
 # Function:         Update-LocalHelp
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -10345,7 +10356,7 @@ Export-ModuleMember -Function Update-LocalHelp
 ######## Function 90 of 96 ##################
 # Function:         Update-MyModulesFromGitHub
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -10496,7 +10507,7 @@ Export-ModuleMember -Function Update-MyModulesFromGitHub
 ######## Function 91 of 96 ##################
 # Function:         Update-PSDefaultParameter
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -10571,7 +10582,7 @@ Export-ModuleMember -Function Update-PSDefaultParameter
 ######## Function 92 of 96 ##################
 # Function:         Update-PSModuleInfo
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -10677,7 +10688,7 @@ Export-ModuleMember -Function Update-PSModuleInfo
 ######## Function 93 of 96 ##################
 # Function:         Write-Ascii
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Joakim Svendsen
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -11075,7 +11086,7 @@ Export-ModuleMember -Function Write-Ascii
 ######## Function 94 of 96 ##################
 # Function:         Write-PSMessage
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
@@ -11232,7 +11243,7 @@ Export-ModuleMember -Function Write-PSMessage
 ######## Function 95 of 96 ##################
 # Function:         Write-PSReports
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/9/2023 7:09:09 PM
@@ -11430,7 +11441,7 @@ Export-ModuleMember -Function Write-PSReports
 ######## Function 96 of 96 ##################
 # Function:         Write-PSToolKitLog
 # Module:           PSToolKit
-# ModuleVersion:    0.2.46
+# ModuleVersion:    0.2.47
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        5/4/2023 3:39:27 PM
