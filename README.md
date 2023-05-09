@@ -96,6 +96,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Get-PropertiesToCSV`](https://smitpi.github.io/PSToolKit/Get-PropertiesToCSV) -- Get member data of an object. Use it to create other PSObjects.
 - [`Get-PSObject`](https://smitpi.github.io/PSToolKit/Get-PSObject) -- Show all Object Methods and Properties.
 - [`Get-RDSSessionReport`](https://smitpi.github.io/PSToolKit/Get-RDSSessionReport) -- Reports on Connects and Disconnects on a RDS Farm.
+- [`Get-ServerInventory`](https://smitpi.github.io/PSToolKit/Get-ServerInventory) -- Connect to remote host and collect server details.
 - [`Get-SoftwareAudit`](https://smitpi.github.io/PSToolKit/Get-SoftwareAudit) -- Connects to a remote hosts and collect installed software details
 - [`Get-SystemInfo`](https://smitpi.github.io/PSToolKit/Get-SystemInfo) -- Get system details of a remote device
 - [`Get-SystemUptime`](https://smitpi.github.io/PSToolKit/Get-SystemUptime) -- Calculates the uptime of a system

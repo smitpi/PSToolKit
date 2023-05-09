@@ -80,8 +80,7 @@ Function Get-ServerInventory {
 	Begin {
 		[System.Collections.generic.List[PSObject]]$ServerObject = @()
 	} #End Begin
-	Process {
-		
+	Process {	
 		foreach ($IP in $ComputerName) {
 			Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] $($ComputerName.IndexOf($($IP)) + 1) of $($ComputerName.Count)"
 			if ($PSBoundParameters.Keys -contains 'Credentials') {
@@ -103,6 +102,8 @@ Function Get-ServerInventory {
 			$OS = Get-CimInstance -CimSession $CimSession -ClassName Win32_OperatingSystem
 			$Ram = Get-CimInstance -CimSession $CimSession -ClassName Win32_PhysicalMemory | Measure-Object -Property Capacity -Sum
 			$HDD = Get-CimInstance -CimSession $CimSession -ClassName win32_logicaldisk | Where-Object {$_.DriveType -eq 3}
+			[string[]]$HDDSize = $HDD.Size | ForEach-Object {[Math]::Round(($_ / 1gb), 2)}
+			[string[]]$HDDFreeSize = $HDD.FreeSpace | ForEach-Object {[Math]::Round(($_ / 1gb), 2)}
 			$BIOS = Get-CimInstance -CimSession $CimSession -ClassName win32_bios
 
 			if ($BIOS.SerialNumber -like 'VMware*') {
@@ -116,12 +117,17 @@ Function Get-ServerInventory {
 				'MAC'            = $Network[0].MACAddress
 				'Server_Type'    = $Type
 				'Cpu_Type'       = $CPU[0].Name
+				CPU_Count        = $CPU.Count
 				'CPU_Cores'      = $CPU[0].NumberOfCores
+				VCPU_Totall      = ([int]$CPU.Count * [int]$CPU[0].NumberOfCores)
 				'Memory'         = ([Math]::Round(($ram.sum / 1gb), 2))
 				'OS'             = $OS.Caption
-				'DriveName'      = ($HDD.DeviceID) | ForEach-Object { @(($_) | Out-String).Trim()}
-				'DriveSize'      = ($HDD.size) | ForEach-Object {@(([Math]::Round(($_ / 1gb), 2)) | Out-String).Trim()}
-				'DriveFreeSpace' = ($HDD.FreeSpace) | ForEach-Object {@(([Math]::Round(($_ / 1gb), 2)) | Out-String).Trim()}
+				'DriveName'      = @(($HDD.DeviceID) | Out-String).Trim()
+				'DriveSize'      = @(($HDDSize) | Out-String).Trim()
+				'DriveFreeSpace' = @(($HDDFreeSize) | Out-String).Trim()
+				# 'DriveName'      = ($HDD.DeviceID) | ForEach-Object { @(($_) | Out-String).Trim()}
+				# 'DriveSize'      = ($HDD.size) | ForEach-Object {@(([Math]::Round(($_ / 1gb), 2)) | Out-String).Trim()}
+				# 'DriveFreeSpace' = ($HDD.FreeSpace) | ForEach-Object {@(([Math]::Round(($_ / 1gb), 2)) | Out-String).Trim()}
 			}
 			#endregion
 			Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Complete with $($IP)"
