@@ -95,7 +95,7 @@ Function New-ElevatedShortcut {
 	}
 
 	$taskaction = New-ScheduledTaskAction @taskActionSettings
-	Register-ScheduledTask -TaskName "RunAs\$ShortcutName" -Action $taskAction -Description "Run $($ScriptInfo.Name) Elivated"
+	Register-ScheduledTask -TaskName "RunAs\$ShortcutName" -Action $taskAction -Description "Run $($ScriptInfo.Name) Elevated"
 	if ($PSBoundParameters.ContainsKey('Credential')) {
 		$taskPrincipal = New-ScheduledTaskPrincipal -UserId $Credential.UserName -RunLevel Highest -LogonType Interactive
 	} else {
