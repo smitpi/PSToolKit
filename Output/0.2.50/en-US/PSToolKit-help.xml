@@ -840,9 +840,16 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>$rr = [PSCustomObject]@{</dev:code>
+        <dev:code>$rr = [PSCustomObject]@{
+	Host         = 'esx00'
+	HostName     = '192.168.10.19'
+	User         = 'root'
+	Port         = '22'
+	IdentityFile = 'C:\Users\xx\.ssh\yyy.id'
+}
+Edit-SSHConfigFile -AddObject $rr</dev:code>
         <dev:remarks>
-          <maml:para>Host         = 'esx00' 	HostName     = '192.168.10.19' 	User         = 'root' 	Port         = '22' 	IdentityFile = 'C:\Users\xx\.ssh\yyy.id' } Edit-SSHConfigFile -AddObject $rr</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2103,9 +2110,10 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>. .\Get-FolderSize.ps1</dev:code>
+        <dev:code>. .\Get-FolderSize.ps1
+PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</dev:code>
         <dev:remarks>
-          <maml:para>PS C:\&gt; 'C:\Windows', 'E:\temp' | Get-FolderSize</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
@@ -3099,6 +3107,148 @@
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>Get-RDSSessionReport -Gateway TXGATE01 -Credential $admin -Export Excel,HTML -ReportPath C:\Temp\rds</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-ServerInventory</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>ServerInventory</command:noun>
+      <maml:description>
+        <maml:para>Connect to remote host and collect server details.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Connect to remote host and collect server details.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-ServerInventory</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="CN, host">
+          <maml:name>ComputerName</maml:name>
+          <maml:description>
+            <maml:para>Computer to scan.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>Credentials</maml:name>
+          <maml:description>
+            <maml:para>Credentials used for the connection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+          <dev:type>
+            <maml:name>PSCredential</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Export</maml:name>
+          <maml:description>
+            <maml:para>Export the report to html or excel.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ReportPath</maml:name>
+          <maml:description>
+            <maml:para>Where to save the report.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
+          <dev:type>
+            <maml:name>DirectoryInfo</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>C:\Temp</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="CN, host">
+        <maml:name>ComputerName</maml:name>
+        <maml:description>
+          <maml:para>Computer to scan.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>Credentials</maml:name>
+        <maml:description>
+          <maml:para>Credentials used for the connection.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+        <dev:type>
+          <maml:name>PSCredential</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Export</maml:name>
+        <maml:description>
+          <maml:para>Export the report to html or excel.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>ReportPath</maml:name>
+        <maml:description>
+          <maml:para>Where to save the report.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
+        <dev:type>
+          <maml:name>DirectoryInfo</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>C:\Temp</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-ServerInventory -ComputerName '172.16.72.198', '172.16.72.200' -Export Excel,HTML -ReportPath C:\temp\reports</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -5987,51 +6137,58 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Lists all devices</dev:code>
+        <dev:code>Lists all devices
+. Remove-HiddenDevices -listDevicesOnly</dev:code>
         <dev:remarks>
-          <maml:para>. Remove-HiddenDevices -listDevicesOnly</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Save the list of devices as an object</dev:code>
+        <dev:code>Save the list of devices as an object
+$Devices = . Remove-HiddenDevices -listDevicesOnly</dev:code>
         <dev:remarks>
-          <maml:para>$Devices = . Remove-HiddenDevices -listDevicesOnly</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Lists all 'ghost' devices</dev:code>
+        <dev:code>Lists all 'ghost' devices
+. Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
         <dev:remarks>
-          <maml:para>. Remove-HiddenDevices -listGhostDevicesOnly</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-        <dev:code>Save the list of 'ghost' devices as an object</dev:code>
+        <dev:code>Save the list of 'ghost' devices as an object
+$ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</dev:code>
         <dev:remarks>
-          <maml:para>$ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-        <dev:code>Remove all ghost devices EXCEPT any devices that have "Intel" or "Citrix" in their friendly name</dev:code>
+        <dev:code>Remove all ghost devices EXCEPT any devices that have "Intel" or "Citrix" in their friendly name
+. Remove-HiddenDevices -filterByFriendlyName @("Intel","Citrix")</dev:code>
         <dev:remarks>
-          <maml:para>. Remove-HiddenDevices -filterByFriendlyName @("Intel","Citrix")</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
-        <dev:code>Remove all ghost devices EXCEPT any devices that are apart of the classes "LegacyDriver" or "Processor"</dev:code>
+        <dev:code>Remove all ghost devices EXCEPT any devices that are apart of the classes "LegacyDriver" or "Processor"
+. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor")</dev:code>
         <dev:remarks>
-          <maml:para>. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor")</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
-        <dev:code>Remove all ghost devices EXCEPT for devices with a friendly name of "Intel" or "Citrix" or with a class of "LegacyDriver" or "Processor"</dev:code>
+        <dev:code>Remove all ghost devices EXCEPT for devices with a friendly name of "Intel" or "Citrix" or with a class of "LegacyDriver" or "Processor"
+. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor") -filterByFriendlyName @("Intel","Citrix")</dev:code>
         <dev:remarks>
-          <maml:para>. Remove-HiddenDevices -filterByClass @("LegacyDriver","Processor") -filterByFriendlyName @("Intel","Citrix")</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -8061,7 +8218,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Collections.Generic.List`1[[System.Management.Automation.PSObject, System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]</maml:name>
+          <maml:name>System.Collections.Generic.List`1[[System.Management.Automation.PSObject, System.Management.Automation, Version=7.3.5.500, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -10957,9 +11114,11 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>[System.Collections.generic.List[PSObject]]$Conditions = @()</dev:code>
+        <dev:code>[System.Collections.generic.List[PSObject]]$Conditions = @()    
+$Conditions.Add((New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor Yellow -Range 'E:E' ))
+$Conditions.Add((New-ConditionalText -Text 'Error' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' ))
+$Conditions.Add((New-ConditionalText -Text 'Critical' -ConditionalTextColor white -BackgroundColor Red -Range 'E:E' ))</dev:code>
         <dev:remarks>
-          <maml:para>$Conditions.Add((New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor Yellow -Range 'E:E' )) $Conditions.Add((New-ConditionalText -Text 'Error' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' )) $Conditions.Add((New-ConditionalText -Text 'Critical' -ConditionalTextColor white -BackgroundColor Red -Range 'E:E' ))</maml:para>
           <maml:para>Write-PSReports -InputObject $report -ReportTitle 'Windows Events' -Export All -ReportPath C:\temp -ExcelConditionalText $Conditions</maml:para>
         </dev:remarks>
       </command:example>

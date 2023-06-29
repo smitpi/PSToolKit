@@ -116,14 +116,14 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
 <div class="highlight"><pre><span></span><code>$rr = [PSCustomObject]@{
-</code></pre></div>
-<p>Host         = 'esx00'
-    HostName     = '192.168.10.19'
-    User         = 'root'
-    Port         = '22'
-    IdentityFile = 'C:\Users\xx.ssh\yyy.id'
+    Host         = &#39;esx00&#39;
+    HostName     = &#39;192.168.10.19&#39;
+    User         = &#39;root&#39;
+    Port         = &#39;22&#39;
+    IdentityFile = &#39;C:\Users\xx\.ssh\yyy.id&#39;
 }
-Edit-SSHConfigFile -AddObject $rr</p>
+Edit-SSHConfigFile -AddObject $rr
+</code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-show">-Show</h3>
 <p>Show current records.</p>

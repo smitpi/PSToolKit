@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="author" content="Pierre Smit">
-    <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Remove-HiddenDevice/">
+    <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Get-ServerInventory/">
     <link rel="shortcut icon" href="../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Remove-HiddenDevice - PSToolKit</title>
+    <title>Get-ServerInventory - PSToolKit</title>
     <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
@@ -32,7 +32,7 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Remove-HiddenDevice", url: "#_top", children: [
+          {title: "Get-ServerInventory", url: "#_top", children: [
               {title: "SYNOPSIS", url: "#synopsis" },
               {title: "SYNTAX", url: "#syntax" },
               {title: "DESCRIPTION", url: "#description" },
@@ -68,20 +68,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Remove-UserProfile/" class="btn btn-xs btn-default pull-right">
+      <a href="../Get-SoftwareAudit/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Remove-UserProfile/" class="btn btn-xs btn-link">
-        Remove-UserProfile
+      <a href="../Get-SoftwareAudit/" class="btn btn-xs btn-link">
+        Get-SoftwareAudit
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../Remove-FaultyProfileList/" class="btn btn-xs btn-default pull-left">
+      <a href="../Get-RDSSessionReport/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Remove-FaultyProfileList/" class="btn btn-xs btn-link">
-        Remove-FaultyProfileList
+        Previous</a><a href="../Get-RDSSessionReport/" class="btn btn-xs btn-link">
+        Get-RDSSessionReport
       </a>
     </div>
     
@@ -89,65 +89,35 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="remove-hiddendevice">Remove-HiddenDevice</h1>
+    <h1 id="get-serverinventory">Get-ServerInventory</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Removes ghost devices from your system</p>
+<p>Connect to remote host and collect server details.</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Remove-HiddenDevice [[-FilterByClass] &lt;Array&gt;] [[-FilterByFriendlyName] &lt;Array&gt;] [-listDevicesOnly]
- [-listGhostDevicesOnly] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Get-ServerInventory [-ComputerName] &lt;String[]&gt; [[-Credentials] &lt;PSCredential&gt;] [-Export &lt;String[]&gt;]
+ [-ReportPath &lt;DirectoryInfo&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
-<p>Removes ghost devices from your system</p>
+<p>Connect to remote host and collect server details.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Lists all devices
-. Remove-HiddenDevices -listDevicesOnly
-</code></pre></div>
-<h3 id="example-2">EXAMPLE 2</h3>
-<div class="highlight"><pre><span></span><code>Save the list of devices as an object
-$Devices = . Remove-HiddenDevices -listDevicesOnly
-</code></pre></div>
-<h3 id="example-3">EXAMPLE 3</h3>
-<div class="highlight"><pre><span></span><code>Lists all &#39;ghost&#39; devices
-. Remove-HiddenDevices -listGhostDevicesOnly
-</code></pre></div>
-<h3 id="example-4">EXAMPLE 4</h3>
-<div class="highlight"><pre><span></span><code>Save the list of &#39;ghost&#39; devices as an object
-$ghostDevices = . Remove-HiddenDevices -listGhostDevicesOnly
-</code></pre></div>
-<h3 id="example-5">EXAMPLE 5</h3>
-<div class="highlight"><pre><span></span><code>Remove all ghost devices EXCEPT any devices that have &quot;Intel&quot; or &quot;Citrix&quot; in their friendly name
-. Remove-HiddenDevices -filterByFriendlyName @(&quot;Intel&quot;,&quot;Citrix&quot;)
-</code></pre></div>
-<h3 id="example-6">EXAMPLE 6</h3>
-<div class="highlight"><pre><span></span><code>Remove all ghost devices EXCEPT any devices that are apart of the classes &quot;LegacyDriver&quot; or &quot;Processor&quot;
-. Remove-HiddenDevices -filterByClass @(&quot;LegacyDriver&quot;,&quot;Processor&quot;)
-</code></pre></div>
-<h3 id="example-7">EXAMPLE 7</h3>
-<div class="highlight"><pre><span></span><code>Remove all ghost devices EXCEPT for devices with a friendly name of &quot;Intel&quot; or &quot;Citrix&quot; or with a class of &quot;LegacyDriver&quot; or &quot;Processor&quot;
-. Remove-HiddenDevices -filterByClass @(&quot;LegacyDriver&quot;,&quot;Processor&quot;) -filterByFriendlyName @(&quot;Intel&quot;,&quot;Citrix&quot;)
+<div class="highlight"><pre><span></span><code>Get-ServerInventory -ComputerName &#39;172.16.72.198&#39;, &#39;172.16.72.200&#39; -Export Excel,HTML -ReportPath C:\temp\reports
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
-<h3 id="-filterbyclass">-FilterByClass</h3>
-<p>This parameter will exclude devices that match the class name provided.
-This parameter needs to be specified in an array format for all the class names you want to be excluded from removal.
-This is an exact string match so "Disk" will not match "DiskDrive".</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Array</span>
+<h3 id="-computername">-ComputerName</h3>
+<p>Computer to scan.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>
-<span class="nt">Aliases</span><span class="p">:</span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CN, host</span>
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True (ByPropertyName, ByValue)</span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </code></pre></div>
-<h3 id="-filterbyfriendlyname">-FilterByFriendlyName</h3>
-<p>This parameter will exclude devices that match the partial name provided.
-This parameter needs to be specified in an array format for all the friendly names you want to be excluded from removal.
-"Intel" will match "Intel(R) Xeon(R) CPU E5-2680 0 @ 2.70GHz".
-"Loop" will match "Microsoft Loopback Adapter".</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Array</span>
+<h3 id="-credentials">-Credentials</h3>
+<p>Credentials used for the connection.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PSCredential</span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>
 <span class="nt">Aliases</span><span class="p">:</span>
 
@@ -157,27 +127,27 @@ This parameter needs to be specified in an array format for all the friendly nam
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </code></pre></div>
-<h3 id="-listdevicesonly">-listDevicesOnly</h3>
-<p>listDevicesOnly will output a table of all devices found in this system.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span>
+<h3 id="-export">-Export</h3>
+<p>Export the report to html or excel.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>
 <span class="nt">Aliases</span><span class="p">:</span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </code></pre></div>
-<h3 id="-listghostdevicesonly">-listGhostDevicesOnly</h3>
-<p>listGhostDevicesOnly will output a table of all 'ghost' devices found in this system.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span>
+<h3 id="-reportpath">-ReportPath</h3>
+<p>Where to save the report.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DirectoryInfo</span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>
 <span class="nt">Aliases</span><span class="p">:</span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C:\Temp</span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </code></pre></div>
@@ -185,9 +155,8 @@ This parameter needs to be specified in an array format for all the friendly nam
 <p>This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see <a href="http://go.microsoft.com/fwlink/?LinkID=113216">about_CommonParameters</a>.</p>
 <h2 id="inputs">INPUTS</h2>
 <h2 id="outputs">OUTPUTS</h2>
+<h3 id="systemobject">System.Object[]</h3>
 <h2 id="notes">NOTES</h2>
-<p>Permission level has not been tested. 
-It is assumed you will need to have sufficient rights to uninstall devices from device manager for this script to run properly.</p>
 <h2 id="related-links">RELATED LINKS</h2>
 
   <br>
@@ -201,20 +170,20 @@ It is assumed you will need to have sufficient rights to uninstall devices from 
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Remove-UserProfile/" class="btn btn-xs btn-default pull-right">
+      <a href="../Get-SoftwareAudit/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Remove-UserProfile/" class="btn btn-xs btn-link">
-        Remove-UserProfile
+      <a href="../Get-SoftwareAudit/" class="btn btn-xs btn-link">
+        Get-SoftwareAudit
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../Remove-FaultyProfileList/" class="btn btn-xs btn-default pull-left">
+      <a href="../Get-RDSSessionReport/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Remove-FaultyProfileList/" class="btn btn-xs btn-link">
-        Remove-FaultyProfileList
+        Previous</a><a href="../Get-RDSSessionReport/" class="btn btn-xs btn-link">
+        Get-RDSSessionReport
       </a>
     </div>
     
@@ -225,7 +194,7 @@ It is assumed you will need to have sufficient rights to uninstall devices from 
 
 <footer class="container-fluid wm-page-content">
       <p>
-        <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Remove-HiddenDevice.md">Edit on smitpi/PSToolKit</a>
+        <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Get-ServerInventory.md">Edit on smitpi/PSToolKit</a>
       </p><p>(c) 2022 Pierre Smit. All rights reserved.</p>
   <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
 </footer>
