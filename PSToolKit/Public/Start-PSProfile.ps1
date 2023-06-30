@@ -94,7 +94,7 @@ Function Start-PSProfile {
 	#region PSReadLine
 	Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
 	Write-Host (' {0,-36}: ' -f 'PSReadLine Options') -ForegroundColor Cyan -NoNewline
-	if ((Get-Module 'PSReadLine') -or (Get-Module 'PSReadLine' -ListAvailable)) {	
+	if ((Get-Module 'PSReadLine') -or (Get-Module 'PSReadLine' -ListAvailable) -and ((Get-Module 'PSReadLine').Version -gt [version]'2.2.0')) {	
 		try {
 			$PSReadLineSplat = @{
 				PredictionSource              = 'HistoryAndPlugin'
