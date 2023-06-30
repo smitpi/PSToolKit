@@ -142,7 +142,7 @@ Function Start-PSProfile {
 		Write-Host (' {0,-36}: ' -f 'PSStyle Module') -ForegroundColor Cyan -NoNewline
 		if ((Get-Module 'PSStyle') -or (Get-Module 'PSStyle' -ListAvailable)) {
 			try {
-				Import-Module PSStyle -Force
+				Get-Module PSStyle -ListAvailable | Import-Module -Global -ErrorAction Stop
 				Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
 			} catch {Write-Warning 'PSStyle Module: Could not be loaded'}
 		} else {
