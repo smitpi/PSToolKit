@@ -101,13 +101,13 @@ Function Start-PSProfile {
 			BellStyle                     = 'Visual'
 			HistorySavePath               = "$([environment]::GetFolderPath('ApplicationData'))\Microsoft\Windows\PowerShell\PSReadLine\history.txt"
 		}
+		Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
+		Write-Host (' {0,-36}: ' -f 'PSReadLineOptions Functions') -ForegroundColor Cyan -NoNewline
 		Set-PSReadLineOption @PSReadLineSplat -ErrorAction Stop
 		Set-PSReadLineKeyHandler -Chord 'Enter' -Function ValidateAndAcceptLine
 		Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 		Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 		Set-PSReadLineKeyHandler -Key 'Ctrl+m' -Function ForwardWord
-		Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
-		Write-Host (' {0,-36}: ' -f 'PSReadLineOptions Functions') -ForegroundColor Cyan -NoNewline
 		Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
 	} catch {
 		try {
@@ -116,8 +116,6 @@ Function Start-PSProfile {
 			Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 			Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 			Set-PSReadLineKeyHandler -Key 'Ctrl+m' -Function ForwardWord
-			Write-Host ('[Alternative]') -ForegroundColor Yellow -NoNewline
-			Write-Host (' {0,-36}: ' -f 'PSReadLineOptions Functions') -ForegroundColor Cyan -NoNewline
 			Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
 		} catch { Write-Warning 'PSReadLineOptions: Could not be loaded' }
 	}
@@ -164,7 +162,7 @@ Function Start-PSProfile {
 	#endregion
 
 
-#region Session Info
+	#region Session Info
 	$ErrorActionPreference = 'Continue'
 	## Some Session Information
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
@@ -198,9 +196,9 @@ Function Start-PSProfile {
 	Write-Host ('{0,-20}' -f "$($env:USERDOMAIN)\$($env:USERNAME) ($($env:USERNAME)@$($env:USERDNSDOMAIN))") -ForegroundColor Green
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
 	Write-Host ' '
-#endregion
+	#endregion
 
-#region Update help
+	#region Update help
 	if ($(Get-Date).DayOfWeek -like 'Monday') {
 		$Localhelpjob = Update-LocalHelp
 		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
@@ -208,6 +206,6 @@ Function Start-PSProfile {
 		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
 		Write-Host "`$Localhelpjob | Wait-Job | Receive-Job" -ForegroundColor Green
 	}
-#endregion
+	#endregion
 
 } #end Function

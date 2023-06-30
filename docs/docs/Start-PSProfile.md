@@ -13,7 +13,7 @@ My PS Profile for all sessions.
 ## SYNTAX
 
 ```
-Start-PSProfile [-ClearHost] [-ShowModuleList] [<CommonParameters>]
+Start-PSProfile [-ClearHost] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,21 +30,6 @@ Start-PSProfile -ClearHost
 
 ### -ClearHost
 Clear the screen before loading.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ShowModuleList
-Summary of installed modules.
 
 ```yaml
 Type: SwitchParameter
