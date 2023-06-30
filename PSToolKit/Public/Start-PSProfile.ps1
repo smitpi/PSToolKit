@@ -122,12 +122,12 @@ Function Start-PSProfile {
 	#endregion
 	#region Chocolatey
 	try {
+		Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
+		Write-Host (' {0,-36}: ' -f 'Chocolatey Functions') -ForegroundColor Cyan -NoNewline
 		$chocofunctions = Get-Item "$env:ChocolateyInstall\helpers\functions" -ErrorAction Stop
 		$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 		Import-Module "$ChocolateyProfile" -ErrorAction Stop
 		Get-ChildItem $chocofunctions | ForEach-Object { . $_.FullName }
-		Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
-		Write-Host (' {0,-36}: ' -f 'Chocolatey Functions') -ForegroundColor Cyan -NoNewline
 		Write-Host ('{0,-21}' -f 'Complete') -ForegroundColor Green
 	} catch { Write-Warning 'Chocolatey: Could not be loaded' }
 	#endregion
