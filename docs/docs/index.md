@@ -143,6 +143,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Set-VSCodeExplorerSortOrder`](https://smitpi.github.io/PSToolKit/Set-VSCodeExplorerSortOrder) -- Change the sort order in VSCode explorer
 - [`Set-WindowsAutoLogin`](https://smitpi.github.io/PSToolKit/Set-WindowsAutoLogin) -- Enable autologin on a device.
 - [`Show-ComputerManagement`](https://smitpi.github.io/PSToolKit/Show-ComputerManagement) -- Opens the Computer Management of the system or remote system
+- [`Show-ModulePathList`](https://smitpi.github.io/PSToolKit/Show-ModulePathList) -- Show installed module list grouped by install path.
 - [`Show-MyPSGalleryModule`](https://smitpi.github.io/PSToolKit/Show-MyPSGalleryModule) -- Show version numbers ext. about my modules.
 - [`Show-PSToolKit`](https://smitpi.github.io/PSToolKit/Show-PSToolKit) -- Show details of the commands in this module.
 - [`Start-DomainControllerReplication`](https://smitpi.github.io/PSToolKit/Start-DomainControllerReplication) -- Start replication between Domain Controllers.

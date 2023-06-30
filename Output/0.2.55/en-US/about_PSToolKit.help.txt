@@ -81,6 +81,7 @@ Functions in this module:
 	 Set-VSCodeExplorerSortOrder -- Change the sort order in VSCode explorer
 	 Set-WindowsAutoLogin -- Enable autologin on a device.
 	 Show-ComputerManagement -- Opens the Computer Management of the system or remote system
+	 Show-ModulePathList -- Show installed module list grouped by install path.
 	 Show-MyPSGalleryModule -- Show version numbers ext. about my modules.
 	 Show-PSToolKit -- Show details of the commands in this module.
 	 Start-DomainControllerReplication -- Start replication between Domain Controllers.

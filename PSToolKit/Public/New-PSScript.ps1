@@ -138,14 +138,15 @@ Function $properverb-$propernoun {
 									else {throw "Unable to connect to `$(`$_)"} })]
 					[string[]]`$ComputerName,
 
-					[ValidateSet('Excel', 'HTML', 'Host')]
-					[string]`$Export = 'Host',
+					[ValidateSet('All', 'Excel', 'HTML', 'HTML5')]
+					[string[]]`$Export = 'Host',
 
 					[ValidateScript( { if (Test-Path `$_) { `$true }
                                 else { Write-Warning "Folder does not exist, creating folder now."
                                 New-Item -Path `$_ -ItemType Directory -Force | Out-Null; `$true }
                     })]
 					[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp'
+					[switch]`$OpenReportsFolder
 				)
                 #endregion
     Begin {

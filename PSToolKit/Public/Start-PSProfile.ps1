@@ -49,8 +49,6 @@ My PS Profile for all sessions.
 .PARAMETER ClearHost
 Clear the screen before loading.
 
-.PARAMETER ShowModuleList
-Summary of installed modules.
 
 .EXAMPLE
 Start-PSProfile -ClearHost
@@ -59,26 +57,20 @@ Start-PSProfile -ClearHost
 Function Start-PSProfile {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Start-PSProfile')]
 	PARAM(
-		[switch]$ClearHost = $false,
-		[switch]$ShowModuleList = $false
+		[switch]$ClearHost = $false
 	)
+	
 	$ErrorActionPreference = 'Stop'
-
 	if ($ClearHost) { Clear-Host }
-
+	#region Create Folder
 	if ((Test-Path $profile) -eq $false ) {
 		Write-Warning 'Profile does not exist, creating file.'
 		New-Item -ItemType File -Path $Profile -Force
 		$Global:psfolder = Get-Item (Get-Item $profile).DirectoryName
 	} else { $Global:psfolder = Get-Item (Get-Item $profile).DirectoryName }
+	#endregion
 
-	function proxyconnect {
-		$wc = New-Object System.Net.WebClient
-		$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
-		[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-	}
-	proxyconnect
-
+	#region Add Extra Folders
 	try {
 		## Create folders for PowerShell profile
 		if ((Test-Path -Path $psfolder\Scripts) -eq $false) { New-Item -Path "$psfolder\Scripts" -ItemType Directory | Out-Null }
@@ -91,12 +83,14 @@ Function Start-PSProfile {
 	try {
 		Set-Location $psfolder -ErrorAction Stop
 	} catch { Write-Warning 'Unable to set location' }
-
+	#endregion
+	
+	#region Loading Functions
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
 	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
 	Write-Host (' {0,23} ' -f 'Loading Functions') -ForegroundColor DarkRed
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
-
+	#region PSReadLine
 	try {
 		$PSReadLineSplat = @{
 			PredictionSource              = 'HistoryAndPlugin'
@@ -108,6 +102,7 @@ Function Start-PSProfile {
 			HistorySavePath               = "$([environment]::GetFolderPath('ApplicationData'))\Microsoft\Windows\PowerShell\PSReadLine\history.txt"
 		}
 		Set-PSReadLineOption @PSReadLineSplat -ErrorAction Stop
+		Set-PSReadLineKeyHandler -Chord 'Enter' -Function ValidateAndAcceptLine
 		Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 		Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 		Set-PSReadLineKeyHandler -Key 'Ctrl+m' -Function ForwardWord
@@ -117,6 +112,7 @@ Function Start-PSProfile {
 	} catch {
 		try {
 			Set-PSReadLineOption @PSReadLineSplat -PredictionSource history -PredictionViewStyle InlineView
+			Set-PSReadLineKeyHandler -Chord 'Enter' -Function ValidateAndAcceptLine
 			Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 			Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 			Set-PSReadLineKeyHandler -Key 'Ctrl+m' -Function ForwardWord
@@ -125,7 +121,8 @@ Function Start-PSProfile {
 			Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
 		} catch { Write-Warning 'PSReadLineOptions: Could not be loaded' }
 	}
-
+	#endregion
+	#region Chocolatey
 	try {
 		$chocofunctions = Get-Item "$env:ChocolateyInstall\helpers\functions" -ErrorAction Stop
 		$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
@@ -135,14 +132,39 @@ Function Start-PSProfile {
 		Write-Host (' {0,-36}: ' -f 'Chocolatey Functions') -ForegroundColor Cyan -NoNewline
 		Write-Host ('{0,-21}' -f 'Complete') -ForegroundColor Green
 	} catch { Write-Warning 'Chocolatey: Could not be loaded' }
+	#endregion
+	#region PStyle
+	if ($PSVersionTable.PSEdition -like 'Desktop') {
+		if (!(Get-Module 'PSStyle') -and !(Get-Module 'PSStyle' -ListAvailable)) {
+			try {
+				Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
+				Write-Host (' {0,-36}: ' -f 'PSStyle Module') -ForegroundColor Cyan -NoNewline
+				Import-Module PSStyle -Force
+				Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
+			} catch {Write-Warning 'PSStyle Module: Could not be loaded'}
+		} else {
+			Write-Warning 'PSStyle Module: Not Installed'
+		}
+	}
 
- try {
-		Add-PSSnapin citrix*
-		Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
-		Write-Host (' {0,-36}: ' -f 'Citrix SnapIns') -ForegroundColor Cyan -NoNewline
-		Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
-	} catch { Write-Warning 'Citrix SnapIns: Could not be loaded' }
+	#endregion
+	#region Proxy Connect
+	function Connect-Proxy {
+		try {
+			$wc = New-Object System.Net.WebClient
+			$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
+			[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+		} catch { Write-Warning 'Proxy Connection: Could not be loaded' }
+	}
+	Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
+	Write-Host (' {0,-36}: ' -f 'Proxy Connection') -ForegroundColor Cyan -NoNewline
+	Connect-Proxy
+	Write-Host ('{0,-21}' -f 'Complete') -ForegroundColor Green
+	#endregion
+	#endregion
 
+
+#region Session Info
 	$ErrorActionPreference = 'Continue'
 	## Some Session Information
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
@@ -176,32 +198,16 @@ Function Start-PSProfile {
 	Write-Host ('{0,-20}' -f "$($env:USERDOMAIN)\$($env:USERNAME) ($($env:USERNAME)@$($env:USERDNSDOMAIN))") -ForegroundColor Green
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
 	Write-Host ' '
+#endregion
 
-
- if ($ShowModuleList) {
-		[string[]]$Modpaths = ($env:PSModulePath).Split(';')
-		$AvailableModules = Get-Module -ListAvailable
-		[System.Collections.ArrayList]$ModuleDetails = @()
-		$ModuleDetails = $Modpaths | ForEach-Object {
-			$Mpath = $_
-			[pscustomobject]@{
-				Location = $Mpath
-				Modules  = ($AvailableModules | Where-Object { $_.path -match $Mpath.replace('\', '\\') } ).count
-			}
-		}
-		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
-		Write-Host (' {0,25} ' -f 'Module Paths Details') -ForegroundColor DarkRed
-		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
-		Write-Host "$(($ModuleDetails | Sort-Object -Property modules -Descending | Out-String))" -ForegroundColor Green
-	}
-
-
+#region Update help
 	if ($(Get-Date).DayOfWeek -like 'Monday') {
+		$Localhelpjob = Update-LocalHelp
 		Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
 		Write-Host (' {0,15} ' -f 'Updating Local Help, For details Run:') -ForegroundColor DarkRed
 		Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
 		Write-Host "`$Localhelpjob | Wait-Job | Receive-Job" -ForegroundColor Green
-		$Localhelpjob = Update-LocalHelp
 	}
+#endregion
 
 } #end Function
