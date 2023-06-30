@@ -90,34 +90,39 @@ Function Start-PSProfile {
 	Write-Host ("[$((Get-Date -Format HH:mm:ss).ToString())]") -ForegroundColor DarkYellow -NoNewline
 	Write-Host (' {0,23} ' -f 'Loading Functions') -ForegroundColor DarkRed
 	Write-Host '--------------------------------------------------------' -ForegroundColor DarkGray
+	
 	#region PSReadLine
-	try {
-		$PSReadLineSplat = @{
-			PredictionSource              = 'HistoryAndPlugin'
-			PredictionViewStyle           = 'InlineView'
-			HistorySearchCursorMovesToEnd = $true
-			HistorySaveStyle              = 'SaveIncrementally'
-			ShowToolTips                  = $true
-			BellStyle                     = 'Visual'
-			HistorySavePath               = "$([environment]::GetFolderPath('ApplicationData'))\Microsoft\Windows\PowerShell\PSReadLine\history.txt"
-		}
-		Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
-		Write-Host (' {0,-36}: ' -f 'PSReadLineOptions Functions') -ForegroundColor Cyan -NoNewline
-		Set-PSReadLineOption @PSReadLineSplat -ErrorAction Stop
-		Set-PSReadLineKeyHandler -Chord 'Enter' -Function ValidateAndAcceptLine
-		Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
-		Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
-		Set-PSReadLineKeyHandler -Key 'Ctrl+m' -Function ForwardWord
-		Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
-	} catch {
+	Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
+	Write-Host (' {0,-36}: ' -f 'PSReadLine Options') -ForegroundColor Cyan -NoNewline
+	if ((Get-Module 'PSReadLine') -or (Get-Module 'PSReadLine' -ListAvailable)) {	
 		try {
-			Set-PSReadLineOption @PSReadLineSplat -PredictionSource history -PredictionViewStyle InlineView
+			$PSReadLineSplat = @{
+				PredictionSource              = 'HistoryAndPlugin'
+				PredictionViewStyle           = 'InlineView'
+				HistorySearchCursorMovesToEnd = $true
+				HistorySaveStyle              = 'SaveIncrementally'
+				ShowToolTips                  = $true
+				BellStyle                     = 'Visual'
+				HistorySavePath               = "$([environment]::GetFolderPath('ApplicationData'))\Microsoft\Windows\PowerShell\PSReadLine\history.txt"
+			}
+			Set-PSReadLineOption @PSReadLineSplat -ErrorAction Stop
 			Set-PSReadLineKeyHandler -Chord 'Enter' -Function ValidateAndAcceptLine
 			Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 			Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 			Set-PSReadLineKeyHandler -Key 'Ctrl+m' -Function ForwardWord
 			Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
-		} catch { Write-Warning 'PSReadLineOptions: Could not be loaded' }
+		} catch {
+			try {
+				Set-PSReadLineOption @PSReadLineSplat -PredictionSource history -PredictionViewStyle InlineView
+				Set-PSReadLineKeyHandler -Chord 'Enter' -Function ValidateAndAcceptLine
+				Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+				Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+				Set-PSReadLineKeyHandler -Key 'Ctrl+m' -Function ForwardWord
+				Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
+			} catch { Write-Warning 'PSReadLine Options: Could not be loaded' }
+		}
+	} else {
+		Write-Warning 'PSReadLine Module: Not Installed'
 	}
 	#endregion
 	#region Chocolatey
@@ -129,14 +134,14 @@ Function Start-PSProfile {
 		Import-Module "$ChocolateyProfile" -ErrorAction Stop
 		Get-ChildItem $chocofunctions | ForEach-Object { . $_.FullName }
 		Write-Host ('{0,-21}' -f 'Complete') -ForegroundColor Green
-	} catch { Write-Warning 'Chocolatey: Could not be loaded' }
+	} catch { Write-Warning 'Chocolatey Functions: Could not be loaded' }
 	#endregion
 	#region PStyle
 	if ($PSVersionTable.PSEdition -like 'Desktop') {
-		if (!(Get-Module 'PSStyle') -and !(Get-Module 'PSStyle' -ListAvailable)) {
+		Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
+		Write-Host (' {0,-36}: ' -f 'PSStyle Module') -ForegroundColor Cyan -NoNewline
+		if ((Get-Module 'PSStyle') -or (Get-Module 'PSStyle' -ListAvailable)) {
 			try {
-				Write-Host ('[Loading]') -ForegroundColor Yellow -NoNewline
-				Write-Host (' {0,-36}: ' -f 'PSStyle Module') -ForegroundColor Cyan -NoNewline
 				Import-Module PSStyle -Force
 				Write-Host ('{0,-20}' -f 'Complete') -ForegroundColor Green
 			} catch {Write-Warning 'PSStyle Module: Could not be loaded'}
@@ -144,7 +149,6 @@ Function Start-PSProfile {
 			Write-Warning 'PSStyle Module: Not Installed'
 		}
 	}
-
 	#endregion
 	#region Proxy Connect
 	function Connect-Proxy {
