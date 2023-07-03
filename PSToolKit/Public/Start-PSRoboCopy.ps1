@@ -103,26 +103,23 @@ Function Start-PSRoboCopy {
         )
 
         [System.Collections.ArrayList]$RoboArgs = @()
-        $RoboArgs.Add($($Source))
-        $RoboArgs.Add($($Destination))
+        [void]$RoboArgs.Add($($Source))
+        [void]$RoboArgs.Add($($Destination))
         if ($null -notlike $IncludeFiles) {
-                $IncludeFiles | ForEach-Object { $RoboArgs.Add("`"$_`"") }
+                $IncludeFiles | ForEach-Object { [void]$RoboArgs.Add("`"$_`"") }
         }
         if ($null -notlike $eXcludeFiles) {
-                $RoboArgs.Add('/XF')
-                $eXcludeFiles | ForEach-Object { $RoboArgs.Add("`"$_`"") }
+                [void]$RoboArgs.Add('/XF')
+                $eXcludeFiles | ForEach-Object { [void]$RoboArgs.Add("`"$_`"") }
         }
 
         if ($null -notlike $eXcludeDirs) {
-                $RoboArgs.Add('/XD')
-                $eXcludeDirs | ForEach-Object { $RoboArgs.Add("`"$_`"") }
+                [void]$RoboArgs.Add('/XD')
+                $eXcludeDirs | ForEach-Object { [void]$RoboArgs.Add("`"$_`"") }
         }
 
         [void]$RoboArgs.Add('/W:0')
         [void]$RoboArgs.Add('/R:0')
-        #[void]$RoboArgs.Add('/COPYALL')
-        #[void]$RoboArgs.Add('/NJS')
-        #[void]$RoboArgs.Add('/NJH')
         [void]$RoboArgs.Add('/NP')
         [void]$RoboArgs.Add('/NDL')
         [void]$RoboArgs.Add('/TEE')
