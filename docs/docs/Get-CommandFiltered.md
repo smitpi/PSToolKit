@@ -13,7 +13,7 @@ Finds commands on the system and sort it according to module
 ## SYNTAX
 
 ```
-Get-CommandFiltered [[-Filter] <String>] [-PrettyAnswer] [<CommonParameters>]
+Get-CommandFiltered [[-Filter] <String>] [-PSToolKit] [-PrettyAnswer] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,7 +23,7 @@ Finds commands on the system and sort it according to module
 
 ### EXAMPLE 1
 ```
-Get-CommandFiltered -Filter blah
+Get-CommandFiltered -Filter help
 ```
 
 ## PARAMETERS
@@ -43,8 +43,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -PSToolKit
+Limit search to the PSToolKit Module
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -PrettyAnswer
-Display results with colour, but runs slow.
+Display results with color, but runs slow.
 
 ```yaml
 Type: SwitchParameter

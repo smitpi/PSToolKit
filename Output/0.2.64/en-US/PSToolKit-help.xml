@@ -1943,9 +1943,20 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>PSToolKit</maml:name>
+          <maml:description>
+            <maml:para>Limit search to the PSToolKit Module</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>PrettyAnswer</maml:name>
           <maml:description>
-            <maml:para>Display results with colour, but runs slow.</maml:para>
+            <maml:para>Display results with color, but runs slow.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1969,9 +1980,21 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>PSToolKit</maml:name>
+        <maml:description>
+          <maml:para>Limit search to the PSToolKit Module</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>PrettyAnswer</maml:name>
         <maml:description>
-          <maml:para>Display results with colour, but runs slow.</maml:para>
+          <maml:para>Display results with color, but runs slow.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1991,7 +2014,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CommandFiltered -Filter blah</dev:code>
+        <dev:code>Get-CommandFiltered -Filter help</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
