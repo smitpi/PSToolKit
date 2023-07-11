@@ -94,7 +94,7 @@ Function Get-WinEventLogExtract {
         [string]$ErrorLevel,
 
         [ValidateSet('All', 'Excel', 'HTML', 'HTML5')]
-        [string[]]$Export,
+        [string[]]$Export = 'Host',
 
         [ValidateScript( { if (Test-Path $_) { $true }
                 else { New-Item -Path $_ -ItemType Directory -Force | Out-Null; $true }
@@ -127,17 +127,19 @@ Function Get-WinEventLogExtract {
     }
     end {
 
-        $report = [PSCustomObject]@{
-            WinEvents = $EventObject
-        }# PSObject
+        if ($Export -eq 'Host') {$EventObject}
+        else {
+            $report = [PSCustomObject]@{
+                'Windows Event Logs' = $EventObject
+            }# PSObject
 
-        [System.Collections.generic.List[PSObject]]$Conditions = @()    
-        $Conditions.Add((New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor Yellow -Range 'E:E' ))
-        $Conditions.Add((New-ConditionalText -Text 'Error' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' ))
-        $Conditions.Add((New-ConditionalText -Text 'Critical' -ConditionalTextColor white -BackgroundColor Red -Range 'E:E' ))
+            [System.Collections.generic.List[PSObject]]$Conditions = @()    
+            $Conditions.Add((New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor Yellow -Range 'E:E' ))
+            $Conditions.Add((New-ConditionalText -Text 'Error' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' ))
+            $Conditions.Add((New-ConditionalText -Text 'Critical' -ConditionalTextColor white -BackgroundColor Red -Range 'E:E' ))
 
-        Write-PSReports -InputObject $report -ReportTitle 'Windows Events' -Export $Export -ReportPath $ReportPath -ExcelConditionalText $conditions
-
+            Write-PSReports -InputObject $report -ReportTitle 'Windows Events' -Export $Export -ReportPath $ReportPath -ExcelConditionalText $conditions
+        }
     }
 } #end Function
 
