@@ -64,6 +64,9 @@ Export results
 .PARAMETER ReportPath
 Path where report will be saved
 
+.PARAMETER OpenReportsFolder
+Open the folder after report creation.
+
 .EXAMPLE
 Get-WinEventLogExtract -ComputerName localhost
 
@@ -99,7 +102,8 @@ Function Get-WinEventLogExtract {
         [ValidateScript( { if (Test-Path $_) { $true }
                 else { New-Item -Path $_ -ItemType Directory -Force | Out-Null; $true }
             })]
-        [System.IO.DirectoryInfo]$ReportPath = 'C:\Temp'
+        [System.IO.DirectoryInfo]$ReportPath = 'C:\Temp',
+        [switch]$OpenReportsFolder
     )
     Begin {
         [System.Collections.generic.List[PSObject]]$EventObject = @()       
