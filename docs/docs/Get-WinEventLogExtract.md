@@ -14,7 +14,7 @@ Extract Event logs of a server list, and create html / excel report
 
 ```
 Get-WinEventLogExtract [-ComputerName] <String[]> [-Days] <Int32> [-ErrorLevel] <String> [-Export <String[]>]
- [-ReportPath <DirectoryInfo>] [<CommonParameters>]
+ [-ReportPath <DirectoryInfo>] [-OpenReportsFolder] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -100,6 +100,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: C:\Temp
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -OpenReportsFolder
+Open the folder after report creation.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

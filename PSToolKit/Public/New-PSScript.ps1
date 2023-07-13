@@ -145,7 +145,7 @@ Function $properverb-$propernoun {
                                 else { Write-Warning "Folder does not exist, creating folder now."
                                 New-Item -Path `$_ -ItemType Directory -Force | Out-Null; `$true }
                     })]
-					[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp'
+					[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp',
 					[switch]`$OpenReportsFolder
 				)
                 #endregion

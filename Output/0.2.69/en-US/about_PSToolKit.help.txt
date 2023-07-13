@@ -74,6 +74,7 @@ Functions in this module:
 	 Set-FolderCustomIcon -- Will change the icon of a folder to a custom selected icon
 	 Set-PSProjectFile -- Creates and modify needed files for a PS project from existing module files.
 	 Set-PSToolKitSystemSetting -- Set multiple settings on desktop or server
+	 Set-ScheduledRestart -- Create a scheduled task to reboot a server.
 	 Set-SharedPSProfile -- Redirects PowerShell and WindowsPowerShell profile folder to another path.
 	 Set-StaticIP -- Set static IP on device
 	 Set-TempFolder -- Set all the temp environmental variables to c:\temp
