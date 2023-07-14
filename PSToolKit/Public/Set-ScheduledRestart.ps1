@@ -60,7 +60,7 @@ Set-ScheduledRestart -ComputerName $Env:COMPUTERNAME -Credential $admin -RebootD
 
 #>
 Function Set-ScheduledRestart {
-	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/PSToolKit/Set-ScheduledRestart')]
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Set-ScheduledRestart')]
 	[OutputType([System.Object[]])]
 	#region Parameter
 	PARAM(
@@ -87,20 +87,20 @@ Function Set-ScheduledRestart {
 		} catch {Write-Warning "Error: Message:$($Error[0])"}
 
 		Invoke-Command -Session $session -ScriptBlock {
-			Get-ScheduledTask -TaskName 'Force Reboot' -ErrorAction SilentlyContinue | Unregister-ScheduledTask -Confirm:$false -ErrorAction SilentlyContinue
+			Get-ScheduledTask -TaskName 'Forced Reboot*' -ErrorAction SilentlyContinue | Unregister-ScheduledTask -Confirm:$false -ErrorAction SilentlyContinue
 				
 			$trigger = New-ScheduledTaskTrigger -Once -At $using:RebootDate
-			$principal = New-ScheduledTaskPrincipal -UserID 'NT AUTHORITY\SYSTEM' -LogonType ServiceAccount
+			$principal = New-ScheduledTaskPrincipal -UserId 'NT AUTHORITY\SYSTEM' -LogonType ServiceAccount
 
 			$taskActionSettings = @{
-				Execute = 'shutdown.exe'
-                Argument =  '/r /f /t 0'
+				Execute  = 'shutdown.exe'
+				Argument = '/r /f /t 0'
 			}
 
 			$TaskAction = New-ScheduledTaskAction @taskActionSettings
 			$TaskSettings = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -Priority 0 -DontStopIfGoingOnBatteries 
 			$NewTask = New-ScheduledTask -Action $TaskAction -Principal $principal -Trigger $trigger -Settings $TaskSettings
-			Register-ScheduledTask -TaskName 'Force Reboot' -InputObject $NewTask -Force
+			Register-ScheduledTask -TaskName "Forced Reboot by $(whoami -upn)" -InputObject $NewTask -Force
 		}
 	}
 } #end Function
