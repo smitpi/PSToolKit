@@ -80,14 +80,8 @@ Function Start-PSRoboCopy {
         [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Start-PSRoboCopy')]
         PARAM(
                 [Parameter(Mandatory = $true)]
-                [ValidateScript( { if (Test-Path $_) { $true }
-                                else { throw "Source: $($_) does not exist." }
-                        })]
                 [System.IO.DirectoryInfo]$Source,
                 [Parameter(Mandatory = $true)]
-                [ValidateScript( { if (Test-Path $_) { $true }
-                                else { New-Item -Path $_ -ItemType Directory -Force | Out-Null; $true }
-                        })]
                 [System.IO.DirectoryInfo]$Destination,
                 [Parameter(Mandatory = $true)]
                 [ValidateSet('Copy', 'Move', 'Mirror')]
