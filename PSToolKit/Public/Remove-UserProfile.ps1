@@ -66,7 +66,6 @@ Function Remove-UserProfile {
         [ValidateNotNullOrEmpty()]
         [string]$UserName
     )
-    ## TODO Needs to be tested and confirm working.
     if ((Test-Connection -ComputerName $TargetServer -Count 2 -Quiet) -eq $true) {
         try {
             Invoke-Command -ComputerName $TargetServer -ScriptBlock {

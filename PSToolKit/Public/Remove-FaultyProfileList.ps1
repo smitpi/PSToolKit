@@ -64,7 +64,6 @@ function Remove-FaultyProfileList {
     if ((Test-Connection -ComputerName $TargetServer -Count 2 -Quiet) -eq $true) {
         try {
             Invoke-Command -ComputerName $TargetServer -ScriptBlock {
-                ## TODO  ### <-- This needs to be tested to return the correct list
                 $UserProfileReg = Get-ChildItem 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion\ProfileList' | Where-Object { $_.GetValue('Guid') -notlike $null }
 
                 foreach ($UserProfile in $UserProfileReg) {
