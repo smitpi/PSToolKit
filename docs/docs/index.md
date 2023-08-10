@@ -128,6 +128,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Remove-FaultyProfileList`](https://smitpi.github.io/PSToolKit/Remove-FaultyProfileList) -- Fixes Profilelist in the registry. To fix user logon with temp profile.
 - [`Remove-HiddenDevice`](https://smitpi.github.io/PSToolKit/Remove-HiddenDevice) -- Removes ghost devices from your system
 - [`Remove-UserProfile`](https://smitpi.github.io/PSToolKit/Remove-UserProfile) -- Connects to a server and renames a user profile folder, and delete the key from Profilelist in the registry
+- [`Reset-FileOwnership`](https://smitpi.github.io/PSToolKit/Reset-FileOwnership) -- Reset the ownership of a directory and add full control to the folder.
 - [`Reset-Module`](https://smitpi.github.io/PSToolKit/Reset-Module) -- Removes and force import a module.
 - [`Reset-PSGallery`](https://smitpi.github.io/PSToolKit/Reset-PSGallery) -- Reset gallery to default settings
 - [`Resolve-SID`](https://smitpi.github.io/PSToolKit/Resolve-SID) -- Resolves the Sid

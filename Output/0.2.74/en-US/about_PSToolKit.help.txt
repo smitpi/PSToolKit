@@ -66,6 +66,7 @@ Functions in this module:
 	 Remove-FaultyProfileList -- Fixes Profilelist in the registry. To fix user logon with temp profile.
 	 Remove-HiddenDevice -- Removes ghost devices from your system
 	 Remove-UserProfile -- Connects to a server and renames a user profile folder, and delete the key from Profilelist in the registry
+	 Reset-FileOwnership -- Reset the ownership of a directory and add full control to the folder.
 	 Reset-Module -- Removes and force import a module.
 	 Reset-PSGallery -- Reset gallery to default settings
 	 Resolve-SID -- Resolves the Sid
