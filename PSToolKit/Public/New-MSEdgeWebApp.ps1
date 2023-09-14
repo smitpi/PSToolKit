@@ -89,7 +89,6 @@ Function New-MSEdgeWebApp {
 	#endregion
 	Begin {
 		Write-Verbose '[16:08:48 BEGIN] Starting New-PSScript'
-
 	} #End Begin
 	Process {
 		$WScriptShell = New-Object -ComObject WScript.Shell

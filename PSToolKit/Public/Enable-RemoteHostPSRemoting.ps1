@@ -83,6 +83,5 @@ Function Enable-RemoteHostPSRemoting {
 		}
 	}
 	Invoke-CimMethod @MethodArgs
-	Invoke-Command -ComputerName $ComputerName -ScriptBlock { Write-Output -InputObject $using:env:COMPUTERNAME : working } -HideComputerName
-
+	Test-PSRemote -ComputerName $ComputerName -Credential $AdminCredentials
 } #end Function
