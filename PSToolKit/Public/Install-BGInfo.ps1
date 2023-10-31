@@ -95,6 +95,16 @@ Function Install-BGInfo {
 			New-ItemProperty -Path $bgInfoRegPath -Name $bgInfoRegkey -PropertyType $bgInfoRegType -Value $bgInfoRegkeyValue | Out-Null
 			Write-Color '[Creating] ', 'Registry AutoStart: ', 'Completed' -Color Yellow, Cyan, Green
 		}
+		$WScriptShell = New-Object -ComObject WScript.Shell
+		$lnkfile = "$($env:PUBLIC)\Desktop\Refresh Bginfo.lnk"
+		$Shortcut = $WScriptShell.CreateShortcut($($lnkfile))
+		$Shortcut.TargetPath = 'C:\Program Files\PSToolKit\BGInfo\Bginfo64.exe'
+		$Shortcut.Arguments = "`"C:\Program Files\PSToolKit\BGInfo\PSToolKit.bgi`" /timer:0 /nolicprompt"
+		$icon = Get-Item 'C:\Program Files\PSToolKit\BGInfo\BgInfo.ico'
+		$Shortcut.IconLocation = $icon.FullName
+		#Save the Shortcut to the TargetPath
+		$Shortcut.Save()
+
 	} catch {Write-Warning "Error: `nMessage:$($_.Exception.Message)`nItem:$($_.Exception.ItemName)"}
 
 	if ($RunBGInfo) {
