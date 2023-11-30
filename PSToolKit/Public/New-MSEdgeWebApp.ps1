@@ -88,7 +88,7 @@ Function New-MSEdgeWebApp {
 	)
 	#endregion
 	Begin {
-		Write-Verbose '[16:08:48 BEGIN] Starting New-PSScript'
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
 	} #End Begin
 	Process {
 		$WScriptShell = New-Object -ComObject WScript.Shell
@@ -111,6 +111,6 @@ Function New-MSEdgeWebApp {
 	}#Process
 
 	End {
-		Write-Verbose '[16:08:48 END] Complete'
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Done"
 	}#End End
 } #end Function

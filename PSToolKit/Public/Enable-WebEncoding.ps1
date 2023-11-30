@@ -64,7 +64,7 @@ Function Enable-WebEncoding {
 	)
 	#endregion
 	Begin {
-		Write-Verbose '[07:26:07 BEGIN] Starting New-PSScript'
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
 	}#Begin
 	Process {
 		foreach ($ur in $URL) {
@@ -72,6 +72,6 @@ Function Enable-WebEncoding {
 		}
 	}#Process
 	End {
-		Write-Verbose '[07:26:07 END] Complete'
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Done"
 	}#End
 } #end Function

@@ -86,6 +86,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Get-CitrixClientVersion`](https://smitpi.github.io/PSToolKit/Get-CitrixClientVersion) -- Report on the CItrix workspace versions the users are using.
 - [`Get-CitrixPolicy`](https://smitpi.github.io/PSToolKit/Get-CitrixPolicy) -- Export Citrix Policies
 - [`Get-CommandFiltered`](https://smitpi.github.io/PSToolKit/Get-CommandFiltered) -- Finds commands on the system and sort it according to module
+- [`Get-DotNetVersions`](https://smitpi.github.io/PSToolKit/Get-DotNetVersions) -- List all the installed versions of .net
 - [`Get-FolderSize`](https://smitpi.github.io/PSToolKit/Get-FolderSize) -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option
 - [`Get-FQDN`](https://smitpi.github.io/PSToolKit/Get-FQDN) -- Get FQDN for a device, and checks if it is online
 - [`Get-FullADUserDetail`](https://smitpi.github.io/PSToolKit/Get-FullADUserDetail) -- Extract user details from the domain

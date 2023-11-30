@@ -116,7 +116,7 @@ $properverb-$propernoun -Export HTML -ReportPath C:\temp
 #>
 Function $properverb-$propernoun {
 		[Cmdletbinding(DefaultParameterSetName='Set1', HelpURI = "https://smitpi.github.io/$modulename/$properverb-$propernoun")]
-	    [OutputType([System.Object[]])]
+		[OutputType([System.Object[]])]
                 #region Parameter
                 PARAM(
 					[Parameter(Position = 0,Mandatory,ParameterSetName = 'Set1',HelpMessage = "Specify the name of a remote computer. The default is the local host.")]
@@ -145,19 +145,18 @@ Function $properverb-$propernoun {
                                 else { Write-Warning "Folder does not exist, creating folder now."
                                 New-Item -Path `$_ -ItemType Directory -Force | Out-Null; `$true }
                     })]
-					[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp',
-					[switch]`$OpenReportsFolder
+					[System.IO.DirectoryInfo]`$ReportPath = 'C:\Temp'
 				)
                 #endregion
     Begin {
-		Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
+		Write-Verbose "[`$(Get-Date -Format HH:mm:ss) BEGIN] Starting `$(`$myinvocation.mycommand)"
 
     } #End Begin
     Process {
     
     }#Process
     End {
-		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Complete"
+		Write-Verbose "[`$(Get-Date -Format HH:mm:ss) END] Complete"
     }#End End
 } #end Function
 "@
