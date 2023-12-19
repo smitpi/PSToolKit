@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DotNetVersions
 
 ## SYNOPSIS
-List all the installed versions of .net
+List all the installed versions of .net.
 
 ## SYNTAX
 
@@ -18,19 +18,19 @@ Get-DotNetVersions [-ComputerName] <String[]> [[-Credential] <PSCredential>] [[-
 ```
 
 ## DESCRIPTION
-List all the installed versions of .net
+List all the installed versions of .net.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-DotNetVersions -Export HTML -ReportPath C:\temp
+Get-DotNetVersions -ComputerName RDS01 -Export HTML -ReportPath C:\temp
 ```
 
 ## PARAMETERS
 
 ### -ComputerName
-{{ Fill ComputerName Description }}
+The computer to query.
 
 ```yaml
 Type: String[]
@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -Credential
-{{ Fill Credential Description }}
+Credentials to use.
 
 ```yaml
 Type: PSCredential
@@ -60,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -Export
-{{ Fill Export Description }}
+Export results
 
 ```yaml
 Type: String[]
@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReportPath
-{{ Fill ReportPath Description }}
+Path where report will be saved
 
 ```yaml
 Type: DirectoryInfo

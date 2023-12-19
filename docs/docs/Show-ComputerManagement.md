@@ -39,7 +39,7 @@ Aliases:
 Required: False
 Position: 1
 Default value: $env:ComputerName
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 

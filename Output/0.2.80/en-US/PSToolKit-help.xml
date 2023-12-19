@@ -2028,11 +2028,11 @@
       <command:verb>Get</command:verb>
       <command:noun>DotNetVersions</command:noun>
       <maml:description>
-        <maml:para>List all the installed versions of .net</maml:para>
+        <maml:para>List all the installed versions of .net.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>List all the installed versions of .net</maml:para>
+      <maml:para>List all the installed versions of .net.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2040,7 +2040,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
           <maml:name>ComputerName</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ComputerName Description }}</maml:para>
+            <maml:para>The computer to query.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -2052,7 +2052,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>Credential</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Credential Description }}</maml:para>
+            <maml:para>Credentials to use.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
           <dev:type>
@@ -2064,7 +2064,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>Export</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Export Description }}</maml:para>
+            <maml:para>Export results</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -2076,7 +2076,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
           <maml:name>ReportPath</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ReportPath Description }}</maml:para>
+            <maml:para>Path where report will be saved</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
           <dev:type>
@@ -2091,7 +2091,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
         <maml:name>ComputerName</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ComputerName Description }}</maml:para>
+          <maml:para>The computer to query.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -2103,7 +2103,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>Credential</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Credential Description }}</maml:para>
+          <maml:para>Credentials to use.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
         <dev:type>
@@ -2115,7 +2115,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>Export</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Export Description }}</maml:para>
+          <maml:para>Export results</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -2127,7 +2127,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>ReportPath</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ReportPath Description }}</maml:para>
+          <maml:para>Path where report will be saved</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">DirectoryInfo</command:parameterValue>
         <dev:type>
@@ -2156,7 +2156,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-DotNetVersions -Export HTML -ReportPath C:\temp</dev:code>
+        <dev:code>Get-DotNetVersions -ComputerName RDS01 -Export HTML -ReportPath C:\temp</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -6467,7 +6467,7 @@
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Reset-FileOwnership</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="Directory">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="Directory">
           <maml:name>Path</maml:name>
           <maml:description>
             <maml:para>Path to the folder to reset ownership.</maml:para>
@@ -6494,7 +6494,7 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="Directory">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="Directory">
         <maml:name>Path</maml:name>
         <maml:description>
           <maml:para>Path to the folder to reset ownership.</maml:para>
@@ -8511,7 +8511,7 @@
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Show-ComputerManagement</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
           <maml:name>ComputerName</maml:name>
           <maml:description>
             <maml:para>Computer to Manage</maml:para>
@@ -8526,7 +8526,7 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
         <maml:name>ComputerName</maml:name>
         <maml:description>
           <maml:para>Computer to Manage</maml:para>
