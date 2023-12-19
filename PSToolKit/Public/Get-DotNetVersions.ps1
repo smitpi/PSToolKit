@@ -39,16 +39,27 @@ Created [30/11/2023_08:14] Initial Script
 
 #> 
 
-
 <#
 .SYNOPSIS
-List all the installed versions of .net
+List all the installed versions of .net.
 
 .DESCRIPTION
-List all the installed versions of .net
+List all the installed versions of .net.
+
+.PARAMETER ComputerName
+The computer to query.
+
+.PARAMETER Credential
+Credentials to use.
+
+.PARAMETER Export
+Export results
+
+.PARAMETER ReportPath
+Path where report will be saved
 
 .EXAMPLE
-Get-DotNetVersions -Export HTML -ReportPath C:\temp
+Get-DotNetVersions -ComputerName RDS01 -Export HTML -ReportPath C:\temp
 
 #>
 Function Get-DotNetVersions {

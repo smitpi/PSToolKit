@@ -58,10 +58,11 @@ Show-ComputerManagement -ComputerName neptune
 #>
 Function Show-ComputerManagement {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Show-ComputerManagement')]
-                PARAM(
-        			[ValidateScript({if (Test-Connection -ComputerName $_ -Count 2 -Quiet) {$true}
-                            		else {throw "Unable to connect to $($_)"} })]
-        			[string[]]$ComputerName = $env:ComputerName
-					)
-    compmgmt.msc /computer:$ComputerName
+	PARAM(
+		[ValidateScript({if (Test-Connection -ComputerName $_ -Count 2 -Quiet) {$true}
+				else {throw "Unable to connect to $($_)"} })]
+		[Parameter(ValueFromPipeline)]
+		[string[]]$ComputerName = $env:ComputerName
+	)
+	foreach ($Comp in $ComputerName) {compmgmt.msc /computer:$Comp}
 } #end Function

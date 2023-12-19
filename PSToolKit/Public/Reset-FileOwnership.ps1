@@ -63,10 +63,7 @@ Function Reset-FileOwnership {
 	[OutputType([System.Object[]])]
 	#region Parameter
 	PARAM(
-		[Parameter(Position = 0,
-			Mandatory,
-			ValueFromPipeline,
-			ValueFromPipelineByPropertyName)]
+		[Parameter(Position = 0,Mandatory,ValueFromPipeline)]
 		[alias('Directory')]
 		[ValidateScript( { (Test-Path $_)})]
 		[System.IO.DirectoryInfo[]]$Path,
