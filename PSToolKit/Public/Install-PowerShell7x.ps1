@@ -54,25 +54,28 @@ Install-PowerShell7x
 
 #>
 Function Install-PowerShell7x {
-		[Cmdletbinding(HelpURI = "https://smitpi.github.io/PSToolKit/Install-PowerShell7x")]
-                PARAM()
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Install-PowerShell7x')]
+	PARAM()
 
 	$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 	if (-not($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))) {Throw 'Must be running an elevated prompt to use this function'}
 
-
 	try {
+		$ReleaseModule = Get-Module PSReleaseTools
+		if ($null -like $ReleaseModule) {$ReleaseModule = Get-Module PSReleaseTools -ListAvailable}
+		if ($null -like $ReleaseModule) {
+			Write-Color '[Installing] ', 'Required Modules: ', 'PSReleaseTools' -Color Yellow, green, Cyan
+			Install-Module -Name PSReleaseTools -Scope CurrentUser -AllowClobber -Force
+		}
+		Import-Module PSReleaseTools -Force
 		if ((Test-Path 'C:\Program Files\PowerShell\7') -eq $false) {
-			$ReleaseModule = Get-Module PSReleaseTools
-			if ($null -like $ReleaseModule) {$ReleaseModule = Get-Module PSReleaseTools -ListAvailable}
-			if ($null -like $ReleaseModule) {
-				Write-Color '[Installing] ', 'Required Modules: ', 'PSReleaseTools' -Color Yellow, green, Cyan
-				Install-Module -Name PSReleaseTools -Scope CurrentUser -AllowClobber -Force
-			}
-			Import-Module PSReleaseTools -Force
 			Install-PowerShell -Mode Quiet -EnableRemoting -EnableContextMenu -EnableRunContext
 			Write-Color '[Installing] ', 'PowerShell 7.x ', 'Complete' -Color Yellow, Cyan, Green
-		} else {
+		}elseif (($PSVersionTable.PSVersion) -lt ([version]((Get-PSReleaseCurrent).version).replace('v', $null))) {
+				Install-PowerShell -Mode Quiet -EnableRemoting -EnableContextMenu -EnableRunContext
+				Write-Color '[Upgrading] ', 'PowerShell 7.x ', 'Complete' -Color Yellow, Cyan, Green
+			}
+		else {
 			Write-Color '[Installing] ', 'PowerShell 7.x: ', 'Already Installed' -Color Yellow, Cyan, DarkRed
 		}
 	} catch { Write-Warning "[Installing] PowerShell 7.x: Failed:`n $($_.Exception.Message)" }
