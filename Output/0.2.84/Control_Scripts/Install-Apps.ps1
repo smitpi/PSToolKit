@@ -1,5 +1,19 @@
-#`$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-# if (-not($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))) { Throw 'Must be running an elevated prompt to use function' }
+####Elevate Powershell####
+# Get the ID and security principal of the current user account
+$myWindowsID = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+$myWindowsPrincipal = New-Object System.Security.Principal.WindowsPrincipal($myWindowsID)
+
+# Get the security principal for the Administrator role
+$adminRole = [System.Security.Principal.WindowsBuiltInRole]::Administrator
+
+# Check to see if we are currently running "as Administrator"
+if (-not($myWindowsPrincipal.IsInRole($adminRole))) {
+	$newProcess = New-Object System.Diagnostics.ProcessStartInfo 'PowerShell'
+	$newProcess.Arguments = $myInvocation.MyCommand.Definition
+	$newProcess.Verb = 'runas'
+	[System.Diagnostics.Process]::Start($newProcess)
+	exit
+}
 
 $RequiredModules = @(
 	'PSPackageMan'
