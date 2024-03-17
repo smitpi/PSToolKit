@@ -1,5 +1,5 @@
-$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-if (-not($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))) { Throw 'Must be running an elevated prompt to use function' }
+#`$IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+# if (-not($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))) { Throw 'Must be running an elevated prompt to use function' }
 
 $RequiredModules = @(
 	'PSPackageMan'
@@ -148,8 +148,8 @@ do {
 } while ($Select.ToUpper() -ne 'Q')
 
 $Settings = @{
-	ListName        = $InstallList.Name
-	GitHubUserID    = $GitHubUser
+	ListName     = $InstallList.Name
+	GitHubUserID = $GitHubUser
 }
 if ($PublicGist) {$Settings.Add('PublicGist', $true)}
 else {$Settings.Add('GitHubToken', $GitHubToken)}
