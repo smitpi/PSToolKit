@@ -8,6 +8,22 @@ $Boxstarter.AutoLogin = $false # Save my password securely and auto-login after 
 Write-Host 'Setting execution policy'
 Update-ExecutionPolicy Unrestricted
 
+try {
+	$message = @"
+  _    _ _______ _____   _____ ______           ____              _       _                   
+ | |  | |__   __|  __ \ / ____|___  /   /\     |  _ \            | |     | |                  
+ | |__| |  | |  | |__) | |       / /   /  \    | |_) | ___   ___ | |_ ___| |_ _ __ __ _ _ __  
+ |  __  |  | |  |  ___/| |      / /   / /\ \   |  _ < / _ \ / _ \| __/ __| __| '__/ _` | '_ \ 
+ | |  | |  | |  | |    | |____ / /__ / ____ \  | |_) | (_) | (_) | |_\__ \ |_| | | (_| | |_) |
+ |_|  |_|  |_|  |_|     \_____/_____/_/    \_\ |____/ \___/ \___/ \__|___/\__|_|  \__,_| .__/ 
+                                                                                       | |    
+                                                                                       |_|    
+"@
+	Write-Host $message -ForegroundColor Yellow
+	Disable-UAC
+	refreshenv
+} catch {Write-Warning "Error: Message:$($Error[0])"}
+
 ####Elevate Powershell####
 # Get the ID and security principal of the current user account
 $myWindowsID = [System.Security.Principal.WindowsIdentity]::GetCurrent()
