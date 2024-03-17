@@ -67,6 +67,7 @@ Get-Help about_PSToolKit
 Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit)
  
 ## PS Controller Scripts
+- box.ps1
 - boxstarter-install.ps1
 - call-initial.ps1
 - Initial-Setup.ps1

@@ -153,7 +153,7 @@ Function Install-ModulesFromPWSHModule {
 	##################################
 	#region Create list menu
 	##################################
-	if (-not($PSBoundParameters.ContainsKey('GitHubUser'))) {
+	if (-not($PSBoundParameters.ContainsKey('GitHubUserID'))) {
 		Write-Host ' '
 		do {
 			[string]$selection2 = Read-Host 'Are you installing from a Public Gist? (Y/N)'
@@ -161,11 +161,11 @@ Function Install-ModulesFromPWSHModule {
 		} while ($selection2.ToUpper() -ne 'Y' -and $selection2.ToUpper() -ne 'N')
 		switch ($selection2.ToUpper()) {
 			'Y' {
-				$GitHubUser = Read-Host 'GitHub Username'
+				$GitHubUserID = Read-Host 'GitHub Username'
 				$PublicGist = $true
 			}
 			'N' { 
-				$GitHubUser = Read-Host 'GitHub Username'
+				$GitHubUserID = Read-Host 'GitHub Username'
 				$GitHubToken = Read-Host 'GitHub Token'	
 			}
 		}
@@ -191,7 +191,7 @@ Function Install-ModulesFromPWSHModule {
 
 
 	[System.Collections.generic.List[PSObject]]$ModuleLists = @()
-	Get-PWSHModuleList -GitHubUserID $GitHubUser -GitHubToken $GitHubToken | ForEach-Object {$ModuleLists.Add($_)}
+	Get-PWSHModuleList -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken | ForEach-Object {$ModuleLists.Add($_)}
 
 	$InstallList = @()
 	Write-Host ' '
@@ -229,7 +229,7 @@ Function Install-ModulesFromPWSHModule {
 		ListName        = $InstallList.Name
 		Scope           = $scope
 		AllowPrerelease = $PreRelease
-		GitHubUserID    = $GitHubUser
+		GitHubUserID    = $GitHubUserID
 	}
 	if ($PublicGist) {$CommandParam.Add('PublicGist', $true)}
 	else {$CommandParam.Add('GitHubToken', $GitHubToken)}

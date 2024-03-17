@@ -65,7 +65,7 @@ Function Install-AppsFromPSPackageMan {
 	[OutputType([System.Object[]])]
 	#region Parameter
 	PARAM(
-		[string]$GitHubUserID, 
+		[string]$GitHubUserID,
 		[Parameter(ParameterSetName = 'Public')]
 		[switch]$PublicGist,
 		[Parameter(ParameterSetName = 'Private')]
@@ -190,7 +190,7 @@ Function Install-AppsFromPSPackageMan {
 			choco config set --name="'removePackageInformationOnUninstall'" --value="'true'" --limit-output
 		}
 	}
-	if (-not($PSBoundParameters.ContainsKey('GitHubUser'))) {
+	if (-not($PSBoundParameters.ContainsKey('GitHubUserID'))) {
 		Write-Host ' '
 		do {
 			[string]$selection2 = Read-Host 'Are you installing from a Public Gist? (Y/N)'
@@ -198,18 +198,18 @@ Function Install-AppsFromPSPackageMan {
 		} while ($selection2.ToUpper() -ne 'Y' -and $selection2.ToUpper() -ne 'N')
 		switch ($selection2.ToUpper()) {
 			'Y' {
-				$GitHubUser = Read-Host 'GitHub Username'
+				$GitHubUserID = Read-Host 'GitHub Username'
 				$PublicGist = $true
 			}
 			'N' { 
-				$GitHubUser = Read-Host 'GitHub Username'
+				$GitHubUserID = Read-Host 'GitHub Username'
 				$GitHubToken = Read-Host 'GitHub Token'	
 			}
 		}
 	}
 
 	[System.Collections.generic.List[PSObject]]$AppLists = @()
-	Get-PSPackageManAppList -GitHubUserID $GitHubUser -GitHubToken $GitHubToken | ForEach-Object {$AppLists.Add($_)}
+	Get-PSPackageManAppList -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken | ForEach-Object {$AppLists.Add($_)}
 
 	$InstallList = @()
 	Write-Host ' '
@@ -243,7 +243,7 @@ Function Install-AppsFromPSPackageMan {
 
 	$Settings = @{
 		ListName     = $InstallList.Name
-		GitHubUserID = $GitHubUser
+		GitHubUserID = $GitHubUserID
 	}
 	if ($PublicGist) {$Settings.Add('PublicGist', $true)}
 	else {$Settings.Add('GitHubToken', $GitHubToken)}

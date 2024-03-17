@@ -3,6 +3,14 @@
 $Boxstarter.RebootOk = $false # Allow reboots?
 $Boxstarter.NoPassword = $false # Is this a machine with no login password?
 $Boxstarter.AutoLogin = $false # Save my password securely and auto-login after a reboot
+$Boxstarter.SuppressLogging = $True.
+# Install-BoxstarterPackage -Package "C:\ProgramData\Boxstarter\BuildPackages\InstallApps.1.0.0.nupkg"
+#New-PackageFromScript MyScript.ps1 MyPackage
+#http://boxstarter.org/package/nr/url?
+
+
+#Boxstarter.WinConfig\Install-WindowsUpdate -getUpdatesFromMS -acceptEula
+
 
 # Basic setup
 Write-Host 'Setting execution policy'
@@ -40,10 +48,28 @@ if (-not($myWindowsPrincipal.IsInRole($adminRole))) {
 	[System.Diagnostics.Process]::Start($newProcess)
 	exit
 }
+
+if ([string]::IsNullOrEmpty($GitHubUserID)) {
+	$input = [Microsoft.VisualBasic.Interaction]::InputBox('Please enter the GitHub User:', 'User Input', '')
+	if ([string]::IsNullOrWhiteSpace($input)) {
+		$GitHubUserID = $input
+	}
+}
+	
+if ([string]::IsNullOrEmpty($GitHubToken)) {
+	$input = [Microsoft.VisualBasic.Interaction]::InputBox('Please enter the GitHub Token:', 'User Input', '')
+	if ([string]::IsNullOrWhiteSpace($input)) {$GitHubToken = $input}
+}
 $URL = 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Install-AppsFromPSPackageMan.ps1'
 (New-Object System.Net.WebClient).DownloadFile($($URL), "$($env:tmp)\Install-AppsFromPSPackageMan.ps1")
-Import-Module (Get-Item "$($env:tmp)\Install-AppsFromPSPackageMan.ps1") -Force; Install-AppsFromPSPackageMan
+Import-Module (Get-Item "$($env:tmp)\Install-AppsFromPSPackageMan.ps1") -Force; 
+Install-AppsFromPSPackageMan -GitHubUserID $GitHubUserID -GitHubToken $GitHubToken
+
+
+
 
 #powershell 'irm asheroto.com/winget | iex'
 #Invoke-RestMethod asheroto.com/winget | Invoke-Expression
 #http://boxstarter.org/package/url?asheroto.com/winget
+
+Enable-UAC
