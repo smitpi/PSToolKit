@@ -373,23 +373,23 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <td><a href="http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Initial-Setup.ps1'">System Setup</a></td>
 <td>Use <a href="https://github.com/smitpi/PSToolKit">PSToolKit</a> to Install a new System.</td>
 </tr>
-<tr>
-<td><a href="http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-Apps.ps1.ps1'">Install/Upgrade Apps</a></td>
-<td>Run script to update list of installed apps from module <a href="https://github.com/smitpi/PSPackageMan">PSPackageMan</a> or <a href="https://www.powershellgallery.com/packages/PSPackageMan/0.1.3">PS Gallary</a></td>
-</tr>
-<tr>
-<td><a href="http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-Modules.ps1.ps1'">Install/Upgrade Modules</a></td>
-<td>Run script to update list of PS Modules from module <a href="https://github.com/smitpi/PWSHModule">PWSHModule</a> or <a href="https://www.powershellgallery.com/packages/PWSHModule/0.1.21">PS Gallary</a></td>
-</tr>
 </tbody>
 </table>
 <blockquote>
 <p><strong>Warning</strong></p>
 <blockquote>
-<p>You will need a valid <strong>github userid</strong> and <strong>token</strong> to continue</p>
+<p>You will need a valid <strong>github userid</strong> and <strong>token</strong> to continue.</p>
 </blockquote>
 </blockquote>
 <hr />
+<ul>
+<li>Run the following to update or install apps using the module: <a href="https://github.com/smitpi/PSPackageMan">PSPackageMan</a> (<a href="https://www.powershellgallery.com/packages/PSPackageMan/0.1.3">PS Gallary</a>)
+<div class="highlight"><pre><span></span><code><span class="nb">Invoke-RestMethod</span> <span class="n">https</span><span class="p">://</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">smitpi</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">master</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">Control_Scripts</span><span class="p">/</span><span class="n">Run-Install-Apps</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">Invoke-Expression</span>
+</code></pre></div></li>
+<li>Run the following to update or install PS Modules using the module: <a href="https://github.com/smitpi/PWSHModule">PWSHModule</a> (<a href="https://www.powershellgallery.com/packages/PWSHModule/0.1.21">PS Gallary</a>)
+<div class="highlight"><pre><span></span><code><span class="nb">Invoke-RestMethod</span> <span class="n">https</span><span class="p">://</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">smitpi</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">master</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">Control_Scripts</span><span class="p">/</span><span class="n">Run-Install-Modules</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">Invoke-Expression</span>
+</code></pre></div></li>
+</ul>
 <h2 id="getting-started">Getting Started</h2>
 <ul>
 <li>Run this script to install from GitHub <a href="https://github.com/smitpi/PSToolKit">GitHub Repo</a></li>
@@ -569,5 +569,5 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </html>
 <!--
 MkDocs version : 1.4.2
-Build Date UTC : 2024-03-17 14:55:40.122394+00:00
+Build Date UTC : 2024-03-17 21:25:36.511747+00:00
 -->
