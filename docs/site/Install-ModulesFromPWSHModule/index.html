@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="author" content="Pierre Smit">
-    <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Import-XamlConfigFile/">
+    <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Install-ModulesFromPWSHModule/">
     <link rel="shortcut icon" href="../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Import-XamlConfigFile - PSToolKit</title>
+    <title>Install-ModulesFromPWSHModule - PSToolKit</title>
     <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
@@ -32,7 +32,7 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Import-XamlConfigFile", url: "#_top", children: [
+          {title: "Install-ModulesFromPWSHModule", url: "#_top", children: [
               {title: "SYNOPSIS", url: "#synopsis" },
               {title: "SYNTAX", url: "#syntax" },
               {title: "DESCRIPTION", url: "#description" },
@@ -68,20 +68,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Install-AppsFromPSPackageMan/" class="btn btn-xs btn-default pull-right">
+      <a href="../Install-NFSClient/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Install-AppsFromPSPackageMan/" class="btn btn-xs btn-link">
-        Install-AppsFromPSPackageMan
+      <a href="../Install-NFSClient/" class="btn btn-xs btn-link">
+        Install-NFSClient
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../Import-CitrixSiteConfigFile/" class="btn btn-xs btn-default pull-left">
+      <a href="../Install-MSUpdate/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Import-CitrixSiteConfigFile/" class="btn btn-xs btn-link">
-        Import-CitrixSiteConfigFile
+        Previous</a><a href="../Install-MSUpdate/" class="btn btn-xs btn-link">
+        Install-MSUpdate
       </a>
     </div>
     
@@ -89,47 +89,42 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="import-xamlconfigfile">Import-XamlConfigFile</h1>
+    <h1 id="install-modulesfrompwshmodule">Install-ModulesFromPWSHModule</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Import the wpf xaml file and create variables from objects</p>
+<p>Uses the module PWSHModulePS to install PS Modules from a GitHub Gist File.</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Import-XamlConfigFile [[-XamlFile] &lt;FileInfo&gt;] [[-FormName] &lt;String&gt;] [-ShowExample] [&lt;CommonParameters&gt;]
+<h3 id="set1-default">Set1 (Default)</h3>
+<div class="highlight"><pre><span></span><code>Install-ModulesFromPWSHModule [-GitHubUserID &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre></div>
+<h3 id="public">Public</h3>
+<div class="highlight"><pre><span></span><code>Install-ModulesFromPWSHModule [-GitHubUserID &lt;String&gt;] [-PublicGist] [&lt;CommonParameters&gt;]
+</code></pre></div>
+<h3 id="private">Private</h3>
+<div class="highlight"><pre><span></span><code>Install-ModulesFromPWSHModule [-GitHubUserID &lt;String&gt;] [-GitHubToken &lt;String&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
-<p>Import the wpf xaml file and create variables from objects</p>
+<p>Uses the module PWSHModulePS to install PS Modules from a GitHub Gist File.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Import-XamlConfigFile -XamlFile D:\MainWindow.xaml -FormName SMainForm
+<div class="highlight"><pre><span></span><code>Install-ModulesFromPWSHModule
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
-<h3 id="-xamlfile">-XamlFile</h3>
-<p>Path to the xaml file to import</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FileInfo</span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>
-<span class="nt">Aliases</span><span class="p">:</span>
-
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
-</code></pre></div>
-<h3 id="-formname">-FormName</h3>
-<p>The form name variable to be created.</p>
+<h3 id="-githubuserid">-GitHubUserID</h3>
+<p>User with access to the gist.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>
 <span class="nt">Aliases</span><span class="p">:</span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </code></pre></div>
-<h3 id="-showexample">-ShowExample</h3>
-<p>Show example to open the form.</p>
+<h3 id="-publicgist">-PublicGist</h3>
+<p>Select if the list is hosted publicly.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Public</span>
 <span class="nt">Aliases</span><span class="p">:</span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
@@ -138,10 +133,23 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </code></pre></div>
+<h3 id="-githubtoken">-GitHubToken</h3>
+<p>The token for that gist.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Private</span>
+<span class="nt">Aliases</span><span class="p">:</span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+</code></pre></div>
 <h3 id="commonparameters">CommonParameters</h3>
 <p>This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see <a href="http://go.microsoft.com/fwlink/?LinkID=113216">about_CommonParameters</a>.</p>
 <h2 id="inputs">INPUTS</h2>
 <h2 id="outputs">OUTPUTS</h2>
+<h3 id="systemobject">System.Object[]</h3>
 <h2 id="notes">NOTES</h2>
 <h2 id="related-links">RELATED LINKS</h2>
 
@@ -156,20 +164,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Install-AppsFromPSPackageMan/" class="btn btn-xs btn-default pull-right">
+      <a href="../Install-NFSClient/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Install-AppsFromPSPackageMan/" class="btn btn-xs btn-link">
-        Install-AppsFromPSPackageMan
+      <a href="../Install-NFSClient/" class="btn btn-xs btn-link">
+        Install-NFSClient
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../Import-CitrixSiteConfigFile/" class="btn btn-xs btn-default pull-left">
+      <a href="../Install-MSUpdate/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Import-CitrixSiteConfigFile/" class="btn btn-xs btn-link">
-        Import-CitrixSiteConfigFile
+        Previous</a><a href="../Install-MSUpdate/" class="btn btn-xs btn-link">
+        Install-MSUpdate
       </a>
     </div>
     
@@ -180,7 +188,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 <footer class="container-fluid wm-page-content">
       <p>
-        <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Import-XamlConfigFile.md">Edit on smitpi/PSToolKit</a>
+        <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Install-ModulesFromPWSHModule.md">Edit on smitpi/PSToolKit</a>
       </p><p>(c) 2022 Pierre Smit. All rights reserved.</p>
   <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
 </footer>

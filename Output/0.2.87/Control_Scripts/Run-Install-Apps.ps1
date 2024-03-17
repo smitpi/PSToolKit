@@ -1,5 +1,13 @@
 
-Set-ExecutionPolicy Bypass -Scope Process -Force
+# Boxstarter options
+$Boxstarter.RebootOk = $false # Allow reboots?
+$Boxstarter.NoPassword = $false # Is this a machine with no login password?
+$Boxstarter.AutoLogin = $false # Save my password securely and auto-login after a reboot
+
+# Basic setup
+Write-Host 'Setting execution policy'
+Update-ExecutionPolicy Unrestricted
+
 ####Elevate Powershell####
 # Get the ID and security principal of the current user account
 $myWindowsID = [System.Security.Principal.WindowsIdentity]::GetCurrent()
@@ -19,3 +27,7 @@ if (-not($myWindowsPrincipal.IsInRole($adminRole))) {
 $URL = 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Install-AppsFromPSPackageMan.ps1'
 (New-Object System.Net.WebClient).DownloadFile($($URL), "$($env:tmp)\Install-AppsFromPSPackageMan.ps1")
 Import-Module (Get-Item "$($env:tmp)\Install-AppsFromPSPackageMan.ps1") -Force; Install-AppsFromPSPackageMan
+
+#powershell 'irm asheroto.com/winget | iex'
+#Invoke-RestMethod asheroto.com/winget | Invoke-Expression
+#http://boxstarter.org/package/url?asheroto.com/winget
