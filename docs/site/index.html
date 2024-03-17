@@ -370,11 +370,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <td>Use <a href="https://github.com/smitpi/PSToolKit">PSToolKit</a> to Install a new System.</td>
 </tr>
 <tr>
-<td><a href="http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Install-Apps.ps1.ps1'">Install/Upgrade Apps</a></td>
+<td><a href="http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-Apps.ps1.ps1'">Install/Upgrade Apps</a></td>
 <td>Run script to update list of installed apps from module <a href="https://github.com/smitpi/PSPackageMan">PSPackageMan</a> or <a href="https://www.powershellgallery.com/packages/PSPackageMan/0.1.3">PS Gallary</a></td>
 </tr>
 <tr>
-<td><a href="http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Install-Modules.ps1.ps1'">Install/Upgrade Modules</a></td>
+<td><a href="http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-Modules.ps1.ps1'">Install/Upgrade Modules</a></td>
 <td>Run script to update list of PS Modules from module <a href="https://github.com/smitpi/PWSHModule">PWSHModule</a> or <a href="https://www.powershellgallery.com/packages/PWSHModule/0.1.21">PS Gallary</a></td>
 </tr>
 </tbody>
@@ -419,8 +419,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>boxstarter-install.ps1</li>
 <li>call-initial.ps1</li>
 <li>Initial-Setup.ps1</li>
-<li>Install-Apps.ps1</li>
-<li>Install-Modules.ps1</li>
+<li>Run-Install-Apps.ps1</li>
+<li>Run-Install-Modules.ps1</li>
 </ul>
 <h2 id="functions">Functions</h2>
 <ul>
@@ -458,10 +458,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li><a href="https://smitpi.github.io/PSToolKit/Get-WinEventLogExtract"><code>Get-WinEventLogExtract</code></a> -- Extract Event logs of a server list, and create html / excel report</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Import-CitrixSiteConfigFile"><code>Import-CitrixSiteConfigFile</code></a> -- Import the Citrix config file, and created a variable with the details</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Import-XamlConfigFile"><code>Import-XamlConfigFile</code></a> -- Import the wpf xaml file and create variables from objects</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Install-AppsFromPSPackageMan"><code>Install-AppsFromPSPackageMan</code></a> -- Uses the module PSPackageMan to install apps from a GitHub Gist File.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Install-BGInfo"><code>Install-BGInfo</code></a> -- Install and auto runs bginfo at start up.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Install-ChocolateyClient"><code>Install-ChocolateyClient</code></a> -- Downloads and installs the Chocolatey client.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Install-ChocolateyServer"><code>Install-ChocolateyServer</code></a> -- This will download, install and setup a new Chocolatey Repo Server</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Install-LocalPSRepository"><code>Install-LocalPSRepository</code></a> -- Short desCreates a repository for offline installations.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Install-ModulesFromPWSHModule"><code>Install-ModulesFromPWSHModule</code></a> -- Uses the module PWSHModulePS to install PS Modules from a GitHub Gist File.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Install-MSUpdate"><code>Install-MSUpdate</code></a> -- Perform windows update</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Install-NFSClient"><code>Install-NFSClient</code></a> -- Install NFS Client for windows</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Install-PowerShell7x"><code>Install-PowerShell7x</code></a> -- Install ps7</li>
@@ -562,5 +564,5 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </html>
 <!--
 MkDocs version : 1.4.2
-Build Date UTC : 2024-03-17 12:18:15.657792+00:00
+Build Date UTC : 2024-03-17 13:29:30.522299+00:00
 -->

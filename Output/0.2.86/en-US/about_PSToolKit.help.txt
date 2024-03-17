@@ -42,10 +42,12 @@ Functions in this module:
 	 Get-WinEventLogExtract -- Extract Event logs of a server list, and create html / excel report
 	 Import-CitrixSiteConfigFile -- Import the Citrix config file, and created a variable with the details
 	 Import-XamlConfigFile -- Import the wpf xaml file and create variables from objects
+	 Install-AppsFromPSPackageMan -- Uses the module PSPackageMan to install apps from a GitHub Gist File.
 	 Install-BGInfo -- Install and auto runs bginfo at start up.
 	 Install-ChocolateyClient -- Downloads and installs the Chocolatey client.
 	 Install-ChocolateyServer -- This will download, install and setup a new Chocolatey Repo Server
 	 Install-LocalPSRepository -- Short desCreates a repository for offline installations.
+	 Install-ModulesFromPWSHModule -- Uses the module PWSHModulePS to install PS Modules from a GitHub Gist File.
 	 Install-MSUpdate -- Perform windows update
 	 Install-NFSClient -- Install NFS Client for windows
 	 Install-PowerShell7x -- Install ps7

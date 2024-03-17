@@ -24,9 +24,8 @@ Get-Boxstarter -Force
 |Click link to run  |Description  |
 |---------|---------|
 | [System Setup](http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Initial-Setup.ps1')     | Use [PSToolKit](https://github.com/smitpi/PSToolKit) to Install a new System.|
-| [Install/Upgrade Apps](http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Install-Apps.ps1.ps1')     | Run script to update list of installed apps from module [PSPackageMan](https://github.com/smitpi/PSPackageMan) or [PS Gallary](https://www.powershellgallery.com/packages/PSPackageMan/0.1.3)|
-| [Install/Upgrade Modules](http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Install-Modules.ps1.ps1')     |  Run script to update list of PS Modules from module [PWSHModule](https://github.com/smitpi/PWSHModule) or [PS Gallary](https://www.powershellgallery.com/packages/PWSHModule/0.1.21)|
-
+| [Install/Upgrade Apps](http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-Apps.ps1.ps1')     | Run script to update list of installed apps from module [PSPackageMan](https://github.com/smitpi/PSPackageMan) or [PS Gallary](https://www.powershellgallery.com/packages/PSPackageMan/0.1.3)|
+| [Install/Upgrade Modules](http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-Modules.ps1.ps1')     |  Run script to update list of PS Modules from module [PWSHModule](https://github.com/smitpi/PWSHModule) or [PS Gallary](https://www.powershellgallery.com/packages/PWSHModule/0.1.21)|
 
 > **Warning**
 >> You will need a valid **github userid** and **token** to continue
@@ -71,8 +70,8 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - boxstarter-install.ps1
 - call-initial.ps1
 - Initial-Setup.ps1
-- Install-Apps.ps1
-- Install-Modules.ps1
+- Run-Install-Apps.ps1
+- Run-Install-Modules.ps1
  
 ## Functions
 - [`Add-ChocolateyPrivateRepo`](https://smitpi.github.io/PSToolKit/Add-ChocolateyPrivateRepo) -- Add a private repository to Chocolatey.
@@ -109,10 +108,12 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - [`Get-WinEventLogExtract`](https://smitpi.github.io/PSToolKit/Get-WinEventLogExtract) -- Extract Event logs of a server list, and create html / excel report
 - [`Import-CitrixSiteConfigFile`](https://smitpi.github.io/PSToolKit/Import-CitrixSiteConfigFile) -- Import the Citrix config file, and created a variable with the details
 - [`Import-XamlConfigFile`](https://smitpi.github.io/PSToolKit/Import-XamlConfigFile) -- Import the wpf xaml file and create variables from objects
+- [`Install-AppsFromPSPackageMan`](https://smitpi.github.io/PSToolKit/Install-AppsFromPSPackageMan) -- Uses the module PSPackageMan to install apps from a GitHub Gist File.
 - [`Install-BGInfo`](https://smitpi.github.io/PSToolKit/Install-BGInfo) -- Install and auto runs bginfo at start up.
 - [`Install-ChocolateyClient`](https://smitpi.github.io/PSToolKit/Install-ChocolateyClient) -- Downloads and installs the Chocolatey client.
 - [`Install-ChocolateyServer`](https://smitpi.github.io/PSToolKit/Install-ChocolateyServer) -- This will download, install and setup a new Chocolatey Repo Server
 - [`Install-LocalPSRepository`](https://smitpi.github.io/PSToolKit/Install-LocalPSRepository) -- Short desCreates a repository for offline installations.
+- [`Install-ModulesFromPWSHModule`](https://smitpi.github.io/PSToolKit/Install-ModulesFromPWSHModule) -- Uses the module PWSHModulePS to install PS Modules from a GitHub Gist File.
 - [`Install-MSUpdate`](https://smitpi.github.io/PSToolKit/Install-MSUpdate) -- Perform windows update
 - [`Install-NFSClient`](https://smitpi.github.io/PSToolKit/Install-NFSClient) -- Install NFS Client for windows
 - [`Install-PowerShell7x`](https://smitpi.github.io/PSToolKit/Install-PowerShell7x) -- Install ps7
