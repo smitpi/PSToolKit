@@ -38,6 +38,10 @@ Invoke-RestMethod https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSTo
 ```Powershell
 Invoke-RestMethod https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-Modules.ps1 | Invoke-Expression
 ```
+- Install this module.
+```powershell
+Invoke-RestMethod https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-PSToolKit.ps1 | Invoke-Expression
+```
 ---
 ## Getting Started
 

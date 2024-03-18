@@ -38,6 +38,10 @@ Invoke-RestMethod https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSTo
 ```Powershell
 Invoke-RestMethod https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-Modules.ps1 | Invoke-Expression
 ```
+- Install this module.
+```powershell
+Invoke-RestMethod https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-PSToolKit.ps1 | Invoke-Expression
+```
 ---
 ## Getting Started
 
@@ -79,6 +83,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - Initial-Setup.ps1
 - Run-Install-Apps.ps1
 - Run-Install-Modules.ps1
+- Run-Install-PSToolKit.ps1
  
 ## Functions
 - [`Add-ChocolateyPrivateRepo`](https://smitpi.github.io/PSToolKit/Add-ChocolateyPrivateRepo) -- Add a private repository to Chocolatey.
