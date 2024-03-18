@@ -11,7 +11,7 @@ if (-not($myWindowsPrincipal.IsInRole($adminRole))) {
 
 	$AskCredencials = Get-Credential -Message 'Admin Account'
 
-	if (-not(Test-Path 'C:\Temp')) {$TempPath = New-Item -Path 'C:\Temp' -ItemType Directory -Force | Out-Null}
+	if (-not(Test-Path 'C:\Temp')) {$TempPath = New-Item -Path 'C:\Temp' -ItemType Directory -Force -Credential $AskCredencials | Out-Null}
 	else {$TempPath = Get-Item C:\Temp}
 
 	$run = New-Item -Path "$($TempPath)\Run.ps1" -Value @"
