@@ -239,6 +239,6 @@ Function Install-ModulesFromPWSHModule {
 
 	Write-Host "`n`n-----------------------------------" -ForegroundColor DarkCyan
 	Write-Host '[Complete]: ' -NoNewline -ForegroundColor Yellow
-	Write-Host 'App Install Complete' -ForegroundColor Green
+	Write-Host 'PS Modules Install Complete' -ForegroundColor Green
 
 } #end Function
