@@ -26,8 +26,9 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
 Start-Process -FilePath powershell -ArgumentList "-noprofile -ExecutionPolicy Bypass -file ``"$($TempPath)\Run.ps1``"" -Verb runas
 "@ -Verbose -Force
 
-	Start-Process -FilePath powershell -ArgumentList "-noprofile -ExecutionPolicy Bypass -file `"$($TempPath)\RunUser.ps1`"" -Credential $AskCredencials -Wait
+	Start-Process -FilePath powershell -ArgumentList "-noprofile -ExecutionPolicy Bypass -file `"$($TempPath)\RunUser.ps1`"" -Credential $AskCredencials
 
+	Start-Sleep 10
 	$run, $RunUser, (Get-Item "$($TempPath)\Install-AppsFromPSPackageMan.ps1") | Remove-Item -Force
 } else {
 	$URL = 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Install-AppsFromPSPackageMan.ps1'

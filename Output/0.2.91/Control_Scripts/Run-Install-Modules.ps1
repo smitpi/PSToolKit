@@ -16,9 +16,9 @@ if (-not($myWindowsPrincipal.IsInRole($adminRole))) {
 
 	$run = New-Item -Path "$($TempPath)\Run.ps1" -Value @"
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
-`$URL = 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Install-AppsFromPSPackageMan.ps1'
-(New-Object System.Net.WebClient).DownloadFile(`$(`$Url), "$($TempPath)\Install-AppsFromPSPackageMan.ps1")
-Import-Module (Get-Item "$($TempPath)\Install-AppsFromPSPackageMan.ps1").fullname -Force; Install-AppsFromPSPackageMan
+`$URL = 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Install-ModulesFromPWSHModule.ps1'
+(New-Object System.Net.WebClient).DownloadFile(`$(`$Url), "$($TempPath)\Install-ModulesFromPWSHModule.ps1")
+Import-Module (Get-Item "$($TempPath)\Install-ModulesFromPWSHModule.ps1").fullname -Force; Install-ModulesFromPWSHModule
 "@ -Verbose -Force
 
 	$RunUser = New-Item -Path "$($TempPath)\RunUser.ps1" -Value @"
@@ -26,11 +26,12 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
 Start-Process -FilePath powershell -ArgumentList "-noprofile -ExecutionPolicy Bypass -file ``"$($TempPath)\Run.ps1``"" -Verb runas
 "@ -Verbose -Force
 
-	Start-Process -FilePath powershell -ArgumentList "-noprofile -ExecutionPolicy Bypass -file `"$($TempPath)\RunUser.ps1`"" -Credential $AskCredencials -Wait
-
-	$run, $RunUser, (Get-Item "$($TempPath)\Install-AppsFromPSPackageMan.ps1") | Remove-Item -Force
+	Start-Process -FilePath powershell -ArgumentList "-noprofile -ExecutionPolicy Bypass -file `"$($TempPath)\RunUser.ps1`"" -Credential $AskCredencials
+	Start-Sleep 10
+	$run, $RunUser, (Get-Item "$($TempPath)\Install-ModulesFromPWSHModule.ps1") | Remove-Item -Force
 } else {
-	$URL = 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Install-AppsFromPSPackageMan.ps1'
-(New-Object System.Net.WebClient).DownloadFile($($URL), "$($env:tmp)\Install-AppsFromPSPackageMan.ps1")
-	Import-Module (Get-Item "$($env:tmp)\Install-AppsFromPSPackageMan.ps1") -Force; Install-AppsFromPSPackageMan
+	$URL = 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Install-ModulesFromPWSHModule.ps1'
+(New-Object System.Net.WebClient).DownloadFile($($Url), "$($env:tmp)\Install-ModulesFromPWSHModule.ps1")
+	Import-Module (Get-Item "$($env:tmp)\Install-ModulesFromPWSHModule.ps1") -Force; Install-ModulesFromPWSHModule
 }
+
