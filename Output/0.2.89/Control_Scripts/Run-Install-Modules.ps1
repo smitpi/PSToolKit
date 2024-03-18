@@ -8,9 +8,13 @@ $adminRole = [System.Security.Principal.WindowsBuiltInRole]::Administrator
 
 # Check to see if we are currently running "as Administrator"
 if (-not($myWindowsPrincipal.IsInRole($adminRole))) {
-	$newProcess = New-Object System.Diagnostics.ProcessStartInfo 'PowerShell'
-	$newProcess.Arguments = $myInvocation.MyCommand.Definition
+	$AskCredencials = Get-Credential -Message 'Admin Account'
+	$newProcess = New-Object System.Diagnostics.ProcessStartInfo 'C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe'
 	$newProcess.Verb = 'runas'
+	$newProcess.UseShellExecute = $false
+	$newProcess.UserName = $AskCredencials.UserName
+	$newProcess.Password = $AskCredencials.Password
+	$newProcess.Arguments = $myInvocation.MyCommand.Definition
 	[System.Diagnostics.Process]::Start($newProcess)
 	exit
 }
