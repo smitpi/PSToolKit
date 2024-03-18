@@ -11,25 +11,24 @@ if (-not($myWindowsPrincipal.IsInRole($adminRole))) {
 
 	$AskCredencials = Get-Credential -Message 'Admin Account'
 
-	if (-not(Test-Path 'C:\Temp')) {$TempPath = New-Item -Path 'C:\Temp' -ItemType Directory -Force -Credential $AskCredencials | Out-Null}
-	else {$TempPath = Get-Item C:\Temp}
+	if (-not(Test-Path 'C:\Temp')) {New-Item -Path 'C:\Temp' -ItemType Directory -Force -Credential $AskCredencials | Out-Null}
 
-	$run = New-Item -Path "$($TempPath)\Run.ps1" -Value @"
+	$run = New-Item -Path 'C:\Temp\Run.ps1' -Value @"
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
 `$URL = 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Install-AppsFromPSPackageMan.ps1'
-(New-Object System.Net.WebClient).DownloadFile(`$(`$Url), "$($TempPath)\Install-AppsFromPSPackageMan.ps1")
-Import-Module (Get-Item "$($TempPath)\Install-AppsFromPSPackageMan.ps1").fullname -Force; Install-AppsFromPSPackageMan
+(New-Object System.Net.WebClient).DownloadFile(`$(`$Url), "C:\Temp\Install-AppsFromPSPackageMan.ps1")
+Import-Module (Get-Item "C:\Temp\Install-AppsFromPSPackageMan.ps1").fullname -Force; Install-AppsFromPSPackageMan
 "@ -Verbose -Force
 
-	$RunUser = New-Item -Path "$($TempPath)\RunUser.ps1" -Value @"
+	$RunUser = New-Item -Path 'C:\Temp\RunUser.ps1' -Value @"
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
-Start-Process -FilePath powershell -ArgumentList "-noprofile -ExecutionPolicy Bypass -file ``"$($TempPath)\Run.ps1``"" -Verb runas
+Start-Process -FilePath powershell -ArgumentList "-noprofile -ExecutionPolicy Bypass -file ``"C:\Temp\Run.ps1``"" -Verb runas
 "@ -Verbose -Force
 
-	Start-Process -FilePath powershell -ArgumentList "-noprofile -ExecutionPolicy Bypass -file `"$($TempPath)\RunUser.ps1`"" -Credential $AskCredencials
+	Start-Process -FilePath powershell -ArgumentList "-noprofile -ExecutionPolicy Bypass -file `"C:\Temp\RunUser.ps1`"" -Credential $AskCredencials
 
 	Start-Sleep 10
-	$run, $RunUser, (Get-Item "$($TempPath)\Install-AppsFromPSPackageMan.ps1") | Remove-Item -Force
+	$run, $RunUser, (Get-Item 'C:\Temp\Install-AppsFromPSPackageMan.ps1') | Remove-Item -Force
 } else {
 	$URL = 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Install-AppsFromPSPackageMan.ps1'
 (New-Object System.Net.WebClient).DownloadFile($($URL), "$($env:tmp)\Install-AppsFromPSPackageMan.ps1")
