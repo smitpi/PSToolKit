@@ -24,14 +24,19 @@ Get-Boxstarter -Force
 |Click link to run  |Description  |
 |---------|---------|
 | [System Setup](http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Initial-Setup.ps1')     | Use [PSToolKit](https://github.com/smitpi/PSToolKit) to Install a new System.|
-| [Install/Upgrade Apps](http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-Apps.ps1.ps1')     | Run script to update list of installed apps from module [PSPackageMan](https://github.com/smitpi/PSPackageMan) or [PS Gallary](https://www.powershellgallery.com/packages/PSPackageMan/0.1.3)|
-| [Install/Upgrade Modules](http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-Modules.ps1.ps1')     |  Run script to update list of PS Modules from module [PWSHModule](https://github.com/smitpi/PWSHModule) or [PS Gallary](https://www.powershellgallery.com/packages/PWSHModule/0.1.21)|
 
 > **Warning**
->> You will need a valid **github userid** and **token** to continue
+>> You will need a valid **github userid** and **token** to continue.
 
 ---
-
+- Run the following to update or install apps using the module: [PSPackageMan](https://github.com/smitpi/PSPackageMan) ([PS Gallary](https://www.powershellgallery.com/packages/PSPackageMan/0.1.3))
+```Powershell
+Invoke-RestMethod https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-Apps.ps1 | Invoke-Expression
+```
+- Run the following to update or install PS Modules using the module: [PWSHModule](https://github.com/smitpi/PWSHModule) ([PS Gallary](https://www.powershellgallery.com/packages/PWSHModule/0.1.21))
+```Powershell
+Invoke-RestMethod https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-Modules.ps1 | Invoke-Expression
+```
 ## Getting Started
 
 - Run this script to install from GitHub [GitHub Repo](https://github.com/smitpi/PSToolKit)

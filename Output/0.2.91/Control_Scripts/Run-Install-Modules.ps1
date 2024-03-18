@@ -16,4 +16,4 @@ if (-not($myWindowsPrincipal.IsInRole($adminRole))) {
 }
 $URL = 'https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Public/Install-ModulesFromPWSHModule.ps1'
 (New-Object System.Net.WebClient).DownloadFile($($Url), "$($env:tmp)\Install-ModulesFromPWSHModule.ps1")
-Import-Module (Get-Item "$($env:tmp)\Install-ModulesFromPWSHModule.ps1") -Force; Install-AppsFromPSPackageMan
+Import-Module (Get-Item "$($env:tmp)\Install-ModulesFromPWSHModule.ps1") -Force; Install-ModulesFromPWSHModule

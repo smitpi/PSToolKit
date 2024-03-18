@@ -29,6 +29,7 @@ Get-Boxstarter -Force
 >> You will need a valid **github userid** and **token** to continue.
 
 ---
+## Manage Modules and Apps
 - Run the following to update or install apps using the module: [PSPackageMan](https://github.com/smitpi/PSPackageMan) ([PS Gallary](https://www.powershellgallery.com/packages/PSPackageMan/0.1.3))
 ```Powershell
 Invoke-RestMethod https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-Apps.ps1 | Invoke-Expression
@@ -37,6 +38,7 @@ Invoke-RestMethod https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSTo
 ```Powershell
 Invoke-RestMethod https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Run-Install-Modules.ps1 | Invoke-Expression
 ```
+---
 ## Getting Started
 
 - Run this script to install from GitHub [GitHub Repo](https://github.com/smitpi/PSToolKit)
