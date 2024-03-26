@@ -1,42 +1,9 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": 
-    [
+    "actions": [
         {
-            "command": 
-            {
-                "action": "commandPalette"
-            },
-            "keys": "ctrl+shift+p"
-        },
-        {
-            "command": 
-            {
-                "action": "copy",
-                "singleLine": true
-            },
-            "keys": "ctrl+c"
-        },
-        {
-            "command": "find",
-            "keys": "ctrl+f"
-        },
-        {
-            "command": "paste",
-            "keys": "ctrl+v"
-        },
-        {
-            "command": 
-            {
-                "action": "adjustFontSize",
-                "delta": -1
-            },
-            "keys": "ctrl+minus"
-        },
-        {
-            "command": 
-            {
+            "command": {
                 "action": "splitPane",
                 "split": "auto",
                 "splitMode": "duplicate"
@@ -44,67 +11,176 @@
             "keys": "ctrl+alt+d"
         },
         {
-            "command": 
-            {
+            "command": "find",
+            "keys": "ctrl+f"
+        },
+        {
+            "command": "resetFontSize",
+            "keys": "ctrl+0"
+        },
+        {
+            "command": {
+                "action": "commandPalette"
+            },
+            "keys": "ctrl+shift+p"
+        },
+        {
+            "command": {
                 "action": "adjustFontSize",
-                "delta": 1
-            }
+                "delta": -1
+            },
+            "keys": "ctrl+minus"
+        },
+        {
+            "command": {
+                "action": "copy",
+                "singleLine": true
+            },
+            "keys": "ctrl+c"
         },
         {
             "command": "closePane",
             "keys": "ctrl+alt+w"
         },
         {
-            "command": "resetFontSize",
-            "keys": "ctrl+0"
+            "command": "paste",
+            "keys": "ctrl+v"
+        },
+        {
+            "command": {
+                "action": "adjustFontSize",
+                "delta": 1
+            }
         }
     ],
+    "alwaysShowNotificationIcon": false,
     "confirmCloseAllTabs": false,
     "copyFormatting": "all",
     "copyOnSelect": true,
     "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+    "launchMode": "default",
     "multiLinePasteWarning": false,
-    "profiles": 
-    {
-        "defaults": 
+    "newTabMenu": [
         {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles": {
+        "defaults": {
             "antialiasingMode": "cleartype",
             "backgroundImage": null,
-            "backgroundImageOpacity": 0.0,
-            "bellStyle": 
-            [
-                "audible",
+            "backgroundImageAlignment": "bottomRight",
+            "backgroundImageOpacity": 0.9,
+            "bellStyle": [
                 "window",
                 "taskbar"
             ],
             "closeOnExit": "always",
-            "colorScheme": "Argonaut",
+            "colorScheme": "One Half Dark",
+            "cursorHeight": 33,
             "cursorShape": "filledBox",
             "experimental.retroTerminalEffect": false,
-            "font": 
-            {
+            "font": {
                 "face": "CaskaydiaCove Nerd Font",
-                "size": 13,
-                "weight": "thin"
+                "size": 12.0,
+                "weight": "medium"
             },
             "historySize": 9001,
             "intenseTextStyle": "all",
+            "padding": "20",
             "tabTitle": null,
             "useAcrylic": true
         },
-        "list": 
-        [
+        "list": [
             {
                 "colorScheme": "Tango Dark",
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "Command Prompt",
+                "tabTitle": "CMD",
                 "useAcrylic": true
+            },
+            {
+                "backgroundImage": "https://techmeaway.net/wp-content/uploads/2020/02/powershell_logo-1024x1024.png",
+                "backgroundImageAlignment": "center",
+                "backgroundImageOpacity": 0.1,
+                "backgroundImageStretchMode": "uniform",
+                "commandline": "C:\\Program Files\\PowerShell\\7\\pwsh.exe -noprofile",
+                "guid": "{1d17300f-638a-4eec-992c-1a6106bb2bca}",
+                "icon": "ms-appx:///ProfileIcons/pwsh.png",
+                "name": "PowerShell 7 (no profile)",
+                "startingDirectory": "c:\\",
+                "tabTitle": "PowerShell 7 (no profile)"
+            },
+            {
+                "backgroundImage": "https://techmeaway.net/wp-content/uploads/2020/02/powershell_logo-1024x1024.png",
+                "backgroundImageAlignment": "center",
+                "backgroundImageOpacity": 0.1,
+                "backgroundImageStretchMode": "uniform",
+                "colorScheme": "Campbell Powershell",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "PowerShell 5.1",
+                "tabTitle": "PowerShell 5.1"
+            },
+            {
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "hidden": false,
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
+            },
+            {
+                "backgroundImage": "https://techmeaway.net/wp-content/uploads/2020/02/powershell_logo-1024x1024.png",
+                "backgroundImageAlignment": "center",
+                "backgroundImageOpacity": 0.1,
+                "backgroundImageStretchMode": "uniform",
+                "colorScheme": "Argonaut",
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "hidden": false,
+                "name": "PowerShell 7",
+                "source": "Windows.Terminal.PowershellCore",
+                "tabTitle": "PowerShell 7"
+            },
+            {
+                "colorScheme": "Argonaut",
+                "commandline": "notepad %USERPROFILE%\\.ssh\\known_hosts",
+                "guid": "{4ca74978-7398-4940-baad-265f25cf8437}",
+                "icon": "https://www.pngfind.com/pngs/m/275-2755033_edit-png-file-on-phone-svg-edit-icon.png",
+                "name": "Edit known_hosts",
+                "tabTitle": "known_hosts"
+            },
+            {
+                "colorScheme": "Argonaut",
+                "commandline": "notepad %USERPROFILE%\\.ssh\\config",
+                "guid": "{d6de8ee1-94e6-49de-816e-d21553544119}",
+                "icon": "https://www.pngfind.com/pngs/m/275-2755033_edit-png-file-on-phone-svg-edit-icon.png",
+                "name": "Edit ssh config",
+                "tabTitle": "ssh config"
+            },
+            {
+                "backgroundImage": "https://cdn-icons-png.flaticon.com/512/5261/5261867.png",
+                "backgroundImageAlignment": "bottomRight",
+                "backgroundImageOpacity": 0.2,
+                "backgroundImageStretchMode": "uniform",
+                "colorScheme": "Ubuntu-ColorScheme",
+                "commandline": "ssh lnx01",
+                "guid": "{43b86c60-99a9-4702-bdec-9ce054eb0018}",
+                "icon": "https://cdn0.iconfinder.com/data/icons/programming-development-1/32/ssh-512.png",
+                "name": "LNX01",
+                "tabTitle": "linux-box"
+            },
+            {
+                "colorScheme": "Ubuntu-ColorScheme",
+                "commandline": "ssh 8lsvdcdash001",
+                "guid": "{ced0eb3c-acf7-4c78-9761-af08226fa1a4}",
+                "hidden": false,
+                "icon": "https://cdn0.iconfinder.com/data/icons/programming-development-1/32/ssh-512.png",
+                "name": "8lsvdcdash001",
+                "tabTitle": "plex"
             }
         ]
     },
-    "schemes": 
-    [
+    "schemes": [
         {
             "background": "#0E1019",
             "black": "#232323",
@@ -360,6 +436,52 @@
         },
         {
             "background": "#300A24",
+            "black": "#171421",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#08458F",
+            "brightCyan": "#2C9FB3",
+            "brightGreen": "#26A269",
+            "brightPurple": "#A347BA",
+            "brightRed": "#C01C28",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#A2734C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#26A269",
+            "name": "Ubuntu-ColorScheme",
+            "purple": "#881798",
+            "red": "#C21A23",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#A2734C"
+        },
+        {
+            "background": "#300A24",
+            "black": "#171421",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#08458F",
+            "brightCyan": "#2C9FB3",
+            "brightGreen": "#26A269",
+            "brightPurple": "#A347BA",
+            "brightRed": "#C01C28",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#A2734C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#26A269",
+            "name": "Ubuntu-Preview-ColorScheme",
+            "purple": "#881798",
+            "red": "#C21A23",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#A2734C"
+        },
+        {
+            "background": "#300A24",
             "black": "#2E3436",
             "blue": "#0037DA",
             "brightBlack": "#767676",
@@ -408,5 +530,7 @@
     "startOnUserLogin": false,
     "tabSwitcherMode": "mru",
     "theme": "system",
-    "useAcrylicInTabRow": true
+    "themes": [],
+    "useAcrylicInTabRow": true,
+    "windowingBehavior": "useAnyExisting"
 }

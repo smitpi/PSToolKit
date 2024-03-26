@@ -73,25 +73,25 @@ Function Install-AppsFromPSPackageMan {
 	)
 	#endregion
 
-	# ##################################
-	# #region Check Admin
-	# ##################################
-	# 	# Get the ID and security principal of the current user account
-	# 	$myWindowsID = [System.Security.Principal.WindowsIdentity]::GetCurrent()
-	# 	$myWindowsPrincipal = New-Object System.Security.Principal.WindowsPrincipal($myWindowsID)
+	##################################
+	#region Check Admin
+	##################################
+		# Get the ID and security principal of the current user account
+		$myWindowsID = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+		$myWindowsPrincipal = New-Object System.Security.Principal.WindowsPrincipal($myWindowsID)
 
-	# 	# Get the security principal for the Administrator role
-	# 	$adminRole = [System.Security.Principal.WindowsBuiltInRole]::Administrator
+		# Get the security principal for the Administrator role
+		$adminRole = [System.Security.Principal.WindowsBuiltInRole]::Administrator
 
-	# 	# Check to see if we are currently running "as Administrator"
-	# 	if (-not($myWindowsPrincipal.IsInRole($adminRole))) {
-	# 		$newProcess = New-Object System.Diagnostics.ProcessStartInfo 'PowerShell'
-	# 		$newProcess.Arguments = $myInvocation.MyCommand.Definition
-	# 		$newProcess.Verb = 'runas'
-	# 		[System.Diagnostics.Process]::Start($newProcess)
-	# 		exit
-	# 	}
-	# #endregion
+		# Check to see if we are currently running "as Administrator"
+		if (-not($myWindowsPrincipal.IsInRole($adminRole))) {
+			$newProcess = New-Object System.Diagnostics.ProcessStartInfo 'PowerShell'
+			$newProcess.Arguments = $myInvocation.MyCommand.Definition
+			$newProcess.Verb = 'runas'
+			[System.Diagnostics.Process]::Start($newProcess)
+			exit
+		}
+	#endregion
 
 	$RequiredModules = @(
 		'PSPackageMan'
@@ -232,7 +232,7 @@ Function Install-AppsFromPSPackageMan {
 		Write-Host ' '
 		Write-Host 'Current selected lists:' -NoNewline -ForegroundColor Green
 		if (-not([string]::IsNullOrEmpty(($($InstallList))))) {
-			Write-Host ($($InstallList.Name) | Join-String -Separator ' ; ')
+			Write-Host ($($InstallList.Name) | Microsoft.PowerShell.Utility\Join-String -Separator ' ; ')
 		}		[string]$select = Read-Host 'Select list'
 		if ($select.ToUpper() -ne 'Q') {
 			[int32]$sel = $select
