@@ -81,8 +81,6 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/PSToolKit
 - boxstarter-install.ps1
 - call-initial.ps1
 - Initial-Setup.ps1
-- InstallApps.1.0.0.nupkg
-- InstallModules.1.0.0.nupkg
 - Run-Install-Apps.ps1
 - Run-Install-Modules.ps1
 - Run-Install-PSToolKit.ps1
