@@ -60,6 +60,9 @@ Data for the report.
 .PARAMETER ExcelConditionalText
 Add Conditional text color to the cells.
 
+.PARAMETER TextWrap
+Wrap the text in the excel report.
+
 .PARAMETER ReportTitle
 Title of the report.
 
@@ -89,6 +92,8 @@ Function Write-PSReports {
 		[string]$ReportTitle,
 
 		[PSCustomObject]$ExcelConditionalText,
+
+		[Switch]$TextWrap,
 
 		[ValidateSet('All', 'Excel', 'HTML', 'HTML5')]
 		[string[]]$Export,
@@ -145,6 +150,18 @@ Function Write-PSReports {
 
 		foreach ($Member in $Members) {
 			if ($ToReport.$member) { $ToReport.$Member | Export-Excel -Title $Member -WorksheetName $Member @ExcelOptions }
+		}
+
+		if ($TextWrap) {
+			$excel = Open-ExcelPackage -Path $ExcelOptions.Path
+			foreach ($Member in $Members) {
+				if ($ToReport.$member) { 
+					$WorkSheet = $excel.Workbook.Worksheets[$member]
+					$range = $WorkSheet.Dimension.address.Replace('A1', 'A2')
+					Set-ExcelRange -Address $WorkSheet.Cells[$($range)] -WrapText -VerticalAlignment Center
+			 }
+			}
+			Close-ExcelPackage $excel
 		}
 	}
 
@@ -226,3 +243,4 @@ Function Write-PSReports {
 	}
 	Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Done"
 } #end Function
+
