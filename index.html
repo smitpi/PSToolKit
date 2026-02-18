@@ -37,6 +37,7 @@
           {title: "PSToolKit", url: "#_top", children: [
               {title: "Description", url: "#description" },
               {title: "Win-Bootstrap", url: "#win-bootstrap" },
+              {title: "Manage Modules and Apps", url: "#manage-modules-and-apps" },
               {title: "Getting Started", url: "#getting-started" },
               {title: "PS Controller Scripts", url: "#ps-controller-scripts" },
               {title: "Functions", url: "#functions" },
@@ -139,6 +140,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CommandFiltered/" class="wm-article-link wm-toc-text">Get-CommandFiltered</a>
 </li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-DotNetVersions/" class="wm-article-link wm-toc-text">Get-DotNetVersions</a>
+</li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Get-FQDN/" class="wm-article-link wm-toc-text">Get-FQDN</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Get-FolderSize/" class="wm-article-link wm-toc-text">Get-FolderSize</a>
@@ -173,6 +176,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Import-XamlConfigFile/" class="wm-article-link wm-toc-text">Import-XamlConfigFile</a>
 </li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Install-AppsFromPSPackageMan/" class="wm-article-link wm-toc-text">Install-AppsFromPSPackageMan</a>
+</li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Install-BGInfo/" class="wm-article-link wm-toc-text">Install-BGInfo</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Install-ChocolateyClient/" class="wm-article-link wm-toc-text">Install-ChocolateyClient</a>
@@ -182,6 +187,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
         <li class="wm-toc-li wm-toc-lev1 "><a href="Install-LocalPSRepository/" class="wm-article-link wm-toc-text">Install-LocalPSRepository</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Install-MSUpdate/" class="wm-article-link wm-toc-text">Install-MSUpdate</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Install-ModulesFromPWSHModule/" class="wm-article-link wm-toc-text">Install-ModulesFromPWSHModule</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Install-NFSClient/" class="wm-article-link wm-toc-text">Install-NFSClient</a>
 </li>
@@ -222,6 +229,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
         <li class="wm-toc-li wm-toc-lev1 "><a href="Remove-HiddenDevice/" class="wm-article-link wm-toc-text">Remove-HiddenDevice</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Remove-UserProfile/" class="wm-article-link wm-toc-text">Remove-UserProfile</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Reset-FileOwnership/" class="wm-article-link wm-toc-text">Reset-FileOwnership</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Reset-Module/" class="wm-article-link wm-toc-text">Reset-Module</a>
 </li>
@@ -370,9 +379,22 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <blockquote>
 <p><strong>Warning</strong></p>
 <blockquote>
-<p>You will need a valid <strong>github userid</strong> and <strong>token</strong> to continue</p>
+<p>You will need a valid <strong>github userid</strong> and <strong>token</strong> to continue.</p>
 </blockquote>
 </blockquote>
+<hr />
+<h2 id="manage-modules-and-apps">Manage Modules and Apps</h2>
+<ul>
+<li>Run the following to update or install apps using the module: <a href="https://github.com/smitpi/PSPackageMan">PSPackageMan</a> (<a href="https://www.powershellgallery.com/packages/PSPackageMan/0.1.3">PS Gallary</a>)
+<div class="highlight"><pre><span></span><code><span class="nb">Invoke-RestMethod</span> <span class="n">https</span><span class="p">://</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">smitpi</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">master</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">Control_Scripts</span><span class="p">/</span><span class="n">Run-Install-Apps</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">Invoke-Expression</span>
+</code></pre></div></li>
+<li>Run the following to update or install PS Modules using the module: <a href="https://github.com/smitpi/PWSHModule">PWSHModule</a> (<a href="https://www.powershellgallery.com/packages/PWSHModule/0.1.21">PS Gallary</a>)
+<div class="highlight"><pre><span></span><code><span class="nb">Invoke-RestMethod</span> <span class="n">https</span><span class="p">://</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">smitpi</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">master</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">Control_Scripts</span><span class="p">/</span><span class="n">Run-Install-Modules</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">Invoke-Expression</span>
+</code></pre></div></li>
+<li>Install this module.
+<div class="highlight"><pre><span></span><code><span class="nb">Invoke-RestMethod</span> <span class="n">https</span><span class="p">://</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">smitpi</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">master</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">Control_Scripts</span><span class="p">/</span><span class="n">Run-Install-PSToolKit</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">Invoke-Expression</span>
+</code></pre></div></li>
+</ul>
 <hr />
 <h2 id="getting-started">Getting Started</h2>
 <ul>
@@ -407,6 +429,9 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>boxstarter-install.ps1</li>
 <li>call-initial.ps1</li>
 <li>Initial-Setup.ps1</li>
+<li>Run-Install-Apps.ps1</li>
+<li>Run-Install-Modules.ps1</li>
+<li>Run-Install-PSToolKit.ps1</li>
 </ul>
 <h2 id="functions">Functions</h2>
 <ul>
@@ -426,6 +451,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li><a href="https://smitpi.github.io/PSToolKit/Get-CitrixClientVersion"><code>Get-CitrixClientVersion</code></a> -- Report on the CItrix workspace versions the users are using.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Get-CitrixPolicy"><code>Get-CitrixPolicy</code></a> -- Export Citrix Policies</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Get-CommandFiltered"><code>Get-CommandFiltered</code></a> -- Finds commands on the system and sort it according to module</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-DotNetVersions"><code>Get-DotNetVersions</code></a> -- List all the installed versions of .net.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Get-FolderSize"><code>Get-FolderSize</code></a> -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Get-FQDN"><code>Get-FQDN</code></a> -- Get FQDN for a device, and checks if it is online</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Get-FullADUserDetail"><code>Get-FullADUserDetail</code></a> -- Extract user details from the domain</li>
@@ -443,10 +469,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li><a href="https://smitpi.github.io/PSToolKit/Get-WinEventLogExtract"><code>Get-WinEventLogExtract</code></a> -- Extract Event logs of a server list, and create html / excel report</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Import-CitrixSiteConfigFile"><code>Import-CitrixSiteConfigFile</code></a> -- Import the Citrix config file, and created a variable with the details</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Import-XamlConfigFile"><code>Import-XamlConfigFile</code></a> -- Import the wpf xaml file and create variables from objects</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Install-AppsFromPSPackageMan"><code>Install-AppsFromPSPackageMan</code></a> -- Uses the module PSPackageMan to install apps from a GitHub Gist File.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Install-BGInfo"><code>Install-BGInfo</code></a> -- Install and auto runs bginfo at start up.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Install-ChocolateyClient"><code>Install-ChocolateyClient</code></a> -- Downloads and installs the Chocolatey client.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Install-ChocolateyServer"><code>Install-ChocolateyServer</code></a> -- This will download, install and setup a new Chocolatey Repo Server</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Install-LocalPSRepository"><code>Install-LocalPSRepository</code></a> -- Short desCreates a repository for offline installations.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Install-ModulesFromPWSHModule"><code>Install-ModulesFromPWSHModule</code></a> -- Uses the module PWSHModulePS to install PS Modules from a GitHub Gist File.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Install-MSUpdate"><code>Install-MSUpdate</code></a> -- Perform windows update</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Install-NFSClient"><code>Install-NFSClient</code></a> -- Install NFS Client for windows</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Install-PowerShell7x"><code>Install-PowerShell7x</code></a> -- Install ps7</li>
@@ -468,6 +496,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li><a href="https://smitpi.github.io/PSToolKit/Remove-FaultyProfileList"><code>Remove-FaultyProfileList</code></a> -- Fixes Profilelist in the registry. To fix user logon with temp profile.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Remove-HiddenDevice"><code>Remove-HiddenDevice</code></a> -- Removes ghost devices from your system</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Remove-UserProfile"><code>Remove-UserProfile</code></a> -- Connects to a server and renames a user profile folder, and delete the key from Profilelist in the registry</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Reset-FileOwnership"><code>Reset-FileOwnership</code></a> -- Reset the ownership of a directory and add full control to the folder.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Reset-Module"><code>Reset-Module</code></a> -- Removes and force import a module.</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Reset-PSGallery"><code>Reset-PSGallery</code></a> -- Reset gallery to default settings</li>
 <li><a href="https://smitpi.github.io/PSToolKit/Resolve-SID"><code>Resolve-SID</code></a> -- Resolves the Sid</li>
@@ -545,6 +574,6 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </body>
 </html>
 <!--
-MkDocs version : 1.4.3
-Build Date UTC : 2023-07-14 20:48:13.772825+00:00
+MkDocs version : 1.6.1
+Build Date UTC : 2026-02-18 14:43:32.744029+00:00
 -->

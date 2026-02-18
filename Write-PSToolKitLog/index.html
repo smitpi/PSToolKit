@@ -85,14 +85,14 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <h2 id="syntax">SYNTAX</h2>
 <h3 id="log-default">log (Default)</h3>
 <div class="highlight"><pre><span></span><code>Write-PSToolKitLog [-Severity &lt;String&gt;] [-Action &lt;String&gt;] [-Object &lt;String[]&gt;] [-Message &lt;String&gt;]
- [-ShowVerbose] [&lt;CommonParameters&gt;]
+ [-ShowVerbose] [-ProgressAction &lt;ActionPreference&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="create">Create</h3>
-<div class="highlight"><pre><span></span><code>Write-PSToolKitLog [-Initialize] [-Object &lt;String[]&gt;] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Write-PSToolKitLog [-Initialize] [-Object &lt;String[]&gt;] [-ProgressAction &lt;ActionPreference&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="export">Export</h3>
 <div class="highlight"><pre><span></span><code>Write-PSToolKitLog [-Object &lt;String[]&gt;] [-ExportFinal] [-Export &lt;String&gt;] [-LogName &lt;String&gt;]
- [-ReportPath &lt;DirectoryInfo&gt;] [&lt;CommonParameters&gt;]
+ [-ReportPath &lt;DirectoryInfo&gt;] [-ProgressAction &lt;ActionPreference&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Create a log for scripts</p>
@@ -228,6 +228,18 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C:\Temp</span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+</code></pre></div>
+<h3 id="-progressaction">-ProgressAction</h3>
+<p>{{ Fill ProgressAction Description }}</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ActionPreference</span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">proga</span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </code></pre></div>

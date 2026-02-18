@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="author" content="Pierre Smit">
-    <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Get-FullADUserDetail/">
+    <link rel="canonical" href="https://smitpi.github.io/PSToolKit/Reset-FileOwnership/">
     <link rel="shortcut icon" href="../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Get-FullADUserDetail - PSToolKit</title>
+    <title>Reset-FileOwnership - PSToolKit</title>
     <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
@@ -32,7 +32,7 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Get-FullADUserDetail", url: "#_top", children: [
+          {title: "Reset-FileOwnership", url: "#_top", children: [
               {title: "SYNOPSIS", url: "#synopsis" },
               {title: "SYNTAX", url: "#syntax" },
               {title: "DESCRIPTION", url: "#description" },
@@ -68,20 +68,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Get-MyPSGalleryReport/" class="btn btn-xs btn-default pull-right">
+      <a href="../Reset-Module/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Get-MyPSGalleryReport/" class="btn btn-xs btn-link">
-        Get-MyPSGalleryReport
+      <a href="../Reset-Module/" class="btn btn-xs btn-link">
+        Reset-Module
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../Get-FolderSize/" class="btn btn-xs btn-default pull-left">
+      <a href="../Remove-UserProfile/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Get-FolderSize/" class="btn btn-xs btn-link">
-        Get-FolderSize
+        Previous</a><a href="../Remove-UserProfile/" class="btn btn-xs btn-link">
+        Remove-UserProfile
       </a>
     </div>
     
@@ -89,57 +89,41 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="get-fulladuserdetail">Get-FullADUserDetail</h1>
+    <h1 id="reset-fileownership">Reset-FileOwnership</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Extract user details from the domain</p>
+<p>Reset the ownership of a directory and add full control to the folder.</p>
 <h2 id="syntax">SYNTAX</h2>
-<h3 id="currentdomain-default">CurrentDomain (Default)</h3>
-<div class="highlight"><pre><span></span><code>Get-FullADUserDetail [-UserToQuery &lt;String[]&gt;] [-ProgressAction &lt;ActionPreference&gt;] [&lt;CommonParameters&gt;]
-</code></pre></div>
-<h3 id="otherdomain">OtherDomain</h3>
-<div class="highlight"><pre><span></span><code>Get-FullADUserDetail [-UserToQuery &lt;String[]&gt;] [-DomainFQDN &lt;String&gt;] [-DomainCredential &lt;PSCredential&gt;]
+<div class="highlight"><pre><span></span><code>Reset-FileOwnership [-Path] &lt;DirectoryInfo[]&gt; [[-Credentials] &lt;PSCredential&gt;]
  [-ProgressAction &lt;ActionPreference&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
-<p>Extract user details from the domain</p>
+<p>Reset the ownership of a directory and add full control to the folder.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Get-FullADUserDetail -UserToQuery ps
+<div class="highlight"><pre><span></span><code>Reset-FileOwnership -Path C:\temp -Credentials $Admin
 </code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
-<h3 id="-usertoquery">-UserToQuery</h3>
-<p>User id to search for.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span>
+<h3 id="-path">-Path</h3>
+<p>Path to the folder to reset ownership.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DirectoryInfo[]</span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name, UserName, Identity</span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span>
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span>
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True (ByValue)</span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </code></pre></div>
-<h3 id="-domainfqdn">-DomainFQDN</h3>
-<p>Domain to search</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OtherDomain</span>
-<span class="nt">Aliases</span><span class="p">:</span>
-
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
-</code></pre></div>
-<h3 id="-domaincredential">-DomainCredential</h3>
-<p>Userid to connect to that domain.</p>
+<h3 id="-credentials">-Credentials</h3>
+<p>The account to grant full control.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PSCredential</span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OtherDomain</span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>
 <span class="nt">Aliases</span><span class="p">:</span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(Get-Credential -Message &#39;User to be given access&#39;)</span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </code></pre></div>
@@ -159,6 +143,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see <a href="http://go.microsoft.com/fwlink/?LinkID=113216">about_CommonParameters</a>.</p>
 <h2 id="inputs">INPUTS</h2>
 <h2 id="outputs">OUTPUTS</h2>
+<h3 id="systemobject">System.Object[]</h3>
 <h2 id="notes">NOTES</h2>
 <h2 id="related-links">RELATED LINKS</h2>
 
@@ -173,20 +158,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Get-MyPSGalleryReport/" class="btn btn-xs btn-default pull-right">
+      <a href="../Reset-Module/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Get-MyPSGalleryReport/" class="btn btn-xs btn-link">
-        Get-MyPSGalleryReport
+      <a href="../Reset-Module/" class="btn btn-xs btn-link">
+        Reset-Module
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../Get-FolderSize/" class="btn btn-xs btn-default pull-left">
+      <a href="../Remove-UserProfile/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Get-FolderSize/" class="btn btn-xs btn-link">
-        Get-FolderSize
+        Previous</a><a href="../Remove-UserProfile/" class="btn btn-xs btn-link">
+        Remove-UserProfile
       </a>
     </div>
     
@@ -197,7 +182,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 <footer class="container-fluid wm-page-content">
       <p>
-        <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Get-FullADUserDetail.md">Edit on smitpi/PSToolKit</a>
+        <a href="https://github.com/smitpi/PSToolKit/edit/master/docs/Reset-FileOwnership.md">Edit on smitpi/PSToolKit</a>
       </p><p>(c) 2022 Pierre Smit. All rights reserved.</p>
   <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
 </footer>

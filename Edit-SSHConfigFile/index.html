@@ -94,36 +94,36 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>Creates and modifies the ssh config file in their profile.</p>
 <h2 id="syntax">SYNTAX</h2>
 <h3 id="list-default">List (Default)</h3>
-<div class="highlight"><pre><span></span><code>Edit-SSHConfigFile [-Show] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Edit-SSHConfigFile [-Show] [-ProgressAction &lt;ActionPreference&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="remove">remove</h3>
-<div class="highlight"><pre><span></span><code>Edit-SSHConfigFile [-Remove] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Edit-SSHConfigFile [-Remove] [-ProgressAction &lt;ActionPreference&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="removestring">removestring</h3>
-<div class="highlight"><pre><span></span><code>Edit-SSHConfigFile [-RemoveString &lt;String&gt;] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Edit-SSHConfigFile [-RemoveString &lt;String&gt;] [-ProgressAction &lt;ActionPreference&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="add">add</h3>
-<div class="highlight"><pre><span></span><code>Edit-SSHConfigFile [-Add] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Edit-SSHConfigFile [-Add] [-ProgressAction &lt;ActionPreference&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="addobject">addobject</h3>
-<div class="highlight"><pre><span></span><code>Edit-SSHConfigFile [-AddObject &lt;PSObject&gt;] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Edit-SSHConfigFile [-AddObject &lt;PSObject&gt;] [-ProgressAction &lt;ActionPreference&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="notepad">notepad</h3>
-<div class="highlight"><pre><span></span><code>Edit-SSHConfigFile [-OpenInNotepad] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Edit-SSHConfigFile [-OpenInNotepad] [-ProgressAction &lt;ActionPreference&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Creates and modifies the ssh config file in their profile.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
 <div class="highlight"><pre><span></span><code>$rr = [PSCustomObject]@{
-</code></pre></div>
-<p>Host         = 'esx00'
-    HostName     = '192.168.10.19'
-    User         = 'root'
-    Port         = '22'
-    IdentityFile = 'C:\Users\xx.ssh\yyy.id'
+    Host         = &#39;esx00&#39;
+    HostName     = &#39;192.168.10.19&#39;
+    User         = &#39;root&#39;
+    Port         = &#39;22&#39;
+    IdentityFile = &#39;C:\Users\xx\.ssh\yyy.id&#39;
 }
-Edit-SSHConfigFile -AddObject $rr</p>
+Edit-SSHConfigFile -AddObject $rr
+</code></pre></div>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-show">-Show</h3>
 <p>Show current records.</p>
@@ -194,6 +194,18 @@ Edit-SSHConfigFile -AddObject $rr</p>
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+</code></pre></div>
+<h3 id="-progressaction">-ProgressAction</h3>
+<p>{{ Fill ProgressAction Description }}</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ActionPreference</span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">proga</span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </code></pre></div>

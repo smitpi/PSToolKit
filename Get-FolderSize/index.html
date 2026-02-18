@@ -93,7 +93,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Get-FolderSize [-Path] &lt;String[]&gt; [[-Precision] &lt;Int32&gt;] [-RoboOnly] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Get-FolderSize [-Path] &lt;String[]&gt; [[-Precision] &lt;Int32&gt;] [-RoboOnly] [-ProgressAction &lt;ActionPreference&gt;]
+ [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option
@@ -116,8 +117,8 @@ Svendsen Tech.
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
 <div class="highlight"><pre><span></span><code>. .\Get-FolderSize.ps1
+PS C:\&gt; &#39;C:\Windows&#39;, &#39;E:\temp&#39; | Get-FolderSize
 </code></pre></div>
-<p>PS C:\> 'C:\Windows', 'E:\temp' | Get-FolderSize</p>
 <h3 id="example-2">EXAMPLE 2</h3>
 <div class="highlight"><pre><span></span><code>Get-FolderSize -Path Z:\Database -Precision 2
 </code></pre></div>
@@ -158,6 +159,18 @@ Svendsen Tech.
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span>
 <span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+</code></pre></div>
+<h3 id="-progressaction">-ProgressAction</h3>
+<p>{{ Fill ProgressAction Description }}</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ActionPreference</span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">proga</span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </code></pre></div>
