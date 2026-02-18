@@ -14,32 +14,32 @@ Creates and modifies the ssh config file in their profile.
 
 ### List (Default)
 ```
-Edit-SSHConfigFile [-Show] [<CommonParameters>]
+Edit-SSHConfigFile [-Show] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### remove
 ```
-Edit-SSHConfigFile [-Remove] [<CommonParameters>]
+Edit-SSHConfigFile [-Remove] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### removestring
 ```
-Edit-SSHConfigFile [-RemoveString <String>] [<CommonParameters>]
+Edit-SSHConfigFile [-RemoveString <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### add
 ```
-Edit-SSHConfigFile [-Add] [<CommonParameters>]
+Edit-SSHConfigFile [-Add] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### addobject
 ```
-Edit-SSHConfigFile [-AddObject <PSObject>] [<CommonParameters>]
+Edit-SSHConfigFile [-AddObject <PSObject>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### notepad
 ```
-Edit-SSHConfigFile [-OpenInNotepad] [<CommonParameters>]
+Edit-SSHConfigFile [-OpenInNotepad] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,15 +50,14 @@ Creates and modifies the ssh config file in their profile.
 ### EXAMPLE 1
 ```
 $rr = [PSCustomObject]@{
-```
-
-Host         = 'esx00'
+	Host         = 'esx00'
 	HostName     = '192.168.10.19'
 	User         = 'root'
 	Port         = '22'
 	IdentityFile = 'C:\Users\xx\.ssh\yyy.id'
 }
 Edit-SSHConfigFile -AddObject $rr
+```
 
 ## PARAMETERS
 
@@ -148,6 +147,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

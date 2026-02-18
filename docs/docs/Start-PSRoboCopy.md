@@ -15,7 +15,7 @@ My wrapper for default robocopy switches
 ```
 Start-PSRoboCopy [-Source] <DirectoryInfo> [-Destination] <DirectoryInfo> [-Action] <String>
  [[-IncludeFiles] <String[]>] [[-eXcludeFiles] <String[]>] [[-eXcludeDirs] <String[]>] [-TestOnly]
- [[-LogPath] <DirectoryInfo>] [<CommonParameters>]
+ [[-LogPath] <DirectoryInfo>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -148,6 +148,21 @@ Aliases:
 Required: False
 Position: 7
 Default value: C:\Temp
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

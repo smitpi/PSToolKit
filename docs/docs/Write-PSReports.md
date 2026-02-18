@@ -14,7 +14,8 @@ Creates a excel or html report
 
 ```
 Write-PSReports [-InputObject] <PSObject> [-ReportTitle] <String> [-ExcelConditionalText <PSObject>]
- [-Export <String[]>] [-ReportPath <DirectoryInfo>] [-OpenReportsFolder] [<CommonParameters>]
+ [-TextWrap] [-Export <String[]>] [-ReportPath <DirectoryInfo>] [-OpenReportsFolder]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,12 +25,11 @@ Creates a excel or html report
 
 ### EXAMPLE 1
 ```
-[System.Collections.generic.List[PSObject]]$Conditions = @()
-```
-
+[System.Collections.generic.List[PSObject]]$Conditions = @()    
 $Conditions.Add((New-ConditionalText -Text 'Warning' -ConditionalTextColor black -BackgroundColor Yellow -Range 'E:E' ))
 $Conditions.Add((New-ConditionalText -Text 'Error' -ConditionalTextColor black -BackgroundColor orange -Range 'E:E' ))
 $Conditions.Add((New-ConditionalText -Text 'Critical' -ConditionalTextColor white -BackgroundColor Red -Range 'E:E' ))
+```
 
 Write-PSReports -InputObject $report -ReportTitle 'Windows Events' -Export All -ReportPath C:\temp -ExcelConditionalText $Conditions
 
@@ -80,6 +80,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -TextWrap
+Wrap the text in the excel report.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Export
 Export the result to a report file.
 (Excel or html5 or normal html).
@@ -122,6 +137,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

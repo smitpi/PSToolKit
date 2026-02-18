@@ -14,7 +14,7 @@ Connect to remote host and collect server details.
 
 ```
 Get-ServerInventory [-ComputerName] <String[]> [[-Credentials] <PSCredential>] [-Export <String[]>]
- [-ReportPath <DirectoryInfo>] [<CommonParameters>]
+ [-ReportPath <DirectoryInfo>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -85,6 +85,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: C:\Temp
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

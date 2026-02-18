@@ -15,13 +15,13 @@ Show stats about my published modules.
 ### InLastDays (Default)
 ```
 Get-MyPSGalleryStat [-GitHubUserID <String>] [-GitHubToken <String>] [-daysToReport <Int32>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### DateRange
 ```
 Get-MyPSGalleryStat [-GitHubUserID <String>] [-GitHubToken <String>] [-Startdate <DateTime>]
- [-EndDate <DateTime>] [<CommonParameters>]
+ [-EndDate <DateTime>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -103,6 +103,21 @@ A custom end date for the report.
 Type: DateTime
 Parameter Sets: DateRange
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

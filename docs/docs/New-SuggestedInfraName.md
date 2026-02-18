@@ -14,7 +14,7 @@ Generates a list of usernames and server names, that can be used as test / demo 
 
 ```
 New-SuggestedInfraName [[-OS] <String>] [[-Export] <String>] [[-ReportPath] <DirectoryInfo>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -70,6 +70,21 @@ Aliases:
 Required: False
 Position: 3
 Default value: C:\Temp
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

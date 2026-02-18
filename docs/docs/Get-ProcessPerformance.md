@@ -14,7 +14,7 @@ Gets the top 10 processes by CPU %
 
 ```
 Get-ProcessPerformance [[-ComputerName] <String[]>] [[-LimitProcCount] <Int32>] [[-Sortby] <String>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -70,6 +70,21 @@ Aliases:
 Required: False
 Position: 3
 Default value: % CPU
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

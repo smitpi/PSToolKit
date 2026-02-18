@@ -15,7 +15,7 @@ Creates and modify needed files for a PS project from existing module files.
 ```
 Set-PSProjectFile [-ModuleScriptFile] <FileInfo> [[-VersionBump] <String>] [[-ReleaseNotes] <String>]
  [-BuildHelpFiles] [-DeployMKDocs] [-RunScriptAnalyzer] [-GitPush] [-CopyToModulesFolder] [-CopyNestedModules]
- [-ShowReport] [<CommonParameters>]
+ [-ShowReport] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -176,6 +176,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -15,7 +15,8 @@ Filtered by scripts
 
 ```
 Find-OnlineScript [[-Keyword] <String>] [-NoAzureAWS] [-MaxCount <Int32>] [-Offline] [-UpdateCache]
- [-SortOrder <String>] [-Export <String>] [-ReportPath <DirectoryInfo>] [<CommonParameters>]
+ [-SortOrder <String>] [-Export <String>] [-ReportPath <DirectoryInfo>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -149,6 +150,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: C:\Temp
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

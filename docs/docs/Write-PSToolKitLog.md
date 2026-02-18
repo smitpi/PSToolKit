@@ -15,18 +15,18 @@ Create a log for scripts
 ### log (Default)
 ```
 Write-PSToolKitLog [-Severity <String>] [-Action <String>] [-Object <String[]>] [-Message <String>]
- [-ShowVerbose] [<CommonParameters>]
+ [-ShowVerbose] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Create
 ```
-Write-PSToolKitLog [-Initialize] [-Object <String[]>] [<CommonParameters>]
+Write-PSToolKitLog [-Initialize] [-Object <String[]>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Export
 ```
 Write-PSToolKitLog [-Object <String[]>] [-ExportFinal] [-Export <String>] [-LogName <String>]
- [-ReportPath <DirectoryInfo>] [<CommonParameters>]
+ [-ReportPath <DirectoryInfo>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -199,6 +199,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: C:\Temp
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

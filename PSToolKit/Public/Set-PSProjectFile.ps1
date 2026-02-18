@@ -211,11 +211,13 @@ Function Set-PSProjectFile {
 			$markdownParams = @{
 				Module         = $module.Name
 				OutputFolder   = $Moduledocs.FullName
-				WithModulePage = $false
+				WithModulePage = $true
 				Locale         = 'en-US'
 				HelpVersion    = $ModuleManifest.Version.ToString()
 			}
-			New-MarkdownHelp @markdownParams -Force | Out-Null
+			#New-MarkdownHelp @markdownParams -Force
+            New-MarkdownCommandHelp  @markdownParams -Force
+
 		} catch { Write-Error "Error: Creating Mardown Help Files `nMessage:$($_.Exception.message)"; return }
 
 		try {
@@ -340,7 +342,7 @@ Function Set-PSProjectFile {
 			$mkdocsFunc.add('  - pymdownx.snippets')
 			$mkdocsFunc.add('  - pymdownx.superfences')
 			$mkdocsFunc.add(' ')
-			$mkdocsFunc.add('theme: windmill')
+			$mkdocsFunc.add('theme: material')
 			$mkdocsFunc | Set-Content -Path $Modulemkdocs -Force
 
 			Write-Color "`t[Processing]: ", 'MKDocs Index Files' -Color yello, Gray

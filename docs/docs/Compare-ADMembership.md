@@ -15,13 +15,15 @@ Compare two users AD group memberships
 ### CurrentDomain (Default)
 ```
 Compare-ADMembership [-ReferenceUser <String>] [-DifferenceUser <String>] [-DomainFQDN <String>]
- [-DomainCredential <PSCredential>] [-Export <String>] [-ReportPath <DirectoryInfo>] [<CommonParameters>]
+ [-DomainCredential <PSCredential>] [-Export <String>] [-ReportPath <DirectoryInfo>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### OtherDomain
 ```
 Compare-ADMembership [-ReferenceUser <String>] [-DifferenceUser <String>] [-DomainFQDN <String>]
- [-DomainCredential <PSCredential>] [-Export <String>] [-ReportPath <DirectoryInfo>] [<CommonParameters>]
+ [-DomainCredential <PSCredential>] [-Export <String>] [-ReportPath <DirectoryInfo>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -123,6 +125,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: C:\Temp
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

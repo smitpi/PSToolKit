@@ -14,7 +14,7 @@ Create a scheduled task to reboot a server.
 
 ```
 Set-ScheduledRestart [-ComputerName] <String[]> [-Credential <PSCredential>] [-RebootDate <DateTime>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -66,6 +66,21 @@ The date and time to run the reboot.
 Type: DateTime
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

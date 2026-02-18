@@ -15,7 +15,8 @@ With PowerShell Script Info
 
 ```
 New-PSScript [[-Path] <DirectoryInfo>] [-Verb] <String> [-Noun] <String> [[-Author] <String>]
- [-Description] <String> [[-RequiredModules] <String[]>] [-tags] <String[]> [<CommonParameters>]
+ [-Description] <String> [[-RequiredModules] <String[]>] [-tags] <String[]>
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -131,6 +132,21 @@ Aliases:
 
 Required: True
 Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

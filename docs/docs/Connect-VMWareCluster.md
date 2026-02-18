@@ -13,7 +13,8 @@ Connect to a vSphere cluster to perform other commands or scripts
 ## SYNTAX
 
 ```
-Connect-VMWareCluster [[-vCenterIp] <String>] [[-vCenterCredencial] <PSCredential>] [<CommonParameters>]
+Connect-VMWareCluster [[-vCenterIp] <String>] [[-vCenterCredencial] <PSCredential>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -53,6 +54,21 @@ Aliases:
 
 Required: False
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

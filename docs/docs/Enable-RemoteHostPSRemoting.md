@@ -13,7 +13,8 @@ enable ps remote remotely
 ## SYNTAX
 
 ```
-Enable-RemoteHostPSRemoting [-ComputerName] <String> [-AdminCredentials <PSCredential>] [<CommonParameters>]
+Enable-RemoteHostPSRemoting [-ComputerName] <String> [-AdminCredentials <PSCredential>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -54,6 +55,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: (Get-Credential)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -14,17 +14,20 @@ Uses the module PWSHModulePS to install PS Modules from a GitHub Gist File.
 
 ### Set1 (Default)
 ```
-Install-ModulesFromPWSHModule [-GitHubUserID <String>] [<CommonParameters>]
+Install-ModulesFromPWSHModule [-GitHubUserID <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### Public
 ```
-Install-ModulesFromPWSHModule [-GitHubUserID <String>] [-PublicGist] [<CommonParameters>]
+Install-ModulesFromPWSHModule [-GitHubUserID <String>] [-PublicGist] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### Private
 ```
-Install-ModulesFromPWSHModule [-GitHubUserID <String>] [-GitHubToken <String>] [<CommonParameters>]
+Install-ModulesFromPWSHModule [-GitHubUserID <String>] [-GitHubToken <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -76,6 +79,21 @@ The token for that gist.
 Type: String
 Parameter Sets: Private
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

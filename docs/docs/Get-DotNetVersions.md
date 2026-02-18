@@ -14,7 +14,7 @@ List all the installed versions of .net.
 
 ```
 Get-DotNetVersions [-ComputerName] <String[]> [[-Credential] <PSCredential>] [[-Export] <String[]>]
- [[-ReportPath] <DirectoryInfo>] [<CommonParameters>]
+ [[-ReportPath] <DirectoryInfo>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -85,6 +85,21 @@ Aliases:
 Required: False
 Position: 4
 Default value: C:\Temp
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

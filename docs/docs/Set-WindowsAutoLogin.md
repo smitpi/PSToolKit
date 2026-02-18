@@ -14,13 +14,14 @@ Enable autologin on a device.
 
 ### Disable (Default)
 ```
-Set-WindowsAutoLogin -ComputerName <String[]> [-Action <String>] [<CommonParameters>]
+Set-WindowsAutoLogin -ComputerName <String[]> [-Action <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### Enable
 ```
 Set-WindowsAutoLogin -ComputerName <String[]> [-Action <String>] [-LogonCredentials <PSCredential>]
- [-RestartHost] [<CommonParameters>]
+ [-RestartHost] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -91,6 +92,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

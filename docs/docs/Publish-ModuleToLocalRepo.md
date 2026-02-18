@@ -13,7 +13,8 @@ Checks for required modules and upload all to your local repo.
 ## SYNTAX
 
 ```
-Publish-ModuleToLocalRepo [[-ManifestPaths] <String[]>] [-Repository] <String> [<CommonParameters>]
+Publish-ModuleToLocalRepo [[-ManifestPaths] <String[]>] [-Repository] <String>
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -53,6 +54,21 @@ Aliases:
 
 Required: True
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

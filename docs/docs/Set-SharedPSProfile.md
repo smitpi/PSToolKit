@@ -14,13 +14,14 @@ Redirects PowerShell and WindowsPowerShell profile folder to another path.
 
 ### Current (Default)
 ```
-Set-SharedPSProfile [-CurrentUser] [-SharedProfilePath <DirectoryInfo>] [<CommonParameters>]
+Set-SharedPSProfile [-CurrentUser] [-SharedProfilePath <DirectoryInfo>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### Other
 ```
 Set-SharedPSProfile [-OtherUser] [-ProfilePath <String>] [-SharedProfilePath <DirectoryInfo>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -88,6 +89,21 @@ Folders PowerShell and WindowsPowerShell will be created if it doesn't exists.
 Type: DirectoryInfo
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

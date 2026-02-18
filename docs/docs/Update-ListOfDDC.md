@@ -13,7 +13,8 @@ Update list of ListOfDDCs in the registry
 ## SYNTAX
 
 ```
-Update-ListOfDDC [[-ComputerName] <String>] [-CurrentOnly] [[-CloudConnectors] <String[]>] [<CommonParameters>]
+Update-ListOfDDC [[-ComputerName] <String>] [-CurrentOnly] [[-CloudConnectors] <String[]>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -68,6 +69,21 @@ Aliases:
 
 Required: False
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

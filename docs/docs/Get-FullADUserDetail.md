@@ -14,13 +14,13 @@ Extract user details from the domain
 
 ### CurrentDomain (Default)
 ```
-Get-FullADUserDetail [-UserToQuery <String[]>] [<CommonParameters>]
+Get-FullADUserDetail [-UserToQuery <String[]>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### OtherDomain
 ```
 Get-FullADUserDetail [-UserToQuery <String[]>] [-DomainFQDN <String>] [-DomainCredential <PSCredential>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -72,6 +72,21 @@ Userid to connect to that domain.
 Type: PSCredential
 Parameter Sets: OtherDomain
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

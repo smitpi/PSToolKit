@@ -13,7 +13,8 @@ Gets folder sizes using COM and with a fallback to robocopy.exe with the logging
 ## SYNTAX
 
 ```
-Get-FolderSize [-Path] <String[]> [[-Precision] <Int32>] [-RoboOnly] [<CommonParameters>]
+Get-FolderSize [-Path] <String[]> [[-Precision] <Int32>] [-RoboOnly] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,9 +41,8 @@ Otherwise you should get a warning.
 ### EXAMPLE 1
 ```
 . .\Get-FolderSize.ps1
+PS C:\> 'C:\Windows', 'E:\temp' | Get-FolderSize
 ```
-
-PS C:\\\> 'C:\Windows', 'E:\temp' | Get-FolderSize
 
 ### EXAMPLE 2
 ```
@@ -97,6 +97,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -13,7 +13,8 @@ Import the wpf xaml file and create variables from objects
 ## SYNTAX
 
 ```
-Import-XamlConfigFile [[-XamlFile] <FileInfo>] [[-FormName] <String>] [-ShowExample] [<CommonParameters>]
+Import-XamlConfigFile [[-XamlFile] <FileInfo>] [[-FormName] <String>] [-ShowExample]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -69,6 +70,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

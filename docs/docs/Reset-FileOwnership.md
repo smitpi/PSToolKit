@@ -13,7 +13,8 @@ Reset the ownership of a directory and add full control to the folder.
 ## SYNTAX
 
 ```
-Reset-FileOwnership [-Path] <DirectoryInfo[]> [[-Credentials] <PSCredential>] [<CommonParameters>]
+Reset-FileOwnership [-Path] <DirectoryInfo[]> [[-Credentials] <PSCredential>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -54,6 +55,21 @@ Aliases:
 Required: False
 Position: 2
 Default value: (Get-Credential -Message 'User to be given access')
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
