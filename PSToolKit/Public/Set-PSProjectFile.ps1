@@ -214,6 +214,7 @@ Function Set-PSProjectFile {
 				WithModulePage = $true
 				Locale         = 'en-US'
 				HelpVersion    = $ModuleManifest.Version.ToString()
+                AbbreviateParameterTypename = $true
 			}
 			#New-MarkdownHelp @markdownParams -Force
             New-MarkdownCommandHelp  @markdownParams -Force
