@@ -1,4 +1,4 @@
-#region Public Functions
+﻿#region Public Functions
 #region Add-ChocolateyPrivateRepo.ps1
 ######## Function 1 of 102 ##################
 # Function:         Add-ChocolateyPrivateRepo
