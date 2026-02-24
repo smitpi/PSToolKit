@@ -76,7 +76,7 @@ Function Test-CitrixVDAPort {
         [string]$Export = 'Host',
         [Parameter(Mandatory = $false, Position = 4)]
         [ValidateScript( { (Test-Path $_) })]
-        [string]$ReportPath = $env:temp
+        [System.IO.DirectoryInfo]$ReportPath = $env:temp
     )
 
     $index = 0

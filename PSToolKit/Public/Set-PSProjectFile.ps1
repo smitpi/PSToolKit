@@ -81,9 +81,9 @@ Will open the issues report in a browser.
 Set-PSProjectFiles -ModuleScriptFile blah.psm1 -VersionBump Minor -mkdocs serve
 
 #>
-Function Set-PSProjectFile {
+function Set-PSProjectFile {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Set-PSProjectFiles')]
-	PARAM(
+	param(
 		[Parameter(Mandatory = $true)]
 		[System.IO.FileInfo]$ModuleScriptFile,
 		[ValidateSet('Minor', 'Build', 'CombineOnly', 'Revision')]
@@ -95,7 +95,7 @@ Function Set-PSProjectFile {
 		[Switch]$GitPush = $false,
 		[ValidateScript( { $IsAdmin = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 				if ($IsAdmin.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { $True }
-				else { Throw 'Must be running an elevated prompt.' } })]
+				else { throw 'Must be running an elevated prompt.' } })]
 		[switch]$CopyToModulesFolder = $false,
 		[switch]$CopyNestedModules = $false,
 		[switch]$ShowReport
@@ -211,13 +211,22 @@ Function Set-PSProjectFile {
 			$markdownParams = @{
 				Module         = $module.Name
 				OutputFolder   = $Moduledocs.FullName
-				WithModulePage = $true
+				WithModulePage = $false
 				Locale         = 'en-US'
 				HelpVersion    = $ModuleManifest.Version.ToString()
-                AbbreviateParameterTypename = $true
+				#AbbreviateParameterTypename = $true
+			}
+			$newsplat = @{
+				ModuleInfo                  = Get-Module -Name $module.Name
+				OutputFolder                = $Moduledocs.FullName
+				WithModulePage              = $false
+				Locale                      = 'en-US'
+				AbbreviateParameterTypename = $true
 			}
 			#New-MarkdownHelp @markdownParams -Force
-            New-MarkdownCommandHelp  @markdownParams -Force
+			New-MarkdownCommandHelp @newsplat -Force
+			#  @markdownParams
+			#  -Force
 
 		} catch { Write-Error "Error: Creating Mardown Help Files `nMessage:$($_.Exception.message)"; return }
 
@@ -254,7 +263,11 @@ Function Set-PSProjectFile {
 
 		try {
 			Write-Color "`t[Processing]: ", 'External Help Files' -Color yello, Gray
-			New-ExternalHelp -Path $Moduledocs.FullName -OutputPath $ModuleExternalHelp.FullName -Force | Out-Null
+			Measure-PlatyPSMarkdown -Path (Join-Path -Path $Moduledocs.FullName -ChildPath '\*.md') | Where-Object Filetype -Match 'CommandHelp' |
+				Import-MarkdownCommandHelp -Path {$_.FilePath} |
+					New-MarkdownModuleFile -OutputFolder $ModuleExternalHelp.FullName -Force
+
+			#New-ExternalHelp -Path $Moduledocs.FullName -OutputPath $ModuleExternalHelp.FullName -Force | Out-Null
 
 			Write-Color "`t[Processing]: ", 'About Help Files' -Color yello, Gray
 			$aboutfile = [System.Collections.Generic.List[string]]::new()
@@ -267,7 +280,7 @@ Function Set-PSProjectFile {
 			$aboutfile.Add(' ')
 			$aboutfile.Add('NOTES')
 			$aboutfile.Add('Functions in this module:')
-	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { ($aboutfile.Add("`t $_ -- $((Get-Help $_).synopsis)")) }
+			(Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { ($aboutfile.Add("`t $_ -- $((Get-Help $_).synopsis)")) }
 			$aboutfile.Add(' ')
 			$aboutfile.Add('SEE ALSO')
 			$aboutfile.Add("`t $(($ModuleManifest.ProjectUri.AbsoluteUri | Out-String))")
@@ -317,7 +330,7 @@ Function Set-PSProjectFile {
 			Get-ChildItem $ModuleControlScripts.FullName | ForEach-Object {$readme.add("- $($_.name)")}
 			$readme.add(' ')
 			$readme.add('## Functions')
-	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $readme.add("- [``$_``](https://smitpi.github.io/$($module.Name)/$_) -- " + (Get-Help $_).SYNOPSIS) }
+			(Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $readme.add("- [``$_``](https://smitpi.github.io/$($module.Name)/$_) -- " + (Get-Help $_).SYNOPSIS) }
 			$readme | Set-Content -Path $ModuleReadme
 
 			Write-Color "`t[Processing]: ", 'MKDocs Config Files' -Color yello, Gray
@@ -354,7 +367,7 @@ Function Set-PSProjectFile {
 			Get-ChildItem $ModuleControlScripts.FullName | ForEach-Object {$indexFile.add("- $($_.name)")}
 			$indexFile.add(' ')
 			$indexFile.add('## Functions')
-	 (Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $indexFile.add("- [``$_``](https://smitpi.github.io/$($module.Name)/$_) -- " + (Get-Help $_).SYNOPSIS) }
+			(Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $indexFile.add("- [``$_``](https://smitpi.github.io/$($module.Name)/$_) -- " + (Get-Help $_).SYNOPSIS) }
 			$indexFile | Set-Content -Path $ModuleIndex -Force
 
 			Write-Color "`t[Processing]: ", 'Versioning Files' -Color yello, Gray

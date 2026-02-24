@@ -1,0 +1,3651 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for PowerShell Module: PSToolKit">
+      
+      
+        <meta name="author" content="Pierre Smit">
+      
+      
+        <link rel="canonical" href="https://smitpi.github.io/PSToolKit/">
+      
+      
+      
+        <link rel="next" href="PSToolKit/Add-ChocolateyPrivateRepo/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>PSToolKit</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pstoolkit" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="PSToolKit" class="md-header__button md-logo" aria-label="PSToolKit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PSToolKit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PSToolKit
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/smitpi/PSToolKit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    smitpi/PSToolKit
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="PSToolKit" class="md-nav__button md-logo" aria-label="PSToolKit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    PSToolKit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/smitpi/PSToolKit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    smitpi/PSToolKit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PSToolKit
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PSToolKit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#win-bootstrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Win-Bootstrap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manage-modules-and-apps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manage Modules and Apps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ps-controller-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PS Controller Scripts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PSToolKit
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    PSToolKit
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Add-ChocolateyPrivateRepo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add-ChocolateyPrivateRepo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Backup-ElevatedShortcut/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup-ElevatedShortcut
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Backup-PowerShellProfile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup-PowerShellProfile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Compare-ADMembership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compare-ADMembership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Connect-VMWareCluster/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connect-VMWareCluster
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Disable-WebEncoding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Disable-WebEncoding
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Edit-SSHConfigFile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Edit-SSHConfigFile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Enable-RemoteHostPSRemoting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enable-RemoteHostPSRemoting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Enable-WebEncoding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enable-WebEncoding
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Export-ESXTemplate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Export-ESXTemplate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Find-ChocolateyApp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Find-ChocolateyApp
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Find-OnlineModule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Find-OnlineModule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Find-OnlineScript/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Find-OnlineScript
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-CitrixClientVersion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-CitrixClientVersion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-CitrixPolicy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-CitrixPolicy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-CommandFiltered/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-CommandFiltered
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-DotNetVersions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-DotNetVersions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-FQDN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-FQDN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-FolderSize/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-FolderSize
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-FullADUserDetail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-FullADUserDetail
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-MyPSGalleryReport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-MyPSGalleryReport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-MyPSGalleryStat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-MyPSGalleryStat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-NestedADGroupMember/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-NestedADGroupMember
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-PSObject/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-PSObject
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-ProcessPerformance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-ProcessPerformance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-PropertiesToCSV/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-PropertiesToCSV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-RDSSessionReport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-RDSSessionReport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-ServerInventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-ServerInventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-SoftwareAudit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-SoftwareAudit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-SystemInfo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-SystemInfo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-SystemUptime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-SystemUptime
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Get-WinEventLogExtract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get-WinEventLogExtract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Import-CitrixSiteConfigFile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import-CitrixSiteConfigFile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Import-XamlConfigFile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import-XamlConfigFile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Install-AppsFromPSPackageMan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install-AppsFromPSPackageMan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Install-BGInfo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install-BGInfo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Install-ChocolateyClient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install-ChocolateyClient
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Install-ChocolateyServer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install-ChocolateyServer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Install-LocalPSRepository/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install-LocalPSRepository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Install-MSUpdate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install-MSUpdate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Install-ModulesFromPWSHModule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install-ModulesFromPWSHModule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Install-NFSClient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install-NFSClient
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Install-PowerShell7x/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install-PowerShell7x
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Install-RSAT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install-RSAT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Install-VMWareTool/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install-VMWareTool
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/New-CitrixSiteConfigFile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    New-CitrixSiteConfigFile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/New-ElevatedShortcut/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    New-ElevatedShortcut
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/New-GodModeFolder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    New-GodModeFolder
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/New-GoogleSearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    New-GoogleSearch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/New-MSEdgeWebApp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    New-MSEdgeWebApp
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/New-PSGenericList/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    New-PSGenericList
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/New-PSModule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    New-PSModule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/New-PSProfile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    New-PSProfile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/New-PSReportingScript/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    New-PSReportingScript
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/New-PSScript/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    New-PSScript
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/New-SuggestedInfraName/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    New-SuggestedInfraName
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Publish-ModuleToLocalRepo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publish-ModuleToLocalRepo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Remove-CIMUserProfile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Remove-CIMUserProfile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Remove-FaultyProfileList/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Remove-FaultyProfileList
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Remove-HiddenDevice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Remove-HiddenDevice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Remove-UserProfile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Remove-UserProfile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Reset-FileOwnership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reset-FileOwnership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Reset-Module/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reset-Module
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Reset-PSGallery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reset-PSGallery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Resolve-SID/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resolve-SID
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Restore-ElevatedShortcut/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Restore-ElevatedShortcut
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Search-Script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Search-Script
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Set-FolderCustomIcon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set-FolderCustomIcon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Set-PSProjectFile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set-PSProjectFile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Set-PSToolKitSystemSetting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set-PSToolKitSystemSetting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Set-ScheduledRestart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set-ScheduledRestart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Set-SharedPSProfile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set-SharedPSProfile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Set-StaticIP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set-StaticIP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Set-TempFolder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set-TempFolder
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Set-UserDesktopWallpaper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set-UserDesktopWallpaper
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Set-VSCodeExplorerSortOrder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set-VSCodeExplorerSortOrder
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Set-WindowsAutoLogin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set-WindowsAutoLogin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Show-ComputerManagement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Show-ComputerManagement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Show-ModulePathList/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Show-ModulePathList
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Show-MyPSGalleryModule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Show-MyPSGalleryModule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Show-PSToolKit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Show-PSToolKit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Start-DomainControllerReplication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start-DomainControllerReplication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Start-PSProfile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start-PSProfile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Start-PSRoboCopy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start-PSRoboCopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Start-PSScriptAnalyzer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start-PSScriptAnalyzer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Start-PSToolkitSystemInitialize/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start-PSToolkitSystemInitialize
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Start-PowerShellAsAdmin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start-PowerShellAsAdmin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Test-CitrixCloudConnector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test-CitrixCloudConnector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Test-CitrixVDAPort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test-CitrixVDAPort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Test-IsFileOpen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test-IsFileOpen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Test-PSPendingReboot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test-PSPendingReboot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Test-PSRemote/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test-PSRemote
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Test-SystemOnline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test-SystemOnline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Update-ListOfDDC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Update-ListOfDDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Update-LocalHelp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Update-LocalHelp
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Update-MyModulesFromGitHub/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Update-MyModulesFromGitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Update-PSDefaultParameter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Update-PSDefaultParameter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Update-PSModuleInfo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Update-PSModuleInfo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Write-Ascii/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Write-Ascii
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Write-PSMessage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Write-PSMessage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Write-PSReports/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Write-PSReports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSToolKit/Write-PSToolKitLog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Write-PSToolKitLog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#win-bootstrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Win-Bootstrap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manage-modules-and-apps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manage Modules and Apps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ps-controller-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PS Controller Scripts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="pstoolkit">PSToolKit</h1>
+<h2 id="description">Description</h2>
+<p>A Repository of my random scripts and functions writen over the years, there is a wyde range of tools in this module, used by a SysAdmin and EUC Administrator.</p>
+<hr />
+<h2 id="win-bootstrap">Win-Bootstrap</h2>
+<p>Boxstarter scripts to setup a new windows machine.</p>
+<ul>
+<li>Run the following commands to install Boxstarter:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">Set-ExecutionPolicy</span> <span class="n">Bypass</span> <span class="n">-Scope</span> <span class="k">Process</span> <span class="n">-Force</span>
+<span class="no">[System.Net.ServicePointManager]</span><span class="p">::</span><span class="n">SecurityProtocol</span> <span class="p">=</span> <span class="no">[System.Net.ServicePointManager]</span><span class="p">::</span><span class="n">SecurityProtocol</span> <span class="o">-bor</span> <span class="n">3072</span> 
+<span class="nb">iex </span><span class="p">((</span><span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebClient</span><span class="p">).</span><span class="n">DownloadString</span><span class="p">(</span><span class="s1">&#39;https://boxstarter.org/bootstrapper.ps1&#39;</span><span class="p">))</span>
+<span class="nb">Get-Boxstarter</span> <span class="n">-Force</span>
+</code></pre></div>
+<ul>
+<li>Then click on one of the below links to start.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Click link to run</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://boxstarter.org/package/url?https://raw.githubusercontent.com/smitpi/PSToolKit/master/PSToolKit/Control_Scripts/Initial-Setup.ps1'">System Setup</a></td>
+<td>Use <a href="https://github.com/smitpi/PSToolKit">PSToolKit</a> to Install a new System.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Warning</strong></p>
+<blockquote>
+<p>You will need a valid <strong>github userid</strong> and <strong>token</strong> to continue.</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2 id="manage-modules-and-apps">Manage Modules and Apps</h2>
+<ul>
+<li>Run the following to update or install apps using the module: <a href="https://github.com/smitpi/PSPackageMan">PSPackageMan</a> (<a href="https://www.powershellgallery.com/packages/PSPackageMan/0.1.3">PS Gallary</a>)
+<div class="highlight"><pre><span></span><code><span class="nb">Invoke-RestMethod</span> <span class="n">https</span><span class="p">://</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">smitpi</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">master</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">Control_Scripts</span><span class="p">/</span><span class="n">Run-Install-Apps</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">Invoke-Expression</span>
+</code></pre></div></li>
+<li>Run the following to update or install PS Modules using the module: <a href="https://github.com/smitpi/PWSHModule">PWSHModule</a> (<a href="https://www.powershellgallery.com/packages/PWSHModule/0.1.21">PS Gallary</a>)
+<div class="highlight"><pre><span></span><code><span class="nb">Invoke-RestMethod</span> <span class="n">https</span><span class="p">://</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">smitpi</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">master</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">Control_Scripts</span><span class="p">/</span><span class="n">Run-Install-Modules</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">Invoke-Expression</span>
+</code></pre></div></li>
+<li>Install this module.
+<div class="highlight"><pre><span></span><code><span class="nb">Invoke-RestMethod</span> <span class="n">https</span><span class="p">://</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">smitpi</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">master</span><span class="p">/</span><span class="n">PSToolKit</span><span class="p">/</span><span class="n">Control_Scripts</span><span class="p">/</span><span class="n">Run-Install-PSToolKit</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">Invoke-Expression</span>
+</code></pre></div></li>
+</ul>
+<hr />
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+<li>Run this script to install from GitHub <a href="https://github.com/smitpi/PSToolKit">GitHub Repo</a></li>
+</ul>
+<p><div class="highlight"><pre><span></span><code><span class="nv">$CurrentLocation</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="p">.</span>
+<span class="nv">$ModuleDestination</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="p">(</span><span class="nb">Get-Item</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="p">(</span><span class="nb">Get-Item</span> <span class="nv">$profile</span><span class="p">).</span><span class="n">Directory</span> <span class="s1">&#39;Modules&#39;</span><span class="p">)).</span><span class="n">FullName</span> <span class="n">-ChildPath</span> <span class="n">PSToolKit</span><span class="p">)</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="p">-</span><span class="n">-depth</span> <span class="n">1</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">smitpi</span><span class="p">/</span><span class="n">PSToolKit</span> <span class="nv">$ModuleDestination</span> <span class="n">2</span><span class="p">&gt;&amp;</span><span class="n">1</span> <span class="p">|</span> <span class="nb">Write-Host</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
+<span class="nb">Set-Location</span> <span class="nv">$ModuleDestination</span>
+<span class="n">git</span> <span class="k">filter</span><span class="n">-branch</span> <span class="p">-</span><span class="n">-prune-empty</span> <span class="p">-</span><span class="n">-subdirectory-filter</span> <span class="n">Output</span> <span class="n">HEAD</span> <span class="n">2</span><span class="p">&gt;&amp;</span><span class="n">1</span> <span class="p">|</span> <span class="nb">Write-Host</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
+<span class="nb">Set-Location</span> <span class="nv">$CurrentLocation</span>
+</code></pre></div>
+- Or from the created Powershell Script:
+<div class="highlight"><pre><span></span><code><span class="nb">Set-ExecutionPolicy</span> <span class="n">Bypass</span> <span class="n">-Scope</span> <span class="k">Process</span> <span class="n">-Force</span>
+<span class="p">(</span><span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebClient</span><span class="p">).</span><span class="n">DownloadFile</span><span class="p">(</span><span class="s1">&#39;https://bit.ly/35sEu2b&#39;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="p">$(</span><span class="nv">$env:tmp</span><span class="p">)</span><span class="s2">\Start-PSToolkitSystemInitialize.ps1&quot;</span><span class="p">)</span>
+<span class="nb">Import-Module</span> <span class="p">(</span><span class="nb">Get-Item</span> <span class="s2">&quot;</span><span class="p">$(</span><span class="nv">$env:tmp</span><span class="p">)</span><span class="s2">\Start-PSToolkitSystemInitialize.ps1&quot;</span><span class="p">)</span> <span class="n">-Force</span><span class="p">;</span> <span class="nb">Start-PSToolkitSystemInitialize</span>
+</code></pre></div></p>
+<ul>
+<li>Then import the module into your session</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">Import-Module</span> <span class="n">PSToolKit</span> <span class="n">-Verbose</span> <span class="n">-Force</span>
+</code></pre></div>
+<ul>
+<li>or run these commands for more help and details.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-Command</span> <span class="n">-Module</span> <span class="n">PSToolKit</span>
+<span class="nb">Get-Help</span> <span class="n">about_PSToolKit</span>
+</code></pre></div>
+<p>Documentation can be found at: <a href="https://smitpi.github.io/PSToolKit">Github_Pages</a></p>
+<h2 id="ps-controller-scripts">PS Controller Scripts</h2>
+<ul>
+<li>boxstarter-install.ps1</li>
+<li>call-initial.ps1</li>
+<li>Initial-Setup.ps1</li>
+<li>Run-Install-Apps.ps1</li>
+<li>Run-Install-Modules.ps1</li>
+<li>Run-Install-PSToolKit.ps1</li>
+</ul>
+<h2 id="functions">Functions</h2>
+<ul>
+<li><a href="https://smitpi.github.io/PSToolKit/Add-ChocolateyPrivateRepo"><code>Add-ChocolateyPrivateRepo</code></a> -- Add a private repository to Chocolatey.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Backup-ElevatedShortcut"><code>Backup-ElevatedShortcut</code></a> -- Exports the RunAss shortcuts, to a zip file</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Backup-PowerShellProfile"><code>Backup-PowerShellProfile</code></a> -- Creates a zip file from the ps profile directories</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Compare-ADMembership"><code>Compare-ADMembership</code></a> -- Compare two users AD group memberships</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Connect-VMWareCluster"><code>Connect-VMWareCluster</code></a> -- Connect to a vSphere cluster to perform other commands or scripts</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Disable-WebEncoding"><code>Disable-WebEncoding</code></a> -- decode a URL</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Edit-SSHConfigFile"><code>Edit-SSHConfigFile</code></a> -- Creates and modifies the ssh config file in their profile.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Enable-RemoteHostPSRemoting"><code>Enable-RemoteHostPSRemoting</code></a> -- enable ps remote remotely</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Enable-WebEncoding"><code>Enable-WebEncoding</code></a> -- encode a URL</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Export-ESXTemplate"><code>Export-ESXTemplate</code></a> -- Export all VM Templates from vSphere to local disk.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Find-ChocolateyApp"><code>Find-ChocolateyApp</code></a> -- Search the online repo for software</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Find-OnlineModule"><code>Find-OnlineModule</code></a> -- Creates reports based on PSGallery.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Find-OnlineScript"><code>Find-OnlineScript</code></a> -- Creates reports based on PSGallery. Filtered by scripts</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-CitrixClientVersion"><code>Get-CitrixClientVersion</code></a> -- Report on the CItrix workspace versions the users are using.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-CitrixPolicy"><code>Get-CitrixPolicy</code></a> -- Export Citrix Policies</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-CommandFiltered"><code>Get-CommandFiltered</code></a> -- Finds commands on the system and sort it according to module</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-DotNetVersions"><code>Get-DotNetVersions</code></a> -- List all the installed versions of .net.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-FolderSize"><code>Get-FolderSize</code></a> -- Gets folder sizes using COM and with a fallback to robocopy.exe with the logging option</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-FQDN"><code>Get-FQDN</code></a> -- Get FQDN for a device, and checks if it is online</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-FullADUserDetail"><code>Get-FullADUserDetail</code></a> -- Extract user details from the domain</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-MyPSGalleryReport"><code>Get-MyPSGalleryReport</code></a> -- Gallery report</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-MyPSGalleryStat"><code>Get-MyPSGalleryStat</code></a> -- Show stats about my published modules.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-NestedADGroupMember"><code>Get-NestedADGroupMember</code></a> -- Extract users from an AD group recursive, 4 levels deep.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-ProcessPerformance"><code>Get-ProcessPerformance</code></a> -- Gets the top 10 processes by CPU %</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-PropertiesToCSV"><code>Get-PropertiesToCSV</code></a> -- Get member data of an object. Use it to create other PSObjects.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-PSObject"><code>Get-PSObject</code></a> -- Show all Object Methods and Properties.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-RDSSessionReport"><code>Get-RDSSessionReport</code></a> -- Reports on Connects and Disconnects on a RDS Farm.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-ServerInventory"><code>Get-ServerInventory</code></a> -- Connect to remote host and collect server details.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-SoftwareAudit"><code>Get-SoftwareAudit</code></a> -- Connects to a remote hosts and collect installed software details</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-SystemInfo"><code>Get-SystemInfo</code></a> -- Get system details of a remote device</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-SystemUptime"><code>Get-SystemUptime</code></a> -- Calculates the uptime of a system</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Get-WinEventLogExtract"><code>Get-WinEventLogExtract</code></a> -- Extract Event logs of a server list, and create html / excel report</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Import-CitrixSiteConfigFile"><code>Import-CitrixSiteConfigFile</code></a> -- Import the Citrix config file, and created a variable with the details</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Import-XamlConfigFile"><code>Import-XamlConfigFile</code></a> -- Import the wpf xaml file and create variables from objects</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Install-AppsFromPSPackageMan"><code>Install-AppsFromPSPackageMan</code></a> -- Uses the module PSPackageMan to install apps from a GitHub Gist File.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Install-BGInfo"><code>Install-BGInfo</code></a> -- Install and auto runs bginfo at start up.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Install-ChocolateyClient"><code>Install-ChocolateyClient</code></a> -- Downloads and installs the Chocolatey client.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Install-ChocolateyServer"><code>Install-ChocolateyServer</code></a> -- This will download, install and setup a new Chocolatey Repo Server</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Install-LocalPSRepository"><code>Install-LocalPSRepository</code></a> -- Short desCreates a repository for offline installations.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Install-ModulesFromPWSHModule"><code>Install-ModulesFromPWSHModule</code></a> -- Uses the module PWSHModulePS to install PS Modules from a GitHub Gist File.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Install-MSUpdate"><code>Install-MSUpdate</code></a> -- Perform windows update</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Install-NFSClient"><code>Install-NFSClient</code></a> -- Install NFS Client for windows</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Install-PowerShell7x"><code>Install-PowerShell7x</code></a> -- Install ps7</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Install-RSAT"><code>Install-RSAT</code></a> -- Install Remote Admin Tools</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Install-VMWareTool"><code>Install-VMWareTool</code></a> -- Install vmware tools from chocolatety</li>
+<li><a href="https://smitpi.github.io/PSToolKit/New-CitrixSiteConfigFile"><code>New-CitrixSiteConfigFile</code></a> -- A config file with Citrix server details and URLs. To be used in scripts.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/New-ElevatedShortcut"><code>New-ElevatedShortcut</code></a> -- Creates a shortcut to a script or exe that runs as admin, without UNC</li>
+<li><a href="https://smitpi.github.io/PSToolKit/New-GodModeFolder"><code>New-GodModeFolder</code></a> -- Creates a God Mode Folder</li>
+<li><a href="https://smitpi.github.io/PSToolKit/New-GoogleSearch"><code>New-GoogleSearch</code></a> -- Start a new browser tab with search string.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/New-MSEdgeWebApp"><code>New-MSEdgeWebApp</code></a> -- Creates a new webapp to a URL, and save the shortcut on your system.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/New-PSGenericList"><code>New-PSGenericList</code></a> -- Creates a .net list object</li>
+<li><a href="https://smitpi.github.io/PSToolKit/New-PSModule"><code>New-PSModule</code></a> -- Creates a new PowerShell module.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/New-PSProfile"><code>New-PSProfile</code></a> -- Creates new profile files in the documents folder</li>
+<li><a href="https://smitpi.github.io/PSToolKit/New-PSReportingScript"><code>New-PSReportingScript</code></a> -- Script template for scripts to create reports</li>
+<li><a href="https://smitpi.github.io/PSToolKit/New-PSScript"><code>New-PSScript</code></a> -- Creates a new PowerShell script. With PowerShell Script Info</li>
+<li><a href="https://smitpi.github.io/PSToolKit/New-SuggestedInfraName"><code>New-SuggestedInfraName</code></a> -- Generates a list of usernames and server names, that can be used as test / demo data.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Publish-ModuleToLocalRepo"><code>Publish-ModuleToLocalRepo</code></a> -- Checks for required modules and upload all to your local repo.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Remove-CIMUserProfile"><code>Remove-CIMUserProfile</code></a> -- Uses CimInstance to remove a user profile</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Remove-FaultyProfileList"><code>Remove-FaultyProfileList</code></a> -- Fixes Profilelist in the registry. To fix user logon with temp profile.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Remove-HiddenDevice"><code>Remove-HiddenDevice</code></a> -- Removes ghost devices from your system</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Remove-UserProfile"><code>Remove-UserProfile</code></a> -- Connects to a server and renames a user profile folder, and delete the key from Profilelist in the registry</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Reset-FileOwnership"><code>Reset-FileOwnership</code></a> -- Reset the ownership of a directory and add full control to the folder.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Reset-Module"><code>Reset-Module</code></a> -- Removes and force import a module.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Reset-PSGallery"><code>Reset-PSGallery</code></a> -- Reset gallery to default settings</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Resolve-SID"><code>Resolve-SID</code></a> -- Resolves the Sid</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Restore-ElevatedShortcut"><code>Restore-ElevatedShortcut</code></a> -- Restore the RunAss shortcuts, from a zip file</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Search-Script"><code>Search-Script</code></a> -- Search for a string in a directory of ps1 scripts.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Set-FolderCustomIcon"><code>Set-FolderCustomIcon</code></a> -- Will change the icon of a folder to a custom selected icon</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Set-PSProjectFile"><code>Set-PSProjectFile</code></a> -- Creates and modify needed files for a PS project from existing module files.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Set-PSToolKitSystemSetting"><code>Set-PSToolKitSystemSetting</code></a> -- Set multiple settings on desktop or server</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Set-ScheduledRestart"><code>Set-ScheduledRestart</code></a> -- Create a scheduled task to reboot a server.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Set-SharedPSProfile"><code>Set-SharedPSProfile</code></a> -- Redirects PowerShell and WindowsPowerShell profile folder to another path.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Set-StaticIP"><code>Set-StaticIP</code></a> -- Set static IP on device</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Set-TempFolder"><code>Set-TempFolder</code></a> -- Set all the temp environmental variables to c:\temp</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Set-UserDesktopWallpaper"><code>Set-UserDesktopWallpaper</code></a> -- Change the wallpaper for the user.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Set-VSCodeExplorerSortOrder"><code>Set-VSCodeExplorerSortOrder</code></a> -- Change the sort order in VSCode explorer</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Set-WindowsAutoLogin"><code>Set-WindowsAutoLogin</code></a> -- Enable autologin on a device.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Show-ComputerManagement"><code>Show-ComputerManagement</code></a> -- Opens the Computer Management of the system or remote system</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Show-ModulePathList"><code>Show-ModulePathList</code></a> -- Show installed module list grouped by install path.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Show-MyPSGalleryModule"><code>Show-MyPSGalleryModule</code></a> -- Show version numbers ext. about my modules.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Show-PSToolKit"><code>Show-PSToolKit</code></a> -- Show details of the commands in this module.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Start-DomainControllerReplication"><code>Start-DomainControllerReplication</code></a> -- Start replication between Domain Controllers.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Start-PowerShellAsAdmin"><code>Start-PowerShellAsAdmin</code></a> -- Starts a porwershell session as an administrator</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Start-PSProfile"><code>Start-PSProfile</code></a> -- My PS Profile for all sessions.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Start-PSRoboCopy"><code>Start-PSRoboCopy</code></a> -- My wrapper for default robocopy switches</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Start-PSScriptAnalyzer"><code>Start-PSScriptAnalyzer</code></a> -- Run and report ScriptAnalyzer output</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Start-PSToolkitSystemInitialize"><code>Start-PSToolkitSystemInitialize</code></a> -- Initialize a blank machine.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Test-CitrixCloudConnector"><code>Test-CitrixCloudConnector</code></a> -- Perform basic connection tests to Citrix cloud.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Test-CitrixVDAPort"><code>Test-CitrixVDAPort</code></a> -- Test connection between DDC and VDI</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Test-IsFileOpen"><code>Test-IsFileOpen</code></a> -- Checks if a file is open</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Test-PSPendingReboot"><code>Test-PSPendingReboot</code></a> -- This script tests various registry values to see if the local computer is pending a reboot.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Test-PSRemote"><code>Test-PSRemote</code></a> -- Test PSb Remote to a device.</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Test-SystemOnline"><code>Test-SystemOnline</code></a> -- Does basic checks for connecting to a remote device</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Update-ListOfDDC"><code>Update-ListOfDDC</code></a> -- Update list of ListOfDDCs in the registry</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Update-LocalHelp"><code>Update-LocalHelp</code></a> -- Downloads and saves help files locally</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Update-MyModulesFromGitHub"><code>Update-MyModulesFromGitHub</code></a> -- Updates my modules</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Update-PSDefaultParameter"><code>Update-PSDefaultParameter</code></a> -- Updates the $PSDefaultParameterValues variable</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Update-PSModuleInfo"><code>Update-PSModuleInfo</code></a> -- Update PowerShell module manifest file</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Write-Ascii"><code>Write-Ascii</code></a> -- Create Ascii Art</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Write-PSMessage"><code>Write-PSMessage</code></a> -- Writes the given into to screen</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Write-PSReports"><code>Write-PSReports</code></a> -- Creates a excel or html report</li>
+<li><a href="https://smitpi.github.io/PSToolKit/Write-PSToolKitLog"><code>Write-PSToolKitLog</code></a> -- Create a log for scripts</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      (c) 2022 Pierre Smit. All rights reserved.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://smitpi.github.io/PSToolKit" target="_blank" rel="noopener" title="smitpi.github.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h320c35.3 0 64-28.7 64-64zM265.8 407.7c0-1.8 0-6 .1-11.6.1-11.4.1-28.8.1-43.7 0-15.6-5.2-25.5-11.3-30.7 37-4.1 76-9.2 76-73.1 0-18.2-6.5-27.3-17.1-39 1.7-4.3 7.4-22-1.7-45-13.9-4.3-45.7 17.9-45.7 17.9-26.6-7.5-56.6-7.5-83.2 0 0 0-31.8-22.2-45.7-17.9-9.1 22.9-3.5 40.6-1.7 45-10.6 11.7-15.6 20.8-15.6 39 0 63.6 37.3 69 74.3 73.1-4.8 4.3-9.1 11.7-10.6 22.3-9.5 4.3-33.8 11.7-48.3-13.9-9.1-15.8-25.5-17.1-25.5-17.1-16.2-.2-1.1 10.2-1.1 10.2 10.8 5 18.4 24.2 18.4 24.2 9.7 29.7 56.1 19.7 56.1 19.7 0 9 .1 21.7.1 30.6 0 4.8.1 8.6.1 10 0 4.3-3 9.5-11.5 8-66-22.1-112.2-84.9-112.2-158.3 0-91.8 70.2-161.5 162-161.5S388 165.6 388 257.4c.1 73.4-44.7 136.3-110.7 158.3-8.4 1.5-11.5-3.7-11.5-8m-90.5-54.8c-.2-1.5 1.1-2.8 3-3.2 1.9-.2 3.7.6 3.9 1.9.3 1.3-1 2.6-3 3-1.9.4-3.7-.4-3.9-1.7m-9.1 3.2c-2.2.2-3.7-.9-3.7-2.4 0-1.3 1.5-2.4 3.5-2.4 1.9-.2 3.7.9 3.7 2.4 0 1.3-1.5 2.4-3.5 2.4m-14.3-2.2c-1.9-.4-3.2-1.9-2.8-3.2s2.4-1.9 4.1-1.5c2 .6 3.3 2.1 2.8 3.4-.4 1.3-2.4 1.9-4.1 1.3m-12.5-7.3c-1.5-1.3-1.9-3.2-.9-4.1.9-1.1 2.8-.9 4.3.6 1.3 1.3 1.8 3.3.9 4.1-.9 1.1-2.8.9-4.3-.6m-8.5-10c-1.1-1.5-1.1-3.2 0-3.9 1.1-.9 2.8-.2 3.7 1.3 1.1 1.5 1.1 3.3 0 4.1-.9.6-2.6 0-3.7-1.5m-6.3-8.8c-1.1-1.3-1.3-2.8-.4-3.5.9-.9 2.4-.4 3.5.6 1.1 1.3 1.3 2.8.4 3.5-.9.9-2.4.4-3.5-.6m-6-6.4c-1.3-.6-1.9-1.7-1.5-2.6.4-.6 1.5-.9 2.8-.4 1.3.7 1.9 1.8 1.5 2.6-.4.9-1.7 1.1-2.8.4"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": [], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
