@@ -54,9 +54,9 @@ Creates new profile files in the documents folder
 New-PSProfile
 
 #>
-Function New-PSProfile {
+function New-PSProfile {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/New-PSProfile')]
-    PARAM(
+    param(
     )
 
     [System.Collections.ArrayList]$folders = @()
@@ -114,38 +114,11 @@ Start-PSProfile
 #endregion
 
 ################################
-#region Add custom prompt     ##
+#region  zlocation            ##
 ################################
-function prompt {
-    `$identity = [Security.Principal.WindowsIdentity]::GetCurrent()
-    `$principal = [Security.Principal.WindowsPrincipal] `$identity
-    `$adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
-    `$Seconds = (New-TimeSpan -Start (Get-History)[-1].StartExecutionTime -End (Get-History)[-1].EndExecutionTime).Seconds
-    
-    if (Test-Path variable:/PSDebugContext) {
-        `$Part1 = '[DBG]'
-    } elseif (`$principal.IsInRole(`$adminRole)) {
-        `$Part1 = '[ADMIN]'
-    } else {
-        `$Part1 = ''
-    }
-    if (`$Part1) {
-        Write-Host `$Part1 -NoNewline -ForegroundColor Red
-    }
-    Write-Host "(`$(`$Seconds)sec)[`$(`$env:USERNAME.ToLower())@`$(`$env:USERDNSDOMAIN.ToLower())] " -ForegroundColor Cyan -NoNewline
-    if ((Get-Location).ProviderPath.Length -lt 50) {
-        Write-Host "`$(Get-Location)" -NoNewline
-    } else {
-        Write-Host "`$((Get-Location).ProviderPath[0..2] | Join-String)....`$((Get-Location).ProviderPath[-50..-1] | Join-String)" -NoNewline
-    }
-    if (`$NestedPromptLevel -ge 1) { 
-        Write-Host ' >>' -NoNewline 
-    } else {
-        Write-Host ' >' -NoNewline
-    }
-    return ' '
-}
+Add-Content -Value "`r`n`r`nImport-Module ZLocation`r`n" -Encoding utf8 -Path $PROFILE
 #endregion
+
 "@
 
 
