@@ -34,7 +34,6 @@ Created [06/09/2022_14:10] Initial Script
 
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
-#Requires -Module POSHTML5
 
 <# 
 
@@ -81,10 +80,10 @@ $Conditions.Add((New-ConditionalText -Text 'Critical' -ConditionalTextColor whit
 Write-PSReports -InputObject $report -ReportTitle 'Windows Events' -Export All -ReportPath C:\temp -ExcelConditionalText $Conditions
 
 #>
-Function Write-PSReports {
+function Write-PSReports {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/PSToolKit/Write-PSReports')]
 	[OutputType([System.Object[]])]
-	PARAM(
+	param(
 		[Parameter(Position = 0, Mandatory)]
 		[PSCustomObject]$InputObject,
 		
@@ -95,7 +94,7 @@ Function Write-PSReports {
 
 		[Switch]$TextWrap,
 
-		[ValidateSet('All', 'Excel', 'HTML', 'HTML5')]
+		[ValidateSet('Excel', 'HTML', 'XML')]
 		[string[]]$Export,
 
 		[ValidateScript( { if (Test-Path $_) { $true }
@@ -106,12 +105,6 @@ Function Write-PSReports {
 	)
 
 	Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
-	$Excel = $HTML = $HTML5 = $false
-
-	if ($Export -contains 'Excel') { $Excel = $True }
-	if ($Export -contains 'HTML') { $HTML = $True }
-	if ($Export -contains 'HTML5') { $HTML5 = $True }
-	if ($Export -contains 'All') { $Excel = $HTML = $HTML5 = $True }
 
 	Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Checking Members"
 	$MemberCheck = ($InputObject.psobject.members | Where-Object { $_.MemberType -like 'NoteProperty' }).Name
@@ -128,7 +121,7 @@ Function Write-PSReports {
 	Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Rechecking Members"
 	$Members = ($ToReport.psobject.members | Where-Object { $_.MemberType -like 'NoteProperty' }).Name
 
-	if ($Excel) {
+	if (($PSBoundParameters['Export'] -contains 'Excel') -or ($PSBoundParameters['Export'] -contains 'All')) {
 		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Creating Excel Report "
 		$ExcelOptions = @{
 			Path              = $(Join-Path -Path $ReportPath -ChildPath "\$($ReportTitle.Replace(' ','_'))_$(Get-Date -Format yyyy.MM.dd-HH.mm).xlsx")
@@ -144,28 +137,27 @@ Function Write-PSReports {
 			MaxAutoSizeRows   = 50
 		}
 
-		if ($ExcelConditionalText) {
+		if ($PSBoundParameters['ExcelConditionalText']) {
 			$ExcelOptions.Add('ConditionalText', $ExcelConditionalText)
 		}
 
 		foreach ($Member in $Members) {
 			if ($ToReport.$member) { $ToReport.$Member | Export-Excel -Title $Member -WorksheetName $Member @ExcelOptions }
 		}
-
-		if ($TextWrap) {
+		if ($PSBoundParameters['TextWrap']) {
 			$excel = Open-ExcelPackage -Path $ExcelOptions.Path
 			foreach ($Member in $Members) {
 				if ($ToReport.$member) { 
 					$WorkSheet = $excel.Workbook.Worksheets[$member]
 					$range = $WorkSheet.Dimension.address.Replace('A1', 'A2')
 					Set-ExcelRange -Address $WorkSheet.Cells[$($range)] -WrapText -VerticalAlignment Center
-			 }
+				}
 			}
 			Close-ExcelPackage $excel
 		}
 	}
 
-	if ($HTML) {
+	if (($PSBoundParameters['Export'] -contains 'HTML') -or ($PSBoundParameters['Export'] -contains 'All')) {
 		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Creating HTML Report "
 		$TableSettings = @{
 			Style           = 'cell-border'
@@ -217,26 +209,11 @@ Function Write-PSReports {
 			}
 		}
 	}
-	if ($HTML5) {
-		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Creating HTML5 Report "
-		New-PWFPage -Title $($ReportTitle) -Content {
-			New-PWFCardHeader -BackgroundColor '#fff' -Center -Content { New-PWFTitles -TitleText "$($ReportTitle)" -Size 1 }
-			New-PWFTabContainer -Tabs {
-				foreach ($Member in $Members) {
-					New-PWFTab -Name $Member -Content {
-						New-PWFRow -Content {
-							New-PWFColumn -Content {
-								New-PWFCard -BackgroundColor '#fff' -Content {
-									New-PWFTitles -Size 3 -TitleText $Member -Center
-									New-PWFTable -ToTable ($ToReport.$member) -Pagination -DetailsOnClick -SortByColumn -ShowTooltip -EnableSearch -Exportbuttons -ContextualColor dark -Striped
-								}
-							}
-						}
-					}
-				}
-			}
-		} | Out-File -Encoding utf8 -FilePath $(Join-Path -Path $ReportPath -ChildPath "\$($ReportTitle.Replace(' ','_'))_HTML5_$(Get-Date -Format yyyy.MM.dd-HH.mm).html")
+	if (($PSBoundParameters['Export'] -contains 'XML') -or ($PSBoundParameters['Export'] -contains 'All')) {
+		$Path = $(Join-Path -Path $ReportPath -ChildPath "\$($ReportTitle.Replace(' ','_'))_$(Get-Date -Format yyyy.MM.dd-HH.mm).xml")
+		$InputObject | Export-Clixml -Depth 20 -Path $Path -Force -NoClobber
 	}
+
 	if ($OpenReportsFolder) { 
 		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Opening Folder"
 		Start-Process -FilePath explorer.exe -ArgumentList $($ReportPath) 
