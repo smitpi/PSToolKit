@@ -122,7 +122,9 @@ function Set-PSProjectFile {
 	$VersionFilePath = [IO.Path]::Combine($ModuleBase, 'Version.json')
 	$ModulePublicFunctions = [IO.Path]::Combine($module.ModuleBase, 'Public') | Get-Item
 	$ModulePrivateFunctions = [IO.Path]::Combine($module.ModuleBase, 'Private') | Get-Item
-	$ModuleControlScripts = [IO.Path]::Combine($module.ModuleBase, 'Control_Scripts') | Get-Item -ErrorAction SilentlyContinue
+	if (Test-Path ([IO.Path]::Combine($module.ModuleBase, 'Control_Scripts'))) {
+		$ModuleControlScripts = [IO.Path]::Combine($module.ModuleBase, 'Control_Scripts') | Get-Item
+	} else {$ModuleControlScripts = $null}
 	$Modulemkdocs = [IO.Path]::Combine($ModuleBase, 'docs', 'mkdocs.yml')
 	$ModuleIndex = [IO.Path]::Combine($ModuleBase, 'docs', 'docs', 'index.md')
 	$ScriptInfoArchive = [IO.Path]::Combine($ModuleBase, 'ScriptInfo.zip')
@@ -223,8 +225,8 @@ function Set-PSProjectFile {
 				Locale                      = 'en-US'
 				AbbreviateParameterTypename = $true
 			}
-			#New-MarkdownHelp @markdownParams -Force
-			New-MarkdownCommandHelp @newsplat -Force
+			New-MarkdownHelp @markdownParams -Force
+			#New-MarkdownCommandHelp @newsplat -Force
 			#  @markdownParams
 			#  -Force
 
@@ -265,8 +267,10 @@ function Set-PSProjectFile {
 			Write-Color "`t[Processing]: ", 'External Help Files' -Color yello, Gray
 			Measure-PlatyPSMarkdown -Path (Join-Path -Path $Moduledocs.FullName -ChildPath '\*.md') | Where-Object Filetype -Match 'CommandHelp' |
 				Import-MarkdownCommandHelp -Path {$_.FilePath} |
-					New-MarkdownModuleFile -OutputFolder $ModuleExternalHelp.FullName -Force
+					Export-MamlCommandHelp -OutputFolder $ModuleExternalHelp.FullName -Force
 
+			Move-Item -Path "$($ModuleExternalHelp.FullName)\$($module.Name)\*.xml" -Destination $ModuleExternalHelp.FullName
+			Remove-Item "$($ModuleExternalHelp.FullName)\$($module.Name)"
 			#New-ExternalHelp -Path $Moduledocs.FullName -OutputPath $ModuleExternalHelp.FullName -Force | Out-Null
 
 			Write-Color "`t[Processing]: ", 'About Help Files' -Color yello, Gray
@@ -325,9 +329,11 @@ function Set-PSProjectFile {
 			Write-Color "`t[Processing]: ", 'Readme Files' -Color yello, Gray
 			$readme = [System.Collections.Generic.List[string]]::new()
 			Get-Content -Path $ModulesInstuctions | ForEach-Object { $readme.add($_) }
-			$readme.add(' ')
-			$readme.add('## PS Controller Scripts')
-			Get-ChildItem $ModuleControlScripts.FullName | ForEach-Object {$readme.add("- $($_.name)")}
+			if (-not[string]::IsNullOrEmpty($ModuleControlScripts)) {
+				$readme.add(' ')
+				$readme.add('## PS Controller Scripts')
+				Get-ChildItem $ModuleControlScripts.FullName | ForEach-Object {$readme.add("- $($_.name)")}
+			}
 			$readme.add(' ')
 			$readme.add('## Functions')
 			(Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $readme.add("- [``$_``](https://smitpi.github.io/$($module.Name)/$_) -- " + (Get-Help $_).SYNOPSIS) }
@@ -362,9 +368,11 @@ function Set-PSProjectFile {
 			Write-Color "`t[Processing]: ", 'MKDocs Index Files' -Color yello, Gray
 			$indexFile = [System.Collections.Generic.List[string]]::new()
 			Get-Content -Path $ModulesInstuctions | ForEach-Object { $indexFile.add($_) }
-			$indexFile.add(' ')
-			$indexFile.add('## PS Controller Scripts')
-			Get-ChildItem $ModuleControlScripts.FullName | ForEach-Object {$indexFile.add("- $($_.name)")}
+			if (-not[string]::IsNullOrEmpty($ModuleControlScripts)) {
+				$indexFile.add(' ')
+				$indexFile.add('## PS Controller Scripts')
+				Get-ChildItem $ModuleControlScripts.FullName | ForEach-Object {$indexFile.add("- $($_.name)")}
+			}
 			$indexFile.add(' ')
 			$indexFile.add('## Functions')
 			(Get-Command -Module $module.Name -CommandType Function).name | Sort-Object | ForEach-Object { $indexFile.add("- [``$_``](https://smitpi.github.io/$($module.Name)/$_) -- " + (Get-Help $_).SYNOPSIS) }
@@ -393,8 +401,9 @@ function Set-PSProjectFile {
 	if ($null -notlike $PrivateFiles) {
 		Copy-Item -Path $ModulePrivateFunctions.FullName -Destination $ModuleOutput.fullname -Recurse -Exclude *.ps1 -Force
 	}
-	Copy-Item -Path $ModuleControlScripts.FullName -Destination $ModuleOutput.fullname -Recurse -Force -ErrorAction SilentlyContinue
-
+	if (-not[string]::IsNullOrEmpty($ModuleControlScripts)) {
+		Copy-Item -Path $ModuleControlScripts.FullName -Destination $ModuleOutput.fullname -Recurse -Force -ErrorAction SilentlyContinue
+	}
 	$private = @(Get-ChildItem -Path "$($ModulePrivateFunctions.FullName)\*.ps1" -ErrorAction Stop | Sort-Object -Property Name)
 	$public = @(Get-ChildItem -Path "$($ModulePublicFunctions.FullName)\*.ps1" -Recurse -ErrorAction Stop | Sort-Object -Property Name)
 
