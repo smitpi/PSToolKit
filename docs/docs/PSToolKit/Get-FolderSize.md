@@ -4,7 +4,7 @@ external help file: PSToolKit-Help.xml
 HelpUri: https://smitpi.github.io/PSToolKit/Get-FolderSize
 Locale: en-US
 Module Name: PSToolKit
-ms.date: 02/24/2026
+ms.date: 03/09/2026
 PlatyPS schema version: 2024-05-01
 title: Get-FolderSize
 ---
@@ -53,6 +53,7 @@ Otherwise you should get a warning.
 ### EXAMPLE 1
 
 . .\Get-FolderSize.ps1
+
 PS C:\> 'C:\Windows', 'E:\temp' | Get-FolderSize
 
 ### EXAMPLE 2

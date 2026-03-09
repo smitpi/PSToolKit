@@ -4,7 +4,7 @@ external help file: PSToolKit-Help.xml
 HelpUri: https://smitpi.github.io/PSToolKit/Show-MyPSGalleryModules
 Locale: en-US
 Module Name: PSToolKit
-ms.date: 02/24/2026
+ms.date: 03/09/2026
 PlatyPS schema version: 2024-05-01
 title: Show-MyPSGalleryModule
 ---
@@ -77,7 +77,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 {{ Fill in the Description }}
 
-### System.Collections.Generic.List`1[[System.Management.Automation.PSObject, System.Management.Automation, Version=7.4.6.500, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]
+### System.Collections.Generic.List`1[[System.Management.Automation.PSObject, System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]
 
 {{ Fill in the Description }}
 

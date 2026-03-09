@@ -4,7 +4,7 @@ external help file: PSToolKit-Help.xml
 HelpUri: https://smitpi.github.io/PSToolKit/Edit-SSHConfigFile
 Locale: en-US
 Module Name: PSToolKit
-ms.date: 02/24/2026
+ms.date: 03/09/2026
 PlatyPS schema version: 2024-05-01
 title: Edit-SSHConfigFile
 ---
@@ -67,7 +67,8 @@ Creates and modifies the ssh config file in their profile.
 ### EXAMPLE 1
 
 $rr = [PSCustomObject]@{
-	Host         = 'esx00'
+
+Host         = 'esx00'
 	HostName     = '192.168.10.19'
 	User         = 'root'
 	Port         = '22'
